@@ -1,5 +1,5 @@
 # light
-【轻巧之光】 基于java spring boot 面向对象建模低代码快速开发框架
+【轻巧之光】 基于java spring boot 面向对象建模低的代码快速开发框架
 
 ## 为啥要弄着个东东 
 
@@ -131,4 +131,8 @@ Hibernate Validator 附加的 constraint
 3、InQueryDTO 是否做完前端列表 头部查询使用字段
 
 4、NotinListDTO 此字段是否在列表中使用
+
+## 效果
+
+![运行效果] (https://github.com/Echosong/light/blob/main/web.png?raw=true)
 
