@@ -1,9 +1,6 @@
 
-# sa-admin (vue单页版)
 
-一个多窗口后台模板，流畅、易上手、提高生产力，演示地址：[http://sa-vue-admin.dev33.cn](http://sa-vue-admin.dev33.cn)
 
-如果你不太熟悉vue单页应用，[点我访问iframe版](https://github.com/click33/sa-admin)
 
 :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes: :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes: :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes: :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes:  :blush:  :blush:  :blush:  :heart:  :heart:  :heart: 
 
@@ -11,8 +8,6 @@
 - 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
 - 示例全面：提供大量常见增删改查示例，提高你的生产力
 
-## 需求提交
-- 我们深知一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
 
 
 ## 框架选型
@@ -86,9 +81,6 @@
 - 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
 - 如果更新实用功能，可在文档友情链接处留下自己的推广链接
 
-
-## QQ群
-QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
 ## 截图
 
