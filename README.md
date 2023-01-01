@@ -134,5 +134,6 @@ Hibernate Validator 附加的 constraint
 
 ## 效果
 
-![运行效果] (https://github.com/Echosong/light/blob/main/web.png?raw=true)
+
+![运行效果](https://github.com/Echosong/light/blob/main/web.png?raw=true)
 
