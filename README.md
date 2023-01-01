@@ -1,5 +1,5 @@
 # light
-【轻巧之光】 基于java spring boot 面向对象建模低的代码快速开发框架
+【轻巧之光】 基于java spring boot 面向对象建模的低代码快速开发框架
 
 ## 开发背景 
 
