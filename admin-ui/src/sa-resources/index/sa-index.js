@@ -30,7 +30,7 @@ export default {
 		return {
 			version: 'v1.0.3', // 当前版本
 			update_time: '2020-11-12', // 更新日期 
-			title: '空道灯控项目管理', //'空道项目管理系统',				// 页面标题  
+			title: '轻巧之光项目管理', //'空道项目管理系统',				// 页面标题  
 			logo_url: '', // logo地址 
 			icon_url: '', // icon地址 
 			github_url: 'https://github.com/click33/sa-vue-admin', // github地址 

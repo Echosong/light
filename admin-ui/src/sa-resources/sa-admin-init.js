@@ -8,7 +8,7 @@ export default function(sa_admin, sa) {
 
 
 	// ================================= 示例：模板基础信息  =================================
-	sa_admin.title = '空道灯控项目管理';
+	sa_admin.title = '轻巧之光项目管理';
 	// sa_admin.logo_url = '图片地址';    // 设置logo图标地址   默认值空, 代表使用：./admin-logo.png
 	// sa_admin.icon_url = '图片地址';    // 设置icon图标地址   默认值空, 代表使用：./favicon.ico
 

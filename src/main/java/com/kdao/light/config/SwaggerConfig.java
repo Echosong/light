@@ -62,7 +62,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("空道灯控项目管理系统")
+                .title("轻巧之光项目管理系统")
                 .description(" http  header 参数 Authorization  算法为 md5(appkey+time(时间戳秒)) appkey 由平台提供 ")
                 // 开发者信息
                 .contact(new Contact("空道项目管理系统", "http://www.hn1024.cn/",
