@@ -2,20 +2,23 @@
 【轻巧、光】 基于java spring boot 面向对象建模低代码快速开发框架
 
 # 配置步骤
-1、 修改 application.yml 文件 配置数据库，前端路径，系统包 等等信息
+1、 打开mysql 新建数据库  执行 sql 文件夹 db_light.sql 文件
 
-2、 执行 test下 LightInitTest.autoAppliaction() 测试函数 自动化生成相关代码
+2、 修改 application.yml 文件 配置数据库，前端路径，系统包 等等信息
 
-3、 运行spring boot  启动main
+3、 执行 test下 LightInitTest.autoAppliaction() 测试函数 自动化生成相关代码
 
-4、 前端 文件夹 admin-ui  配置好 vue.config.js 相关的代理（模式直接可以使用）
+4、 运行spring boot  启动main
+
+5、 前端 文件夹 admin-ui  配置好 vue.config.js 相关的代理（模式直接可以使用）
 ```javascript
     npm run serve 运行
 ``` 
+ 账号: admin  密码: 123456
 
-5、 新增功能新增 entity 文件 完事 运行第二步生成相关代码，在运行低 3,4 步骤
+6、 新增功能新增 entity 文件 完事 运行第二步生成相关代码，在运行低 3,4 步骤
 
-6、 配置好后台权限 使菜单能正确显示出来
+7、 配置好后台权限 使菜单能正确显示出来
 
 ## 开发代码结构规范（简单、实用、高效、规范）
 
