@@ -5,7 +5,7 @@
 
 spring boot 没有一款基于程序员面向对象设计建模，快速开发类似低代码的框架，没有合适的？ 那就写个，于是就有了轻巧之光。
 
-# 配置步骤
+## 配置步骤
 1、 打开mysql 新建数据库  执行 sql 文件夹 db_light.sql 文件
 
 2、 修改 application.yml 文件 配置数据库，前端路径，系统包 等等信息
@@ -137,3 +137,15 @@ Hibernate Validator 附加的 constraint
 
 ![运行效果](https://github.com/Echosong/light/blob/main/web.png?raw=true)
 
+## 商用
+
+> 任意个人 或者公司使用， 遵循  MIT 最宽泛的开源协议
+
+## 联系我们
+
+如果绝对对你有帮助，请点个小星星
+
+
+qq:313690636
+
+qq群： 571627871
