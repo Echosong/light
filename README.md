@@ -2,7 +2,7 @@
 【轻巧、光】java快速开发框架
 
 # 配置步骤
-1、 修改 application.yml 文件
+1、 修改 application.yml 文件 配置数据库，前端路径，系统包 等等信息
 
 2、 执行 test下 LightInitTest.autoAppliaction() 测试函数 自动化生成相关代码
 
