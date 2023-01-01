@@ -1,5 +1,5 @@
 # light
-【轻巧、光】java快速开发框架
+【轻巧、光】 基于java spring boot 面向对象建模低代码快速开发框架
 
 # 配置步骤
 1、 修改 application.yml 文件 配置数据库，前端路径，系统包 等等信息
