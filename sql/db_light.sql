@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2023-01-01 16:18:37
+Date: 2023-01-01 20:10:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `kd_config` (
 -- ----------------------------
 -- Records of kd_config
 -- ----------------------------
-INSERT INTO `kd_config` VALUES ('1', '2021-10-30 17:41:31', '38', '2022-12-15 22:59:04', '1', '系统名称', '0', 'sysName', '系统名称', '0', '轻巧之光项目管理');
+INSERT INTO `kd_config` VALUES ('1', '2021-10-30 17:41:31', '38', '2023-01-01 16:23:18', '1', '系统名称', '0', 'sysName', '系统名称', '0', '轻巧之光项目管理');
 INSERT INTO `kd_config` VALUES ('2', '2021-06-30 23:52:39', '26', '2022-09-07 10:36:51', '1', '版本号', '0', '1001', '版本号', '0', 'v1.0');
 INSERT INTO `kd_config` VALUES ('3', null, null, '2022-09-07 10:24:39', '1', '开启,关闭', '0', 'state', '状态', '2', 'true');
 INSERT INTO `kd_config` VALUES ('4', null, null, '2022-09-29 14:08:29', '1', '协议', '0', 'contace', '使用协议', '5', '协议内容');
@@ -151,6 +151,7 @@ INSERT INTO `kd_permission` VALUES ('4', '用户列表', null, '用户列表', '
 INSERT INTO `kd_permission` VALUES ('6', '系统日志', null, '系统日志', 'log-list', '1', null, '5', '1', null, null, null, null);
 INSERT INTO `kd_permission` VALUES ('8', '内容管理', 'el-icon-cpu', '项目管理', null, '0', null, '1', '0', null, null, null, null);
 INSERT INTO `kd_permission` VALUES ('9', '文章列表', null, '文章列表', 'article-list', '8', null, '2', '1', null, null, null, null);
+INSERT INTO `kd_permission` VALUES ('10', '文件管理', null, '文件管理', 'file-list', '8', null, '3', '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for kd_role
@@ -186,7 +187,7 @@ CREATE TABLE `kd_role_permission` (
   `permission_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of kd_role_permission
@@ -198,7 +199,7 @@ INSERT INTO `kd_role_permission` VALUES ('4', null, null, null, null, '4', '1');
 INSERT INTO `kd_role_permission` VALUES ('5', null, null, null, null, '6', '1');
 INSERT INTO `kd_role_permission` VALUES ('6', null, null, null, null, '8', '1');
 INSERT INTO `kd_role_permission` VALUES ('7', null, null, null, null, '9', '1');
-INSERT INTO `kd_role_permission` VALUES ('8', null, null, null, null, '21', '1');
+INSERT INTO `kd_role_permission` VALUES ('8', null, null, null, null, '10', '1');
 
 -- ----------------------------
 -- Table structure for kd_user
