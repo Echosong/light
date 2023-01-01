@@ -35,14 +35,6 @@
 - 文档：使用说明，见文档
 
 
-## 开始使用
-#### 1、获取源码
-- 方式1：通过gitee或者github下载
-- 方式2：通过Git Bash：	
-```
-	git clone https://github.com/click33/sa-vue-admin.git
-```
-
 #### 2、运行
 - 获取源码后，在项目根目录执行cmd命令：
 ```
@@ -67,27 +59,5 @@
 
 - 以上示例在 sa-admin-init.js 文件里均有详细的注释说明，如果还要明白的地方，可以加入qq群询问
 
-
-## 贡献代码
-1. 在github上fork一份到自己的仓库
-2. clone自己的仓库到本地电脑
-3. 在本地电脑修改、commit、push
-4. 提交pr（点击：New Pull Request）（提交pr前请保证自己fork的仓库是最新版本，如若不是先强制更新一下）
-5. 等待合并
-
-## 建议贡献的地方
-- 更多登录模板
-- 修复源码现有bug，或增加新的实用功能（比如：流畅的tab左右拖拽排序）
-- 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
-- 如果更新实用功能，可在文档友情链接处留下自己的推广链接
-
-
-## 截图
-
-![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-vue-admin/2.jpg)
-![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-vue-admin/1.jpg)
-![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-vue-admin/3.jpg)
-
-见演示说明地址
 
 
