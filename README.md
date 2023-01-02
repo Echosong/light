@@ -94,6 +94,7 @@ spring:
 
 实现了一个swagger插件ModelPropertyBuilderPlugin插件：SmartSwaggerApiModelEnumPlugin,在插件中使用@ApiModelPropertyEnum注解，这样在swagger文档中就可以很好的显示了
 
+> swagger 地址  http://localhost:8090/swagger-ui/index.html
 
 ### 常用验证码
 
