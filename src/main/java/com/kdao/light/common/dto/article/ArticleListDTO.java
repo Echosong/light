@@ -1,23 +1,10 @@
 package com.kdao.light.common.dto.article;
 
-import com.kdao.light.common.annotation.ApiModelPropertyEnum;
 import com.kdao.light.common.component.IDictionaryObject;
-import com.kdao.light.common.dto.PageInfo;
 import com.kdao.light.common.dto.SysBaseDTO;
-import com.kdao.light.common.enums.FileTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
-import java.math.BigDecimal;
-import java.util.*;
-
 
 
 /**
