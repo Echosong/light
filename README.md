@@ -290,7 +290,7 @@ Hibernate Validator 附加的 constraint
 
 
 
-如果绝对对你有帮助，请点个小星星
+如果对你有帮助，请点个小星星
 
 
 
