@@ -22,6 +22,7 @@ public class HomeTest {
 
     @Test
     public void  index(){
+
         Console.log( MD5.create().digestHex("123456"));
         Console.log( SmUtil.sm3().digestHex("123456"));
 

@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>Title: 球场</p >
+ * <p>Title: 文章</p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
  * <p>create date: 2022-09-21 15:32:32</p >
