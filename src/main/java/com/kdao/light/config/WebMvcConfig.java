@@ -1,6 +1,7 @@
 package com.kdao.light.config;
 
 import cn.hutool.core.util.StrUtil;
+import com.kdao.light.advice.LoginInterceptor;
 import com.kdao.light.config.properties.FileUploadProperties;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,6 +25,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final FileUploadProperties fileUploadProperties;
 
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/","/user/login");
+    }
 
     /**
      * 配置本地文件上传的虚拟路径和静态化的文件生成路径
