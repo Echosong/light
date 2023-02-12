@@ -254,6 +254,24 @@ public class ViewService extends BaseService implements ServiceInterface {
         return false;
     }
 
+    private String getFromUploadFileStr(int type) {
+        String cardStr = type == 0?"":" list-type=\"picture-card\" \n";
+        String fromUploadFileStr = "<el-upload\n" +
+                "  class=\"upload-demo\"\n" +
+                "  :action=\"sa.cfg.api_url + '/file/upload'\"\n" +
+                "  :multiple=\"false\"\n" +
+                "  :data=\"{ fileType: 2, params: '' }\"" +
+                "  :limit=\"10\"\n" +
+                " {$cardStr$}"+
+                "   :on-success=\"success_{name}\"" +
+                "   :before-remove=\"remove_{name}\"" +
+                "  :file-list=\"m.{name}File\">\n" +
+                "  <el-button size=\"mini\" type=\"primary\">点击上传</el-button>\n" +
+                "  <div slot=\"tip\" class=\"el-upload__tip\">上传{info}</div>\n" +
+                "</el-upload>";
+        return fromUploadFileStr.replace("{$cardStr$}", cardStr);
+    }
+
     /**
      * 编辑
      */
@@ -276,6 +294,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         List<String> replaceFiles = new ArrayList<>();
         List<String> replaceOlds = new ArrayList<>();
         List<String> rulesFields = new ArrayList<>();
+        List<String> textEdits = new LinkedList<>();
 
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
@@ -322,18 +341,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
             if (annotation.htmlType() != HtmlTypeEnum.INPUT) {
                 String htmlTypeStr = "";
-                String fromUploadFileStr = "<el-upload\n" +
-                        "  class=\"upload-demo\"\n" +
-                        "  :action=\"sa.cfg.api_url + '/file/upload'\"\n" +
-                        "  :multiple=\"false\"\n" +
-                        "  :data=\"{ fileType: 2, params: '' }\"" +
-                        "  :limit=\"10\"\n" +
-                        "   :on-success=\"success_{name}\"" +
-                        "   :before-remove=\"remove_{name}\"" +
-                        "  :file-list=\"m.{name}File\">\n" +
-                        "  <el-button size=\"mini\" type=\"primary\">点击上传</el-button>\n" +
-                        "  <div slot=\"tip\" class=\"el-upload__tip\">上传{info}</div>\n" +
-                        "</el-upload>";
+
                 switch (annotation.htmlType()) {
                     case RADIO:
                         htmlTypeStr = StrUtil.format("<el-switch v-model=\"m.{}\" ></el-switch>", StrUtil.lowerFirst(field.getName()));
@@ -347,8 +355,21 @@ public class ViewService extends BaseService implements ServiceInterface {
                         Map<String, String> uploadMap = new HashMap<>(2);
                         uploadMap.put("name", field.getName());
                         uploadMap.put("info", annotation.value());
-                        htmlTypeStr = StrUtil.format(fromUploadFileStr, uploadMap);
+                        htmlTypeStr = StrUtil.format(getFromUploadFileStr(0), uploadMap);
                         ms.add(StrUtil.format("{}File:[]", field.getName()));
+                        break;
+                    case FILE:
+                        //暂时一个页面只考虑一个上传
+                        Map<String, String> fileMap = new HashMap<>(2);
+                        fileMap.put("name", field.getName());
+                        fileMap.put("info", annotation.value());
+                        htmlTypeStr = StrUtil.format(getFromUploadFileStr(1),fileMap);
+                        ms.add(StrUtil.format("{}File:[]", field.getName()));
+                        break;
+                    case TEXTEDIT:
+                        htmlTypeStr = StrUtil.format( " <div class=\"editor-box\"> <div id = \"{}\" ref= \"{}\" style = \"text-align:left\" >" +
+                            "</div></div> ", field.getName(), field.getName());
+                        textEdits.add(StrUtil.format("this.create_editor(\"{}\");", field.getName()));
                         break;
                     default:
                 }
@@ -392,6 +413,13 @@ public class ViewService extends BaseService implements ServiceInterface {
                     "import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";");
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//components: { inputEnum },", "components: { inputEnum },");
         }
+        if(textEdits.size() > 0){
+            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import E from \"wangeditor\";", "import E from \"wangeditor\";");
+            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"/*create_editor", "").replace("create_editor*/", "");
+            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", textEdits));
+            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"width=\"550px\"", "width=\"850px\"");
+        }
+
         tplContent = StrUtil.replace(tplContent, "//rule_fields", String.join("\r\n", rulesFields));
         tplContent = StrUtil.replace(tplContent, "#{el-form-item}#", elContent);
         tplContent = StrUtil.replace(tplContent, "#{data_init}#", String.join(",\r\n", ms));

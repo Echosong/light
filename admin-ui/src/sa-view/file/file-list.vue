@@ -62,9 +62,11 @@ export default {
     },
 
     methods: {
-        f5() {
-            this.sa.put("/file/list", this.p).then((res) => {
-                this.dataList = res.data.content;
+        f5: function () {
+            this.sa.put("/file/listPage", this.p).then((res) => {
+                this.dataList = res.data.content.map((item) => {
+                    return item;
+                });
                 this.dataCount = res.data.totalElements;
             });
         },

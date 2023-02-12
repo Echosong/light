@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * <p>Title: </p >
@@ -32,7 +33,7 @@ import javax.validation.constraints.Pattern;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "用户")
-public class KdUser extends  SysBase {
+public class KdUser extends  SysBase implements Serializable {
 
     @AutoEntityField("账号")
     @NotNull

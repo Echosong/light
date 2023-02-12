@@ -266,6 +266,10 @@ Hibernate Validator 附加的 constraint
 
 4、NotinListDTO 此字段是否在列表中使用
 
+# 生成脚手架
+1、 在maven中，双击archetype:create-from-project运行archetype插件
+
+2、 径下（archetype目录中），打开cmd窗口，执行命令：mvn clean install
 
 
 ## 效果

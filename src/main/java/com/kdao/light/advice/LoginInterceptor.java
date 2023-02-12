@@ -2,6 +2,11 @@ package com.kdao.light.advice;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.extra.spring.SpringUtil;
+import com.kdao.light.common.exception.BaseKnownException;
+import com.kdao.light.entity.KdUser;
+import com.kdao.light.repository.UserRepository;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +22,22 @@ import javax.servlet.http.HttpServletResponse;
  * @version :1.0.0
  */
 public class LoginInterceptor implements HandlerInterceptor {
+    private final RedisTemplate<String, KdUser> redisTemplate;
+
+    public LoginInterceptor(RedisTemplate<String, KdUser> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Integer loginId = Convert.toInt(StpUtil.getLoginId());
+
+        String userId = StpUtil.getLoginId().toString();
+        if(redisTemplate.opsForValue().get(userId) == null) {
+            UserRepository userRepository = SpringUtil.getBean("userRepository");
+            KdUser user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
+            redisTemplate.opsForValue().set(userId, user);
+        }
         return true;
     }
 }

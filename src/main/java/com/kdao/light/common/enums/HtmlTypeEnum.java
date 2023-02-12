@@ -21,7 +21,9 @@ public enum HtmlTypeEnum implements BaseEnum{
     RADIO(2, "switch"),
     CHECKBOX(3, "复选框"),
     UPLOAD(4, "上传"),
-    TEXTAREA(5, "文本域");
+    TEXTAREA(5, "文本域"),
+    FILE(6,"上传文件"),
+    TEXTEDIT(7,"富文本");
 
 
     private final Integer code;

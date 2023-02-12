@@ -36,7 +36,7 @@ public class KdArticle extends SysBase {
     @AutoEntityField(value = "类型", enums = ArticleTypeEnum.class)
     private int type;
 
-    @AutoEntityField(value = "内容", htmlType = HtmlTypeEnum.TEXTAREA)
+    @AutoEntityField(value = "内容", htmlType = HtmlTypeEnum.TEXTEDIT)
     private String content;
 
     @AutoEntityField(value = "项目id")

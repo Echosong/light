@@ -33,7 +33,7 @@ public class KdFile extends SysBase {
     @AutoEntityField(value = "图标",htmlType = HtmlTypeEnum.UPLOAD)
     private String ico;
 
-    @AutoEntityField(value = "文件名", htmlType = HtmlTypeEnum.UPLOAD)
+    @AutoEntityField(value = "文件名", htmlType = HtmlTypeEnum.FILE)
     @InQueryDTO
     @NotNull
     private String fileName;

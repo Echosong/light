@@ -20,6 +20,7 @@
 
 <script>
 //import inputEnum from "../../sa-resources/com-view/input-enum.vue";
+//import E from "wangeditor";
 export default {
   //components: { inputEnum },
   props: ["params"],
@@ -43,7 +44,25 @@ export default {
         this.m = {#{data_init}#}
         this.title = "添加 #{tableInfo}#" ;
       }
+      //create_editor
     },
+    /*create_editor
+    create_editor: function (editName) {
+        this.$nextTick(function () {
+            let editor = new E(this.$refs[editName]);
+            editor.customConfig.debug = true; // debug模式
+            editor.customConfig.uploadFileName = 'file'; // 图片流name
+            editor.customConfig.withCredentials = true; // 跨域携带cookie
+            editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
+            editor.customConfig.onchange = (html) => {	// 创建监听，实时传入
+                this.m[editName] = html;
+            }
+            editor.create();		// 创建编辑器
+            editor.txt.html(this.m[editName]);	// 为编辑器赋值
+        });
+    },
+     create_editor*/
+
     //upload_functions
 
     //提交#{tableInfo}#信息

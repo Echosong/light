@@ -3,6 +3,7 @@ package com.kdao.light.repository;
 import com.kdao.light.entity.KdUserRole;
 import com.kdao.light.entity.KdUserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
  * @author : echosong
  * @version :1.0.0
  */
+@Repository
 public interface UserRoleRepository extends JpaRepository<KdUserRole, Integer> {
     /**
      * 根据用户获取角色信息

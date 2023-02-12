@@ -6,10 +6,13 @@ import com.kdao.light.config.properties.FileUploadProperties;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import java.io.File;
 
 /**
@@ -25,11 +28,20 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final FileUploadProperties fileUploadProperties;
 
+    @Resource
+    private final RedisTemplate redisTemplate;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/","/user/login");
+        registry.addInterceptor(new LoginInterceptor(redisTemplate)).addPathPatterns("/api/**", "/admin/**")
+                .excludePathPatterns("/","/admin/user/login","/api/home/logout");
+    }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.addPathPrefix("/admin", c -> c.getPackage().getName().contains("com.kdao.light.controller"))
+                .addPathPrefix("/api", c -> c.getPackage().getName().contains("com.kdao.light.api") )
+        ;
     }
 
     /**
