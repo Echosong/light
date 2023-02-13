@@ -49,6 +49,7 @@ public class #{UpEntityName}#Controller extends BaseController{
 
     @ApiOperation("新增活更新#{tableInfo}#")
     @PostMapping("/save")
+    @Log("新增|修改#{tableInfo}#")
     public void save(@RequestBody @Valid #{UpEntityName}#DTO #{EntityName}#DTO){
         #{UpTableName}# #{TableName}# = DtoMapper.convert(#{EntityName}#DTO, #{UpTableName}#.class);
         #{EntityName}#Repository.save(#{TableName}#);
@@ -71,6 +72,7 @@ public class #{UpEntityName}#Controller extends BaseController{
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("删除")
+    @Log("删除#{tableInfo}#")
     public void delete(@PathVariable Integer id) {
         #{EntityName}#Repository.deleteById(id);
     }
