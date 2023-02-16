@@ -1,7 +1,7 @@
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
-body{font-size: 1.4rem; height: 100%; background-color: #eeeeee;  color: #333;} 
+body{font-size: 1.4rem; height: 100%; background-color: #eeeeee;  color: #333;}
 body{font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, Arial, sans-serif;}
 a{text-decoration: none;}
 a:hover{}
@@ -43,13 +43,13 @@ input::-webkit-inner-spin-button {
 
 /* ===================== 表单相关 ===================== */
 .c-panel .el-form{padding-top: 10px; padding-bottom: 5px;}
-.c-panel .el-form-item{min-width: 278px;}
+.c-panel .el-form-item{min-width: 258px;}
 .el-step__title {font-size: 10px;}
-.c-panel .el-form-item__label,.c-panel .c-label{width: 100px;}
+.c-panel .el-form-item__label,.c-panel .c-label{width: auto;}
 .c-panel .c-label{display: inline-block;}
-.c-panel .el-form .el-input{width: 178px;}
+.c-panel .el-form .el-input{width: 158px;}
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
-
+.demo-ruleForm .el-input { width: 180px !important}
 /* 标签 */
 .c-panel .c-tag{padding: 0px 15px; height: 22px; line-height: 22px; border-radius: 0px; border: 0px;}
 /* 复选框 */
