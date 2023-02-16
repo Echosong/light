@@ -22,7 +22,9 @@ import './static/sa.css';
 import SaAdminInIt from './sa-resources/sa-admin-init.js';
 Vue.prototype.SaAdminInIt = SaAdminInIt;
 
-
+// 按钮权限指令
+import hasPermi from './sa-resources/directive/hasPermi';
+Vue.directive("hasPermi", hasPermi );
 
 // 打开vue 
 new Vue({
