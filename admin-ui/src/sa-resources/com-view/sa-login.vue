@@ -72,7 +72,7 @@
             <div class="login-box-2">
                 <div class="login-top">
                     <img src="./../index/logo.png" class="logo-img">
-                    <span class="admin-title">空道灯控项目管系统</span>
+                    <span class="admin-title">{{title}}</span>
                 </div>
                 <div class="from-box">
                     <h3 class="from-title">账号登录</h3>
@@ -81,15 +81,14 @@
                             <el-input prefix-icon="el-icon-user" v-model="m.username" placeholder="请输入账号"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-input prefix-icon="el-icon-unlock" v-model="m.password" type="password"
-                                placeholder="请输入密码" @keyup.native.enter="ok()"></el-input>
+                            <el-input prefix-icon="el-icon-unlock" v-model="m.password" type="password" placeholder="请输入密码" @keyup.native.enter="ok()"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" size="small" style="width: 100%;" @click="ok()">登录</el-button>
                         </el-form-item>
                         <el-form-item>
                             <span style="color: #999;"></span>
-                            <el-link style="float: right;" @click="isShow=false">注册</el-link>
+
                         </el-form-item>
                     </el-form>
                 </div>
@@ -100,33 +99,41 @@
 </template>
 
 <script>
-let Base64 = require('js-base64').Base64;
+let Base64 = require("js-base64").Base64;
 export default {
-    name: 'sa-login',
+    name: "sa-login",
     data() {
         return {
-            isShow: false,	// 是否显示当前视图 
+            isShow: false, // 是否显示当前视图
             m: {
-                username: '',
-                password: ''
+                username: "",
+                password: "",
             },
-        }
+            title: "",
+        };
     },
+
     methods: {
-        // 点击确定 
+        open(title) {
+            this.title = title;
+        },
+        // 点击确定
         ok() {
-            // 表单验证  
-            if (this.m.username == '' || this.m.password == '') {
-                return this.sa.error2('请输入完整');
+            // 表单验证
+            if (this.m.username == "" || this.m.password == "") {
+                return this.sa.error2("请输入完整");
             }
             this.m.password = Base64.encode(this.m.password);
-            this.sa.post('/user/login', this.m).then(rs => {
-                console.log(rs);
-                location.href = "/";
-                
-            })
-        }
-    }
-}
+            this.sa.post("/user/login", this.m).then((res) => {
+                console.log("信息登录后信息===" + res);
+
+                localStorage.setItem("token", res.data);
+                console.log(res);
+                location.href = "/index.html";
+            });
+            this.m.password = "";
+        },
+    },
+};
 </script>
 

@@ -1,6 +1,7 @@
 package com.kdao.light.api;
 
 import com.kdao.light.common.utils.IpUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,10 @@ import javax.servlet.http.HttpServletRequest;
  * @author : echosong
  * @version :1.0.0
  */
+@AllArgsConstructor
 public class BaseController {
-    @Autowired
-    protected HttpServletRequest request;
+
+    protected final HttpServletRequest request;
 
 
     /**

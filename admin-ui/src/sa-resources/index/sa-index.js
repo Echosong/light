@@ -18,19 +18,20 @@ export default {
 	},
 	data: function () {
 		// 首页
-		// 首页
 		var homeTab = {
-			id: 3, // 唯一标识 
-			name: '配置管理',
-			view: () => import('@/sa-view/cfg/system-cfg.vue'),
+			id: 21, // 唯一标识 
+			name: '工作台',
+			view: () => import('@/sa-resources/com-view/sa-home.vue'),
 			hide_close: true, // 隐藏关闭键 
 			is_rend: true,
 		}
 
 		return {
+			configs:[],
+			alarmTitle:'',
 			version: 'v1.0.3', // 当前版本
 			update_time: '2020-11-12', // 更新日期 
-			title: '轻巧之光项目管理', //'空道项目管理系统',				// 页面标题  
+			title: '',			// 页面标题  
 			logo_url: '', // logo地址 
 			icon_url: '', // icon地址 
 			github_url: 'https://github.com/click33/sa-vue-admin', // github地址 
@@ -192,7 +193,6 @@ export default {
 		// ------------------- 对外预留接口 --------------------
 		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有	
 		initMenu: function (show_list) {
-			console.log(4444444444, saMenuList);
 			this.setMenuList(saMenuList, show_list);
 		},
 		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组	
@@ -206,22 +206,16 @@ export default {
 				}
 			}
 			menu_list.then(remenu_res => {
-				console.log(67888, remenu_res);
 				this.remenu_res = JSON.parse(JSON.stringify(remenu_res));
 				//深度克隆
 				let pmenu_res = JSON.parse(JSON.stringify(remenu_res.filter(item => {
-					return item.type < 2;
+					return item.show ;
 				})))
-
-				remenu_res = this.arrayToTree(remenu_res);
-				remenu_res = this.refMenuList(remenu_res, show_list);
-
 				pmenu_res = this.arrayToTree(pmenu_res);
 				pmenu_res = this.refMenuList(pmenu_res, show_list);
 
 				this.pmenuList = pmenu_res;
 				this.menuList = remenu_res;
-
 			})
 
 
@@ -378,7 +372,7 @@ export default {
 			} else {
 				var breMenuList = [menu];
 				for (var i = 0; i < breMenuList.length; i += 0) {
-					var parent_id = breMenuList[0].parent_id;
+					var parent_id = breMenuList[0].parentId;
 					if (parent_id == 0 || parent_id == undefined) {
 						break;
 					}
@@ -460,6 +454,7 @@ export default {
 			let _this = this;
 			this.remenu_res.forEach(item => {
 				if (item.perms) {
+					console.log("提示", item.params, params);
 					if (item.perms.indexOf(perms) != -1) {
 						_this.params = params;
 						var tab = _this.getTabById(item.id);
@@ -686,6 +681,11 @@ export default {
 					})
 				}
 			}.bind(this), 150);
+
+			//关闭以后清理
+			if(tab.id == 13 && this.sa.mapSetTimeout){
+				clearInterval(this.sa.mapSetTimeout)
+			}
 		},
 		// js关闭某个tab, 根据id
 		closeTabById: function (id, callFn) {
@@ -734,6 +734,11 @@ export default {
 		// 显示一个选项卡, 根据 id , 不存在则不显示 
 		showTabById: function (id) {
 			var tab = this.getTabById(id);
+			this.menuList.forEach(item=>{
+				if(item.id == id){
+					tab =  item
+				}
+			})
 			if (tab) {
 				this.showTab(tab);
 			}
@@ -787,7 +792,7 @@ export default {
 		scrollToLeft: function () {
 			var width = document.querySelector('.nav-right-2').clientWidth; // 视角宽度
 			this.scrollX += width / 2; // 视角向左滑动一段距离
-			// 越界检查
+			// 越界检测
 			setTimeout(function () {
 				if (this.scrollX > 0) {
 					this.scrollX = 0;
@@ -800,7 +805,7 @@ export default {
 			var tabListWidth = document.querySelector('.tab-title-box').clientWidth; // title总盒子宽度
 			var rightLimit = (0 - tabListWidth + width / 2); // 右滑的极限
 			this.scrollX -= width / 2; // 视角向右滑动一段距离
-			// 越界检查
+			// 越界检测
 			setTimeout(function () {
 				if (this.scrollX < rightLimit) {
 					this.scrollX = rightLimit;
@@ -838,32 +843,6 @@ export default {
 		// 在 某个tab上被松开  -->  重新排序   ( 函数未完成 )   
 		tab_ondrop: function (tab) {
 			this.sss(tab);
-			/**
-			 * 写到一半发现,这看似简单的一个功能, 实则复杂无比
-			 * 首先tab卡交换顺序, 算法就已经比较复杂, 同时为了不显着生硬,还要加上: 
-			 * tab被悬浮提示, 
-			 * tab卡交换动画, 
-			 * 避开在v-for下操作dom带来的一系列坑 
-			 * 其次, 下面的iframe, 也要按照相应顺序进行交换, 
-			 * 而swiper本身没有提供这样的api, 又要用js操作dom
-			 * 交换dom顺序, 同时又要保持iframe不被销毁(因为用户肯定不想看到交换一下tab 页面竟然初始化了)
-			 * 同时一些列操作后, 又要保证不和swiper本身产生冲突...
-			 * 脑供血不足了...... 让我缓缓... 
-			 * 求前端大神提交pr, 跪谢!!!
-			 */
-
-			// // 如果没有交换
-			// if(tab == this.dragTab)  {
-			// 	return;
-			// }
-			// // 删除这个
-			// var dragIndex = this.tabList.indexOf(this.dragTab);
-			// this.tabList.splice(dragIndex, 1);
-			// // 重新添加到这个位置 
-			// this.$nextTick(function() {
-			// 	var tabIndex = this.tabList.indexOf(tab);
-			// 	this.tabList.splice(tabIndex + 1, 0, this.dragTab);	
-			// })
 		},
 		// ------------------- 锚链接路由相关 --------------------
 		// 根据锚链接, 打开窗口
@@ -944,7 +923,9 @@ export default {
 		// ------------------- 登录 与鉴权 -------------------- 
 		// 打开登录页面 
 		openLogin: function () {
+			this.$refs['sa-login'].open(this.title);
 			this.$refs['sa-login'].isShow = true;
+			
 		},
 		// 关闭login页面
 		closeLogin: function () {
@@ -957,7 +938,7 @@ export default {
 		
 
 		// ------------------- 杂七杂八 -------------------- 
-		// 什么也不做, 帮助一下不太规范的语法逃避检查 
+		// 什么也不做, 帮助一下不太规范的语法逃避检测 
 		sss: function () {
 
 		},
@@ -1018,7 +999,6 @@ export default {
 		// 打印版本
 		printVesion: function () {
 			console.log('欢迎使用sa-admin(vue单页版)，当前版本：' + this.version + "，更新于：" + this.update_time + "，GitHub地址：" + this.github_url);
-			console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
 		},
 		// 初始化window相关配置 
 		initWindow: function () {
@@ -1075,11 +1055,27 @@ export default {
 				sa_admin.now_time = zong;
 			}, 1000);
 
+		},
+		getConfig(){
+			this.sa.get("/config/List").then(res=>{
+				let configs = res.data;
+				configs.forEach(item=>{
+					if(item.code =='logo'){
+						this.logo_url = item.value.indexOf('[')!=-1? JSON.parse(item.value).url: item.value;
+					}
+					if(item.code == 'title'){
+						this.title = item.value;
+					}
+					
+				})
+			})
 		}
 	},
 	mounted: function () {
 		this.initWindow();
+		
 		this.SaAdminInIt(this.sa_admin, this.sa);
+		this.getConfig();
 	},
 
 
