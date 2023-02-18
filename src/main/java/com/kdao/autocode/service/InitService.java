@@ -1,10 +1,8 @@
 package com.kdao.autocode.service;
 
 import cn.hutool.core.lang.Singleton;
-import cn.hutool.setting.Setting;
 import com.kdao.autocode.anno.AutoEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.Entity;
 
@@ -48,6 +46,12 @@ public class InitService {
             if (autoEntity.controller()) {
                 Singleton.get(ControllerService.class, clazz).start();
             }
+
+            //数据字典写入
+            Singleton.get(DictionaryService.class, clazz).start();
         }
+
+
+
     }
 }

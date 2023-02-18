@@ -1,5 +1,6 @@
 package com.kdao.light.entity;
 
+import com.kdao.autocode.anno.AutoEntityField;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -30,6 +31,7 @@ public class SysBase {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @AutoEntityField(value = "编号")
     protected Integer id;
 
     /**
@@ -37,12 +39,14 @@ public class SysBase {
      */
     @Column(updatable = false)
     @CreatedDate
+    @AutoEntityField(value = "创建时间")
     protected Date createTime;
 
     /**
      * 修改时间
      */
     @LastModifiedDate
+    @AutoEntityField(value = "更新时间")
     protected Date updateTime;
 
     /**
@@ -50,12 +54,14 @@ public class SysBase {
      */
     @Column(updatable = false)
     @CreatedBy
+    @AutoEntityField(value = "创建人")
     protected Integer creatorId;
 
     /**
      * 修改人
      */
     @LastModifiedBy
+    @AutoEntityField(value = "修改人")
     protected Integer updaterId;
 
 

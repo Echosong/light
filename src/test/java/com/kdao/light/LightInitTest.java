@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Singleton;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.setting.Setting;
 import com.kdao.autocode.Const;
+import com.kdao.autocode.service.DictionaryService;
 import com.kdao.autocode.service.InitService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -54,6 +55,7 @@ class LightInitTest {
             InitService initService = Singleton.get(InitService.class);
             initService.run(aClass);
         }
+        DictionaryService.writeDictionaryFile();
     }
 
 }
