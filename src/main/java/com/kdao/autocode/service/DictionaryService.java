@@ -57,10 +57,10 @@ public class DictionaryService extends BaseService implements ServiceInterface {
             String name = field.getName();
             String columnName = annotation.value();
             int len = annotation.len();
-            String isNull = "N";
+            String isNull = "Y";
             String typeString = field.getType().getSimpleName();
             if (field.isAnnotationPresent(NotNull.class) || field.isAnnotationPresent(Id.class)) {
-                isNull = "Y";
+                isNull = "N";
             }
             DICTIONARY_STR.append("<tr>");
             DICTIONARY_STR.append(StrUtil.format("<td>{}</td>", name));

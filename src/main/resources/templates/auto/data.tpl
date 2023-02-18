@@ -43,7 +43,7 @@
 </head>
 
 <body>
-<div class="title"><h1>起航志愿项目数据字典 </h1> <h2>{{dateTime}}</h2></div>
+<div class="title"><h1>项目数据字典 </h1> <h2>{{dateTime}}</h2></div>
   #{tableDiv}#
 </body>
 
