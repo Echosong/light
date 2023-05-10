@@ -27,7 +27,7 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: _sys31UC
-    database: 5
+    database: 9
 server:
   port: 8090
 #文件上传操作
@@ -35,6 +35,12 @@ file:
   #文件上传目录
   upload-folder: E:\外包项目整理\light轻巧之光\light\upload\
 
+#配置mybatis
+mybatis:
+  type-aliases-package: com.kdao.light.entity
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 # Sa-Token配置
 sa-token:

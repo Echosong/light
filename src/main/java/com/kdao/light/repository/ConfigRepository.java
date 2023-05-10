@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface ConfigRepository extends JpaRepository<KdConfig, Integer> {
 
 }

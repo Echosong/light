@@ -17,6 +17,7 @@ import java.util.List;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface RoleRepository extends JpaRepository<KdRole, Integer> {
     /**
      * 根据 多个id 获取角色

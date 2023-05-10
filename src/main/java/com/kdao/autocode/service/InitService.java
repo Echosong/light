@@ -49,6 +49,7 @@ public class InitService {
 
             //数据字典写入
             Singleton.get(DictionaryService.class, clazz).start();
+
         }
 
 

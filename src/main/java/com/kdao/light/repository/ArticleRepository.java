@@ -1,6 +1,8 @@
 package com.kdao.light.repository;
 import java.util.*;
 import java.math.BigDecimal;
+
+import com.github.lkqm.spring.jpa.repository.MybatisQuery;
 import com.kdao.light.entity.KdArticle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Repository;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface ArticleRepository extends JpaRepository<KdArticle, Integer> {
   /**
      * 分页查询
@@ -27,5 +30,6 @@ public interface ArticleRepository extends JpaRepository<KdArticle, Integer> {
     @Query(value = "select t1 from KdArticle t1 where 1=1 ")
     Page<KdArticle> listPage( Pageable pageable);
 
-  List<KdArticle> findByType(int type);
+    @MybatisQuery
+    List<KdArticle> findByType(int type);
 }

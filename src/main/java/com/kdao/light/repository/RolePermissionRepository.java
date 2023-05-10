@@ -2,6 +2,7 @@ package com.kdao.light.repository;
 
 import com.kdao.light.entity.KdRolePermission;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
  * @author : echosong
  * @version :1.0.0
  */
+@Repository
+@SuppressWarnings("ALL")
 public interface RolePermissionRepository extends JpaRepository<KdRolePermission, Integer> {
     /**
      * 根据角色获取当前权限信息

@@ -19,6 +19,7 @@ import java.util.Date;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface LogRepository extends JpaRepository<KdLog, Integer> {
   /**
    * 分页查询

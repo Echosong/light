@@ -20,6 +20,7 @@ import java.util.List;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface PermissionRepository extends JpaRepository<KdPermission, Integer> {
     /**
      * 根据id集合查询相关权限列表

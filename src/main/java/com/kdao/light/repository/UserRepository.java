@@ -21,6 +21,7 @@ import java.util.Optional;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface UserRepository extends JpaRepository<KdUser, Integer> {
     /**
      * 分页查询
