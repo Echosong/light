@@ -275,7 +275,7 @@ Hibernate Validator 附加的 constraint
 ## 效果
 
 
-
+> 前端 admin-ui 文件夹 执行  npm i（安装）    npm run dev(本地运行)  npm run build(发布) 
 
 
 ![运行效果](https://github.com/Echosong/light/blob/main/web.png?raw=true)
