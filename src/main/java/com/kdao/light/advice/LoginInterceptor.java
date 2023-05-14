@@ -3,14 +3,17 @@ package com.kdao.light.advice;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.spring.SpringUtil;
+import com.kdao.light.common.annotation.NoPermission;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.UserRepository;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * <p>Title: liveShop</p >
@@ -31,12 +34,19 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        String userId = StpUtil.getLoginId().toString();
-        if(redisTemplate.opsForValue().get(userId) == null) {
-            UserRepository userRepository = SpringUtil.getBean("userRepository");
-            KdUser user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
-            redisTemplate.opsForValue().set(userId, user);
+        if(handler instanceof HandlerMethod) {
+            HandlerMethod h = (HandlerMethod) handler;
+            NoPermission methodAnnotation = h.getMethodAnnotation(NoPermission.class);
+            //不需要做权限判断
+            if(Objects.nonNull(methodAnnotation)){
+                return true;
+            }
+            String userId = StpUtil.getLoginId().toString();
+            if (redisTemplate.opsForValue().get(userId) == null) {
+                UserRepository userRepository = SpringUtil.getBean("userRepository");
+                KdUser user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
+                redisTemplate.opsForValue().set(userId, user);
+            }
         }
         return true;
     }
