@@ -1,5 +1,7 @@
 package com.kdao.light.repository;
 
+import com.github.lkqm.spring.jpa.repository.MybatisQuery;
+import com.kdao.light.common.dto.permission.PermissionQueryDTO;
 import com.kdao.light.entity.KdPermission;
 import com.kdao.light.entity.KdPermission;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,10 @@ public interface PermissionRepository extends JpaRepository<KdPermission, Intege
      * @return
      */
     List<KdPermission> getAllByIdIn(List<Integer> ids);
+
+
+    @MybatisQuery
+    List<KdPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
 
     /**
      * 分页获取权限信息

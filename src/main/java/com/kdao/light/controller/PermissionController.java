@@ -6,6 +6,7 @@ import com.kdao.light.common.dto.permission.PermissionDTO;
 import com.kdao.light.common.dto.permission.PermissionQueryDTO;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.DtoMapper;
+import com.kdao.light.common.utils.PageUtil;
 import com.kdao.light.entity.KdPermission;
 import com.kdao.light.entity.KdRolePermission;
 import com.kdao.light.entity.KdUserRole;
@@ -79,9 +80,7 @@ public class PermissionController extends BaseController {
     @PostMapping("/list")
     @ApiOperation("查询列表")
     public Page<KdPermission> list(@RequestBody PermissionQueryDTO permissionQueryDTO){
-        return  permissionRepository.getAllByPermsAndNameContainingAndType(
-                permissionQueryDTO.getPerms(),permissionQueryDTO.getName(), permissionQueryDTO.getType()
-                ,permissionQueryDTO.getRequest());
+        return PageUtil.getPage(permissionRepository::getListPage, permissionQueryDTO);
     }
 
     /**
