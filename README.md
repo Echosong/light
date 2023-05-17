@@ -102,13 +102,27 @@ spring boot 没有一款基于程序员面向对象设计建模，快速开发�
 
 ### repository 层
 
+> 操作数据库用jpa 还是mybatis 怎么选，成年人当然全要咯，但是全要的话又要建立两天体体系， Mapper + Repository 非常麻烦！！
+> 全新方便的 spring-data-jpa-mybatis 解决了一套架构灵活使用两个框架的精简合成
+
+```java
+// 启动文件
+@EnableMybatisJpaRepositories
 
 
-1、 主要jpa 操作接口, 常规jpa 操作满足 80% 业务需要
+// 只有该方法会由mybatis执行，其余方法按照jpa方式正常处理 如此分页
+@MybatisQuery
+List<KdPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
+
+
+```
+
+
+1、 一 主要jpa 操作接口, 常规jpa 操作满足 80% 业务需要 
 
 
 
-2、 复杂的sql 直接 用 @Query(nativeQuery = true, value = "***")
+2、 复杂的sql 直接 用 @MybatisQuery 然后对应写mybatis xml
 
 
 
