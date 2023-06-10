@@ -1,16 +1,27 @@
 package com.kdao.light.api;
 
+import com.kdao.light.common.annotation.NoPermission;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
- * <p>Title: light</p >
- * <p>Description: HomeController</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2023-02-07 13:28 </p >
- * 注意这里 需要填 注册controller 名字 避免跟admin 那边的bean名字冲突
+ *  前端首页相关接口
  * @author : 二胡子
  * @version :1.0.0
  */
-@RestController("homeApi")
+@RestController("api-home")
+@RequestMapping("/home")
 public class HomeController {
+
+    /**
+     * 前端接口
+     * @return 欢迎语句
+     */
+    @GetMapping("/index")
+    @NoPermission
+    public String index(){
+        return "这里是前端接口";
+    }
 }

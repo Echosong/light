@@ -76,6 +76,26 @@ spring boot 没有一款基于程序员面向对象设计建模，快速开发�
 
 4. 所有Controller 继承父类 BaseController ， 父类处理 Http request 相关的操作，比如获取 客户端ip ...
 
+5. 如果有前后端各自的controller 由于本项目单体，也没切分模块，那么可以通过文件夹加以区分，比如api 里面是跟前端app对接的接口， 在webmvcconfig里面配置了相应请求前缀
+```java
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.addPathPrefix("/admin", c -> c.getPackage().getName().contains("com.kdao.light.controller"))
+                .addPathPrefix("/api", c -> c.getPackage().getName().contains("com.kdao.light.api") )
+        ;
+    }
+   // 注意 如果 api 文件加 和 controller 文件夹里面有相同的controller 时候 @RestController("api-home") 需要注入不同bean名加以区分
+
+    /**
+     *  前端首页相关接口
+     * @author : 二胡子
+     * @version :1.0.0
+     */
+    @RestController("api-home")
+    @RequestMapping("/home")
+    public class HomeController 
+```
+
 
 
 ### service 层规范
