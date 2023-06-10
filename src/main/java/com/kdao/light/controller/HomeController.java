@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * 后台首页接口处理
  * @author Administrator
  */
 @Api(tags = "接口处理")
@@ -36,8 +37,6 @@ import java.util.Objects;
 @Slf4j
 @Validated
 public class HomeController extends BaseController {
-
-
 
 
     private final UserRepository userRepository;

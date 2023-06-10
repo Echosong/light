@@ -218,9 +218,10 @@ spring:
 
 
 
-### Swagger枚举类型
+### 接口文档方案
 
 
+####  swagger 侵入类型
 
 实现了一个swagger插件ModelPropertyBuilderPlugin插件：SmartSwaggerApiModelEnumPlugin,在插件中使用@ApiModelPropertyEnum注解，这样在swagger文档中就可以很好的显示了
 
@@ -228,6 +229,9 @@ spring:
 
 > swagger 地址 http://localhost:8090/swagger-ui/index.html
 
+####  apifox方案
+
+如果不喜欢swagger 这种侵入式的接口文档方案，建议使用idea 的 apifox插件，直接生成相应的接口文档方案
 
 
 ### 常用验证码

@@ -30,11 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>Title: </p >
- * <p>Description: 权限</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/28 002814:26</p >
- *
+ * 权限菜单
  * @author : echosong
  * @version :1.0.0
  */

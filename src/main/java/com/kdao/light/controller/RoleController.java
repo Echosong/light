@@ -17,11 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * <p>Title: </p >
- * <p>Description: </p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/28 002814:25</p >
- *
+ *部门，角色
  * @author : echosong
  * @version :1.0.0
  */

@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * <p>Title: </p >
- * <p>Description: </p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/27 002719:52</p >
- *
+ * 基类
  * @author : echosong
  * @version :1.0.0
  */

@@ -27,11 +27,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: 文件管理</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/29 002922:12</p >
- *
+ * 文件管理
  * @author : echosong
  * @version :1.0.0
  */

@@ -19,11 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * <p>Title: </p >
- * <p>Description: 日志管理</p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2021-11-10 22:35:56</p >
- *
+ * 日志 控制器
  * listPage,save,delete,find,list
  * @author : echosong
  * @version :1.0.0

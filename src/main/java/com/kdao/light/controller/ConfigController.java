@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>Title: </p >
- * <p>Description: 键值配置</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/28 002817:14</p >
- *
+ * 键值配置
  * @author : echosong
  * @version :1.0.0
  */

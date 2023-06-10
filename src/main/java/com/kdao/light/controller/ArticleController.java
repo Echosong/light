@@ -17,16 +17,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * <p>Title: </p >
- * <p>Description: 球场管理</p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2022-09-21 15:32:32</p >
- *
+ * 内容相关
  * listPage,save,delete,find,list
  * @author : echosong
  * @version :1.0.0
  */
-@Api(tags = "新闻 控制器")
+@Api(tags = "新闻文章控制器")
 @RestController
 @RequestMapping("/article")
 public class ArticleController extends BaseController{
@@ -38,21 +34,21 @@ public class ArticleController extends BaseController{
         this.articleRepository = articleRepository;
     }
 
-    @ApiOperation("分页查询球场")
+    @ApiOperation("分页文章")
     @PutMapping("/listPage")
     public Page<ArticleListDTO> listPage(@RequestBody @Valid ArticleQueryDTO queryDTO){
         Page<KdArticle> dataPages = articleRepository.listPage( queryDTO.getRequest());
         return DtoMapper.convertPage(dataPages, ArticleListDTO.class);
     }
 
-    @ApiOperation("新增活更新球场")
+    @ApiOperation("新增活更新文章")
     @PostMapping("/save")
     public void save(@RequestBody @Valid ArticleDTO articleDTO){
         KdArticle kdArticle = DtoMapper.convert(articleDTO, KdArticle.class);
         articleRepository.save(kdArticle);
     }
 
-    @ApiOperation("查询全部球场")
+    @ApiOperation("查询全部文章")
     @GetMapping("/list")
     public List<ArticleListDTO> list(){
         List<KdArticle> all = articleRepository.findAll();
