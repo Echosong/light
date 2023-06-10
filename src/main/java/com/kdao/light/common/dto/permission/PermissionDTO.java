@@ -48,4 +48,7 @@ public class PermissionDTO implements Serializable {
 
     @ApiModelProperty("图标")
     private String icon;
+
+    @ApiModelProperty("是否展现")
+    private Integer show;
 }

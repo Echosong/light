@@ -154,6 +154,8 @@ List<KdPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
 
 ```
 
+3、自动生成数据字典在 根目录下的 data.html
+
 
 
 ### 权限认证框架 sa-token

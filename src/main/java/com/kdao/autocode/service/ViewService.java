@@ -175,7 +175,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
         if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
             String uploadListTemplate = "" +
-                    " <el-table-column  label=\"{}\"  >\n" +
+                    " <el-table-column  label=\"{}\"   #{sortable}# >\n" +
                     "    <template slot-scope=\"s\">\n" +
                     "        <el-link  v-for=\"item in (s.row.{}File)\"  :key=\"item.name\" :href=\"item.url\"  type=\"primary\" >{{item.name}}</el-link>\n" +
                     "     </template>\n" +
@@ -183,8 +183,13 @@ public class ViewService extends BaseService implements ServiceInterface {
             returnValue = StrUtil.format(uploadListTemplate, autoEntityField.value(), typeName);
         } else {
             returnValue = StrUtil.format("" +
-                            "                   <el-table-column  label=\"{}\"   prop=\"{}\" ></el-table-column>",
+                            "                   <el-table-column  label=\"{}\" #{sortable}#  prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);
+        }
+        if (field.isAnnotationPresent(AutoSorted.class)) {
+            returnValue =  returnValue.replace("#{sortable}#", "sortable");
+        }else{
+            returnValue =  returnValue.replace("#{sortable}#", "");
         }
         return returnValue;
     }

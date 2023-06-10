@@ -10,7 +10,7 @@
                 </el-form-item>
             </el-form>
             <!-- <div class="c-title">数据列表</div> -->
-            <el-table :data="dataList" size="mini">
+            <el-table :data="dataList" size="mini" @sort-change="shortChange">
                 #{el-table-column}#
                 <el-table-column prop="address" label="操作" width="220px">
                     <template slot-scope="s">
@@ -76,6 +76,14 @@
 
 				}.bind(this));
 			},
+
+			shortChange(e){
+                console.log('排序接受', e)
+                this.p.direction = e.order === 'ascending';
+                this.p.sortCol = e.prop;
+                this.f5();
+            },
+
             //更新
 			update(row){
 				this.$refs['add-or-update'].open(row);

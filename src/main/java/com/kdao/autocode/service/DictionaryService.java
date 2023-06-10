@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
 import javax.persistence.*;
 
 /**
- * <p>Title: light</p >
+ * <p>Title: 自动生成数据字典</p >
  * <p>Description: DictionaryService</p >
  * <p>Company: www.hn1024.cn</p >
  * <p>create date: 2023-02-18 17:52 </p >

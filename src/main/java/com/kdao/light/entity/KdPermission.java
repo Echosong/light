@@ -56,4 +56,7 @@ public class KdPermission extends  SysBase{
 
     @AutoEntityField("图标")
     private String icon;
+
+    @AutoEntityField("是否展现 1 展现 0 不展现")
+    private Integer show;
 }

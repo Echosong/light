@@ -318,7 +318,6 @@
                 </div>
             </el-col>
             <!-- 增改组件 -->
-            <index-task-add ref="add-or-update"></index-task-add>
         </el-row>
     </div>
 </template>
@@ -348,15 +347,10 @@ export default {
         console.log("====", this.user);
 	
 		this.f5();
-        this.sa.get("/project/getCountGroupByState").then((res) => {
-            this.enums = res.data;
-            this.enums.forEach((t) => {
-                this.all += parseInt(t.count);
-            });
-        });
+
     },
     mounted(){
-        this.timer = setInterval(this.f5, 2000);
+
     },
     beforeDestroy() {
       clearInterval(this.timer);

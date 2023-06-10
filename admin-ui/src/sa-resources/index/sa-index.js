@@ -206,6 +206,7 @@ export default {
 				}
 			}
 			menu_list.then(remenu_res => {
+				console.log("得到菜单信息=====", remenu_res);
 				this.remenu_res = JSON.parse(JSON.stringify(remenu_res));
 				//深度克隆
 				let pmenu_res = JSON.parse(JSON.stringify(remenu_res.filter(item => {
@@ -213,7 +214,7 @@ export default {
 				})))
 				pmenu_res = this.arrayToTree(pmenu_res);
 				pmenu_res = this.refMenuList(pmenu_res, show_list);
-
+				console.log("得到菜单信息", pmenu_res);
 				this.pmenuList = pmenu_res;
 				this.menuList = remenu_res;
 			})
@@ -1057,7 +1058,7 @@ export default {
 
 		},
 		getConfig(){
-			this.sa.get("/config/List").then(res=>{
+			this.sa.get("/config/list").then(res=>{
 				let configs = res.data;
 				configs.forEach(item=>{
 					if(item.code =='logo'){

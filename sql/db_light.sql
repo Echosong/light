@@ -138,20 +138,21 @@ CREATE TABLE `kd_permission` (
   `update_time` datetime DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
   `updater_id` int(11) DEFAULT NULL,
+  `show` tinyint(1) default 1 comment '是否展现',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COMMENT='权限';
 
 -- ----------------------------
 -- Records of kd_permission
 -- ----------------------------
-INSERT INTO `kd_permission` VALUES ('1', '系统管理', 'el-icon-user', '系统管理', '', '0', null, '12', '0', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('2', '角色管理', null, '项目管理', 'role-list', '1', null, '1', '1', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('3', '系统配置', null, '系统配置', 'sys-config', '1', null, '3', '1', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('4', '用户列表', null, '用户列表', 'user-list', '1', null, '2', '1', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('6', '系统日志', null, '系统日志', 'log-list', '1', null, '5', '1', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('8', '内容管理', 'el-icon-cpu', '项目管理', null, '0', null, '1', '0', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('9', '文章列表', null, '文章列表', 'article-list', '8', null, '2', '1', null, null, null, null);
-INSERT INTO `kd_permission` VALUES ('10', '文件管理', null, '文件管理', 'file-list', '8', null, '3', '1', null, null, null, null);
+INSERT INTO `kd_permission` VALUES ('1', '系统管理', 'el-icon-user', '系统管理', '', '0', null, '12', '0', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('2', '角色管理', null, '项目管理', 'role-list', '1', null, '1', '1', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('3', '系统配置', null, '系统配置', 'sys-config', '1', null, '3', '1', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('4', '用户列表', null, '用户列表', 'user-list', '1', null, '2', '1', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('6', '系统日志', null, '系统日志', 'log-list', '1', null, '5', '1', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('8', '内容管理', 'el-icon-cpu', '项目管理', null, '0', null, '1', '0', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('9', '文章列表', null, '文章列表', 'article-list', '8', null, '2', '1', null, null, null, null,1);
+INSERT INTO `kd_permission` VALUES ('10', '文件管理', null, '文件管理', 'file-list', '8', null, '3', '1', null, null, null, null,1);
 
 -- ----------------------------
 -- Table structure for kd_role
