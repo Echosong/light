@@ -27,7 +27,6 @@ public class InitService {
         // 生成 repository
         if (clazz.isAnnotationPresent(Entity.class)) {
             Singleton.get(RepositoryService.class, clazz).start();
-            Singleton.get(MapperService.class, clazz).start();
         }
         //做表备注
         if (clazz.isAnnotationPresent(AutoEntity.class)) {
@@ -39,6 +38,7 @@ public class InitService {
             //DTO处理
             if (autoEntity.dto()) {
                 Singleton.get(DtoService.class, clazz).start();
+                Singleton.get(MapperService.class, clazz).start();
             }
             //视图处理
             Singleton.get(ViewService.class, clazz).start();

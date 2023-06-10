@@ -6,6 +6,7 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.AutoCover;
+import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.enums.CodeTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,7 +51,14 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
                     , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))
                     ,true);
         }
-        String templateFile = this.templatePath+"repository.tpl";
+        String templateFile = this.templatePath+"repositoryPage.tpl";
+        //如果有dto 那么就需要生成分页，否则不需要
+        if (clazz.isAnnotationPresent(AutoEntity.class)) {
+            AutoEntity autoEntity = clazz.getAnnotation(AutoEntity.class);
+            if(!autoEntity.dto()){
+                templateFile = this.templatePath+"repository.tpl";
+            }
+        }
         String tplContent =  this.replaceTpl(templateFile);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Repository 文件 {} 成功 ", fileName);
