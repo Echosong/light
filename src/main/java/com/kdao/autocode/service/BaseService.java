@@ -69,8 +69,6 @@ public class BaseService {
      */
     protected String  templatePath = "templates/auto/";
 
-
-
     /**
      * 获取当前绝对路径
      *

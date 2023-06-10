@@ -2,6 +2,7 @@ package com.kdao.light;
 
 import cn.hutool.core.lang.Singleton;
 import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.Setting;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.service.DictionaryService;
@@ -26,11 +27,9 @@ class LightInitTest {
     @Value("${spring.datasource.password}")
     private String password;
 
-    @Value("${auto-config.vue-root-path}")
+    @Value("${auto-config.vue-root-path:}")
     private String vueRootPath;
 
-    @Value("${auto-config.sys-path}")
-    private String sysPath;
 
     private void initSetting() {
         log.info("初始化项目开始");
@@ -41,7 +40,11 @@ class LightInitTest {
         setting.store();
         log.info("设置db.setting 文件成功");
         //配置基础路径
-        Const.SYS_PATH = sysPath;
+        Const.SYS_PATH = ClassUtil.getPackagePath(LightInitTest.class).replace("/", ".");
+        if(StrUtil.isBlank(vueRootPath)) {
+            vueRootPath = ClassUtil.getClassPath().replace("target/test-classes/", "admin-ui")
+                    .replace("target/classes/", "admin-ui");
+        }
         Const.VUE_PATH = vueRootPath + Const.VUE_PATH;
         Const.VUE_ROOT_ROUTER = vueRootPath + Const.VUE_ROOT_ROUTER;
         log.info("设置基础配置参数成功");

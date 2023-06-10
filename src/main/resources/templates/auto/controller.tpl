@@ -1,10 +1,11 @@
 package #{PackageName}#;
-
+import #{SYS_PATH}.common.annotation.Log;
 import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#DTO;
 import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#ListDTO;
 import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
 import #{SYS_PATH}.common.exception.BaseKnownException;
 import #{SYS_PATH}.common.utils.DtoMapper;
+import #{SYS_PATH}.common.utils.PageUtil;
 import #{SYS_PATH}.entity.#{UpTableName}#;
 import #{SYS_PATH}.repository.#{UpEntityName}#Repository;
 import io.swagger.annotations.Api;
@@ -43,7 +44,7 @@ public class #{UpEntityName}#Controller extends BaseController{
     @ApiOperation("分页查询#{tableInfo}#")
     @PutMapping("/listPage")
     public Page<#{UpEntityName}#ListDTO> listPage(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO){
-        Page<#{UpTableName}#> dataPages = #{EntityName}#Repository.listPage(#{queryParams}# queryDTO.getRequest());
+        Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Repository::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, #{UpEntityName}#ListDTO.class);
     }
 

@@ -2,8 +2,9 @@ package #{PackageName}#;
 import java.util.*;
 import java.math.BigDecimal;
 import #{SYS_PATH}.entity.#{UpTableName}#;
+import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
+import com.github.lkqm.spring.jpa.repository.MybatisQuery;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,12 +19,13 @@ import org.springframework.stereotype.Repository;
  * @version :1.0.0
  */
 @Repository
+@SuppressWarnings("ALL")
 public interface #{UpEntityName}#Repository extends JpaRepository<#{UpTableName}#, Integer> {
   /**
      * 分页查询
-     #{pageable_params}#
+     # @param queryDTO 查询条件
      * @return 分页数据
      */
-    @Query(value = "select t1 from #{UpTableName}# t1 #{queryWhere}#")
-    Page<#{UpTableName}#> listPage(#{queryFields}# Pageable pageable);
+    @MybatisQuery
+    List<#{UpTableName}#> listPage(#{UpEntityName}#QueryDTO queryDTO);
 }

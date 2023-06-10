@@ -62,10 +62,10 @@ sa-token:
 
 # 自动化生成代码配置
 auto-config:
-  # 前端路径
-  vue-root-path: E:\外包项目整理\light轻巧之光\light\admin-ui
-  # 项目包路径
-  sys-path: com.kdao.light
+  # 前端路径 如果单独放项目之外的路径这里需要配置下,默认不需要配置
+  vue-root-path:
+
+
 
 
 

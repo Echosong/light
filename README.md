@@ -280,10 +280,18 @@ Hibernate Validator 附加的 constraint
 
 4、NotinListDTO 此字段是否在列表中使用
 
+### 注意运行自动生成相关代码在 test/LightInitTest 文件入库
+
+> 自动生成 各层业务代码，直接执行 autoApplication 方法，每次新增entity 或者 修改entity （注意为了防止覆盖，可以先删除原来的代码，或者在原来的entity
+> 加 @AutoCover 注解表示每次自动生成覆盖原来的，原来的会以txt 文件备份在同目录下）
+
+
 # 生成脚手架
 1、 在maven中，双击archetype:create-from-project运行archetype插件
 
 2、 径下（archetype目录中），打开cmd窗口，执行命令：mvn clean install
+
+3、 修改 application.yml 里面 auto-config 配置，方便于autocode 生成代码
 
 
 ## 效果

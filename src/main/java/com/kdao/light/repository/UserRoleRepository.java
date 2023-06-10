@@ -18,7 +18,7 @@ import java.util.Set;
  * @version :1.0.0
  */
 @Repository
-
+@SuppressWarnings("ALL")
 public interface UserRoleRepository extends JpaRepository<KdUserRole, Integer> {
     /**
      * 根据用户获取角色信息
