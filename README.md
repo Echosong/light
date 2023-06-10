@@ -266,21 +266,16 @@ Hibernate Validator 附加的 constraint
 
 > 有几个注解配合来生成业务
 
-
-
 1、AutoEntity 作用在实体类上，用来确定实体是否需要生成对应的 controller 前端 list, 表单
 
-
-
 2、AutoEntityField 各种字段名称，验证码 等等
-
-
 
 3、InQueryDTO 是否做完前端列表 头部查询使用字段
 
 
-
 4、NotinListDTO 此字段是否在列表中使用
+
+5、AutoSorted 注解为排序字段，如果字段加了这个注解，前端自动可以根据这个字段进行操作排序
 
 ### 注意运行自动生成相关代码在 test/LightInitTest 文件入库
 
