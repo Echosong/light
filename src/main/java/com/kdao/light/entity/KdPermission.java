@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Range;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
@@ -58,5 +59,6 @@ public class KdPermission extends  SysBase{
     private String icon;
 
     @AutoEntityField("是否展现 1 展现 0 不展现")
+    @Column(name = "`show`")
     private Integer show;
 }

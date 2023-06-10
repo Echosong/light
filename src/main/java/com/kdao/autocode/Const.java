@@ -1,7 +1,5 @@
 package com.kdao.autocode;
 
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  * <p>Title: </p >
  * <p>Description: 配置相关</p >
@@ -14,9 +12,14 @@ import org.springframework.beans.factory.annotation.Value;
 public class Const {
 
     /**
-     * 项目路径
+     * 项目包路径.隔开
      */
     public static String  SYS_PATH = "";
+
+    /**
+     * 根路径
+     */
+    public static String ROOT_PATH = "";
 
     /**
      * 静态魔板路径

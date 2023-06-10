@@ -39,11 +39,14 @@ class LightInitTest {
         setting.set("pass", this.password);
         setting.store();
         log.info("设置db.setting 文件成功");
-        //配置基础路径
+        //配置基础包路径
         Const.SYS_PATH = ClassUtil.getPackagePath(LightInitTest.class).replace("/", ".");
+        //根路径
+        Const.ROOT_PATH = ClassUtil.getClassPath().replace("target/test-classes/", "")
+                .replace("target/classes/", "");
+
         if(StrUtil.isBlank(vueRootPath)) {
-            vueRootPath = ClassUtil.getClassPath().replace("target/test-classes/", "admin-ui")
-                    .replace("target/classes/", "admin-ui");
+            vueRootPath = Const.ROOT_PATH + "admin-ui";
         }
         Const.VUE_PATH = vueRootPath + Const.VUE_PATH;
         Const.VUE_ROOT_ROUTER = vueRootPath + Const.VUE_ROOT_ROUTER;

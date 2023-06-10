@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 14px;
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2
+		}
+
+		th {
+			color: #333;
+		}
+
+		h2 {
+			margin: 10px;
+			font-size: 20px;
+		}
+		.title{
+			max-width: 1000px;
+			margin: 20px auto;
+		}
+
+		.content {
+			border: 1px solid #eee; margin: 20px;
+			border-radius: 6px;
+			max-width: 1000px;
+			margin: 20px auto;
+			box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+		}
+	</style>
+</head>
+
+<body>
+<div class="title"><h1>项目数据字典 </h1> <h2>2023-06-10 20:52:50</h2></div>
+  <div class="content">
+<h2>KdLog(日志)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>requestIp</td><td>String</td><td>255</td><td>Y</td><td>请求ip</td></tr><tr><td>address</td><td>String</td><td>255</td><td>Y</td><td>地址</td></tr><tr><td>description</td><td>String</td><td>255</td><td>Y</td><td>描述</td></tr><tr><td>browser</td><td>String</td><td>255</td><td>Y</td><td>浏览器</td></tr><tr><td>time</td><td>Long</td><td>255</td><td>Y</td><td>请求耗时</td></tr><tr><td>method</td><td>String</td><td>255</td><td>Y</td><td>方法名</td></tr><tr><td>params</td><td>String</td><td>1000</td><td>Y</td><td>参数</td></tr><tr><td>logType</td><td>String</td><td>255</td><td>Y</td><td>日志类型</td></tr><tr><td>exceptionDetail</td><td>byte[]</td><td>255</td><td>Y</td><td>异常详情</td></tr></table></div><div class="content">
+<h2>KdArticle(新闻)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>title</td><td>String</td><td>255</td><td>Y</td><td>标题</td></tr><tr><td>type</td><td>int</td><td>255</td><td>Y</td><td>类型</td></tr><tr><td>content</td><td>String</td><td>255</td><td>Y</td><td>内容</td></tr><tr><td>projectId</td><td>Integer</td><td>255</td><td>Y</td><td>项目id</td></tr></table></div><div class="content">
+<h2>KdPermission(权限)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>name</td><td>String</td><td>255</td><td>Y</td><td>权限名称</td></tr><tr><td>description</td><td>String</td><td>255</td><td>Y</td><td>权限描述</td></tr><tr><td>url</td><td>String</td><td>255</td><td>Y</td><td>访问路径</td></tr><tr><td>perms</td><td>String</td><td>255</td><td>Y</td><td>权限标识</td></tr><tr><td>parentId</td><td>Integer</td><td>255</td><td>Y</td><td>父级id</td></tr><tr><td>type</td><td>Integer</td><td>255</td><td>Y</td><td>类型</td></tr><tr><td>sort</td><td>Integer</td><td>255</td><td>Y</td><td>排序</td></tr><tr><td>icon</td><td>String</td><td>255</td><td>Y</td><td>图标</td></tr><tr><td>show</td><td>Integer</td><td>255</td><td>Y</td><td>是否展现 1 展现 0 不展现</td></tr></table></div><div class="content">
+<h2>KdFile(文件管理)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>ico</td><td>String</td><td>255</td><td>Y</td><td>图标</td></tr><tr><td>fileName</td><td>String</td><td>255</td><td>N</td><td>文件名</td></tr><tr><td>extend</td><td>String</td><td>255</td><td>Y</td><td>文件扩展名</td></tr><tr><td>filePath</td><td>String</td><td>255</td><td>Y</td><td>文件存储路径</td></tr><tr><td>fileType</td><td>Integer</td><td>255</td><td>Y</td><td>文件类型</td></tr><tr><td>fileSize</td><td>long</td><td>255</td><td>Y</td><td>文件大小</td></tr><tr><td>urlPath</td><td>String</td><td>255</td><td>Y</td><td>相对路径</td></tr><tr><td>uuid</td><td>String</td><td>255</td><td>Y</td><td>文件唯一标识</td></tr></table></div><div class="content">
+<h2>KdUserRole(用户角色)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>roleId</td><td>Integer</td><td>255</td><td>Y</td><td>角色id</td></tr><tr><td>userId</td><td>Integer</td><td>255</td><td>Y</td><td>用户id</td></tr></table></div><div class="content">
+<h2>KdRole(所属客户)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr></table></div><div class="content">
+<h2>KdConfig(系统配置)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>key</td><td>String</td><td>255</td><td>Y</td><td>配置字段名</td></tr><tr><td>name</td><td>String</td><td>255</td><td>Y</td><td>配置说明</td></tr><tr><td>group</td><td>Integer</td><td>255</td><td>Y</td><td>配置分组</td></tr><tr><td>value</td><td>String</td><td>255</td><td>Y</td><td>配置值</td></tr><tr><td>type</td><td>Integer</td><td>255</td><td>Y</td><td>类型</td></tr><tr><td>description</td><td>String</td><td>255</td><td>Y</td><td>描述</td></tr></table></div><div class="content">
+<h2>KdUser(用户)</h2><table><tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+<tr><td>id</td><td>Integer</td><td>255</td><td>N</td><td>编号</td></tr><tr><td>createTime</td><td>Date</td><td>255</td><td>Y</td><td>创建时间</td></tr><tr><td>updateTime</td><td>Date</td><td>255</td><td>Y</td><td>更新时间</td></tr><tr><td>creatorId</td><td>Integer</td><td>255</td><td>Y</td><td>创建人</td></tr><tr><td>updaterId</td><td>Integer</td><td>255</td><td>Y</td><td>修改人</td></tr><tr><td>username</td><td>String</td><td>255</td><td>N</td><td>账号</td></tr><tr><td>password</td><td>String</td><td>255</td><td>Y</td><td>密码</td></tr><tr><td>sex</td><td>Integer</td><td>255</td><td>Y</td><td>性别</td></tr><tr><td>height</td><td>Double</td><td>255</td><td>Y</td><td>身高</td></tr><tr><td>weight</td><td>Double</td><td>255</td><td>Y</td><td>体重</td></tr><tr><td>nick</td><td>String</td><td>255</td><td>Y</td><td>昵称</td></tr><tr><td>type</td><td>String</td><td>255</td><td>Y</td><td>注册方式</td></tr><tr><td>name</td><td>String</td><td>255</td><td>Y</td><td>姓名</td></tr><tr><td>state</td><td>Integer</td><td>255</td><td>Y</td><td>状态默认开启</td></tr><tr><td>email</td><td>String</td><td>255</td><td>Y</td><td>邮箱</td></tr><tr><td>regIp</td><td>String</td><td>255</td><td>Y</td><td>注册ip</td></tr><tr><td>loginIp</td><td>String</td><td>255</td><td>Y</td><td>登录ip</td></tr><tr><td>frontCard</td><td>String</td><td>255</td><td>Y</td><td>身份证正面</td></tr><tr><td>reverseCard</td><td>String</td><td>255</td><td>Y</td><td>身份证反面</td></tr></table></div>
+</body>
+
+</html>

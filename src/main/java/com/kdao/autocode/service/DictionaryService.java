@@ -74,8 +74,7 @@ public class DictionaryService extends BaseService implements ServiceInterface {
         if (StrUtil.isBlank(tplContent)) {
             String templateFile = this.templatePath + "data.tpl";
             tplContent = replaceTpl(templateFile);
-            this.packageName = Const.SYS_PATH;
-            path = this.getRealPath(packageName);
+            path = Const.ROOT_PATH+"/sql";
         }
     }
 
@@ -83,7 +82,7 @@ public class DictionaryService extends BaseService implements ServiceInterface {
      * 写入字典
      */
     public static void writeDictionaryFile() {
-        String fileName = path + "../../../../../../../data.html";
+        String fileName = path + "/data.html";
         if (FileUtil.isFile(fileName)) {
             FileUtil.del(fileName);
         }

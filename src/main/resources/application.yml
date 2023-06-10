@@ -37,7 +37,6 @@ file:
 
 #配置mybatis
 mybatis:
-  type-aliases-package: com.kdao.light.entity
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
