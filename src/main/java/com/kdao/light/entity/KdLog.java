@@ -7,9 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.beans.factory.annotation.Required;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 /**
  * <p>Title: </p >

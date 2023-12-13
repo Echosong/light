@@ -9,11 +9,12 @@ import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.light.entity.SysBase;
+import jakarta.persistence.Id;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import javax.persistence.*;
+
 
 /**
  * <p>Title: 自动生成数据字典</p >

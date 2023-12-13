@@ -2,7 +2,7 @@ package com.kdao.light.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * <p>Title: </p >

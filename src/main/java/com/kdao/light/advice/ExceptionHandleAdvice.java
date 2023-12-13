@@ -4,6 +4,7 @@ package com.kdao.light.advice;
 import cn.dev33.satoken.exception.SaTokenException;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.ResultVO;
+import io.undertow.util.BadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 异常统一处理
@@ -24,6 +25,15 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @ControllerAdvice
 public class ExceptionHandleAdvice {
+
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResultVO handleBadRequest(BadRequestException ex) {
+        // 处理400请求的逻辑
+        // 返回自定义的响应实体
+        return   ResultVO.error(404, "找不到该请求接口");
+    }
+
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public ResultVO handleException(Exception e, HttpServletRequest request, HttpServletResponse response) {

@@ -1,10 +1,8 @@
 package com.kdao.light.controller;
 
 import com.kdao.light.common.utils.IpUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**

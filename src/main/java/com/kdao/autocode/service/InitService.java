@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Singleton;
 import com.kdao.autocode.anno.AutoEntity;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 /**
  * <p>Title: </p >

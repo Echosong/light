@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**

@@ -1,10 +1,8 @@
 package com.kdao.light.api;
 
 import com.kdao.light.common.utils.IpUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
