@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.config;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -18,11 +18,11 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ConfigQueryDTO extends PageInfo {
     @NotBlank
-    @ApiModelProperty(value="配置字段名", notes="")
+   @Schema(defaultValue="配置字段名")
     private String key;
 
     @NotBlank(message="不能为空")
-    @ApiModelProperty(value="配置说明", notes="")
+   @Schema(defaultValue="配置说明")
     private String name;
 
 

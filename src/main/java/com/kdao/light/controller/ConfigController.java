@@ -4,8 +4,9 @@ import com.kdao.light.common.dto.config.ConfigDTO;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdConfig;
 import com.kdao.light.service.ConfigService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @version :1.0.0
  */
 @RestController
-@Api(tags = "系统配置")
+@Tag(name = "系统配置")
 @RequestMapping("/config")
 public class ConfigController {
     private final ConfigService configService;
@@ -31,7 +32,7 @@ public class ConfigController {
      * 查询全部配置数据
      * @return
      */
-    @ApiOperation("查询全部配置数据")
+    @Operation(summary = "查询全部配置数据")
     @GetMapping("/list")
     public List<ConfigDTO> list(){
         return configService.listAll();
@@ -42,7 +43,7 @@ public class ConfigController {
      * @param kdConfig
      */
     @PostMapping("/save")
-    @ApiOperation("修改或者新建配置")
+    @Operation(summary = "修改或者新建配置")
     public void save(@RequestBody ConfigDTO kdConfig){
         configService.save(DtoMapper.convert(kdConfig, KdConfig.class));
     }
@@ -52,7 +53,7 @@ public class ConfigController {
      * @param configDTOS
      */
     @PostMapping("saveList")
-    @ApiOperation("/批量修改")
+    @Operation(summary = "/批量修改")
     public void saveList(@RequestBody List<ConfigDTO> configDTOS){
         configDTOS.stream().forEach(t->{
             configService.save(DtoMapper.convert(t, KdConfig.class));

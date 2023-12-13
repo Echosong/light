@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.user;
 
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,8 +17,8 @@ import java.io.Serializable;
  */
 @Data
 public class UserCacheDTO  implements Serializable {
-    @ApiModelProperty("用户id")
+   @Schema(defaultValue = "用户id")
     private Integer id;
-    @ApiModelProperty("用户姓名")
+   @Schema(defaultValue = "用户姓名")
     private String name;
 }

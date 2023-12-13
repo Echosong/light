@@ -17,8 +17,9 @@ import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.UserRepository;
 import com.kdao.light.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户操作")
+@Tag(name = "用户操作")
 @Validated
 public class UserController extends BaseController {
     private final UserRepository userRepository;
@@ -63,7 +64,7 @@ public class UserController extends BaseController {
      * @param user 用户json
      */
     @PostMapping("/create")
-    @ApiOperation("新增用户")
+    @Operation(summary = "新增用户")
     @Log("新增用户")
     public void create(@RequestBody @Valid UserDTO user) {
         user.setRegIp(getRemoteIp());
@@ -75,7 +76,7 @@ public class UserController extends BaseController {
      *
 
      */
-    @ApiOperation("获取当前用户")
+    @Operation(summary = "获取当前用户")
     @GetMapping("/getCurrent")
     public UserDTO getCurrent() {
         return  userService.getCurrent();
@@ -87,7 +88,7 @@ public class UserController extends BaseController {
      * @param userQueryDTO 分页查询条件
      */
     @PutMapping("/list")
-    @ApiOperation("分页查询用户")
+    @Operation(summary = "分页查询用户")
     public Page<UserDTO> list(@RequestBody UserQueryDTO userQueryDTO) {
         return userService.list(userQueryDTO);
     }
@@ -96,7 +97,7 @@ public class UserController extends BaseController {
      * 更新用户
      */
     @PutMapping("/update")
-    @ApiOperation("更新用户")
+    @Operation(summary = "更新用户")
     @Log("更新用户")
     public void update(@RequestBody UserDTO userDTO) {
         Integer userId = userDTO.getId();
@@ -112,7 +113,7 @@ public class UserController extends BaseController {
      *
 
      */
-    @ApiOperation(("获取所有用户"))
+    @Operation(summary = "获取所有用户")
     @GetMapping("/all")
     public List<UserKeyDTO> all() {
         List<KdUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
@@ -123,7 +124,7 @@ public class UserController extends BaseController {
      * 设置密码
      */
     @PostMapping("/setPassword")
-    @ApiOperation("重置设置密码")
+    @Operation(summary = "重置设置密码")
     @Log("重置设置密码")
     public void setPassword(@RequestBody Map<String, String> map) {
         String password = map.get("password");
@@ -139,7 +140,7 @@ public class UserController extends BaseController {
      * @param userId 用户
      */
     @GetMapping("/resetPassword/{userId}")
-    @ApiOperation("管理员重置密码")
+    @Operation(summary = "管理员重置密码")
     @Log("管理员重置密码")
     public void resetPassword(@PathVariable Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
@@ -154,7 +155,7 @@ public class UserController extends BaseController {
      * @param loginUserDTO 登录
      */
     @PostMapping("/login")
-    @ApiOperation("用户登录")
+    @Operation(summary = "用户登录")
     @Log("用户登录")
     @NoRepeatSubmit(value = 1000)
     public SaTokenInfo login(@RequestBody @Valid LoginUserDTO loginUserDTO) {
@@ -165,7 +166,7 @@ public class UserController extends BaseController {
     /**
      * 退出登录
      */
-    @ApiOperation("强制退出登录")
+    @Operation(summary = "强制退出登录")
     @GetMapping("/logout")
     @Log("退出登录")
     public void logout() {
@@ -178,7 +179,7 @@ public class UserController extends BaseController {
      * @param userId 用户id
      */
     @DeleteMapping("/delete/{userId}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @Log("删除用户")
     public void delete(@PathVariable Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
@@ -195,7 +196,7 @@ public class UserController extends BaseController {
     /**
      * 验证码
      */
-    @ApiOperation("验证码")
+    @Operation(summary = "验证码")
     @GetMapping("/captcha")
     public void captcha(HttpServletResponse response) throws IOException {
 

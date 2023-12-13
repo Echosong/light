@@ -7,8 +7,9 @@ import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdArticle;
 import com.kdao.light.repository.ArticleRepository;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ import java.util.List;
  * @author : echosong
  * @version :1.0.0
  */
-@Api(tags = "新闻文章控制器")
+@Tag(name = "新闻文章控制器")
 @RestController
 @RequestMapping("/article")
 public class ArticleController extends BaseController{
@@ -34,28 +35,28 @@ public class ArticleController extends BaseController{
         this.articleRepository = articleRepository;
     }
 
-    @ApiOperation("分页文章")
+    @Operation(summary = "分页文章")
     @PutMapping("/listPage")
     public Page<ArticleListDTO> listPage(@RequestBody @Valid ArticleQueryDTO queryDTO){
         Page<KdArticle> dataPages = articleRepository.listPage( queryDTO.getRequest());
         return DtoMapper.convertPage(dataPages, ArticleListDTO.class);
     }
 
-    @ApiOperation("新增活更新文章")
+    @Operation(summary = "新增活更新文章")
     @PostMapping("/save")
     public void save(@RequestBody @Valid ArticleDTO articleDTO){
         KdArticle kdArticle = DtoMapper.convert(articleDTO, KdArticle.class);
         articleRepository.save(kdArticle);
     }
 
-    @ApiOperation("查询全部文章")
+    @Operation(summary = "查询全部文章")
     @GetMapping("/list")
     public List<ArticleListDTO> list(){
         List<KdArticle> all = articleRepository.findAll();
         return DtoMapper.convertList(all, ArticleListDTO.class);
     }
 
-    @ApiOperation("查询")
+    @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public ArticleDTO find(@PathVariable Integer id){
         KdArticle one = articleRepository.findById(id)
@@ -64,7 +65,7 @@ public class ArticleController extends BaseController{
     }
 
     @DeleteMapping("/delete/{id}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     public void delete(@PathVariable Integer id) {
         articleRepository.deleteById(id);
     }

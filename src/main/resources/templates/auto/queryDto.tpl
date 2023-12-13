@@ -1,7 +1,7 @@
 package #{SYS_PATH}.common.dto.#{EntityName}#;
 
 import #{SYS_PATH}.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import #{SYS_PATH}.common.annotation.ApiModelPropertyEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

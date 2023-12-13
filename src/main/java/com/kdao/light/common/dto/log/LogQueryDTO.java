@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.log;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,13 +17,13 @@ import java.util.Date;
  */
 @Data
 public class LogQueryDTO extends PageInfo {
-    @ApiModelProperty(value="描述", notes="")
+   @Schema(defaultValue="描述")
     private String description;
 
-    @ApiModelProperty(value="创建时间", notes="")
+   @Schema(defaultValue="创建时间")
     private Date startCreateTime;
 
-    @ApiModelProperty(value="创建时间", notes="")
+   @Schema(defaultValue="创建时间")
     private Date endCreateTime;
 
 

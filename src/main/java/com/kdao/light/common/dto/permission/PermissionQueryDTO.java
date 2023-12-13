@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.permission;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,10 +15,10 @@ import lombok.Data;
  */
 @Data
 public class PermissionQueryDTO extends PageInfo {
-    @ApiModelProperty("权限名称")
+   @Schema(defaultValue = "权限名称")
     private String name = "";
-    @ApiModelProperty("权限编码")
+   @Schema(defaultValue = "权限编码")
     private String perms = "";
-    @ApiModelProperty(value = "权限类型 0：目录   1：菜单   2：按钮",allowableValues = "0,1,2")
+   @Schema(defaultValue = "权限类型 0：目录   1：菜单   2：按钮",allowableValues = "0,1,2")
     private Integer type = 1;
 }

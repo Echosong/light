@@ -4,7 +4,8 @@ import com.kdao.light.common.annotation.ApiModelPropertyEnum;
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
 import com.kdao.light.common.enums.FileTypeEnum;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -20,23 +21,23 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class FileDTO extends SysBaseDTO implements IDictionaryObject {
-    @ApiModelProperty("文件名")
+    @Schema(name = "文件名")
     @NotNull
     private String fileName;
 
-    @ApiModelProperty("文件扩展名")
+    @Schema(defaultValue = "文件扩展名")
     private String extend;
 
-    @ApiModelProperty("文件存储路径")
+    @Schema(defaultValue = "文件存储路径")
     private String filePath;
 
-    @ApiModelProperty("文件业务类型")
+   @Schema(defaultValue = "文件业务类型")
     @ApiModelPropertyEnum(value = FileTypeEnum.class)
     private Integer fileType;
 
-    @ApiModelProperty("文件大小")
+   @Schema(defaultValue = "文件大小")
     private long fileSize;
 
-    @ApiModelProperty("相对路径")
+   @Schema(defaultValue = "相对路径")
     private String urlPath;
 }

@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,12 +13,12 @@ import lombok.Data;
  * @author : echosong
  * @version :1.0.0
  */
-@ApiModel("人脸对比上传信息")
+@Schema(defaultValue = "人脸对比上传信息")
 @Data
 public class FaceDTO {
-    @ApiModelProperty("人脸图片 base64")
+   @Schema(defaultValue = "人脸图片 base64")
     private String image;
 
-    @ApiModelProperty("项目编码")
+   @Schema(defaultValue = "项目编码")
     private String app;
 }

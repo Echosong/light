@@ -8,7 +8,7 @@ import #{SYS_PATH}.common.utils.DtoMapper;
 import #{SYS_PATH}.common.utils.PageUtil;
 import #{SYS_PATH}.entity.#{UpTableName}#;
 import #{SYS_PATH}.repository.#{UpEntityName}#Repository;
-import io.swagger.annotations.Api;
+
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,14 +41,14 @@ public class #{UpEntityName}#Controller extends BaseController{
     }
 
 
-    @ApiOperation("分页查询#{tableInfo}#")
+    @Operation(summary = "分页查询#{tableInfo}#")
     @PutMapping("/listPage")
     public Page<#{UpEntityName}#ListDTO> listPage(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO){
         Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Repository::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, #{UpEntityName}#ListDTO.class);
     }
 
-    @ApiOperation("新增活更新#{tableInfo}#")
+    @Operation(summary = "新增活更新#{tableInfo}#")
     @PostMapping("/save")
     @Log("新增|修改#{tableInfo}#")
     public void save(@RequestBody @Valid #{UpEntityName}#DTO #{EntityName}#DTO){
@@ -56,14 +56,14 @@ public class #{UpEntityName}#Controller extends BaseController{
         #{EntityName}#Repository.save(#{TableName}#);
     }
 
-    @ApiOperation("查询全部#{tableInfo}#")
+    @Operation(summary = "查询全部#{tableInfo}#")
     @GetMapping("/list")
     public List<#{UpEntityName}#ListDTO> list(){
         List<#{UpTableName}#> all = #{EntityName}#Repository.findAll();
         return DtoMapper.convertList(all, #{UpEntityName}#ListDTO.class);
     }
 
-    @ApiOperation("查询")
+    @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public #{UpEntityName}#DTO find(@PathVariable Integer id){
         #{UpTableName}# one = #{EntityName}#Repository.findById(id)
@@ -72,7 +72,7 @@ public class #{UpEntityName}#Controller extends BaseController{
     }
 
     @DeleteMapping("/delete/{id}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @Log("删除#{tableInfo}#")
     public void delete(@PathVariable Integer id) {
         #{EntityName}#Repository.deleteById(id);

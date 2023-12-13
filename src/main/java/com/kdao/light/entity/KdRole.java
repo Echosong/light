@@ -2,7 +2,7 @@ package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.light.common.component.IDictionaryObject;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -28,10 +28,10 @@ import javax.validation.constraints.NotNull;
 @AutoEntity(value = "所属客户")
 public class KdRole extends SysBase implements IDictionaryObject {
     @NotNull
-    @ApiModelProperty("客户名称")
+   @Schema(defaultValue = "客户名称")
     private String name;
 
-    @ApiModelProperty("描述")
+   @Schema(defaultValue = "描述")
     private String description;
 
 

@@ -3,6 +3,7 @@ package com.kdao.light.config;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.light.advice.LoginInterceptor;
 import com.kdao.light.config.properties.FileUploadProperties;
+import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
 import java.io.File;
 
 /**

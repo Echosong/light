@@ -14,8 +14,9 @@ import com.kdao.light.repository.PermissionRepository;
 import com.kdao.light.repository.RolePermissionRepository;
 import com.kdao.light.repository.UserRoleRepository;
 import com.kdao.light.service.PermissionService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
  * @version :1.0.0
  */
 @RestController
-@Api(tags = "权限菜单")
+@Tag(name = "权限菜单")
 @RequestMapping("/permission")
 public class PermissionController extends BaseController {
 
@@ -58,7 +59,7 @@ public class PermissionController extends BaseController {
      * @param kdPermission
      */
     @PostMapping("/save")
-    @ApiOperation("新建|更新权限信息")
+    @Operation(summary = "新建|更新权限信息")
     @CacheEvict(value = "Permission_all", allEntries = true)
     public void save(@RequestBody @Valid KdPermission kdPermission){
         if(kdPermission.getParentId() != 0) {
@@ -74,7 +75,7 @@ public class PermissionController extends BaseController {
      * @return
      */
     @PostMapping("/list")
-    @ApiOperation("查询列表")
+    @Operation(summary = "查询列表")
     public Page<KdPermission> list(@RequestBody PermissionQueryDTO permissionQueryDTO){
         return PageUtil.getPage(permissionRepository::getListPage, permissionQueryDTO);
     }
@@ -85,7 +86,7 @@ public class PermissionController extends BaseController {
      */
    // @Cacheable(value = "Permission_all") 开发阶段先去掉缓存
     @GetMapping("/all")
-    @ApiOperation("获取所有权限")
+    @Operation(summary = "获取所有权限")
     public List<PermissionDTO> all(){
         return DtoMapper.convertList( permissionRepository.findAll().stream()
                         .sorted(Comparator.comparing(KdPermission::getSort))
@@ -98,7 +99,7 @@ public class PermissionController extends BaseController {
      * @return
      */
     @GetMapping("/listByUser")
-    @ApiOperation("根据用户获取当前用户具有的菜单权限")
+    @Operation(summary = "根据用户获取当前用户具有的菜单权限")
     public List<PermissionDTO> listByUser(){
         Integer userId = Convert.toInt(StpUtil.getLoginId(), 0);
         List<KdUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
@@ -119,7 +120,7 @@ public class PermissionController extends BaseController {
      * @return
      */
     @GetMapping("/listByRole/{roleId}")
-    @ApiOperation("根据角色id获取权限")
+    @Operation(summary = "根据角色id获取权限")
     public List<KdPermission> listByRole(@NotBlank @PathVariable Integer roleId){
         return  permissionService.getListByrole(Arrays.asList(roleId));
     }
@@ -130,7 +131,7 @@ public class PermissionController extends BaseController {
      * @param roleId
      */
     @PostMapping("/updateRolePermissions/{roleId}")
-    @ApiOperation("更新某个角色的权限信息")
+    @Operation(summary = "更新某个角色的权限信息")
     public void updateRolePermissions(@RequestBody List<Integer> permissionIds, @PathVariable Integer roleId){
         List<KdRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Arrays.asList(roleId));
         if(!allByRoleIdIn.isEmpty()){

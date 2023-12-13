@@ -5,7 +5,7 @@ import com.kdao.light.common.annotation.ApiModelPropertyEnum;
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
 import com.kdao.light.common.enums.UserStateEnum;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
@@ -28,17 +28,17 @@ import java.util.Objects;
 @Data
 @ToString
 public class UserDTO extends SysBaseDTO implements  IDictionaryObject {
-    @ApiModelProperty("账号直接用手机号")
+   @Schema(defaultValue = "账号直接用手机号")
     @NotNull
     @Column(unique = true, length = 11, name = "username")
     @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
     private String username;
 
     @Length(min = 6, message = "密码必须大于等于6位")
-    @ApiModelProperty("密码")
+   @Schema(defaultValue = "密码")
     private String password;
 
-    @ApiModelProperty("姓名")
+   @Schema(defaultValue = "姓名")
     @Length(min = 2, message = "姓名必须大于两个字符")
     private String name;
 
@@ -52,34 +52,34 @@ public class UserDTO extends SysBaseDTO implements  IDictionaryObject {
     @AutoEntityField("昵称")
     private String nick;
 
-    @ApiModelProperty(value = "状态默认开启", allowableValues = "0,1,2" )
+   @Schema(defaultValue = "状态默认开启", allowableValues = "0,1,2" )
     @ApiModelPropertyEnum(value = UserStateEnum.class)
     private Integer state = 0 ;
 
-    @ApiModelProperty("性别")
+   @Schema(defaultValue = "性别")
     private Integer sex;
 
-    @ApiModelProperty("获取性别")
+   @Schema(defaultValue = "获取性别")
     public String getSexEnum(){
         return Objects.equals(sex, 0)?"男":"女";
     }
 
-    @ApiModelProperty("email")
+   @Schema(defaultValue = "email")
     private String email;
 
-    @ApiModelProperty("注册ip")
+   @Schema(defaultValue = "注册ip")
     private String regIp;
 
-    @ApiModelProperty("登录ip")
+   @Schema(defaultValue = "登录ip")
     private String loginIp;
 
-    @ApiModelProperty("角色id")
+   @Schema(defaultValue = "角色id")
     @Range(min = 1)
     private Integer roleId;
 
-    @ApiModelProperty("角色名称")
+   @Schema(defaultValue = "角色名称")
     private String roleName;
 
-    @ApiModelProperty("0 线下注册 1 微信注册， 2 支付宝小程序， 3 app")
+   @Schema(defaultValue = "0 线下注册 1 微信注册， 2 支付宝小程序， 3 app")
     private String type ;
 }

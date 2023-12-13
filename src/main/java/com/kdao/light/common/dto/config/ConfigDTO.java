@@ -2,7 +2,7 @@ package com.kdao.light.common.dto.config;
 
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -19,26 +19,26 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ConfigDTO extends SysBaseDTO implements IDictionaryObject {
 
-    @ApiModelProperty(value="配置字段名", notes="")
+   @Schema(defaultValue="配置字段名")
     private String key;
 
     @NotBlank
-    @ApiModelProperty(value="配置说明", notes="")
+   @Schema(defaultValue="配置说明")
     private String name;
 
 
-    @ApiModelProperty(value="配置分组", notes="")
+   @Schema(defaultValue="配置分组")
     private Integer group;
 
-    @ApiModelProperty(value="配置值", notes="")
+   @Schema(defaultValue="配置值")
     private String value;
 
 
-    @ApiModelProperty(value="类型", notes="配置html展现类型")
+   @Schema(defaultValue="类型", description="配置html展现类型")
 
     private Integer type;
 
-    @ApiModelProperty(value="描述", notes="如果选择框用,隔开")
+   @Schema(defaultValue="描述", description="如果选择框用,隔开")
     private String description;
 
 

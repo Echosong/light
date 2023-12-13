@@ -7,8 +7,9 @@ import com.kdao.light.entity.KdUserRole;
 import com.kdao.light.repository.RoleRepository;
 import com.kdao.light.repository.UserRoleRepository;
 import com.kdao.light.service.RoleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ import java.util.Optional;
  * @version :1.0.0
  */
 @RestController
-@Api(tags = "部门，角色")
+@Tag(name = "部门，角色")
 @RequestMapping("/role")
 public class RoleController extends BaseController{
     private final RoleRepository roleRepository;
@@ -40,7 +41,7 @@ public class RoleController extends BaseController{
      * 添加修改角色信息
      * @param role
      */
-    @ApiOperation("添加修改角色信息")
+    @Operation(summary = "添加修改角色信息")
     @PostMapping("/save")
     @Log("修改角色")
     public void save(@RequestBody KdRole role){
@@ -52,7 +53,7 @@ public class RoleController extends BaseController{
      * @return
      */
     @GetMapping("/list")
-    @ApiOperation("一次性获取所有角色，角色不会有很多，所以不需要分页")
+    @Operation(summary = "一次性获取所有角色，角色不会有很多，所以不需要分页")
     public List<KdRole> list(){
         return roleRepository.findAll();
     }
@@ -63,7 +64,7 @@ public class RoleController extends BaseController{
      * @return
      */
     @PostMapping("/listByUser/{userId}")
-    @ApiOperation("根据用户获取角色")
+    @Operation(summary = "根据用户获取角色")
     public List<KdRole> listByUser(@PathVariable Integer userId){
         return roleService.listByUser(userId);
     }
@@ -73,7 +74,7 @@ public class RoleController extends BaseController{
      * @param id
      */
     @DeleteMapping("/delete/{id}")
-    @ApiOperation("删除某个角色")
+    @Operation(summary = "删除某个角色")
     @Log("删除某个角色")
     public void delete(@PathVariable Integer id){
         Optional<KdRole> byId = roleRepository.findById(id);

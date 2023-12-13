@@ -1,6 +1,6 @@
 package com.kdao.light.common.dto.user;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,8 +15,8 @@ import lombok.Data;
 @Data
 public class UserKeyDTO {
     private String username;
-    @ApiModelProperty("用户名")
+   @Schema(defaultValue = "用户名")
     private String name;
-    @ApiModelProperty("用户id")
+   @Schema(defaultValue = "用户id")
     private Integer id;
 }

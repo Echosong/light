@@ -2,7 +2,7 @@ package com.kdao.light.common.dto.role;
 
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -19,9 +19,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RoleDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull
-    @ApiModelProperty("角色名称")
+   @Schema(defaultValue = "角色名称")
     private String name;
 
-    @ApiModelProperty("描述")
+   @Schema(defaultValue = "描述")
     private String description;
 }

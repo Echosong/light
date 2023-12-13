@@ -11,8 +11,9 @@ import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.config.properties.FileUploadProperties;
 import com.kdao.light.entity.KdFile;
 import com.kdao.light.repository.FileRepository;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +33,7 @@ import java.util.*;
  * @version :1.0.0
  */
 @RestController
-@Api(tags = "文件相关处理")
+@Tag(name = "文件相关处理")
 @RequestMapping("/file")
 public class FileController extends BaseController {
 
@@ -54,7 +55,7 @@ public class FileController extends BaseController {
      * @throws IOException 错误
      */
     @PostMapping("/upload")
-    @ApiOperation("文件上传")
+    @Operation(summary = "文件上传")
     public Map<String, String> upload(@RequestParam(value = "file", required = false) MultipartFile file, Integer fileType, String params) throws IOException {
         String format = DateUtil.format(new Date(), "yyyy/MM/dd");
         File folder = new File(fileUploadProperties.getUploadFolder() + format);
@@ -105,7 +106,7 @@ public class FileController extends BaseController {
      */
     @ApiResultIgnore
     @GetMapping({"/download/{uuid}"})
-    @ApiOperation("文件下载")
+    @Operation(summary = "文件下载")
     public ResponseEntity download(@PathVariable String uuid) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=" + uuid);
@@ -121,7 +122,7 @@ public class FileController extends BaseController {
      * @param fileQueryDTO 是
      */
     @PutMapping("/listPage")
-    @ApiOperation("列表分页")
+    @Operation(summary = "列表分页")
     public Page<FileDTO> list(@RequestBody FileQueryDTO fileQueryDTO) {
         Page<KdFile> files = fileRepository.listPage(fileQueryDTO.getFileName(), fileQueryDTO.getFileType(), fileQueryDTO.getRequest());
         return DtoMapper.convertPage(files, FileDTO.class);
@@ -133,7 +134,7 @@ public class FileController extends BaseController {
      * @param id 文件id
      */
     @DeleteMapping("delete/{id}")
-    @ApiOperation("删除指定文件")
+    @Operation(summary = "删除指定文件")
     public void delete(@PathVariable Integer id) {
         fileRepository.findById(id).ifPresent(t -> {
             if (FileUtil.del(t.getFilePath())) {

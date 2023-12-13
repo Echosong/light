@@ -2,7 +2,7 @@ package com.kdao.light.common.dto.user;
 
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -24,32 +24,32 @@ import javax.validation.constraints.Pattern;
 public class UserListDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull
     @Pattern(message="必须为手机格式",regexp="\\d{11}")
-    @ApiModelProperty(value="账号", notes="")
+   @Schema(defaultValue="账号")
     private String username;
 
     @Length(min=6,max=2147483647,message="密码必须大于等于6位")
-    @ApiModelProperty(value="密码", notes="")
+   @Schema(defaultValue="密码")
     private String password;
 
     @Range(min=0,max=1)
-    @ApiModelProperty(value="性别", notes="")
+   @Schema(defaultValue="性别")
     private Integer sex;
 
     @Length(min=2,max=2147483647,message="姓名必须大于两个字符")
-    @ApiModelProperty(value="姓名", notes="")
+   @Schema(defaultValue="姓名")
     private String name;
 
-    @ApiModelProperty(value="状态默认开启", notes="0,1")
+   @Schema(defaultValue="状态默认开启", description="0,1")
     private Integer state;
 
     @Email
-    @ApiModelProperty(value="邮箱", notes="")
+   @Schema(defaultValue="邮箱")
     private String email;
 
-    @ApiModelProperty(value="注册ip", notes="")
+   @Schema(defaultValue="注册ip")
     private String regIp;
 
-    @ApiModelProperty(value="登录ip", notes="")
+   @Schema(defaultValue="登录ip")
     private String loginIp;
 
 

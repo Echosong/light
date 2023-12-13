@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.user;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -19,20 +19,20 @@ import java.time.LocalDate;
  */
 @Data
 public class UserQueryDTO extends PageInfo {
-    @ApiModelProperty("账号直接用手机号")
+   @Schema(defaultValue = "账号直接用手机号")
     @NotNull
     @Size(min = 10, max = 12, message = "手机格式不对")
     private String username;
 
-    @ApiModelProperty("姓名")
+   @Schema(defaultValue = "姓名")
     private String name;
 
-    @ApiModelProperty(value = "状态默认开启", allowableValues = "0,1" )
+   @Schema(defaultValue = "状态默认开启", allowableValues = "0,1" )
     private Integer state = 0 ;
 
-    @ApiModelProperty("开始时间")
+   @Schema(defaultValue = "开始时间")
     private LocalDate startDate ;
 
-    @ApiModelProperty("结束时间")
+   @Schema(defaultValue = "结束时间")
     private LocalDate endDate;
 }

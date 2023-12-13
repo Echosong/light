@@ -5,7 +5,7 @@ import #{SYS_PATH}.common.component.IDictionaryObject;
 import #{SYS_PATH}.common.dto.PageInfo;
 import #{SYS_PATH}.common.dto.SysBaseDTO;
 import #{SYS_PATH}.common.enums.FileTypeEnum;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;

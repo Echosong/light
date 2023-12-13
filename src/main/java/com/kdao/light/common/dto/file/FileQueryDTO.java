@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.file;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,9 +15,9 @@ import lombok.Data;
  */
 @Data
 public class FileQueryDTO extends PageInfo {
-    @ApiModelProperty("业务类型")
+   @Schema(defaultValue = "业务类型")
     private Integer fileType;
 
-    @ApiModelProperty("文件名")
+   @Schema(defaultValue = "文件名")
     private String fileName;
 }

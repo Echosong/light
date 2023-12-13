@@ -1,8 +1,8 @@
 package com.kdao.light.common.dto.user;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class RegUserDTO extends UserDTO {
-    @ApiModelProperty("base64头像信息")
+   @Schema(defaultValue = "base64头像信息")
     private String photo;
 }

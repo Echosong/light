@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,15 +17,15 @@ import org.springframework.data.domain.Sort;
  */
 @Data
 public class PageInfo {
-    @ApiModelProperty("页数，默认0,第一页")
+   @Schema(defaultValue = "页数，默认0,第一页")
     private int page = 1;
-    @ApiModelProperty("每页个数,默认10")
+   @Schema(defaultValue = "每页个数,默认10")
     private int pageSize = 10;
-    @ApiModelProperty("是否排序,默认不排序")
+   @Schema(defaultValue = "是否排序,默认不排序")
     private boolean sort = true;
-    @ApiModelProperty("是否正序,默认正序")
+   @Schema(defaultValue = "是否正序,默认正序")
     private boolean direction = false;
-    @ApiModelProperty("排序列名")
+   @Schema(defaultValue = "排序列名")
     private String sortCol = "id";
 
     public PageInfo() {

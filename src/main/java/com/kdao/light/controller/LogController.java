@@ -9,8 +9,9 @@ import com.kdao.light.entity.KdLog;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.LogRepository;
 import com.kdao.light.service.LogService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ import java.util.List;
  * @author : echosong
  * @version :1.0.0
  */
-@Api(tags = "日志 控制器")
+@Tag(name = "日志 控制器")
 @RestController
 @RequestMapping("/log")
 public class LogController extends BaseController{
@@ -42,7 +43,7 @@ public class LogController extends BaseController{
      * 分页获取 日志
      * @param queryDTO 查询条件
      */
-    @ApiOperation("分页查询日志")
+    @Operation(summary = "分页查询日志")
     @PutMapping("/listPage")
     public Page<LogListDTO> listPage(@RequestBody @Valid LogQueryDTO queryDTO){
         Page<KdLog> dataPages = logRepository.listPage(queryDTO.getDescription(),queryDTO.getStartCreateTime(),queryDTO.getEndCreateTime(),  queryDTO.getRequest());
@@ -64,7 +65,7 @@ public class LogController extends BaseController{
      * 获取单个信息 日志
      * @param id 日志id
      */
-    @ApiOperation("查询")
+    @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public LogDTO find(@PathVariable Integer id){
         KdLog one = logRepository.findById(id)

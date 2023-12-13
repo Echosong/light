@@ -2,7 +2,7 @@ package com.kdao.light.common.dto.article;
 
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,16 +19,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleListDTO extends SysBaseDTO implements IDictionaryObject {
-    @ApiModelProperty(value="标题" )
+   @Schema(defaultValue="标题" )
     private String title;
 
-    @ApiModelProperty(value="类型" )
+   @Schema(defaultValue="类型" )
     private String type;
 
-    @ApiModelProperty(value="内容" )
+   @Schema(defaultValue="内容" )
     private String content;
 
-    @ApiModelProperty(value="项目id" )
+   @Schema(defaultValue="项目id" )
     private Integer projectId;
 
 

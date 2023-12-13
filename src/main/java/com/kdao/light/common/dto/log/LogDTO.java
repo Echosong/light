@@ -2,7 +2,7 @@ package com.kdao.light.common.dto.log;
 
 import com.kdao.light.common.component.IDictionaryObject;
 import com.kdao.light.common.dto.SysBaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -16,31 +16,31 @@ import lombok.Data;
  */
 @Data
 public class LogDTO extends SysBaseDTO implements IDictionaryObject {
-    @ApiModelProperty(value="请求ip", notes="")
+   @Schema(defaultValue="请求ip")
     private String requestIp;
 
-    @ApiModelProperty(value="地址", notes="")
+   @Schema(defaultValue="地址")
     private String address;
 
-    @ApiModelProperty(value="描述", notes="")
+   @Schema(defaultValue="描述")
     private String description;
 
-    @ApiModelProperty(value="浏览器", notes="")
+   @Schema(defaultValue="浏览器")
     private String browser;
 
-    @ApiModelProperty(value="请求耗时", notes="")
+   @Schema(defaultValue="请求耗时")
     private Long time;
 
-    @ApiModelProperty(value="方法名", notes="")
+   @Schema(defaultValue="方法名")
     private String method;
 
-    @ApiModelProperty(value="参数", notes="")
+   @Schema(defaultValue="参数")
     private String params;
 
-    @ApiModelProperty(value="日志类型", notes="")
+   @Schema(defaultValue="日志类型")
     private String logType;
 
-    @ApiModelProperty(value="异常详情", notes="")
+   @Schema(defaultValue="异常详情")
     private String exceptionDetail;
 
 

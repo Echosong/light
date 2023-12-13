@@ -1,7 +1,7 @@
 package com.kdao.light.common.dto.article;
 
 import com.kdao.light.common.dto.PageInfo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import com.kdao.light.common.annotation.ApiModelPropertyEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
