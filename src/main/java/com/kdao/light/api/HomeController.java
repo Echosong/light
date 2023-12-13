@@ -22,6 +22,6 @@ public class HomeController {
     @GetMapping("/index")
     @NoPermission
     public String index(){
-        return "这里是前端接口";
+        return "可以告诉你些东dd东！！！！！！！！！！！！！！！";
     }
 }
