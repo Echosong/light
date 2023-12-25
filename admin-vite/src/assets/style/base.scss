@@ -1,0 +1,58 @@
+.app-container {
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.headTitle {
+    font-size: 16px;
+}
+
+
+.flexs {
+    display: flex;
+}
+
+.flexsCen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexsAliCen {
+    display: flex;
+    align-items: center;
+}
+
+.flexBet {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexEnd {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pages {
+    padding: 20px 0;
+}
+
+.tableBackground {
+    background: red;
+}
+
+
+.el-table th {
+    color: #333;
+}
+
+// 取消input的上下箭头
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+
+}
+.el-sub-menu__title{
+    padding: 0 var(--el-menu-base-level-padding);
+  }
+
