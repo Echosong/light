@@ -43,7 +43,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
             String userId = StpUtil.getLoginId().toString();
             if (redisTemplate.opsForValue().get(userId) == null) {
-                UserRepository userRepository = SpringUtil.getBean("userRepository");
+                UserRepository userRepository = SpringUtil.getBean(UserRepository.class);
                 KdUser user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
                 redisTemplate.opsForValue().set(userId, user);
             }

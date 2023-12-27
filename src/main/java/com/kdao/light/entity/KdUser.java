@@ -49,7 +49,7 @@ public class KdUser extends  SysBase implements Serializable {
     private Integer sex;
 
     @AutoEntityField("身高")
-    @Range(min = 0, max = 2)
+    @Range(min = 0, max = 300)
     private Double height;
 
     @AutoEntityField("体重")

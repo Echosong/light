@@ -82,9 +82,13 @@ Object.entries(Components).forEach(([key, component]) => {
 import * as Directives from '@/directive'
 Object.values(Directives).forEach(fn => fn(app))
 
+
 // 错误日志
 import useErrorHandler from './error-log'
+import sa from "@/utils/sa";
 useErrorHandler(app)
+
+app.provide('sa', sa);
 
 app
   .use(i18n)

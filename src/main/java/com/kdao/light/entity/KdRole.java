@@ -1,14 +1,14 @@
 package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.AutoEntity;
-import com.kdao.light.common.component.IDictionaryObject;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.kdao.autocode.anno.AutoEntityField;
+import com.kdao.autocode.anno.InQueryDTO;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import jakarta.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -26,12 +26,13 @@ import javax.validation.constraints.NotNull;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "所属客户")
-public class KdRole extends SysBase implements IDictionaryObject {
+public class KdRole extends SysBase  {
     @NotNull
-   @Schema(defaultValue = "客户名称")
+    @AutoEntityField(value = "客户名称")
+    @InQueryDTO
     private String name;
 
-   @Schema(defaultValue = "描述")
+    @AutoEntityField(value = "描述")
     private String description;
 
 

@@ -8,12 +8,15 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.SmUtil;
 import com.kdao.light.common.annotation.Log;
 import com.kdao.light.common.annotation.NoRepeatSubmit;
+import com.kdao.light.common.dto.file.FileDTO;
+import com.kdao.light.common.dto.file.FileQueryDTO;
 import com.kdao.light.common.dto.user.LoginUserDTO;
 import com.kdao.light.common.dto.user.UserDTO;
 import com.kdao.light.common.dto.user.UserKeyDTO;
 import com.kdao.light.common.dto.user.UserQueryDTO;
 import com.kdao.light.common.enums.UserStateEnum;
 import com.kdao.light.common.utils.DtoMapper;
+import com.kdao.light.entity.KdFile;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.UserRepository;
 import com.kdao.light.service.UserService;
@@ -22,6 +25,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
@@ -87,7 +91,7 @@ public class UserController extends BaseController {
      *
      * @param userQueryDTO 分页查询条件
      */
-    @PutMapping("/list")
+    @PutMapping("/listPage")
     @Operation(summary = "分页查询用户")
     public Page<UserDTO> list(@RequestBody UserQueryDTO userQueryDTO) {
         return userService.list(userQueryDTO);
@@ -202,6 +206,7 @@ public class UserController extends BaseController {
 
         lineCaptcha.write(response.getOutputStream());
         response.getOutputStream().close();
-
     }
+
+
 }

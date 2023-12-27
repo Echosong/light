@@ -73,10 +73,10 @@ export default ({ mode }) => {
       port: 3001,
       open: true,
       proxy: {
-        '^/yunwoo': {
+        '^/admin': {
           target:env.VITE_APP_URL, // 后端接口的域名
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/yunwoo/, ''),
+          rewrite: path => path,
         },
       },
     },

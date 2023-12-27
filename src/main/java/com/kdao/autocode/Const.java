@@ -30,12 +30,12 @@ public class Const {
     /**
      * vue地址
      */
-    public static String  VUE_PATH = "\\src\\sa-view";
+    public static String  VUE_PATH = "\\src\\views";
 
     /**
      * vue 路由
      */
-    public static String  VUE_ROOT_ROUTER = "\\src\\router.js";
+    public static String  VUE_ROOT_ROUTER = "\\src\\router\\main.js";
 
     /**
      * 开启或者关闭数据库备注

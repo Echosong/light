@@ -27,8 +27,8 @@ class LightInitTest {
     @Value("${spring.datasource.password}")
     private String password;
 
-    @Value("${auto-config.vue-root-path:}")
-    private String vueRootPath;
+    @Value("${auto-config.root-path:}")
+    private String rootPath;
 
 
     private void initSetting() {
@@ -41,13 +41,13 @@ class LightInitTest {
         log.info("设置db.setting 文件成功");
         //配置基础包路径
         Const.SYS_PATH = ClassUtil.getPackagePath(LightInitTest.class).replace("/", ".");
-        //根路径
-        Const.ROOT_PATH = ClassUtil.getClassPath().replace("target/test-classes/", "")
-                .replace("target/classes/", "");
-
-        if(StrUtil.isBlank(vueRootPath)) {
-            vueRootPath = Const.ROOT_PATH + "admin-ui";
+        if (StrUtil.isBlank(rootPath)) {
+            throw new RuntimeException("项目路路径");
         }
+        //根路径
+        Const.ROOT_PATH = rootPath;
+
+        String vueRootPath = this.rootPath + "/admin-vite";
         Const.VUE_PATH = vueRootPath + Const.VUE_PATH;
         Const.VUE_ROOT_ROUTER = vueRootPath + Const.VUE_ROOT_ROUTER;
         log.info("设置基础配置参数成功");

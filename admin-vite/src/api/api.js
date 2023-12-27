@@ -1,5 +1,17 @@
 import request from '@/utils/request'
 
+
+//==================================新开接口=============================================
+
+export const getConfigList = params => {
+  return request({
+    url: 'config/list',
+    method: 'get',
+    params,
+  })
+}
+
+//================================================================================
 export const backQueryUsersList = params => {
   return request({
     url: 'users/backQueryUsersList',

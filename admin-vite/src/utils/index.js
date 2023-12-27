@@ -19,8 +19,8 @@
  */
 
 /**
- * 
- * @param {string} birthday 
+ *
+ * @param {string} birthday
  * @returns 根据出生日期计算年龄
  */
 export function calculateAge(birthday) {
@@ -285,7 +285,7 @@ export function getTime(type) {
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
-  const later = function() {
+  const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
 
@@ -302,7 +302,7 @@ export function debounce(func, wait, immediate) {
     }
   }
 
-  return function(...args) {
+  return function (...args) {
     context = this
     timestamp = +new Date()
     const callNow = immediate && !timeout
@@ -359,7 +359,7 @@ export function createUniqueString() {
 
 /**
  * @param {number} 生成多少位随机数
- *  
+ *
  */
 export function generateCode(num) {
   let code = '';
@@ -368,7 +368,6 @@ export function generateCode(num) {
   }
   return code;
 }
-
 
 
 /**
@@ -401,19 +400,21 @@ export function removeClass(ele, cls) {
     ele.className = ele.className.replace(reg, ' ')
   }
 }
+
 /**
- * 
+ *
  * @param {string} str 传入的地址
  * @returns 完整的url地址
  */
-export function urlMontage(str){
+export function urlMontage(str) {
   if (import.meta.env.VITE_APP_IMAGE == '/') {
     return str
-  }else{
+  } else {
     return import.meta.env.VITE_APP_IMAGE + str
   }
-  
+
 }
+
 /**
  * 根据id将数据组织成树状结构
  * @param ary 要组织的数据
@@ -423,44 +424,42 @@ export function urlMontage(str){
  */
 export function formatToTree(ary, pid, pidName = 'parentId') {
   return ary
-      .filter((item) => item[pidName] === pid)
-      .map((item) => {
-          // 通过父节点ID查询所有子节点
-          item.children = formatToTree(ary, item.id);
-        return item;
-      });
+    .filter((item) => item[pidName] === pid)
+    .map((item) => {
+      // 通过父节点ID查询所有子节点
+      item.children = formatToTree(ary, item.id);
+      return item;
+    });
 }
-
-
 
 
 export function groupbyField(data, fieldName) {
   var obj = {}
   for (const item in data) {
-      var key = getValue(data[item], fieldName)
-      if (obj[key] == null) {
-          obj[key] = []
-      }
-      obj[key].push(data[item])
+    var key = getValue(data[item], fieldName)
+    if (obj[key] == null) {
+      obj[key] = []
+    }
+    obj[key].push(data[item])
   }
   return obj
 }
 
 export function getValue(data, fieldName) {
   if (fieldName) {
-      var obj = data
-      if (fieldName.search('.') == 0) {
-          var fieldNames = fieldName.split('.')
-          for (var i in fieldNames) {
-              var fieldNamess = fieldNames[i].split('_')
-              if (fieldNamess.length > 1) {
-                  obj = obj[fieldNamess[1]]
-                  return obj
-              }
-              obj = obj[fieldNames[i]]
-          }
+    var obj = data
+    if (fieldName.search('.') == 0) {
+      var fieldNames = fieldName.split('.')
+      for (var i in fieldNames) {
+        var fieldNamess = fieldNames[i].split('_')
+        if (fieldNamess.length > 1) {
+          obj = obj[fieldNamess[1]]
           return obj
+        }
+        obj = obj[fieldNames[i]]
       }
+      return obj
+    }
   }
   return null
 }
@@ -474,34 +473,34 @@ export function getValue(data, fieldName) {
  * @param {*} rootId 根Id 默认 0
  */
 export function handleTree(data, id, parentId, children, rootId) {
-	id = id || 'id'
-	parentId = parentId || 'parentId'
-	children = children || 'children'
-	rootId = rootId || 0
-	// 对源数据深度克隆
-	const cloneData = JSON.parse(JSON.stringify(data))
-	// 循环所有项
-	const treeData =  cloneData.filter(father => {
-	  let branchArr = cloneData.filter(child => {
+  id = id || 'id'
+  parentId = parentId || 'parentId'
+  children = children || 'children'
+  rootId = rootId || 0
+  // 对源数据深度克隆
+  const cloneData = JSON.parse(JSON.stringify(data))
+  // 循环所有项
+  const treeData = cloneData.filter(father => {
+    let branchArr = cloneData.filter(child => {
       // child.actionType = child.actionType.split(',')
-		// 返回每一项的子级数组
-		return father[id] == child[parentId]
-	  });
-	  branchArr.length > 0 ? father.children = branchArr : '';
-	  // 返回第一层
-	  return father[parentId] == rootId;
-	});
-	return treeData != '' ? treeData : data;
-  }
+      // 返回每一项的子级数组
+      return father[id] === child[parentId]
+    });
+    branchArr.length > 0 ? father.children = branchArr : '';
+    // 返回第一层
+    return father[parentId] === rootId;
+  });
+  return treeData !== '' ? treeData : data;
+}
 
 
-export function hasId(obj, benefitsid,benefitdetailsid) {
+export function hasId(obj, benefitsid, benefitdetailsid) {
   if (obj.attr1 == benefitsid && obj.attr2 == benefitdetailsid) {
     return obj
   }
   for (let key in obj) {
     if (key === 'children' && obj[key].length > 0) {
-      if (hasId(obj[key],benefitsid,benefitdetailsid)) {
+      if (hasId(obj[key], benefitsid, benefitdetailsid)) {
         return obj[key]
       }
     }

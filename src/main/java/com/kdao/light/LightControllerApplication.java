@@ -1,5 +1,6 @@
 package com.kdao.light;
 
+import cn.hutool.extra.spring.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,11 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @Slf4j
 public class LightControllerApplication {
+
+    public LightControllerApplication(SpringUtil springUtil) {
+
+    }
+
     public static void main(String[] args) {
         try {
             SpringApplication.run(LightControllerApplication.class, args);

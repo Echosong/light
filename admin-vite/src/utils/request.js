@@ -28,12 +28,12 @@
  */
 
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import {ElMessage} from 'element-plus'
 import router from '@/router'
-import { useApp } from '@/pinia/modules/app'
+import {useApp} from '@/pinia/modules/app'
 
 const service = axios.create({
-  baseURL: '/yunwoo/',
+  baseURL: '/admin/',
   timeout: 100000,
   withCredentials: true,
 })
@@ -41,14 +41,14 @@ const service = axios.create({
 // 拦截请求
 service.interceptors.request.use(
   config => {
-    const { authorization } = useApp()
+    const {authorization} = useApp()
     if (authorization) {
       config.headers.Authorization = authorization
     }
     return config
   },
   error => {
-    // console.log(error);
+    console.log(error);
     return Promise.reject(error)
   }
 )
@@ -57,14 +57,14 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   // 响应成功进入第1个函数，该函数的参数是响应对象
   response => {
-    if(response.data.status == 0){
+    if (response.data.code === 200) {
       return response.data
-    }else if(response.data.status == 405){
+    } else if (response.data.code === 405) {
       const redirect = encodeURIComponent(window.location.href)
-        router.push(`/login?redirect=${redirect}`)
-    } else{
-      ElMessage.error(response.data.statusInfo)
-      return Promise.reject(error)
+      router.push(`/login?redirect=${redirect}`)
+    } else {
+      ElMessage.error(response.data.message)
+      return Promise.reject(response.data)
     }
 
   },
@@ -74,7 +74,7 @@ service.interceptors.response.use(
     // 响应拦截器中的 error 就是那个响应的错误对象
     if (error.response && error.response.status === 401) {
       // 校验是否有 refresh_token
-      const { authorization, clearToken, setToken } = useApp()
+      const {authorization, clearToken, setToken} = useApp()
       if (!authorization || !authorization.refresh_token) {
         if (router.currentRoute.value.name === 'login') {
           return Promise.reject(error)
@@ -86,11 +86,12 @@ service.interceptors.response.use(
         setTimeout(() => {
           ElMessage.closeAll()
           try {
-            ElMessage.error(error.response.data.msg)
+            ElMessage.error("B"+error.response.data.message)
           } catch (err) {
-            ElMessage.error(error.message)
+            ElMessage.error("A"+error.message)
           }
         })
+
         // 代码不要往后执行了
         return Promise.reject(error)
       }
@@ -128,9 +129,9 @@ service.interceptors.response.use(
     // console.dir(error) // 可在此进行错误上报
     ElMessage.closeAll()
     try {
-      ElMessage.error(error.response.data.msg)
+      ElMessage.error("C"+error.response.data.message)
     } catch (err) {
-      ElMessage.error(error.message)
+      ElMessage.error("D"+error.message)
     }
 
     return Promise.reject(error)

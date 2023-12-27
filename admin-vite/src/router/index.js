@@ -32,7 +32,7 @@ import error from './modules/error'
 import login from './modules/login'
 import lock from './modules/lock'
 import home from './modules/home'
-import main from './modules/main'
+import main from './main'
 
 /* 菜单栏的路由 */
 // 固定菜单

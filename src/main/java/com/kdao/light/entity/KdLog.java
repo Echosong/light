@@ -3,6 +3,8 @@ package com.kdao.light.entity;
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.autocode.anno.InQueryDTO;
+import com.kdao.autocode.anno.NotinListDTO;
+import com.kdao.light.common.enums.HtmlTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -38,7 +40,7 @@ public class KdLog extends SysBase {
     private String description;
 
 
-    @AutoEntityField("浏览器")
+    @AutoEntityField(value = "浏览器", htmlType = HtmlTypeEnum.TEXTAREA)
     private String browser;
 
     @AutoEntityField(value = "请求耗时")
@@ -47,13 +49,15 @@ public class KdLog extends SysBase {
     @AutoEntityField(value = "方法名")
     private String method;
 
-    @AutoEntityField(value = "参数", len = 1000)
+    @AutoEntityField(value = "参数", len = 1000, htmlType = HtmlTypeEnum.TEXTAREA)
+    @NotinListDTO
     private String params;
 
     @AutoEntityField(value = "日志类型")
     @InQueryDTO
     private String logType;
 
-    @AutoEntityField(value = "异常详情")
+    @AutoEntityField(value = "异常详情", htmlType = HtmlTypeEnum.TEXTAREA)
+    @NotinListDTO
     private byte[] exceptionDetail;
 }

@@ -65,7 +65,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         Map<String, String> map = new HashMap<>(12);
         map.put("name", StrUtil.lowerFirst(this.className));
         map.put("type", typeStr);
-        String perms = StrUtil.format("{perms: \"{name}-{type}\", view: () => import('@/sa-view/{name}/{type}.vue')},",
+        String perms = StrUtil.format("{perms: \"{name}-{type}\", view: () => import('@/views/{name}/{type}.vue')},",
                 map);
         List<String> strings = FileUtil.readLines(Const.VUE_ROOT_ROUTER, Charset.defaultCharset());
         Set<String> setLine = new HashSet<>();
@@ -94,7 +94,7 @@ public class ViewService extends BaseService implements ServiceInterface {
      */
     @SuppressWarnings("AlibabaUndefineMagicConstant")
     private void listView() {
-        String templateFile = this.templatePath + "list.tpl";
+        String templateFile = this.templatePath + "list.vue";
         String listPath = vuePath + "/list.vue";
         if (FileUtil.isFile(listPath)) {
             if(reWrite(listPath, CodeTypeEnum.LIST_VIEW)){
@@ -282,7 +282,7 @@ public class ViewService extends BaseService implements ServiceInterface {
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void viewFrom() {
-        String templateFile = this.templatePath + "add.tpl";
+        String templateFile = this.templatePath + "add.vue";
 
         String listPath = vuePath + "/add.vue";
         if (FileUtil.isFile(listPath)) {
@@ -418,7 +418,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                     "import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";");
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//components: { inputEnum },", "components: { inputEnum },");
         }
-        if(textEdits.size() > 0){
+        if(!textEdits.isEmpty()){
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import E from \"wangeditor\";", "import E from \"wangeditor\";");
             tplContent =  StrUtil.replaceIgnoreCase(tplContent,"/*create_editor", "").replace("create_editor*/", "");
             tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", textEdits));

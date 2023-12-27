@@ -10,18 +10,20 @@
 import request from '@/utils/request'
 
 // 登录接口
-export const Login = params => {
+export const Login = data => {
   return request({
-    url: '/userauth/backAuth',
-    method: 'get',
-    params,
+    url: '/user/login',
+    method: 'post',
+    data,
   })
 }
+
+
 
 // 获取登录用户信息
 export const UserInfo = (params) => {
   return request({
-    url: '/users/queryUsersByName',
+    url: '/user/getCurrent',
     method: 'get',
     params
   })
