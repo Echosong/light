@@ -128,7 +128,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                 tableColumns.add(this.elTableColumn(field, autoEntityField));
             }
             if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
-                mapFile.add(StrUtil.format(" item.{}File = JSON.parse(item.{});", field.getName(), field.getName()));
+                mapFile.add(StrUtil.format(" try{\r\n item.{}File = JSON.parse(item.{});}\r\n catch(e){\r\n item.{}File = [{name:'咱无',url:''}] \r\n}", field.getName(), field.getName(), field.getName()));
             }
         }
         PageInfo pageInfo = new PageInfo();
@@ -176,7 +176,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
             String uploadListTemplate = "" +
                     " <el-table-column  label=\"{}\"   #{sortable}# >\n" +
-                    "    <template slot-scope=\"s\">\n" +
+                    "    <template #default=\"s\">\n" +
                     "        <el-link  v-for=\"item in (s.row.{}File)\"  :key=\"item.name\" :href=\"item.url\"  type=\"primary\" >{{item.name}}</el-link>\n" +
                     "     </template>\n" +
                     " </el-table-column> ";
@@ -263,7 +263,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         String cardStr = type == 0?"":" list-type=\"picture-card\" \n";
         String fromUploadFileStr = "<el-upload\n" +
                 "  class=\"upload-demo\"\n" +
-                "  :action=\"sa.cfg.api_url + '/file/upload'\"\n" +
+                "  action=\"/admin/file/upload\"\n" +
                 "  :multiple=\"false\"\n" +
                 "  :data=\"{ fileType: 2, params: '' }\"" +
                 "  :limit=\"10\"\n" +
@@ -312,25 +312,25 @@ public class ViewService extends BaseService implements ServiceInterface {
                 Map<String, String> upMap = new HashMap<>(1);
                 upMap.put("name", field.getName());
                 String successUploadFun = "" +
-                        "success_{name}(response, file, fileList) {\n" +
+                        "function success_{name}(response, file, fileList) {\n" +
                         "          if(response.code != 200){\n" +
                         "            this.sa.error(response.message);\n" +
                         "            return;\n" +
                         "          }\n" +
-                        "          if(!this.m.{name}File){\n" +
-                        "            this.m.{name}File = [];\n" +
+                        "          if(!m.value.{name}File){\n" +
+                        "            m.value.{name}File = [];\n" +
                         "          }" +
-                        "          this.m.{name}File.push(response.data);\n" +
+                        "          m.value.{name}File.push(response.data);\n" +
                         "          console.log(fileList);\n" +
-                        "        },";
+                        "        }";
                 uploadCallback.add(StrUtil.format(successUploadFun, upMap));
                 String removeUploadFun = " " +
-                        "remove_{name}(file, fileList){\n" +
-                        "    this.m.{name}File = fileList;\n" +
-                        "},";
+                        "function remove_{name}(file, fileList){\n" +
+                        "    m.value.{name}File = fileList;\n" +
+                        "}";
                 uploadCallback.add(StrUtil.format(removeUploadFun, upMap));
                 String replaceOlderFile = "" +
-                        "       this.m.{name} =JSON.stringify(this.m.{name}File.map(item=>{\n" +
+                        "       m.value.{name} =JSON.stringify(m.value.{name}File.map(item=>{\n" +
                         "              let a = {};\n" +
                         "              a.name = item.name;\n" +
                         "              a.url = item.url;\n" +
@@ -372,9 +372,8 @@ public class ViewService extends BaseService implements ServiceInterface {
                         ms.add(StrUtil.format("{}File:[]", field.getName()));
                         break;
                     case TEXTEDIT:
-                        htmlTypeStr = StrUtil.format( " <div class=\"editor-box\"> <div id = \"{}\" ref= \"{}\" style = \"text-align:left\" >" +
-                            "</div></div> ", field.getName(), field.getName());
-                        textEdits.add(StrUtil.format("this.create_editor(\"{}\");", field.getName()));
+                        htmlTypeStr = StrUtil.format( "<Tinymce ref=\"{}\" v-model=\"m.{}\"></Tinymce> ", field.getName(), StrUtil.lowerFirst(field.getName()));
+                        textEdits.add(field.getName());
                         break;
                     default:
                 }
@@ -419,10 +418,16 @@ public class ViewService extends BaseService implements ServiceInterface {
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//components: { inputEnum },", "components: { inputEnum },");
         }
         if(!textEdits.isEmpty()){
-            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import E from \"wangeditor\";", "import E from \"wangeditor\";");
-            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"/*create_editor", "").replace("create_editor*/", "");
-            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", textEdits));
-            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"width=\"550px\"", "width=\"850px\"");
+            List<String> importEdits = new ArrayList<>();
+            List<String> replaceEdits = new ArrayList<>();
+            importEdits.add("import Tinymce from '@/components/Tinymce/Tinymce.vue';");
+            for (String textEdit : textEdits) {
+                importEdits.add(StrUtil.format("const {} = ref()", textEdit));
+                replaceEdits.add(StrUtil.format("m.value.{} = {}.value.getContent()",StrUtil.lowerFirst(textEdit), textEdit));
+            }
+            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", importEdits));
+            //replace_editor
+            tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//replace_editor", String.join("\r\n", replaceEdits));
         }
 
         tplContent = StrUtil.replace(tplContent, "//rule_fields", String.join("\r\n", rulesFields));

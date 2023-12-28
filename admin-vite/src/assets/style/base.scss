@@ -55,4 +55,6 @@ input::-webkit-inner-spin-button {
 .el-sub-menu__title{
     padding: 0 var(--el-menu-base-level-padding);
   }
-
+.el-overlay{
+    z-index: 10 !important;
+}

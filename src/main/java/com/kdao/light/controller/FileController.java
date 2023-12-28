@@ -62,8 +62,10 @@ public class FileController extends BaseController {
         if (!folder.isDirectory()) {
             folder.mkdirs();
         }
+        Long fileSize = file.getSize();
         //把可运行的文件屏蔽掉，免得 xss
         String uuid = IdUtil.fastUUID();
+        String fileName = file.getOriginalFilename();
         String extName = FileUtil.extName(file.getOriginalFilename());
         List<String> limtExtName = Arrays.asList("html", "htm", "js");
         Assert.isTrue(!limtExtName.contains(extName), "文件格式不允许！");
@@ -82,15 +84,15 @@ public class FileController extends BaseController {
         }
 
         Map<String, String> map = new HashMap<>(2);
-        map.put("name", file.getOriginalFilename());
+        map.put("name", fileName);
         map.put("url", filePath);
         map.put("params", params);
         map.put("uuid", uuid);
         //入库
         KdFile kdFile = new KdFile();
         kdFile.setFilePath(folder.getAbsolutePath() + newFilename);
-        kdFile.setFileName(FileUtil.mainName(file.getOriginalFilename()));
-        kdFile.setFileSize(file.getSize());
+        kdFile.setFileName(FileUtil.mainName(fileName));
+        kdFile.setFileSize(fileSize);
         kdFile.setExtend(extName);
         kdFile.setFileType(Objects.isNull(fileType) ? 1 : fileType);
         kdFile.setUrlPath(format + "/" + newFilename);
