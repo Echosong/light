@@ -183,13 +183,19 @@ public class ViewService extends BaseService implements ServiceInterface {
             returnValue = StrUtil.format(uploadListTemplate, autoEntityField.value(), typeName);
         } else {
             returnValue = StrUtil.format("" +
-                            "                   <el-table-column  label=\"{}\" #{sortable}#  prop=\"{}\" ></el-table-column>",
+                            "                   <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);
         }
         if (field.isAnnotationPresent(AutoSorted.class)) {
             returnValue =  returnValue.replace("#{sortable}#", "sortable");
         }else{
             returnValue =  returnValue.replace("#{sortable}#", "");
+        }
+        //:show-overflow-tooltip="true"
+        if (autoEntityField.htmlType() == HtmlTypeEnum.TEXTEDIT || autoEntityField.htmlType() == HtmlTypeEnum.TEXTAREA) {
+            returnValue =  returnValue.replace("#{overflow}#", ":show-overflow-tooltip=\"true\"") ;
+        }else {
+            returnValue = returnValue.replace("#{overflow}#", "");
         }
         return returnValue;
     }

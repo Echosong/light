@@ -66,7 +66,7 @@ public class MapperService extends BaseService implements ServiceInterface {
                     , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
-        String templateFile = this.templatePath + "mapper.tpl";
+        String templateFile = this.templatePath + "mapperXml.tpl";
         String tplContent = this.replaceTpl(templateFile);
         tplContent = assignWhereCondition(tplContent);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());

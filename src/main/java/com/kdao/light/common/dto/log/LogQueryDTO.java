@@ -17,14 +17,16 @@ import java.util.Date;
  */
 @Data
 public class LogQueryDTO extends PageInfo {
-   @Schema(defaultValue="描述")
+    @Schema(defaultValue = "描述")
     private String description;
 
-   @Schema(defaultValue="创建时间")
+    @Schema(defaultValue = "创建时间")
     private Date startCreateTime;
 
-   @Schema(defaultValue="创建时间")
+    @Schema(defaultValue = "创建时间")
     private Date endCreateTime;
+
+    private Integer logType;
 
 
 }
