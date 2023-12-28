@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @EnableCaching
 @SpringBootApplication
-
 @Slf4j
 public class LightControllerApplication {
 

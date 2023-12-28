@@ -21,7 +21,7 @@
                    <el-table-column  label="类型"   prop="type" ></el-table-column>
                    <el-table-column  label="排序"   prop="sort" ></el-table-column>
                    <el-table-column  label="图标"   prop="icon" ></el-table-column>
-                   <el-table-column  label="是否展现 1 展现 0 不展现"   prop="show" ></el-table-column>
+                   <el-table-column  label="展现"   prop="show" ></el-table-column>
             <el-table-column prop="address" label="操作" width="220px">
                 <template #default="s">
                     <el-button link class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改

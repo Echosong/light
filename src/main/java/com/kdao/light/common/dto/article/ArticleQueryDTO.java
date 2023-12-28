@@ -26,5 +26,5 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleQueryDTO extends PageInfo {
-
+    private String title;
 }

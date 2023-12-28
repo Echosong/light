@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="#{PackageName}#.#{UpEntityName}#Repository">
-    <select id="listPage" resultType="#{SYS_PATH}.entity.#{UpTableName}#">
-        select *
-        from #{table_name}# where 1=1
-                 #{sql_where}#
-    </select>
+package #{PackageName}#;
 
-</mapper>
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
+import #{SYS_PATH}.entity.#{UpTableName}#;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+/**
+ * 自动生成 #{tableInfo}#
+ * @author : 二胡子
+ * @version :1.0.0
+ */
+@Mapper
+public interface #{UpEntityName}#Mapper extends BaseMapper<#{UpTableName}#> {
+    List<#{UpTableName}#> listPage(#{UpEntityName}#QueryDTO #{EntityName}#QueryDTO);
+}

@@ -53,7 +53,7 @@ defineExpose({
 
 const successFn = (file)=>{
    let data = file.data
-    if(file.status == 0){
+    if(file.status === 0){
         emit('onSuccess',data.fileurl)
     }else{
         ElMessage.error(file.statusInfo)

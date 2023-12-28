@@ -64,6 +64,7 @@
 <script setup>
 
 import {inject, ref} from "vue";
+import InputEnum from "@/components/enum/InputEnum.vue";
 
 //create_editor
 
@@ -110,7 +111,7 @@ function open(data) {
 
 
 function success_ico(response, file, fileList) {
-    if (response.code != 200) {
+    if (response.code !== 200) {
         this.sa.error(response.message);
         return;
     }

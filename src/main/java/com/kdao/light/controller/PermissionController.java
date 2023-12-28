@@ -2,6 +2,7 @@ package com.kdao.light.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;
+import com.kdao.light.common.annotation.NoPermission;
 import com.kdao.light.common.dto.permission.PermissionDTO;
 import com.kdao.light.common.dto.permission.PermissionQueryDTO;
 import com.kdao.light.common.exception.BaseKnownException;
@@ -10,6 +11,7 @@ import com.kdao.light.common.utils.PageUtil;
 import com.kdao.light.entity.KdPermission;
 import com.kdao.light.entity.KdRolePermission;
 import com.kdao.light.entity.KdUserRole;
+import com.kdao.light.mapper.PermissionMapper;
 import com.kdao.light.repository.PermissionRepository;
 import com.kdao.light.repository.RolePermissionRepository;
 import com.kdao.light.repository.UserRoleRepository;
@@ -17,6 +19,7 @@ import com.kdao.light.service.PermissionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
@@ -44,6 +47,9 @@ public class PermissionController extends BaseController {
     private final UserRoleRepository userRoleRepositroy;
     private final RolePermissionRepository rolePermissionRepository;
     private final PermissionService permissionService;
+
+    @Resource
+    private  PermissionMapper permissionMapper;
 
     @Autowired
     public PermissionController(PermissionRepository permissionRepository, UserRoleRepository userRoleRepositroy,
@@ -74,10 +80,11 @@ public class PermissionController extends BaseController {
      * @param permissionQueryDTO
      * @return
      */
-    @PostMapping("/list")
+    @PutMapping("/listPage")
     @Operation(summary = "查询列表")
+    @NoPermission
     public Page<KdPermission> list(@RequestBody PermissionQueryDTO permissionQueryDTO){
-        return PageUtil.getPage(permissionRepository::getListPage, permissionQueryDTO);
+        return PageUtil.getPage(permissionMapper::listPage, permissionQueryDTO);
     }
 
     /**

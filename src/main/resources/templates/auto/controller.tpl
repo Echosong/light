@@ -7,10 +7,12 @@ import #{SYS_PATH}.common.exception.BaseKnownException;
 import #{SYS_PATH}.common.utils.DtoMapper;
 import #{SYS_PATH}.common.utils.PageUtil;
 import #{SYS_PATH}.entity.#{UpTableName}#;
+import #{SYS_PATH}.mapper.#{UpEntityName}#Mapper;
 import #{SYS_PATH}.repository.#{UpEntityName}#Repository;
 
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,23 +30,20 @@ import java.util.*;
  * @author : echosong
  * @version :1.0.0
  */
-@Api(tags = "#{tableInfo}# 控制器")
+@Tag(name = "#{tableInfo}# 控制器")
 @RestController
 @RequestMapping("/#{EntityName}#")
 public class #{UpEntityName}#Controller extends BaseController{
+    @Resource
+    private  #{UpEntityName}#Repository #{EntityName}#Repository;
 
-    private final #{UpEntityName}#Repository #{EntityName}#Repository;
-
-    @Autowired
-    public #{UpEntityName}#Controller(#{UpEntityName}#Repository #{EntityName}#Repository) {
-        this.#{EntityName}#Repository = #{EntityName}#Repository;
-    }
-
+    @Resource
+    private #{UpEntityName}#Mapper #{EntityName}#Mapper;
 
     @Operation(summary = "分页查询#{tableInfo}#")
     @PutMapping("/listPage")
     public Page<#{UpEntityName}#ListDTO> listPage(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO){
-        Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Repository::listPage, queryDTO);
+        Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Mapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, #{UpEntityName}#ListDTO.class);
     }
 

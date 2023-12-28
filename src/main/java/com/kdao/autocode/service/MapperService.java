@@ -30,16 +30,29 @@ public class MapperService extends BaseService implements ServiceInterface {
         super(clazz);
     }
 
+    public void getMapperFile(String className){
+        this.packageName = Const.SYS_PATH + ".mapper";
+        String repositoryName = className.substring(2);
+        String tplPath = this.getRealPath(packageName);
+        String fileName = tplPath +"/"+ repositoryName +"Mapper.java";
+        if(FileUtil.isFile(fileName)){
+            Console.log(StrUtil.format("文件{}已存在，无需重新生成", fileName));
+            return;
+        }
+        String templateFile = this.templatePath + "mapper.tpl";
+        String tplContent = this.replaceTpl(templateFile);
+        FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
+        Console.log("生成Mapper 文件 {} 成功 ", fileName);
+    }
+
 
     public void getFile(String className) {
-        String repositoryName = className.substring(2) + "Repository";
-        this.packageName = Const.SYS_PATH + ".repository";
-        String repositoryPath = ClassUtil.getClassPath()
-                .replace("target/classes/", "src/main/resources/mapper")
-                .replace("target/test-classes","src/main/resources/mapper" );
+        String repositoryName = className.substring(2) + "Mapper";
+        this.packageName = Const.SYS_PATH + ".mapper";
+        String repositoryPath = Const.ROOT_PATH +"/src/main/resources/mapper/";
 
         String fileName = repositoryPath  + repositoryName + ".xml";
-        if (FileUtil.isFile(fileName)) {
+         if (FileUtil.isFile(fileName)) {
             boolean autoCover = clazz.isAnnotationPresent(AutoCover.class);
             if (!autoCover) {
                 return;
@@ -57,7 +70,7 @@ public class MapperService extends BaseService implements ServiceInterface {
         String tplContent = this.replaceTpl(templateFile);
         tplContent = assignWhereCondition(tplContent);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
-        Console.log("生成Mapper 文件 {} 成功 ", fileName);
+        Console.log("生成Mapper.xml 文件 {} 成功 ", fileName);
     }
 
     /**
@@ -115,6 +128,7 @@ public class MapperService extends BaseService implements ServiceInterface {
      */
     @Override
     public void start() {
+        this.getMapperFile(clazz.getSimpleName());
         this.getFile(clazz.getSimpleName());
     }
 }

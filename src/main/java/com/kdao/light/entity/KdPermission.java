@@ -1,5 +1,6 @@
 package com.kdao.light.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.autocode.anno.InQueryDTO;
@@ -60,5 +61,6 @@ public class KdPermission extends  SysBase{
 
     @AutoEntityField("是否展现 1 展现 0 不展现")
     @Column(name = "`show`")
+    @TableField("`show`")
     private Integer show;
 }
