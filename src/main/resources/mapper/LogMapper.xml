@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdao.light.mapper.LogMapper">
+    <select id="listPage" resultType="com.kdao.light.entity.KdLog">
+        select *
+        from kd_log where 1=1
+                 <if test="description != null ">
+ and description  like CONCAT('%',#{description},'%')
+ </if>
+<if test="logType != null ">
+ and log_type  like CONCAT('%',#{logType},'%')
+ </if>
+    </select>
+
+</mapper>

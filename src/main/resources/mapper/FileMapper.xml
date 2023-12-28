@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdao.light.mapper.FileMapper">
+    <select id="listPage" resultType="com.kdao.light.entity.KdFile">
+        select *
+        from kd_file where 1=1
+                 <if test="fileName != null ">
+ and file_name  like CONCAT('%',#{fileName},'%')
+ </if>
+<if test="fileType != null "> 
+ and file_type = #{fileType} 
+ </if>
+    </select>
+
+</mapper>
