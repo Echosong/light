@@ -3,6 +3,7 @@ package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
+import com.kdao.autocode.anno.NotinListDTO;
 import com.kdao.light.common.enums.HtmlTypeEnum;
 import com.kdao.light.common.enums.UserRegTypeEnum;
 import com.kdao.light.common.enums.UserStateEnum;
@@ -43,6 +44,7 @@ public class KdUser extends  SysBase implements Serializable {
 
     @Length(min = 6, message = "密码必须大于等于6位")
     @AutoEntityField("密码")
+    @NotinListDTO
     private String password;
 
     @AutoEntityField("性别")
@@ -67,7 +69,7 @@ public class KdUser extends  SysBase implements Serializable {
     @Length(min = 2, message = "姓名必须大于两个字符")
     private String name;
 
-    @AutoEntityField(value = "状态默认开启", notes = "0,1", enums = UserStateEnum.class)
+    @AutoEntityField(value = "状态", notes = "0,1", enums = UserStateEnum.class)
     private Integer state = 0 ;
 
     @Email
@@ -81,8 +83,10 @@ public class KdUser extends  SysBase implements Serializable {
     private String loginIp;
 
     @AutoEntityField(value = "身份证正面", htmlType = HtmlTypeEnum.UPLOAD)
+    @NotinListDTO
     private String frontCard;
 
+    @NotinListDTO
     @AutoEntityField(value = "身份证反面", htmlType = HtmlTypeEnum.UPLOAD)
     private String reverseCard;
 

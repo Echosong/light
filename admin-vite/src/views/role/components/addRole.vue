@@ -1,6 +1,6 @@
 <template>
-    <Dialog v-model="dialogVisible"   :title="`${formLabelAlign.id ? '修改' :'新增'}角色`" >
-        <el-form  label-position="right" label-width="100" :inline="true" ref="ruleFormRef" :model="formLabelAlign" class="demo-form-inline">
+    <Dialog v-model="dialogVisible"   :title="`${formLabelAlign.id ? '修改' :'新增'}角色`"  maxHeight="200px" maxWidth="500px">
+        <el-form  label-position="right" label-width="100" ref="ruleFormRef" :model="formLabelAlign" class="demo-form-inline">
             <el-form-item :rules="[
                 {
                     required: true,
@@ -12,7 +12,7 @@
             </el-form-item>
 
             <el-form-item prop="description" label="描述">
-                <el-input v-model="formLabelAlign.description" placeholder="请输入描述" />
+                <el-input type="textarea" v-model="formLabelAlign.description" placeholder="请输入描述" />
             </el-form-item>
         </el-form>
         <template #footer>

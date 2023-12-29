@@ -103,7 +103,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
         List<String> tableColumns = new ArrayList<>();
-        List<String> importFiles = new ArrayList<>();
+        Set<String> importFiles = new HashSet<>();
 
         //追加一个id编号
         tableColumns.add("<el-table-column type=\"selection\"></el-table-column>");
@@ -127,10 +127,12 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
             if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
                 importFiles.add("import Preview from \"@/components/file/preview.vue\";");
+            }else if (autoEntityField.htmlType() == HtmlTypeEnum.FILE) {
+                importFiles.add("import Link from \"@/components/file/link.vue\";");
             }
         }
         PageInfo pageInfo = new PageInfo();
-        String queryParam = StrUtil.format("pageSize:{},page:{}", pageInfo.getPageSize(), pageInfo.getPage());
+        String queryParam = StrUtil.format("pageSize:{},page:{}, total: 0", pageInfo.getPageSize(), pageInfo.getPage());
         if (paramsList.isEmpty()) {
             queryParam = "{" + queryParam + "}";
         } else {
@@ -184,12 +186,11 @@ public class ViewService extends BaseService implements ServiceInterface {
             String fileTemplate = """
                      <el-table-column  label="{}"  #{sortable}# >
                          <template #default="s">
-                             <a v-if="s.row.{}" :href="s.row.{}.split(',')[0] " target="_blank">下载</a>
-                             <span v-else> 暂无</span>
+                             <Link :fileUrl="s.row.{}"></Link>
                          </template>
                      </el-table-column>
                     """;
-            returnValue =  StrUtil.format(fileTemplate, autoEntityField.value(), typeName, typeName);
+            returnValue =  StrUtil.format(fileTemplate, autoEntityField.value(), typeName);
         }else {
             returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);

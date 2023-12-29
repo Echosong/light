@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" title="权限分配" width="50%" draggable>
+    <Dialog v-model="dialogVisible" title="权限分配" max-height="700px" >
 
         <el-table default-expand-all max-height="400px" @selection-change="selectAllFn" header-cell-class-name="tableBackground" :data="list" style="width: 100%" border row-key="id" 
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
@@ -37,13 +37,15 @@
                 <el-button @click="dialogVisible = false">取消</el-button>
             </span>
         </template>
-    </el-dialog>
+    </Dialog>
 </template>
 
 <script setup>
 import { ref, reactive, inject } from 'vue'
 import { ElMessage } from 'element-plus'
 import { handleTree } from '@/utils';
+import  Dialog  from '@/components/Dialog/index.vue'
+
 const emit = defineEmits(['onsuccess'])
 
 const ruleFormRef = ref(null)

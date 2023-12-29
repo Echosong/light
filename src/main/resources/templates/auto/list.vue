@@ -21,18 +21,7 @@
             </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <div class="pages">
-            <el-pagination
-                background
-                layout="total, prev, pager, next, sizes, jumper"
-                v-model:current-page="p.page"
-                v-model:page-size="p.pageSize"
-                :total="dataCount"
-                :page-sizes="[1, 10, 20, 30, 40, 50, 100]"
-                @current-change="f5(true)"
-                @size-change="f5(true)">
-            </el-pagination>
-        </div>
+        <Pagination :p="p"  @f5="f5"></Pagination>
     </div>
     <!-- 增改组件 -->
     <add-or-update ref="addUpdate"></add-or-update>
@@ -41,10 +30,10 @@
 <script setup>
 import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
+import Pagination from "@/components/file/Pagination.vue";
 //importFiles
 
 const p = ref(#{queryPageParams}#)
-const dataCount = ref(0);
 const dataList = ref([]);
 const sa = inject('sa')
 const addUpdate = ref()
@@ -58,7 +47,7 @@ async function f5() {
     dataList.value = data.content.map((item) => {
         return item;
     });
-    dataCount.value = data.totalElements;
+    p.value.total  = data.totalElements;
 }
 
 // 删除

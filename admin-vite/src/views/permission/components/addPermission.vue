@@ -54,7 +54,6 @@
 <script setup>
 import { ref, reactive, inject } from 'vue'
 import { ElMessage } from 'element-plus'
-import { parseTime } from '@/utils'
 import Dialog from "@/components/Dialog/index.vue";
 
 const emit = defineEmits(['onsuccess'])
