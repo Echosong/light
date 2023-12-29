@@ -54,7 +54,6 @@ public class ViewService extends BaseService implements ServiceInterface {
     private static final String  START_WITH = "{javax";
     private static final String START_ORG = "{org";
     private static final String BASE_ENUM = "BaseEnum";
-    private static final String  INPUT_ENUM = "<input-enum";
 
     /**
      * 写入配置文件
@@ -174,16 +173,16 @@ public class ViewService extends BaseService implements ServiceInterface {
             log.info(e.getMessage());
         }
         if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
-            String uploadListTemplate = "" +
-                    " <el-table-column  label=\"{}\"   #{sortable}# >\n" +
-                    "    <template #default=\"s\">\n" +
-                    "        <el-link  v-for=\"item in (s.row.{}File)\"  :key=\"item.name\" :href=\"item.url\"  type=\"primary\" >{{item.name}}</el-link>\n" +
-                    "     </template>\n" +
-                    " </el-table-column> ";
+            String uploadListTemplate = """
+                     <el-table-column  label="{}"  #{sortable}# >
+                        <template #default="s">
+                            <el-link  v-for="item in (s.row.{}File)"  :key="item.name" :href="item.url"  type="primary" >{{item.name}}</el-link>
+                         </template>
+                     </el-table-column>
+                    """;
             returnValue = StrUtil.format(uploadListTemplate, autoEntityField.value(), typeName);
         } else {
-            returnValue = StrUtil.format("" +
-                            "                   <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
+            returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);
         }
         if (field.isAnnotationPresent(AutoSorted.class)) {
@@ -212,38 +211,36 @@ public class ViewService extends BaseService implements ServiceInterface {
     private String elForm(Field field, AutoEntityField autoEntityField) {
         String returnValue = "";
         if ("String".equals(field.getType().getSimpleName())) {
-            returnValue = StrUtil.format("<el-form-item label=\"{}：\">\n" +
-                    " <el-input v-model=\"p.{}\" placeholder=\"模糊查询\"></el-input>\n" +
-                    "</el-form-item>", autoEntityField.value(), field.getName());
+            returnValue = StrUtil.format("""
+                    <el-form-item label="{}：">
+                     <el-input v-model="p.{}" placeholder="模糊查询"></el-input>
+                    </el-form-item>""", autoEntityField.value(), field.getName());
         }
         if ("Date".equals(field.getType().getSimpleName())) {
-            returnValue = StrUtil.format("<el-form-item label=\"{}：\">\n" +
-                            "          <el-date-picker\n" +
-                            "            v-model=\"p.start{}\"\n" +
-                            "            type=\"datetime\"\n" +
-                            "            value-format=\"yyyy-MM-dd HH:mm:ss\"\n" +
-                            "            placeholder=\"开始日期\"\n" +
-                            "          ></el-date-picker>\n" +
-                            "          -\n" +
-                            "          <el-date-picker\n" +
-                            "            v-model=\"p.end{}\"\n" +
-                            "            type=\"datetime\"\n" +
-                            "            value-format=\"yyyy-MM-dd HH:mm:ss\"\n" +
-                            "            placeholder=\"结束日期\"\n" +
-                            "          ></el-date-picker>\n" +
-                            "        </el-form-item>", autoEntityField.value(), StrUtil.upperFirst(field.getName()),
+            returnValue = StrUtil.format("""
+                            <el-form-item label="{}：">
+                                      <el-date-picker
+                                        v-model="p.start{}"
+                                        type="datetime"
+                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                        placeholder="开始日期"></el-date-picker>
+                                      -
+                                      <el-date-picker
+                                        v-model="p.end{}"
+                                        type="datetime"
+                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                        placeholder="结束日期"></el-date-picker>
+                                    </el-form-item>""", autoEntityField.value(), StrUtil.upperFirst(field.getName()),
                     StrUtil.upperFirst(field.getName()));
         }
 
         if (!BASE_ENUM.equals(autoEntityField.enums().getSimpleName())) {
             Class<? extends BaseEnum> lclazz = autoEntityField.enums();
 
-            returnValue = StrUtil.format("<el-form-item label=\"{}\">\n" +
-                            "                    <input-enum\n" +
-                            "                        enumName=\"{}\"\n" +
-                            "                        v-model=\"p.{}\"\n" +
-                            "                    ></input-enum>\n" +
-                            "                </el-form-item>",
+            returnValue = StrUtil.format("""
+                            <el-form-item label="{}">
+                                  <input-enum enumName="{}"  v-model="p.{}"></input-enum>
+                            </el-form-item>""",
                     autoEntityField.value(), StrUtil.lowerFirst(lclazz.getSimpleName()), field.getName());
         }
         return returnValue;
@@ -341,29 +338,24 @@ public class ViewService extends BaseService implements ServiceInterface {
             if (!"BaseEnum".equals(annotation.enums().getSimpleName())) {
                 importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
                 Class<? extends BaseEnum> lclazz = annotation.enums();
-                elFormItems.add(StrUtil.format("<el-form-item label=\"{}\">\n" +
-                                "                    <input-enum\n" +
-                                "                        enumName=\"{}\"\n" +
-                                "                        v-model=\"m.{}\"\n" +
-                                "                    ></input-enum>\n" +
-                                "                </el-form-item>", annotation.value(), StrUtil.lowerFirst(lclazz.getSimpleName()),
+                elFormItems.add(StrUtil.format("""
+                                <el-form-item label="{}">
+                                     <input-enum enumName="{}" v-model="m.{}" ></input-enum>
+                                </el-form-item>""", annotation.value(), StrUtil.lowerFirst(lclazz.getSimpleName()),
                         field.getName()));
                 continue;
             }
 
             if ("Date".equals(field.getType().getSimpleName())) {
-                elFormItems.add(StrUtil.format("<el-form-item label=\"{}：\"  prop=\"{}\" >\n" +
-                        " <el-date-picker\n" +
-                        "            v-model=\"m.{}\"\n" +
-                        "            type=\"datetime\"\n" +
-                        "            value-format=\"yyyy-MM-dd HH:mm:ss\"\n" +
-                        "            placeholder=\"{}\"\n" +
-                        "          ></el-date-picker>" +
-                        " </el-form-item>", annotation.value(), field.getName(), field.getName(), annotation.value()));
+                elFormItems.add(StrUtil.format("""
+                      <el-form-item label="{}："  prop="{}" >
+                         <el-date-picker v-model="m.{}" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="{}"></el-date-picker>
+                      </el-form-item>""", annotation.value(), field.getName(), field.getName(), annotation.value()));
             } else {
-                elFormItems.add(StrUtil.format("<el-form-item label=\"{}：\"  prop=\"{}\" >\n" +
-                        "            <el-input v-model=\"m.{}\"></el-input>\n" +
-                        "          </el-form-item>", annotation.value(), field.getName(), field.getName()));
+                elFormItems.add(StrUtil.format("""
+                        <el-form-item label="{}："  prop="{}" >
+                            <el-input v-model="m.{}"></el-input>
+                        </el-form-item>""", annotation.value(), field.getName(), field.getName()));
             }
         }
         //
@@ -371,7 +363,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if(!textEdits.isEmpty()){
             List<String> importEdits = new ArrayList<>();
             List<String> replaceEdits = new ArrayList<>();
-            importEdits.add("import Tinymce from '@/components/Tinymce/Tinymce.vue';");
+            importFiles.add("import Tinymce from '@/components/Tinymce/Tinymce.vue';");
             for (String textEdit : textEdits) {
                 importEdits.add(StrUtil.format("const {} = ref()", textEdit));
                 replaceEdits.add(StrUtil.format("m.value.{} = {}.value.getContent()",StrUtil.lowerFirst(textEdit), textEdit));
@@ -450,3 +442,5 @@ public class ViewService extends BaseService implements ServiceInterface {
         return StrUtil.format(ruleField,field.getName(), ruleBuilder.toString());
     }
 }
+
+
