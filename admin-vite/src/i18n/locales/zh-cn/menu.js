@@ -1,5 +1,5 @@
 export default {
-  homepage: '首页',
+  homepage: '工作台',
   dashboard: '工作台',
   test: '测试页面',
   testList: '列表',

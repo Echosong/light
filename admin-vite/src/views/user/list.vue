@@ -21,7 +21,6 @@
             <el-table-column label="注册方式" prop="typeEnum"></el-table-column>
             <el-table-column label="姓名" prop="name"></el-table-column>
             <el-table-column label="状态" prop="stateEnum"></el-table-column>
-            <el-table-column label="邮箱" prop="email"></el-table-column>
             <el-table-column label="注册ip" prop="regIp"></el-table-column>
             <el-table-column label="登录ip" prop="loginIp"></el-table-column>
             <el-table-column prop="address" label="操作" width="220px">
