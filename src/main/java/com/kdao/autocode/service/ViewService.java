@@ -86,8 +86,6 @@ public class ViewService extends BaseService implements ServiceInterface {
     }
 
 
-
-
     /**
      * 生成列表
      */
@@ -105,9 +103,10 @@ public class ViewService extends BaseService implements ServiceInterface {
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
         List<String> tableColumns = new ArrayList<>();
+        List<String> importFiles = new ArrayList<>();
+
         //追加一个id编号
         tableColumns.add("<el-table-column type=\"selection\"></el-table-column>");
-        List<String> mapFile = new ArrayList<>();
 
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
@@ -127,7 +126,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                 tableColumns.add(this.elTableColumn(field, autoEntityField));
             }
             if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
-                mapFile.add(StrUtil.format(" try{\r\n item.{}File = JSON.parse(item.{});}\r\n catch(e){\r\n item.{}File = [{name:'咱无',url:''}] \r\n}", field.getName(), field.getName(), field.getName()));
+                importFiles.add("import Preview from \"@/components/file/preview.vue\";");
             }
         }
         PageInfo pageInfo = new PageInfo();
@@ -150,7 +149,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         tplContent = StrUtil.replace(tplContent, "#{queryPageParams}#", queryParam);
         tplContent = StrUtil.replace(tplContent, "#{el-table-column}#",
                 String.join("\r\n", tableColumns));
-        tplContent = StrUtil.replace(tplContent, "//map_file", String.join("\r\n", mapFile));
+        tplContent = StrUtil.replace(tplContent, "//importFiles", String.join("\r\n", importFiles));
 
         FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
         this.reWriteConfigJs("list");
@@ -175,13 +174,23 @@ public class ViewService extends BaseService implements ServiceInterface {
         if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
             String uploadListTemplate = """
                      <el-table-column  label="{}"  #{sortable}# >
-                        <template #default="s">
-                            <el-link  v-for="item in (s.row.{}File)"  :key="item.name" :href="item.url"  type="primary" >{{item.name}}</el-link>
+                         <template #default="s">
+                             <Preview :imgUrl="s.row.{}"></Preview>
                          </template>
                      </el-table-column>
                     """;
             returnValue = StrUtil.format(uploadListTemplate, autoEntityField.value(), typeName);
-        } else {
+        } else if(autoEntityField.htmlType() == HtmlTypeEnum.FILE) {
+            String fileTemplate = """
+                     <el-table-column  label="{}"  #{sortable}# >
+                         <template #default="s">
+                             <a v-if="s.row.{}" :href="s.row.{}.split(',')[0] " target="_blank">下载</a>
+                             <span v-else> 暂无</span>
+                         </template>
+                     </el-table-column>
+                    """;
+            returnValue =  StrUtil.format(fileTemplate, autoEntityField.value(), typeName, typeName);
+        }else {
             returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);
         }
@@ -366,7 +375,14 @@ public class ViewService extends BaseService implements ServiceInterface {
             importFiles.add("import Tinymce from '@/components/Tinymce/Tinymce.vue';");
             for (String textEdit : textEdits) {
                 importEdits.add(StrUtil.format("const {} = ref()", textEdit));
-                replaceEdits.add(StrUtil.format("m.value.{} = {}.value.getContent()",StrUtil.lowerFirst(textEdit), textEdit));
+                String getEditContent = """
+                            let {content}Text = {content}.value.getContent()
+                            if({content}Text){
+                                m.value.{content} = {content}Text
+                            }
+                        """;
+                Map<String,String> mapContent = new HashMap<>(){{put("content", textEdit);}};
+                replaceEdits.add(StrUtil.format(getEditContent, mapContent));
             }
             tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", importEdits));
             //replace_editor

@@ -33,12 +33,20 @@ public class KdArticle extends SysBase {
     @InQueryDTO
     private String title;
 
+    @AutoEntityField(value = "封面图片", htmlType = HtmlTypeEnum.UPLOAD)
+    private String imgUrl;
+
     @AutoEntityField(value = "类型", enums = ArticleTypeEnum.class)
     private int type;
 
     @AutoEntityField(value = "内容", htmlType = HtmlTypeEnum.TEXTEDIT)
     private String content;
 
+    @AutoEntityField(value = "附件", htmlType = HtmlTypeEnum.FILE)
+    private String fileUrl;
+
     @AutoEntityField(value = "项目id")
     private  Integer projectId;
+
+
 }

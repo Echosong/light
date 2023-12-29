@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="80%">
+    <Dialog v-model="isShow" :title="title" maxHeight="700px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
             #{el-form-item}#
@@ -43,13 +43,12 @@ function open(data) {
 
 //提交#{tableInfo}#信息
 function ok(parent) {
-    ruleForm.value.validate((valid) => {
+    ruleForm.value.validate(async (valid) => {
         if (valid) {
             //replace_editor
-            sa.post("/#{EntityName}#/save", m.value).then((res) => {
-                parent.f5();
-                isShow.value = false;
-            });
+            await sa.post("/#{EntityName}#/save", m.value);
+            parent.f5();
+            isShow.value = false;
         } else {
             console.log("error submit!!");
             return false;

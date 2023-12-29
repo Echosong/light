@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" :title="title" width="30%" draggable>
+    <Dialog v-model="dialogVisible" :title="title" maxHeight="500px">
         <el-form label-position="right" label-width="100" :inline="true" ref="ruleFormRef" :model="formLabelAlign"
             class="demo-form-inline">
             <el-form-item :rules="[
@@ -48,13 +48,14 @@
                 <el-button @click="dialogVisible = false">取消</el-button>
             </span>
         </template>
-    </el-dialog>
+    </Dialog>
 </template>
 
 <script setup>
 import { ref, reactive, inject } from 'vue'
 import { ElMessage } from 'element-plus'
 import { parseTime } from '@/utils'
+import Dialog from "@/components/Dialog/index.vue";
 
 const emit = defineEmits(['onsuccess'])
 const sa = inject('sa')

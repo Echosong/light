@@ -41,9 +41,9 @@
 <script setup>
 import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
+//importFiles
 
 const p = ref(#{queryPageParams}#)
-;
 const dataCount = ref(0);
 const dataList = ref([]);
 const sa = inject('sa')
@@ -53,24 +53,21 @@ onMounted(() => {
 })
 
 // 数据刷新
-function f5() {
-    sa.put("/#{EntityName}#/listPage", p.value).then(res => {
-        dataList.value = res.data.content.map((item) => {
-            //map_file
-            return item;
-        });
-        dataCount.value = res.data.totalElements;
+async function f5() {
+    const {data} = await sa.put("/#{EntityName}#/listPage", p.value);
+    dataList.value = data.content.map((item) => {
+        return item;
     });
+    dataCount.value = data.totalElements;
 }
 
 // 删除
 function del(data) {
-    sa.confirm('是否删除，此操作不可撤销', function () {
-        sa.delete("/#{EntityName}#/delete/" + data.id).then(res => {
-            console.log(res)
-            sa.arrayDelete(dataList.value, data);
-            sa.ok(res.message);
-        });
+    sa.confirm('是否删除，此操作不可撤销', async function () {
+        let res = await sa.delete("/#{EntityName}#/delete/" + data.id);
+        console.log(res)
+        sa.arrayDelete(dataList.value, data);
+        sa.ok(res.message);
     }.bind(this));
 }
 
