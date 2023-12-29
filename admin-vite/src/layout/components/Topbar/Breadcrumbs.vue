@@ -152,7 +152,7 @@ export default defineComponent({
 .el-breadcrumb__inner {
   &.is-link,
   a {
-    color: #5c5c5c;
+    color: $topHeaderTextColor;
   }
 }
 </style>

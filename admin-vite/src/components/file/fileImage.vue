@@ -10,11 +10,11 @@
     :on-remove="removeFn"
     :on-success="successFn"
   >
-    <img v-if="file" :src="urlMontage(file)" class="avatar" />
+    <img v-if="file" :src="file" class="avatar" />
     <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
     <template #tip>
       <div class="el-upload__tip">
-        请上传大小为450*300的图片
+        请上传大小合适的图片
       </div>
     </template>
   </el-upload>
@@ -22,14 +22,13 @@
 
 <script setup>
 import { useApp } from '@/pinia/modules/app'
-import { urlMontage } from '@/utils';
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue';
 import { defineEmits } from 'vue'
 const emit = defineEmits(["onSuccess","onremove"])
 
 const { authorization } = useApp()
-const action = ref(`/yunwoo/file/upload`)
+const action = ref(`/admin/file/upload`)
 const headers =  {'Authorization':authorization}
 const props = defineProps({
     file:{
@@ -40,10 +39,10 @@ const props = defineProps({
 
 const successFn = (file)=>{
    let data = file.data
-    if(file.status == 0){
-        emit('onSuccess',data.fileurl)
+    if(file.code === 200){
+        emit('onSuccess',data.url)
     }else{
-        ElMessage.error(file.statusInfo)
+        ElMessage.error(file.message)
     }
 }
 const removeFn = (file)=>{
@@ -55,7 +54,7 @@ const removeFn = (file)=>{
 <style scoped>
 .avatar-uploader .avatar {
   width: 230px;
-  height: 153;
+  height: 153px;
   display: block;
 }
 </style>

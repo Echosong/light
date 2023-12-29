@@ -5,11 +5,14 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.light.common.annotation.ApiResultIgnore;
+import com.kdao.light.common.annotation.Log;
 import com.kdao.light.common.dto.file.FileDTO;
 import com.kdao.light.common.dto.file.FileQueryDTO;
+import com.kdao.light.common.dto.log.LogDTO;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.config.properties.FileUploadProperties;
 import com.kdao.light.entity.KdFile;
+import com.kdao.light.entity.KdLog;
 import com.kdao.light.repository.FileRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +26,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -143,5 +147,13 @@ public class FileController extends BaseController {
                 fileRepository.delete(t);
             }
         });
+    }
+
+    @Operation(summary = "新增活更新日志")
+    @PostMapping("/save")
+    @Log("新增|修改日志")
+    public void save(@RequestBody @Valid FileDTO fileDTO){
+        KdFile file = DtoMapper.convert(fileDTO, KdFile.class);
+        fileRepository.save(file);
     }
 }

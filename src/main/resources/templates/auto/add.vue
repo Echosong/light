@@ -1,29 +1,25 @@
 <template>
-    <el-dialog v-if="m" :title="title" v-model="isShow" width="800px" top="10vh" :append-to-body="true"
-               :destroy-on-close="true" :close-on-click-modal="false" custom-class="full-dialog" draggable>
-        <div class="vue-box">
-            <!-- 参数栏 -->
-            <div class="c-panel">
-                <el-form size="mini" v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
-                         label-width="120px">
-                    #{el-form-item}#
-                    <el-form-item>
-                        <span class="c-label">&emsp;</span>
-                        <el-button type="primary" icon="el-icon-plus" size="small" @click="ok($parent)">确定
-                        </el-button>
-                    </el-form-item>
-                </el-form>
-            </div>
-        </div>
-    </el-dialog>
+    <Dialog v-model="isShow" :title="title" maxHeight="80%">
+        <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
+                 label-width="120px">
+            #{el-form-item}#
+        </el-form>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button type="primary" @click="ok($parent)">
+                    确定
+                </el-button>
+                <el-button @click="isShow = false">取消</el-button>
+            </span>
+        </template>
+    </Dialog>
 </template>
 
 <script setup>
-
+import Dialog from "@/components/dialog/index.vue";
 import {inject, ref} from "vue";
-
+//import_file
 //create_editor
-
 const props = defineProps(["params"]);
 const m = ref({});
 const title = ref("");
@@ -37,25 +33,20 @@ const ruleForm = ref();
 function open(data) {
     isShow.value = true;
     if (data) {
-        this.title = "修改 #{tableInfo}#";
-        //replace_file
+        title.value = "修改 #{tableInfo}#";
         m.value = data;
     } else {
-        m.value = {#{data_init}#}
+        m.value = //data_init
         title.value = "添加 #{tableInfo}#";
     }
 }
-
-
-//upload_functions
 
 //提交#{tableInfo}#信息
 function ok(parent) {
     ruleForm.value.validate((valid) => {
         if (valid) {
-            //replace_old
             //replace_editor
-             sa.post("/#{EntityName}#/save", m.value).then((res) => {
+            sa.post("/#{EntityName}#/save", m.value).then((res) => {
                 parent.f5();
                 isShow.value = false;
             });
@@ -65,6 +56,7 @@ function ok(parent) {
         }
     });
 }
+
 defineExpose({
     open
 })

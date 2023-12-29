@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" :title="title" width="30%">
+    <el-dialog v-model="dialogVisible" :title="title" width="30%" draggable>
         <el-form label-position="right" label-width="100" :inline="true" ref="ruleFormRef" :model="formLabelAlign"
             class="demo-form-inline">
             <el-form-item :rules="[

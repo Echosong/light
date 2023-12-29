@@ -14,7 +14,7 @@ import { defineEmits } from 'vue'
 const emit = defineEmits(["onSuccess", "onremove"])
 const { authorization } = useApp()
 // const action = ref(`http://127.0.0.1:3001/yunwoo/file/upload`)
-const action = ref(`/yunwoo/file/upload`)
+const action = ref(`/admin/file/upload`)
 const headers = { 'Authorization': authorization }
 const fileList = ref([
     //   {

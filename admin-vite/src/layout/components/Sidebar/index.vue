@@ -76,7 +76,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .left {
-  width: 175px;
+  width: 185px;
   background: $menuBg;
   transition: all 0.3s;
   overflow: hidden;

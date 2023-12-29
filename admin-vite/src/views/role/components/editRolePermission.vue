@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" title="权限分配" width="50%">
+    <el-dialog v-model="dialogVisible" title="权限分配" width="50%" draggable>
 
         <el-table default-expand-all max-height="400px" @selection-change="selectAllFn" header-cell-class-name="tableBackground" :data="list" style="width: 100%" border row-key="id" 
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">

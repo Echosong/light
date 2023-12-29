@@ -52,7 +52,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .brand {
-  background-color: #fff;
+  background-color: $topHeaderBgColor;
   height: 48px;
   padding: 0 8px;
   display: flex;
@@ -68,6 +68,7 @@ export default defineComponent({
     white-space: nowrap;
     margin-left: 8px;
     transition: all 0.5s;
+      color: $topHeaderTextColor;
   }
 }
 </style>

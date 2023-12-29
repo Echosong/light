@@ -265,22 +265,13 @@ public class ViewService extends BaseService implements ServiceInterface {
         return false;
     }
 
-    private String getFromUploadFileStr(int type) {
-        String cardStr = type == 0?"":" list-type=\"picture-card\" \n";
-        String fromUploadFileStr = "<el-upload\n" +
-                "  class=\"upload-demo\"\n" +
-                "  action=\"/admin/file/upload\"\n" +
-                "  :multiple=\"false\"\n" +
-                "  :data=\"{ fileType: 2, params: '' }\"" +
-                "  :limit=\"10\"\n" +
-                " {$cardStr$}"+
-                "   :on-success=\"success_{name}\"" +
-                "   :before-remove=\"remove_{name}\"" +
-                "  :file-list=\"m.{name}File\">\n" +
-                "  <el-button size=\"mini\" type=\"primary\">点击上传</el-button>\n" +
-                "  <div slot=\"tip\" class=\"el-upload__tip\">上传{info}</div>\n" +
-                "</el-upload>";
-        return fromUploadFileStr.replace("{$cardStr$}", cardStr);
+    private String getFromUploadFileStr(HtmlTypeEnum type,String fieldName) {
+        String componentName = type == HtmlTypeEnum.UPLOAD?"FileImage":"File";
+        Map<String,String> map = new HashMap<>();
+        map.put("componentName", componentName);
+        map.put("fieldName", fieldName);
+        String fromUploadFileStr = " <{componentName} @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
+        return  StrUtil.format(fromUploadFileStr, map);
     }
 
     /**
@@ -301,11 +292,9 @@ public class ViewService extends BaseService implements ServiceInterface {
         Field[] declaredFields = clazz.getDeclaredFields();
         List<String> elFormItems = new ArrayList<>();
         List<String> ms = new ArrayList<>();
-        List<String> uploadCallback = new ArrayList<>();
-        List<String> replaceFiles = new ArrayList<>();
-        List<String> replaceOlds = new ArrayList<>();
         List<String> rulesFields = new ArrayList<>();
         List<String> textEdits = new LinkedList<>();
+        Set<String> importFiles = new HashSet<>();
 
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
@@ -313,43 +302,13 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
             AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
             rulesFields.add(this.validationRules(field));
-            //处理上传得各种回调函数
-            if (annotation.htmlType() == HtmlTypeEnum.UPLOAD) {
-                Map<String, String> upMap = new HashMap<>(1);
-                upMap.put("name", field.getName());
-                String successUploadFun = "" +
-                        "function success_{name}(response, file, fileList) {\n" +
-                        "          if(response.code != 200){\n" +
-                        "            this.sa.error(response.message);\n" +
-                        "            return;\n" +
-                        "          }\n" +
-                        "          if(!m.value.{name}File){\n" +
-                        "            m.value.{name}File = [];\n" +
-                        "          }" +
-                        "          m.value.{name}File.push(response.data);\n" +
-                        "          console.log(fileList);\n" +
-                        "        }";
-                uploadCallback.add(StrUtil.format(successUploadFun, upMap));
-                String removeUploadFun = " " +
-                        "function remove_{name}(file, fileList){\n" +
-                        "    m.value.{name}File = fileList;\n" +
-                        "}";
-                uploadCallback.add(StrUtil.format(removeUploadFun, upMap));
-                String replaceOlderFile = "" +
-                        "       m.value.{name} =JSON.stringify(m.value.{name}File.map(item=>{\n" +
-                        "              let a = {};\n" +
-                        "              a.name = item.name;\n" +
-                        "              a.url = item.url;\n" +
-                        "              return a;" +
-                        "       }));";
-                replaceOlds.add(StrUtil.format(replaceOlderFile, upMap));
-                replaceFiles.add(StrUtil.format("data.{name}File = JSON.parse(data.{name});", upMap));
-            }
+
             if ("String".equals(field.getType().getSimpleName()) || "Date".equals(field.getType().getSimpleName())) {
                 ms.add(StrUtil.format("{}:''", field.getName()));
             } else {
                 ms.add(StrUtil.format("{}:0", field.getName()));
             }
+
             if (annotation.htmlType() != HtmlTypeEnum.INPUT) {
                 String htmlTypeStr = "";
 
@@ -362,20 +321,10 @@ public class ViewService extends BaseService implements ServiceInterface {
                                 "</el-input>", annotation.value(), StrUtil.lowerFirst(field.getName()));
                         break;
                     case UPLOAD:
-                        //暂时一个页面只考虑一个上传
-                        Map<String, String> uploadMap = new HashMap<>(2);
-                        uploadMap.put("name", field.getName());
-                        uploadMap.put("info", annotation.value());
-                        htmlTypeStr = StrUtil.format(getFromUploadFileStr(0), uploadMap);
-                        ms.add(StrUtil.format("{}File:[]", field.getName()));
-                        break;
                     case FILE:
                         //暂时一个页面只考虑一个上传
-                        Map<String, String> fileMap = new HashMap<>(2);
-                        fileMap.put("name", field.getName());
-                        fileMap.put("info", annotation.value());
-                        htmlTypeStr = StrUtil.format(getFromUploadFileStr(1),fileMap);
-                        ms.add(StrUtil.format("{}File:[]", field.getName()));
+                        htmlTypeStr = getFromUploadFileStr(annotation.htmlType(), field.getName());
+                        importFiles.add(annotation.htmlType() == HtmlTypeEnum.UPLOAD? "import FileImage from \"@/components/file/fileImage.vue\";" : "import File from \"@/components/file/file.vue\";");
                         break;
                     case TEXTEDIT:
                         htmlTypeStr = StrUtil.format( "<Tinymce ref=\"{}\" v-model=\"m.{}\"></Tinymce> ", field.getName(), StrUtil.lowerFirst(field.getName()));
@@ -390,6 +339,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
 
             if (!"BaseEnum".equals(annotation.enums().getSimpleName())) {
+                importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
                 Class<? extends BaseEnum> lclazz = annotation.enums();
                 elFormItems.add(StrUtil.format("<el-form-item label=\"{}\">\n" +
                                 "                    <input-enum\n" +
@@ -418,11 +368,6 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
         //
         String elContent = String.join("\r\n", elFormItems);
-        if (elContent.contains(INPUT_ENUM)) {
-            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";",
-                    "import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";");
-            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//components: { inputEnum },", "components: { inputEnum },");
-        }
         if(!textEdits.isEmpty()){
             List<String> importEdits = new ArrayList<>();
             List<String> replaceEdits = new ArrayList<>();
@@ -434,14 +379,15 @@ public class ViewService extends BaseService implements ServiceInterface {
             tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//create_editor", String.join("\r\n", importEdits));
             //replace_editor
             tplContent =  StrUtil.replaceIgnoreCase(tplContent,"//replace_editor", String.join("\r\n", replaceEdits));
+        }else{
+            tplContent = StrUtil.replaceIgnoreCase(tplContent,"//create_editor", "");
+            tplContent = StrUtil.replaceIgnoreCase(tplContent,"//replace_editor", "");
         }
 
         tplContent = StrUtil.replace(tplContent, "//rule_fields", String.join("\r\n", rulesFields));
         tplContent = StrUtil.replace(tplContent, "#{el-form-item}#", elContent);
-        tplContent = StrUtil.replace(tplContent, "#{data_init}#", String.join(",\r\n", ms));
-        tplContent = StrUtil.replace(tplContent, "//upload_functions", String.join("\r\n", uploadCallback));
-        tplContent = StrUtil.replace(tplContent, "//replace_file", String.join("\r\n", replaceFiles));
-        tplContent = StrUtil.replace(tplContent, "//replace_old", String.join("\r\n", replaceOlds));
+        tplContent = StrUtil.replace(tplContent, "//data_init","{"+ String.join(",\r\n", ms)+"}");
+        tplContent = StrUtil.replace(tplContent, "//import_file", String.join("\r\n", importFiles));
         FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
         this.reWriteConfigJs("add");
     }

@@ -7,7 +7,7 @@
 </el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
-                <el-button type="success" icon="Plus" @click="add">增加</el-button>
+                <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
             </el-form-item>
         </el-form>
         <!-- <div class="c-title">数据列表</div> -->

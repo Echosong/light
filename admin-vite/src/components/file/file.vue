@@ -10,19 +10,13 @@
 <script setup>
 import { useApp } from '@/pinia/modules/app'
 import { ElMessage } from 'element-plus'
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import { defineEmits } from 'vue'
 const emit = defineEmits(["onSuccess","onremove"])
-const { authorization } = useApp() 
-// const action = ref(`http://127.0.0.1:3001/yunwoo/file/upload`)
-const action = ref(`/yunwoo/file/upload`)
+const { authorization } = useApp()
+const action = ref(`/admin/file/upload`)
 const headers =  {'Authorization':authorization}
-const fileList = ref([
-//   {
-//     name: 'food.jpeg',
-//     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-//   }
-])
+const fileList = ref([])
 const props = defineProps({
     file:{
         type:String,
@@ -33,30 +27,19 @@ const props = defineProps({
         default:'image/*'
     }
 })
-
-
-const addFile = (e)=>{
-    if(e){
-        fileList.value = [{
-        name:e,
-        url:e
+onMounted(()=>{
+    fileList.value = [{
+        name:props.file,
+        url:props.file
     }]
-    }else{
-        fileList.value = []
-    }
-    
-}
-
-defineExpose({
-    addFile
 })
 
 const successFn = (file)=>{
    let data = file.data
-    if(file.status === 0){
-        emit('onSuccess',data.fileurl)
+    if(file.code === 200){
+        emit('onSuccess',data.url)
     }else{
-        ElMessage.error(file.statusInfo)
+        ElMessage.error(file.message)
     }
 }
 const removeFn = (file)=>{

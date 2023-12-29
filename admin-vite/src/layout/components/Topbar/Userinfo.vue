@@ -114,9 +114,7 @@ export default defineComponent({
   cursor: pointer;
   display: flex;
   align-items: center;
-  &:hover {
-    background: #f5f5f5;
-  }
+    color: $topHeaderTextColor;
   .el-icon-user {
     font-size: 20px;
     margin-right: 8px;

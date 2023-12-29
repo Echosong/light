@@ -3,6 +3,7 @@ package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
+import com.kdao.light.common.enums.HtmlTypeEnum;
 import com.kdao.light.common.enums.UserRegTypeEnum;
 import com.kdao.light.common.enums.UserStateEnum;
 import lombok.Getter;
@@ -79,10 +80,10 @@ public class KdUser extends  SysBase implements Serializable {
     @AutoEntityField("登录ip")
     private String loginIp;
 
-    @AutoEntityField("身份证正面")
+    @AutoEntityField(value = "身份证正面", htmlType = HtmlTypeEnum.UPLOAD)
     private String frontCard;
 
-    @AutoEntityField("身份证反面")
+    @AutoEntityField(value = "身份证反面", htmlType = HtmlTypeEnum.UPLOAD)
     private String reverseCard;
 
 }

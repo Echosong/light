@@ -142,7 +142,7 @@ export default defineComponent({
       margin-right: 15px;
     }
     &.active {
-      color: #303133;
+      color: $collapseMenuActiveBorderColor;
       background: #f5f5f5;
     }
     .title {

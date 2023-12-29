@@ -25,6 +25,9 @@ public class FileDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull
     private String fileName;
 
+    @Schema(name = "图标")
+    private String ico;
+
     @Schema(defaultValue = "文件扩展名")
     private String extend;
 

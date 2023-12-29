@@ -13,17 +13,25 @@
             </el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
-                <el-button type="success" icon="Plus" @click="add">增加</el-button>
+                <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
             </el-form-item>
         </el-form>
         <!-- <div class="c-title">数据列表</div> -->
-        <el-table :data="dataList" header-cell-class-name="tableBackground" @sort-change="shortChange">
+        <el-table :data="dataList"  @sort-change="shortChange">
             <el-table-column type="selection"></el-table-column>
             <el-table-column label="图标">
                 <template #default="s">
-                    <el-link v-for="item in (s.row.icoFile)" :key="item.name" :href="item.url" type="primary">
-                        {{ item.name }}
-                    </el-link>
+                    <el-image
+                        style="width: 100px; height: 100px"
+                        :src="s.row.ico?s.row.ico.split(',')[0] : '/assets/img/default.png'"
+                        :zoom-rate="1.2"
+                        :max-scale="7"
+                        :min-scale="0.2"
+                        :preview-src-list="s.row.ico?s.row.ico.split(',') : ['/assets/img/default.png']"
+                        :initial-index="4"
+                        fit="cover"
+                        preview-teleported="true"
+                    />
                 </template>
             </el-table-column>
             <el-table-column label="文件名" prop="fileName"></el-table-column>
