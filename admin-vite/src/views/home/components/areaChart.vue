@@ -37,7 +37,7 @@ function initChart() {
     // 把配置和数据放这里
     chart.setOption({
         title: {
-            text: '当日保费统计'
+            text: '当日交易统计'
         },
 
         tooltip: {
@@ -47,7 +47,7 @@ function initChart() {
 
         series: [
             {
-                name: '当日保费统计',
+                name: '当日交易额统计',
                 type: 'pie',
                 center: ['50%', '50%'],
                 //roseType: 'area',

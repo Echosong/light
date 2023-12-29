@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import {ElMessage, ElMessageBox} from 'element-plus'
 
 export default class sa {
-   static get(url, params) {
+   static get(url, params={}) {
     return request({
       url: url,
       method: 'get',

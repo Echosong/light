@@ -137,7 +137,7 @@ public class PermissionController extends BaseController {
      * @param permissionIds
      * @param roleId
      */
-    @PostMapping("/updateRolePermissions/{roleId}")
+    @PutMapping("/updateRolePermissions/{roleId}")
     @Operation(summary = "更新某个角色的权限信息")
     public void updateRolePermissions(@RequestBody List<Integer> permissionIds, @PathVariable Integer roleId){
         List<KdRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Arrays.asList(roleId));

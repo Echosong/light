@@ -44,7 +44,7 @@ sortedKeys.forEach(key => {
     // 把配置和数据放这里
     charts.setOption({
         title: {
-            text: '周保单统计矩形图'
+            text: '周交易统计矩形图'
         },
         grid: {
             left: '0%',

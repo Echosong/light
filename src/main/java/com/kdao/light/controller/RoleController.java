@@ -52,7 +52,7 @@ public class RoleController extends BaseController{
      * 一次性获取所有角色，角色不会有很多，所以不需要分页
      * @return
      */
-    @PutMapping("/listPage")
+    @PutMapping("/list")
     @Operation(summary = "一次性获取所有角色，角色不会有很多，所以不需要分页")
     public List<KdRole> list(){
         return roleRepository.findAll();

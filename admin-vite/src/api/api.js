@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export const adminBack = params => {
   return request({
-    url: `/back`,
+    url: `/index`,
     method: 'get',
     params
   })
@@ -57,5 +57,12 @@ export function saveConfig(params) {
     url: `/config/save`,
     method: 'post',
     data: params
+  })
+}
+
+export function roleList(){
+  return request({
+    url: `/role/list`,
+    method: 'get',
   })
 }

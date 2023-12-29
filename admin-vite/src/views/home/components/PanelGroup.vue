@@ -20,9 +20,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        日保单数
+                        日交易数
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['日保单数'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['日交易数'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -33,9 +33,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        周保单数
+                        周交易数
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['周保单数'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['周交易数'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -46,9 +46,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        月保单数
+                        月交易数
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['月保单数'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['月交易数'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -74,9 +74,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        日保费
+                        日交易费
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['日保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['日保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -87,9 +87,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        周保费
+                        周交易费
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['周保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['周保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -100,9 +100,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        月保费
+                        月交易费
                     </div>
-                    <CountTo v-if="props.numList['保单统计']" :start-val="0" :end-val="props.numList['保单统计']['月保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['月保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>

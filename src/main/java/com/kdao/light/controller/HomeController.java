@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,16 +64,11 @@ public class HomeController extends BaseController {
      *
      * @return 项目列表
      */
-    @GetMapping("/")
+    @GetMapping("/index")
     @Operation(summary = "获取所有项目信息")
     @NoPermission
-    public Page<KdPermission> getList() {
-        PageHelper.startPage(1, 10);
-
-       return PageUtil.getPage(permissionMapper::listPage, new PermissionQueryDTO());
-
-
-
+    public List<Map<String, Object>> index() {
+        return new ArrayList<>();
     }
 
     /**

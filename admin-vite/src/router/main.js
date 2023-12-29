@@ -3,6 +3,7 @@ export default [
 {perms: "file-list", view: () => import('@/views/file/list.vue')},
 {perms: "article-add", view: () => import('@/views/article/add.vue')},
 {perms: "config-add", view: () => import('@/views/config/add.vue')},
+{perms: "sys-config", view: () => import('@/views/set/set.vue')},
 {perms: "permission-list", view: () => import('@/views/permission/list.vue')},
 {perms: "log-list", view: () => import('@/views/log/list.vue')},
 {perms: "product-list", view: () => import('@/views/product/list.vue')},

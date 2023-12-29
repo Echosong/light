@@ -1,112 +1,80 @@
 <template>
     <div class="app-container">
-        <!-- 参数栏 -->
         <el-form :inline="true" size="small" class="demo-form-inline">
-            <el-form-item label="权限名称：">
- <el-input v-model="p.name" placeholder="模糊查询"></el-input>
-</el-form-item>
             <el-form-item style="min-width: 0px">
-                <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
-                <el-button type="success" icon="Plus" @click="add">增加</el-button>
+                <el-button type="success" icon="Plus" @click="addFromPop({},{parentId:0,id:0})">增加</el-button>
             </el-form-item>
         </el-form>
-        <!-- <div class="c-title">数据列表</div> -->
-        <el-table :data="dataList" header-cell-class-name="tableBackground" @sort-change="shortChange">
-            <el-table-column type="selection"></el-table-column>
-                   <el-table-column  label="权限名称"   prop="name" ></el-table-column>
-                   <el-table-column  label="权限描述"   prop="description" ></el-table-column>
-                   <el-table-column  label="访问路径"   prop="url" ></el-table-column>
-                   <el-table-column  label="权限标识"   prop="perms" ></el-table-column>
-                   <el-table-column  label="父级id"   prop="parentId" ></el-table-column>
-                   <el-table-column  label="类型"   prop="type" ></el-table-column>
-                   <el-table-column  label="排序"   prop="sort" ></el-table-column>
-                   <el-table-column  label="图标"   prop="icon" ></el-table-column>
-                   <el-table-column  label="展现"   prop="show" ></el-table-column>
-            <el-table-column prop="address" label="操作" width="220px">
-                <template #default="s">
-                    <el-button link class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改
-                    </el-button>
-                    <el-button link class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除
-                    </el-button>
+
+        <el-table header-cell-class-name="tableBackground" :data="list" style="width: 100%" border row-key="id"
+                  :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+            <el-table-column  width="160" label="id" >
+                <template  #default="scope">
+                    <span>{{ scope.row.id }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="导航名称" >
+                <template  #default="scope">
+                    <div class="flexsAliCen">
+                        <!-- <component style="width: 16px;height: 16px;" class="xxx" :is="scope.row.icon"></component> -->
+                        <span style="margin-left: 6px;">{{ scope.row.name }}</span>
+                    </div>
+                </template>
+            </el-table-column>
+
+            <!-- <el-table-column label="别名">
+                <template  #default="scope">
+                    <span>{{ scope.row.url }}</span>
+                </template>
+            </el-table-column> -->
+            <el-table-column label="权限码" >
+                <template  #default="scope">
+                    <span>{{ scope.row.perms }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="描述">
+                <template  #default="scope">
+                    <span>{{ scope.row.description }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column width="280"  label="操作">
+                <template  #default="scope">
+                    <el-button  link @click="addFromPop(scope.row,{parentId:scope.row.id,id:0})" :icon="Plus"  type="primary" size="small">添加子级</el-button>
+                    <el-button  link @click="addFromPop(scope.row,{parentId:scope.row.parentId,id:scope.row.id})" :icon="Edit"  type="warning" size="small">修改</el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <!-- 分页 -->
-        <div class="pages">
-            <el-pagination
-                background
-                layout="total, prev, pager, next, sizes, jumper"
-                v-model:current-page="p.page"
-                v-model:page-size="p.pageSize"
-                :total="dataCount"
-                :page-sizes="[1, 10, 20, 30, 40, 50, 100]"
-                @current-change="f5(true)"
-                @size-change="f5(true)">
-            </el-pagination>
-        </div>
     </div>
-    <!-- 增改组件 -->
-    <add-or-update ref="addUpdate"></add-or-update>
+    <AddPermission @onsuccess="listFn" ref="addPermissionRef"></AddPermission>
+
 </template>
-
 <script setup>
-import addOrUpdate from './add.vue';
-import {inject, ref, onMounted} from "vue";
 
-const p = ref({pageSize:10,page:1, name:''})
-;
-const dataCount = ref(0);
-const dataList = ref([]);
-const sa = inject('sa')
-const addUpdate = ref()
+import { Edit, Delete, Plus } from '@element-plus/icons-vue';
+import { onMounted, ref } from 'vue'
+import AddPermission from './components/addPermission.vue';
+
+import { handleTree } from '@/utils';
+import { permission } from '@/hooks/permission';
+import sa from "@/utils/sa";
+
 onMounted(() => {
-    f5()
+    listFn()
 })
-
-// 数据刷新
-function f5() {
-    sa.put("/permission/listPage", p.value).then(res => {
-        dataList.value = res.data.content.map((item) => {
-            
-            return item;
-        });
-        dataCount.value = res.data.totalElements;
-    });
+const addPermissionRef = ref(null)
+function addFromPop(obj,editObj) {
+    addPermissionRef.value.dialogVisible = true
+    if (obj) addPermissionRef.value.addFormFn(obj,editObj)
 }
-
-// 删除
-function del(data) {
-    sa.confirm('是否删除，此操作不可撤销', function () {
-        sa.delete("/permission/delete/" + data.id).then(res => {
-            console.log(res)
-            sa.arrayDelete(dataList.value, data);
-            sa.ok(res.message);
-        });
-    }.bind(this));
+const list = ref([])
+async function listFn() {
+    const { data } = await sa.get('/permission/all')
+    list.value = handleTree(data)
 }
-
-function shortChange(e) {
-    console.log('排序接受', e)
-    p.value.direction = e.order === 'ascending';
-    p.value.sortCol = e.prop;
-    f5();
-}
-
-//更新
-function update(row) {
-    console.log(addUpdate.value)
-    addUpdate.value.open(row);
-}
-
-//添加
-function add() {
-    addUpdate.value.open(0);
-}
-
-defineExpose({
-    f5
-})
 </script>
 
 <style>
+.tableBackground {
+    background: red;
+}
 </style>
