@@ -2,28 +2,19 @@ package com.kdao.light.common.dto.user;
 
 import com.kdao.light.common.annotation.ApiModelPropertyEnum;
 import com.kdao.light.common.component.IDictionaryObject;
-import com.kdao.light.common.dto.PageInfo;
 import com.kdao.light.common.dto.SysBaseDTO;
-import com.kdao.light.common.enums.FileTypeEnum;
+import com.kdao.light.common.enums.UserRegTypeEnum;
+import com.kdao.light.common.enums.UserSexEnum;
+import com.kdao.light.common.enums.UserStateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
-
-import lombok.EqualsAndHashCode;
-
-import java.math.BigDecimal;
-import java.util.*;
-
-import com.kdao.light.common.enums.UserSexEnum;
-import com.kdao.light.common.enums.UserRegTypeEnum;
-import com.kdao.light.common.enums.UserStateEnum;
 
 /**
  * <p>Title:用户 </p >

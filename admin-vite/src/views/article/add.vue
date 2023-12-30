@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="700px">
+    <Dialog v-model="isShow" :title="title" maxHeight="700px" maxWidth="80%">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
             <el-form-item label="标题：" prop="title">

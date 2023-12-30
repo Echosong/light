@@ -30,6 +30,8 @@ export const useMenus = defineStore('menu', () => {
         : parentPath
   }
 
+  const permissionList= ref([]);
+
   function getRoute(item) {
     return {
       path: generateUrl('/' + (item.perms || "")),
@@ -48,8 +50,8 @@ export const useMenus = defineStore('menu', () => {
     const parentRoutes = ajaxRoutes.filter(item => item.parentId === 0);
     let i = 0;
     parentRoutes.forEach(item => {
-      if(!item.perms || item.perms.length < 3){
-        item.perms =  ''+i;
+      if (!item.perms || item.perms.length < 3) {
+        item.perms = '' + i;
       }
       i++;
       const route = getRoute(item)
@@ -58,7 +60,7 @@ export const useMenus = defineStore('menu', () => {
       sonRoutes.forEach(son => {
         const sonRoute = getRoute(son)
         var target = targetRoutes.find(t => t.perms === son.perms);
-        if(target) {
+        if (target) {
           sonRoute.component = target.view;
           route.children.push(sonRoute)
         }
@@ -102,6 +104,7 @@ export const useMenus = defineStore('menu', () => {
     // // 从后台获取菜单
     const {userinfo} = useAccount()
     const {data} = await GetMenus({userId: userinfo.id})
+    permissionList.value = data;
     let dataRoutes = handleTree(data);
     // 过滤出需要添加的动态路由
     try {
@@ -111,7 +114,7 @@ export const useMenus = defineStore('menu', () => {
       const menus = getFilterMenus([...fixedRoutes, ...filterRoutes])
       console.log(66666666, menus)
       setMenus(menus)
-    }catch (e) {
+    } catch (e) {
       console.log(e)
     }
   }
@@ -119,5 +122,6 @@ export const useMenus = defineStore('menu', () => {
     menus,
     setMenus,
     generateMenus,
+    permissionList
   }
 })

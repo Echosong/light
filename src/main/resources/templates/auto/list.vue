@@ -13,8 +13,9 @@
             #{el-table-column}#
             <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
                 <template #default="s">
-                    <el-button link  type="primary"  @click="update(s.row)">修改</el-button>
-                    <el-button link  type="danger" @click="del(s.row)">删除</el-button>
+                    <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
+                    <el-button link  v-permission="" type="primary"  @click="update(s.row)">修改</el-button>
+                    <el-button link  v-permission=""  type="danger" @click="del(s.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>

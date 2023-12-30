@@ -34,8 +34,8 @@
             <el-table-column label="登录ip" prop="loginIp"></el-table-column>
             <el-table-column prop="address" label="操作" width="120px" fixed="right">
                 <template #default="s">
-                    <el-button link type="primary" @click="update(s.row)">修改</el-button>
-                    <el-button link type="danger" @click="del(s.row)">删除</el-button>
+                    <el-button link type="primary" v-permission="" @click="update(s.row)">修改</el-button>
+                    <el-button link type="danger" v-permission="'user-delete'" @click="del(s.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>

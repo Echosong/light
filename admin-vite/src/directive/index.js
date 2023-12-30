@@ -32,16 +32,15 @@
 
  */
 
-import { useAccount } from '@/pinia/modules/account'
+import { useMenus } from '@/pinia/modules/menu'
 
 export const Permission = app => {
   app.directive('permission', {
     mounted: function(el, binding) {
-      const { permissionList } = useAccount()
-
+      const { permissionList } = useMenus()
       if (
         binding.value &&
-        permissionList.every(item => item !== binding.value)
+        permissionList.every(item => item.perms !== binding.value)
       ) {
         // 移除组件
         el.parentNode.removeChild(el)

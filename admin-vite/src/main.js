@@ -80,7 +80,10 @@ Object.entries(Components).forEach(([key, component]) => {
 
 // 注册自定义指令
 import * as Directives from '@/directive'
-Object.values(Directives).forEach(fn => fn(app))
+Object.values(Directives).forEach(fn => {
+  fn(app)
+
+})
 
 
 // 错误日志

@@ -22,7 +22,7 @@ function change(){
 </script>
 
 <template>
-    <el-switch  v-model="switchValue" @change="change"></el-switch>
+    <el-switch size="small"  v-model="switchValue" @change="change"></el-switch>
 </template>
 
 <style scoped lang="scss">
