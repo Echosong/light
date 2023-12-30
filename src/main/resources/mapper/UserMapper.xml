@@ -4,7 +4,12 @@
     <select id="listPage" resultType="com.kdao.light.entity.KdUser">
         select *
         from kd_user where 1=1
-                 
+        <if test="username != null ">
+            and username like CONCAT('%',#{username},'%')
+        </if>
+        <if test="name != null ">
+            and name like CONCAT('%',#{name},'%')
+        </if>
     </select>
 
 </mapper>

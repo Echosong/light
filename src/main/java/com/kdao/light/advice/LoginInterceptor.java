@@ -1,7 +1,6 @@
 package com.kdao.light.advice;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.spring.SpringUtil;
 import com.kdao.light.common.annotation.NoPermission;
 import com.kdao.light.common.exception.BaseKnownException;
@@ -42,9 +41,13 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
             String userId = StpUtil.getLoginId().toString();
-            if (redisTemplate.opsForValue().get(userId) == null) {
+            KdUser user = null;
+            try {
+                user = redisTemplate.opsForValue().get(userId);
+            }catch (Exception ignored){}
+            if (Objects.isNull(user)) {
                 UserRepository userRepository = SpringUtil.getBean(UserRepository.class);
-                KdUser user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
+                user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
                 redisTemplate.opsForValue().set(userId, user);
             }
         }

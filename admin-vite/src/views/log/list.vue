@@ -2,7 +2,12 @@
     <div class="app-container">
         <!-- 参数栏 -->
         <el-form :inline="true" size="small" class="demo-form-inline">
-            #{el-form-item}#
+            <el-form-item label="描述：">
+ <el-input v-model="p.description" placeholder="模糊查询"></el-input>
+</el-form-item>
+<el-form-item label="日志类型：">
+ <el-input v-model="p.logType" placeholder="模糊查询"></el-input>
+</el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
                 <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
@@ -10,8 +15,15 @@
         </el-form>
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" header-cell-class-name="tableBackground" @sort-change="shortChange">
-            #{el-table-column}#
-            <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
+            <el-table-column type="selection"></el-table-column>
+  <el-table-column  label="请求ip"   prop="requestIp" ></el-table-column>
+  <el-table-column  label="地址"   prop="address" ></el-table-column>
+  <el-table-column  label="描述"   prop="description" ></el-table-column>
+  <el-table-column  label="浏览器"  :show-overflow-tooltip="true" prop="browser" ></el-table-column>
+  <el-table-column  label="请求耗时"   prop="time" ></el-table-column>
+  <el-table-column  label="方法名"   prop="method" ></el-table-column>
+  <el-table-column  label="日志类型"   prop="logType" ></el-table-column>
+            <el-table-column prop="address" label="操作" width="120px" >
                 <template #default="s">
                     <el-button link  type="primary"  @click="update(s.row)">修改</el-button>
                     <el-button link  type="danger" @click="del(s.row)">删除</el-button>
@@ -29,9 +41,9 @@
 import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
-//importFiles
 
-const p = ref(#{queryPageParams}#)
+
+const p = ref({pageSize:10,page:1, total: 0, description:'',logType:''})
 const dataList = ref([]);
 const sa = inject('sa')
 const addUpdate = ref()
@@ -41,7 +53,7 @@ onMounted(() => {
 
 // 数据刷新
 async function f5() {
-    const {data} = await sa.put("/#{EntityName}#/listPage", p.value);
+    const {data} = await sa.put("/log/listPage", p.value);
     dataList.value = data.content.map((item) => {
         return item;
     });
@@ -51,7 +63,7 @@ async function f5() {
 // 删除
 function del(data) {
     sa.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await sa.delete("/#{EntityName}#/delete/" + data.id);
+        let res = await sa.delete("/log/delete/" + data.id);
         console.log(res)
         sa.arrayDelete(dataList.value, data);
         sa.ok(res.message);

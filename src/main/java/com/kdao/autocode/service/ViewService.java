@@ -38,6 +38,8 @@ public class ViewService extends BaseService implements ServiceInterface {
     }
 
     String vuePath = "";
+    //表格最大列数大于等于12 时候，操作需要固定
+     final int maxColumnCount = 10;
 
     @Override
     public void start() {
@@ -107,7 +109,7 @@ public class ViewService extends BaseService implements ServiceInterface {
 
         //追加一个id编号
         tableColumns.add("<el-table-column type=\"selection\"></el-table-column>");
-
+        int columnCount = 1;
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
                 continue;
@@ -124,6 +126,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
             if (!field.isAnnotationPresent(NotinListDTO.class)) {
                 tableColumns.add(this.elTableColumn(field, autoEntityField));
+                columnCount++;
             }
             if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
                 importFiles.add("import Preview from \"@/components/file/preview.vue\";");
@@ -148,6 +151,11 @@ public class ViewService extends BaseService implements ServiceInterface {
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";",
                     "import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";");
             tplContent = StrUtil.replaceIgnoreCase(tplContent, "//inputEnum,", "inputEnum,");
+        }
+        if(columnCount >= maxColumnCount){
+            tplContent = StrUtil.replaceIgnoreCase(tplContent,"#{fixed}#", "fixed=\"right\"");
+        }else{
+            tplContent = StrUtil.replaceIgnoreCase(tplContent,"#{fixed}#","");
         }
 
         tplContent = StrUtil.replace(tplContent, "#{queryPageParams}#", queryParam);
@@ -201,7 +209,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                          </template>
                      </el-table-column>
                     """;
-            returnValue =  StrUtil.format(radioTemplate, autoEntityField.value(), typeName);
+            returnValue =  StrUtil.format(radioTemplate, autoEntityField.value(), field.getName());
         } else {
             returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);

@@ -8,21 +8,21 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.SmUtil;
 import com.kdao.light.common.dto.user.UserDTO;
 import com.kdao.light.common.dto.user.UserQueryDTO;
+import com.kdao.light.common.utils.PageUtil;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.common.dto.user.LoginUserDTO;
 import com.kdao.light.common.dto.user.UserCacheDTO;
-import com.kdao.light.common.dto.user.UserDTO;
-import com.kdao.light.common.dto.user.UserQueryDTO;
 import com.kdao.light.common.enums.UserStateEnum;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdRole;
-import com.kdao.light.entity.KdUser;
 import com.kdao.light.entity.KdUserRole;
+import com.kdao.light.mapper.UserMapper;
 import com.kdao.light.repository.RoleRepository;
 import com.kdao.light.repository.UserRepository;
 import com.kdao.light.repository.UserRoleRepository;
 import com.kdao.light.service.UserService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -54,12 +54,14 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final RoleRepository roleRepository;
 
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, RoleRepository roleRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.roleRepository = roleRepository;
+        this.userMapper = userMapper;
     }
 
 
@@ -184,10 +186,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @SuppressWarnings("All")
     public Page<UserDTO> list(UserQueryDTO userQueryDTO) {
-        Page<KdUser> allByUsernameContaining = userRepository.findAllByUsernameContaining(userQueryDTO.getUsername(),
-                userQueryDTO.getStartDate(),
-                userQueryDTO.getEndDate(),
-                userQueryDTO.getRequest());
+        Page<KdUser> allByUsernameContaining = PageUtil.getPage(userMapper::listPage, userQueryDTO);
         Page<UserDTO> userPage = DtoMapper.convertPage(allByUsernameContaining, UserDTO.class);
 
         //拿角色名称

@@ -2,7 +2,9 @@
     <div class="app-container">
         <!-- 参数栏 -->
         <el-form :inline="true" size="small" class="demo-form-inline">
-            #{el-form-item}#
+            <el-form-item label="标题：">
+ <el-input v-model="p.title" placeholder="模糊查询"></el-input>
+</el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
                 <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
@@ -10,8 +12,24 @@
         </el-form>
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" header-cell-class-name="tableBackground" @sort-change="shortChange">
-            #{el-table-column}#
-            <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
+            <el-table-column type="selection"></el-table-column>
+  <el-table-column  label="标题"   prop="title" ></el-table-column>
+ <el-table-column  label="封面图片"   >
+     <template #default="s">
+         <Preview :imgUrl="s.row.imgUrl"></Preview>
+     </template>
+ </el-table-column>
+
+  <el-table-column  label="类型"   prop="typeEnum" ></el-table-column>
+  <el-table-column  label="内容"  :show-overflow-tooltip="true" prop="content" ></el-table-column>
+ <el-table-column  label="附件"   >
+     <template #default="s">
+         <Link :fileUrl="s.row.fileUrl"></Link>
+     </template>
+ </el-table-column>
+
+  <el-table-column  label="项目id"   prop="projectId" ></el-table-column>
+            <el-table-column prop="address" label="操作" width="120px" >
                 <template #default="s">
                     <el-button link  type="primary"  @click="update(s.row)">修改</el-button>
                     <el-button link  type="danger" @click="del(s.row)">删除</el-button>
@@ -29,9 +47,10 @@
 import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
-//importFiles
+import Link from "@/components/file/link.vue";
+import Preview from "@/components/file/preview.vue";
 
-const p = ref(#{queryPageParams}#)
+const p = ref({pageSize:10,page:1, total: 0, title:''})
 const dataList = ref([]);
 const sa = inject('sa')
 const addUpdate = ref()
@@ -41,7 +60,7 @@ onMounted(() => {
 
 // 数据刷新
 async function f5() {
-    const {data} = await sa.put("/#{EntityName}#/listPage", p.value);
+    const {data} = await sa.put("/article/listPage", p.value);
     dataList.value = data.content.map((item) => {
         return item;
     });
@@ -51,7 +70,7 @@ async function f5() {
 // 删除
 function del(data) {
     sa.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await sa.delete("/#{EntityName}#/delete/" + data.id);
+        let res = await sa.delete("/article/delete/" + data.id);
         console.log(res)
         sa.arrayDelete(dataList.value, data);
         sa.ok(res.message);

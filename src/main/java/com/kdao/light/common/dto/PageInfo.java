@@ -1,5 +1,6 @@
 package com.kdao.light.common.dto;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -31,15 +32,18 @@ public class PageInfo {
     public PageInfo() {
     }
 
+
     public PageInfo(int page, int pageSize, boolean sort, String sortCol) {
         this.page = page;
         this.pageSize = pageSize;
         this.sort = sort;
-        this.sortCol = sortCol;
+        //注意，这里需要去掉Enum 结尾的
+        this.sortCol = StrUtil.subBefore(sortCol, "Enum", true);
     }
 
     @JsonIgnore
     public PageRequest getRequest() {
+        this.sortCol = StrUtil.subBefore(sortCol, "Enum", true);
         return this.sort ? PageRequest.of(this.page -1, this.pageSize, Sort.by(this.direction ? Sort.Direction.ASC : Sort.Direction.DESC, new String[]{this.sortCol})) : PageRequest.of(this.page, this.pageSize);
     }
 }

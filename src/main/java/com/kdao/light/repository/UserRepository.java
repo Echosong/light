@@ -23,17 +23,6 @@ import java.util.Optional;
 @Repository
 @SuppressWarnings("ALL")
 public interface UserRepository extends JpaRepository<KdUser, Integer> {
-    /**
-     * 分页查询
-     *
-     * @param Username 账号
-     * @param pageable 分页信息
-     * @return
-     */
-    @Query(nativeQuery = true, value = "select * from kd_user where state != 3 and if(?1 !='', INSTR(username ,?1), true)" +
-            " and  if(IFNULL(?2,1)=1,true , create_time >= ?2)" +
-            " and  if(IFNULL(?3,1) =1,true, create_time <= ?3) ")
-    Page<KdUser> findAllByUsernameContaining(String Username, LocalDate startDate, LocalDate endDate, Pageable pageable);
 
 
     /**

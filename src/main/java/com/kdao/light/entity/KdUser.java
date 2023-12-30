@@ -1,10 +1,7 @@
 package com.kdao.light.entity;
 
 
-import com.kdao.autocode.anno.AutoEntity;
-import com.kdao.autocode.anno.AutoEntityField;
-import com.kdao.autocode.anno.AutoSorted;
-import com.kdao.autocode.anno.NotinListDTO;
+import com.kdao.autocode.anno.*;
 import com.kdao.light.common.enums.HtmlTypeEnum;
 import com.kdao.light.common.enums.UserRegTypeEnum;
 import com.kdao.light.common.enums.UserSexEnum;
@@ -42,6 +39,7 @@ public class KdUser extends  SysBase implements Serializable {
     @AutoEntityField("账号")
     @NotNull
     @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
+    @InQueryDTO
     private String username;
 
     @Length(min = 6, message = "密码必须大于等于6位")
@@ -70,6 +68,7 @@ public class KdUser extends  SysBase implements Serializable {
 
     @AutoEntityField("姓名")
     @Length(min = 2, message = "姓名必须大于两个字符")
+    @InQueryDTO
     private String name;
 
     @AutoEntityField(value = "状态", notes = "0,1", enums = UserStateEnum.class, htmlType = HtmlTypeEnum.RADIO)

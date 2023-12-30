@@ -10,10 +10,7 @@ import com.kdao.light.common.annotation.Log;
 import com.kdao.light.common.annotation.NoRepeatSubmit;
 import com.kdao.light.common.dto.file.FileDTO;
 import com.kdao.light.common.dto.file.FileQueryDTO;
-import com.kdao.light.common.dto.user.LoginUserDTO;
-import com.kdao.light.common.dto.user.UserDTO;
-import com.kdao.light.common.dto.user.UserKeyDTO;
-import com.kdao.light.common.dto.user.UserQueryDTO;
+import com.kdao.light.common.dto.user.*;
 import com.kdao.light.common.enums.UserStateEnum;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdFile;
@@ -93,8 +90,8 @@ public class UserController extends BaseController {
      */
     @PutMapping("/listPage")
     @Operation(summary = "分页查询用户")
-    public Page<UserDTO> list(@RequestBody UserQueryDTO userQueryDTO) {
-        return userService.list(userQueryDTO);
+    public Page<UserListDTO> list(@RequestBody UserQueryDTO userQueryDTO) {
+        return  DtoMapper.convertPage(userService.list(userQueryDTO), UserListDTO.class);
     }
 
     /**

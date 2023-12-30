@@ -1,8 +1,13 @@
 package com.kdao.light.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.kdao.light.common.dto.article.ArticleQueryDTO;
+import com.kdao.light.common.dto.user.UserQueryDTO;
+import com.kdao.light.entity.KdArticle;
 import com.kdao.light.entity.KdUser;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>Title: light</p >
@@ -15,5 +20,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<KdUser> {
-
+    List<KdUser> listPage(UserQueryDTO queryDTO);
 }
