@@ -3,9 +3,11 @@ package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
+import com.kdao.autocode.anno.AutoSorted;
 import com.kdao.autocode.anno.NotinListDTO;
 import com.kdao.light.common.enums.HtmlTypeEnum;
 import com.kdao.light.common.enums.UserRegTypeEnum;
+import com.kdao.light.common.enums.UserSexEnum;
 import com.kdao.light.common.enums.UserStateEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,8 +49,9 @@ public class KdUser extends  SysBase implements Serializable {
     @NotinListDTO
     private String password;
 
-    @AutoEntityField("性别")
+    @AutoEntityField(value = "性别", enums = UserSexEnum.class)
     @Range(min = 0, max = 1)
+    @AutoSorted
     private Integer sex;
 
     @AutoEntityField("身高")
@@ -62,14 +65,14 @@ public class KdUser extends  SysBase implements Serializable {
     private String nick;
 
     @AutoEntityField(value = "注册方式", notes = "0,1,2", enums = UserRegTypeEnum.class)
-    private String type;
+    private Integer type;
 
 
     @AutoEntityField("姓名")
     @Length(min = 2, message = "姓名必须大于两个字符")
     private String name;
 
-    @AutoEntityField(value = "状态", notes = "0,1", enums = UserStateEnum.class)
+    @AutoEntityField(value = "状态", notes = "0,1", enums = UserStateEnum.class, htmlType = HtmlTypeEnum.RADIO)
     private Integer state = 0 ;
 
     @Email
@@ -89,5 +92,9 @@ public class KdUser extends  SysBase implements Serializable {
     @NotinListDTO
     @AutoEntityField(value = "身份证反面", htmlType = HtmlTypeEnum.UPLOAD)
     private String reverseCard;
+
+    @AutoEntityField(value = "个人简介", htmlType = HtmlTypeEnum.TEXTAREA)
+    @NotinListDTO
+    private String info;
 
 }

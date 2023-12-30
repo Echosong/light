@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import {ElMessage, ElMessageBox} from 'element-plus'
+import {ElMessage, ElMessageBox, ElLoading } from 'element-plus'
 
 export default class sa {
    static get(url, params={}) {
@@ -72,15 +72,11 @@ export default class sa {
   }
 
   static loading(msg) {
-    ElMessageBox.loading(msg, {
-      lock: true,
-      text: '加载中',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-    });
+    var loading = ElLoading.service({text: msg});
     setTimeout(() => {
-      ElMessageBox.close();
+      loading.close();
     }, 10000);
+    return loading;
   }
 
   static arrayDelete(arr, item){

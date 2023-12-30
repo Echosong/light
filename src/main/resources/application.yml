@@ -27,7 +27,7 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: _sys31UC
-    database: 9
+    database: 8
 server:
   port: 8090
 #文件上传操作

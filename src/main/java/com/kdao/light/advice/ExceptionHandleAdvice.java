@@ -46,7 +46,7 @@ public class ExceptionHandleAdvice {
         }
         if (e instanceof SaTokenException) {
             //登录或者无权限
-            return ResultVO.error(3000, e.getMessage());
+            return ResultVO.error(401, e.getMessage());
         }
         //自定义抛异常
         if(e instanceof BaseKnownException){

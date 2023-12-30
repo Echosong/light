@@ -70,6 +70,19 @@ export default defineComponent({
                     trigger: 'blur',
                 },
             ],
+            password: [
+                {
+                    required: true,
+                    message: ctx.$t('login.rules-password'),
+                    trigger: 'blur',
+                },
+                {
+                    min: 6,
+                    max: 16,
+                    message: "密码长度必须在6-16位",
+                    trigger: 'blur',
+                },
+            ],
         })
         const state = reactive({
             model: {
@@ -96,6 +109,8 @@ export default defineComponent({
                             const response = await Login(state.model);
                             data = response&&response.data || "";
                         }catch (e) {
+                            state.model.password = "";
+                            state.loading = false;
                             return;
                         }
                         setItem("USERNAME", state.model.username)
@@ -178,18 +193,6 @@ export default defineComponent({
     right: 20px;
     top: 20px;
 
-    :deep() {
-        .change-lang {
-            height: 24px;
 
-            &:hover {
-                background: none;
-            }
-
-            .icon {
-                color: #fff;
-            }
-        }
-    }
 }
 </style>

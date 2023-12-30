@@ -81,5 +81,5 @@ public class UserDTO extends SysBaseDTO implements  IDictionaryObject {
     private String roleName;
 
    @Schema(defaultValue = "0 线下注册 1 微信注册， 2 支付宝小程序， 3 app")
-    private String type ;
+    private Integer type ;
 }

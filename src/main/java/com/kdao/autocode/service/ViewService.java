@@ -129,6 +129,8 @@ public class ViewService extends BaseService implements ServiceInterface {
                 importFiles.add("import Preview from \"@/components/file/preview.vue\";");
             }else if (autoEntityField.htmlType() == HtmlTypeEnum.FILE) {
                 importFiles.add("import Link from \"@/components/file/link.vue\";");
+            }else if(autoEntityField.htmlType() == HtmlTypeEnum.RADIO){
+                importFiles.add("import ElSwitch from \"@/components/ESwitch/ESwitch.vue\";");
             }
         }
         PageInfo pageInfo = new PageInfo();
@@ -191,7 +193,16 @@ public class ViewService extends BaseService implements ServiceInterface {
                      </el-table-column>
                     """;
             returnValue =  StrUtil.format(fileTemplate, autoEntityField.value(), typeName);
-        }else {
+        }else if(autoEntityField.htmlType() == HtmlTypeEnum.RADIO){
+            String radioTemplate = """
+                     <el-table-column  label="{}"  #{sortable}# >
+                         <template #default="s">
+                              <ElSwitch v-model="s.row.{}" @change="updateSwitch(s.row)"></ElSwitch>
+                         </template>
+                     </el-table-column>
+                    """;
+            returnValue =  StrUtil.format(radioTemplate, autoEntityField.value(), typeName);
+        } else {
             returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
                     autoEntityField.value(), typeName);
         }

@@ -1,5 +1,5 @@
 <template>
-    <el-dialog append-to-body v-model="dialogVisible" title="个人中心" width="30%">
+    <Dialog v-model="dialogVisible" title="个人中心" >
         <div>
             <el-form label-position="right" label-width="100" :model="formLabelAlign" ref="ruleFormRef"
                 style="max-width: 70%">
@@ -72,13 +72,17 @@
                 ]" label="确认密码">
                     <el-input type="password" v-model="formLabelAlign.rePassword" placeholder="确认密码" />
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm(ruleFormRef)">提交</el-button>
-                    <el-button @click="dialogVisible = false">返回</el-button>
-                </el-form-item>
             </el-form>
         </div>
-    </el-dialog>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button type="primary" @click="submitForm(ruleFormRef)">
+                    确定
+                </el-button>
+                <el-button @click="dialogVisible = false">取消</el-button>
+            </span>
+        </template>
+    </Dialog>
 </template>
 <script>
 export default {
@@ -88,11 +92,9 @@ export default {
 <script setup>
 import { updatePassword,listByUser } from '@/api/api';
 import { useAccount } from '@/pinia/modules/account';
-
-// import useCloseTag from '@/hooks/useCloseTag'
-// import { statusmark } from '@/pinia/modules/statusmark'
 import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
+import Dialog from "@/components/dialog/index.vue";
 
 
 
@@ -122,6 +124,7 @@ const formLabelAlign = reactive({
 
 async function addForm(obj) {
     const { userinfo } = useAccount()
+
     formLabelAlign.id = userinfo.id
     formLabelAlign.username = userinfo.username
     formLabelAlign.mobile = userinfo.mobile
@@ -146,15 +149,6 @@ const validatePass = (rule, value, callback) => {
         callback()
     }
 }
-
-// const validatePassPay = (rule, value, callback) => {
-//     if ((formLabelAlign.operatepassword || value) && value !== formLabelAlign.loginpassword) {
-//         callback(new Error("与支付密码不一样!"))
-//     } else {
-//         callback()
-//     }
-// }
-
 const submitForm = async (formEl) => {
     if (!formEl) return
     await formEl.validate(async (valid, fields) => {
@@ -175,55 +169,6 @@ const submitForm = async (formEl) => {
     })
 
 }
-
-// const parentCity = ref([])
-// const citys = ref([])
-// const companyCitys = ref([])
-// queryCitysListFn(1)
-// async function queryCitysListFn(type) {
-//     let { data } = await queryCitysList({
-//         citylevel: 1
-//     })
-//     parentCity.value = data
-// }
-
-// async function queryCitysListcitysFn(parentcode, type) {
-//     let { data } = await queryCitysList({
-//         parentcode
-//     })
-//     if (type == 1) {
-//         citys.value = data
-//     } else {
-//         companyCitys.value = data
-//     }
-// }
-
-// const changeFn = (type) => {
-//     if (type == 1) {
-//         formLabelAlign.cityscode = ''
-//     } else {
-//         formLabelAlign.userCompanyDetails.cityscode = ''
-//     }
-//     queryCitysListcitysFn(type == 1 ? formLabelAlign.parentCityCode : formLabelAlign.userCompanyDetails.parentCityCode, type)
-// }
-
-// const levelList = ref([])
-// let { data } = await queryUserLevelList({})
-// levelList.value = data
-
-
-// if (useRoute().query.id) {
-//     formLabelAlign.id = useRoute().query.id
-//     queryUsersByidFn()
-// }
-
-// async function queryUsersByidFn() {
-//     let { data: list } = await queryUsersByid({
-//         id: formLabelAlign.id,
-//     })
-//     Object.assign(formLabelAlign, list)
-//     formLabelAlign.userCompanyDetails = list.userCompany
-// }
 </script>
 
 <style></style>

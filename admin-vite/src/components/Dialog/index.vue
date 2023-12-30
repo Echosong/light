@@ -74,7 +74,7 @@ const dialogStyle = computed(() => {
                 </slot>
                 <div class="es-icon">
 
-                    <el-icon  v-if="isFullscreen" @click="toggleFull"  style=" margin-right: 10px;" class="es-full">
+                    <el-icon  v-if="isFullscreen" @click="toggleFull"  style=" margin-right: 10px; " class="es-full">
                         <CopyDocument />
                     </el-icon>
                     <el-icon   v-else @click="toggleFull"  style=" margin-right: 10px;" class="es-full">
@@ -109,18 +109,17 @@ const dialogStyle = computed(() => {
     padding-right: 15px;
     position: relative;
     font-size: 16px;
+    color: #333 !important;
 }
 .es-icon{
     font-size: 14px;
 }
 .es-full{
-    //cursor-pointer is-hover !h-54px mr-10px
     cursor: pointer;
     &:hover{
         color: #409EFC;
     }
     height: 54px;
-
 }
 
 .el-overlay-dialog {

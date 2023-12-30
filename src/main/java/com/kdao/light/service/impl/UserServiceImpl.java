@@ -132,6 +132,7 @@ public class UserServiceImpl implements UserService {
         user.setState(userDTO.getState());
         user.setEmail(userDTO.getEmail());
         user.setSex(userDTO.getSex());
+        user.setType(userDTO.getType());
 
         //这里只考虑一个用户一个角色
         if (Objects.nonNull(userDTO.getRoleId())) {
@@ -143,7 +144,7 @@ public class UserServiceImpl implements UserService {
                 Optional<KdUserRole> first = allByUserId.stream()
                         .filter(t -> t.getRoleId().equals(userDTO.getRoleId()))
                         .findFirst();
-                if(!first.isPresent()){
+                if(first.isEmpty()){
                     //删掉老的
                     userRoleRepository.deleteAll(allByUserId);
                     userRoleRepository.save(userRole);

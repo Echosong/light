@@ -100,7 +100,7 @@ public class UserController extends BaseController {
     /**
      * 更新用户
      */
-    @PutMapping("/update")
+    @PostMapping(path = {"/update","/save"})
     @Operation(summary = "更新用户")
     @Log("更新用户")
     public void update(@RequestBody UserDTO userDTO) {

@@ -59,7 +59,9 @@ service.interceptors.response.use(
   response => {
     if (response.data.code === 200) {
       return response.data
-    } else if (response.data.code === 405) {
+    } else if (response.data.code === 401) {
+      const {clearToken} = useApp()
+      clearToken()
       const redirect = encodeURIComponent(window.location.href)
       router.push(`/login?redirect=${redirect}`)
     } else {
@@ -72,9 +74,10 @@ service.interceptors.response.use(
   async error => {
     // 如果响应码是 401 ，则请求获取新的 token
     // 响应拦截器中的 error 就是那个响应的错误对象
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.code === 401) {
+      debugger;
       // 校验是否有 refresh_token
-      const {authorization, clearToken, setToken} = useApp()
+
       if (!authorization || !authorization.refresh_token) {
         if (router.currentRoute.value.name === 'login') {
           return Promise.reject(error)

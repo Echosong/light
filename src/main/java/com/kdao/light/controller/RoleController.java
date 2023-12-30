@@ -63,7 +63,7 @@ public class RoleController extends BaseController{
      * @param userId
      * @return
      */
-    @PostMapping("/listByUser/{userId}")
+    @GetMapping("/listByUser/{userId}")
     @Operation(summary = "根据用户获取角色")
     public List<KdRole> listByUser(@PathVariable Integer userId){
         return roleService.listByUser(userId);

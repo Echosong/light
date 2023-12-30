@@ -17,22 +17,21 @@
 import {ref} from "@vue/runtime-core";
 import {onMounted} from "vue";
 import sa from "@/utils/sa";
-const changeValue = ref("")
+const changeValue = ref(0)
 const enums = ref([])
 const props = defineProps({
     enumName: { type: String, default: "" },
-    selectValue: { default: 0},
+    modelValue: { type: Number, default: 0},
 })
 
-onMounted(()=>{
-    sa.get("/getEnums?enumName=" +  props.enumName).then((res) => {
-        enums.value = res.data;
-    });
-    changeValue.value = props.selectValue;
+onMounted(async ()=>{
+   const {data} = await sa.get("/getEnums?enumName=" +  props.enumName);
+    enums.value = data;
+    changeValue.value = parseInt(props.modelValue);
 })
 
 const emits = defineEmits(['update:modelValue'])
-function selectTo(parent) {
+function selectTo() {
     emits('update:modelValue', changeValue.value);
 }
 

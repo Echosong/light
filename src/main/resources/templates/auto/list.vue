@@ -67,6 +67,11 @@ function shortChange(e) {
     f5();
 }
 
+async function updateSwitch(row) {
+    await sa.post('/user/save', row);
+    sa.ok("更新成功", true)
+}
+
 //更新
 function update(row) {
     console.log(addUpdate.value)
