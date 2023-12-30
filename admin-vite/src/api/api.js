@@ -52,9 +52,9 @@ export function getConfiglist(params) {
   })
 }
 
-export function saveConfig(params) {
+export function saveConfigList(params) {
   return request({
-    url: `/config/save`,
+    url: `/config/saveList`,
     method: 'post',
     data: params
   })

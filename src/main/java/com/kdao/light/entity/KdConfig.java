@@ -3,6 +3,7 @@ package com.kdao.light.entity;
 import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.autocode.anno.InQueryDTO;
+import com.kdao.light.common.enums.HtmlTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -50,8 +51,8 @@ public class KdConfig extends SysBase  {
     @AutoEntityField("配置值")
     private String value;
 
-    @AutoEntityField( value = "类型", notes = "配置html展现类型")
-    @Range(min = 0, max = 3, message = "必须大于")
+    @AutoEntityField( value = "类型", notes = "配置html展现类型", enums = HtmlTypeEnum.class)
+    @Range(min = 0, max = 10, message = "必须大于")
     private Integer type = 0;
 
     @Pattern(regexp = "\\s{2,}", message = "必须大于2")

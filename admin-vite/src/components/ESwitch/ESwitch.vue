@@ -2,7 +2,8 @@
 
 import {onMounted, ref} from "vue";
 const props = defineProps({
-    modelValue: {type:Number, default: false}
+    modelValue: {type:Number, default: false},
+    size:{type:String,default:'small'}
 })
 
 const switchValue = ref(props.modelValue > 0)
@@ -22,7 +23,7 @@ function change(){
 </script>
 
 <template>
-    <el-switch size="small"  v-model="switchValue" @change="change"></el-switch>
+    <el-switch :size="size"  v-model="switchValue" @change="change"></el-switch>
 </template>
 
 <style scoped lang="scss">

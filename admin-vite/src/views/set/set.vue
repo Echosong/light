@@ -8,24 +8,24 @@
 
                         <template v-for="(item, index) in configList">
                             <el-form-item :label="item.name + ':'">
-                                <el-input v-if="item.type == 0" v-model="item.value"
+                                <el-input v-if="item.type === 0" v-model="item.value"
                                           :placeholder="item.description"></el-input>
 
-                                <el-select v-if="item.type == 1" v-model="item.value">
+                                <el-select v-if="item.type === 1" v-model="item.value">
                                     <el-option label="请选择" value=""></el-option>
                                     <el-option v-for="op in item.options" :key="op.v" :label="op.n" :value="op.n">
                                         {{ op.n }}
                                     </el-option>
                                 </el-select>
 
-                                <el-switch v-if="item.type == 2" v-model="item.value" active-color="#13ce66">
-                                </el-switch>
+                                <ESwitch v-if="item.type === 2" v-model="item.value" size="default"></ESwitch>
 
-                                <el-input v-if="item.type == 5" type="textarea" :rows="4" style="width: 60%"
+                                <el-input v-if="item.type === 5" type="textarea" :rows="4" style="width: 60%"
                                           :placeholder="item.description" v-model="item.value">
                                 </el-input>
-
-                                <template v-if="item.type == 3">
+                                <FileImage v-if="item.type === 4" @onremove="item.value = ''" @onSuccess="item.value = $event" :file="item.value"/>
+                                <File v-if="item.type === 6" @onremove="item.value = ''" @onSuccess="item.value = $event" :file="item.value"/>
+                                <template v-if="item.type === 3">
                                     <el-checkbox-group v-model="item.values">
                                         <el-checkbox v-for="op in item.options" :key="op.v" :label="op.n">{{ op.n }}
                                         </el-checkbox>
@@ -49,9 +49,12 @@ export default {
 }
 </script>
 <script setup>
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
-import {getConfiglist,saveConfig} from "@/api/api";
+import {getConfiglist, saveConfigList} from "@/api/api";
+import File from "@/components/file/file.vue";
+import FileImage from "@/components/file/fileImage.vue";
+import ESwitch from "@/components/ESwitch/ESwitch.vue";
 
 const activeName = ref('first')
 const name = ref("系统配置");
@@ -62,14 +65,12 @@ onMounted(() => {
 })
 
 const init = async ()=>{
-    console.log(666666666666666);
     const { data } = await getConfiglist({});
     configList.value = data;
-    console.log(5555555,data)
 }
 
 const  submitForm = async ()=>{
-    var promise = await saveConfig(configList.value);
+    await saveConfigList(configList.value);
     ElMessage.success("修改配置成功！！")
 }
 
