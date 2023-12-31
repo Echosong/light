@@ -10,13 +10,16 @@ import com.kdao.light.common.dto.file.FileDTO;
 import com.kdao.light.common.dto.file.FileQueryDTO;
 import com.kdao.light.common.dto.log.LogDTO;
 import com.kdao.light.common.utils.DtoMapper;
+import com.kdao.light.common.utils.PageUtil;
 import com.kdao.light.config.properties.FileUploadProperties;
 import com.kdao.light.entity.KdFile;
 import com.kdao.light.entity.KdLog;
+import com.kdao.light.mapper.FileMapper;
 import com.kdao.light.repository.FileRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +46,9 @@ public class FileController extends BaseController {
 
     private final FileUploadProperties fileUploadProperties;
     private final FileRepository fileRepository;
+
+    @Resource
+    private FileMapper fileMapper;
 
     @Autowired
     public FileController(FileUploadProperties fileUploadProperties, FileRepository fileRepository) {
@@ -130,7 +136,7 @@ public class FileController extends BaseController {
     @PutMapping("/listPage")
     @Operation(summary = "列表分页")
     public Page<FileDTO> list(@RequestBody FileQueryDTO fileQueryDTO) {
-        Page<KdFile> files = fileRepository.listPage(fileQueryDTO.getFileName(), fileQueryDTO.getFileType(), fileQueryDTO.getRequest());
+        Page<KdFile> files = PageUtil.getPage(fileMapper::listPage, fileQueryDTO);
         return DtoMapper.convertPage(files, FileDTO.class);
     }
 

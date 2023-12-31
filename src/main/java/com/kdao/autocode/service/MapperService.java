@@ -17,7 +17,9 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 获取mapper.xml
@@ -37,23 +39,6 @@ public class MapperService extends BaseService implements ServiceInterface {
         String tplPath = this.getRealPath(packageName);
         String fileName = tplPath + "/" + repositoryName + "Mapper.java";
         if (FileUtil.isFile(fileName)) {
-            Console.log(StrUtil.format("文件{}已存在，无需重新生成", fileName));
-            return;
-        }
-        String templateFile = this.templatePath + "mapper.tpl";
-        String tplContent = this.replaceTpl(templateFile);
-        FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
-        Console.log("生成Mapper 文件 {} 成功 ", fileName);
-    }
-
-
-    public void getFile(String className) {
-        String repositoryName = className.substring(2) + "Mapper";
-        this.packageName = Const.SYS_PATH + ".mapper";
-        String repositoryPath = Const.ROOT_PATH + "/src/main/resources/mapper/";
-
-        String fileName = repositoryPath + repositoryName + ".xml";
-        if (FileUtil.isFile(fileName)) {
             boolean autoCover = clazz.isAnnotationPresent(AutoCover.class);
             if (!autoCover) {
                 return;
@@ -63,16 +48,34 @@ public class MapperService extends BaseService implements ServiceInterface {
             if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.MAPPER)) {
                 return;
             }
-            //进行备份
             FileUtil.copy(fileName, fileName.replace(".xml"
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
+        }
+        String templateFile = this.templatePath + "mapper.tpl";
+        String tplContent = this.replaceTpl(templateFile);
+        FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
+        Console.log("生成Mapper.java 文件 {} 成功 ", fileName);
+    }
+
+
+    public void getFile(String className) {
+        String repositoryName = className.substring(2) + "Mapper";
+        this.packageName = Const.SYS_PATH + ".mapper";
+        String repositoryPath = Const.ROOT_PATH + "/src/main/resources/mapper/";
+
+        String fileName = repositoryPath + repositoryName + ".xml";
+        Console.log("准备文件::"+ fileName);
+
+        if (FileUtil.isFile(fileName)) {
+            //进行备份
+            Console.log("生成Mapper.xml 文件 {} 已经存在 ", fileName);
         }
         String templateFile = this.templatePath + "mapperXml.tpl";
         String tplContent = this.replaceTpl(templateFile);
         tplContent = assignWhereCondition(tplContent);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
-        Console.log("生成Mapper.xml 文件 {} 成功 ", fileName);
+        Console.log("生成Mapper.xml 文件 {} 生成成功 ", fileName);
     }
 
     /**
@@ -91,6 +94,10 @@ public class MapperService extends BaseService implements ServiceInterface {
             if (!field.isAnnotationPresent(InQueryDTO.class)) {
                 continue;
             }
+            Map<String, String> fieldMap = new HashMap<>();
+            fieldMap.put("name", field.getName());
+            fieldMap.put("underlineName",  StrUtil.toUnderlineCase(field.getName()).toLowerCase());
+
             if ("Date".equals(field.getType().getSimpleName())) {
                 fieldList.add(StrUtil.format("<if test=\"{} != null \"> \n and {} &gt; #{{}} \n </if>",
                         "start" + StrUtil.upperFirst(field.getName()),
@@ -104,16 +111,12 @@ public class MapperService extends BaseService implements ServiceInterface {
                         "end" + StrUtil.upperFirst(field.getName())
                 ));
             } else if ("String".equals(field.getType().getSimpleName())) {
-                fieldList.add(StrUtil.format("<if test=\"{} != null \">\n and {}  like CONCAT('%',#{{}},'%')\n </if>",
-                        field.getName(),
-                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
-                        field.getName()
+                fieldList.add(StrUtil.format("<if test=\"{name} != null and {name} != '' \">\n and {underlineName}  like CONCAT('%',#{{name}},'%')\n </if>",
+                        fieldMap
                 ));
             } else {
-                fieldList.add(StrUtil.format("<if test=\"{} != null \"> \n and {} = #{{}} \n </if>",
-                        field.getName(),
-                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
-                        field.getName()
+                fieldList.add(StrUtil.format("<if test=\"{name} != null \"> \n and {underlineName} = #{{name}} \n </if>",
+                        fieldMap
                 ));
             }
         }

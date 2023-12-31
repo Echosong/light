@@ -3,10 +3,12 @@
 <mapper namespace="com.kdao.light.mapper.PermissionMapper">
     <select id="listPage" resultType="com.kdao.light.entity.KdPermission">
         select *
-        from kd_permission where 1=1
-        <if test="name != null ">
-            and name like CONCAT('%',#{name},'%')
-        </if>
+        from kd_permission
+        <where>
+            <if test="name != null and name != '' ">
+ and name  like CONCAT('%',#{name},'%')
+ </if>
+        </where>
     </select>
 
 </mapper>

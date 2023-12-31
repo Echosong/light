@@ -3,13 +3,15 @@
 <mapper namespace="com.kdao.light.mapper.FileMapper">
     <select id="listPage" resultType="com.kdao.light.entity.KdFile">
         select *
-        from kd_file where 1=1
-                 <if test="fileName != null ">
+        from kd_file
+        <where>
+            <if test="fileName != null and fileName != '' ">
  and file_name  like CONCAT('%',#{fileName},'%')
  </if>
 <if test="fileType != null "> 
  and file_type = #{fileType} 
  </if>
+        </where>
     </select>
 
 </mapper>

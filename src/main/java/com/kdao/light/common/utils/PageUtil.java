@@ -20,16 +20,8 @@ import java.util.function.Function;
  * @version :1.0.0
  */
 public class PageUtil {
-    public static void main(String[] args) {
-        Function<String, String> function = (s) -> s;
-        System.out.println(function.apply("123"));
-    }
 
-    public static <P extends PageInfo, R> Page getPage(Function<P, List<R>> function, P param) {
-        return getPage(function, param, null);
-    }
-
-    public static <P extends PageInfo, I, R> Page getPage(Function<P, List<I>> function, P param, Class<R> resultClass) {
+    public static <P extends PageInfo, I> Page<I> getPage(Function<P, List<I>> function, P param) {
         PageHelper.startPage(param.getRequest().getPageNumber() + 1, param.getRequest().getPageSize());
         if (param.getRequest().getSort().isSorted()) {
             StringBuilder orderBy = new StringBuilder();
@@ -46,10 +38,8 @@ public class PageUtil {
             }
             PageHelper.orderBy(orderBy.toString());
         }
-
         List<I> result = function.apply(param);
         com.github.pagehelper.PageInfo<I> pageInfo = new com.github.pagehelper.PageInfo<>(result);
-        PageImpl page = new PageImpl(result, param.getRequest(), pageInfo.getTotal());
-        return (Page) (resultClass != null ? DtoMapper.convertPage(page, resultClass, new String[0]) : page);
+        return new PageImpl<>(result, param.getRequest(), pageInfo.getTotal());
     }
 }

@@ -53,7 +53,6 @@ public class KdLog extends SysBase {
     private String method;
 
     @AutoEntityField(value = "参数", len = 1000, htmlType = HtmlTypeEnum.TEXTAREA)
-    @NotinListDTO
     private String params;
 
     @AutoEntityField(value = "日志类型")
