@@ -5,7 +5,7 @@
                 <el-button type="success" icon="Plus" plain @click="addFromPop({},{parentId:0,id:0})">增加</el-button>
             </el-form-item>
         </el-form>
-        <el-table header-cell-class-name="tableBackground" :data="list" stripe style="width: 100%">
+        <el-table :header-cell-style="tableHeaderCellStyle" :data="list"  style="width: 100%">
             <el-table-column width="80" prop="id" label="id" />
             <el-table-column prop="name" label="角色名" />
             <el-table-column prop="description" label="描述" />

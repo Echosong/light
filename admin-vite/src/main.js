@@ -89,9 +89,13 @@ Object.values(Directives).forEach(fn => {
 // 错误日志
 import useErrorHandler from './error-log'
 import sa from "@/utils/sa";
+import {tableHeaderCellStyle} from "@/utils/tableHeaderCellStyle";
 useErrorHandler(app)
 
 app.provide('sa', sa);
+
+
+app.config.globalProperties.tableHeaderCellStyle = tableHeaderCellStyle;
 
 app
   .use(i18n)

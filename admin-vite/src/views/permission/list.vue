@@ -10,13 +10,12 @@
             </el-form-item>
         </el-form>
 
-
         <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
             <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
             <el-button type="info" icon="Sort" plain @click="toggleExpandAll">展开/折叠</el-button>
         </FunNavigation>
 
-        <el-table v-if="refreshTable" :default-expand-all="isExpandAll" :data="list" style="width: 100%" border row-key="id"
+        <el-table v-if="refreshTable" :header-cell-style="tableHeaderCellStyle"  :default-expand-all="isExpandAll" :data="list" style="width: 100%"  row-key="id"
                   :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
             <el-table-column  width="160" label="id" >
                 <template  #default="scope">
@@ -71,7 +70,7 @@ import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 const params = {pageSize: 10, page: 1, total: 0, name: ''}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const showSearch = ref(true);
-const isExpandAll = ref(true);
+const isExpandAll = ref(false);
 const refreshTable = ref(true);
 
 onMounted(() => {

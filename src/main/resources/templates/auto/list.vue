@@ -10,12 +10,12 @@
         </el-form>
 
         <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
-            <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
-            <el-button type="warning" icon="Download" plain @click="exportFile">导出</el-button>
+            <el-button type="success" v-permission="" icon="Plus" plain @click="add">增加</el-button>
+            <el-button type="warning" v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
         </FunNavigation>
 
         <!-- <div class="c-title">数据列表</div> -->
-        <el-table :data="dataList" v-loading="loading"  @sort-change="shortChange">
+        <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"  @sort-change="shortChange">
             #{el-table-column}#
             <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
                 <template #default="s">

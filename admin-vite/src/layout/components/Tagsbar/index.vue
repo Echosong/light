@@ -144,6 +144,9 @@ export default defineComponent({
     &.active {
       color: $collapseMenuActiveBorderColor;
       background: #f5f5f5;
+        .el-icon-close{
+            color: $collapseMenuActiveBorderColor;
+        }
     }
     .title {
       display: inline-block;
