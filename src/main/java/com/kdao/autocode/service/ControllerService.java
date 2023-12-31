@@ -2,6 +2,7 @@ package com.kdao.autocode.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.AutoCover;
@@ -14,6 +15,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -51,7 +53,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if( !annotation.value().equals(CodeTypeEnum.CONTROLLER)){
+            if( !ArrayUtil.contains(annotation.value(), CodeTypeEnum.CONTROLLER)){
                 return;
             }
             //进行备份

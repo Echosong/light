@@ -5,9 +5,13 @@ import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.autocode.anno.InQueryDTO;
 import com.kdao.autocode.anno.NotinListDTO;
 import com.kdao.light.common.enums.HtmlTypeEnum;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -30,6 +34,8 @@ import java.math.BigDecimal;
 @DynamicUpdate
 public class KdProduct extends SysBase {
 
+    @Size
+    @Column
     @AutoEntityField(value = "产品名称")
     @InQueryDTO
     private String name;

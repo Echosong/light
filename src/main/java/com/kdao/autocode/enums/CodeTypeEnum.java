@@ -24,6 +24,8 @@ public enum CodeTypeEnum {
     ADD_VIEW,
     //视图列表
     LIST_VIEW,
+
+    MAPPER,
     //不需要任何
     NULL
 

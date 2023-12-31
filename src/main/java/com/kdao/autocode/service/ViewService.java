@@ -2,6 +2,7 @@ package com.kdao.autocode.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.*;
@@ -167,6 +168,8 @@ public class ViewService extends BaseService implements ServiceInterface {
         this.reWriteConfigJs("list");
     }
 
+
+
     /**
      * 处理表格行信息
      *
@@ -281,7 +284,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             return true;
         }
         AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-        if( !annotation.value().equals(codeTypeEnum)){
+        if( !ArrayUtil.contains(annotation.value(), codeTypeEnum)){
             return true;
         }
         //进行备份

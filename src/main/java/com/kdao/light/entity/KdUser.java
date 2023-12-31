@@ -6,6 +6,7 @@ import com.kdao.light.common.enums.HtmlTypeEnum;
 import com.kdao.light.common.enums.UserRegTypeEnum;
 import com.kdao.light.common.enums.UserSexEnum;
 import com.kdao.light.common.enums.UserStateEnum;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -42,6 +43,7 @@ public class KdUser extends  SysBase implements Serializable {
     @InQueryDTO
     private String username;
 
+    @Column(length = 300, columnDefinition = "密码")
     @Length(min = 6, message = "密码必须大于等于6位")
     @AutoEntityField("密码")
     @NotinListDTO

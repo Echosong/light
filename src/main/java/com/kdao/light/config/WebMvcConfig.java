@@ -28,12 +28,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final FileUploadProperties fileUploadProperties;
 
-    @Resource
-    private final RedisTemplate redisTemplate;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor(redisTemplate)).addPathPatterns("/api/**", "/admin/**")
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/**", "/admin/**")
                 .excludePathPatterns("/","/admin/user/login","/api/home/logout");
     }
 

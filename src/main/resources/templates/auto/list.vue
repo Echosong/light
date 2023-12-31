@@ -67,7 +67,7 @@ function shortChange(e) {
 }
 
 async function updateSwitch(row) {
-    await sa.post('/user/save', row);
+    await sa.post('/#{EntityName}#//save', row);
     sa.ok("更新成功", true)
 }
 

@@ -3,6 +3,7 @@ package com.kdao.autocode.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.AutoCover;
@@ -43,7 +44,7 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if( !annotation.value().equals(CodeTypeEnum.REPOSITORY)){
+            if( !ArrayUtil.contains(annotation.value(), CodeTypeEnum.REPOSITORY)){
                 return;
             }
             //进行备份

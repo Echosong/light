@@ -1,9 +1,7 @@
 package com.kdao.light.entity;
 
-import com.kdao.autocode.anno.AutoEntity;
-import com.kdao.autocode.anno.AutoEntityField;
-import com.kdao.autocode.anno.InQueryDTO;
-import com.kdao.autocode.anno.NotinListDTO;
+import com.kdao.autocode.anno.*;
+import com.kdao.autocode.enums.CodeTypeEnum;
 import com.kdao.light.common.enums.HtmlTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +25,12 @@ import jakarta.persistence.Entity;
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@AutoCover({CodeTypeEnum.NULL})
 public class KdLog extends SysBase {
+
+    @AutoEntityField(value = "用户")
+    @InQueryDTO
+    private String username;
 
     @AutoEntityField(value = "请求ip")
     private String requestIp;
@@ -59,5 +62,5 @@ public class KdLog extends SysBase {
 
     @AutoEntityField(value = "异常详情", htmlType = HtmlTypeEnum.TEXTAREA)
     @NotinListDTO
-    private byte[] exceptionDetail;
+    private String exceptionDetail;
 }

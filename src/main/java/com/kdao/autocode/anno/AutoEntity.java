@@ -1,5 +1,7 @@
 package com.kdao.autocode.anno;
 
+import com.kdao.autocode.enums.CodeTypeEnum;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -43,4 +45,6 @@ public @interface AutoEntity {
      * controller 需要生成那些对应方法
      */
     String  controllerFunction() default "listPage,save,delete,find,list";
+
+
 }

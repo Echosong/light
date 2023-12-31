@@ -6,6 +6,8 @@ import com.kdao.light.common.annotation.NoPermission;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.UserRepository;
+import com.kdao.light.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,12 +26,6 @@ import java.util.Objects;
  * @version :1.0.0
  */
 public class LoginInterceptor implements HandlerInterceptor {
-    private final RedisTemplate<String, KdUser> redisTemplate;
-
-    public LoginInterceptor(RedisTemplate<String, KdUser> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
-
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,16 +36,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             if(Objects.nonNull(methodAnnotation)){
                 return true;
             }
-            String userId = StpUtil.getLoginId().toString();
-            KdUser user = null;
-            try {
-                user = redisTemplate.opsForValue().get(userId);
-            }catch (Exception ignored){}
-            if (Objects.isNull(user)) {
-                UserRepository userRepository = SpringUtil.getBean(UserRepository.class);
-                user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
-                redisTemplate.opsForValue().set(userId, user);
-            }
+            KdUser user = SpringUtil.getBean(UserService.class).getUserCache();
+            return  Objects.nonNull(user);
         }
         return true;
     }

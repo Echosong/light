@@ -30,10 +30,11 @@ class LightInitTest {
     @Value("${auto-config.root-path:}")
     private String rootPath;
 
+    private Setting setting;
 
     private void initSetting() {
         log.info("初始化项目开始");
-        Setting setting = new Setting("db.setting");
+        setting = new Setting("db.setting");
         setting.set("url", this.dataUrl);
         setting.set("user", this.username);
         setting.set("pass", this.password);
@@ -46,7 +47,6 @@ class LightInitTest {
         }
         //根路径
         Const.ROOT_PATH = rootPath;
-
         String vueRootPath = this.rootPath + "/admin-vite";
         Const.VUE_PATH = vueRootPath + Const.VUE_PATH;
         Const.VUE_ROOT_ROUTER = vueRootPath + Const.VUE_ROOT_ROUTER;

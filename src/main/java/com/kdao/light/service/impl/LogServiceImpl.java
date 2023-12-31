@@ -1,16 +1,24 @@
 package com.kdao.light.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.kdao.light.common.dto.log.LogDTO;
+import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.entity.KdLog;
 import com.kdao.light.entity.KdUser;
 import com.kdao.light.repository.LogRepository;
+import com.kdao.light.repository.UserRepository;
 import com.kdao.light.service.LogService;
+import com.kdao.light.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Title: </p >
@@ -25,6 +33,12 @@ import java.util.List;
 public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
+
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private  RedisTemplate<String, KdUser> redisTemplate;
 
     private final List<KdUser> userList = new ArrayList<>();
 
@@ -55,11 +69,10 @@ public class LogServiceImpl implements LogService {
      */
     @Override
     public void save(LogDTO logDTO) {
+        //获取用户信息
+        KdUser user = userService.getUserCache();
+        String userName = Objects.isNull(user)?"未知用户": user.getUsername();
+        logDTO.setUsername(userName);
         logRepository.save(DtoMapper.convert(logDTO, KdLog.class));
     }
-
-
-
-
-
 }

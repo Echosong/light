@@ -2,6 +2,7 @@ package com.kdao.autocode.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
 import com.kdao.autocode.anno.AutoCover;
@@ -74,13 +75,14 @@ public class DtoService extends BaseService implements ServiceInterface {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if(tplEnum == DtoTplEnum.ListDTO &&  !annotation.value().equals(CodeTypeEnum.LIST_DTO)){
+
+            if(tplEnum == DtoTplEnum.ListDTO &&!ArrayUtil.contains(annotation.value(), CodeTypeEnum.LIST_DTO) ){
                 return;
             }
-            if(tplEnum == DtoTplEnum.QueryDTO && !annotation.value().equals(CodeTypeEnum.QUERY_DTO)){
+            if(tplEnum == DtoTplEnum.QueryDTO && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.QUERY_DTO) ){
                 return;
             }
-            if(tplEnum == DtoTplEnum.DTO && !annotation.value().equals(CodeTypeEnum.DTO)){
+            if(tplEnum == DtoTplEnum.DTO && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.DTO) ){
                 return;
             }
             //进行备份

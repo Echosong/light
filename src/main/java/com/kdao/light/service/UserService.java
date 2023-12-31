@@ -9,6 +9,7 @@ import com.kdao.light.common.dto.user.LoginUserDTO;
 import com.kdao.light.common.dto.user.UserCacheDTO;
 import com.kdao.light.common.dto.user.UserDTO;
 import com.kdao.light.common.dto.user.UserQueryDTO;
+import com.kdao.light.entity.KdUser;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -52,6 +53,9 @@ public interface UserService {
      * @return 用户信息
      */
     UserDTO getCurrent();
+
+
+    KdUser getUserCache();
 
     /**
      * 处理分页信息

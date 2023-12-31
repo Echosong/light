@@ -6,6 +6,7 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.SmUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.kdao.light.common.dto.user.UserDTO;
 import com.kdao.light.common.dto.user.UserQueryDTO;
 import com.kdao.light.common.utils.PageUtil;
@@ -28,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -55,6 +57,9 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     private final UserMapper userMapper;
+
+    @Resource
+    private  RedisTemplate<String, KdUser> redisTemplate;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, RoleRepository roleRepository, UserMapper userMapper) {
@@ -177,6 +182,22 @@ public class UserServiceImpl implements UserService {
         }
         return userDTO;
     }
+
+    @Override
+    public KdUser getUserCache() {
+        String userId = StpUtil.getLoginId().toString();
+        KdUser user = null;
+        try {
+            user = redisTemplate.opsForValue().get(userId);
+        }catch (Exception ignored){}
+        if (Objects.isNull(user)) {
+            UserRepository userRepository = SpringUtil.getBean(UserRepository.class);
+            user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
+            redisTemplate.opsForValue().set(userId, user);
+        }
+        return user;
+    }
+
 
     /**
      * 处理分页信息

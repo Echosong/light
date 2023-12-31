@@ -3,6 +3,7 @@ package com.kdao.autocode.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import com.kdao.autocode.Const;
@@ -30,12 +31,12 @@ public class MapperService extends BaseService implements ServiceInterface {
         super(clazz);
     }
 
-    public void getMapperFile(String className){
+    public void getMapperFile(String className) {
         this.packageName = Const.SYS_PATH + ".mapper";
         String repositoryName = className.substring(2);
         String tplPath = this.getRealPath(packageName);
-        String fileName = tplPath +"/"+ repositoryName +"Mapper.java";
-        if(FileUtil.isFile(fileName)){
+        String fileName = tplPath + "/" + repositoryName + "Mapper.java";
+        if (FileUtil.isFile(fileName)) {
             Console.log(StrUtil.format("文件{}已存在，无需重新生成", fileName));
             return;
         }
@@ -49,21 +50,22 @@ public class MapperService extends BaseService implements ServiceInterface {
     public void getFile(String className) {
         String repositoryName = className.substring(2) + "Mapper";
         this.packageName = Const.SYS_PATH + ".mapper";
-        String repositoryPath = Const.ROOT_PATH +"/src/main/resources/mapper/";
+        String repositoryPath = Const.ROOT_PATH + "/src/main/resources/mapper/";
 
-        String fileName = repositoryPath  + repositoryName + ".xml";
-         if (FileUtil.isFile(fileName)) {
+        String fileName = repositoryPath + repositoryName + ".xml";
+        if (FileUtil.isFile(fileName)) {
             boolean autoCover = clazz.isAnnotationPresent(AutoCover.class);
             if (!autoCover) {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if (!annotation.value().equals(CodeTypeEnum.REPOSITORY)) {
+
+            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.MAPPER)) {
                 return;
             }
             //进行备份
             FileUtil.copy(fileName, fileName.replace(".xml"
-                    , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
+                            , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
         String templateFile = this.templatePath + "mapperXml.tpl";
@@ -92,25 +94,25 @@ public class MapperService extends BaseService implements ServiceInterface {
             if ("Date".equals(field.getType().getSimpleName())) {
                 fieldList.add(StrUtil.format("<if test=\"{} != null \"> \n and {} &gt; #{{}} \n </if>",
                         "start" + StrUtil.upperFirst(field.getName()),
-                        StrUtil.toUnderlineCase( field.getName()).toLowerCase(),
+                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
                         "start" + StrUtil.upperFirst(field.getName())
                 ));
 
                 fieldList.add(StrUtil.format("<if test=\"{} != null \">\n and {}  &lt; #{{}} \n</if>",
                         "end" + StrUtil.upperFirst(field.getName()),
-                        StrUtil.toUnderlineCase( field.getName()).toLowerCase(),
+                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
                         "end" + StrUtil.upperFirst(field.getName())
                 ));
             } else if ("String".equals(field.getType().getSimpleName())) {
                 fieldList.add(StrUtil.format("<if test=\"{} != null \">\n and {}  like CONCAT('%',#{{}},'%')\n </if>",
                         field.getName(),
-                        StrUtil.toUnderlineCase( field.getName()).toLowerCase(),
+                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
                         field.getName()
                 ));
-            }else {
+            } else {
                 fieldList.add(StrUtil.format("<if test=\"{} != null \"> \n and {} = #{{}} \n </if>",
                         field.getName(),
-                        StrUtil.toUnderlineCase( field.getName()).toLowerCase(),
+                        StrUtil.toUnderlineCase(field.getName()).toLowerCase(),
                         field.getName()
                 ));
             }

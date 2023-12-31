@@ -4,10 +4,13 @@ import com.kdao.autocode.anno.AutoEntity;
 import com.kdao.autocode.anno.AutoEntityField;
 import com.kdao.autocode.anno.InQueryDTO;
 import com.kdao.light.common.enums.HtmlTypeEnum;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import jakarta.persistence.Column;
@@ -38,8 +41,10 @@ public class KdConfig extends SysBase  {
     @Column(name = "`key`")
     private String key;
 
+    @Email
+    @CreditCardNumber
+    @Length(message = "长度必须为6-16", min = 6, max = 16)
     @AutoEntityField("配置说明")
-    @NotBlank(message = "不能为空")
     @InQueryDTO
     private String name;
 
