@@ -1,12 +1,22 @@
 <template>
     <div class="app-container">
-        <el-form :inline="true"  class="demo-form-inline">
+        <el-form :inline="true" v-show="showSearch" class="demo-form-inline">
+            <el-form-item label="名称">
+                <el-input v-model="p.name" placeholder="模糊查询"></el-input>
+            </el-form-item>
             <el-form-item style="min-width: 0px">
-                <el-button type="success" icon="Plus" plain @click="addFromPop({},{parentId:0,id:0})">增加</el-button>
+                <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
+                <el-button icon="Refresh" plain @click="reset">重置</el-button>
             </el-form-item>
         </el-form>
 
-        <el-table header-cell-class-name="tableBackground" :data="list" style="width: 100%" border row-key="id"
+
+        <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
+            <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
+            <el-button type="info" icon="Sort" plain @click="toggleExpandAll">展开/折叠</el-button>
+        </FunNavigation>
+
+        <el-table v-if="refreshTable" :default-expand-all="isExpandAll" :data="list" style="width: 100%" border row-key="id"
                   :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
             <el-table-column  width="160" label="id" >
                 <template  #default="scope">
@@ -50,13 +60,19 @@
 </template>
 <script setup>
 
-import { Edit, Delete, Plus } from '@element-plus/icons-vue';
-import { onMounted, ref } from 'vue'
+import { Edit, Plus } from '@element-plus/icons-vue';
+import {nextTick, onMounted, ref} from 'vue'
 import AddPermission from './components/addPermission.vue';
 
 import { handleTree } from '@/utils';
-import { permission } from '@/hooks/permission';
 import sa from "@/utils/sa";
+import FunNavigation from "@/components/funNavigation/funNavigation.vue";
+
+const params = {pageSize: 10, page: 1, total: 0, name: ''}
+const p = ref(JSON.parse(JSON.stringify(params)))
+const showSearch = ref(true);
+const isExpandAll = ref(true);
+const refreshTable = ref(true);
 
 onMounted(() => {
     listFn()
@@ -71,6 +87,17 @@ async function listFn() {
     const { data } = await sa.get('/permission/all')
     list.value = handleTree(data)
 }
+
+function reset() {
+    p.value = JSON.parse(JSON.stringify(params))
+}
+async function toggleExpandAll(){
+    refreshTable.value = false;
+    isExpandAll.value =!isExpandAll.value
+    await nextTick()
+    refreshTable.value = true;
+}
+
 </script>
 
 <style>
