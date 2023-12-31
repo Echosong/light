@@ -3,12 +3,10 @@
 <mapper namespace="com.kdao.light.mapper.RoleMapper">
     <select id="listPage" resultType="com.kdao.light.entity.KdRole">
         select *
-        from kd_role
-        <where>
-            <if test="name != null and name != '' ">
+        from kd_role where 1=1
+                 <if test="name != null and name != '' ">
  and name  like CONCAT('%',#{name},'%')
  </if>
-        </where>
     </select>
 
 </mapper>

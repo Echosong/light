@@ -46,7 +46,7 @@ export default class sa {
    static download(url, params) {
     return request({
       url: url,
-      method: 'get',
+      method: 'post',
       params: params,
       responseType: 'blob'
     })

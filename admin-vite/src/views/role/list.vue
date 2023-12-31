@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <el-form :inline="true" size="small" class="demo-form-inline">
+        <el-form :inline="true"  class="demo-form-inline">
             <el-form-item style="min-width: 0px">
                 <el-button type="success" icon="Plus" plain @click="addFromPop({},{parentId:0,id:0})">增加</el-button>
             </el-form-item>

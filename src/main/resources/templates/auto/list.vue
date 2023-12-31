@@ -1,15 +1,21 @@
 <template>
     <div class="app-container">
         <!-- 参数栏 -->
-        <el-form :inline="true" size="small" class="demo-form-inline">
+        <el-form :inline="true"  v-show="showSearch"  class="demo-form-inline">
             #{el-form-item}#
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
-                <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
+                <el-button  icon="Refresh" plain @click="reset">重置</el-button>
             </el-form-item>
         </el-form>
+
+        <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
+            <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
+            <el-button type="warning" icon="Download" plain @click="exportFile">导出</el-button>
+        </FunNavigation>
+
         <!-- <div class="c-title">数据列表</div> -->
-        <el-table :data="dataList" header-cell-class-name="tableBackground" @sort-change="shortChange">
+        <el-table :data="dataList" v-loading="loading"  @sort-change="shortChange">
             #{el-table-column}#
             <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
                 <template #default="s">
@@ -30,23 +36,36 @@
 import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
+import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 //importFiles
-
-const p = ref(#{queryPageParams}#)
+const params = #{queryPageParams}#
+const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')
 const addUpdate = ref()
+const  loading = ref(false)
+const showSearch = ref(true)
 onMounted(() => {
     f5()
 })
 
 // 数据刷新
 async function f5() {
+    loading.value = true
     const {data} = await sa.put("/#{EntityName}#/listPage", p.value);
+    loading.value = false
     dataList.value = data.content.map((item) => {
         return item;
     });
     p.value.total  = data.totalElements;
+}
+
+function exportFile() {
+    sa.download("/#{EntityName}#/export", p.value)
+}
+
+function reset() {
+    p.value = JSON.parse(JSON.stringify(params))
 }
 
 // 删除

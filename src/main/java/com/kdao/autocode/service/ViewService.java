@@ -244,13 +244,13 @@ public class ViewService extends BaseService implements ServiceInterface {
         String returnValue = "";
         if ("String".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                    <el-form-item label="{}：">
+                    <el-form-item label="{}">
                      <el-input v-model="p.{}" placeholder="模糊查询"></el-input>
                     </el-form-item>""", autoEntityField.value(), field.getName());
         }
         if ("Date".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}：">
+                            <el-form-item label="{}">
                                       <el-date-picker
                                         v-model="p.start{}"
                                         type="datetime"

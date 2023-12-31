@@ -3,12 +3,10 @@
 <mapper namespace="com.kdao.light.mapper.ProductMapper">
     <select id="listPage" resultType="com.kdao.light.entity.KdProduct">
         select *
-        from kd_product
-        <where>
-            <if test="name != null and name != '' ">
+        from kd_product where 1=1
+                 <if test="name != null and name != '' ">
  and name  like CONCAT('%',#{name},'%')
  </if>
-        </where>
     </select>
 
 </mapper>

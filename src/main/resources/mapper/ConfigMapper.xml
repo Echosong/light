@@ -3,15 +3,13 @@
 <mapper namespace="com.kdao.light.mapper.ConfigMapper">
     <select id="listPage" resultType="com.kdao.light.entity.KdConfig">
         select *
-        from kd_config
-        <where>
-            <if test="key != null and key != '' ">
+        from kd_config where 1=1
+                 <if test="key != null and key != '' ">
  and key  like CONCAT('%',#{key},'%')
  </if>
 <if test="name != null and name != '' ">
  and name  like CONCAT('%',#{name},'%')
  </if>
-        </where>
     </select>
 
 </mapper>
