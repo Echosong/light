@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * 入库文件
+ * 启动文件
  * @author 二胡子
  */
 @Slf4j
