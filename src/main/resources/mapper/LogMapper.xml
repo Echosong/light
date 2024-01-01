@@ -4,15 +4,15 @@
     <select id="listPage" resultType="com.kdao.light.entity.KdLog">
         select *
         from kd_log where 1=1
-                 <if test="username != null and username != '' ">
- and username  like CONCAT('%',#{username},'%')
- </if>
-<if test="description != null and description != '' ">
- and description  like CONCAT('%',#{description},'%')
- </if>
-<if test="logType != null and logType != '' ">
- and log_type  like CONCAT('%',#{logType},'%')
- </if>
+        <if test="username != null and username != '' ">
+            and username like CONCAT('%',#{username},'%')
+        </if>
+        <if test="description != null and description != '' ">
+            and description like CONCAT('%',#{description},'%')
+        </if>
+        <if test="logType != null ">
+            and log_type = #{logType}
+        </if>
     </select>
 
 </mapper>

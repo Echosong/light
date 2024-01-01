@@ -95,11 +95,7 @@ public class LogAspect {
         // 方法路径
         String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
         LogDTO logDTO = new LogDTO();
-        if (StrUtil.isEmpty("")) {
-            logDTO.setLogType("info");
-        } else {
-            logDTO.setLogType("error");
-        }
+        logDTO.setLogType(aopLog.businessType().getCode());
         logDTO.setRequestIp(IpUtil.getRemortIP(request));
         logDTO.setBrowser(request.getHeader("User-Agent"));
         logDTO.setDescription(aopLog.value());

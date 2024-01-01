@@ -149,9 +149,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         tplContent = StrUtil.replace(tplContent, "#{el-form-item}#", elContent);
         //处理枚举下来组件
         if (elContent.contains("<input-enum")) {
-            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";",
-                    "import inputEnum from \"../../sa-resources/com-view/input-enum.vue\";");
-            tplContent = StrUtil.replaceIgnoreCase(tplContent, "//inputEnum,", "inputEnum,");
+            importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
         }
         if(columnCount >= maxColumnCount){
             tplContent = StrUtil.replaceIgnoreCase(tplContent,"#{fixed}#", "fixed=\"right\"");

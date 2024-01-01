@@ -2,6 +2,7 @@ package com.kdao.light.entity;
 
 import com.kdao.autocode.anno.*;
 import com.kdao.autocode.enums.CodeTypeEnum;
+import com.kdao.light.common.enums.BusinessEnum;
 import com.kdao.light.common.enums.HtmlTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,9 +56,9 @@ public class KdLog extends SysBase {
     @AutoEntityField(value = "参数", len = 1000, htmlType = HtmlTypeEnum.TEXTAREA)
     private String params;
 
-    @AutoEntityField(value = "日志类型")
+    @AutoEntityField(value = "日志类型", enums = BusinessEnum.class)
     @InQueryDTO
-    private String logType;
+    private Integer logType;
 
     @AutoEntityField(value = "异常详情", htmlType = HtmlTypeEnum.TEXTAREA)
     @NotinListDTO

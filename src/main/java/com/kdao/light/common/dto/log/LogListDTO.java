@@ -18,13 +18,13 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.*;
 
-
+import com.kdao.light.common.enums.BusinessEnum;
 
 /**
  * <p>Title:日志 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2023-12-31 20:01:39</p >
+ * <p>create date: 2024-01-01 10:01:08</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -57,7 +57,8 @@ public class LogListDTO extends SysBaseDTO implements IDictionaryObject {
     private String params;
 
    @Schema(name="日志类型" )
-    private String logType;
+    @ApiModelPropertyEnum(BusinessEnum.class)
+    private Integer logType;
 
 
 }

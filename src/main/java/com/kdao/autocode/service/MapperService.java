@@ -48,7 +48,7 @@ public class MapperService extends BaseService implements ServiceInterface {
             if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.MAPPER)) {
                 return;
             }
-            FileUtil.copy(fileName, fileName.replace(".xml"
+            FileUtil.copy(fileName, fileName.replace(".java"
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
@@ -63,11 +63,23 @@ public class MapperService extends BaseService implements ServiceInterface {
         String repositoryName = className.substring(2) + "Mapper";
         this.packageName = Const.SYS_PATH + ".mapper";
         String repositoryPath = Const.ROOT_PATH + "/src/main/resources/mapper/";
-
         String fileName = repositoryPath + repositoryName + ".xml";
-        Console.log("准备文件::"+ fileName);
 
         if (FileUtil.isFile(fileName)) {
+
+            boolean autoCover = clazz.isAnnotationPresent(AutoCover.class);
+            if (!autoCover) {
+                return;
+            }
+            AutoCover annotation = clazz.getAnnotation(AutoCover.class);
+
+            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.MAPPER_XML)) {
+                return;
+            }
+            FileUtil.copy(fileName, fileName.replace(".xml"
+                            , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
+                    , true);
+
             //进行备份
             Console.log("生成Mapper.xml 文件 {} 已经存在 ", fileName);
         }

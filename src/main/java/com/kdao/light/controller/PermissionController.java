@@ -3,8 +3,10 @@ package com.kdao.light.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;
 import com.kdao.light.common.annotation.NoPermission;
+import com.kdao.light.common.annotation.Permission;
 import com.kdao.light.common.dto.permission.PermissionDTO;
 import com.kdao.light.common.dto.permission.PermissionQueryDTO;
+import com.kdao.light.common.enums.LogicalEnum;
 import com.kdao.light.common.exception.BaseKnownException;
 import com.kdao.light.common.utils.DtoMapper;
 import com.kdao.light.common.utils.PageUtil;
@@ -67,6 +69,7 @@ public class PermissionController extends BaseController {
     @PostMapping("/save")
     @Operation(summary = "新建|更新权限信息")
     @CacheEvict(value = "Permission_all", allEntries = true)
+    @Permission(roles = "admin", logical = LogicalEnum.AND)
     public void save(@RequestBody @Valid KdPermission kdPermission){
         if(kdPermission.getParentId() != 0) {
             permissionRepository.findById(kdPermission.getParentId())

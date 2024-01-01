@@ -5,6 +5,9 @@
             <el-form-item label="标题">
  <el-input v-model="p.title" placeholder="模糊查询"></el-input>
 </el-form-item>
+<el-form-item label="类型">
+      <input-enum enumName="articleTypeEnum"  v-model="p.type"></input-enum>
+</el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
                 <el-button  icon="Refresh" plain @click="reset">重置</el-button>
@@ -56,8 +59,9 @@ import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 import Link from "@/components/file/link.vue";
+import InputEnum from "@/components/enum/InputEnum.vue";
 import Preview from "@/components/file/preview.vue";
-const params = {pageSize:10,page:1, total: 0, title:''}
+const params = {pageSize:10,page:1, total: 0, title:'',type:''}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')
