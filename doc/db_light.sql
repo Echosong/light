@@ -116,9 +116,9 @@ CREATE TABLE `kd_log` (
 -- ----------------------------
 -- Records of kd_log
 -- ----------------------------
-INSERT INTO `kd_log` VALUES ('1', '2023-01-01 16:12:42.378000', '1', '2023-01-01 16:12:42.378000', '1', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '退出登录', null, 'info', 'com.kdao.light.controller.UserController.logout()', '', '127.0.0.1', '1');
-INSERT INTO `kd_log` VALUES ('2', '2023-01-01 16:13:01.407000', '5', '2023-01-01 16:13:01.407000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'com.kdao.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"NjU0MzIx\"}', '127.0.0.1', '0');
-INSERT INTO `kd_log` VALUES ('3', '2023-01-01 16:13:06.006000', '5', '2023-01-01 16:13:06.006000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'com.kdao.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\"}', '127.0.0.1', '0');
+INSERT INTO `kd_log` VALUES ('1', '2023-01-01 16:12:42.378000', '1', '2023-01-01 16:12:42.378000', '1', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '退出登录', null, 'info', 'cn.light.controller.UserController.logout()', '', '127.0.0.1', '1');
+INSERT INTO `kd_log` VALUES ('2', '2023-01-01 16:13:01.407000', '5', '2023-01-01 16:13:01.407000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"NjU0MzIx\"}', '127.0.0.1', '0');
+INSERT INTO `kd_log` VALUES ('3', '2023-01-01 16:13:06.006000', '5', '2023-01-01 16:13:06.006000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\"}', '127.0.0.1', '0');
 
 -- ----------------------------
 -- Table structure for kd_permission

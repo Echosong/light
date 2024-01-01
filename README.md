@@ -80,8 +80,8 @@ spring boot 没有一款基于程序员面向对象设计建模，快速开发�
 ```java
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("/admin", c -> c.getPackage().getName().contains("com.kdao.light.controller"))
-                .addPathPrefix("/api", c -> c.getPackage().getName().contains("com.kdao.light.api") )
+        configurer.addPathPrefix("/admin", c -> c.getPackage().getName().contains("cn.light.controller"))
+                .addPathPrefix("/api", c -> c.getPackage().getName().contains("cn.light.api") )
         ;
     }
    // 注意 如果 api 文件加 和 controller 文件夹里面有相同的controller 时候 @RestController("api-home") 需要注入不同bean名加以区分
