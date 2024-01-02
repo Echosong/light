@@ -20,7 +20,7 @@ import java.util.*;
  * <p>Title: 产品信息</p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-01 19:23:19</p >
+ * <p>create date: 2024-01-02 16:52:06</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -33,6 +33,9 @@ public class ProductDTO extends SysBaseDTO implements IDictionaryObject {
 
    @Schema(name="价格" )
     private BigDecimal price;
+
+   @Schema(name="产品描述" )
+    private String info;
 
 
 }

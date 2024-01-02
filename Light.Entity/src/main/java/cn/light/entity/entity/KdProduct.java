@@ -1,9 +1,11 @@
 package cn.light.entity.entity;
 
 
+import cn.light.common.anno.AutoCover;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
+import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +32,7 @@ import java.math.BigDecimal;
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@AutoCover(value = {CodeTypeEnum.LIST_DTO, CodeTypeEnum.DTO, CodeTypeEnum.QUERY_DTO})
 public class KdProduct extends SysBase {
 
     @Size

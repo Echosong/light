@@ -1,4 +1,4 @@
-package #{SYS_PATH}.common.dto.#{EntityName}#;
+package #{SYS_PATH}.packet.dto.#{EntityName}#;
 
 import #{SYS_PATH}.common.dto.PageInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
