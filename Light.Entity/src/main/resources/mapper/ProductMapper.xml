@@ -4,9 +4,9 @@
     <select id="listPage" resultType="cn.light.entity.entity.KdProduct">
         select *
         from kd_product where 1=1
-                 <if test="name != null and name != '' ">
- and name  like CONCAT('%',#{name},'%')
- </if>
+        <if test="name != null and name != '' ">
+            and name like CONCAT('%',#{name},'%')
+        </if>
     </select>
 
 </mapper>

@@ -1,10 +1,7 @@
 package cn.light.entity.entity;
 
 
-import cn.light.common.anno.AutoCover;
-import cn.light.common.anno.AutoEntity;
-import cn.light.common.anno.AutoEntityField;
-import cn.light.common.anno.InQueryDTO;
+import cn.light.common.anno.*;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.packet.enums.ArticleTypeEnum;
@@ -30,13 +27,14 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "新闻")
-@AutoCover(value = {CodeTypeEnum.NULL})
+@AutoCover(value = {CodeTypeEnum.MAPPER})
 public class KdArticle extends SysBase {
     @AutoEntityField(value = "标题")
     @InQueryDTO
     private String title;
 
     @AutoEntityField(value = "封面图片", htmlType = HtmlTypeEnum.UPLOAD)
+    @NotinListDTO
     private String imgUrl;
 
     @AutoEntityField(value = "类型", enums = ArticleTypeEnum.class)

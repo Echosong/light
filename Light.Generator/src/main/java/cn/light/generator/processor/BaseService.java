@@ -36,7 +36,7 @@ public class BaseService {
         //表名称
         this.tableName = clazz.getSimpleName();
         //类目
-        this.className = this.tableName.substring(2);
+        this.className = StrUtil.subAfter(this.tableName, Const.TABLE_PREFIX, false);
     }
 
     /**

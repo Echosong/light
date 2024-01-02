@@ -23,7 +23,7 @@ import cn.light.packet.enums.ArticleTypeEnum;
  * <p>Title:新闻 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-02 16:49:59</p >
+ * <p>create date: 2024-01-02 20:58:09</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -33,9 +33,6 @@ import cn.light.packet.enums.ArticleTypeEnum;
 public class ArticleListDTO extends SysBaseDTO implements IDictionaryObject {
    @Schema(name="标题" )
     private String title;
-
-   @Schema(name="封面图片" )
-    private String imgUrl;
 
    @Schema(name="类型" )
     @ApiModelPropertyEnum(ArticleTypeEnum.class)

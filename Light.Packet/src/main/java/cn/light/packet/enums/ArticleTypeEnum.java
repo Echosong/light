@@ -13,7 +13,9 @@ public enum ArticleTypeEnum  implements BaseEnum {
     NEW(0, "新闻"),
     NOTICE(1, "公告"),
 
-    ARTICLE(3, "文章");
+    ARTICLE(3, "文章"),
+
+    X(4, "通知");
 
     final Integer code;
     final String name;

@@ -14,6 +14,8 @@ export default [
 {perms: "file-add", view: () => import('@/views/file/add.vue')},
 {perms: "role-add", view: () => import('@/views/role/add.vue')},
 {perms: "product-add", view: () => import('@/views/product/add.vue')},
+{perms: "der-list", view: () => import('@/views/der/list.vue')},
 {perms: "config-list", view: () => import('@/views/config/list.vue')},
 {perms: "permission-add", view: () => import('@/views/permission/add.vue')},
+{perms: "der-add", view: () => import('@/views/der/add.vue')},
 ];

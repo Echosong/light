@@ -32,8 +32,8 @@ public class MapperService extends BaseService implements ServiceInterface {
         super(clazz);
     }
 
-    public void getMapperFile(String className) {
-        String repositoryName = className.substring(2);
+    public void getMapperFile() {
+        String repositoryName = this.className;
         String tplPath = this.getRealPath(packageName)+"/mapper";
         String fileName = tplPath + "/" + repositoryName + "Mapper.java";
         if (FileUtil.isFile(fileName)) {
@@ -57,9 +57,8 @@ public class MapperService extends BaseService implements ServiceInterface {
     }
 
 
-    public void getFile(String className) {
-        String repositoryName = className.substring(2) + "Mapper";
-
+    public void getFile() {
+        String repositoryName = this.className + "Mapper";
         String repositoryPath = Const.ROOT_PATH + "/Light.Entity/src/main/resources/mapper/";
         String fileName = repositoryPath + repositoryName + ".xml";
 
@@ -144,7 +143,7 @@ public class MapperService extends BaseService implements ServiceInterface {
     @Override
     public void start() {
         this.packageName = Const.SYS_PATH + ".entity";
-        this.getMapperFile(clazz.getSimpleName());
-        this.getFile(clazz.getSimpleName());
+        this.getMapperFile();
+        this.getFile();
     }
 }

@@ -4,12 +4,12 @@
     <select id="listPage" resultType="cn.light.entity.entity.KdFile">
         select *
         from kd_file where 1=1
-                 <if test="fileName != null and fileName != '' ">
- and file_name  like CONCAT('%',#{fileName},'%')
- </if>
-<if test="fileType != null "> 
- and file_type = #{fileType} 
- </if>
+        <if test="fileName != null and fileName != '' ">
+            and file_name like CONCAT('%',#{fileName},'%')
+        </if>
+        <if test="fileType != null ">
+            and file_type = #{fileType}
+        </if>
     </select>
 
 </mapper>

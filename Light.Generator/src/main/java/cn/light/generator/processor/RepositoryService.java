@@ -31,8 +31,8 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
     }
 
 
-    public void getFile(String className){
-        String repositoryName = className.substring(2)+"Repository";
+    public void getFile(){
+        String repositoryName = className+"Repository";
         String repositoryPath = super.getRealPath(packageName)+"/repository";
 
         String fileName = repositoryPath +"/"+ repositoryName +".java";
@@ -65,7 +65,7 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
     @Override
     public void start() {
         this.packageName = Const.SYS_PATH +".entity";
-        this.getFile(clazz.getSimpleName());
+        this.getFile();
     }
 
 

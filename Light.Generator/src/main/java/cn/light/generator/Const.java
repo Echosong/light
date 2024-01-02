@@ -52,4 +52,10 @@ public class Const {
      */
     public static String  PACKET_PATH = "packet";
 
+    /**
+     * 表前缀
+     */
+    public static String TABLE_PREFIX = "Kd";
+
+
 }
