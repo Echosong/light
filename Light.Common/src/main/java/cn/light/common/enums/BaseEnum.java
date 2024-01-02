@@ -77,16 +77,10 @@ public interface BaseEnum {
      */
     static  List<Map<String, Object>> toMap(String enumClass) throws ClassNotFoundException {
         String className = ClassUtil.getClassName(BaseEnum.class, false)
-                .replace(".BaseEnum", "."+enumClass);
+                .replace("common.enums.BaseEnum", "packet.enums."+enumClass);
         Class<? extends BaseEnum> clazz;
-        try {
-            clazz = (Class<? extends BaseEnum>) Class.forName(className);
-            ClassUtil.getLocationPath(BaseEnum.class);
-        }catch (Exception e){
-            className = className.replace(enumClass, "business."+ enumClass);
-            clazz = (Class<? extends BaseEnum>) Class.forName(className);
-            ClassUtil.getLocationPath(BaseEnum.class);
-        }
+        clazz = (Class<? extends BaseEnum>) Class.forName(className);
+        ClassUtil.getLocationPath(BaseEnum.class);
         return toMap(clazz);
     }
 }
