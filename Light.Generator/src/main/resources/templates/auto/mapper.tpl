@@ -1,7 +1,7 @@
 package #{PackageName}#.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
+import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
 import #{SYS_PATH}.entity.entity.#{UpTableName}#;
 import org.apache.ibatis.annotations.Mapper;
 
