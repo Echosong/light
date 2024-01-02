@@ -30,7 +30,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "新闻")
-@AutoCover(value = {CodeTypeEnum.DTO})
+@AutoCover(value = {CodeTypeEnum.NULL})
 public class KdArticle extends SysBase {
     @AutoEntityField(value = "标题")
     @InQueryDTO
