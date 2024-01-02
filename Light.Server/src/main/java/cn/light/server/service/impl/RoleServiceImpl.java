@@ -5,6 +5,7 @@ import cn.light.entity.entity.KdRole;
 import cn.light.entity.entity.KdUserRole;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRoleRepository;
+import cn.light.server.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

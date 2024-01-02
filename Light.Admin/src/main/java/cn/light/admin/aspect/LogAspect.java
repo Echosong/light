@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.annotation.Log;
 import cn.light.packet.dto.log.LogDTO;
-import cn.light.server.service.impl.LogService;
+import cn.light.server.service.LogService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

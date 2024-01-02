@@ -7,7 +7,7 @@ import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
 import cn.light.packet.dto.user.UserCacheDTO;
 import cn.light.common.enums.BaseEnum;
-import cn.light.server.service.impl.UserService;
+import cn.light.server.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

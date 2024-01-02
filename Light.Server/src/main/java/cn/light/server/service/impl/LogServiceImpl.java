@@ -6,6 +6,8 @@ import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.KdLog;
 import cn.light.entity.entity.KdUser;
 import cn.light.entity.repository.LogRepository;
+import cn.light.server.service.LogService;
+import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,4 +1,4 @@
-package cn.light.server.service.impl;
+package cn.light.server.service;
 
 
 import cn.light.packet.dto.config.ConfigDTO;

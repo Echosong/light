@@ -3,7 +3,7 @@ package cn.light.admin.advice;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.light.common.annotation.NoPermission;
 import cn.light.entity.entity.KdUser;
-import cn.light.server.service.impl.UserService;
+import cn.light.server.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;

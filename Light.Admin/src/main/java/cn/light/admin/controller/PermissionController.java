@@ -17,7 +17,7 @@ import cn.light.entity.mapper.PermissionMapper;
 import cn.light.entity.repository.PermissionRepository;
 import cn.light.entity.repository.RolePermissionRepository;
 import cn.light.entity.repository.UserRoleRepository;
-import cn.light.server.service.impl.PermissionService;
+import cn.light.server.service.PermissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -54,7 +54,7 @@ public class PermissionController extends BaseController{
     @Resource
     private  RolePermissionRepository rolePermissionRepository;
     @Resource
-    private  PermissionService permissionService;
+    private PermissionService permissionService;
 
     @Resource
     private  PermissionMapper permissionMapper;

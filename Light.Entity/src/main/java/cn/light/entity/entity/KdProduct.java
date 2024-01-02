@@ -4,6 +4,7 @@ package cn.light.entity.entity;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
+import cn.light.common.enums.HtmlTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
@@ -38,7 +39,11 @@ public class KdProduct extends SysBase {
     private String name;
 
     @AutoEntityField(value = "价格")
+    @InQueryDTO
     private BigDecimal price;
 
+
+    @AutoEntityField(value = "产品描述", htmlType = HtmlTypeEnum.TEXTEDIT)
+    private String info;
 
 }

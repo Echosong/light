@@ -5,7 +5,7 @@ import cn.light.entity.entity.KdUserRole;
 import cn.light.entity.repository.RoleRepository;
 
 import cn.light.entity.repository.UserRoleRepository;
-import cn.light.server.service.impl.RoleService;
+import cn.light.server.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

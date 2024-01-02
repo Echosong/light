@@ -21,6 +21,7 @@ import cn.light.entity.mapper.UserMapper;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRepository;
 import cn.light.entity.repository.UserRoleRepository;
+import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,25 +49,16 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-
-    private final UserRepository userRepository;
-    private final UserRoleRepository userRoleRepository;
-    private final RoleRepository roleRepository;
-
-    private final UserMapper userMapper;
-
+    @Resource
+    private  UserRepository userRepository;
+    @Resource
+    private  UserRoleRepository userRoleRepository;
+    @Resource
+    private  RoleRepository roleRepository;
+    @Resource
+    private  UserMapper userMapper;
     @Resource
     private  RedisTemplate<String, KdUser> redisTemplate;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, RoleRepository roleRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userRoleRepository = userRoleRepository;
-        this.roleRepository = roleRepository;
-        this.userMapper = userMapper;
-    }
-
-
 
     /**
      * 登录服务

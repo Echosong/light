@@ -5,6 +5,8 @@ import cn.light.entity.entity.KdPermission;
 import cn.light.entity.entity.KdRolePermission;
 import cn.light.entity.repository.PermissionRepository;
 import cn.light.entity.repository.RolePermissionRepository;
+import cn.light.server.service.PermissionService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +27,12 @@ import java.util.stream.Collectors;
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
+    @Resource
+    private  RolePermissionRepository rolePermissionRepository;
+    @Resource
+    private  PermissionRepository permissionRepository;
 
-    private final RolePermissionRepository rolePermissionRepository;
-    private final PermissionRepository permissionRepository;
 
-    @Autowired
-    public PermissionServiceImpl(RolePermissionRepository rolePermissionRepository, PermissionRepository permissionRepository) {
-        this.rolePermissionRepository = rolePermissionRepository;
-        this.permissionRepository = permissionRepository;
-    }
 
     /**
      * 根据角色获取角色下所有权限

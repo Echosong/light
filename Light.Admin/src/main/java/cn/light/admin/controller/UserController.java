@@ -14,7 +14,7 @@ import cn.light.packet.enums.UserStateEnum;
 import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.KdUser;
 import cn.light.entity.repository.UserRepository;
-import cn.light.server.service.impl.UserService;
+import cn.light.server.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

@@ -1,4 +1,4 @@
-package cn.light.server.service.impl;
+package cn.light.server.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.light.packet.dto.user.LoginUserDTO;

@@ -8,6 +8,8 @@ import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.KdConfig;
 import cn.light.entity.repository.ConfigRepository;
+import cn.light.server.service.ConfigService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -29,14 +31,8 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class ConfigServiceImpl implements ConfigService {
-
-    private final ConfigRepository configRepository;
-
-
-    @Autowired
-    public ConfigServiceImpl(ConfigRepository configRepository) {
-        this.configRepository = configRepository;
-    }
+    @Resource
+    private  ConfigRepository configRepository;
 
     /**
      * 获取一组配置数据
