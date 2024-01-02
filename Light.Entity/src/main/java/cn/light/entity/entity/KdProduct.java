@@ -32,7 +32,7 @@ import java.math.BigDecimal;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@AutoCover(value = {CodeTypeEnum.LIST_DTO, CodeTypeEnum.DTO, CodeTypeEnum.QUERY_DTO})
+@AutoCover(value = {CodeTypeEnum.NULL})
 public class KdProduct extends SysBase {
 
     @Size
