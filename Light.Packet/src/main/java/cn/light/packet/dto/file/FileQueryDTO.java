@@ -1,6 +1,6 @@
 package cn.light.packet.dto.file;
 
-import cn.light.packet.dto.PageInfo;
+import cn.light.common.dto.PageInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import lombok.Data;

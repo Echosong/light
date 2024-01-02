@@ -2,8 +2,8 @@ package cn.light.packet.dto.user;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
-import cn.light.packet.dto.PageInfo;
-import cn.light.packet.dto.SysBaseDTO;
+import cn.light.common.dto.PageInfo;
+import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

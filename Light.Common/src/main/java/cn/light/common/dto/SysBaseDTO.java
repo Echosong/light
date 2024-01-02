@@ -1,4 +1,4 @@
-package cn.light.packet.dto;
+package cn.light.common.dto;
 
 import cn.light.common.annotation.ExcelAnnotation;
 import io.swagger.v3.oas.annotations.media.Schema;

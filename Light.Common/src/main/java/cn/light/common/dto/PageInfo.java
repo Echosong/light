@@ -1,4 +1,4 @@
-package cn.light.packet.dto;
+package cn.light.common.dto;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;

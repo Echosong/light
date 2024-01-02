@@ -47,4 +47,9 @@ public class Const {
      */
     public static String  ADMIN_PATH = "admin";
 
+    /**
+     * 包路径
+     */
+    public static String  PACKET_PATH = "packet";
+
 }

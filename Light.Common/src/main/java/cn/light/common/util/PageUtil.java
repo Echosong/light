@@ -1,6 +1,6 @@
 package cn.light.common.util;
 
-import cn.light.packet.dto.PageInfo;
+import cn.light.common.dto.PageInfo;
 import com.github.pagehelper.PageHelper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

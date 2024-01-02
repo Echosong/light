@@ -49,9 +49,14 @@ public class DtoService extends BaseService implements ServiceInterface {
      */
     @Override
     public void start() {
-        this.packageName = Const.SYS_PATH + ".packet.dto";
+        this.packageName = String.format(Const.SYS_PATH + ".{}.dto", Const.PACKET_PATH);
+
+        String entityPackageName = Const.SYS_PATH + ".common";
         //新建文件夹
-        dtoPath = super.getRealPath(packageName) + "/" + StrUtil.lowerFirst(this.className);
+        dtoPath = super.getRealPath(entityPackageName) + "/" + StrUtil.lowerFirst(this.className);
+        dtoPath = dtoPath.replace(".Common", StrUtil.format(".{}", StrUtil.upperFirst(Const.PACKET_PATH)))
+                .replace("/common", StrUtil.format("/{}/dto", Const.PACKET_PATH));
+
         if (!FileUtil.exist(dtoPath)) {
             FileUtil.mkdir(dtoPath);
         }
