@@ -1,7 +1,7 @@
 package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cn.light.common.dto.role.RoleQueryDTO;
+import cn.light.packet.dto.role.RoleQueryDTO;
 import cn.light.entity.entity.KdRole;
 import org.apache.ibatis.annotations.Mapper;
 

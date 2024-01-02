@@ -1,8 +1,8 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.Log;
-import cn.light.common.dto.product.ProductDTO;
-import cn.light.common.dto.product.ProductListDTO;
-import cn.light.common.dto.product.ProductQueryDTO;
+import cn.light.packet.dto.product.ProductDTO;
+import cn.light.packet.dto.product.ProductListDTO;
+import cn.light.packet.dto.product.ProductQueryDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.*;
 
 /**

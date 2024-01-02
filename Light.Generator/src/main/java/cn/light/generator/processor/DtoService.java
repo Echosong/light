@@ -49,7 +49,7 @@ public class DtoService extends BaseService implements ServiceInterface {
      */
     @Override
     public void start() {
-        this.packageName = Const.SYS_PATH + ".common.dto";
+        this.packageName = Const.SYS_PATH + ".packet.dto";
         //新建文件夹
         dtoPath = super.getRealPath(packageName) + "/" + StrUtil.lowerFirst(this.className);
         if (!FileUtil.exist(dtoPath)) {

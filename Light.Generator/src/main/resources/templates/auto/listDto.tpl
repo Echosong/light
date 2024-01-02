@@ -1,4 +1,4 @@
-package #{SYS_PATH}.common.dto.#{EntityName}#;
+package #{SYS_PATH}.packet.dto.#{EntityName}#;
 
 import #{SYS_PATH}.common.annotation.ApiModelPropertyEnum;
 import #{SYS_PATH}.common.component.IDictionaryObject;

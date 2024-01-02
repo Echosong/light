@@ -5,7 +5,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.*;
-import cn.light.common.dto.PageInfo;
+import cn.light.packet.dto.PageInfo;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;

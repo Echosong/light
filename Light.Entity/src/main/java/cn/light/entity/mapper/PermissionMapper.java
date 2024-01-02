@@ -1,7 +1,7 @@
 package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cn.light.common.dto.permission.PermissionQueryDTO;
+import cn.light.packet.dto.permission.PermissionQueryDTO;
 import cn.light.entity.entity.KdPermission;
 import org.apache.ibatis.annotations.Mapper;
 

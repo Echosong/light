@@ -3,7 +3,7 @@ package cn.light.entity.entity;
 import cn.light.common.anno.*;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.common.enums.business.BusinessEnum;
+import cn.light.common.enums.BusinessEnum;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;

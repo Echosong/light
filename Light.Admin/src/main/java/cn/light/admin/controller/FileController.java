@@ -6,10 +6,9 @@ import cn.hutool.core.util.StrUtil;
 import cn.light.admin.config.properties.FileUploadProperties;
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
-import cn.light.common.dto.file.FileDTO;
-import cn.light.common.dto.file.FileListDTO;
-import cn.light.common.dto.file.FileQueryDTO;
-import cn.light.common.exception.BaseKnownException;
+import cn.light.packet.dto.file.FileDTO;
+import cn.light.packet.dto.file.FileListDTO;
+import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.KdFile;
@@ -31,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 
 /**

@@ -4,7 +4,7 @@ import cn.light.admin.aspect.RepeatSubmitAspect;
 import cn.light.admin.component.DictionarySerializer;
 import cn.light.common.component.IDictionaryObject;
 import cn.light.common.component.SerialUtil;
-import cn.light.service.UserService;
+import cn.light.server.service.impl.UserService;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -14,7 +14,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

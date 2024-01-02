@@ -28,7 +28,12 @@
 
 		<dependency>
 			<groupId>cn.light</groupId>
-			<artifactId>Light.Service</artifactId>
+			<artifactId>Light.Server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.light</groupId>
+			<artifactId>Light.Packet</artifactId>
 		</dependency>
 
 		<!--数据操作规范jpa-->

@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @MapperScan(basePackages = {"cn.light.entity.mapper"})
 @EntityScan(basePackages = {"cn.light.entity.entity"})
 @EnableJpaRepositories("cn.light.entity.repository")
-@ComponentScan(basePackages = {"cn.light.service.*","cn.light.admin.*"})
+@ComponentScan(basePackages = {"cn.light.server.*","cn.light.admin.*"})
 @SpringBootApplication
 public class LightAdminApplication {
 

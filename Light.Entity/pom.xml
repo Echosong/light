@@ -38,6 +38,11 @@
             <artifactId>Light.Common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.light</groupId>
+            <artifactId>Light.Packet</artifactId>
+        </dependency>
+
 
     </dependencies>
 </project>

@@ -5,7 +5,7 @@ import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.common.enums.business.FileTypeEnum;
+import cn.light.packet.enums.FileTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

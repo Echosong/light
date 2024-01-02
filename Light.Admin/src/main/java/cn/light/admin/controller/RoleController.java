@@ -1,28 +1,17 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.Log;
-import cn.light.common.dto.role.RoleDTO;
-import cn.light.common.dto.role.RoleListDTO;
-import cn.light.common.dto.role.RoleQueryDTO;
-import cn.light.common.exception.BaseKnownException;
-import cn.light.common.util.DtoMapper;
-import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.KdRole;
 import cn.light.entity.entity.KdUserRole;
-import cn.light.entity.mapper.RoleMapper;
 import cn.light.entity.repository.RoleRepository;
 
 import cn.light.entity.repository.UserRoleRepository;
-import cn.light.service.RoleService;
+import cn.light.server.service.impl.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.*;
 
 /**

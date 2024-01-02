@@ -1,8 +1,7 @@
 package cn.light.entity.repository;
 import java.util.*;
-import java.math.BigDecimal;
 
-import cn.light.common.dto.permission.PermissionQueryDTO;
+import cn.light.packet.dto.permission.PermissionQueryDTO;
 import cn.light.entity.entity.KdPermission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

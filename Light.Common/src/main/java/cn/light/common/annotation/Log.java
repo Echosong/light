@@ -1,7 +1,7 @@
 package cn.light.common.annotation;
 
 
-import cn.light.common.enums.business.BusinessEnum;
+import cn.light.common.enums.BusinessEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

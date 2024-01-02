@@ -2,7 +2,7 @@ package cn.light.admin.controller;
 
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.annotation.NoPermission;
-import cn.light.common.dto.user.UserDTO;
+import cn.light.packet.dto.user.UserDTO;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.KdUser;
@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

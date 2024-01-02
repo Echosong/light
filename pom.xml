@@ -27,7 +27,8 @@
         <module>Light.Generator</module>
         <module>Light.Entity</module>
         <module>Light.Admin</module>
-        <module>Light.Service</module>
+        <module>Light.Server</module>
+        <module>Light.Packet</module>
     </modules>
     <!--控制了版本以后子类可以直接使用该版本-->
     <dependencyManagement>
@@ -48,7 +49,14 @@
 
             <dependency>
                 <groupId>cn.light</groupId>
-                <artifactId>Light.Service</artifactId>
+                <artifactId>Light.Server</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>cn.light</groupId>
+                <artifactId>Light.Packet</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

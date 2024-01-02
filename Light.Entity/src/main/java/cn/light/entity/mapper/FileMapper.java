@@ -1,7 +1,7 @@
 package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cn.light.common.dto.file.FileQueryDTO;
+import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.entity.entity.KdFile;
 import org.apache.ibatis.annotations.Mapper;
 
