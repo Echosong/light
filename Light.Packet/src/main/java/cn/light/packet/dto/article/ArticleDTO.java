@@ -36,7 +36,7 @@ public class ArticleDTO extends SysBaseDTO implements IDictionaryObject {
 
    @Schema(title="类型" )
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
-    private int type;
+    private Integer type;
 
    @Schema(title="内容" )
     private String content;

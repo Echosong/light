@@ -30,7 +30,7 @@ public class FileQueryDTO extends PageInfo {
    @Schema(title="文件名" )
     private String fileName;
 
-   @Schema(title="文件类型" )
+    @Schema(title="文件类型" )
     @ApiModelPropertyEnum(FileTypeEnum.class)
     private Integer fileType;
 

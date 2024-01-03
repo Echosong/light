@@ -29,9 +29,9 @@ public class ArticleQueryDTO extends PageInfo {
    @Schema(title="标题" )
     private String title;
 
-   @Schema(title="类型" )
+    @Schema(title="类型" )
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
-    private int type;
+    private Integer type;
 
 
 }

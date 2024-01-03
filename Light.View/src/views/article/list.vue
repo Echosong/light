@@ -57,7 +57,7 @@ import Link from "@/components/file/link.vue";
 import InputEnum from "@/components/enum/InputEnum.vue";
 import Preview from "@/components/file/preview.vue";
 
-const params = {pageSize: 10, page: 1, total: 0, title: '', type: ''}
+const params = {pageSize: 10, page: 1, total: 0, title: '', type: null}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')

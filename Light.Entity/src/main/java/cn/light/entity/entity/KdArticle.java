@@ -12,11 +12,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 /**
- * <p>Title: LightController</p >
- * <p>Description: KdArticle</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2022-09-21 12:18 </p >
- *
+ * 注意 类型一定要用应用类型，因为允许为null 会带来一些好处
  * @author : echosong
  * @version :1.0.0
  */
@@ -39,7 +35,7 @@ public class KdArticle extends SysBase {
 
     @AutoEntityField(value = "类型", enums = ArticleTypeEnum.class)
     @InQueryDTO
-    private int type;
+    private Integer type;
 
     @AutoEntityField(value = "内容", htmlType = HtmlTypeEnum.TEXTEDIT)
     private String content;

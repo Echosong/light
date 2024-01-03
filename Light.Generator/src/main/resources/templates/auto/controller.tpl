@@ -87,7 +87,4 @@ public class #{UpEntityName}#Controller extends BaseController{
         #{EntityName}#Repository.deleteById(id);
     }
 
-
-
-
 }

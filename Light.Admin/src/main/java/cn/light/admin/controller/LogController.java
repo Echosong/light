@@ -87,7 +87,4 @@ public class LogController extends BaseController{
         logRepository.deleteById(id);
     }
 
-
-
-
 }

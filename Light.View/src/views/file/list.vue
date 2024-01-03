@@ -63,6 +63,7 @@ import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 import Link from "@/components/file/link.vue";
 import Preview from "@/components/file/preview.vue";
+import InputEnum from "@/components/enum/InputEnum.vue";
 
 const params = {pageSize: 10, page: 1, total: 0, fileName: '', fileType: ''}
 const p = ref(JSON.parse(JSON.stringify(params)))
