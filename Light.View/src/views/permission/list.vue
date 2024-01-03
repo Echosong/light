@@ -11,7 +11,7 @@
         </el-form>
 
         <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
-            <el-button type="success" icon="Plus" plain @click="add">增加</el-button>
+            <el-button type="success" icon="Plus" plain @click="addFromPop({},{parentId:0,id:0})">增加</el-button>
             <el-button type="info" icon="Sort" plain @click="toggleExpandAll">展开/折叠</el-button>
         </FunNavigation>
 
