@@ -1,23 +1,24 @@
 package #{PackageName}#;
-import #{SYS_PATH}.common.annotation.Log;
-import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#DTO;
-import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#ListDTO;
-import #{SYS_PATH}.common.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
+import #{SYS_PATH}.common.annotation.*;
+import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#DTO;
+import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#ListDTO;
+import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
 import #{SYS_PATH}.common.exception.BaseKnownException;
-import #{SYS_PATH}.common.util.DtoMapper;
-import #{SYS_PATH}.common.util.PageUtil;
+import #{SYS_PATH}.common.util.*;
 import #{SYS_PATH}.entity.entity.#{UpTableName}#;
 import #{SYS_PATH}.entity.mapper.#{UpEntityName}#Mapper;
 import #{SYS_PATH}.entity.repository.#{UpEntityName}#Repository;
-
+import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import cn.hutool.core.date.DateUtil;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -45,6 +46,15 @@ public class #{UpEntityName}#Controller extends BaseController{
     public Page<#{UpEntityName}#ListDTO> listPage(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO){
         Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Mapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, #{UpEntityName}#ListDTO.class);
+    }
+
+    @PutMapping("/export")
+    @ApiResultIgnore
+    @Log("导出#{tableInfo}#")
+    public ResponseEntity<byte[]> export(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO) throws IOException, IllegalAccessException {
+        List<#{UpTableName}#> all = #{EntityName}#Mapper.listPage(queryDTO);
+        String fileName = "#{UpEntityName}#"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
+        return ExcelUtil.generateImportFile(DtoMapper.convertList(all, #{UpEntityName}#ListDTO.class), fileName, #{UpEntityName}#ListDTO.class);
     }
 
     @Operation(summary = "新增活更新#{tableInfo}#")
@@ -76,5 +86,8 @@ public class #{UpEntityName}#Controller extends BaseController{
     public void delete(@PathVariable Integer id) {
         #{EntityName}#Repository.deleteById(id);
     }
+
+
+
 
 }

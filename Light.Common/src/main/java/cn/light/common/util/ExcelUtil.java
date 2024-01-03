@@ -104,7 +104,7 @@ public class ExcelUtil {
                 }
 
                 hssfCell = hssfRowCn.createCell(columnSqu);
-                hssfCell.setCellValue(apiModelProperties.defaultValue());
+                hssfCell.setCellValue(apiModelProperties.title());
             }
 
             hssfCell = hssfRow.createCell(columnSqu);

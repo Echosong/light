@@ -1,29 +1,31 @@
 package cn.light.admin.controller;
-import cn.light.common.annotation.Log;
+import cn.light.common.annotation.*;
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.dto.log.LogListDTO;
 import cn.light.packet.dto.log.LogQueryDTO;
 import cn.light.common.exception.BaseKnownException;
-import cn.light.common.util.DtoMapper;
-import cn.light.common.util.PageUtil;
+import cn.light.common.util.*;
 import cn.light.entity.entity.KdLog;
 import cn.light.entity.mapper.LogMapper;
 import cn.light.entity.repository.LogRepository;
-
+import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import cn.hutool.core.date.DateUtil;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * <p>Title: </p >
  * <p>Description: 日志管理</p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-01 19:36:11</p >
+ * <p>create date: 2024-01-03 10:10:23</p >
  *
  * listPage,save,delete,find,list
  * @author : echosong
@@ -44,6 +46,15 @@ public class LogController extends BaseController{
     public Page<LogListDTO> listPage(@RequestBody @Valid LogQueryDTO queryDTO){
         Page<KdLog> dataPages  =  PageUtil.getPage(logMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, LogListDTO.class);
+    }
+
+    @PutMapping("/export")
+    @ApiResultIgnore
+    @Log("导出日志")
+    public ResponseEntity<byte[]> export(@RequestBody @Valid LogQueryDTO queryDTO) throws IOException, IllegalAccessException {
+        List<KdLog> all = logMapper.listPage(queryDTO);
+        String fileName = "Log"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
+        return ExcelUtil.generateImportFile(DtoMapper.convertList(all, LogListDTO.class), fileName, LogListDTO.class);
     }
 
     @Operation(summary = "新增活更新日志")
@@ -75,5 +86,8 @@ public class LogController extends BaseController{
     public void delete(@PathVariable Integer id) {
         logRepository.deleteById(id);
     }
+
+
+
 
 }
