@@ -122,7 +122,7 @@ public class DtoService extends BaseService implements ServiceInterface {
                 if(StrUtil.isNotEmpty( autoEntityField.notes())){
                     notes = StrUtil.format(", description=\"{}\"", autoEntityField.notes());
                 }
-                builder.append(StrUtil.format("   @Schema(name=\"{}\" {})", autoEntityField.value(),
+                builder.append(StrUtil.format("   @Schema(title=\"{}\" {})", autoEntityField.value(),
                         notes));
                 builder.append("\r\n");
                 String autoEnumName = autoEntityField.enums().getSimpleName();

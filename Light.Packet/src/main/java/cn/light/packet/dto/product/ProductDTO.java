@@ -28,13 +28,13 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ProductDTO extends SysBaseDTO implements IDictionaryObject {
-   @Schema(name="产品名称" )
+   @Schema(title="产品名称" )
     private String name;
 
-   @Schema(name="价格" )
+   @Schema(title="价格" )
     private BigDecimal price;
 
-   @Schema(name="产品描述" )
+   @Schema(title="产品描述" )
     private String info;
 
 

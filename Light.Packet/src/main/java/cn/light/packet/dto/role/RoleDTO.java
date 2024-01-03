@@ -29,10 +29,10 @@ import java.util.*;
 @Data
 public class RoleDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
-   @Schema(name="客户名称" )
+   @Schema(title="客户名称" )
     private String name;
 
-   @Schema(name="描述" )
+   @Schema(title="描述" )
     private String description;
 
 

@@ -31,30 +31,30 @@ import cn.light.packet.enums.FileTypeEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class FileListDTO extends SysBaseDTO implements IDictionaryObject {
-   @Schema(name="图标" )
+   @Schema(title="图标" )
     private String ico;
 
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
-   @Schema(name="文件名" )
+   @Schema(title="文件名" )
     private String fileName;
 
-   @Schema(name="文件扩展名" )
+   @Schema(title="文件扩展名" )
     private String extend;
 
-   @Schema(name="文件存储路径" )
+   @Schema(title="文件存储路径" )
     private String filePath;
 
-   @Schema(name="文件类型" )
+   @Schema(title="文件类型" )
     @ApiModelPropertyEnum(FileTypeEnum.class)
     private Integer fileType;
 
-   @Schema(name="文件大小" )
+   @Schema(title="文件大小" )
     private long fileSize;
 
-   @Schema(name="相对路径" )
+   @Schema(title="相对路径" )
     private String urlPath;
 
-   @Schema(name="文件唯一标识" )
+   @Schema(title="文件唯一标识" )
     private String uuid;
 
 

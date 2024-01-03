@@ -35,44 +35,44 @@ import cn.light.packet.enums.UserSexEnum;
 public class UserListDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
     @Pattern(message="必须为手机格式",regexp="\\d{11}")
-   @Schema(name="账号" )
+   @Schema(title="账号" )
     private String username;
 
     @Range(min=0,max=1)
-   @Schema(name="性别" )
+   @Schema(title="性别" )
     @ApiModelPropertyEnum(UserSexEnum.class)
     private Integer sex;
 
     @Range(min=0,max=300)
-   @Schema(name="身高" )
+   @Schema(title="身高" )
     private Double height;
 
-   @Schema(name="体重" )
+   @Schema(title="体重" )
     private Double weight;
 
-   @Schema(name="昵称" )
+   @Schema(title="昵称" )
     private String nick;
 
-   @Schema(name="注册方式" , description="0,1,2")
+   @Schema(title="注册方式" , description="0,1,2")
     @ApiModelPropertyEnum(UserRegTypeEnum.class)
     private Integer type;
 
     @Length(min=2,max=2147483647,message="姓名必须大于两个字符")
-   @Schema(name="姓名" )
+   @Schema(title="姓名" )
     private String name;
 
-   @Schema(name="状态" , description="0,1")
+   @Schema(title="状态" , description="0,1")
     @ApiModelPropertyEnum(UserStateEnum.class)
     private Integer state;
 
     @Email(message="{jakarta.validation.constraints.Email.message}")
-   @Schema(name="邮箱" )
+   @Schema(title="邮箱" )
     private String email;
 
-   @Schema(name="注册ip" )
+   @Schema(title="注册ip" )
     private String regIp;
 
-   @Schema(name="登录ip" )
+   @Schema(title="登录ip" )
     private String loginIp;
 
 

@@ -26,10 +26,10 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ProductQueryDTO extends PageInfo {
-   @Schema(name="产品名称" )
+   @Schema(title="产品名称" )
     private String name;
 
-   @Schema(name="价格" )
+   @Schema(title="价格" )
     private BigDecimal price;
 
 

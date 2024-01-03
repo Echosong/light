@@ -27,12 +27,12 @@ import java.util.*;
 @Data
 public class ConfigQueryDTO extends PageInfo {
     @NotBlank(message="{jakarta.validation.constraints.NotBlank.message}")
-   @Schema(name="配置字段名" )
+   @Schema(title="配置字段名" )
     private String key;
 
     @Email(message="{jakarta.validation.constraints.Email.message}")
     @Length(min=6,max=16,message="长度必须为6-16")
-   @Schema(name="配置说明" )
+   @Schema(title="配置说明" )
     private String name;
 
 

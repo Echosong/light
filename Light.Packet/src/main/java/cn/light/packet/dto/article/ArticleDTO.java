@@ -28,23 +28,23 @@ import cn.light.packet.enums.ArticleTypeEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleDTO extends SysBaseDTO implements IDictionaryObject {
-   @Schema(name="标题" )
+   @Schema(defaultValue="标题" )
     private String title;
 
-   @Schema(name="封面图片" )
+   @Schema(title="封面图片" )
     private String imgUrl;
 
-   @Schema(name="类型" )
+   @Schema(title="类型" )
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
     private int type;
 
-   @Schema(name="内容" )
+   @Schema(title="内容" )
     private String content;
 
-   @Schema(name="附件" )
+   @Schema(title="附件" )
     private String fileUrl;
 
-   @Schema(name="项目id" )
+   @Schema(title="项目id" )
     private Integer projectId;
 
 

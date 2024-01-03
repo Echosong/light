@@ -26,10 +26,10 @@ import cn.light.packet.enums.ArticleTypeEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleQueryDTO extends PageInfo {
-   @Schema(name="标题" )
+   @Schema(title="标题" )
     private String title;
 
-   @Schema(name="类型" )
+   @Schema(title="类型" )
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
     private int type;
 

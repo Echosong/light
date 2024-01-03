@@ -1,5 +1,8 @@
 package cn.light.admin.controller;
+import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
+import cn.light.common.annotation.NoPermission;
+import cn.light.common.util.ExcelUtil;
 import cn.light.packet.dto.article.ArticleDTO;
 import cn.light.packet.dto.article.ArticleListDTO;
 import cn.light.packet.dto.article.ArticleQueryDTO;
@@ -14,9 +17,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -74,6 +79,14 @@ public class ArticleController extends BaseController{
     @Log("删除新闻")
     public void delete(@PathVariable Integer id) {
         articleRepository.deleteById(id);
+    }
+
+    @GetMapping("/export")
+    @NoPermission
+    @ApiResultIgnore
+    @Log("导出新闻")
+    public ResponseEntity<byte[]> test() throws IOException, IllegalAccessException {
+        return ExcelUtil.generateImportFile(new LinkedList(), "test.xlsx", ArticleListDTO.class);
     }
 
 }

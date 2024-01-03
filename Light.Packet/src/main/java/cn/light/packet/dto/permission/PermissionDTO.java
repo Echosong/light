@@ -29,34 +29,34 @@ import java.util.*;
 @Data
 public class PermissionDTO extends SysBaseDTO implements IDictionaryObject {
     @NotBlank(message="权限名称不能为空")
-   @Schema(name="权限名称" )
+   @Schema(title="权限名称" )
     private String name;
 
-   @Schema(name="权限描述" )
+   @Schema(title="权限描述" )
     private String description;
 
-   @Schema(name="访问路径" )
+   @Schema(title="访问路径" )
     private String url;
 
     @NotBlank(message="权限标识不能为空")
-   @Schema(name="权限标识" )
+   @Schema(title="权限标识" )
     private String perms;
 
     @Range(min=0)
-   @Schema(name="父级id" )
+   @Schema(title="父级id" )
     private Integer parentId;
 
     @Range(min=0,max=3)
-   @Schema(name="类型" , description="权限类型 0：目录   1：菜单   2：按钮")
+   @Schema(title="类型" , description="权限类型 0：目录   1：菜单   2：按钮")
     private Integer type;
 
-   @Schema(name="排序" )
+   @Schema(title="排序" )
     private Integer sort;
 
-   @Schema(name="图标" )
+   @Schema(title="图标" )
     private String icon;
 
-   @Schema(name="是否展现 1 展现 0 不展现" )
+   @Schema(title="是否展现 1 展现 0 不展现" )
     private Integer show;
 
 

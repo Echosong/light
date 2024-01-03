@@ -28,11 +28,11 @@ import java.util.*;
 public class UserQueryDTO extends PageInfo {
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
     @Pattern(message="必须为手机格式",regexp="\\d{11}")
-   @Schema(name="账号" )
+   @Schema(title="账号" )
     private String username;
 
     @Length(min=2,max=2147483647,message="姓名必须大于两个字符")
-   @Schema(name="姓名" )
+   @Schema(title="姓名" )
     private String name;
 
 

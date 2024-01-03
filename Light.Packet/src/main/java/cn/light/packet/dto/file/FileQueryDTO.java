@@ -27,10 +27,10 @@ import cn.light.packet.enums.FileTypeEnum;
 @Data
 public class FileQueryDTO extends PageInfo {
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
-   @Schema(name="文件名" )
+   @Schema(title="文件名" )
     private String fileName;
 
-   @Schema(name="文件类型" )
+   @Schema(title="文件类型" )
     @ApiModelPropertyEnum(FileTypeEnum.class)
     private Integer fileType;
 

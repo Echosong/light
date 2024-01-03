@@ -29,28 +29,28 @@ import cn.light.common.enums.HtmlTypeEnum;
 @Data
 public class ConfigDTO extends SysBaseDTO implements IDictionaryObject {
     @NotBlank(message="{jakarta.validation.constraints.NotBlank.message}")
-   @Schema(name="配置字段名" )
+   @Schema(title="配置字段名" )
     private String key;
 
     @Email(message="{jakarta.validation.constraints.Email.message}")
     @Length(min=6,max=16,message="长度必须为6-16")
-   @Schema(name="配置说明" )
+   @Schema(title="配置说明" )
     private String name;
 
     @Range(min=0)
-   @Schema(name="配置分组" )
+   @Schema(title="配置分组" )
     private Integer group;
 
-   @Schema(name="配置值" )
+   @Schema(title="配置值" )
     private String value;
 
     @Range(min=0,max=10,message="必须大于")
-   @Schema(name="类型" , description="配置html展现类型")
+   @Schema(title="类型" , description="配置html展现类型")
     @ApiModelPropertyEnum(HtmlTypeEnum.class)
     private Integer type;
 
     @Pattern(message="必须大于2",regexp="\\s{2,}")
-   @Schema(name="描述" , description="如果选择框用,隔开")
+   @Schema(title="描述" , description="如果选择框用,隔开")
     private String description;
 
 

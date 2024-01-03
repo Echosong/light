@@ -27,7 +27,7 @@ import java.util.*;
 @Data
 public class PermissionQueryDTO extends PageInfo {
     @NotBlank(message="权限名称不能为空")
-   @Schema(name="权限名称" )
+   @Schema(title="权限名称" )
     private String name;
 
 

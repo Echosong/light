@@ -27,7 +27,7 @@ import java.util.*;
 @Data
 public class RoleQueryDTO extends PageInfo {
     @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
-   @Schema(name="客户名称" )
+   @Schema(title="客户名称" )
     private String name;
 
 

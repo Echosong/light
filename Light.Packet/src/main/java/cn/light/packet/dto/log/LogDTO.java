@@ -19,35 +19,35 @@ import cn.light.common.enums.BusinessEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class LogDTO extends SysBaseDTO implements IDictionaryObject {
-   @Schema(name="用户" )
+   @Schema(title="用户" )
     private String username;
 
-   @Schema(name="请求ip" )
+   @Schema(title="请求ip" )
     private String requestIp;
 
-   @Schema(name="地址" )
+   @Schema(title="地址" )
     private String address;
 
-   @Schema(name="描述" )
+   @Schema(title="描述" )
     private String description;
 
-   @Schema(name="浏览器" )
+   @Schema(title="浏览器" )
     private String browser;
 
-   @Schema(name="请求耗时" )
+   @Schema(title="请求耗时" )
     private Long time;
 
-   @Schema(name="方法名" )
+   @Schema(title="方法名" )
     private String method;
 
-   @Schema(name="参数" )
+   @Schema(title="参数" )
     private String params;
 
-   @Schema(name="日志类型" )
+   @Schema(title="日志类型" )
     @ApiModelPropertyEnum(BusinessEnum.class)
     private Integer logType;
 
-   @Schema(name="异常详情" )
+   @Schema(title="异常详情" )
     private String exceptionDetail;
 
 

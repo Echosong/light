@@ -18,13 +18,13 @@ import cn.light.common.enums.BusinessEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class LogQueryDTO extends PageInfo {
-   @Schema(name="用户" )
+   @Schema(title="用户" )
     private String username;
 
-   @Schema(name="描述" )
+   @Schema(title="描述" )
     private String description;
 
-   @Schema(name="日志类型" )
+   @Schema(title="日志类型" )
     @ApiModelPropertyEnum(BusinessEnum.class)
     private Integer logType;
 
