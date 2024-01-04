@@ -9,6 +9,7 @@ import cn.light.entity.repository.LogRepository;
 import cn.light.server.service.LogService;
 import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import java.util.Objects;
  * @version :1.0.0
  */
 @Service
+@Slf4j
 public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
@@ -35,13 +37,13 @@ public class LogServiceImpl implements LogService {
     private UserService userService;
 
     @Resource
-    private  RedisTemplate<String, KdUser> redisTemplate;
+    private RedisTemplate<String, KdUser> redisTemplate;
 
     private final List<KdUser> userList = new ArrayList<>();
 
 
     @Override
-    public void  setUserList(){
+    public void setUserList() {
         for (int i = 0; i < 10; i++) {
             KdUser kdUser = new KdUser();
             kdUser.setId(i);
@@ -50,8 +52,8 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public List<KdUser> getUserList(){
-        return  userList;
+    public List<KdUser> getUserList() {
+        return userList;
     }
 
     @Autowired
@@ -66,9 +68,14 @@ public class LogServiceImpl implements LogService {
      */
     @Override
     public void save(LogDTO logDTO) {
+        String userName = null;
         //获取用户信息
-        KdUser user = userService.getUserCache();
-        String userName = Objects.isNull(user)?"未知用户": user.getUsername();
+        try {
+            KdUser user = userService.getUserCache();
+            userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
+        } catch (Exception ignored) {
+            log.warn("获取用户信息失败");
+        }
         logDTO.setUsername(userName);
         logRepository.save(DtoMapper.convert(logDTO, KdLog.class));
     }

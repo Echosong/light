@@ -25,7 +25,7 @@ import java.util.*;
  * <p>Title: </p >
  * <p>Description: 日志管理</p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-03 10:10:23</p >
+ * <p>create date: 2024-01-03 17:20:17</p >
  *
  * listPage,save,delete,find,list
  * @author : echosong

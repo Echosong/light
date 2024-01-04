@@ -5,10 +5,10 @@ import cn.light.common.anno.AutoCover;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
+import cn.light.common.enums.BusinessEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +30,9 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
+@Table(indexes = {
+        @Index(name = "idx_kdproduct_name", columnList = "name")
+})
 @DynamicInsert
 @DynamicUpdate
 @AutoCover(value = {CodeTypeEnum.NULL})
@@ -41,6 +44,11 @@ public class KdProduct extends SysBase {
     @InQueryDTO
     private String name;
 
+    @PrePersist
+    public void prePersist() {
+
+    }
+
     @AutoEntityField(value = "价格")
     @InQueryDTO
     private BigDecimal price;
@@ -48,5 +56,6 @@ public class KdProduct extends SysBase {
 
     @AutoEntityField(value = "产品描述", htmlType = HtmlTypeEnum.TEXTEDIT)
     private String info;
+
 
 }

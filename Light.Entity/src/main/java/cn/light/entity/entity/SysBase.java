@@ -26,6 +26,11 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class SysBase {
+
+    @Version
+    @AutoEntityField(value = "版本号，自动实现乐观锁")
+    private Integer version;
+
     /**
      * 主键 这里跟AUTO 要有区分
      */
