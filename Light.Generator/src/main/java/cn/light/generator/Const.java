@@ -55,7 +55,7 @@ public class Const {
     /**
      * 表前缀
      */
-    public static String TABLE_PREFIX = "Kd";
+    public static String TABLE_PREFIX = "Sys";
 
 
 }
