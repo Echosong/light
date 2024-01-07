@@ -36,7 +36,7 @@ public class BaseService {
         //表名称
         this.tableName = clazz.getSimpleName();
         if(StrUtil.startWith(this.tableName,"Sys")){
-            tableName = StrUtil.subAfter(this.tableName,"Sys", false);
+            this.className = StrUtil.subAfter(this.tableName,"Sys", false);
         }else {
             //类目
             this.className = StrUtil.subAfter(this.tableName, Const.TABLE_PREFIX, false);

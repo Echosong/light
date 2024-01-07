@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import cn.hutool.core.date.DateUtil;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.io.IOException;
 import java.util.*;
 
@@ -24,7 +25,7 @@ import java.util.*;
  * <p>Title: </p >
  * <p>Description: 日志管理</p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-03 17:20:17</p >
+ * <p>create date: 2024-01-07 23:00:49</p >
  *
  * listPage,save,delete,find,list
  * @author : echosong
@@ -60,8 +61,8 @@ public class LogController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改日志")
     public void save(@RequestBody @Valid LogDTO logDTO){
-        SysLog kdLog = DtoMapper.convert(logDTO, SysLog.class);
-        logRepository.save(kdLog);
+        SysLog sysLog = DtoMapper.convert(logDTO, SysLog.class);
+        logRepository.save(sysLog);
     }
 
     @Operation(summary = "查询全部日志")
