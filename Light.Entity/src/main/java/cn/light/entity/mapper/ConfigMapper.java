@@ -2,7 +2,7 @@ package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.config.ConfigQueryDTO;
-import cn.light.entity.entity.KdConfig;
+import cn.light.entity.entity.SysConfig;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * @version :1.0.0
  */
 @Mapper
-public interface ConfigMapper extends BaseMapper<KdConfig> {
-    List<KdConfig> listPage(ConfigQueryDTO configQueryDTO);
+public interface ConfigMapper extends BaseMapper<SysConfig> {
+    List<SysConfig> listPage(ConfigQueryDTO configQueryDTO);
 }

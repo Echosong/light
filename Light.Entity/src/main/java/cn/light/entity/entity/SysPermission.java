@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.Range;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "权限")
-public class KdPermission extends  SysBase{
+public class SysPermission extends  SysBase{
     @AutoEntityField("权限名称")
     @NotBlank(message = "权限名称不能为空")
     @InQueryDTO

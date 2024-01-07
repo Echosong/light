@@ -6,7 +6,7 @@ import cn.light.packet.dto.product.ProductQueryDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdProduct;
+import cn.light.entity.entity.SysProduct;
 import cn.light.entity.mapper.ProductMapper;
 import cn.light.entity.repository.ProductRepository;
 
@@ -42,7 +42,7 @@ public class ProductController extends BaseController{
     @Operation(summary = "分页查询产品信息")
     @PutMapping("/listPage")
     public Page<ProductListDTO> listPage(@RequestBody @Valid ProductQueryDTO queryDTO){
-        Page<KdProduct> dataPages  =  PageUtil.getPage(productMapper::listPage, queryDTO);
+        Page<SysProduct> dataPages  =  PageUtil.getPage(productMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, ProductListDTO.class);
     }
 
@@ -50,21 +50,21 @@ public class ProductController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改产品信息")
     public void save(@RequestBody @Valid ProductDTO productDTO){
-        KdProduct kdProduct = DtoMapper.convert(productDTO, KdProduct.class);
+        SysProduct kdProduct = DtoMapper.convert(productDTO, SysProduct.class);
         productRepository.save(kdProduct);
     }
 
     @Operation(summary = "查询全部产品信息")
     @GetMapping("/list")
     public List<ProductListDTO> list(){
-        List<KdProduct> all = productRepository.findAll();
+        List<SysProduct> all = productRepository.findAll();
         return DtoMapper.convertList(all, ProductListDTO.class);
     }
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public ProductDTO find(@PathVariable Integer id){
-        KdProduct one = productRepository.findById(id)
+        SysProduct one = productRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ProductDTO.class);
     }

@@ -12,7 +12,7 @@ import cn.light.packet.dto.user.*;
 import cn.light.common.enums.BusinessEnum;
 import cn.light.packet.enums.UserStateEnum;
 import cn.light.common.util.DtoMapper;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysUser;
 import cn.light.entity.repository.UserRepository;
 import cn.light.server.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -110,7 +110,7 @@ public class UserController extends BaseController{
     @Operation(summary = "获取所有用户")
     @GetMapping("/all")
     public List<UserKeyDTO> all() {
-        List<KdUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
+        List<SysUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
         return DtoMapper.convertList(all, UserKeyDTO.class);
     }
 

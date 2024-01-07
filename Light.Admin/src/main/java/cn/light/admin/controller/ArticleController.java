@@ -7,7 +7,7 @@ import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdArticle;
+import cn.light.entity.entity.SysArticle;
 import cn.light.entity.mapper.ArticleMapper;
 import cn.light.entity.repository.ArticleRepository;
 import cn.light.packet.dto.article.ArticleDTO;
@@ -48,7 +48,7 @@ public class ArticleController extends BaseController{
     @Operation(summary = "分页查询新闻")
     @PutMapping("/listPage")
     public Page<ArticleListDTO> listPage(@RequestBody @Valid ArticleQueryDTO queryDTO){
-        Page<KdArticle> dataPages  =  PageUtil.getPage(articleMapper::listPage, queryDTO);
+        Page<SysArticle> dataPages  =  PageUtil.getPage(articleMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, ArticleListDTO.class);
     }
 
@@ -56,21 +56,21 @@ public class ArticleController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改新闻")
     public void save(@RequestBody @Valid ArticleDTO articleDTO){
-        KdArticle kdArticle = DtoMapper.convert(articleDTO, KdArticle.class);
+        SysArticle kdArticle = DtoMapper.convert(articleDTO, SysArticle.class);
         articleRepository.save(kdArticle);
     }
 
     @Operation(summary = "查询全部新闻")
     @GetMapping("/list")
     public List<ArticleListDTO> list(){
-        List<KdArticle> all = articleRepository.findAll();
+        List<SysArticle> all = articleRepository.findAll();
         return DtoMapper.convertList(all, ArticleListDTO.class);
     }
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public ArticleDTO find(@PathVariable Integer id){
-        KdArticle one = articleRepository.findById(id)
+        SysArticle one = articleRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ArticleDTO.class);
     }
@@ -86,7 +86,7 @@ public class ArticleController extends BaseController{
     @ApiResultIgnore
     @Log("导出新闻")
     public ResponseEntity<byte[]> export(@RequestBody @Valid ArticleQueryDTO queryDTO) throws IOException, IllegalAccessException {
-        List<KdArticle> all = articleMapper.listPage(queryDTO);
+        List<SysArticle> all = articleMapper.listPage(queryDTO);
         String fileName = "article"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
         return ExcelUtil.generateImportFile(DtoMapper.convertList(all, ArticleListDTO.class), fileName, ArticleListDTO.class);
     }

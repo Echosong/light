@@ -1,10 +1,8 @@
 package cn.light.entity.repository;
 import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdRole;
-import org.springframework.data.domain.Page;
+
+import cn.light.entity.entity.SysRole;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,11 +16,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface RoleRepository extends JpaRepository<KdRole, Integer> {
+public interface RoleRepository extends JpaRepository<SysRole, Integer> {
     /**
      * 根据 多个id 获取角色
      * @param ids
      * @return
      */
-    List<KdRole> getAllByIdIn(List<Integer> ids);
+    List<SysRole> getAllByIdIn(List<Integer> ids);
 }

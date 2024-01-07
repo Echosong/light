@@ -5,7 +5,7 @@ import cn.light.common.annotation.NoPermission;
 import cn.light.packet.dto.user.UserDTO;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.util.DtoMapper;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysUser;
 import cn.light.entity.mapper.PermissionMapper;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRepository;
@@ -66,7 +66,7 @@ public class HomeController extends BaseController {
     @PostMapping("/reg")
     @Operation(summary = "注册用户")
     public void reg(@RequestBody UserDTO userDTO) {
-        KdUser userDb = DtoMapper.convert(userDTO, KdUser.class);
+        SysUser userDb = DtoMapper.convert(userDTO, SysUser.class);
         //新注册用户暂时给0
         userDb.setState(0);
         userRepository.save(userDb);

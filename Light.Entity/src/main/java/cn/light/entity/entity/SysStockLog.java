@@ -19,7 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "业务库存变动日志表")
-public class KdStockLog extends SysBase {
+public class SysStockLog extends SysBase {
     @AutoEntityField(value = "业务变动类型")
     private Integer businessType;
 }

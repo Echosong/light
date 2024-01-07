@@ -2,7 +2,7 @@ package cn.light.server.service;
 
 
 
-import cn.light.entity.entity.KdPermission;
+import cn.light.entity.entity.SysPermission;
 
 import java.util.List;
 
@@ -21,5 +21,5 @@ public interface PermissionService {
      * @param roleIds
      * @return
      */
-    List<KdPermission> getListByrole(List<Integer> roleIds);
+    List<SysPermission> getListByrole(List<Integer> roleIds);
 }

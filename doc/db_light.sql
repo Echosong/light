@@ -16,10 +16,10 @@ Date: 2023-01-01 20:10:10
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for kd_article
+-- Table structure for sys_article
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_article`;
-CREATE TABLE `kd_article` (
+DROP TABLE IF EXISTS `sys_article`;
+CREATE TABLE `sys_article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -33,14 +33,14 @@ CREATE TABLE `kd_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='新闻';
 
 -- ----------------------------
--- Records of kd_article
+-- Records of sys_article
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for kd_config
+-- Table structure for sys_config
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_config`;
-CREATE TABLE `kd_config` (
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -56,21 +56,21 @@ CREATE TABLE `kd_config` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
 
 -- ----------------------------
--- Records of kd_config
+-- Records of sys_config
 -- ----------------------------
-INSERT INTO `kd_config` VALUES ('1', '2021-10-30 17:41:31', '38', '2023-01-01 16:23:18', '1', '系统名称', '0', 'sysName', '系统名称', '0', '轻巧之光项目管理');
-INSERT INTO `kd_config` VALUES ('2', '2021-06-30 23:52:39', '26', '2022-09-07 10:36:51', '1', '版本号', '0', '1001', '版本号', '0', 'v1.0');
-INSERT INTO `kd_config` VALUES ('3', null, null, '2022-09-07 10:24:39', '1', '开启,关闭', '0', 'state', '状态', '2', 'true');
-INSERT INTO `kd_config` VALUES ('4', null, null, '2022-09-29 14:08:29', '1', '协议', '0', 'contace', '使用协议', '5', '协议内容');
-INSERT INTO `kd_config` VALUES ('5', null, null, '2022-12-15 22:59:04', '1', '红,绿色,蓝色', '0', 'them', '风格', '1', '绿色');
-INSERT INTO `kd_config` VALUES ('6', null, null, '2022-09-29 14:08:29', '1', '只能上传jpg/png文件，且不超过500kb', '0', 'logo', '上传logo', '4', 'http://admin.kongdaozn.com/upload/2022/09/29/b4834260-4d6c-4f8a-8078-5ce497bd5364.png');
-INSERT INTO `kd_config` VALUES ('7', null, null, '2021-12-24 11:05:11', '1', '软件,硬件,实施', '0', 'selectTypes', '服务类型', '3', 'bbbbbb');
+INSERT INTO `sys_config` VALUES ('1', '2021-10-30 17:41:31', '38', '2023-01-01 16:23:18', '1', '系统名称', '0', 'sysName', '系统名称', '0', '轻巧之光项目管理');
+INSERT INTO `sys_config` VALUES ('2', '2021-06-30 23:52:39', '26', '2022-09-07 10:36:51', '1', '版本号', '0', '1001', '版本号', '0', 'v1.0');
+INSERT INTO `sys_config` VALUES ('3', null, null, '2022-09-07 10:24:39', '1', '开启,关闭', '0', 'state', '状态', '2', 'true');
+INSERT INTO `sys_config` VALUES ('4', null, null, '2022-09-29 14:08:29', '1', '协议', '0', 'contace', '使用协议', '5', '协议内容');
+INSERT INTO `sys_config` VALUES ('5', null, null, '2022-12-15 22:59:04', '1', '红,绿色,蓝色', '0', 'them', '风格', '1', '绿色');
+INSERT INTO `sys_config` VALUES ('6', null, null, '2022-09-29 14:08:29', '1', '只能上传jpg/png文件，且不超过500kb', '0', 'logo', '上传logo', '4', 'http://admin.kongdaozn.com/upload/2022/09/29/b4834260-4d6c-4f8a-8078-5ce497bd5364.png');
+INSERT INTO `sys_config` VALUES ('7', null, null, '2021-12-24 11:05:11', '1', '软件,硬件,实施', '0', 'selectTypes', '服务类型', '3', 'bbbbbb');
 
 -- ----------------------------
--- Table structure for kd_file
+-- Table structure for sys_file
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_file`;
-CREATE TABLE `kd_file` (
+DROP TABLE IF EXISTS `sys_file`;
+CREATE TABLE `sys_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -88,14 +88,14 @@ CREATE TABLE `kd_file` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件管理';
 
 -- ----------------------------
--- Records of kd_file
+-- Records of sys_file
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for kd_log
+-- Table structure for sys_log
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_log`;
-CREATE TABLE `kd_log` (
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -114,17 +114,17 @@ CREATE TABLE `kd_log` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='日志';
 
 -- ----------------------------
--- Records of kd_log
+-- Records of sys_log
 -- ----------------------------
-INSERT INTO `kd_log` VALUES ('1', '2023-01-01 16:12:42.378000', '1', '2023-01-01 16:12:42.378000', '1', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '退出登录', null, 'info', 'cn.light.controller.UserController.logout()', '', '127.0.0.1', '1');
-INSERT INTO `kd_log` VALUES ('2', '2023-01-01 16:13:01.407000', '5', '2023-01-01 16:13:01.407000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"NjU0MzIx\"}', '127.0.0.1', '0');
-INSERT INTO `kd_log` VALUES ('3', '2023-01-01 16:13:06.006000', '5', '2023-01-01 16:13:06.006000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\"}', '127.0.0.1', '0');
+INSERT INTO `sys_log` VALUES ('1', '2023-01-01 16:12:42.378000', '1', '2023-01-01 16:12:42.378000', '1', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '退出登录', null, 'info', 'cn.light.controller.UserController.logout()', '', '127.0.0.1', '1');
+INSERT INTO `sys_log` VALUES ('2', '2023-01-01 16:13:01.407000', '5', '2023-01-01 16:13:01.407000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"NjU0MzIx\"}', '127.0.0.1', '0');
+INSERT INTO `sys_log` VALUES ('3', '2023-01-01 16:13:06.006000', '5', '2023-01-01 16:13:06.006000', '5', null, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54', '用户登录', null, 'info', 'cn.light.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\"}', '127.0.0.1', '0');
 
 -- ----------------------------
--- Table structure for kd_permission
+-- Table structure for sys_permission
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_permission`;
-CREATE TABLE `kd_permission` (
+DROP TABLE IF EXISTS `sys_permission`;
+CREATE TABLE `sys_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '权限名称',
   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
@@ -143,22 +143,22 @@ CREATE TABLE `kd_permission` (
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COMMENT='权限';
 
 -- ----------------------------
--- Records of kd_permission
+-- Records of sys_permission
 -- ----------------------------
-INSERT INTO `kd_permission` VALUES ('1', '系统管理', 'el-icon-user', '系统管理', '', '0', null, '12', '0', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('2', '角色管理', null, '项目管理', 'role-list', '1', null, '1', '1', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('3', '系统配置', null, '系统配置', 'sys-config', '1', null, '3', '1', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('4', '用户列表', null, '用户列表', 'user-list', '1', null, '2', '1', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('6', '系统日志', null, '系统日志', 'log-list', '1', null, '5', '1', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('8', '内容管理', 'el-icon-cpu', '项目管理', null, '0', null, '1', '0', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('9', '文章列表', null, '文章列表', 'article-list', '8', null, '2', '1', null, null, null, null,1);
-INSERT INTO `kd_permission` VALUES ('10', '文件管理', null, '文件管理', 'file-list', '8', null, '3', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('1', '系统管理', 'el-icon-user', '系统管理', '', '0', null, '12', '0', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('2', '角色管理', null, '项目管理', 'role-list', '1', null, '1', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('3', '系统配置', null, '系统配置', 'sys-config', '1', null, '3', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('4', '用户列表', null, '用户列表', 'user-list', '1', null, '2', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('6', '系统日志', null, '系统日志', 'log-list', '1', null, '5', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('8', '内容管理', 'el-icon-cpu', '项目管理', null, '0', null, '1', '0', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('9', '文章列表', null, '文章列表', 'article-list', '8', null, '2', '1', null, null, null, null,1);
+INSERT INTO `sys_permission` VALUES ('10', '文件管理', null, '文件管理', 'file-list', '8', null, '3', '1', null, null, null, null,1);
 
 -- ----------------------------
--- Table structure for kd_role
+-- Table structure for sys_role
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_role`;
-CREATE TABLE `kd_role` (
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -170,16 +170,16 @@ CREATE TABLE `kd_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='所属客户';
 
 -- ----------------------------
--- Records of kd_role
+-- Records of sys_role
 -- ----------------------------
-INSERT INTO `kd_role` VALUES ('1', '2022-09-06 22:33:23.000000', null, '2022-09-07 11:03:48.115000', '1', '公司用户信息可以全部权限', '空道公司');
-INSERT INTO `kd_role` VALUES ('2', '2022-09-06 22:47:44.716000', '1', '2022-09-06 22:47:44.716000', '1', '描述', '山东项目');
+INSERT INTO `sys_role` VALUES ('1', '2022-09-06 22:33:23.000000', null, '2022-09-07 11:03:48.115000', '1', '公司用户信息可以全部权限', '空道公司');
+INSERT INTO `sys_role` VALUES ('2', '2022-09-06 22:47:44.716000', '1', '2022-09-06 22:47:44.716000', '1', '描述', '山东项目');
 
 -- ----------------------------
--- Table structure for kd_role_permission
+-- Table structure for sys_role_permission
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_role_permission`;
-CREATE TABLE `kd_role_permission` (
+DROP TABLE IF EXISTS `sys_role_permission`;
+CREATE TABLE `sys_role_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -191,22 +191,22 @@ CREATE TABLE `kd_role_permission` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of kd_role_permission
+-- Records of sys_role_permission
 -- ----------------------------
-INSERT INTO `kd_role_permission` VALUES ('1', null, null, null, null, '1', '1');
-INSERT INTO `kd_role_permission` VALUES ('2', null, null, null, null, '2', '1');
-INSERT INTO `kd_role_permission` VALUES ('3', null, null, null, null, '3', '1');
-INSERT INTO `kd_role_permission` VALUES ('4', null, null, null, null, '4', '1');
-INSERT INTO `kd_role_permission` VALUES ('5', null, null, null, null, '6', '1');
-INSERT INTO `kd_role_permission` VALUES ('6', null, null, null, null, '8', '1');
-INSERT INTO `kd_role_permission` VALUES ('7', null, null, null, null, '9', '1');
-INSERT INTO `kd_role_permission` VALUES ('8', null, null, null, null, '10', '1');
+INSERT INTO `sys_role_permission` VALUES ('1', null, null, null, null, '1', '1');
+INSERT INTO `sys_role_permission` VALUES ('2', null, null, null, null, '2', '1');
+INSERT INTO `sys_role_permission` VALUES ('3', null, null, null, null, '3', '1');
+INSERT INTO `sys_role_permission` VALUES ('4', null, null, null, null, '4', '1');
+INSERT INTO `sys_role_permission` VALUES ('5', null, null, null, null, '6', '1');
+INSERT INTO `sys_role_permission` VALUES ('6', null, null, null, null, '8', '1');
+INSERT INTO `sys_role_permission` VALUES ('7', null, null, null, null, '9', '1');
+INSERT INTO `sys_role_permission` VALUES ('8', null, null, null, null, '10', '1');
 
 -- ----------------------------
--- Table structure for kd_user
+-- Table structure for sys_user
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_user`;
-CREATE TABLE `kd_user` (
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -230,15 +230,15 @@ CREATE TABLE `kd_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户';
 
 -- ----------------------------
--- Records of kd_user
+-- Records of sys_user
 -- ----------------------------
-INSERT INTO `kd_user` VALUES ('1', '2022-09-06 21:32:29.000000', '1', '2023-01-01 12:34:37.001000', '5', '31369063@qq.com', '182', '127.0.0.1', '宋飞', null, '207cf410532f92a47dee245ce9b11ff71f578ebd763eb3bbea44ebd043d018fb', '192.168.10.105', '1', '1', '1', 'admin', '2', null, null);
+INSERT INTO `sys_user` VALUES ('1', '2022-09-06 21:32:29.000000', '1', '2023-01-01 12:34:37.001000', '5', '31369063@qq.com', '182', '127.0.0.1', '宋飞', null, '207cf410532f92a47dee245ce9b11ff71f578ebd763eb3bbea44ebd043d018fb', '192.168.10.105', '1', '1', '1', 'admin', '2', null, null);
 
 -- ----------------------------
--- Table structure for kd_user_role
+-- Table structure for sys_user_role
 -- ----------------------------
-DROP TABLE IF EXISTS `kd_user_role`;
-CREATE TABLE `kd_user_role` (
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime(6) DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
@@ -250,8 +250,8 @@ CREATE TABLE `kd_user_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户角色';
 
 -- ----------------------------
--- Records of kd_user_role
+-- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `kd_user_role` VALUES ('1', '2022-09-06 22:33:47.000000', '1', '2022-09-06 22:33:52.000000', '1', '1', '1');
-INSERT INTO `kd_user_role` VALUES ('2', '2022-09-29 11:44:46.977000', '1', '2022-09-29 11:44:46.977000', '1', '2', '2');
-INSERT INTO `kd_user_role` VALUES ('3', '2022-09-29 11:52:35.164000', '1', '2022-09-29 11:52:35.164000', '1', '2', '3');
+INSERT INTO `sys_user_role` VALUES ('1', '2022-09-06 22:33:47.000000', '1', '2022-09-06 22:33:52.000000', '1', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('2', '2022-09-29 11:44:46.977000', '1', '2022-09-29 11:44:46.977000', '1', '2', '2');
+INSERT INTO `sys_user_role` VALUES ('3', '2022-09-29 11:52:35.164000', '1', '2022-09-29 11:52:35.164000', '1', '2', '3');

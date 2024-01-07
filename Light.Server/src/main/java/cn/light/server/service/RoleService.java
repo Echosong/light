@@ -1,7 +1,7 @@
 package cn.light.server.service;
 
 
-import cn.light.entity.entity.KdRole;
+import cn.light.entity.entity.SysRole;
 
 import java.util.List;
 
@@ -20,5 +20,5 @@ public interface RoleService {
      * @param userId
      * @return
      */
-    List<KdRole> listByUser(Integer userId);
+    List<SysRole> listByUser(Integer userId);
 }

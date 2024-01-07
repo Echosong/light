@@ -1,13 +1,12 @@
 package cn.light.server.service.impl;
 
 
-import cn.light.entity.entity.KdPermission;
-import cn.light.entity.entity.KdRolePermission;
+import cn.light.entity.entity.SysPermission;
+import cn.light.entity.entity.SysRolePermission;
 import cn.light.entity.repository.PermissionRepository;
 import cn.light.entity.repository.RolePermissionRepository;
 import cn.light.server.service.PermissionService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,12 +39,12 @@ public class PermissionServiceImpl implements PermissionService {
      * @return
      */
     @Override
-    public List<KdPermission> getListByrole(List<Integer> roleIds) {
-        List<KdRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(roleIds);
-        Set<Integer> permissionIds = allByRoleIdIn.stream().map(KdRolePermission::getPermissionId).collect(Collectors.toSet());
+    public List<SysPermission> getListByrole(List<Integer> roleIds) {
+        List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(roleIds);
+        Set<Integer> permissionIds = allByRoleIdIn.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toSet());
         return  permissionRepository.getAllByIdIn(new ArrayList<>(permissionIds))
                 .stream()
-                .sorted(Comparator.comparing(KdPermission::getSort))
+                .sorted(Comparator.comparing(SysPermission::getSort))
                 .collect(Collectors.toList());
     }
 }

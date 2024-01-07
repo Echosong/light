@@ -1,8 +1,7 @@
 package cn.light.entity.repository;
 
-import cn.light.entity.entity.KdLog;
+import cn.light.entity.entity.SysLog;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>Title: 自动生成 日志</p >
@@ -14,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @version :1.0.0
  */
 @SuppressWarnings("ALL")
-public interface LogRepository extends JpaRepository<KdLog, Integer> {
+public interface LogRepository extends JpaRepository<SysLog, Integer> {
 
 }

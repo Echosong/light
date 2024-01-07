@@ -2,7 +2,7 @@ package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.product.ProductQueryDTO;
-import cn.light.entity.entity.KdProduct;
+import cn.light.entity.entity.SysProduct;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * @version :1.0.0
  */
 @Mapper
-public interface ProductMapper extends BaseMapper<KdProduct> {
-    List<KdProduct> listPage(ProductQueryDTO productQueryDTO);
+public interface ProductMapper extends BaseMapper<SysProduct> {
+    List<SysProduct> listPage(ProductQueryDTO productQueryDTO);
 }

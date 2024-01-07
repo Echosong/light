@@ -35,7 +35,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "用户")
-public class KdUser extends  SysBase implements Serializable {
+public class SysUser extends  SysBase implements Serializable {
 
     @NotNull
     @AutoEntityField("账号")

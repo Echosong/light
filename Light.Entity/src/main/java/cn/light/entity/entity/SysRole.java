@@ -26,7 +26,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "所属客户")
-public class KdRole extends SysBase  {
+public class SysRole extends SysBase  {
     @NotNull
     @AutoEntityField(value = "客户名称")
     @InQueryDTO

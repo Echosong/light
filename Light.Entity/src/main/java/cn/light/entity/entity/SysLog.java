@@ -26,7 +26,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoCover({CodeTypeEnum.NULL, CodeTypeEnum.CONTROLLER})
-public class KdLog extends SysBase {
+public class SysLog extends SysBase {
 
     @AutoEntityField(value = "用户")
     @InQueryDTO

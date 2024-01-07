@@ -1,7 +1,7 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.Log;
-import cn.light.entity.entity.KdRole;
-import cn.light.entity.entity.KdUserRole;
+import cn.light.entity.entity.SysRole;
+import cn.light.entity.entity.SysUserRole;
 import cn.light.entity.repository.RoleRepository;
 
 import cn.light.entity.repository.UserRoleRepository;
@@ -42,7 +42,7 @@ public class RoleController extends BaseController{
     @Operation(summary = "添加修改角色信息")
     @PostMapping("/save")
     @Log("修改角色")
-    public void save(@RequestBody KdRole role){
+    public void save(@RequestBody SysRole role){
         roleRepository.save(role);
     }
 
@@ -52,7 +52,7 @@ public class RoleController extends BaseController{
      */
     @PutMapping("/list")
     @Operation(summary = "一次性获取所有角色，角色不会有很多，所以不需要分页")
-    public List<KdRole> list(){
+    public List<SysRole> list(){
         return roleRepository.findAll();
     }
 
@@ -63,7 +63,7 @@ public class RoleController extends BaseController{
      */
     @GetMapping("/listByUser/{userId}")
     @Operation(summary = "根据用户获取角色")
-    public List<KdRole> listByUser(@PathVariable Integer userId){
+    public List<SysRole> listByUser(@PathVariable Integer userId){
         return roleService.listByUser(userId);
     }
 
@@ -75,9 +75,9 @@ public class RoleController extends BaseController{
     @Operation(summary = "删除某个角色")
     @Log("删除某个角色")
     public void delete(@PathVariable Integer id){
-        Optional<KdRole> byId = roleRepository.findById(id);
+        Optional<SysRole> byId = roleRepository.findById(id);
         Assert.isTrue(byId.isPresent(), "部门不存在");
-        List<KdUserRole> allByRoleId = userRoleRepositroy.findAllByRoleId(id);
+        List<SysUserRole> allByRoleId = userRoleRepositroy.findAllByRoleId(id);
         Assert.isTrue(allByRoleId.isEmpty(), "已经有用户归属改部门，所以不能删除");
         roleRepository.delete(byId.get());
     }

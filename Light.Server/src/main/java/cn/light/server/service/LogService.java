@@ -3,7 +3,7 @@ package cn.light.server.service;
 
 
 import cn.light.packet.dto.log.LogDTO;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysUser;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface LogService {
      */
     void save(LogDTO logDTO);
 
-     List<KdUser> getUserList();
+     List<SysUser> getUserList();
 
      void  setUserList();
 

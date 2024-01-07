@@ -3,8 +3,8 @@ package cn.light.server.service.impl;
 
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.common.util.DtoMapper;
-import cn.light.entity.entity.KdLog;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysLog;
+import cn.light.entity.entity.SysUser;
 import cn.light.entity.repository.LogRepository;
 import cn.light.server.service.LogService;
 import cn.light.server.service.UserService;
@@ -37,22 +37,22 @@ public class LogServiceImpl implements LogService {
     private UserService userService;
 
     @Resource
-    private RedisTemplate<String, KdUser> redisTemplate;
+    private RedisTemplate<String, SysUser> redisTemplate;
 
-    private final List<KdUser> userList = new ArrayList<>();
+    private final List<SysUser> userList = new ArrayList<>();
 
 
     @Override
     public void setUserList() {
         for (int i = 0; i < 10; i++) {
-            KdUser kdUser = new KdUser();
+            SysUser kdUser = new SysUser();
             kdUser.setId(i);
             userList.add(kdUser);
         }
     }
 
     @Override
-    public List<KdUser> getUserList() {
+    public List<SysUser> getUserList() {
         return userList;
     }
 
@@ -71,12 +71,12 @@ public class LogServiceImpl implements LogService {
         String userName = null;
         //获取用户信息
         try {
-            KdUser user = userService.getUserCache();
+            SysUser user = userService.getUserCache();
             userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
         } catch (Exception ignored) {
             log.warn("获取用户信息失败");
         }
         logDTO.setUsername(userName);
-        logRepository.save(DtoMapper.convert(logDTO, KdLog.class));
+        logRepository.save(DtoMapper.convert(logDTO, SysLog.class));
     }
 }

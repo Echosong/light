@@ -1,10 +1,8 @@
 package cn.light.entity.repository;
 import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdRolePermission;
-import org.springframework.data.domain.Page;
+
+import cn.light.entity.entity.SysRolePermission;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,11 +16,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface RolePermissionRepository extends JpaRepository<KdRolePermission, Integer> {
+public interface RolePermissionRepository extends JpaRepository<SysRolePermission, Integer> {
     /**
      * 根据角色获取当前权限信息
      * @param roleIds
      * @return
      */
-    List<KdRolePermission> getAllByRoleIdIn(List<Integer> roleIds);
+    List<SysRolePermission> getAllByRoleIdIn(List<Integer> roleIds);
 }

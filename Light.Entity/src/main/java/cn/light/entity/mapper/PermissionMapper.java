@@ -2,7 +2,7 @@ package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.permission.PermissionQueryDTO;
-import cn.light.entity.entity.KdPermission;
+import cn.light.entity.entity.SysPermission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * @version :1.0.0
  */
 @Mapper
-public interface PermissionMapper extends BaseMapper<KdPermission> {
-    List<KdPermission> listPage(PermissionQueryDTO permissionQueryDTO);
+public interface PermissionMapper extends BaseMapper<SysPermission> {
+    List<SysPermission> listPage(PermissionQueryDTO permissionQueryDTO);
 }

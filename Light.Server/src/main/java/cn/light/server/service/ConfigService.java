@@ -2,7 +2,7 @@ package cn.light.server.service;
 
 
 import cn.light.packet.dto.config.ConfigDTO;
-import cn.light.entity.entity.KdConfig;
+import cn.light.entity.entity.SysConfig;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public interface ConfigService {
      * 修改保持配置
      * @param kdConfig
      */
-    void save(KdConfig kdConfig);
+    void save(SysConfig kdConfig);
 
     void update();
 }

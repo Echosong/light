@@ -6,12 +6,11 @@ import cn.hutool.core.lang.Console;
 import cn.light.packet.dto.config.ConfigDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
-import cn.light.entity.entity.KdConfig;
+import cn.light.entity.entity.SysConfig;
 import cn.light.entity.repository.ConfigRepository;
 import cn.light.server.service.ConfigService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,7 +64,7 @@ public class ConfigServiceImpl implements ConfigService {
      */
     @Override
     @CacheEvict(value = "sysConfig", allEntries = true)
-    public void save(KdConfig kdConfig) {
+    public void save(SysConfig kdConfig) {
         configRepository.save(kdConfig);
     }
 
@@ -73,7 +72,7 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     @Transactional(rollbackFor=Exception.class)
     public void update() {
-        KdConfig config = configRepository.findById(2)
+        SysConfig config = configRepository.findById(2)
                 .orElseThrow(()->new BaseKnownException(500, ""));
 
         config.setName("0031dsfsd");
@@ -89,12 +88,12 @@ public class ConfigServiceImpl implements ConfigService {
             DateUtil.parse(a);
         }catch (Exception ignored){}
 
-        List<KdConfig> configList = configRepository.findAll();
+        List<SysConfig> configList = configRepository.findAll();
 
-        KdConfig config1 = configRepository.findById(1)
+        SysConfig config1 = configRepository.findById(1)
                 .orElseThrow(()->new BaseKnownException(500, ""));
 
-        for (KdConfig kdConfig : configList) {
+        for (SysConfig kdConfig : configList) {
             kdConfig.setValue("bbbbbb");
         }
 

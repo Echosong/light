@@ -2,7 +2,7 @@ package cn.light.admin.advice;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.light.common.annotation.NoPermission;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysUser;
 import cn.light.server.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             if(Objects.nonNull(methodAnnotation)){
                 return true;
             }
-            KdUser user = SpringUtil.getBean(UserService.class).getUserCache();
+            SysUser user = SpringUtil.getBean(UserService.class).getUserCache();
             return  true;
         }
         return true;

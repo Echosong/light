@@ -2,7 +2,7 @@ package cn.light.entity.repository;
 import java.util.*;
 
 import cn.light.packet.dto.permission.PermissionQueryDTO;
-import cn.light.entity.entity.KdPermission;
+import cn.light.entity.entity.SysPermission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,17 +20,17 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface PermissionRepository extends JpaRepository<KdPermission, Integer> {
+public interface PermissionRepository extends JpaRepository<SysPermission, Integer> {
     /**
      * 根据id集合查询相关权限列表
      * @param ids
      * @return
      */
-    List<KdPermission> getAllByIdIn(List<Integer> ids);
+    List<SysPermission> getAllByIdIn(List<Integer> ids);
 
 
-    @Query(nativeQuery = true, value = "select  * from kd_permission")
-    List<KdPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
+    @Query(nativeQuery = true, value = "select  * from sys_permission")
+    List<SysPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
 
     /**
      * 分页获取权限信息
@@ -39,6 +39,6 @@ public interface PermissionRepository extends JpaRepository<KdPermission, Intege
      * @param pageable
      * @return
      */
-    @Query(nativeQuery = true, value = "select  * from kd_permission")
-    Page<KdPermission> getAllByPermsAndNameContainingAndType(String perms, String name, Integer type, Pageable pageable);
+    @Query(nativeQuery = true, value = "select  * from sys_permission")
+    Page<SysPermission> getAllByPermsAndNameContainingAndType(String perms, String name, Integer type, Pageable pageable);
 }

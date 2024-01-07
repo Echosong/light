@@ -34,7 +34,7 @@ import org.hibernate.validator.constraints.Range;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "系统配置", controllerFunction = "list,save")
-public class KdConfig extends SysBase  {
+public class SysConfig extends SysBase  {
     @NotBlank
     @AutoEntityField("配置字段名")
     @InQueryDTO

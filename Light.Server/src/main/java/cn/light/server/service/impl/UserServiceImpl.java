@@ -14,9 +14,9 @@ import cn.light.packet.enums.UserStateEnum;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdRole;
-import cn.light.entity.entity.KdUser;
-import cn.light.entity.entity.KdUserRole;
+import cn.light.entity.entity.SysRole;
+import cn.light.entity.entity.SysUser;
+import cn.light.entity.entity.SysUserRole;
 import cn.light.entity.mapper.UserMapper;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRepository;
@@ -24,7 +24,6 @@ import cn.light.entity.repository.UserRoleRepository;
 import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private  UserMapper userMapper;
     @Resource
-    private  RedisTemplate<String, KdUser> redisTemplate;
+    private  RedisTemplate<String, SysUser> redisTemplate;
 
     /**
      * 登录服务
@@ -71,7 +70,7 @@ public class UserServiceImpl implements UserService {
         //前端密码简单用了base64处理了下
         loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));
 
-        Optional<KdUser> byUsername = userRepository.findByUsername(loginUserDTO.getUsername());
+        Optional<SysUser> byUsername = userRepository.findByUsername(loginUserDTO.getUsername());
         Assert.isTrue(byUsername.isPresent(), "账号或者密码错误");
         Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(loginUserDTO.getPassword()), byUsername.get().getPassword()),
                 "账号或者密码错误"+ loginUserDTO.getPassword()+"====");
@@ -97,8 +96,8 @@ public class UserServiceImpl implements UserService {
             throw  new BaseKnownException(600, "账号已经存在，不能注册");
         });
         Assert.notNull(user.getRoleId(), "新增账号必须选择角色");
-        KdUser save = userRepository.save(DtoMapper.convert(user, KdUser.class));
-        KdUserRole kdUserRole = new KdUserRole();
+        SysUser save = userRepository.save(DtoMapper.convert(user, SysUser.class));
+        SysUserRole kdUserRole = new SysUserRole();
         kdUserRole.setUserId(save.getId());
         kdUserRole.setRoleId(user.getRoleId());
         userRoleRepository.save(kdUserRole);
@@ -110,7 +109,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<UserCacheDTO> getAllCache() {
-        List<KdUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
+        List<SysUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
         return DtoMapper.convertList(all, UserCacheDTO.class);
     }
 
@@ -121,7 +120,7 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(value = "Face_userAllCache", allEntries = true)
     @Override
     public void update(UserDTO userDTO) {
-        KdUser user = userRepository.findById(userDTO.getId())
+        SysUser user = userRepository.findById(userDTO.getId())
                 .orElseThrow(() -> new BaseKnownException(300, "账号不存在"));
         user.setName(userDTO.getName());
         user.setState(userDTO.getState());
@@ -131,12 +130,12 @@ public class UserServiceImpl implements UserService {
 
         //这里只考虑一个用户一个角色
         if (Objects.nonNull(userDTO.getRoleId())) {
-            List<KdUserRole> allByUserId = userRoleRepository.findAllByUserId(user.getId());
-            KdUserRole userRole = new KdUserRole();
+            List<SysUserRole> allByUserId = userRoleRepository.findAllByUserId(user.getId());
+            SysUserRole userRole = new SysUserRole();
             userRole.setRoleId(userDTO.getRoleId());
             userRole.setUserId(user.getId());
             if(!allByUserId.isEmpty()){
-                Optional<KdUserRole> first = allByUserId.stream()
+                Optional<SysUserRole> first = allByUserId.stream()
                         .filter(t -> t.getRoleId().equals(userDTO.getRoleId()))
                         .findFirst();
                 if(first.isEmpty()){
@@ -160,10 +159,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getCurrent() {
         Integer userId = Convert.toInt(StpUtil.getLoginId());
-        KdUser kdUser = userRepository.findById(userId)
+        SysUser kdUser = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseKnownException(600, "用户不存在"));
 
-        List<KdUserRole> userRoles = userRoleRepository.findAllByUserId(kdUser.getId());
+        List<SysUserRole> userRoles = userRoleRepository.findAllByUserId(kdUser.getId());
         UserDTO userDTO = DtoMapper.convert(kdUser, UserDTO.class);
         if(CollUtil.isNotEmpty(userRoles)) {
             userDTO.setRoleId(userRoles.get(0).getRoleId());
@@ -172,9 +171,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public KdUser getUserCache() {
+    public SysUser getUserCache() {
         String userId = StpUtil.getLoginId().toString();
-        KdUser user = null;
+        SysUser user = null;
         try {
             user = redisTemplate.opsForValue().get(userId);
         }catch (Exception ignored){}
@@ -194,16 +193,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @SuppressWarnings("All")
     public Page<UserDTO> list(UserQueryDTO userQueryDTO) {
-        Page<KdUser> allByUsernameContaining = PageUtil.getPage(userMapper::listPage, userQueryDTO);
+        Page<SysUser> allByUsernameContaining = PageUtil.getPage(userMapper::listPage, userQueryDTO);
         Page<UserDTO> userPage = DtoMapper.convertPage(allByUsernameContaining, UserDTO.class);
 
         //拿角色名称
         List<UserDTO> content = userPage.getContent();
         Set<Integer> userIds = content.stream().map(UserDTO::getId).collect(Collectors.toSet());
-        List<KdUserRole> allByUserIdIn = userRoleRepository.findAllByUserIdIn(userIds);
+        List<SysUserRole> allByUserIdIn = userRoleRepository.findAllByUserIdIn(userIds);
         if(!allByUserIdIn.isEmpty()){
-            List<Integer> roleIds = allByUserIdIn.stream().map(KdUserRole::getRoleId).collect(Collectors.toList());
-            List<KdRole> allByIdIn = roleRepository.getAllByIdIn(roleIds);
+            List<Integer> roleIds = allByUserIdIn.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
+            List<SysRole> allByIdIn = roleRepository.getAllByIdIn(roleIds);
             //先去到角色id
             content = content.stream().peek(t-> allByUserIdIn.stream().filter(k->k.getUserId().equals(t.getId()))
                     .findFirst()
@@ -226,7 +225,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setPassword(String password, String newPassword) {
         Integer userId = Convert.toInt( StpUtil.getLoginId(), 0);
-        KdUser kdUser = userRepository.findById(userId).orElseThrow(() -> new BaseKnownException(600, "当前未登录"));
+        SysUser kdUser = userRepository.findById(userId).orElseThrow(() -> new BaseKnownException(600, "当前未登录"));
         Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(password), kdUser.getPassword()),
                 "账号或者密码错误");
         kdUser.setPassword(SmUtil.sm3().digestHex(newPassword));

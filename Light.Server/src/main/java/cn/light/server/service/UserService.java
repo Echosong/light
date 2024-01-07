@@ -5,7 +5,7 @@ import cn.light.packet.dto.user.LoginUserDTO;
 import cn.light.packet.dto.user.UserCacheDTO;
 import cn.light.packet.dto.user.UserDTO;
 import cn.light.packet.dto.user.UserQueryDTO;
-import cn.light.entity.entity.KdUser;
+import cn.light.entity.entity.SysUser;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public interface UserService {
     UserDTO getCurrent();
 
 
-    KdUser getUserCache();
+    SysUser getUserCache();
 
     /**
      * 处理分页信息

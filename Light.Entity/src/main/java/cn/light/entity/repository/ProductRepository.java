@@ -1,10 +1,6 @@
 package cn.light.entity.repository;
-import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdProduct;
-import org.springframework.data.domain.Page;
+import cn.light.entity.entity.SysProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,6 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface ProductRepository extends JpaRepository<KdProduct, Integer> {
+public interface ProductRepository extends JpaRepository<SysProduct, Integer> {
 
 }

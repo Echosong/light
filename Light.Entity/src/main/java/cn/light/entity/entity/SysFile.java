@@ -30,7 +30,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "文件管理")
-public class KdFile extends SysBase {
+public class SysFile extends SysBase {
 
     @AutoEntityField(value = "图标",htmlType = HtmlTypeEnum.UPLOAD)
     private String ico;

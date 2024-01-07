@@ -1,10 +1,6 @@
 package cn.light.entity.repository;
-import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdConfig;
-import org.springframework.data.domain.Page;
+import cn.light.entity.entity.SysConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,6 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface ConfigRepository extends JpaRepository<KdConfig, Integer> {
+public interface ConfigRepository extends JpaRepository<SysConfig, Integer> {
 
 }

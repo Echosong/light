@@ -10,9 +10,9 @@ import cn.light.common.enums.LogicalEnum;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdPermission;
-import cn.light.entity.entity.KdRolePermission;
-import cn.light.entity.entity.KdUserRole;
+import cn.light.entity.entity.SysPermission;
+import cn.light.entity.entity.SysRolePermission;
+import cn.light.entity.entity.SysUserRole;
 import cn.light.entity.mapper.PermissionMapper;
 import cn.light.entity.repository.PermissionRepository;
 import cn.light.entity.repository.RolePermissionRepository;
@@ -69,7 +69,7 @@ public class PermissionController extends BaseController{
     @Operation(summary = "新建|更新权限信息")
     @CacheEvict(value = "Permission_all", allEntries = true)
     @Permission(roles = "admin", logical = LogicalEnum.AND)
-    public void save(@RequestBody @Valid KdPermission kdPermission){
+    public void save(@RequestBody @Valid SysPermission kdPermission){
         if(kdPermission.getParentId() != 0) {
             permissionRepository.findById(kdPermission.getParentId())
                     .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
@@ -85,7 +85,7 @@ public class PermissionController extends BaseController{
     @PutMapping("/listPage")
     @Operation(summary = "查询列表")
     @NoPermission
-    public Page<KdPermission> list(@RequestBody PermissionQueryDTO permissionQueryDTO){
+    public Page<SysPermission> list(@RequestBody PermissionQueryDTO permissionQueryDTO){
         return PageUtil.getPage(permissionMapper::listPage, permissionQueryDTO);
     }
 
@@ -98,7 +98,7 @@ public class PermissionController extends BaseController{
     @Operation(summary = "获取所有权限")
     public List<PermissionDTO> all(){
         return DtoMapper.convertList( permissionRepository.findAll().stream()
-                        .sorted(Comparator.comparing(KdPermission::getSort))
+                        .sorted(Comparator.comparing(SysPermission::getSort))
                         .collect(Collectors.toList()),
                 PermissionDTO.class);
     }
@@ -111,14 +111,14 @@ public class PermissionController extends BaseController{
     @Operation(summary = "根据用户获取当前用户具有的菜单权限")
     public List<PermissionDTO> listByUser(){
         Integer userId = Convert.toInt(StpUtil.getLoginId(), 0);
-        List<KdUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
+        List<SysUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
         List<PermissionDTO> kdPermissions = new ArrayList<>();
         if(userRoles.isEmpty()){
             return kdPermissions;
         }
-        List<Integer> roleIds = userRoles.stream().map(KdUserRole::getRoleId)
+        List<Integer> roleIds = userRoles.stream().map(SysUserRole::getRoleId)
                 .collect(Collectors.toList());
-        List<KdPermission> listByrole = permissionService.getListByrole(roleIds);
+        List<SysPermission> listByrole = permissionService.getListByrole(roleIds);
 
         return DtoMapper.convertList(listByrole , PermissionDTO.class);
     }
@@ -130,7 +130,7 @@ public class PermissionController extends BaseController{
      */
     @GetMapping("/listByRole/{roleId}")
     @Operation(summary = "根据角色id获取权限")
-    public List<KdPermission> listByRole(@NotBlank @PathVariable Integer roleId){
+    public List<SysPermission> listByRole(@NotBlank @PathVariable Integer roleId){
         return  permissionService.getListByrole(Arrays.asList(roleId));
     }
 
@@ -142,13 +142,13 @@ public class PermissionController extends BaseController{
     @PutMapping("/updateRolePermissions/{roleId}")
     @Operation(summary = "更新某个角色的权限信息")
     public void updateRolePermissions(@RequestBody List<Integer> permissionIds, @PathVariable Integer roleId){
-        List<KdRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Arrays.asList(roleId));
+        List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Arrays.asList(roleId));
         if(!allByRoleIdIn.isEmpty()){
             rolePermissionRepository.deleteAll(allByRoleIdIn);
         }
-        List<KdRolePermission> kdRolePermissions = new ArrayList<>();
+        List<SysRolePermission> kdRolePermissions = new ArrayList<>();
         for (Integer permissionId : permissionIds) {
-            KdRolePermission kdRolePermission = new KdRolePermission();
+            SysRolePermission kdRolePermission = new SysRolePermission();
             kdRolePermission.setPermissionId(permissionId);
             kdRolePermission.setRoleId(roleId);
             kdRolePermissions.add(kdRolePermission);

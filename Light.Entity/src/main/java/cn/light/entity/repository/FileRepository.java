@@ -1,10 +1,8 @@
 package cn.light.entity.repository;
 import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdFile;
-import org.springframework.data.domain.Page;
+
+import cn.light.entity.entity.SysFile;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,11 +16,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface FileRepository extends JpaRepository<KdFile, Integer> {
+public interface FileRepository extends JpaRepository<SysFile, Integer> {
     /**
      * 根据文件路径获取信息
      * @param uuid uu
      * @return 文件
      */
-    Optional<KdFile> findByUuid(String uuid);
+    Optional<SysFile> findByUuid(String uuid);
 }

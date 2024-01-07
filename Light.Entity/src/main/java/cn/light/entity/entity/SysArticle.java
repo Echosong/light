@@ -24,7 +24,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @AutoEntity(value = "新闻")
 @AutoCover(value = {CodeTypeEnum.NULL})
-public class KdArticle extends SysBase {
+public class SysArticle extends SysBase {
     @AutoEntityField(value = "标题")
     @InQueryDTO
     private String title;

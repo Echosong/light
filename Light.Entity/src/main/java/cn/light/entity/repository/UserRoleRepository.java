@@ -1,10 +1,8 @@
 package cn.light.entity.repository;
 import java.util.*;
-import java.math.BigDecimal;
-import cn.light.entity.entity.KdUserRole;
-import org.springframework.data.domain.Page;
+
+import cn.light.entity.entity.SysUserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,26 +16,26 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @SuppressWarnings("ALL")
-public interface UserRoleRepository extends JpaRepository<KdUserRole, Integer> {
+public interface UserRoleRepository extends JpaRepository<SysUserRole, Integer> {
     /**
      * 根据用户获取角色信息
      *
      * @param userId
      * @return
      */
-    List<KdUserRole> findAllByUserId(Integer userId);
+    List<SysUserRole> findAllByUserId(Integer userId);
 
     /**
      * 多个用户id查询记录
      * @param userIds
      * @return
      */
-    List<KdUserRole> findAllByUserIdIn(Set<Integer> userIds);
+    List<SysUserRole> findAllByUserIdIn(Set<Integer> userIds);
 
     /**
      * 根据角色查询是否用户绑定
      * @param roleId
      * @return
      */
-    List<KdUserRole> findAllByRoleId(Integer roleId);
+    List<SysUserRole> findAllByRoleId(Integer roleId);
 }

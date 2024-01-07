@@ -6,7 +6,7 @@ import cn.light.packet.dto.config.ConfigQueryDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdConfig;
+import cn.light.entity.entity.SysConfig;
 import cn.light.entity.mapper.ConfigMapper;
 import cn.light.entity.repository.ConfigRepository;
 
@@ -42,7 +42,7 @@ public class ConfigController extends BaseController{
     @Operation(summary = "分页查询系统配置")
     @PutMapping("/listPage")
     public Page<ConfigListDTO> listPage(@RequestBody @Valid ConfigQueryDTO queryDTO){
-        Page<KdConfig> dataPages  =  PageUtil.getPage(configMapper::listPage, queryDTO);
+        Page<SysConfig> dataPages  =  PageUtil.getPage(configMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, ConfigListDTO.class);
     }
 
@@ -50,21 +50,21 @@ public class ConfigController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改系统配置")
     public void save(@RequestBody @Valid ConfigDTO configDTO){
-        KdConfig kdConfig = DtoMapper.convert(configDTO, KdConfig.class);
+        SysConfig kdConfig = DtoMapper.convert(configDTO, SysConfig.class);
         configRepository.save(kdConfig);
     }
 
     @Operation(summary = "查询全部系统配置")
     @GetMapping("/list")
     public List<ConfigListDTO> list(){
-        List<KdConfig> all = configRepository.findAll();
+        List<SysConfig> all = configRepository.findAll();
         return DtoMapper.convertList(all, ConfigListDTO.class);
     }
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public ConfigDTO find(@PathVariable Integer id){
-        KdConfig one = configRepository.findById(id)
+        SysConfig one = configRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ConfigDTO.class);
     }

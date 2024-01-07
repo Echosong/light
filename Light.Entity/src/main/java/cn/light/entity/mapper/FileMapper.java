@@ -2,7 +2,7 @@ package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.file.FileQueryDTO;
-import cn.light.entity.entity.KdFile;
+import cn.light.entity.entity.SysFile;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * @version :1.0.0
  */
 @Mapper
-public interface FileMapper extends BaseMapper<KdFile> {
-    List<KdFile> listPage(FileQueryDTO fileQueryDTO);
+public interface FileMapper extends BaseMapper<SysFile> {
+    List<SysFile> listPage(FileQueryDTO fileQueryDTO);
 }

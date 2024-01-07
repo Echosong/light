@@ -2,7 +2,7 @@ package cn.light.entity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.log.LogQueryDTO;
-import cn.light.entity.entity.KdLog;
+import cn.light.entity.entity.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * @version :1.0.0
  */
 @Mapper
-public interface LogMapper extends BaseMapper<KdLog> {
-    List<KdLog> listPage(LogQueryDTO logQueryDTO);
+public interface LogMapper extends BaseMapper<SysLog> {
+    List<SysLog> listPage(LogQueryDTO logQueryDTO);
 }

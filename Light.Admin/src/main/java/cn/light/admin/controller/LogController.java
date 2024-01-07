@@ -5,7 +5,7 @@ import cn.light.packet.dto.log.LogListDTO;
 import cn.light.packet.dto.log.LogQueryDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.*;
-import cn.light.entity.entity.KdLog;
+import cn.light.entity.entity.SysLog;
 import cn.light.entity.mapper.LogMapper;
 import cn.light.entity.repository.LogRepository;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import cn.hutool.core.date.DateUtil;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.io.IOException;
 import java.util.*;
 
@@ -44,7 +43,7 @@ public class LogController extends BaseController{
     @Operation(summary = "分页查询日志")
     @PutMapping("/listPage")
     public Page<LogListDTO> listPage(@RequestBody @Valid LogQueryDTO queryDTO){
-        Page<KdLog> dataPages  =  PageUtil.getPage(logMapper::listPage, queryDTO);
+        Page<SysLog> dataPages  =  PageUtil.getPage(logMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, LogListDTO.class);
     }
 
@@ -52,7 +51,7 @@ public class LogController extends BaseController{
     @ApiResultIgnore
     @Log("导出日志")
     public ResponseEntity<byte[]> export(@RequestBody @Valid LogQueryDTO queryDTO) throws IOException, IllegalAccessException {
-        List<KdLog> all = logMapper.listPage(queryDTO);
+        List<SysLog> all = logMapper.listPage(queryDTO);
         String fileName = "Log"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
         return ExcelUtil.generateImportFile(DtoMapper.convertList(all, LogListDTO.class), fileName, LogListDTO.class);
     }
@@ -61,21 +60,21 @@ public class LogController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改日志")
     public void save(@RequestBody @Valid LogDTO logDTO){
-        KdLog kdLog = DtoMapper.convert(logDTO, KdLog.class);
+        SysLog kdLog = DtoMapper.convert(logDTO, SysLog.class);
         logRepository.save(kdLog);
     }
 
     @Operation(summary = "查询全部日志")
     @GetMapping("/list")
     public List<LogListDTO> list(){
-        List<KdLog> all = logRepository.findAll();
+        List<SysLog> all = logRepository.findAll();
         return DtoMapper.convertList(all, LogListDTO.class);
     }
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
     public LogDTO find(@PathVariable Integer id){
-        KdLog one = logRepository.findById(id)
+        SysLog one = logRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, LogDTO.class);
     }

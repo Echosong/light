@@ -7,11 +7,10 @@ import cn.light.admin.config.properties.FileUploadProperties;
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
 import cn.light.packet.dto.file.FileDTO;
-import cn.light.packet.dto.file.FileListDTO;
 import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.KdFile;
+import cn.light.entity.entity.SysFile;
 import cn.light.entity.mapper.FileMapper;
 import cn.light.entity.repository.FileRepository;
 
@@ -101,14 +100,14 @@ public class FileController extends BaseController{
         map.put("params", params);
         map.put("uuid", uuid);
         //入库
-        KdFile kdFile = new KdFile();
+        SysFile kdFile = new SysFile();
         kdFile.setFilePath(folder.getAbsolutePath() + newFilename);
         kdFile.setFileName(FileUtil.mainName(fileName));
         kdFile.setFileSize(fileSize);
         kdFile.setExtend(extName);
         kdFile.setFileType(Objects.isNull(fileType) ? 1 : fileType);
         kdFile.setUrlPath(format + "/" + newFilename);
-        KdFile save = fileRepository.save(kdFile);
+        SysFile save = fileRepository.save(kdFile);
         map.put("fileId", save.getId().toString());
         return map;
     }
@@ -124,7 +123,7 @@ public class FileController extends BaseController{
     public ResponseEntity download(@PathVariable String uuid) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=" + uuid);
-        Optional<KdFile> byUrlPath = fileRepository.findByUuid(uuid);
+        Optional<SysFile> byUrlPath = fileRepository.findByUuid(uuid);
         return byUrlPath.map(kdFile -> new ResponseEntity(FileUtil.readBytes(kdFile.getFilePath()), headers, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.MULTI_STATUS));
 
@@ -138,7 +137,7 @@ public class FileController extends BaseController{
     @PutMapping("/listPage")
     @Operation(summary = "列表分页")
     public Page<FileDTO> list(@RequestBody FileQueryDTO fileQueryDTO) {
-        Page<KdFile> files = PageUtil.getPage(fileMapper::listPage, fileQueryDTO);
+        Page<SysFile> files = PageUtil.getPage(fileMapper::listPage, fileQueryDTO);
         return DtoMapper.convertPage(files, FileDTO.class);
     }
 
@@ -161,7 +160,7 @@ public class FileController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改日志")
     public void save(@RequestBody @Valid FileDTO fileDTO){
-        KdFile file = DtoMapper.convert(fileDTO, KdFile.class);
+        SysFile file = DtoMapper.convert(fileDTO, SysFile.class);
         fileRepository.save(file);
     }
 
