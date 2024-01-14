@@ -48,7 +48,7 @@ public class SysConfig extends SysBase  {
     @InQueryDTO
     private String name;
 
-    @AutoEntityField("配置分组")
+    @AutoEntityField(value = "配置分组", enums = )
     @Range(min = 0)
     @Column(name="`group`")
     private Integer group = 0;

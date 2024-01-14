@@ -14,6 +14,7 @@ import cn.light.entity.entity.SysFile;
 import cn.light.entity.mapper.FileMapper;
 import cn.light.entity.repository.FileRepository;
 
+import cn.light.server.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -52,6 +53,8 @@ public class FileController extends BaseController{
     @Resource
     private FileMapper fileMapper;
 
+    @Resource
+    private FileService fileService;
     @Autowired
     public FileController(FileUploadProperties fileUploadProperties) {
         this.fileUploadProperties = fileUploadProperties;
@@ -61,55 +64,13 @@ public class FileController extends BaseController{
      * 上传文件 整个系统其他关联地方可以考虑存文件或者uuid （），这样一来文件处理方便
      *
      * @param file     文件流
-     * @param fileType 业务类型
      * @param params   前端需要原路带回的参数
      * @throws IOException 错误
      */
     @PostMapping("/upload")
     @Operation(summary = "文件上传")
-    public Map<String, String> upload(@RequestParam(value = "file", required = false) MultipartFile file, Integer fileType, String params) throws IOException {
-        String format = DateUtil.format(new Date(), "yyyy/MM/dd");
-        File folder = new File(fileUploadProperties.getUploadFolder() + format);
-        if (!folder.isDirectory()) {
-            folder.mkdirs();
-        }
-        Long fileSize = file.getSize();
-        //把可运行的文件屏蔽掉，免得 xss
-        String uuid = IdUtil.fastUUID();
-        String fileName = file.getOriginalFilename();
-        String extName = FileUtil.extName(file.getOriginalFilename());
-        List<String> limtExtName = Arrays.asList("html", "htm", "js");
-        Assert.isTrue(!limtExtName.contains(extName), "文件格式不允许！");
-        String newFilename = uuid + "." + extName;
-
-        file.transferTo(new File(folder, newFilename));
-        String filePath = "";
-        //最简单使用这种方式可以nginx 或者 apache 前端那边用 getAccessPrefixUrl 做反向代理
-        if (StrUtil.isEmpty(fileUploadProperties.getUrl())) {
-            filePath = request.getScheme() + "://" + request.getServerName() + ":"
-                    + request.getServerPort() + fileUploadProperties.getAccessPrefixUrl() + format + "/"
-                    + newFilename;
-        } else {
-            //这种配置就比较自由
-            filePath = fileUploadProperties.getUrl() + format + "/" + newFilename;
-        }
-
-        Map<String, String> map = new HashMap<>(2);
-        map.put("name", fileName);
-        map.put("url", filePath);
-        map.put("params", params);
-        map.put("uuid", uuid);
-        //入库
-        SysFile kdFile = new SysFile();
-        kdFile.setFilePath(folder.getAbsolutePath() + newFilename);
-        kdFile.setFileName(FileUtil.mainName(fileName));
-        kdFile.setFileSize(fileSize);
-        kdFile.setExtend(extName);
-        kdFile.setFileType(Objects.isNull(fileType) ? 1 : fileType);
-        kdFile.setUrlPath(format + "/" + newFilename);
-        SysFile save = fileRepository.save(kdFile);
-        map.put("fileId", save.getId().toString());
-        return map;
+    public Map<String, String> upload(@RequestParam(value = "file", required = false) MultipartFile file,  String params) throws IOException {
+        return fileService.uploadFile(file,  params);
     }
 
     /***

@@ -14,7 +14,7 @@
     <artifactId>light</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>light</name>
+    <name>小朱自驾后端</name>
     <description>轻巧的后台管理系统</description>
 
     <properties>
@@ -143,6 +143,13 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-scratchpad</artifactId>
                 <version>5.2.2</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>3.17.4</version>
             </dependency>
 
 
