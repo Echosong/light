@@ -1,6 +1,8 @@
 package cn.light.entity.entity;
 
 import cn.light.common.anno.AutoEntityField;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +37,7 @@ public class SysBase {
      * 主键 这里跟AUTO 要有区分
      */
     @Id
+    @TableId(type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @AutoEntityField(value = "编号")
     protected Integer id;
