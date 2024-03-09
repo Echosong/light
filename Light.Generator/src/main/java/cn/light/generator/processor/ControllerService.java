@@ -6,6 +6,7 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
+import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
 import cn.light.common.enums.CodeTypeEnum;
@@ -82,6 +83,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
         Field[] fields = clazz.getDeclaredFields();
 
         List<String> fieldList = new ArrayList<>();
+        String keyName = "Name";
         for (Field field : fields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
                 continue;
@@ -95,12 +97,16 @@ public class ControllerService extends BaseService implements ServiceInterface {
             } else {
                 fieldList.add(StrUtil.format("queryDTO.get{}()", StrUtil.upperFirst(field.getName())));
             }
+            AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
+            if(annotation.isKeyName()) {
+                keyName = StrUtil.upperFirst(field.getName());
+            }
         }
         String queryParams = "";
         if (!fieldList.isEmpty()) {
             queryParams = String.join(",", fieldList) + ", ";
         }
-
+        tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
         tplContent = StrUtil.replace(tplContent, "#{queryParams}#", queryParams);
         return tplContent;
     }

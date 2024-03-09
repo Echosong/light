@@ -24,6 +24,7 @@ public @interface AutoEntity {
      */
     boolean dto() default true;
 
+
     /**
      * 是否生成前端list.vue
      */

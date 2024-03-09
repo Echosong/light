@@ -34,6 +34,12 @@ public @interface AutoEntityField {
     boolean dto() default true;
 
 
+    /**
+     * 数据原routeName
+     * @return 数据源
+     */
+    String source() default "";
+
 
     /**
      * 字符长度
@@ -41,10 +47,9 @@ public @interface AutoEntityField {
     int len() default 255;
 
     /**
-     * 数值来源用来做表关联
+     * 是否为主名称 getMap使用
      */
-    String source() default  "";
-
+    boolean isKeyName() default false;
 
     /**
      * 表单类型
