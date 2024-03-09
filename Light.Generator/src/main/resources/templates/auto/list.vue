@@ -37,6 +37,7 @@ import addOrUpdate from './add.vue';
 import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
+import {useRouter} from "vue-router";
 //importFiles
 const params = #{queryPageParams}#
 const p = ref(JSON.parse(JSON.stringify(params)))
@@ -47,6 +48,8 @@ const  loading = ref(false)
 const showSearch = ref(true)
 onMounted(() => {
     f5()
+    const router = useRouter();
+    p.value = {...JSON.parse(JSON.stringify(p.value)), ...router.currentRoute.value.query}
 })
 
 // 数据刷新
