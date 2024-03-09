@@ -19,7 +19,7 @@
  -->
 
 <template>
-  <el-menu-item v-if="!menu.children" :index="menu.url">
+  <el-menu-item v-if="!menu.children" :index="menu.url+ (menu.query ? md5(JSON.stringify(menu.query)) : '')" :route="{ path: menu.url, query: menu.query }">
     <item :icon="menu.icon" :title="menu.title" />
   </el-menu-item>
   <el-sub-menu v-else :index="menu.url">
@@ -37,6 +37,7 @@
 <script>
 import { defineComponent } from 'vue'
 import Item from './Item.vue'
+import md5 from "crypto-js/md5";
 export default defineComponent({
   name: 'Submenu',
   components: {
