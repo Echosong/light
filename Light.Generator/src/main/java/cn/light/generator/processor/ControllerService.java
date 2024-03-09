@@ -83,7 +83,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
         Field[] fields = clazz.getDeclaredFields();
 
         List<String> fieldList = new ArrayList<>();
-        String keyName = "Name";
+        String keyName = "";
         for (Field field : fields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
                 continue;
@@ -106,8 +106,17 @@ public class ControllerService extends BaseService implements ServiceInterface {
         if (!fieldList.isEmpty()) {
             queryParams = String.join(",", fieldList) + ", ";
         }
-        tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
+        if(StrUtil.isBlank(keyName)) {
+            String subBefore = StrUtil.subBefore(tplContent, "//start", true);
+            String subAfter = StrUtil.subAfter(tplContent, "//end", true);
+            tplContent = subBefore + subAfter;
+        }else {
+            tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
+            tplContent = StrUtil.replace(tplContent, "//start", "");
+            tplContent = StrUtil.replace(tplContent, "//end", "");
+        }
         tplContent = StrUtil.replace(tplContent, "#{queryParams}#", queryParams);
+
         return tplContent;
     }
 
