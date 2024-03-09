@@ -40,6 +40,10 @@ public @interface AutoEntityField {
      */
     int len() default 255;
 
+    /**
+     * 数值来源用来做表关联
+     */
+    String source() default  "";
 
 
     /**
