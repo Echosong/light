@@ -28,15 +28,17 @@ const rules = {//rule_fields
 }
 const sa = inject('sa')
 const ruleForm = ref();
+const  query = ref({});
 
-
-function open(data) {
+function open(data, parmas)  {
     isShow.value = true;
     if (data) {
         title.value = "修改 #{tableInfo}#";
         m.value = data;
     } else {
-        m.value = //data_init
+        let mdata  = //data_init
+        query.value = parmas || {};
+        m.value ={...mdata, ...parmas}
         title.value = "添加 #{tableInfo}#";
     }
 }

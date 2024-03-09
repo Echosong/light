@@ -10,9 +10,9 @@ import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.generator.Const;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -135,6 +135,8 @@ public class ViewService extends BaseService implements ServiceInterface {
                 importFiles.add("import Link from \"@/components/file/link.vue\";");
             }else if(autoEntityField.htmlType() == HtmlTypeEnum.RADIO){
                 importFiles.add("import ElSwitch from \"@/components/ESwitch/ESwitch.vue\";");
+            }else if (autoEntityField.htmlType() == HtmlTypeEnum.SELECT){
+                importFiles.add("import selectData from '@/components/SelectData/index.vue'");
             }
         }
         PageInfo pageInfo = new PageInfo();
@@ -242,25 +244,25 @@ public class ViewService extends BaseService implements ServiceInterface {
         String returnValue = "";
         if ("String".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                    <el-form-item label="{}">
+                    <el-form-item label="{}" v-if="!query.{}">
                      <el-input v-model="p.{}" placeholder="模糊查询"></el-input>
-                    </el-form-item>""", autoEntityField.value(), field.getName());
+                    </el-form-item>""", autoEntityField.value(), field.getName(),field.getName());
         }
         if ("Date".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}">
+                            <el-form-item label="{}"  v-if="!query.{}">
                                       <el-date-picker
                                         v-model="p.start{}"
                                         type="datetime"
-                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                        value-format="YYYY-MM-DD HH:mm:ss"
                                         placeholder="开始日期"></el-date-picker>
                                       -
                                       <el-date-picker
                                         v-model="p.end{}"
                                         type="datetime"
-                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                        value-format="YYYY-MM-DD HH:mm:ss"
                                         placeholder="结束日期"></el-date-picker>
-                                    </el-form-item>""", autoEntityField.value(), StrUtil.upperFirst(field.getName()),
+                                    </el-form-item>""", autoEntityField.value(),field.getName(), StrUtil.upperFirst(field.getName()),
                     StrUtil.upperFirst(field.getName()));
         }
 
@@ -268,10 +270,18 @@ public class ViewService extends BaseService implements ServiceInterface {
             Class<? extends BaseEnum> lclazz = autoEntityField.enums();
 
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}">
+                            <el-form-item label="{}"  v-if="!query.{}">
                                   <input-enum enumName="{}"  v-model="p.{}"></input-enum>
                             </el-form-item>""",
-                    autoEntityField.value(), StrUtil.lowerFirst(lclazz.getSimpleName()), field.getName());
+                    autoEntityField.value(), field.getName(),StrUtil.lowerFirst(lclazz.getSimpleName()), field.getName());
+        }
+
+        if(autoEntityField.htmlType() == HtmlTypeEnum.SELECT){
+            returnValue = StrUtil.format("""
+                            <el-form-item label="{}"  v-if="!query.{}">
+                             <select-data v-model="p.{}" routeName="{}" ></select-data>
+                            </el-form-item>""",
+                    autoEntityField.value(), field.getName(), field.getName(), StrUtil.lowerFirst(autoEntityField.source()));
         }
         return returnValue;
     }
@@ -343,6 +353,10 @@ public class ViewService extends BaseService implements ServiceInterface {
                     case RADIO:
                         htmlTypeStr = StrUtil.format("<el-switch v-model=\"m.{}\" ></el-switch>", StrUtil.lowerFirst(field.getName()));
                         break;
+                    case SELECT:
+                        htmlTypeStr = StrUtil.format(" <select-data v-model=\"m.{}\" routeName=\"{}\" ></select-data>", StrUtil.lowerFirst(field.getName()),StrUtil.lowerFirst(annotation.source()));
+                        importFiles.add("import selectData from '@/components/SelectData/index.vue'");
+                        break;
                     case TEXTAREA:
                         htmlTypeStr = StrUtil.format("<el-input type=\"textarea\"  rows=\"2\" placeholder=\"{}\"  v-model=\"m.{}\">" +
                                 "</el-input>", annotation.value(), StrUtil.lowerFirst(field.getName()));
@@ -359,9 +373,11 @@ public class ViewService extends BaseService implements ServiceInterface {
                         break;
                     default:
                 }
-                elFormItems.add(StrUtil.format("<el-form-item label=\"{}\">\n" +
-                        "{}</el-form-item>", annotation.value(), htmlTypeStr));
-
+                elFormItems.add(StrUtil.format("""
+                        <el-form-item label="{}" v-if="!query.{}">
+                        {}
+                        </el-form-item>""",
+                        annotation.value(), field.getName(), htmlTypeStr));
                 continue;
             }
 
@@ -369,23 +385,23 @@ public class ViewService extends BaseService implements ServiceInterface {
                 importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
                 Class<? extends BaseEnum> lclazz = annotation.enums();
                 elFormItems.add(StrUtil.format("""
-                                <el-form-item label="{}">
+                                <el-form-item label="{}" v-if="!query.{}">
                                      <input-enum enumName="{}" v-model="m.{}" ></input-enum>
-                                </el-form-item>""", annotation.value(), StrUtil.lowerFirst(lclazz.getSimpleName()),
+                                </el-form-item>""", annotation.value(), field.getName(), StrUtil.lowerFirst(lclazz.getSimpleName()),
                         field.getName()));
                 continue;
             }
 
             if ("Date".equals(field.getType().getSimpleName())) {
                 elFormItems.add(StrUtil.format("""
-                      <el-form-item label="{}："  prop="{}" >
-                         <el-date-picker v-model="m.{}" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="{}"></el-date-picker>
-                      </el-form-item>""", annotation.value(), field.getName(), field.getName(), annotation.value()));
+                      <el-form-item label="{}："  prop="{}" v-if="!query.{}">
+                         <el-date-picker v-model="m.{}" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="{}"></el-date-picker>
+                      </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName(), annotation.value()));
             } else {
                 elFormItems.add(StrUtil.format("""
-                        <el-form-item label="{}："  prop="{}" >
+                        <el-form-item label="{}："  prop="{}" v-if="!query.{}" >
                             <el-input v-model="m.{}"></el-input>
-                        </el-form-item>""", annotation.value(), field.getName(), field.getName()));
+                        </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName()));
             }
         }
         //

@@ -46,10 +46,12 @@ const sa = inject('sa')
 const addUpdate = ref()
 const  loading = ref(false)
 const showSearch = ref(true)
+const query = ref({})
 onMounted(() => {
-    f5()
     const router = useRouter();
-    p.value = {...JSON.parse(JSON.stringify(p.value)), ...router.currentRoute.value.query}
+    query.value = router.currentRoute.value.query;
+    p.value = {...params, ...router.currentRoute.value.query}
+    f5()
 })
 
 // 数据刷新
@@ -95,13 +97,12 @@ async function updateSwitch(row) {
 
 //更新
 function update(row) {
-    console.log(addUpdate.value)
-    addUpdate.value.open(row);
+    addUpdate.value.open(row, query.value);
 }
 
 //添加
 function add() {
-    addUpdate.value.open(0);
+    addUpdate.value.open(null, query.value);
 }
 
 defineExpose({
