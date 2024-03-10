@@ -328,7 +328,14 @@ public class ViewService extends BaseService implements ServiceInterface {
         List<String> infoList = new ArrayList<>();
 
         String infoTemplate = """
-                <el-descriptions-item label="{}">{{one.{}}}</el-descriptions-item>
+                <el-descriptions-item>
+                 <template #label>
+                        <div class="cell-item" style="width:100px;">
+                          {}
+                        </div>
+                      </template>
+                      <div style="width:500px;" v-html="one.{}"></div>
+                </el-descriptions-item>
                 """;
 
         for (Field field : declaredFields) {
@@ -345,6 +352,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             } catch (Exception e) {
                 log.info(e.getMessage());
             }
+
             infoList.add(StrUtil.format(infoTemplate, annotation.value(), typeName));
 
         }

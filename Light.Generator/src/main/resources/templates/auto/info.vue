@@ -4,7 +4,7 @@
     <Dialog v-model="isShow" :title="title" maxHeight="700px">
         <el-descriptions
             class="margin-top"
-            :column="2"
+            :column="1"
             size="default"
             border
         >
@@ -24,7 +24,7 @@ const one = ref({});
 
 async function open(row, query)  {
     isShow.value = true;
-    title.value = "修改 #{tableInfo}#";
+    title.value = "查看#{tableInfo}#";
     //获取当个信息
     const {data} = await sa.get("/#{EntityName}#/find/"+row.id);
     one.value = data;
