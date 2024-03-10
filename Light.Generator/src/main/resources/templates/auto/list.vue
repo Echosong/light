@@ -17,9 +17,10 @@
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"  @sort-change="shortChange">
             #{el-table-column}#
-            <el-table-column prop="address" label="操作" width="120px" #{fixed}#>
+            <el-table-column prop="address" label="操作" width="150px" #{fixed}#>
                 <template #default="s">
                     <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
+                    <el-button link  v-permission="" type="info"  @click="info(s.row)">查看</el-button>
                     <el-button link  v-permission="" type="primary"  @click="update(s.row)">修改</el-button>
                     <el-button link  v-permission=""  type="danger" @click="del(s.row)">删除</el-button>
                 </template>
@@ -30,10 +31,12 @@
     </div>
     <!-- 增改组件 -->
     <add-or-update ref="addUpdate"></add-or-update>
+    <current-or-info ref="currentInfo"></current-or-info>
 </template>
 
 <script setup>
 import addOrUpdate from './add.vue';
+import currentOrInfo from './info.vue'
 import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
@@ -44,6 +47,7 @@ const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')
 const addUpdate = ref()
+const currentInfo = ref();
 const  loading = ref(false)
 const showSearch = ref(true)
 const query = ref({})
@@ -100,9 +104,14 @@ function update(row) {
     addUpdate.value.open(row, query.value);
 }
 
+
 //添加
 function add() {
     addUpdate.value.open(null, query.value);
+}
+
+function info(row) {
+    currentInfo.value.open(row, query.value);
 }
 
 defineExpose({

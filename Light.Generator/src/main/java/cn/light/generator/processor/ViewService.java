@@ -52,6 +52,9 @@ public class ViewService extends BaseService implements ServiceInterface {
         if (autoEntity.viewList()) {
             this.viewFrom();
         }
+        if(autoEntity.viewInfo()){
+            this.viewInfo();
+        }
     }
 
     private static final String  START_WITH = "{javax";
@@ -309,6 +312,44 @@ public class ViewService extends BaseService implements ServiceInterface {
         map.put("fieldName", fieldName);
         String fromUploadFileStr = " <{componentName} @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
         return  StrUtil.format(fromUploadFileStr, map);
+    }
+
+    private void viewInfo(){
+        String templateFile = this.templatePath + "info.vue";
+
+        String listPath = vuePath + "/info.vue";
+        if (FileUtil.isFile(listPath)) {
+            if(reWrite(listPath, CodeTypeEnum.INFO_VIEW)){
+                return;
+            }
+        }
+        String tplContent = this.replaceTpl(templateFile);
+        Field[] declaredFields = clazz.getDeclaredFields();
+        List<String> infoList = new ArrayList<>();
+
+        String infoTemplate = """
+                <el-descriptions-item label="{}">{{one.{}}}</el-descriptions-item>
+                """;
+
+        for (Field field : declaredFields) {
+            if (!field.isAnnotationPresent(AutoEntityField.class)) {
+                continue;
+            }
+            AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
+
+            String typeName = field.getName();
+            try {
+                if (!BASE_ENUM.equals(annotation.enums().getSimpleName())) {
+                    typeName = typeName + "Enum";
+                }
+            } catch (Exception e) {
+                log.info(e.getMessage());
+            }
+            infoList.add(StrUtil.format(infoTemplate, annotation.value(), typeName));
+
+        }
+        tplContent = tplContent.replace("#{el-descriptions-item}#", StrUtil.join( "", infoList));
+        FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
     }
 
     /**
