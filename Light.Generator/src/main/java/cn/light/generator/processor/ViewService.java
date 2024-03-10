@@ -51,9 +51,9 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
         if (autoEntity.viewList()) {
             this.viewFrom();
-        }
-        if(autoEntity.viewInfo()){
-            this.viewInfo();
+            if(autoEntity.viewInfo()){
+                this.viewInfo();
+            }
         }
     }
 

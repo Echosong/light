@@ -36,6 +36,11 @@ public @interface AutoEntity {
     boolean viewFrom() default true;
 
     /**
+     * 详细
+     */
+    boolean viewInfo() default  true;
+
+    /**
      * 是否需要生成对应的controller
      */
     boolean controller() default  true;
