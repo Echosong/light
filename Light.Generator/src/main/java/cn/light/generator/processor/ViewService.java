@@ -395,6 +395,18 @@ public class ViewService extends BaseService implements ServiceInterface {
                 ms.add(StrUtil.format("{}:0", field.getName()));
             }
 
+            String tipMsg = "";
+            if(annotation.notes().length() > 4){
+                tipMsg =  """
+                        <el-tooltip class="item" effect="dark" content="{}" placement="top-start">
+                         #{}#
+                        </el-tooltip>
+                    """;
+                tipMsg = StrUtil.format(tipMsg,  annotation.notes());
+            }
+
+            String formItem = "";
+
             if (annotation.htmlType() != HtmlTypeEnum.INPUT) {
                 String htmlTypeStr = "";
 
@@ -422,35 +434,50 @@ public class ViewService extends BaseService implements ServiceInterface {
                         break;
                     default:
                 }
-                elFormItems.add(StrUtil.format("""
+                formItem = (StrUtil.format("""
                         <el-form-item label="{}" v-if="!query.{}">
                         {}
                         </el-form-item>""",
                         annotation.value(), field.getName(), htmlTypeStr));
+                if(StrUtil.isNotBlank(tipMsg)) {
+                    elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
+                }else {
+                    elFormItems.add(formItem);
+                }
                 continue;
             }
 
             if (!"BaseEnum".equals(annotation.enums().getSimpleName())) {
                 importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
                 Class<? extends BaseEnum> lclazz = annotation.enums();
-                elFormItems.add(StrUtil.format("""
+                formItem = (StrUtil.format("""
                                 <el-form-item label="{}" v-if="!query.{}">
                                      <input-enum enumName="{}" v-model="m.{}" ></input-enum>
                                 </el-form-item>""", annotation.value(), field.getName(), StrUtil.lowerFirst(lclazz.getSimpleName()),
                         field.getName()));
+                if(StrUtil.isNotBlank(tipMsg)) {
+                    elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
+                }else {
+                    elFormItems.add(formItem);
+                }
                 continue;
             }
 
             if ("Date".equals(field.getType().getSimpleName())) {
-                elFormItems.add(StrUtil.format("""
+                formItem = (StrUtil.format("""
                       <el-form-item label="{}："  prop="{}" v-if="!query.{}">
                          <el-date-picker v-model="m.{}" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="{}"></el-date-picker>
                       </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName(), annotation.value()));
             } else {
-                elFormItems.add(StrUtil.format("""
-                        <el-form-item label="{}："  prop="{}" v-if="!query.{}" >
+                formItem = (StrUtil.format("""
+                        <el-form-item label="{}"  prop="{}" v-if="!query.{}" >
                             <el-input v-model="m.{}"></el-input>
                         </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName()));
+            }
+            if(StrUtil.isNotBlank(tipMsg)) {
+                elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
+            }else {
+                elFormItems.add(formItem);
             }
         }
         //

@@ -30,10 +30,12 @@ const sa = inject('sa')
 const ruleForm = ref();
 const  query = ref({});
 
-function open(data, parmas)  {
+async function open(data, parmas)  {
     isShow.value = true;
     if (data) {
         title.value = "修改 #{tableInfo}#";
+        let one = await sa.get("/#{EntityName}#/find/"+data.id);
+        m.value = one.data;
         m.value = data;
     } else {
         let mdata  = //data_init
