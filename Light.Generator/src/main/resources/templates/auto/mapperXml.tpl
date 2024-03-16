@@ -3,8 +3,10 @@
 <mapper namespace="#{PackageName}#.mapper.#{UpEntityName}#Mapper">
     <select id="listPage" resultType="#{SYS_PATH}.entity.entity.#{UpTableName}#">
         select *
-        from #{table_name}# where 1=1
-                 #{sql_where}#
+        from #{table_name}#
+        <where>
+          #{sql_where}#
+        </where>
     </select>
 
 </mapper>
