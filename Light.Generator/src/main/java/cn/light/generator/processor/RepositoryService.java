@@ -46,6 +46,9 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
             if( !ArrayUtil.contains(annotation.value(), CodeTypeEnum.REPOSITORY)){
                 return;
             }
+            if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
+                return;
+            }
             //进行备份
             FileUtil.copy(fileName, fileName.replace(".java"
                     , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))

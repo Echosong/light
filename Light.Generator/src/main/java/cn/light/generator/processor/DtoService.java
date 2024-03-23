@@ -92,6 +92,9 @@ public class DtoService extends BaseService implements ServiceInterface {
             if(tplEnum == DtoTplEnum.DTO && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.DTO) ){
                 return;
             }
+            if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
+                return;
+            }
             //进行备份
             FileUtil.copy(dtoName, dtoName.replace(".java"
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))

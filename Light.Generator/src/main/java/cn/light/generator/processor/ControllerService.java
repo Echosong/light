@@ -60,7 +60,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.CONTROLLER)) {
+            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.CONTROLLER) && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL)) {
                 return;
             }
             //进行备份

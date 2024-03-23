@@ -1,11 +1,7 @@
 package cn.light.common.enums;
 
 /**
- * <p>Title: </p >
- * <p>Description: Controller 用于对生成代表时候是否要覆盖</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021-11-0411:55</p >
- *
+ * 自动生成代码类型
  * @author : echosong
  * @version :1.0.0
  */
@@ -29,6 +25,7 @@ public enum CodeTypeEnum {
 
     MAPPER_XML,
     //不需要任何
-    NULL
-
+    NULL,
+    //全部重新生成
+    ALL
 }
