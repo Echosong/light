@@ -295,12 +295,10 @@ public class ViewService extends BaseService implements ServiceInterface {
             return true;
         }
         AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-        if( !ArrayUtil.contains(annotation.value(), codeTypeEnum)){
+        if( !ArrayUtil.containsAny(annotation.value(), codeTypeEnum, CodeTypeEnum.ALL)){
             return true;
         }
-        if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
-            return true;
-        }
+
         //进行备份
         FileUtil.copy(listPath, listPath.replace(".vue"
                         , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))

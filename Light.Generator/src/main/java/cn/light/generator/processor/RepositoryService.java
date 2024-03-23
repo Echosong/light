@@ -43,10 +43,7 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if( !ArrayUtil.contains(annotation.value(), CodeTypeEnum.REPOSITORY)){
-                return;
-            }
-            if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
+            if( !ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.REPOSITORY, CodeTypeEnum.ALL)){
                 return;
             }
             //进行备份

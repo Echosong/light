@@ -43,12 +43,10 @@ public class MapperService extends BaseService implements ServiceInterface {
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
 
-            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.MAPPER)) {
+            if (!ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.MAPPER, CodeTypeEnum.ALL)) {
                 return;
             }
-            if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
-                return;
-            }
+
             FileUtil.copy(fileName, fileName.replace(".java"
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);

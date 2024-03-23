@@ -83,16 +83,13 @@ public class DtoService extends BaseService implements ServiceInterface {
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
 
-            if(tplEnum == DtoTplEnum.ListDTO &&!ArrayUtil.contains(annotation.value(), CodeTypeEnum.LIST_DTO) ){
+            if(tplEnum == DtoTplEnum.ListDTO &&!ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.LIST_DTO,CodeTypeEnum.ALL) ){
                 return;
             }
-            if(tplEnum == DtoTplEnum.QueryDTO && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.QUERY_DTO) ){
+            if(tplEnum == DtoTplEnum.QueryDTO && !ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.QUERY_DTO, CodeTypeEnum.ALL) ){
                 return;
             }
-            if(tplEnum == DtoTplEnum.DTO && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.DTO) ){
-                return;
-            }
-            if(!ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL) ){
+            if(tplEnum == DtoTplEnum.DTO && !ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.DTO, CodeTypeEnum.ALL) ){
                 return;
             }
             //进行备份
