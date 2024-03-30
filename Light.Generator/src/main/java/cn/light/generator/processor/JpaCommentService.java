@@ -67,7 +67,7 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
                     length = 2000;
                 }
                 String typeName = field.getType().getSimpleName();
-                if(annotation.htmlType().equals(HtmlTypeEnum.TEXTEDIT) || annotation.htmlType().equals(HtmlTypeEnum.TEXTAREA)
+                if((annotation.htmlType().equals(HtmlTypeEnum.TEXTEDIT) || annotation.htmlType().equals(HtmlTypeEnum.TEXTAREA))
                         && annotation.len() == 255){
                     typeName = "mediumtext";
                 }
@@ -92,8 +92,9 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
      * @param tableComment 表注释
      */
     private void setTableComment(String tableComment) throws SQLException {
-        Db.use().execute(StrUtil.format("alter table {} comment '{}'", tableName, tableComment));
-        Console.log("执行表{} 备注 : {}", tableName, tableComment);
+        String sql = StrUtil.format("alter table {} comment '{}'", tableName, tableComment);
+        Db.use().execute(sql);
+        Console.log("执行表 {} 备注 : {} sql: {}", tableName, tableComment, sql);
     }
 
 
@@ -126,8 +127,9 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
         //设置默认值相关  default 3 not null
         String alertStr = StrUtil.format("alter table {} modify `{}` {} {} comment '{}'",
                 tableName, columnName, sqlType, defaultStr, columnComment);
+        Console.log("执行表 {} ,的字段{} 备注 : {} 执行sql: {}", tableName, columnName, columnComment, alertStr);
         Db.use().execute(alertStr);
-        Console.log("执行表 {} ,的字段{}, 备注 : {}", tableName, columnName, columnComment);
+
     }
 
 
