@@ -66,15 +66,20 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
                 if(annotation.htmlType().equals(HtmlTypeEnum.UPLOAD) && annotation.len() == 255){
                     length = 2000;
                 }
+                String typeName = field.getType().getSimpleName();
+                if(annotation.htmlType().equals(HtmlTypeEnum.TEXTEDIT) || annotation.htmlType().equals(HtmlTypeEnum.TEXTAREA)
+                        && annotation.len() == 255){
+                    typeName = "mediumtext";
+                }
                 String defaultStr = "";
+
                 if(field.isAnnotationPresent(AutoEntityFieldDefault.class)){
                     AutoEntityFieldDefault aDefault = field.getAnnotation(AutoEntityFieldDefault.class);
                     //不能为空那么肯定有默认值，所以就简单粗暴这样处理了
                     defaultStr = StrUtil.format("default {} {} ",StrUtil.isEmpty(aDefault.value())?"''":aDefault.value(),
                             aDefault.notNull()?"not null": "null");
                 }
-                setColumnName(field.getName(), annotation.value() + info, field.getType().getSimpleName(),
-                        length, defaultStr);
+                setColumnName(field.getName(), annotation.value() + info, typeName, length, defaultStr);
             } catch (SQLException sqlException) {
                 log.info(sqlException.getMessage());
             }
@@ -113,6 +118,9 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
         }
         if ("Boolean".equalsIgnoreCase(typeName)) {
             sqlType = "bit";
+        }
+        if("mediumtext".equalsIgnoreCase(typeName)){
+            sqlType = "mediumtext";
         }
 
         //设置默认值相关  default 3 not null
