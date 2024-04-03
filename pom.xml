@@ -14,7 +14,7 @@
     <artifactId>light</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>小朱自驾后端</name>
+    <name>保险中台项目</name>
     <description>轻巧的后台管理系统</description>
 
     <properties>

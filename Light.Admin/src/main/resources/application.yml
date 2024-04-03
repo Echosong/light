@@ -1,12 +1,12 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
   application:
     name: light
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/db_light_demo?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: songfeiok
-
+  profiles:
+    active: rao
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
@@ -23,17 +23,8 @@ spring:
     redis:
       repositories:
         enabled: false
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: _sys31UC
-    database: 8
 server:
-  port: 2024
-#文件上传操作
-file:
-  #文件上传目录
-  upload-folder: E:\外包项目整理\light轻巧之光\light\upload\
+  port: 2034
 
 #配置mybatis
 mybatis:
