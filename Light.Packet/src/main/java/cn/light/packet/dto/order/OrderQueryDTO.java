@@ -18,7 +18,7 @@ import java.util.*;
  * <p>Title:业绩数据 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-04-04 10:49:56</p >
+ * <p>create date: 2024-04-05 01:09:53</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -26,5 +26,20 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class OrderQueryDTO extends PageInfo {
+   @Schema(title="业绩归属" )
+    private Date startOwner;
+
+   @Schema(title="业绩归属" )
+    private Date endOwner;
+
+   @Schema(title="客户名称" )
+    private String customerName;
+
+   @Schema(title="渠道名称" )
+    private String channelName;
+
+   @Schema(title="运营人" )
+    private String operation;
+
 
 }

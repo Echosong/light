@@ -126,7 +126,6 @@ public class UserServiceImpl implements UserService {
         user.setState(userDTO.getState());
         user.setEmail(userDTO.getEmail());
         user.setSex(userDTO.getSex());
-        user.setType(userDTO.getType());
 
         //这里只考虑一个用户一个角色
         if (Objects.nonNull(userDTO.getRoleId())) {

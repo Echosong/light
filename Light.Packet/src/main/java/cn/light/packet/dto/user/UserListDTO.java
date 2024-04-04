@@ -17,15 +17,14 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.*;
 
-import cn.light.packet.enums.UserRegTypeEnum;
-import cn.light.packet.enums.UserStateEnum;
 import cn.light.packet.enums.UserSexEnum;
+import cn.light.packet.enums.UserStateEnum;
 
 /**
  * <p>Title:用户 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-01 19:23:19</p >
+ * <p>create date: 2024-04-05 01:00:52</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -43,19 +42,8 @@ public class UserListDTO extends SysBaseDTO implements IDictionaryObject {
     @ApiModelPropertyEnum(UserSexEnum.class)
     private Integer sex;
 
-    @Range(min=0,max=300)
-   @Schema(title="身高" )
-    private Double height;
-
-   @Schema(title="体重" )
-    private Double weight;
-
-   @Schema(title="昵称" )
-    private String nick;
-
-   @Schema(title="注册方式" , description="0,1,2")
-    @ApiModelPropertyEnum(UserRegTypeEnum.class)
-    private Integer type;
+   @Schema(title="工号" )
+    private String code;
 
     @Length(min=2,max=2147483647,message="姓名必须大于两个字符")
    @Schema(title="姓名" )

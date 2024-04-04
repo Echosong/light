@@ -35,34 +35,10 @@
 <el-descriptions-item>
  <template #label>
         <div class="cell-item" style="width:100px;">
-          身高
+          工号
         </div>
       </template>
-      <div style="width:500px;" v-html="one.height"></div>
-</el-descriptions-item>
-<el-descriptions-item>
- <template #label>
-        <div class="cell-item" style="width:100px;">
-          体重
-        </div>
-      </template>
-      <div style="width:500px;" v-html="one.weight"></div>
-</el-descriptions-item>
-<el-descriptions-item>
- <template #label>
-        <div class="cell-item" style="width:100px;">
-          昵称
-        </div>
-      </template>
-      <div style="width:500px;" v-html="one.nick"></div>
-</el-descriptions-item>
-<el-descriptions-item>
- <template #label>
-        <div class="cell-item" style="width:100px;">
-          注册方式
-        </div>
-      </template>
-      <div style="width:500px;" v-html="one.typeEnum"></div>
+      <div style="width:500px;" v-html="one.code"></div>
 </el-descriptions-item>
 <el-descriptions-item>
  <template #label>
@@ -103,22 +79,6 @@
         </div>
       </template>
       <div style="width:500px;" v-html="one.loginIp"></div>
-</el-descriptions-item>
-<el-descriptions-item>
- <template #label>
-        <div class="cell-item" style="width:100px;">
-          身份证正面
-        </div>
-      </template>
-      <div style="width:500px;" v-html="one.frontCard"></div>
-</el-descriptions-item>
-<el-descriptions-item>
- <template #label>
-        <div class="cell-item" style="width:100px;">
-          身份证反面
-        </div>
-      </template>
-      <div style="width:500px;" v-html="one.reverseCard"></div>
 </el-descriptions-item>
 <el-descriptions-item>
  <template #label>

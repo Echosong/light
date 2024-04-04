@@ -5,7 +5,12 @@
         select *
         from sys_channel
         <where>
-          
+          <if test="channelName != null and channelName != '' ">
+ and channel_name  like CONCAT('%',#{channelName},'%')
+ </if>
+<if test="companyName != null and companyName != '' ">
+ and company_name  like CONCAT('%',#{companyName},'%')
+ </if>
         </where>
     </select>
 

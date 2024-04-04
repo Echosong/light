@@ -2,7 +2,12 @@
     <div class="app-container">
         <!-- 参数栏 -->
         <el-form :inline="true"  v-show="showSearch"  class="demo-form-inline">
-            
+            <el-form-item label="渠道名" v-if="!query.channelName">
+ <el-input v-model="p.channelName" placeholder="模糊查询"></el-input>
+</el-form-item>
+<el-form-item label="保险公司" v-if="!query.companyName">
+ <el-input v-model="p.companyName" placeholder="模糊查询"></el-input>
+</el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
                 <el-button  icon="Refresh" plain @click="reset">重置</el-button>
@@ -48,7 +53,7 @@ import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 import {useRouter} from "vue-router";
 
-const params = {pageSize:10,page:1, total: 0}
+const params = {pageSize:10,page:1, total: 0, channelName:'',companyName:''}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')

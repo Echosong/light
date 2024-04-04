@@ -5,6 +5,9 @@
             <el-form-item label="订单日期："  prop="orderTime" v-if="!query.orderTime">
    <el-date-picker v-model="m.orderTime" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="订单日期"></el-date-picker>
 </el-form-item>
+<el-form-item label="业绩归属："  prop="owner" v-if="!query.owner">
+   <el-date-picker v-model="m.owner" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="业绩归属"></el-date-picker>
+</el-form-item>
 <el-form-item label="客户名称"  prop="customerName" v-if="!query.customerName" >
     <el-input v-model="m.customerName"></el-input>
 </el-form-item>
@@ -29,13 +32,13 @@
 <el-form-item label="三类售价"  prop="threeClassPrice" v-if="!query.threeClassPrice" >
     <el-input v-model="m.threeClassPrice"></el-input>
 </el-form-item>
-<el-form-item label="三类渠道价"  prop="threeClassChannelPrice" v-if="!query.threeClassChannelPrice" >
+<el-form-item label="三类底价"  prop="threeClassChannelPrice" v-if="!query.threeClassChannelPrice" >
     <el-input v-model="m.threeClassChannelPrice"></el-input>
 </el-form-item>
 <el-form-item label="四类人数"  prop="fourClass" v-if="!query.fourClass" >
     <el-input v-model="m.fourClass"></el-input>
 </el-form-item>
-<el-form-item label="四类渠道价"  prop="fourClassChannelPrice" v-if="!query.fourClassChannelPrice" >
+<el-form-item label="四类底价"  prop="fourClassChannelPrice" v-if="!query.fourClassChannelPrice" >
     <el-input v-model="m.fourClassChannelPrice"></el-input>
 </el-form-item>
 <el-form-item label="四类售价"  prop="fourClassPrice" v-if="!query.fourClassPrice" >
@@ -44,14 +47,14 @@
 <el-form-item label="五类人数"  prop="fiveClass" v-if="!query.fiveClass" >
     <el-input v-model="m.fiveClass"></el-input>
 </el-form-item>
-<el-form-item label="五类渠道价"  prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice" >
+<el-form-item label="五类底价"  prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice" >
     <el-input v-model="m.fiveClassChannelPrice"></el-input>
 </el-form-item>
 <el-form-item label="五类售价"  prop="fiveClassPrice" v-if="!query.fiveClassPrice" >
     <el-input v-model="m.fiveClassPrice"></el-input>
 </el-form-item>
-<el-form-item label="运营人"  prop="operation" v-if="!query.operation" >
-    <el-input v-model="m.operation"></el-input>
+<el-form-item label="运营人" v-if="!query.operation">
+ <select-data v-model="m.operation" routeName="user" ></select-data>
 </el-form-item>
 <el-form-item label="返利总额"  prop="totalRebate" v-if="!query.totalRebate" >
     <el-input v-model="m.totalRebate"></el-input>
@@ -77,13 +80,14 @@
 <script setup>
 import Dialog from "@/components/dialog/index.vue";
 import {inject, ref} from "vue";
-
+import selectData from '@/components/SelectData/index.vue'
 
 const props = defineProps(["params"]);
 const m = ref({});
 const title = ref("");
 const isShow = ref(false);
 const rules = {orderTime:[],
+owner:[],
 customerName:[],
 channelName:[],
 companyName:[],
@@ -117,6 +121,7 @@ async function open(data, parmas)  {
         m.value = data;
     } else {
         let mdata  = {orderTime:'',
+owner:'',
 customerName:'',
 channelName:'',
 companyName:'',

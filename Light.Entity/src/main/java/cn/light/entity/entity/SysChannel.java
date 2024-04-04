@@ -3,6 +3,7 @@ package cn.light.entity.entity;
 import cn.light.common.anno.AutoCover;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
+import cn.light.common.anno.InQueryDTO;
 import cn.light.common.enums.CodeTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -26,13 +27,15 @@ import org.hibernate.annotations.DynamicUpdate;
 })
 @DynamicInsert
 @DynamicUpdate
-@AutoCover(value = {CodeTypeEnum.NULL})
+@AutoCover(value = {CodeTypeEnum.LIST_VIEW, CodeTypeEnum.MAPPER_XML, CodeTypeEnum.QUERY_DTO})
 public class SysChannel extends SysBase{
     @AutoEntityField(value = "渠道名")
+    @InQueryDTO
     private String channelName;
 
     //公司
     @AutoEntityField(value = "保险公司")
+    @InQueryDTO
     private String companyName;
 
     @AutoEntityField(value = "渠道等级")
@@ -41,6 +44,7 @@ public class SysChannel extends SysBase{
     //方案
     @AutoEntityField(value = "渠道方案")
     private String scheme;
+
 
     //伤残比例
     @AutoEntityField(value = "伤残比例")

@@ -2,7 +2,28 @@
     <div class="app-container">
         <!-- 参数栏 -->
         <el-form :inline="true"  v-show="showSearch"  class="demo-form-inline">
-            
+            <el-form-item label="业绩归属"  v-if="!query.owner">
+          <el-date-picker
+            v-model="p.startOwner"
+            type="datetime"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            placeholder="开始日期"></el-date-picker>
+          -
+          <el-date-picker
+            v-model="p.endOwner"
+            type="datetime"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            placeholder="结束日期"></el-date-picker>
+        </el-form-item>
+<el-form-item label="客户名称" v-if="!query.customerName">
+ <el-input v-model="p.customerName" placeholder="模糊查询"></el-input>
+</el-form-item>
+<el-form-item label="渠道名称" v-if="!query.channelName">
+ <el-input v-model="p.channelName" placeholder="模糊查询"></el-input>
+</el-form-item>
+<el-form-item label="运营人"  v-if="!query.operation">
+ <select-data v-model="p.operation" routeName="user" ></select-data>
+</el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
                 <el-button  icon="Refresh" plain @click="reset">重置</el-button>
@@ -18,6 +39,7 @@
         <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"  @sort-change="shortChange">
             <el-table-column type="selection"></el-table-column>
   <el-table-column  label="订单日期"   prop="orderTime" ></el-table-column>
+  <el-table-column  label="业绩归属"   prop="owner" ></el-table-column>
   <el-table-column  label="客户名称"   prop="customerName" ></el-table-column>
   <el-table-column  label="渠道名称"   prop="channelName" ></el-table-column>
   <el-table-column  label="保险公司"   prop="companyName" ></el-table-column>
@@ -26,12 +48,12 @@
   <el-table-column  label="伤残比例"   prop="accidentRate" ></el-table-column>
   <el-table-column  label="三类人数"   prop="threeClass" ></el-table-column>
   <el-table-column  label="三类售价"   prop="threeClassPrice" ></el-table-column>
-  <el-table-column  label="三类渠道价"   prop="threeClassChannelPrice" ></el-table-column>
+  <el-table-column  label="三类底价"   prop="threeClassChannelPrice" ></el-table-column>
   <el-table-column  label="四类人数"   prop="fourClass" ></el-table-column>
-  <el-table-column  label="四类渠道价"   prop="fourClassChannelPrice" ></el-table-column>
+  <el-table-column  label="四类底价"   prop="fourClassChannelPrice" ></el-table-column>
   <el-table-column  label="四类售价"   prop="fourClassPrice" ></el-table-column>
   <el-table-column  label="五类人数"   prop="fiveClass" ></el-table-column>
-  <el-table-column  label="五类渠道价"   prop="fiveClassChannelPrice" ></el-table-column>
+  <el-table-column  label="五类底价"   prop="fiveClassChannelPrice" ></el-table-column>
   <el-table-column  label="五类售价"   prop="fiveClassPrice" ></el-table-column>
   <el-table-column  label="运营人"   prop="operation" ></el-table-column>
   <el-table-column  label="返利总额"   prop="totalRebate" ></el-table-column>
@@ -61,8 +83,8 @@ import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 import {useRouter} from "vue-router";
-
-const params = {pageSize:10,page:1, total: 0}
+import selectData from '@/components/SelectData/index.vue'
+const params = {pageSize:10,page:1, total: 0, startOwner:'',endOwner:'',customerName:'',channelName:'',operation:''}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')

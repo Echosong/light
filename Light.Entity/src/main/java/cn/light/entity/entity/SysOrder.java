@@ -3,7 +3,9 @@ package cn.light.entity.entity;
 import cn.light.common.anno.AutoCover;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
+import cn.light.common.anno.InQueryDTO;
 import cn.light.common.enums.CodeTypeEnum;
+import cn.light.common.enums.HtmlTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
@@ -28,16 +30,23 @@ import java.util.Date;
 })
 @DynamicInsert
 @DynamicUpdate
-@AutoCover(value = {CodeTypeEnum.NULL})
+@AutoCover(value = {CodeTypeEnum.LIST_VIEW, CodeTypeEnum.QUERY_DTO, CodeTypeEnum.MAPPER_XML, CodeTypeEnum.ADD_VIEW})
 public class SysOrder extends  SysBase{
     @AutoEntityField(value = "订单日期")
     private Date orderTime;
 
+    //业绩归属
+    @AutoEntityField(value = "业绩归属")
+    @InQueryDTO
+    private Date owner;
+
     //客户名称
     @AutoEntityField(value = "客户名称")
+    @InQueryDTO
     private String customerName;
 
     @AutoEntityField(value = "渠道名称")
+    @InQueryDTO
     private String channelName;
 
     //保险公司
@@ -65,7 +74,7 @@ public class SysOrder extends  SysBase{
     private String threeClassPrice;
 
     //三类渠道价
-    @AutoEntityField(value = "三类渠道价")
+    @AutoEntityField(value = "三类底价")
     private String threeClassChannelPrice;
 
     //四类人数
@@ -73,7 +82,7 @@ public class SysOrder extends  SysBase{
     private Integer fourClass;
 
     //四类渠道价
-    @AutoEntityField(value = "四类渠道价")
+    @AutoEntityField(value = "四类底价")
     private String fourClassChannelPrice;
 
     //四类售价
@@ -85,7 +94,7 @@ public class SysOrder extends  SysBase{
     private Integer fiveClass;
 
     //五类渠道价
-    @AutoEntityField(value = "五类渠道价")
+    @AutoEntityField(value = "五类底价")
     private String fiveClassChannelPrice;
 
     //五类售价
@@ -93,7 +102,8 @@ public class SysOrder extends  SysBase{
     private String fiveClassPrice;
 
     //运营
-    @AutoEntityField(value = "运营人")
+    @AutoEntityField(value = "运营人", htmlType = HtmlTypeEnum.SELECT, source = "User")
+    @InQueryDTO
     private String operation;
 
     //返利总额
