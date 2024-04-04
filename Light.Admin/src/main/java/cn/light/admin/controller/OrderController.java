@@ -15,6 +15,7 @@ import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ import java.util.*;
  * <p>Title: </p >
  * <p>Description: 业绩数据管理</p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-04-04 10:49:56</p >
+ * <p>create date: 2024-04-04 10:56:58</p >
  *
  * listPage,save,delete,find,list
  * @author : echosong
@@ -87,21 +88,6 @@ public class OrderController extends BaseController{
         orderRepository.deleteById(id);
     }
 
-    @Operation(summary = "简单查询业绩数据")
-    @GetMapping("/getMap")
-    public List<Map<String, Object>> getMap(){
-         List<SysOrder> all = clubMapper.selectList(new LambdaQueryWrapper<SysOrder>()
-                        .select(SysOrder::getId, SysOrder::get#{keyName}#)
-                        .orderByDesc(SysOrder::getId)
-                );
-        List<Map<String, Object>> maps = new ArrayList<>();
-        for (SdClub item : all) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", item.getId());
-            map.put("name", item.get#{keyName}#);
-            maps.add(map);
-        }
-        return maps;
-    }
+    
 
 }
