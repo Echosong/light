@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="400px" style="width: 950px">
+    <Dialog v-model="isShow" :title="title" maxHeight="480px" style="width: 950px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px" style="width: 920px;" :inline="true">
             <el-form-item label="订单日期"  prop="orderTime" v-if="!query.orderTime">
@@ -29,13 +29,14 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="伤残比例"  prop="accidentRate" v-if="!query.accidentRate" >
-                <el-input v-model="m.accidentRate" style="width:285px; margin-right: 2px; " :disabled="true"></el-input> <span style="color: #999;">%</span>
-            </el-form-item>
-
-            <el-form-item label="回本日期"  prop="backTime" v-if="!query.backTime">
-                <el-date-picker v-model="m.backTime" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="回本日期" style="width: 300px" > </el-date-picker>
-            </el-form-item>
+            <div  style="margin-bottom: 10px; margin-left: 50px; margin-right: 50px;">
+                <el-descriptions direction="vertical" v-if="channel.id" :column="4" border>
+                    <el-descriptions-item label="伤残比例">{{ channel.accidentRate }}%</el-descriptions-item>
+                    <el-descriptions-item label="三类渠道价">{{ channel.threeClassChannelPrice }}</el-descriptions-item>
+                    <el-descriptions-item label="四类渠道价" >{{ channel.fourClassChannelPrice }}</el-descriptions-item>
+                    <el-descriptions-item label="五类渠道价">{{ channel.fiveClassChannelPrice }}</el-descriptions-item>
+                </el-descriptions>
+            </div>
 
             <el-form-item label="三类人数"  prop="threeClass" v-if="!query.threeClass" >
                 <el-input v-model="m.threeClass" style="width: 300px;" placeholder="三类人数"></el-input>
@@ -58,6 +59,10 @@
 
             <el-form-item label="五类售价"  prop="fiveClass" v-if="!query.fiveClass" >
                 <el-input v-model="m.fiveClassPrice" placeholder="五类售价" style=" width: 300px"></el-input>
+            </el-form-item>
+
+            <el-form-item label="回本日期"  prop="backTime" v-if="!query.backTime">
+                <el-date-picker v-model="m.backTime" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="回本日期" style="width: 300px" > </el-date-picker>
             </el-form-item>
 
         </el-form>
@@ -106,6 +111,7 @@ const rules = {orderTime:[],
 const sa = inject('sa')
 const ruleForm = ref();
 const  query = ref({});
+const  channel = ref({})
 
 async function open(data, parmas)  {
     isShow.value = true;
@@ -113,7 +119,9 @@ async function open(data, parmas)  {
         title.value = "修改业绩数据";
         let one = await sa.get("/order/find/"+data.id);
         m.value = one.data;
-        m.value = data;
+        let channelData = await sa.get("/channel/find/"+one.data.channelId);
+        channel.value = channelData.data;
+
     } else {
         let mdata  = {orderTime:'',
             owner:'',
@@ -160,8 +168,9 @@ async function selectScheme(){
             scheme: m.value.scheme
         }
     );
-    m.value.channelId = data.channelId;
-
+    m.value.channelId = data.id;
+    m.value.accidentRate = data.accidentRate;
+    channel.value = data;
 }
 
 function selectChannel(){

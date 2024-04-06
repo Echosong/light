@@ -123,6 +123,17 @@ public class ChannelController extends BaseController{
         channelRepository.deleteById(id);
     }
 
+    @Operation(summary = "获取渠道信息")
+    @PostMapping("/getChannel")
+    public ChannelDTO getChannelDTO(@RequestBody ChannelDTO channelDTO){
+        List<SysChannel> sysChannels = channelMapper.selectList(new LambdaQueryWrapper<SysChannel>()
+                .eq(SysChannel::getChannelName, StrUtil.trim(channelDTO.getChannelName()))
+                .eq(SysChannel::getCompanyName, StrUtil.trim(channelDTO.getCompanyName()))
+                .eq(SysChannel::getScheme, StrUtil.trim(channelDTO.getScheme()))
+        );
+        return DtoMapper.convert(sysChannels.get(0), ChannelDTO.class);
+    }
+
 
 
 }

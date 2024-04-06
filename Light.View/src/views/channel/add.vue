@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="350px" style="width: 600px;">
+    <Dialog v-model="isShow" :title="title" maxHeight="550px" style="width: 600px;">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
             <el-form-item label="渠道名" prop="channelName" v-if="!query.channelName">
@@ -33,27 +33,27 @@
             </el-form-item>
 
             <el-form-item label="伤残比例" style="width: 520px" prop="accidentRate" v-if="!query.accidentRate">
-                <el-input v-model="m.accidentRate"></el-input>
+                <el-input  style="width: 380px" v-model="m.accidentRate"></el-input> %
             </el-form-item>
 
 
             <el-form-item label="三类成本价" prop="threeClassCostPrice" v-if="!query.threeClassCostPrice">
-                <el-input v-model="m.threeClassCostPrice"></el-input>
+                <el-input style="width: 400px" v-model="m.threeClassCostPrice"></el-input>
             </el-form-item>
             <el-form-item label="四类成本价" prop="fourClassCostPrice" v-if="!query.fourClassCostPrice">
-                <el-input v-model="m.fourClassCostPrice"></el-input>
+                <el-input style="width: 400px" v-model="m.fourClassCostPrice"></el-input>
             </el-form-item>
             <el-form-item label="五类成本价" prop="fiveClassCostPrice" v-if="!query.fiveClassCostPrice">
-                <el-input v-model="m.fiveClassCostPrice"></el-input>
+                <el-input style="width: 400px" v-model="m.fiveClassCostPrice"></el-input>
             </el-form-item>
             <el-form-item label="三类渠道价" prop="threeClassChannelPrice" v-if="!query.threeClassChannelPrice">
-                <el-input v-model="m.threeClassChannelPrice"></el-input>
+                <el-input style="width: 400px" v-model="m.threeClassChannelPrice"></el-input>
             </el-form-item>
             <el-form-item label="四类渠道价" prop="fourClassChannelPrice" v-if="!query.fourClassChannelPrice">
-                <el-input v-model="m.fourClassChannelPrice"></el-input>
+                <el-input style="width: 400px" v-model="m.fourClassChannelPrice"></el-input>
             </el-form-item>
-            <el-form-item label="五类渠道价" prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice">
-                <el-input v-model="m.fiveClassChannelPrice"></el-input>
+            <el-form-item  label="五类渠道价" prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice">
+                <el-input style="width: 400px" v-model="m.fiveClassChannelPrice"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>

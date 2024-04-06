@@ -1,5 +1,7 @@
 package cn.light.packet.dto.order;
 
+import cn.light.common.anno.AutoEntityField;
+import cn.light.common.anno.InQueryDTO;
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
 import cn.light.common.dto.PageInfo;
@@ -31,6 +33,10 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class OrderDTO extends SysBaseDTO implements IDictionaryObject {
+
+    @Schema(title = "业绩归属")
+    private Date owner;
+
     @Schema(title = "订单日期")
     private Date orderTime;
 

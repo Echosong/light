@@ -48,7 +48,6 @@
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"
                   @sort-change="shortChange">
-            <el-table-column type="selection"></el-table-column>
             <el-table-column label="订单日期" prop="orderTime" width="100">
                 <template   #default="s">
                     {{dateFormat(s.row.orderTime)}}
@@ -85,7 +84,7 @@
                     底价: {{s.row.fiveClassChannelPrice}}
                 </template>
             </el-table-column>
-            <el-table-column label="运营人" prop="operation"></el-table-column>
+            <el-table-column label="运营人" prop="creatorName"></el-table-column>
             <el-table-column label="返利总额" prop="totalRebate"></el-table-column>
             <el-table-column label="利润" prop="profit"></el-table-column>
             <el-table-column label="回本日期" prop="backTime" width="100">

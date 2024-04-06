@@ -72,6 +72,10 @@ public class OrderController extends BaseController{
         sysOrder.setOperation(userService.getUserCache().getId());
         SysChannel channel = channelRepository.findById(orderDTO.getChannelId()).orElseThrow(() -> new BaseKnownException(500, "渠道不存在"));
 
+        sysOrder.setThreeClassChannelPrice(channel.getThreeClassChannelPrice());
+        sysOrder.setFourClassChannelPrice(channel.getFourClassChannelPrice());
+        sysOrder.setFiveClassChannelPrice(channel.getFiveClassChannelPrice());
+
         //三类利润
         BigDecimal threePrice = (sysOrder.getThreeClassPrice().subtract(sysOrder.getThreeClassChannelPrice())).multiply(new BigDecimal(sysOrder.getThreeClass()));
         //四类利润

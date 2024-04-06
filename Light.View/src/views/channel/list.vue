@@ -26,7 +26,11 @@
             <el-table-column label="渠道名" sortable prop="channelName"></el-table-column>
             <el-table-column label="保险公司" sortable prop="companyName"></el-table-column>
             <el-table-column label="渠道方案" prop="scheme"></el-table-column>
-            <el-table-column label="伤残比例" sortable prop="accidentRate"></el-table-column>
+            <el-table-column label="伤残比例" sortable prop="accidentRate">
+                <template #default="scope">
+                    {{scope.row.accidentRate }}%
+                </template>
+            </el-table-column>
             <el-table-column label="三类成本价" prop="threeClassCostPrice"></el-table-column>
             <el-table-column label="四类成本价" prop="fourClassCostPrice"></el-table-column>
             <el-table-column label="五类成本价" prop="fiveClassCostPrice"></el-table-column>
