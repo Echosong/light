@@ -2,11 +2,11 @@
     <div class="app-container">
         <!-- 参数栏 -->
         <el-form :inline="true" v-show="showSearch" class="demo-form-inline">
-            <el-form-item label="渠道名" v-if="!query.channelName">
-                <el-input v-model="p.channelName" placeholder="模糊查询"></el-input>
+            <el-form-item label="标题" v-if="!query.title">
+                <el-input v-model="p.title" placeholder="模糊查询"></el-input>
             </el-form-item>
-            <el-form-item label="保险公司" v-if="!query.companyName">
-                <el-input v-model="p.companyName" placeholder="模糊查询"></el-input>
+            <el-form-item label="类别" v-if="!query.type">
+                <select-data v-model="p.type" routeName=""></select-data>
             </el-form-item>
             <el-form-item style="min-width: 0px">
                 <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
@@ -16,22 +16,21 @@
 
         <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
             <el-button type="success" v-permission="" icon="Plus" plain @click="add">增加</el-button>
-            <el-button type="warning" v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
         </FunNavigation>
 
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"
                   @sort-change="shortChange">
-            <el-table-column label="渠道名" sortable prop="channelName"></el-table-column>
-            <el-table-column label="保险公司" sortable prop="companyName"></el-table-column>
-            <el-table-column label="渠道等级" sortable prop="gradeEnum"></el-table-column>
-            <el-table-column label="渠道方案" prop="scheme"></el-table-column>
-            <el-table-column label="伤残比例" sortable prop="accidentRate">
+            <el-table-column type="selection"></el-table-column>
+            <el-table-column label="标题" prop="title"></el-table-column>
+            <el-table-column label="类别" prop="type"></el-table-column>
+            <el-table-column label="文件路径">
                 <template #default="s">
-                    {{s.row.accidentRate}}%
+                    <Link :fileUrl="s.row.path"></Link>
                 </template>
             </el-table-column>
-            <el-table-column label="成本价" sortable prop="costPrice"></el-table-column>
+
+            <el-table-column label="说明" :show-overflow-tooltip="true" prop="info"></el-table-column>
             <el-table-column prop="address" label="操作" width="150px">
                 <template #default="s">
                     <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
@@ -56,8 +55,10 @@ import {inject, ref, onMounted} from "vue";
 import Pagination from "@/components/file/Pagination.vue";
 import FunNavigation from "@/components/funNavigation/funNavigation.vue";
 import {useRouter} from "vue-router";
+import Link from "@/components/file/link.vue";
+import selectData from '@/components/SelectData/index.vue'
 
-const params = {pageSize: 10, page: 1, total: 0, channelName: '', companyName: ''}
+const params = {pageSize: 10, page: 1, total: 0, title: '', type: ''}
 const p = ref(JSON.parse(JSON.stringify(params)))
 const dataList = ref([]);
 const sa = inject('sa')
@@ -76,7 +77,7 @@ onMounted(() => {
 // 数据刷新
 async function f5() {
     loading.value = true
-    const {data} = await sa.put("/channel/listPage", p.value);
+    const {data} = await sa.put("/resource/listPage", p.value);
     loading.value = false
     dataList.value = data.content.map((item) => {
         return item;
@@ -85,7 +86,7 @@ async function f5() {
 }
 
 function exportFile() {
-    sa.download("/channel/export", p.value)
+    sa.download("/resource/export", p.value)
 }
 
 function reset() {
@@ -95,7 +96,7 @@ function reset() {
 // 删除
 function del(data) {
     sa.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await sa.delete("/channel/delete/" + data.id);
+        let res = await sa.delete("/resource/delete/" + data.id);
         console.log(res)
         sa.arrayDelete(dataList.value, data);
         sa.ok(res.message);
@@ -110,7 +111,7 @@ function shortChange(e) {
 }
 
 async function updateSwitch(row) {
-    await sa.post('/channel//save', row);
+    await sa.post('/resource//save', row);
     sa.ok("更新成功", true)
 }
 

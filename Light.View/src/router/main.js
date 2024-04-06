@@ -17,6 +17,7 @@ export default [
 {perms: "channel-list", view: () => import('@/views/channel/list.vue')},
 {perms: "log-add", view: () => import('@/views/log/add.vue')},
 {perms: "article-add", view: () => import('@/views/article/add.vue')},
+{perms: "resource-list", view: () => import('@/views/resource/list.vue')},
 {perms: "config-add", view: () => import('@/views/config/add.vue')},
 {perms: "sys-config", view: () => import('@/views/set/set.vue')},
 {perms: "log-list", view: () => import('@/views/log/list.vue')},
@@ -28,4 +29,5 @@ export default [
 {perms: "order-add", view: () => import('@/views/order/add.vue')},
 {perms: "dictData-add", view: () => import('@/views/dictData/add.vue')},
 {perms: "config-list", view: () => import('@/views/config/list.vue')},
+{perms: "resource-add", view: () => import('@/views/resource/add.vue')},
 ];

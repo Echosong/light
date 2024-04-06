@@ -17,13 +17,13 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.*;
 
-
+import cn.light.packet.enums.ChannelGradeEnum;
 
 /**
  * <p>Title:渠道信息表 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-04-04 10:49:53</p >
+ * <p>create date: 2024-04-06 13:16:47</p >
  *
  * @author : echosong
  * @version :1.0.0
@@ -38,7 +38,8 @@ public class ChannelListDTO extends SysBaseDTO implements IDictionaryObject {
     private String companyName;
 
    @Schema(title="渠道等级" )
-    private String grade;
+    @ApiModelPropertyEnum(ChannelGradeEnum.class)
+    private Integer grade;
 
    @Schema(title="渠道方案" )
     private String scheme;

@@ -5,13 +5,28 @@
         select *
         from sys_channel
         <where>
-          <if test="channelName != null and channelName != '' ">
- and channel_name  like CONCAT('%',#{channelName},'%')
- </if>
-<if test="companyName != null and companyName != '' ">
- and company_name  like CONCAT('%',#{companyName},'%')
- </if>
+            <if test="channelName != null and channelName != '' ">
+                and channel_name like CONCAT('%',#{channelName},'%')
+            </if>
+            <if test="companyName != null and companyName != '' ">
+                and company_name like CONCAT('%',#{companyName},'%')
+            </if>
         </where>
+    </select>
+    <select id="getChannelName" resultType="java.lang.String">
+        select distinct channel_name
+        from sys_channel
+    </select>
+    <select id="getCompanyName" resultType="java.lang.String">
+        select distinct company_name
+        from sys_channel
+        where channel_name = #{channelName}
+    </select>
+    <select id="listSchemelName" resultType="java.lang.String">
+        select distinct scheme
+        from sys_channel
+        where company_name = #{companyName}
+          and channel_name = #{channelName}
     </select>
 
 </mapper>

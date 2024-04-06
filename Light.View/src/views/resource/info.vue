@@ -11,23 +11,31 @@
             <el-descriptions-item>
  <template #label>
         <div class="cell-item" style="width:100px;">
-          产品名称
+          标题
         </div>
       </template>
-      <div style="width:500px;" v-html="one.name"></div>
+      <div style="width:500px;" v-html="one.title"></div>
 </el-descriptions-item>
 <el-descriptions-item>
  <template #label>
         <div class="cell-item" style="width:100px;">
-          价格
+          类别
         </div>
       </template>
-      <div style="width:500px;" v-html="one.price"></div>
+      <div style="width:500px;" v-html="one.type"></div>
 </el-descriptions-item>
 <el-descriptions-item>
  <template #label>
         <div class="cell-item" style="width:100px;">
-          产品描述
+          文件路径
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.path"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          说明
         </div>
       </template>
       <div style="width:500px;" v-html="one.info"></div>
@@ -48,9 +56,9 @@ const one = ref({});
 
 async function open(row, query)  {
     isShow.value = true;
-    title.value = "查看产品信息";
+    title.value = "查看办公资源文件存在";
     //获取当个信息
-    const {data} = await sa.get("/product/find/"+row.id);
+    const {data} = await sa.get("/resource/find/"+row.id);
     one.value = data;
 }
 defineExpose({

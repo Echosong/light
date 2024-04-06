@@ -30,7 +30,7 @@ import java.util.Date;
 })
 @DynamicInsert
 @DynamicUpdate
-@AutoCover(value = {CodeTypeEnum.LIST_VIEW, CodeTypeEnum.QUERY_DTO, CodeTypeEnum.MAPPER_XML, CodeTypeEnum.ADD_VIEW})
+//@AutoCover(value = {CodeTypeEnum.LIST_VIEW, CodeTypeEnum.QUERY_DTO, CodeTypeEnum.MAPPER_XML, CodeTypeEnum.ADD_VIEW})
 public class SysOrder extends  SysBase{
     @AutoEntityField(value = "订单日期")
     private Date orderTime;

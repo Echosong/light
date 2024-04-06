@@ -75,7 +75,7 @@ public class OrderController extends BaseController{
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
-    public OrderDTO find(@PathVariable Integer id){
+    public OrderDTO find(@PathVariable(value = "id") Integer id){
         SysOrder one = orderRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, OrderDTO.class);

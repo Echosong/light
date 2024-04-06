@@ -79,6 +79,7 @@ public class HomeController extends BaseController {
      */
     @GetMapping("/getEnums")
     @Operation(summary = "(实体+字段+Enum) UserSateEnum ")
+    @NoPermission
     public List<Map<String, Object>> getEnums(@Valid @NotBlank String enumName) throws ClassNotFoundException {
         return BaseEnum.toMap(StrUtil.upperFirst(enumName));
     }

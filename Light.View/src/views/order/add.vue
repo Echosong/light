@@ -1,70 +1,72 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="700px">
+    <Dialog v-model="isShow" :title="title" maxHeight="500px" style="width: 950px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
-                 label-width="120px">
-            <el-form-item label="订单日期："  prop="orderTime" v-if="!query.orderTime">
-   <el-date-picker v-model="m.orderTime" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="订单日期"></el-date-picker>
-</el-form-item>
-<el-form-item label="业绩归属："  prop="owner" v-if="!query.owner">
-   <el-date-picker v-model="m.owner" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="业绩归属"></el-date-picker>
-</el-form-item>
-<el-form-item label="客户名称"  prop="customerName" v-if="!query.customerName" >
-    <el-input v-model="m.customerName"></el-input>
-</el-form-item>
-<el-form-item label="渠道名称"  prop="channelName" v-if="!query.channelName" >
-    <el-input v-model="m.channelName"></el-input>
-</el-form-item>
-<el-form-item label="保险公司"  prop="companyName" v-if="!query.companyName" >
-    <el-input v-model="m.companyName"></el-input>
-</el-form-item>
-<el-form-item label="方案"  prop="scheme" v-if="!query.scheme" >
-    <el-input v-model="m.scheme"></el-input>
-</el-form-item>
-<el-form-item label="渠道等级"  prop="grade" v-if="!query.grade" >
-    <el-input v-model="m.grade"></el-input>
-</el-form-item>
-<el-form-item label="伤残比例"  prop="accidentRate" v-if="!query.accidentRate" >
-    <el-input v-model="m.accidentRate"></el-input>
-</el-form-item>
-<el-form-item label="三类人数"  prop="threeClass" v-if="!query.threeClass" >
-    <el-input v-model="m.threeClass"></el-input>
-</el-form-item>
-<el-form-item label="三类售价"  prop="threeClassPrice" v-if="!query.threeClassPrice" >
-    <el-input v-model="m.threeClassPrice"></el-input>
-</el-form-item>
-<el-form-item label="三类底价"  prop="threeClassChannelPrice" v-if="!query.threeClassChannelPrice" >
-    <el-input v-model="m.threeClassChannelPrice"></el-input>
-</el-form-item>
-<el-form-item label="四类人数"  prop="fourClass" v-if="!query.fourClass" >
-    <el-input v-model="m.fourClass"></el-input>
-</el-form-item>
-<el-form-item label="四类底价"  prop="fourClassChannelPrice" v-if="!query.fourClassChannelPrice" >
-    <el-input v-model="m.fourClassChannelPrice"></el-input>
-</el-form-item>
-<el-form-item label="四类售价"  prop="fourClassPrice" v-if="!query.fourClassPrice" >
-    <el-input v-model="m.fourClassPrice"></el-input>
-</el-form-item>
-<el-form-item label="五类人数"  prop="fiveClass" v-if="!query.fiveClass" >
-    <el-input v-model="m.fiveClass"></el-input>
-</el-form-item>
-<el-form-item label="五类底价"  prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice" >
-    <el-input v-model="m.fiveClassChannelPrice"></el-input>
-</el-form-item>
-<el-form-item label="五类售价"  prop="fiveClassPrice" v-if="!query.fiveClassPrice" >
-    <el-input v-model="m.fiveClassPrice"></el-input>
-</el-form-item>
-<el-form-item label="运营人" v-if="!query.operation">
- <select-data v-model="m.operation" routeName="user" ></select-data>
-</el-form-item>
-<el-form-item label="返利总额"  prop="totalRebate" v-if="!query.totalRebate" >
-    <el-input v-model="m.totalRebate"></el-input>
-</el-form-item>
-<el-form-item label="利润"  prop="profit" v-if="!query.profit" >
-    <el-input v-model="m.profit"></el-input>
-</el-form-item>
-<el-form-item label="回本日期："  prop="backTime" v-if="!query.backTime">
-   <el-date-picker v-model="m.backTime" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="回本日期"></el-date-picker>
-</el-form-item>
+                 label-width="120px" style="width: 920px;" :inline="true">
+            <el-form-item label="订单日期"  prop="orderTime" v-if="!query.orderTime">
+                <el-date-picker style="width: 300px" v-model="m.orderTime" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="订单日期"></el-date-picker>
+            </el-form-item>
+            <el-form-item label="业绩归属"  prop="owner" v-if="!query.owner">
+                <el-date-picker style="width: 300px"  v-model="m.owner" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="业绩归属"></el-date-picker>
+            </el-form-item>
+            <el-form-item label="客户名称"  prop="customerName" v-if="!query.customerName" >
+                <el-input v-model="m.customerName" style="width: 300px" ></el-input>
+            </el-form-item>
+            <el-form-item label="渠道名称"  prop="channelName" v-if="!query.channelName" >
+                <el-select  v-model="m.channelName" filterable @change="selectChannel"  style="width: 300px" >
+                    <el-option v-for="item in channelNames" :key="item.channelName" :value="item.channelName" :label="item.channelName">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="保险公司"  prop="companyName" v-if="!query.companyName" >
+                <el-select  v-model="m.companyName" filterable @change="selectCompany" style="width: 300px"  >
+                    <el-option v-for="item in companyNames" :key="item.companyName" :value="item.companyName" :label="item.companyName">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="方案"  prop="scheme" v-if="!query.scheme" >
+                <el-select  v-model="m.scheme" filterable   style="width: 300px" >
+                    <el-option v-for="item in schemes" :key="item" :value="item" :label="item">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="伤残比例"  prop="accidentRate" v-if="!query.accidentRate" >
+                <el-input v-model="m.accidentRate" style="width:285px; margin-right: 2px; " :disabled="true"></el-input> <span style="color: #999;">%</span>
+            </el-form-item>
+
+            <el-form-item label="回本日期："  prop="backTime" v-if="!query.backTime">
+                <el-date-picker v-model="m.backTime" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="回本日期" style="width: 300px" > </el-date-picker>
+            </el-form-item>
+
+            <el-form-item label="三类人数"  prop="threeClass" v-if="!query.threeClass" >
+                <el-input v-model="m.threeClass" style="width: 300px;" placeholder="三类人数"></el-input>
+            </el-form-item>
+            <el-form-item label="三类售价"  prop="threeClass" v-if="!query.threeClass" >
+                <el-input v-model="m.threeClassPrice" placeholder="三类售价" style="width: 300px"></el-input>
+            </el-form-item>
+            <el-form-item label="四类人数"  prop="fourClass" v-if="!query.fourClass" >
+                <el-input v-model="m.fourClass" style="width: 300px;" placeholder="四类人数"></el-input>
+            </el-form-item>
+
+            <el-form-item label="四类售价"  prop="fourClass" v-if="!query.fourClass" >
+
+                <el-input v-model="m.fourClassPrice" placeholder="四类售价" style="width: 300px"></el-input>
+            </el-form-item>
+
+            <el-form-item label="五类人数"  prop="fiveClass" v-if="!query.fiveClass" >
+                <el-input v-model="m.fiveClass" style="width: 300px;" placeholder="五类人数"></el-input>
+            </el-form-item>
+
+            <el-form-item label="五类售价"  prop="fiveClass" v-if="!query.fiveClass" >
+                <el-input v-model="m.fiveClassPrice" placeholder="五类售价" style=" width: 300px"></el-input>
+            </el-form-item>
+
+            <el-form-item label="返利总额"  prop="totalRebate" v-if="!query.totalRebate" >
+                <el-input v-model="m.totalRebate" style="width: 300px"  :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="利润"  prop="profit" v-if="!query.profit" >
+                <el-input v-model="m.profit" style="width: 300px"  :disabled="true"></el-input>
+            </el-form-item>
+
         </el-form>
         <template #footer>
             <span class="dialog-footer">
@@ -87,26 +89,26 @@ const m = ref({});
 const title = ref("");
 const isShow = ref(false);
 const rules = {orderTime:[],
-owner:[],
-customerName:[],
-channelName:[],
-companyName:[],
-scheme:[],
-grade:[],
-accidentRate:[],
-threeClass:[],
-threeClassPrice:[],
-threeClassChannelPrice:[],
-fourClass:[],
-fourClassChannelPrice:[],
-fourClassPrice:[],
-fiveClass:[],
-fiveClassChannelPrice:[],
-fiveClassPrice:[],
-operation:[],
-totalRebate:[],
-profit:[],
-backTime:[],
+    owner:[],
+    customerName:[],
+    channelName:[],
+    companyName:[],
+    scheme:[],
+    grade:[],
+    accidentRate:[],
+    threeClass:[],
+    threeClassPrice:[],
+    threeClassChannelPrice:[],
+    fourClass:[],
+    fourClassChannelPrice:[],
+    fourClassPrice:[],
+    fiveClass:[],
+    fiveClassChannelPrice:[],
+    fiveClassPrice:[],
+    operation:[],
+    totalRebate:[],
+    profit:[],
+    backTime:[],
 }
 const sa = inject('sa')
 const ruleForm = ref();
@@ -121,37 +123,70 @@ async function open(data, parmas)  {
         m.value = data;
     } else {
         let mdata  = {orderTime:'',
-owner:'',
-customerName:'',
-channelName:'',
-companyName:'',
-scheme:'',
-grade:'',
-accidentRate:'',
-threeClass:0,
-threeClassPrice:'',
-threeClassChannelPrice:'',
-fourClass:0,
-fourClassChannelPrice:'',
-fourClassPrice:'',
-fiveClass:0,
-fiveClassChannelPrice:'',
-fiveClassPrice:'',
-operation:'',
-totalRebate:'',
-profit:'',
-backTime:''}
+            owner:'',
+            customerName:'',
+            channelName:'',
+            companyName:'',
+            scheme:'',
+            grade:'',
+            accidentRate:'',
+            threeClass:'',
+            threeClassPrice:'',
+            threeClassChannelPrice:'',
+            fourClass:'',
+            fourClassChannelPrice:'',
+            fourClassPrice:'',
+            fiveClass:'',
+            fiveClassChannelPrice:'',
+            fiveClassPrice:'',
+            operation:'',
+            totalRebate:'',
+            profit:'',
+            backTime:''}
         query.value = parmas || {};
         m.value ={...mdata, ...parmas}
         title.value = "添加 业绩数据";
     }
+    channelData();
 }
+
+const channelNames = ref([])
+const companyNames = ref([]);
+const schemes = ref([]);
+
+async function channelData(){
+    let {data} = await sa.get("/channel/listChannelName");
+    channelNames.value = data;
+}
+
+function selectChannel(){
+    console.log("选择渠道")
+    let model = m.value;
+    //循环 channelNames 过滤等于model.channelName的数据
+    channelNames.value.forEach(item=>{
+        if(item.channelName === model.channelName){
+            companyNames.value = item.companyNames;
+        }
+    })
+    console.log("公司信息", channelNames, companyNames, model.channelName, model.companyName)
+}
+
+function  selectCompany(){
+    let model = m.value;
+    //循环 companyNames 过滤等于model.companyName的数据
+    companyNames.value.filter(item=>{
+        if(item.companyName === model.companyName){
+            schemes.value = item.schemes;
+        }
+    })
+}
+
 
 //提交业绩数据信息
 function ok(parent) {
     ruleForm.value.validate(async (valid) => {
         if (valid) {
-            
+
             await sa.post("/order/save", m.value);
             parent.f5();
             isShow.value = false;

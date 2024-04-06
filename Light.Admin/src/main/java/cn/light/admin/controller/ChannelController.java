@@ -1,7 +1,10 @@
 package cn.light.admin.controller;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.light.common.annotation.*;
 import cn.light.packet.dto.channel.ChannelDTO;
 import cn.light.packet.dto.channel.ChannelListDTO;
+import cn.light.packet.dto.channel.ChannelNameDTO;
 import cn.light.packet.dto.channel.ChannelQueryDTO;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.*;
@@ -62,9 +65,41 @@ public class ChannelController extends BaseController{
     @PostMapping("/save")
     @Log("新增|修改渠道信息表")
     public void save(@RequestBody @Valid ChannelDTO channelDTO){
+        channelDTO.setChannelName(StrUtil.trim(channelDTO.getChannelName()));
+        channelDTO.setCompanyName(StrUtil.trim(channelDTO.getCompanyName()));
+        channelDTO.setScheme(StrUtil.trim(channelDTO.getScheme()));
         SysChannel sysChannel = DtoMapper.convert(channelDTO, SysChannel.class);
         channelRepository.save(sysChannel);
     }
+
+    @Operation(summary = "查询全部渠道名称")
+    @GetMapping("/listChannelName")
+    public List<ChannelNameDTO> listChannelName(){
+       List<ChannelNameDTO> channelNameDTOList = new ArrayList<>();
+        List<String> channelNames = channelMapper.getChannelName();
+        if(CollUtil.isEmpty(channelNames)){
+            return channelNameDTOList;
+        }
+        channelNames.forEach(channelName -> {
+            ChannelNameDTO channelNameDTO = new ChannelNameDTO();
+            channelNameDTO.setChannelName(channelName);
+            List<String> companyNames = channelMapper.getCompanyName(channelName);
+            if(CollUtil.isEmpty(companyNames)){
+                return;
+            }
+            List<ChannelNameDTO.CompanyNameDTO> companyNameDTOList = new ArrayList<>();
+            for (String name : companyNames) {
+                ChannelNameDTO.CompanyNameDTO companyNameDTO = new ChannelNameDTO.CompanyNameDTO();
+                companyNameDTO.setCompanyName(name);
+                companyNameDTO.setSchemes(channelMapper.listSchemelName(channelName, name));
+                companyNameDTOList.add(companyNameDTO);
+            }
+            channelNameDTO.setCompanyNames(companyNameDTOList);
+            channelNameDTOList.add(channelNameDTO);
+        });
+        return channelNameDTOList;
+    }
+
 
     @Operation(summary = "查询全部渠道信息表")
     @GetMapping("/list")

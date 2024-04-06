@@ -2,6 +2,7 @@ package cn.light.entity.entity;
 
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
+import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.packet.enums.DicTypeStateEnum;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class SysDictData extends SysBase{
     private String dictLabel;
 
     /** 字典键值 */
-    @AutoEntityField(value = "字典键值")
+    @AutoEntityField(value = "字典键值", htmlType = HtmlTypeEnum.TEXTAREA)
     private String dictValue;
 
     /** 字典类型 */
