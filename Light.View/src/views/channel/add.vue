@@ -3,22 +3,26 @@
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
             <el-form-item label="渠道名" prop="channelName" v-if="!query.channelName">
-                <el-select style="width: 400px" v-model="m.channelName" filterable @change="selectChannel"  :allow-create="true"  >
-                    <el-option v-for="item in channelNames" :key="item.channelName" :value="item.channelName" :label="item.channelName">
+                <el-select style="width: 400px" v-model="m.channelName" filterable @change="selectChannel"
+                           :allow-create="true">
+                    <el-option v-for="item in channelNames" :key="item.channelName" :value="item.channelName"
+                               :label="item.channelName">
                     </el-option>
                 </el-select>
 
             </el-form-item>
             <el-form-item label="保险公司" prop="companyName" v-if="!query.companyName">
-                <el-select style="width: 400px" v-model="m.companyName" filterable @change="selectCompany" :allow-create="true" >
-                    <el-option v-for="item in companyNames" :key="item.companyName" :value="item.companyName" :label="item.companyName">
+                <el-select style="width: 400px" v-model="m.companyName" filterable @change="selectCompany"
+                           :allow-create="true">
+                    <el-option v-for="item in companyNames" :key="item.companyName" :value="item.companyName"
+                               :label="item.companyName">
                     </el-option>
                 </el-select>
 
             </el-form-item>
 
             <el-form-item label="渠道方案" prop="scheme" v-if="!query.scheme">
-                <el-select style="width: 400px" v-model="m.scheme" filterable  :allow-create="true" >
+                <el-select style="width: 400px" v-model="m.scheme" filterable :allow-create="true">
                     <el-option v-for="item in schemes" :key="item" :value="item" :label="item">
                     </el-option>
                 </el-select>
@@ -31,8 +35,25 @@
             <el-form-item label="伤残比例" style="width: 520px" prop="accidentRate" v-if="!query.accidentRate">
                 <el-input v-model="m.accidentRate"></el-input>
             </el-form-item>
-            <el-form-item label="成本价" prop="costPrice" style="width: 520px" v-if="!query.costPrice">
-                <el-input v-model="m.costPrice"></el-input>
+
+
+            <el-form-item label="三类成本价" prop="threeClassCostPrice" v-if="!query.threeClassCostPrice">
+                <el-input v-model="m.threeClassCostPrice"></el-input>
+            </el-form-item>
+            <el-form-item label="四类成本价" prop="fourClassCostPrice" v-if="!query.fourClassCostPrice">
+                <el-input v-model="m.fourClassCostPrice"></el-input>
+            </el-form-item>
+            <el-form-item label="五类成本价" prop="fiveClassCostPrice" v-if="!query.fiveClassCostPrice">
+                <el-input v-model="m.fiveClassCostPrice"></el-input>
+            </el-form-item>
+            <el-form-item label="三类渠道价" prop="threeClassChannelPrice" v-if="!query.threeClassChannelPrice">
+                <el-input v-model="m.threeClassChannelPrice"></el-input>
+            </el-form-item>
+            <el-form-item label="四类渠道价" prop="fourClassChannelPrice" v-if="!query.fourClassChannelPrice">
+                <el-input v-model="m.fourClassChannelPrice"></el-input>
+            </el-form-item>
+            <el-form-item label="五类渠道价" prop="fiveClassChannelPrice" v-if="!query.fiveClassChannelPrice">
+                <el-input v-model="m.fiveClassChannelPrice"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
@@ -81,7 +102,8 @@ async function open(data, parmas) {
             grade: '',
             scheme: '',
             accidentRate: '',
-            costPrice: ''
+            costPrice: '',
+            channelPrice: ''
         }
         query.value = parmas || {};
         m.value = {...mdata, ...parmas}
@@ -94,31 +116,31 @@ const channelNames = ref([])
 const companyNames = ref([]);
 const schemes = ref([]);
 
-async function channelData(){
-   let {data} = await sa.get("/channel/listChannelName");
+async function channelData() {
+    let {data} = await sa.get("/channel/listChannelName");
     channelNames.value = data;
 }
 
 
-function selectChannel(){
+function selectChannel() {
     console.log("选择渠道")
     let model = m.value;
     //循环 channelNames 过滤等于model.channelName的数据
-     channelNames.value.forEach(item=>{
-        if(item.channelName === model.channelName){
+    channelNames.value.forEach(item => {
+        if (item.channelName === model.channelName) {
             companyNames.value = item.companyNames;
         }
     })
     console.log("公司信息", channelNames, companyNames, model.channelName, model.companyName)
 }
 
-function  selectCompany(){
+function selectCompany() {
     let model = m.value;
     //循环 companyNames 过滤等于model.companyName的数据
-     companyNames.value.filter(item=>{
-         if(item.companyName === model.companyName){
-             schemes.value = item.schemes;
-         }
+    companyNames.value.filter(item => {
+        if (item.companyName === model.companyName) {
+            schemes.value = item.schemes;
+        }
     })
 }
 

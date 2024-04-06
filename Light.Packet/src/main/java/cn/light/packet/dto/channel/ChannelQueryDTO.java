@@ -18,7 +18,7 @@ import java.util.*;
  * <p>Title:渠道信息表 </p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-04-06 11:14:52</p >
+ * <p>create date: 2024-04-06 23:32:03</p >
  *
  * @author : echosong
  * @version :1.0.0

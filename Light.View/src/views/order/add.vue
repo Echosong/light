@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="500px" style="width: 950px">
+    <Dialog v-model="isShow" :title="title" maxHeight="400px" style="width: 950px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px" style="width: 920px;" :inline="true">
             <el-form-item label="订单日期"  prop="orderTime" v-if="!query.orderTime">
@@ -24,7 +24,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="方案"  prop="scheme" v-if="!query.scheme" >
-                <el-select  v-model="m.scheme" filterable   style="width: 300px" >
+                <el-select  v-model="m.scheme"  @change="selectScheme" filterable   style="width: 300px" >
                     <el-option v-for="item in schemes" :key="item" :value="item" :label="item">
                     </el-option>
                 </el-select>
@@ -33,7 +33,7 @@
                 <el-input v-model="m.accidentRate" style="width:285px; margin-right: 2px; " :disabled="true"></el-input> <span style="color: #999;">%</span>
             </el-form-item>
 
-            <el-form-item label="回本日期："  prop="backTime" v-if="!query.backTime">
+            <el-form-item label="回本日期"  prop="backTime" v-if="!query.backTime">
                 <el-date-picker v-model="m.backTime" type="date" value-format="YYYY-MM-DD HH:mm:ss" placeholder="回本日期" style="width: 300px" > </el-date-picker>
             </el-form-item>
 
@@ -58,13 +58,6 @@
 
             <el-form-item label="五类售价"  prop="fiveClass" v-if="!query.fiveClass" >
                 <el-input v-model="m.fiveClassPrice" placeholder="五类售价" style=" width: 300px"></el-input>
-            </el-form-item>
-
-            <el-form-item label="返利总额"  prop="totalRebate" v-if="!query.totalRebate" >
-                <el-input v-model="m.totalRebate" style="width: 300px"  :disabled="true"></el-input>
-            </el-form-item>
-            <el-form-item label="利润"  prop="profit" v-if="!query.profit" >
-                <el-input v-model="m.profit" style="width: 300px"  :disabled="true"></el-input>
             </el-form-item>
 
         </el-form>
@@ -117,7 +110,7 @@ const  query = ref({});
 async function open(data, parmas)  {
     isShow.value = true;
     if (data) {
-        title.value = "修改 业绩数据";
+        title.value = "修改业绩数据";
         let one = await sa.get("/order/find/"+data.id);
         m.value = one.data;
         m.value = data;
@@ -145,7 +138,7 @@ async function open(data, parmas)  {
             backTime:''}
         query.value = parmas || {};
         m.value ={...mdata, ...parmas}
-        title.value = "添加 业绩数据";
+        title.value = "添加业绩数据";
     }
     channelData();
 }
@@ -157,6 +150,18 @@ const schemes = ref([]);
 async function channelData(){
     let {data} = await sa.get("/channel/listChannelName");
     channelNames.value = data;
+}
+
+async function selectScheme(){
+    let {data} = await sa.post("/channel/getChannel",
+       {
+            channelName: m.value.channelName,
+            companyName: m.value.companyName,
+            scheme: m.value.scheme
+        }
+    );
+    m.value.channelId = data.channelId;
+
 }
 
 function selectChannel(){

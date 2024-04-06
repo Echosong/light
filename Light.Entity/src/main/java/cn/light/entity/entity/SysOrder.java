@@ -14,6 +14,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -71,48 +72,51 @@ public class SysOrder extends  SysBase{
 
     //三类售价
     @AutoEntityField(value = "三类售价")
-    private String threeClassPrice;
+    private BigDecimal threeClassPrice;
 
     //三类渠道价
-    @AutoEntityField(value = "三类底价")
-    private String threeClassChannelPrice;
+    @AutoEntityField(value = "三类渠道价")
+    private BigDecimal threeClassChannelPrice;
 
     //四类人数
     @AutoEntityField(value = "四类人数")
     private Integer fourClass;
 
     //四类渠道价
-    @AutoEntityField(value = "四类底价")
-    private String fourClassChannelPrice;
+    @AutoEntityField(value = "四类渠道价")
+    private BigDecimal fourClassChannelPrice;
 
     //四类售价
     @AutoEntityField(value = "四类售价")
-    private String fourClassPrice;
+    private BigDecimal fourClassPrice;
 
     //五类人数
     @AutoEntityField(value = "五类人数")
     private Integer fiveClass;
 
     //五类渠道价
-    @AutoEntityField(value = "五类底价")
-    private String fiveClassChannelPrice;
+    @AutoEntityField(value = "五类渠道价")
+    private BigDecimal fiveClassChannelPrice;
 
     //五类售价
     @AutoEntityField(value = "五类售价")
-    private String fiveClassPrice;
+    private BigDecimal fiveClassPrice;
 
     //运营
     @AutoEntityField(value = "运营人", htmlType = HtmlTypeEnum.SELECT, source = "User")
     @InQueryDTO
-    private String operation;
+    private Integer operation;
 
     //返利总额
     @AutoEntityField(value = "返利总额")
-    private String totalRebate;
+    private BigDecimal totalRebate;
 
     //利润
     @AutoEntityField(value = "利润")
-    private String profit;
+    private BigDecimal profit;
+
+    @AutoEntityField(value = "渠道id")
+    private Integer channelId;
 
     //回本日期
     @AutoEntityField(value = "回本日期")

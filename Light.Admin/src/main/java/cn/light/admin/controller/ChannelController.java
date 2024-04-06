@@ -75,7 +75,7 @@ public class ChannelController extends BaseController{
     @Operation(summary = "查询全部渠道名称")
     @GetMapping("/listChannelName")
     public List<ChannelNameDTO> listChannelName(){
-       List<ChannelNameDTO> channelNameDTOList = new ArrayList<>();
+        List<ChannelNameDTO> channelNameDTOList = new ArrayList<>();
         List<String> channelNames = channelMapper.getChannelName();
         if(CollUtil.isEmpty(channelNames)){
             return channelNameDTOList;
@@ -123,6 +123,6 @@ public class ChannelController extends BaseController{
         channelRepository.deleteById(id);
     }
 
-    
+
 
 }

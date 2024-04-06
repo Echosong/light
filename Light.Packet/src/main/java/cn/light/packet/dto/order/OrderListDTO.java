@@ -56,37 +56,37 @@ public class OrderListDTO extends SysBaseDTO implements IDictionaryObject {
     private Integer threeClass;
 
    @Schema(title="三类售价" )
-    private String threeClassPrice;
+    private BigDecimal threeClassPrice;
 
    @Schema(title="三类渠道价" )
-    private String threeClassChannelPrice;
+    private BigDecimal threeClassChannelPrice;
 
    @Schema(title="四类人数" )
     private Integer fourClass;
 
    @Schema(title="四类渠道价" )
-    private String fourClassChannelPrice;
+    private BigDecimal fourClassChannelPrice;
 
    @Schema(title="四类售价" )
-    private String fourClassPrice;
+    private BigDecimal fourClassPrice;
 
    @Schema(title="五类人数" )
     private Integer fiveClass;
 
    @Schema(title="五类渠道价" )
-    private String fiveClassChannelPrice;
+    private BigDecimal fiveClassChannelPrice;
 
    @Schema(title="五类售价" )
-    private String fiveClassPrice;
+    private BigDecimal fiveClassPrice;
 
    @Schema(title="运营人" )
-    private String operation;
+    private Integer operation;
 
    @Schema(title="返利总额" )
-    private String totalRebate;
+    private BigDecimal totalRebate;
 
    @Schema(title="利润" )
-    private String profit;
+    private BigDecimal profit;
 
    @Schema(title="回本日期" )
     private Date backTime;

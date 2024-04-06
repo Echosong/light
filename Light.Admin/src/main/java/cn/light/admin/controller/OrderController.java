@@ -1,5 +1,7 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.*;
+import cn.light.entity.entity.SysChannel;
+import cn.light.entity.repository.ChannelRepository;
 import cn.light.packet.dto.order.OrderDTO;
 import cn.light.packet.dto.order.OrderListDTO;
 import cn.light.packet.dto.order.OrderQueryDTO;
@@ -8,6 +10,7 @@ import cn.light.common.util.*;
 import cn.light.entity.entity.SysOrder;
 import cn.light.entity.mapper.OrderMapper;
 import cn.light.entity.repository.OrderRepository;
+import cn.light.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,9 +41,12 @@ import java.util.*;
 public class OrderController extends BaseController{
     @Resource
     private  OrderRepository orderRepository;
-
     @Resource
     private OrderMapper orderMapper;
+    @Resource
+    private UserService userService;
+    @Resource
+    private ChannelRepository channelRepository;
 
     @Operation(summary = "分页查询业绩数据")
     @PutMapping("/listPage")
@@ -63,6 +69,27 @@ public class OrderController extends BaseController{
     @Log("新增|修改业绩数据")
     public void save(@RequestBody @Valid OrderDTO orderDTO){
         SysOrder sysOrder = DtoMapper.convert(orderDTO, SysOrder.class);
+        sysOrder.setOperation(userService.getUserCache().getId());
+        SysChannel channel = channelRepository.findById(orderDTO.getChannelId()).orElseThrow(() -> new BaseKnownException(500, "渠道不存在"));
+
+        //三类利润
+        BigDecimal threePrice = (sysOrder.getThreeClassPrice().subtract(sysOrder.getThreeClassChannelPrice())).multiply(new BigDecimal(sysOrder.getThreeClass()));
+        //四类利润
+        BigDecimal fourPrice = (sysOrder.getFourClassPrice().subtract(sysOrder.getFourClassChannelPrice())).multiply(new BigDecimal(sysOrder.getFourClass()));
+        //五类利润
+        BigDecimal fivePrice = (sysOrder.getFiveClassPrice().subtract(sysOrder.getFiveClassChannelPrice())).multiply(new BigDecimal(sysOrder.getFiveClass()));
+        //返费总和
+        sysOrder.setTotalRebate(threePrice.add(fourPrice).add(fivePrice));
+
+        //三类陈本差
+        BigDecimal threeDiffPrice = sysOrder.getThreeClassPrice().subtract(channel.getThreeClassCostPrice()).multiply(new BigDecimal(sysOrder.getThreeClass()));
+        //四类成本差
+        BigDecimal fourDiffPrice = sysOrder.getFourClassPrice().subtract(channel.getFourClassCostPrice()).multiply(new BigDecimal(sysOrder.getFourClass()));
+        //五类成本差
+        BigDecimal fiveDiffPrice = sysOrder.getFiveClassPrice().subtract(channel.getFiveClassCostPrice()).multiply(new BigDecimal(sysOrder.getFiveClass()));
+        //利润
+        sysOrder.setProfit(threeDiffPrice.add(fourDiffPrice).add(fiveDiffPrice).subtract(sysOrder.getTotalRebate()));
+
         orderRepository.save(sysOrder);
     }
 

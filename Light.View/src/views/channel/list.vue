@@ -22,17 +22,18 @@
         <!-- <div class="c-title">数据列表</div> -->
         <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"
                   @sort-change="shortChange">
+            <el-table-column type="selection"></el-table-column>
             <el-table-column label="渠道名" sortable prop="channelName"></el-table-column>
             <el-table-column label="保险公司" sortable prop="companyName"></el-table-column>
-            <el-table-column label="渠道等级" sortable prop="gradeEnum"></el-table-column>
             <el-table-column label="渠道方案" prop="scheme"></el-table-column>
-            <el-table-column label="伤残比例" sortable prop="accidentRate">
-                <template #default="s">
-                    {{s.row.accidentRate}}%
-                </template>
-            </el-table-column>
-            <el-table-column label="成本价" sortable prop="costPrice"></el-table-column>
-            <el-table-column prop="address" label="操作" width="150px">
+            <el-table-column label="伤残比例" sortable prop="accidentRate"></el-table-column>
+            <el-table-column label="三类成本价" prop="threeClassCostPrice"></el-table-column>
+            <el-table-column label="四类成本价" prop="fourClassCostPrice"></el-table-column>
+            <el-table-column label="五类成本价" prop="fiveClassCostPrice"></el-table-column>
+            <el-table-column label="三类渠道价" prop="threeClassChannelPrice"></el-table-column>
+            <el-table-column label="四类渠道价" prop="fourClassChannelPrice"></el-table-column>
+            <el-table-column label="五类渠道价" prop="fiveClassChannelPrice"></el-table-column>
+            <el-table-column prop="address" label="操作" width="150px" fixed="right">
                 <template #default="s">
                     <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
                     <el-button link v-permission="" type="info" @click="info(s.row)">查看</el-button>

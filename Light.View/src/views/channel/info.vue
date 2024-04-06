@@ -1,5 +1,7 @@
+
+
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="500px">
+    <Dialog v-model="isShow" :title="title" maxHeight="700px">
         <el-descriptions
             class="margin-top"
             :column="1"
@@ -7,53 +9,85 @@
             border
         >
             <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        渠道名
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.channelName"></div>
-            </el-descriptions-item>
-            <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        保险公司
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.companyName"></div>
-            </el-descriptions-item>
-            <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        渠道等级
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.grade"></div>
-            </el-descriptions-item>
-            <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        渠道方案
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.scheme"></div>
-            </el-descriptions-item>
-            <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        伤残比例
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.accidentRate"></div>
-            </el-descriptions-item>
-            <el-descriptions-item>
-                <template #label>
-                    <div class="cell-item" style="width:100px;">
-                        成本价
-                    </div>
-                </template>
-                <div style="width:500px;" v-html="one.costPrice"></div>
-            </el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          渠道名
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.channelName"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          保险公司
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.companyName"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          渠道方案
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.scheme"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          伤残比例
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.accidentRate"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          三类成本价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.threeClassCostPrice"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          四类成本价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.fourClassCostPrice"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          五类成本价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.fiveClassCostPrice"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          三类渠道价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.threeClassChannelPrice"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          四类渠道价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.fourClassChannelPrice"></div>
+</el-descriptions-item>
+<el-descriptions-item>
+ <template #label>
+        <div class="cell-item" style="width:100px;">
+          五类渠道价
+        </div>
+      </template>
+      <div style="width:500px;" v-html="one.fiveClassChannelPrice"></div>
+</el-descriptions-item>
 
         </el-descriptions>
     </Dialog>
@@ -68,14 +102,13 @@ const title = ref("");
 const sa = inject('sa')
 const one = ref({});
 
-async function open(row, query) {
+async function open(row, query)  {
     isShow.value = true;
     title.value = "查看渠道信息表";
     //获取当个信息
-    const {data} = await sa.get("/channel/find/" + row.id);
+    const {data} = await sa.get("/channel/find/"+row.id);
     one.value = data;
 }
-
 defineExpose({
     open
 })
