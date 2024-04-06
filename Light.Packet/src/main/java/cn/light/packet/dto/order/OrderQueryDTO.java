@@ -39,7 +39,7 @@ public class OrderQueryDTO extends PageInfo {
     private String channelName;
 
    @Schema(title="运营人" )
-    private String operation;
+    private Integer operation;
 
 
 }

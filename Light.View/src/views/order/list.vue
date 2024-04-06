@@ -59,29 +59,33 @@
                 </template>
             </el-table-column>
             <el-table-column label="客户名称" width="200" prop="customerName"></el-table-column>
-            <el-table-column label="渠道名称" prop="channelName" width="200"></el-table-column>
+            <el-table-column label="渠道名称" prop="channelName" width="150"></el-table-column>
             <el-table-column label="保险公司" prop="companyName" width="200"></el-table-column>
             <el-table-column label="方案" prop="scheme" width="80"></el-table-column>
-            <el-table-column label="伤残比例" prop="accidentRate"></el-table-column>
+            <el-table-column label="伤残比例" prop="accidentRate">
+                <template   #default="s">
+                    {{s.row.accidentRate}}%
+                </template>
+            </el-table-column>
             <el-table-column label="三类信息" prop="threeClass" width="100">
                 <template   #default="s">
                     人数: {{s.row.threeClass}}<br>
                     售价: {{s.row.threeClassPrice}}<br>
-                    底价: {{s.row.threeClassChannelPrice}}
+                    渠道价: {{s.row.threeClassChannelPrice}}
                 </template>
             </el-table-column>
             <el-table-column label="四类信息" prop="fourClass"  width="100">
                 <template   #default="s">
                     人数: {{s.row.fourClass}}<br>
                     售价: {{s.row.fourClassPrice}}<br>
-                    底价: {{s.row.fourClassChannelPrice}}
+                    渠道价: {{s.row.fourClassChannelPrice}}
                 </template>
             </el-table-column>
             <el-table-column label="五类信息" prop="fiveClass"  width="100">
                 <template   #default="s">
                     人数: {{s.row.fiveClass}}<br>
                     售价: {{s.row.fiveClassPrice}}<br>
-                    底价: {{s.row.fiveClassChannelPrice}}
+                    渠道价: {{s.row.fiveClassChannelPrice}}
                 </template>
             </el-table-column>
             <el-table-column label="运营人" prop="creatorName"></el-table-column>

@@ -1,4 +1,6 @@
 package cn.light.admin.controller;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.convert.Convert;
 import cn.light.common.annotation.*;
 import cn.light.entity.entity.SysChannel;
 import cn.light.entity.repository.ChannelRepository;
@@ -10,6 +12,7 @@ import cn.light.common.util.*;
 import cn.light.entity.entity.SysOrder;
 import cn.light.entity.mapper.OrderMapper;
 import cn.light.entity.repository.OrderRepository;
+import cn.light.packet.dto.user.UserDTO;
 import cn.light.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,6 +54,11 @@ public class OrderController extends BaseController{
     @Operation(summary = "分页查询业绩数据")
     @PutMapping("/listPage")
     public Page<OrderListDTO> listPage(@RequestBody @Valid OrderQueryDTO queryDTO){
+        UserDTO current = userService.getCurrent();
+        if(current.getRoleId() != 1){
+            queryDTO.setOperation(current.getId());
+        }
+
         Page<SysOrder> dataPages  =  PageUtil.getPage(orderMapper::listPage, queryDTO);
         return DtoMapper.convertPage(dataPages, OrderListDTO.class);
     }
@@ -69,12 +77,15 @@ public class OrderController extends BaseController{
     @Log("新增|修改业绩数据")
     public void save(@RequestBody @Valid OrderDTO orderDTO){
         SysOrder sysOrder = DtoMapper.convert(orderDTO, SysOrder.class);
-        sysOrder.setOperation(userService.getUserCache().getId());
+        Integer userId = Convert.toInt(StpUtil.getLoginId());
+        sysOrder.setOperation(userId);
         SysChannel channel = channelRepository.findById(orderDTO.getChannelId()).orElseThrow(() -> new BaseKnownException(500, "渠道不存在"));
 
+        sysOrder.setAccidentRate(channel.getAccidentRate());
         sysOrder.setThreeClassChannelPrice(channel.getThreeClassChannelPrice());
         sysOrder.setFourClassChannelPrice(channel.getFourClassChannelPrice());
         sysOrder.setFiveClassChannelPrice(channel.getFiveClassChannelPrice());
+
 
         //三类利润
         BigDecimal threePrice = (sysOrder.getThreeClassPrice().subtract(sysOrder.getThreeClassChannelPrice())).multiply(new BigDecimal(sysOrder.getThreeClass()));
