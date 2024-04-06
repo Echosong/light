@@ -84,7 +84,7 @@ public class #{UpEntityName}#Controller extends BaseController{
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除#{tableInfo}#")
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable(value="id") Integer id) {
         #{EntityName}#Repository.deleteById(id);
     }
 
