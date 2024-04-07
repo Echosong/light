@@ -18,11 +18,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.sqm.mutation.internal.cte.CteInsertStrategy;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -57,6 +55,13 @@ public class HomeController extends BaseController {
 
 
     private final String format = "yyyy-MM-dd";
+
+    @GetMapping("/test/{id}")
+    @NoPermission
+    public String test(@PathVariable Integer id){
+        return id.toString();
+    }
+
     /**
      * 获取所有项目信息，主要市拿相关编号配置给前端使用
      *
@@ -152,7 +157,7 @@ public class HomeController extends BaseController {
     @GetMapping("/getEnums")
     @Operation(summary = "(实体+字段+Enum) UserSateEnum ")
     @NoPermission
-    public List<Map<String, Object>> getEnums(@Valid @NotBlank String enumName) throws ClassNotFoundException {
+    public List<Map<String, Object>> getEnums(@RequestParam(value = "enumName") @Valid @NotBlank String enumName) throws ClassNotFoundException {
         return BaseEnum.toMap(StrUtil.upperFirst(enumName));
     }
 
