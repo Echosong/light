@@ -36,7 +36,6 @@ import cn.light.packet.enums.UserStateEnum;
 @Data
 public class UserListDTO extends SysBaseDTO implements IDictionaryObject {
     @NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
-    @Pattern(message = "必须为手机格式", regexp = "\\d{11}")
     @Schema(title = "账号")
     private String username;
 
