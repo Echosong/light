@@ -1,12 +1,12 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="600px">
+    <Dialog v-model="isShow" :title="title" maxHeight="700px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
             <el-form-item label="标题" prop="title" v-if="!query.title">
                 <el-input v-model="m.title"></el-input>
             </el-form-item>
             <el-form-item label="类别" v-if="!query.type">
-                <select-data v-model="m.type" routeName="resource"></select-data>
+                <select-data v-model="m.type" routeName="resourceCategory"></select-data>
             </el-form-item>
             <el-form-item label="文件路径" v-if="!query.path">
                 <File @onremove="m.path = ''" @onSuccess="m.path = $event" :file="m.path"/>

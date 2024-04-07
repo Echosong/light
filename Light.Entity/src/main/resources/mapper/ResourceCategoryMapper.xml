@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.ResourceCategoryMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysResourceCategory">
+        select *
+        from sys_resource_category
+        <where>
+          <if test="title != null and title != '' ">
+ and title  like CONCAT('%',#{title},'%')
+ </if>
+        </where>
+    </select>
+
+</mapper>

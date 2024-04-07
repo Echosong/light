@@ -1,4 +1,5 @@
 export default [
+{perms: "resourceCategory-list", view: () => import('@/views/resourceCategory/list.vue')},
 {perms: "file-list", view: () => import('@/views/file/list.vue')},
 {perms: "permission-list", view: () => import('@/views/permission/list.vue')},
 {perms: "stockLog-add", view: () => import('@/views/stockLog/add.vue')},
@@ -18,6 +19,7 @@ export default [
 {perms: "log-add", view: () => import('@/views/log/add.vue')},
 {perms: "article-add", view: () => import('@/views/article/add.vue')},
 {perms: "resource-list", view: () => import('@/views/resource/list.vue')},
+{perms: "resourceCategory-add", view: () => import('@/views/resourceCategory/add.vue')},
 {perms: "config-add", view: () => import('@/views/config/add.vue')},
 {perms: "sys-config", view: () => import('@/views/set/set.vue')},
 {perms: "log-list", view: () => import('@/views/log/list.vue')},

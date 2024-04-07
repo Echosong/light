@@ -137,7 +137,7 @@ public class UserController extends BaseController{
     @GetMapping("/resetPassword/{userId}")
     @Operation(summary = "管理员重置密码")
     @Log("管理员重置密码")
-    public void resetPassword(@PathVariable Integer userId) {
+    public void resetPassword(@PathVariable(value = "userId") Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
             t.setPassword(SmUtil.sm3().digestHex(this.defaultPassword));
             userRepository.save(t);
@@ -176,7 +176,7 @@ public class UserController extends BaseController{
     @DeleteMapping("/delete/{userId}")
     @Operation(summary = "删除")
     @Log("删除用户")
-    public void delete(@PathVariable Integer userId) {
+    public void delete(@PathVariable(value = "userId") Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
             t.setState(UserStateEnum.DELETE.getCode());
             userRepository.save(t);
@@ -188,7 +188,7 @@ public class UserController extends BaseController{
 
     @Operation(summary = "获取某个用户")
     @GetMapping("/find/{userId}")
-    public UserDTO find(@PathVariable Integer userId) {
+    public UserDTO find(@PathVariable(value = "userId") Integer userId) {
         return DtoMapper.convert(userRepository.findById(userId).orElse(null), UserDTO.class);
     }
 

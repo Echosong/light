@@ -63,7 +63,7 @@
             <if test="endTime!= null and endTime != ''">
                 and owner &lt; #{endTime}
             </if>
-            <if test="userName != null">
+            <if test="userId != null">
                 and operation = #{userId}
             </if>
         </where>

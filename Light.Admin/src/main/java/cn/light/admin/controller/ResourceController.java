@@ -1,5 +1,8 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.*;
+import cn.light.entity.entity.SysResourceCategory;
+import cn.light.entity.mapper.ResourceCategoryMapper;
+import cn.light.entity.repository.ResourceCategoryRepository;
 import cn.light.packet.dto.resource.ResourceDTO;
 import cn.light.packet.dto.resource.ResourceListDTO;
 import cn.light.packet.dto.resource.ResourceQueryDTO;
@@ -21,6 +24,7 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>Title: </p >
@@ -38,6 +42,8 @@ import java.util.*;
 public class ResourceController extends BaseController{
     @Resource
     private  ResourceRepository resourceRepository;
+    @Resource
+    private ResourceCategoryMapper resourceCategoryMapper;
 
     @Resource
     private ResourceMapper resourceMapper;
@@ -46,7 +52,15 @@ public class ResourceController extends BaseController{
     @PutMapping("/listPage")
     public Page<ResourceListDTO> listPage(@RequestBody @Valid ResourceQueryDTO queryDTO){
         Page<SysResource> dataPages  =  PageUtil.getPage(resourceMapper::listPage, queryDTO);
-        return DtoMapper.convertPage(dataPages, ResourceListDTO.class);
+        Set<String> cateIds = dataPages.getContent().stream().map(SysResource::getType).collect(Collectors.toSet());
+        List<SysResourceCategory> sysResourceCategories = resourceCategoryMapper.selectBatchIds(cateIds);
+        Page<ResourceListDTO> resourceListPage = DtoMapper.convertPage(dataPages, ResourceListDTO.class);
+        for (ResourceListDTO resourceListDTO : resourceListPage.getContent()) {
+            sysResourceCategories.stream().filter(t->Objects.equals(t.getId().toString(), resourceListDTO.getType()))
+                    .findFirst()
+                    .ifPresent(t->resourceListDTO.setCategory(t.getTitle()));
+        }
+        return resourceListPage;
     }
 
     @PutMapping("/export")

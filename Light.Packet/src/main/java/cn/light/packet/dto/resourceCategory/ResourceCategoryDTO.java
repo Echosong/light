@@ -1,4 +1,4 @@
-package cn.light.packet.dto.resource;
+package cn.light.packet.dto.resourceCategory;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
@@ -9,44 +9,30 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
-
 import lombok.EqualsAndHashCode;
-
 import java.math.BigDecimal;
 import java.util.*;
 
-
 /**
- * <p>Title:办公资源文件存在 </p >
+ * <p>Title: 资源分类</p >
  * <p>Description: </p >
  * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-04-06 11:17:53</p >
+ * <p>create date: 2024-04-07 14:35:41</p >
  *
  * @author : echosong
  * @version :1.0.0
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ResourceListDTO extends SysBaseDTO implements IDictionaryObject {
-    @Schema(title = "标题")
+public class ResourceCategoryDTO extends SysBaseDTO implements IDictionaryObject {
+   @Schema(title="标题" )
     private String title;
 
-    @Schema(title = "类别")
-    private String type;
-
-    @Schema(title = "文件路径")
-    private String path;
-
-    @Schema(title = "说明")
-    private String info;
-
-    @Schema(title = "分类")
-    private String category;
+   @Schema(title="排序" )
+    private Integer sort;
 
 
 }

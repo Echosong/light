@@ -73,12 +73,12 @@ public class HomeController extends BaseController {
         String currentWeek =  DateUtil.format(DateUtil.beginOfWeek(new Date()), format);
         String lastWeek = DateUtil.format(DateUtil.beginOfWeek(DateUtil.offsetWeek(new Date(), -1)), format);
 
-        orderCountMap.put("上周保费", orderMapper.selectSumAmount(currentWeek,  lastWeek,null));
+        orderCountMap.put("上周保费", orderMapper.selectSumAmount(lastWeek,  currentWeek,null));
 
         String currentMouth = DateUtil.format( DateUtil.beginOfMonth(new Date()), format);
 
         String now = DateUtil.format(new Date(), format);
-        orderCountMap.put("本月月保费", orderMapper.selectSumAmount(now, currentMouth,  null));
+        orderCountMap.put("本月月保费", orderMapper.selectSumAmount(currentMouth, now,   null));
 
         //DateUtil 获取上个月时间
         String lastMouth = DateUtil.format(DateUtil.beginOfMonth(DateUtil.offsetMonth(new Date(), -1)), format);

@@ -29,7 +29,7 @@ public class SysResource extends SysBase {
     private String title;
 
     //类别
-    @AutoEntityField(value = "类别", htmlType = HtmlTypeEnum.SELECT)
+    @AutoEntityField(value = "类别", htmlType = HtmlTypeEnum.SELECT, source = "ResourceCategory")
     @InQueryDTO
     private String type;
 

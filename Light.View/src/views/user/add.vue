@@ -29,6 +29,10 @@
             <el-form-item label="登录ip" prop="loginIp" v-if="!query.loginIp">
                 <el-input v-model="m.loginIp"></el-input>
             </el-form-item>
+
+            <el-form-item label="角色" v-if="!query.roleId">
+                <select-data v-model="m.roleId" routeName="role"></select-data>
+            </el-form-item>
             <el-form-item label="个人简介" v-if="!query.info">
                 <el-input type="textarea" rows="2" placeholder="个人简介" v-model="m.info"></el-input>
             </el-form-item>
@@ -48,6 +52,7 @@
 import Dialog from "@/components/dialog/index.vue";
 import {inject, ref} from "vue";
 import InputEnum from "@/components/enum/InputEnum.vue";
+import selectData from '@/components/SelectData/index.vue'
 
 const props = defineProps(["params"]);
 const m = ref({});

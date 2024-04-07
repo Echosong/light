@@ -25,7 +25,8 @@
             <el-table-column label="姓名" prop="name"></el-table-column>
             <el-table-column label="账号" prop="username"></el-table-column>
             <el-table-column label="性别" sortable prop="sexEnum"></el-table-column>
-            <el-table-column label="工号" prop="nick"></el-table-column>
+            <el-table-column label="工号" prop="code"></el-table-column>
+            <el-table-column label="角色" prop="roleName"></el-table-column>
             <el-table-column label="邮箱" prop="email"></el-table-column>
             <el-table-column label="最后登录ip" prop="loginIp"></el-table-column>
             <el-table-column label="最后登录时间" prop="loginIp"></el-table-column>
@@ -35,9 +36,10 @@
                     <ElSwitch v-model="s.row.state" @change="updateSwitch(s.row)"></ElSwitch>
                 </template>
             </el-table-column>
-            <el-table-column prop="address" label="操作" width="120px" fixed="right">
+            <el-table-column prop="address" label="操作" width="180px" fixed="right">
                 <template #default="s">
                     <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
+                    <el-button link v-permission="" type="warning" @click="setPassword(s.row)">重置密码</el-button>
                     <el-button link v-permission="" type="primary" @click="update(s.row)">修改</el-button>
                     <el-button link v-permission="" type="danger" @click="del(s.row)">删除</el-button>
                 </template>
@@ -86,6 +88,11 @@ function exportFile() {
 
 function reset() {
     p.value = JSON.parse(JSON.stringify(params))
+}
+
+async function setPassword(row) {
+    await sa.get("/user/resetPassword/" + row.id);
+    sa.ok("重置密码成功")
 }
 
 // 删除
