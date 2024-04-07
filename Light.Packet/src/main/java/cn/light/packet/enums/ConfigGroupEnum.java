@@ -12,16 +12,9 @@ public enum ConfigGroupEnum  implements BaseEnum {
     /**
      * 合同文档
      */
-    APP(1, "app"),
-    /**
-     * 相关配置
-     */
-    ADMIN(0, "后台"),
-
-    /**
-     * 上传配置
-     */
-    FILE(2, "上传");
+    ADMIN(0, "基本配置"),
+    FILE(40, "文件配置"),
+    APP(50, "APP配置");
 
 
     private final Integer code;

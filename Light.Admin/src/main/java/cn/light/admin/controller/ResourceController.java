@@ -89,7 +89,7 @@ public class ResourceController extends BaseController{
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
-    public ResourceDTO find(@PathVariable Integer id){
+    public ResourceDTO find(@PathVariable(value = "id") Integer id){
         SysResource one = resourceRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ResourceDTO.class);

@@ -6,7 +6,7 @@ spring:
   application:
     name: light
   profiles:
-    active: rao
+    active: pro
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false

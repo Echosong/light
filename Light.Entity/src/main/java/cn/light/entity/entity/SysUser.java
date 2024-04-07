@@ -40,7 +40,6 @@ public class SysUser extends  SysBase implements Serializable {
 
     @NotNull
     @AutoEntityField(value = "账号", isKeyName = true)
-    @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
     @InQueryDTO
     private String username;
 

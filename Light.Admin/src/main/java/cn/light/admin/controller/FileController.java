@@ -69,7 +69,7 @@ public class FileController extends BaseController{
      */
     @PostMapping("/upload")
     @Operation(summary = "文件上传")
-    public Map<String, String> upload(@RequestParam(value = "file", required = false) MultipartFile file,  String params) throws IOException {
+    public Map<String, String> upload(@RequestParam(value = "file", required = false) MultipartFile file,@RequestParam(value = "params", required = false)  String params) throws IOException {
         return fileService.uploadFile(file,  params);
     }
 

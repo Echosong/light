@@ -11,6 +11,7 @@
 import { useApp } from '@/pinia/modules/app'
 import { ElMessage } from 'element-plus'
 import {onMounted, ref} from 'vue';
+
 import { defineEmits } from 'vue'
 const emit = defineEmits(["onSuccess","onremove"])
 const { authorization } = useApp()
@@ -37,7 +38,8 @@ onMounted(()=>{
 const successFn = (file)=>{
    let data = file.data
     if(file.code === 200){
-        emit('onSuccess',data.url)
+        console.log(666666666667, file.data.url)
+        emit('onSuccess',file.data.url)
     }else{
         ElMessage.error(file.message)
     }

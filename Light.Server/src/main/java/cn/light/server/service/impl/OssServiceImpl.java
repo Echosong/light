@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.packet.dto.config.ConfigDTO;
 import cn.light.packet.enums.ConfigGroupEnum;
+import cn.light.packet.enums.FileTypeEnum;
 import cn.light.server.service.ConfigService;
 import cn.light.server.service.FileService;
 import cn.light.server.service.StorageService;
@@ -24,21 +25,21 @@ import java.util.Date;
  * @author : 二胡子
  * @version :1.0.0
  */
-@Service(value = "storageService_1")
+@Service(value = "storageService_20")
 public class OssServiceImpl implements StorageService {
 
     @Resource
     private ConfigService configService;
     @Override
     public String uploadFile(MultipartFile file, String fileName) {
-        ConfigDTO ossConfig = configService.getByGroupAndKey(ConfigGroupEnum.ADMIN.getCode(), "ossConfig");
+        ConfigDTO ossConfig = configService.getByGroupAndKey(ConfigGroupEnum.FILE.getCode(), "ossConfig");
         JSONObject ossJson = JSONUtil.parseObj(ossConfig.getValue());
 
-        String endpoint = ossJson.getStr("endpoint"); ;
-        String accessKeyId = ossJson.getStr("accessKeyId");
-        String secretAccessKey = ossJson.getStr("secretAccessKey");
-        String bucketName = ossJson.getStr("bucketName");
-        String ossUrl = ossJson.getStr("ossUrl");
+        String endpoint = ossJson.getStr("aliyun_endpoint"); ;
+        String accessKeyId = ossJson.getStr("aliyun_accessKeyId");
+        String secretAccessKey = ossJson.getStr("aliyun_accessKeySecret");
+        String bucketName = ossJson.getStr("aliyun_file_bucket");
+        String ossUrl = ossJson.getStr("aliyun_origin_file_url");
 
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, secretAccessKey);
         try {
@@ -46,7 +47,7 @@ public class OssServiceImpl implements StorageService {
             fileName = format + "/" + fileName;
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file.getInputStream());
             ossClient.putObject(putObjectRequest);
-            return ossUrl + fileName;
+            return "https://" +ossUrl+"/"+ fileName;
         } catch (IOException e) {
 
             throw new BaseKnownException(e.getMessage());
