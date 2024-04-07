@@ -74,7 +74,7 @@ public class LogController extends BaseController{
 
     @Operation(summary = "查询")
     @GetMapping("/find/{id}")
-    public LogDTO find(@PathVariable Integer id){
+    public LogDTO find(@PathVariable(value = "id") Integer id){
         SysLog one = logRepository.findById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, LogDTO.class);
@@ -83,7 +83,7 @@ public class LogController extends BaseController{
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除日志")
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable("id") Integer id) {
         logRepository.deleteById(id);
     }
 

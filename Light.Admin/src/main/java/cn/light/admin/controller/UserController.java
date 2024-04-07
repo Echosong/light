@@ -5,9 +5,11 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.light.common.annotation.Log;
 import cn.light.common.annotation.NoRepeatSubmit;
+import cn.light.entity.mapper.UserMapper;
 import cn.light.packet.dto.user.*;
 import cn.light.common.enums.BusinessEnum;
 import cn.light.packet.enums.UserStateEnum;
@@ -15,6 +17,7 @@ import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.SysUser;
 import cn.light.entity.repository.UserRepository;
 import cn.light.server.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -26,9 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 用户管理
@@ -41,10 +42,10 @@ import java.util.Objects;
 public class UserController extends BaseController{
     @Resource
     private  UserRepository userRepository;
-
     @Resource
     private  UserService userService;
-
+    @Resource
+    private UserMapper userMapper;
 
     @Value("k-dao.password: 123456")
     private String defaultPassword;
@@ -136,7 +137,7 @@ public class UserController extends BaseController{
     @GetMapping("/resetPassword/{userId}")
     @Operation(summary = "管理员重置密码")
     @Log("管理员重置密码")
-    public void resetPassword(@PathVariable Integer userId) {
+    public void resetPassword(@PathVariable(value = "userId") Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
             t.setPassword(SmUtil.sm3().digestHex(this.defaultPassword));
             userRepository.save(t);
@@ -175,12 +176,22 @@ public class UserController extends BaseController{
     @DeleteMapping("/delete/{userId}")
     @Operation(summary = "删除")
     @Log("删除用户")
-    public void delete(@PathVariable Integer userId) {
+    public void delete(@PathVariable(value = "userId") Integer userId) {
         userRepository.findById(userId).ifPresent(t -> {
             t.setState(UserStateEnum.DELETE.getCode());
             userRepository.save(t);
         });
     }
+    /**
+     * 获取某个用户
+     */
+
+    @Operation(summary = "获取某个用户")
+    @GetMapping("/find/{userId}")
+    public UserDTO find(@PathVariable(value = "userId") Integer userId) {
+        return DtoMapper.convert(userRepository.findById(userId).orElse(null), UserDTO.class);
+    }
+
 
     /**
      * 定义图形验证码的长和宽
@@ -196,6 +207,23 @@ public class UserController extends BaseController{
 
         lineCaptcha.write(response.getOutputStream());
         response.getOutputStream().close();
+    }
+
+    @Operation(summary = "简单处理活运营商")
+    @GetMapping("/getMap")
+    public List<Map<String, Object>> getMap(){
+        List<SysUser> all = userMapper.selectList(new LambdaQueryWrapper<SysUser>()
+                .select(SysUser::getId, SysUser::getName, SysUser::getUsername)
+                .orderByDesc(SysUser::getId)
+        );
+        List<Map<String, Object>> maps = new ArrayList<>();
+        for (SysUser item : all) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", item.getId());
+            map.put("name", StrUtil.format("({}){}", item.getUsername(), item.getName()));
+            maps.add(map);
+        }
+        return maps;
     }
 
 }

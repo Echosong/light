@@ -19,7 +19,7 @@ public class Const {
     /**
      * 根路径
      */
-    public static String ROOT_PATH = "E:\\外包项目整理\\light轻巧之光\\light";
+    public static String ROOT_PATH = "D:\\项目资料\\保险\\insure-ground";
 
     /**
      * 静态魔板路径

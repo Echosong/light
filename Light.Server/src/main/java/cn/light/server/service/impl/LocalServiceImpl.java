@@ -21,7 +21,7 @@ import java.util.Date;
  * @author : 二胡子
  * @version :1.0.0
  */
-@Service(value = "storageService_0")
+@Service(value = "storageService_10")
 public class LocalServiceImpl implements  StorageService{
     @Resource
     private ConfigService configService;

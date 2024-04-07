@@ -33,7 +33,7 @@
  */
 
 const Lock = () => import('@/views/lock/index.vue')
-const member = () => import('@/views/member/member.vue')
+const member = () => import('@/views/channel/list.vue')
 export default [
   {
     path: '/lock',

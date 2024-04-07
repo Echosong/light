@@ -1,11 +1,14 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.Log;
+import cn.light.entity.entity.SysResourceCategory;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUserRole;
+import cn.light.entity.mapper.RoleMapper;
 import cn.light.entity.repository.RoleRepository;
 
 import cn.light.entity.repository.UserRoleRepository;
 import cn.light.server.service.RoleService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -30,6 +33,8 @@ import java.util.*;
 public class RoleController extends BaseController{
     @Resource
     private  RoleRepository roleRepository;
+    @Resource
+    private RoleMapper roleMapper;
     @Resource
     private  RoleService roleService;
     @Resource
@@ -80,6 +85,23 @@ public class RoleController extends BaseController{
         List<SysUserRole> allByRoleId = userRoleRepositroy.findAllByRoleId(id);
         Assert.isTrue(allByRoleId.isEmpty(), "已经有用户归属改部门，所以不能删除");
         roleRepository.delete(byId.get());
+    }
+
+    @Operation(summary = "简单查询资源分类")
+    @GetMapping("/getMap")
+    public List<Map<String, Object>> getMap(){
+        List<SysRole> all = roleMapper.selectList(new LambdaQueryWrapper<SysRole>()
+                .select(SysRole::getId, SysRole::getName)
+                .orderByDesc(SysRole::getId)
+        );
+        List<Map<String, Object>> maps = new ArrayList<>();
+        for (SysRole item : all) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", item.getId());
+            map.put("name", item.getName());
+            maps.add(map);
+        }
+        return maps;
     }
 
 

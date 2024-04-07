@@ -130,7 +130,7 @@ public class PermissionController extends BaseController{
      */
     @GetMapping("/listByRole/{roleId}")
     @Operation(summary = "根据角色id获取权限")
-    public List<SysPermission> listByRole(@NotBlank @PathVariable Integer roleId){
+    public List<SysPermission> listByRole(@NotBlank @PathVariable(value = "roleId") Integer roleId){
         return  permissionService.getListByrole(Arrays.asList(roleId));
     }
 
@@ -141,7 +141,7 @@ public class PermissionController extends BaseController{
      */
     @PutMapping("/updateRolePermissions/{roleId}")
     @Operation(summary = "更新某个角色的权限信息")
-    public void updateRolePermissions(@RequestBody List<Integer> permissionIds, @PathVariable Integer roleId){
+    public void updateRolePermissions(@RequestBody List<Integer> permissionIds, @PathVariable(value = "roleId") Integer roleId){
         List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Arrays.asList(roleId));
         if(!allByRoleIdIn.isEmpty()){
             rolePermissionRepository.deleteAll(allByRoleIdIn);

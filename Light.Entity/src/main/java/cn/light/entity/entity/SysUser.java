@@ -2,6 +2,7 @@ package cn.light.entity.entity;
 
 
 import cn.light.common.anno.*;
+import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.packet.enums.UserRegTypeEnum;
 import cn.light.packet.enums.UserSexEnum;
@@ -38,8 +39,7 @@ import java.io.Serializable;
 public class SysUser extends  SysBase implements Serializable {
 
     @NotNull
-    @AutoEntityField("账号")
-    @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
+    @AutoEntityField(value = "账号", isKeyName = true)
     @InQueryDTO
     private String username;
 
@@ -54,19 +54,8 @@ public class SysUser extends  SysBase implements Serializable {
     @AutoSorted
     private Integer sex;
 
-    @AutoEntityField("身高")
-    @Range(min = 0, max = 300)
-    private Double height;
-
-    @AutoEntityField("体重")
-    private Double weight;
-
-    @AutoEntityField("昵称")
-    private String nick;
-
-    @AutoEntityField(value = "注册方式", notes = "0,1,2", enums = UserRegTypeEnum.class)
-    private Integer type;
-
+    @AutoEntityField("工号")
+    private String code;
 
     @AutoEntityField("姓名")
     @Length(min = 2, message = "姓名必须大于两个字符")
@@ -85,14 +74,6 @@ public class SysUser extends  SysBase implements Serializable {
 
     @AutoEntityField("登录ip")
     private String loginIp;
-
-    @AutoEntityField(value = "身份证正面", htmlType = HtmlTypeEnum.UPLOAD)
-    @NotinListDTO
-    private String frontCard;
-
-    @NotinListDTO
-    @AutoEntityField(value = "身份证反面", htmlType = HtmlTypeEnum.UPLOAD)
-    private String reverseCard;
 
     @AutoEntityField(value = "个人简介", htmlType = HtmlTypeEnum.TEXTAREA)
     @NotinListDTO

@@ -13,11 +13,11 @@ public enum StorageTypeEnum implements BaseEnum {
     /**
      * 本地存储
      */
-    LOCAL(0, "本地存储"),
+    LOCAL(10, "本地存储"),
     /**
      * 相关配置
      */
-    OSS(0, "阿里云OSS");
+    OSS(20, "阿里云OSS");
 
 
     private final Integer code;

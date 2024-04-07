@@ -2,15 +2,15 @@
     <Dialog v-model="isShow" :title="title" maxHeight="700px">
         <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
                  label-width="120px">
-            <el-form-item label="字典名称："  prop="dictName" >
-    <el-input v-model="m.dictName"></el-input>
-</el-form-item>
-<el-form-item label="字典类型："  prop="dictType" >
-    <el-input v-model="m.dictType"></el-input>
-</el-form-item>
-<el-form-item label="状态">
-     <input-enum enumName="dicTypeStateEnum" v-model="m.state" ></input-enum>
-</el-form-item>
+            <el-form-item label="字典名称：" prop="dictName">
+                <el-input v-model="m.dictName"></el-input>
+            </el-form-item>
+            <el-form-item label="字典类型：" prop="dictType">
+                <el-input v-model="m.dictType"></el-input>
+            </el-form-item>
+            <el-form-item label="状态">
+                <input-enum enumName="dicTypeStateEnum" v-model="m.state"></input-enum>
+            </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
@@ -32,9 +32,10 @@ const props = defineProps(["params"]);
 const m = ref({});
 const title = ref("");
 const isShow = ref(false);
-const rules = {dictName:[],
-dictType:[],
-state:[],
+const rules = {
+    dictName: [],
+    dictType: [],
+    state: [],
 }
 const sa = inject('sa')
 const ruleForm = ref();
@@ -46,9 +47,11 @@ function open(data) {
         title.value = "修改 字典类型";
         m.value = data;
     } else {
-        m.value = {dictName:'',
-dictType:'',
-state:0}
+        m.value = {
+            dictName: '',
+            dictType: '',
+            state: 0
+        }
         title.value = "添加 字典类型";
     }
 }
@@ -57,7 +60,7 @@ state:0}
 function ok(parent) {
     ruleForm.value.validate(async (valid) => {
         if (valid) {
-            
+
             await sa.post("/dictType/save", m.value);
             parent.f5();
             isShow.value = false;

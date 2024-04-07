@@ -15,6 +15,7 @@ import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -83,25 +84,27 @@ public class #{UpEntityName}#Controller extends BaseController{
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除#{tableInfo}#")
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable(value="id") Integer id) {
         #{EntityName}#Repository.deleteById(id);
     }
 
+    //start
     @Operation(summary = "简单查询#{tableInfo}#")
     @GetMapping("/getMap")
     public List<Map<String, Object>> getMap(){
-         List<#{UpTableName}#> all = clubMapper.selectList(new LambdaQueryWrapper<#{UpTableName}#>()
+         List<#{UpTableName}#> all = #{EntityName}#Mapper.selectList(new LambdaQueryWrapper<#{UpTableName}#>()
                         .select(#{UpTableName}#::getId, #{UpTableName}#::get#{keyName}#)
                         .orderByDesc(#{UpTableName}#::getId)
                 );
         List<Map<String, Object>> maps = new ArrayList<>();
-        for (SdClub item : all) {
+        for (#{UpTableName}# item : all) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", item.getId());
-            map.put("name", item.get#{keyName}#);
+            map.put("name", item.get#{keyName}#());
             maps.add(map);
         }
         return maps;
     }
+    //end
 
 }

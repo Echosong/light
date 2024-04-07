@@ -10,9 +10,9 @@
 	<artifactId>Light.Admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Light.Admin</description>
-	<properties>
+<!--	<properties>
 		<java.version>21</java.version>
-	</properties>
+	</properties>-->
 	<dependencies>
 
 		<!--项目公告-->

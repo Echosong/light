@@ -14,11 +14,11 @@
                 <template  #default="scope">
                     <el-button link   @click="editRolePermissionPop(scope.row)" :icon="Finished" type="success" size="small">权限分配</el-button>
                     <el-button  link    @click="addFromPop(scope.row)" :icon="Edit"  type="warning" size="small">修改</el-button>
-                    <el-popconfirm    @confirm="deleteFn(scope.row.id)" title="您确定要删除这个角色吗？">
+<!--                    <el-popconfirm    @confirm="deleteFn(scope.row.id)" title="您确定要删除这个角色吗？">
                         <template #reference>
                             <el-button link :icon="Delete"  type="danger" size="small">删除</el-button>
                         </template>
-                    </el-popconfirm>
+                    </el-popconfirm>-->
                 </template>
             </el-table-column>
         </el-table>

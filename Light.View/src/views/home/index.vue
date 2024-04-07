@@ -13,7 +13,7 @@
     <el-row  style="background:#fff;margin-top: 30px;" :gutter="20">
       <el-col style="margin-bottom: 20px;" :lg="12" :sm="24" :span="12">
         <el-card class="box-card">
-          <Line-chart :chart-data="statistics['周订单统计矩形图']" />
+          <Line-chart :chart-data="statistics['周业绩统计矩形图']" />
         </el-card>
       </el-col>
       <el-col :lg="12" :sm="24" :span="12">
