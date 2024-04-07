@@ -77,12 +77,16 @@ const m = ref({});
 const title = ref("");
 const isShow = ref(false);
 const rules = {
-    channelName: [],
-    companyName: [],
-    grade: [],
-    scheme: [],
-    accidentRate: [],
-    costPrice: [],
+    channelName: [{required: true, message: '请输入渠道名', trigger: 'blur'},],
+    companyName: [{required: true, message: '请输入保险公司', trigger: 'blur'},],
+    scheme: [{required: true, message: '请输入渠道方案', trigger: 'blur'},],
+    accidentRate: [{required: true, message: '请输入伤残比例', trigger: 'blur'},],
+    threeClassCostPrice: [{required: true, message: '请输入三类成本价', trigger: 'blur'},],
+    fourClassCostPrice: [{required: true, message: '请输入四类成本价', trigger: 'blur'},],
+    fiveClassCostPrice: [{required: true, message: '请输入五类成本价', trigger: 'blur'},],
+    threeClassChannelPrice: [{required: true, message: '请输入三类渠道价', trigger: 'blur'},],
+    fourClassChannelPrice: [{required: true, message: '请输入四类渠道价', trigger: 'blur'},],
+    fiveClassChannelPrice: [{required: true, message: '请输入五类渠道价', trigger: 'blur'},],
 }
 const sa = inject('sa')
 const ruleForm = ref();

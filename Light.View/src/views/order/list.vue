@@ -35,12 +35,17 @@
                 <el-button type="success" v-permission="" icon="Plus" plain @click="add">增加</el-button>
                 <el-button type="warning" v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
                 <div style="font-size: 14px; padding-top: 5px; margin-left: 20px;">
-                    <span ><strong>总人数:</strong>  1100</span>
-                    <span style="margin-left:10px; "><strong>三类人数:</strong>5</span>
-                    <span style="margin-left:10px; "><strong>四类人数:</strong>5 </span>
-                    <span style="margin-left:10px; "><strong>五类人数:</strong>5</span>
-                    <span style="margin-left:10px; "><strong>总返利:</strong> 10000</span>
-                    <span style="margin-left:10px; "><strong>总利润:</strong> 200</span>
+                    <span ><strong>总人数:</strong>  {{ statis.peopleCount }}</span>
+                    <span style="margin-left:10px; "><strong>三类人数:</strong>{{statis.threeClassNum}}</span>
+                    <span style="margin-left:10px; "><strong>四类人数:</strong>{{ statis.fourClassNum }} </span>
+                    <span style="margin-left:10px; "><strong>五类人数:</strong>{{ statis.fiveClassNum }}</span>
+
+                    <span style="margin-left:10px; "><strong>三类业绩:</strong>{{statis.threeClassTotal}}</span>
+                    <span style="margin-left:10px; "><strong>四类业绩:</strong>{{ statis.fourClassTotal }} </span>
+                    <span style="margin-left:10px; "><strong>五类业绩:</strong>{{ statis.fiveClassTotal }}</span>
+
+                    <span style="margin-left:10px; "><strong>总返利:</strong> {{ statis.totalRebate }}</span>
+                    <span style="margin-left:10px; "><strong>总利润:</strong> {{ statis.totalProfit }}</span>
                 </div>
             </div>
         </FunNavigation>
@@ -151,6 +156,7 @@ const currentInfo = ref();
 const loading = ref(false)
 const showSearch = ref(true)
 const query = ref({})
+const statis = ref({})
 onMounted(() => {
     const router = useRouter();
     query.value = router.currentRoute.value.query;
@@ -163,10 +169,11 @@ async function f5() {
     loading.value = true
     const {data} = await sa.put("/order/listPage", p.value);
     loading.value = false
-    dataList.value = data.content.map((item) => {
+    dataList.value = data.page.content.map((item) => {
         return item;
     });
-    p.value.total = data.totalElements;
+    p.value.total = data.page.totalElements;
+    statis.value = data.statistics;
 }
 
 function exportFile() {

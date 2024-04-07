@@ -1,6 +1,7 @@
 package cn.light.packet.dto.order;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
+import cn.light.common.annotation.ExcelAnnotation;
 import cn.light.common.component.IDictionaryObject;
 import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
@@ -52,6 +53,7 @@ public class OrderListDTO extends SysBaseDTO implements IDictionaryObject {
     private String scheme;
 
     @Schema(title = "渠道等级")
+    @ExcelAnnotation(ignore = true)
     private String grade;
 
     @Schema(title = "伤残比例")
@@ -85,7 +87,11 @@ public class OrderListDTO extends SysBaseDTO implements IDictionaryObject {
     private BigDecimal fiveClassPrice;
 
     @Schema(title = "运营人")
+    @ExcelAnnotation(ignore = true)
     private Integer operation;
+
+    @Schema(title = "运营人员")
+    private String operationName;
 
     @Schema(title = "返利总额")
     private BigDecimal totalRebate;

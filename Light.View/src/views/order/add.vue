@@ -85,19 +85,18 @@
 <script setup>
 import Dialog from "@/components/dialog/index.vue";
 import {inject, ref} from "vue";
-import selectData from '@/components/SelectData/index.vue'
 
 const props = defineProps(["params"]);
 const m = ref({});
 const title = ref("");
 const isShow = ref(false);
 const rules = {
-    orderTime: [],
-    owner: [],
-    customerName: [],
-    channelName: [],
-    companyName: [],
-    scheme: [],
+    orderTime: [{required: true, message: '请输入订单日期', trigger: 'blur'},],
+    owner: [{required: true, message: '请输入业绩归属', trigger: 'blur'},],
+    customerName: [{required: true, message: '请输入客户名称', trigger: 'blur'},],
+    channelName: [{required: true, message: '请输入渠道名称', trigger: 'blur'},],
+    companyName: [{required: true, message: '请输入保险公司', trigger: 'blur'},],
+    scheme: [{required: true, message: '请输入方案', trigger: 'blur'},],
     grade: [],
     accidentRate: [],
     threeClass: [],
@@ -112,6 +111,7 @@ const rules = {
     operation: [],
     totalRebate: [],
     profit: [],
+    channelId: [],
     backTime: [],
 }
 const sa = inject('sa')

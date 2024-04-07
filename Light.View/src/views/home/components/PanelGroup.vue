@@ -1,4 +1,5 @@
 <template>
+
     <el-row :gutter="40" class="panel-group">
         <!-- <el-col :xs="12" :sm="24" :lg="8" class="card-panel-col">
             <div class="card-panel flexsAliCen flexBet" @click="handleSetLineChartData('newVisitis')">
@@ -20,63 +21,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        日交易数
+                        上周保费
                     </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['日交易数'] || 0" :duration="2600" class="card-panel-num" />
-                </div>
-            </div>
-        </el-col>
-        <el-col :xs="12" :sm="24" :lg="8" class="card-panel-col">
-            <div class="card-panel flexsAliCen flexBet" @click="handleSetLineChartData('newVisitis')">
-                <div class="card-panel-icon-wrapper icon-shoppin icon-message">
-                    <svg-icon class="card-panel-icon" name="z"></svg-icon>
-                </div>
-                <div class="card-panel-description">
-                    <div class="card-panel-text">
-                        周交易数
-                    </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['周交易数'] || 0" :duration="2600" class="card-panel-num" />
-                </div>
-            </div>
-        </el-col>
-        <el-col :xs="12" :sm="24" :lg="8" class="card-panel-col">
-            <div class="card-panel flexsAliCen flexBet" @click="handleSetLineChartData('newVisitis')">
-                <div class="card-panel-icon-wrapper icon-money">
-                    <svg-icon class="card-panel-icon" icon-shoppin name="m"></svg-icon>
-                </div>
-                <div class="card-panel-description">
-                    <div class="card-panel-text">
-                        月交易数
-                    </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['月交易数'] || 0" :duration="2600" class="card-panel-num" />
-                </div>
-            </div>
-        </el-col>
-    </el-row>
-    <el-row :gutter="40" class="panel-group">
-        <!-- <el-col :xs="12" :sm="24" :lg="8" class="card-panel-col">
-            <div class="card-panel flexsAliCen flexBet" @click="handleSetLineChartData('newVisitis')">
-                <div class="card-panel-icon-wrapper icon-people">
-                    <el-icon class="card-panel-icon"><UserFilled /></el-icon>
-                </div>
-                <div class="card-panel-description">
-                    <div class="card-panel-text">
-                        总用户量
-                    </div>
-                    <CountTo :start-val="0" :end-val="props.numList['总用户量'] || 0" :duration="2600" class="card-panel-num" />
-                </div>
-            </div>
-        </el-col> -->
-        <el-col :xs="12" :sm="24" :lg="8" class="card-panel-col">
-            <div class="card-panel flexsAliCen flexBet" @click="handleSetLineChartData('newVisitis')">
-                <div class="card-panel-icon-wrapper icon-people">
-                    <svg-icon class="card-panel-icon icon-shoppin" name="d"></svg-icon>
-                </div>
-                <div class="card-panel-description">
-                    <div class="card-panel-text">
-                        日交易费
-                    </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['日保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['上周保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -87,9 +34,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        周交易费
+                        本月月保费
                     </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['周保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['本月月保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>
@@ -100,9 +47,9 @@
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">
-                        月交易费
+                        上月保费
                     </div>
-                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['月保费'] || 0" :duration="2600" class="card-panel-num" />
+                    <CountTo v-if="props.numList['交易统计']" :start-val="0" :end-val="props.numList['交易统计']['上月保费'] || 0" :duration="2600" class="card-panel-num" />
                 </div>
             </div>
         </el-col>

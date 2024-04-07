@@ -19,5 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @SuppressWarnings("ALL")
 public interface OrderRepository extends JpaRepository<SysOrder, Integer> {
+    List<SysOrder> findByOrderTimeAfter(Date orderTime);
 
 }

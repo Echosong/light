@@ -1,8 +1,13 @@
 package cn.light.admin.controller;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.light.packet.dto.order.OrderStatisticsDTO;
+import cn.light.admin.vo.OrderVO;
 import cn.light.common.annotation.*;
 import cn.light.entity.entity.SysChannel;
+import cn.light.entity.entity.SysUser;
+import cn.light.entity.mapper.UserMapper;
 import cn.light.entity.repository.ChannelRepository;
 import cn.light.packet.dto.order.OrderDTO;
 import cn.light.packet.dto.order.OrderListDTO;
@@ -21,12 +26,12 @@ import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>Title: </p >
@@ -50,17 +55,26 @@ public class OrderController extends BaseController{
     private UserService userService;
     @Resource
     private ChannelRepository channelRepository;
+    @Resource
+    private UserMapper userMapper;
 
     @Operation(summary = "分页查询业绩数据")
     @PutMapping("/listPage")
-    public Page<OrderListDTO> listPage(@RequestBody @Valid OrderQueryDTO queryDTO){
+    public OrderVO listPage(@RequestBody @Valid OrderQueryDTO queryDTO){
         UserDTO current = userService.getCurrent();
         if(current.getRoleId() != 1){
             queryDTO.setOperation(current.getId());
         }
 
         Page<SysOrder> dataPages  =  PageUtil.getPage(orderMapper::listPage, queryDTO);
-        return DtoMapper.convertPage(dataPages, OrderListDTO.class);
+        Page<OrderListDTO> orderListPage = DtoMapper.convertPage(dataPages, OrderListDTO.class);
+        OrderVO orderVO = new OrderVO();
+        orderVO.setPage(orderListPage);
+
+        OrderStatisticsDTO orderStatistics = orderMapper.listPageStatistics(queryDTO);
+
+        orderVO.setStatistics(orderStatistics);
+        return orderVO;
     }
 
     @PutMapping("/export")
@@ -68,8 +82,20 @@ public class OrderController extends BaseController{
     @Log("导出业绩数据")
     public ResponseEntity<byte[]> export(@RequestBody @Valid OrderQueryDTO queryDTO) throws IOException, IllegalAccessException {
         List<SysOrder> all = orderMapper.listPage(queryDTO);
+
+        List<OrderListDTO> orderList = DtoMapper.convertList(all, OrderListDTO.class);
+
+        Set<Integer> userIds = all.stream().map(SysOrder::getOperation).collect(Collectors.toSet());
+        if(CollUtil.isNotEmpty(userIds)) {
+            List<SysUser> sysUsers = userMapper.selectBatchIds(userIds);
+            for (OrderListDTO sysOrder : orderList) {
+                sysUsers.stream().filter(t->Objects.equals(t.getId(), sysOrder.getOperation()))
+                        .findFirst()
+                        .ifPresent(t->sysOrder.setOperationName(t.getName()));
+            }
+        }
         String fileName = "Order"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
-        return ExcelUtil.generateImportFile(DtoMapper.convertList(all, OrderListDTO.class), fileName, OrderListDTO.class);
+        return ExcelUtil.generateImportFile(orderList, fileName, OrderListDTO.class);
     }
 
     @Operation(summary = "新增活更新业绩数据")

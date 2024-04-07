@@ -22,5 +22,60 @@
             </if>
         </where>
     </select>
+    <select id="listPageStatistics" resultType="cn.light.packet.dto.order.OrderStatisticsDTO">
+
+        select (sum(three_class) + sum(four_class) + sum(five_class)) as peopleCount,
+        sum(three_class) as threeClassNum,
+        sum(four_class) as fourClassNum,
+        sum(five_class) as fiveClassNum,
+        sum(three_class_price) as threeClassTotal,
+        sum(four_class_price) as fourClassTotal,
+        sum(five_class_price) as fiveClassTotal,
+        sum(total_rebate) as totalRebate,
+        sum(profit) as totalProfit
+        from sys_order
+        <where>
+            <if test="startOwner != null ">
+                and owner &gt; #{startOwner}
+            </if>
+            <if test="endOwner != null ">
+                and owner &lt; #{endOwner}
+            </if>
+            <if test="customerName != null and customerName != '' ">
+                and customer_name like CONCAT('%',#{customerName},'%')
+            </if>
+            <if test="channelName != null and channelName != '' ">
+                and channel_name like CONCAT('%',#{channelName},'%')
+            </if>
+            <if test="operation != null and operation != 0 ">
+                and operation = #{operation}
+            </if>
+        </where>
+
+
+    </select>
+    <select id="selectSumAmount" resultType="java.math.BigDecimal">
+        select * from sys_order
+        <where>
+            <if test="startTime!= null and startTime != ''">
+                and owner &gt; #{startTime}
+            </if>
+            <if test="endTime!= null and endTime != ''">
+                and owner &lt; #{endTime}
+            </if>
+            <if test="userName != null">
+                and operation = #{userId}
+            </if>
+        </where>
+    </select>
+    <select id="SumAmountByCompany" resultType="cn.light.packet.dto.order.SumAmountByCompanyDTO">
+        select channel_name as channelName, channel_id as channelId, (sum(three_class_price) + sum(four_class_price)  + sum(five_class_price)) as amount
+        from sys_order
+        where order_time BETWEEN
+                  DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01') AND
+                  LAST_DAY(CURRENT_DATE())
+        group by channel_name
+
+    </select>
 
 </mapper>
