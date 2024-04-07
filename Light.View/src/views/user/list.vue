@@ -29,7 +29,7 @@
             <el-table-column label="角色" prop="roleName"></el-table-column>
             <el-table-column label="邮箱" prop="email"></el-table-column>
             <el-table-column label="最后登录ip" prop="loginIp"></el-table-column>
-            <el-table-column label="最后登录时间" prop="loginIp"></el-table-column>
+            <el-table-column label="最后登录时间" prop="updateTime"></el-table-column>
 
             <el-table-column label="状态">
                 <template #default="s">
