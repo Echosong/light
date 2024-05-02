@@ -6,14 +6,10 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.SmUtil;
-import cn.light.packet.dto.user.LoginUserDTO;
-import cn.light.packet.dto.user.UserCacheDTO;
-import cn.light.packet.dto.user.UserDTO;
-import cn.light.packet.dto.user.UserQueryDTO;
-import cn.light.packet.enums.UserStateEnum;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
+import cn.light.entity.cache.UserCacheRepository;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUser;
 import cn.light.entity.entity.SysUserRole;
@@ -21,12 +17,16 @@ import cn.light.entity.mapper.UserMapper;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRepository;
 import cn.light.entity.repository.UserRoleRepository;
+import cn.light.packet.dto.user.LoginUserDTO;
+import cn.light.packet.dto.user.UserCacheDTO;
+import cn.light.packet.dto.user.UserDTO;
+import cn.light.packet.dto.user.UserQueryDTO;
+import cn.light.packet.enums.UserStateEnum;
 import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private  UserMapper userMapper;
     @Resource
-    private  RedisTemplate<String, SysUser> redisTemplate;
+    private UserCacheRepository userCacheRepository;
 
     /**
      * 登录服务
@@ -175,11 +175,11 @@ public class UserServiceImpl implements UserService {
         String userId = StpUtil.getLoginId().toString();
         SysUser user = null;
         try {
-            user = redisTemplate.opsForValue().get(userId);
+            user = userCacheRepository.findById(Integer.parseInt(userId)).orElse(null);
         }catch (Exception ignored){}
         if (Objects.isNull(user)) {
             user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
-            redisTemplate.opsForValue().set(userId, user);
+            userCacheRepository.save(user);
         }
         return user;
     }

@@ -18,6 +18,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 
@@ -36,6 +37,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "用户")
+@RedisHash
 public class SysUser extends  SysBase implements Serializable {
 
     @NotNull

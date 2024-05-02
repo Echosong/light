@@ -3,6 +3,7 @@ package cn.light.admin.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.annotation.NoPermission;
+import cn.light.entity.cache.UserCacheRepository;
 import cn.light.entity.entity.SysOrder;
 import cn.light.entity.mapper.OrderMapper;
 import cn.light.entity.repository.OrderRepository;
@@ -43,11 +44,9 @@ public class HomeController extends BaseController {
 
     @Resource
     private  UserRepository userRepository;
-    @Resource
-    private  RoleRepository roleRepository;
 
     @Resource
-    private PermissionMapper permissionMapper;
+    private UserCacheRepository userCacheRepository;
     @Resource
     private OrderMapper orderMapper;
     @Resource
@@ -56,10 +55,21 @@ public class HomeController extends BaseController {
 
     private final String format = "yyyy-MM-dd";
 
-    @GetMapping("/test/{id}")
+    @GetMapping("/test")
     @NoPermission
-    public String test(@PathVariable Integer id){
-        return id.toString();
+    public String test(){
+        List<SysUser> all = userRepository.findAll();
+        userCacheRepository.saveAll(all);
+
+        Iterable<SysUser> all1 = userCacheRepository.findAll();
+        all.forEach(item->{
+            item.setInfo(item.getInfo() + "===");
+        });
+
+        userRepository.saveAll(all);
+
+        all1.forEach(item->log.info("item:{}",item));
+        return "success";
     }
 
     /**

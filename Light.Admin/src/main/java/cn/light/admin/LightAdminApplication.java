@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 /**
  * 启动文件
@@ -19,6 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @MapperScan(basePackages = {"cn.light.entity.mapper"})
 @EntityScan(basePackages = {"cn.light.entity.entity"})
 @EnableJpaRepositories("cn.light.entity.repository")
+@EnableRedisRepositories("cn.light.entity.cache")
 @ComponentScan(basePackages = {"cn.light.server.*","cn.light.admin.*"})
 @SpringBootApplication
 public class LightAdminApplication {
