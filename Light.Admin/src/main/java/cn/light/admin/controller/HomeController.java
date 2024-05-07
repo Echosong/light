@@ -3,11 +3,14 @@ package cn.light.admin.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.annotation.NoPermission;
+import cn.light.entity.cache.SmsCache;
+import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.cache.UserCacheRepository;
 import cn.light.entity.entity.SysOrder;
 import cn.light.entity.mapper.OrderMapper;
 import cn.light.entity.repository.OrderRepository;
 import cn.light.packet.dto.order.SumAmountByCompanyDTO;
+import cn.light.packet.dto.user.UserCacheDTO;
 import cn.light.packet.dto.user.UserDTO;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.util.DtoMapper;
@@ -46,7 +49,7 @@ public class HomeController extends BaseController {
     private  UserRepository userRepository;
 
     @Resource
-    private UserCacheRepository userCacheRepository;
+    private SmsCacheRepository smsCacheRepository;
     @Resource
     private OrderMapper orderMapper;
     @Resource
@@ -58,18 +61,16 @@ public class HomeController extends BaseController {
     @GetMapping("/test")
     @NoPermission
     public String test(){
-        List<SysUser> all = userRepository.findAll();
-        userCacheRepository.saveAll(all);
-
-        Iterable<SysUser> all1 = userCacheRepository.findAll();
-        all.forEach(item->{
-            item.setInfo(item.getInfo() + "===");
-        });
-
-        userRepository.saveAll(all);
-
-        all1.forEach(item->log.info("item:{}",item));
-        return "success";
+        Optional<SmsCache> byId = smsCacheRepository.findById("18317033205");
+        if (byId.isPresent()) {
+            return byId.get().getContent();
+        }else{
+            SmsCache smsCache = new SmsCache();
+            smsCache.setContent("123654");
+            smsCache.setId("18317033205");
+            smsCacheRepository.save(smsCache);
+            return "success";
+        }
     }
 
     /**
