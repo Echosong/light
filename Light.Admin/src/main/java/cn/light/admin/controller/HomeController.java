@@ -82,11 +82,16 @@ public class HomeController extends BaseController {
 
     //获取版本号
     @GetMapping("/version")
-    @NoPermission
-    @Operation(summary = "获取当前版本号")
-    public String getVersion() {
-        return appVersion + "(" + buildTime + ")";
+    @Operation(summary = "获取后台接口版本号")
+    public Map<String, String> version() {
+        Map<String, String> versionMap = new HashMap<>();
+        versionMap.put("version", appVersion);
+        Date localDateTime = DateUtil.parse(buildTime);
+        String format = DateUtil.format(DateUtil.offsetHour(localDateTime, 8), "yyyyMMdd HH:mm:ss");
+        versionMap.put("buildTime", format );
+        return versionMap;
     }
+
 
     /**
      * 获取所有项目信息，主要市拿相关编号配置给前端使用

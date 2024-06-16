@@ -57,6 +57,7 @@
             <error-log/>
             <userinfo/>
             <!-- <change-lang /> -->
+            <Version />
             <font-size/>
         </div>
     </div>
@@ -73,9 +74,11 @@ import ErrorLog from '@/components/ErrorLog/index.vue'
 import {useLayoutsettings} from '@/pinia/modules/layoutSettings'
 import {storeToRefs} from 'pinia'
 import {useApp} from '@/pinia/modules/app'
+import Version from "@/layout/components/Topbar/Version.vue";
 
 export default defineComponent({
     components: {
+        Version,
         Logo,
         Hamburger,
         Breadcrumbs,
