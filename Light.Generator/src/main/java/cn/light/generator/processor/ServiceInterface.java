@@ -1,5 +1,7 @@
 package cn.light.generator.processor;
 
+import java.sql.SQLException;
+
 /**
  * <p>Title: </p >
  * <p>Description: </p >
@@ -13,5 +15,5 @@ public interface ServiceInterface {
     /**
      * 业务处理方法
      */
-    void start();
+    void start() throws SQLException;
 }

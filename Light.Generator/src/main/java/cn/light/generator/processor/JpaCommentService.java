@@ -127,7 +127,7 @@ public class JpaCommentService extends BaseService implements ServiceInterface {
         //设置默认值相关  default 3 not null
         String alertStr = StrUtil.format("alter table {} modify `{}` {} {} comment '{}'",
                 tableName, columnName, sqlType, defaultStr, columnComment);
-        Console.log("执行表 {} ,的字段{} 备注 : {} 执行sql: {}", tableName, columnName, columnComment, alertStr);
+        Console.log("执行sql: {}",  alertStr);
         Db.use().execute(alertStr);
 
     }

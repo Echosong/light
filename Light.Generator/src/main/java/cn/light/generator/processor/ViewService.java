@@ -46,13 +46,20 @@ public class ViewService extends BaseService implements ServiceInterface {
     public void start() {
         vuePath = Const.VUE_PATH + "/" + StrUtil.lowerFirst(this.className);
         AutoEntity autoEntity = clazz.getAnnotation(AutoEntity.class);
+
+        Field[] declaredFields = clazz.getDeclaredFields();
+        Class<?> superclass = clazz.getSuperclass();
+        if(!Objects.equals(superclass.getSimpleName(), "SysBase")){
+            declaredFields = ArrayUtil.addAll(declaredFields, superclass.getDeclaredFields());
+        }
+
         if (autoEntity.viewFrom()) {
-            this.listView();
+            this.listView(declaredFields);
         }
         if (autoEntity.viewList()) {
-            this.viewFrom();
+            this.viewFrom(declaredFields);
             if(autoEntity.viewInfo()){
-                this.viewInfo();
+                this.viewInfo(declaredFields);
             }
         }
     }
@@ -96,7 +103,7 @@ public class ViewService extends BaseService implements ServiceInterface {
      * 生成列表
      */
     @SuppressWarnings("AlibabaUndefineMagicConstant")
-    private void listView() {
+    private void listView(Field[] declaredFields) {
         String templateFile = this.templatePath + "list.vue";
         String listPath = vuePath + "/list.vue";
         if (FileUtil.isFile(listPath)) {
@@ -104,7 +111,6 @@ public class ViewService extends BaseService implements ServiceInterface {
                 return;
             }
         }
-        Field[] declaredFields = clazz.getDeclaredFields();
         String tplContent = this.replaceTpl(templateFile);
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
@@ -315,7 +321,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         return  StrUtil.format(fromUploadFileStr, map);
     }
 
-    private void viewInfo(){
+    private void viewInfo(Field[] declaredFields){
         String templateFile = this.templatePath + "info.vue";
 
         String listPath = vuePath + "/info.vue";
@@ -325,7 +331,6 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
         }
         String tplContent = this.replaceTpl(templateFile);
-        Field[] declaredFields = clazz.getDeclaredFields();
         List<String> infoList = new ArrayList<>();
 
         String infoTemplate = """
@@ -335,7 +340,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                           {}
                         </div>
                       </template>
-                      <div style="width:500px;" v-html="one.{}"></div>
+                      {}
                 </el-descriptions-item>
                 """;
 
@@ -344,7 +349,6 @@ public class ViewService extends BaseService implements ServiceInterface {
                 continue;
             }
             AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
-
             String typeName = field.getName();
             try {
                 if (!BASE_ENUM.equals(annotation.enums().getSimpleName())) {
@@ -354,7 +358,14 @@ public class ViewService extends BaseService implements ServiceInterface {
                 log.info(e.getMessage());
             }
 
-            infoList.add(StrUtil.format(infoTemplate, annotation.value(), typeName));
+            String currentHtml = " <div style=\"width:500px;\" v-html=\"one.{}\"></div>";
+            if(annotation.htmlType() == HtmlTypeEnum.UPLOAD){
+                currentHtml = """
+                            <img :src="one.{}" style="width:100px; height:100px" />
+                        """;
+            }
+            currentHtml = StrUtil.format(currentHtml, typeName);
+            infoList.add(StrUtil.format(infoTemplate, annotation.value(), currentHtml));
 
         }
         tplContent = tplContent.replace("#{el-descriptions-item}#", StrUtil.join( "", infoList));
@@ -365,7 +376,7 @@ public class ViewService extends BaseService implements ServiceInterface {
      * 编辑
      */
     @SuppressWarnings("AlibabaMethodTooLong")
-    private void viewFrom() {
+    private void viewFrom(Field[] declaredFields) {
         String templateFile = this.templatePath + "add.vue";
 
         String listPath = vuePath + "/add.vue";
@@ -376,7 +387,6 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
 
         String tplContent = this.replaceTpl(templateFile);
-        Field[] declaredFields = clazz.getDeclaredFields();
         List<String> elFormItems = new ArrayList<>();
         List<String> ms = new ArrayList<>();
         List<String> rulesFields = new ArrayList<>();

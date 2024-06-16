@@ -52,7 +52,7 @@ public class SysLog extends SysBase {
     @AutoEntityField(value = "方法名")
     private String method;
 
-    @AutoEntityField(value = "参数", len = 1000, htmlType = HtmlTypeEnum.TEXTAREA)
+    @AutoEntityField(value = "参数", htmlType = HtmlTypeEnum.TEXTAREA)
     private String params;
 
     @AutoEntityField(value = "日志类型", enums = BusinessEnum.class)

@@ -105,7 +105,7 @@ public class LogAspect {
         logDTO.setDescription(aopLog.value());
         logDTO.setExceptionDetail("");
         logDTO.setTime(System.currentTimeMillis() - currentTime.get());
-        logDTO.setParams(StrUtil.sub(getParameter(method, joinPoint.getArgs()), 0, 2000));
+        logDTO.setParams(getParameter(method, joinPoint.getArgs()));
         logDTO.setMethod(methodName);
         logService.save(logDTO);
         currentTime.remove();

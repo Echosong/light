@@ -60,7 +60,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if (!ArrayUtil.contains(annotation.value(), CodeTypeEnum.CONTROLLER) && !ArrayUtil.contains(annotation.value(), CodeTypeEnum.ALL)) {
+            if (!ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.CONTROLLER, CodeTypeEnum.ALL)) {
                 return;
             }
             //进行备份
@@ -88,6 +88,11 @@ public class ControllerService extends BaseService implements ServiceInterface {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
                 continue;
             }
+            AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
+            if(annotation.isKeyName()) {
+                keyName = StrUtil.upperFirst(field.getName());
+            }
+
             if (!field.isAnnotationPresent(InQueryDTO.class)) {
                 continue;
             }
@@ -97,10 +102,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
             } else {
                 fieldList.add(StrUtil.format("queryDTO.get{}()", StrUtil.upperFirst(field.getName())));
             }
-            AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
-            if(annotation.isKeyName()) {
-                keyName = StrUtil.upperFirst(field.getName());
-            }
+
         }
         String queryParams = "";
         if (!fieldList.isEmpty()) {

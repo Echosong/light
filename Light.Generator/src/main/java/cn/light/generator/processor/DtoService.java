@@ -2,21 +2,20 @@ package cn.light.generator.processor;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-
 import cn.light.common.anno.AutoCover;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
 import cn.light.common.anno.NotinListDTO;
+import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.DtoTplEnum;
 import cn.light.generator.Const;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -26,6 +25,7 @@ import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Title: </p >
@@ -61,6 +61,10 @@ public class DtoService extends BaseService implements ServiceInterface {
             FileUtil.mkdir(dtoPath);
         }
         Field[] declaredFields = clazz.getDeclaredFields();
+        Class<?> superclass = clazz.getSuperclass();
+        if(!Objects.equals(superclass.getSimpleName(), "SysBase")){
+           declaredFields = ArrayUtil.addAll(declaredFields, superclass.getDeclaredFields());
+        }
         this.writeDtoTpl(declaredFields, DtoTplEnum.QueryDTO);
         this.writeDtoTpl(declaredFields, DtoTplEnum.DTO);
         this.writeDtoTpl(declaredFields, DtoTplEnum.ListDTO);
@@ -119,9 +123,18 @@ public class DtoService extends BaseService implements ServiceInterface {
 
                 String typeString = field.getType().getSimpleName();
                 String notes = "";
-                if(StrUtil.isNotEmpty( autoEntityField.notes())){
-                    notes = StrUtil.format(", description=\"{}\"", autoEntityField.notes());
+
+                if(autoEntityField.enums()  != BaseEnum.class){
+                    notes = autoEntityField.enums().getSimpleName();
                 }
+
+                if(StrUtil.isNotEmpty(autoEntityField.notes())){
+                    notes += autoEntityField.notes();
+                }
+                if(StrUtil.isNotBlank(notes)) {
+                    notes = StrUtil.format(", description=\"{}\"", notes);
+                }
+
                 builder.append(StrUtil.format("   @Schema(title=\"{}\" {})", autoEntityField.value(),
                         notes));
                 builder.append("\r\n");

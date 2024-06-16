@@ -81,7 +81,7 @@ public class BaseService {
             String path =  URLDecoder.decode(paths.get(0),"utf-8");
             path = StrUtil.replaceIgnoreCase(path, "target/classes", "src/main/java");
             path = StrUtil.replaceIgnoreCase(path, "target/test-classes", "src/main/java");
-            return  StrUtil.subSuf(path, 1);
+            return  StrUtil.trim(path);
         }catch (Exception ignored){
             return "";
         }

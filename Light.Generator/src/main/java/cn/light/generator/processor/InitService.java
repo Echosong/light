@@ -22,6 +22,7 @@ public class InitService {
      * @param clazz 当前类的类型
      */
     public void run(Class<?> clazz) {
+
         // 类上面拿注解
         // 生成 repository
         if (clazz.isAnnotationPresent(Entity.class)) {
