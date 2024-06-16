@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.mutation.internal.cte.CteInsertStrategy;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +56,12 @@ public class HomeController extends BaseController {
     @Resource
     private OrderRepository orderRepository;
 
+    @Value("${app.version}")
+    private String appVersion;
+
+    @Value("${app.build.time}")
+    private String buildTime;
+
 
     private final String format = "yyyy-MM-dd";
 
@@ -71,6 +78,14 @@ public class HomeController extends BaseController {
             smsCacheRepository.save(smsCache);
             return "success";
         }
+    }
+
+    //获取版本号
+    @GetMapping("/version")
+    @NoPermission
+    @Operation(summary = "获取当前版本号")
+    public String getVersion() {
+        return appVersion + "(" + buildTime + ")";
     }
 
     /**

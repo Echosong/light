@@ -10,9 +10,11 @@
 	<artifactId>Light.Admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Light.Admin</description>
-<!--	<properties>
+	<properties>
 		<java.version>21</java.version>
-	</properties>-->
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+	</properties>
 	<dependencies>
 
 		<!--项目公告-->

@@ -50,7 +50,10 @@ sa-token:
   # 是否输出操作日志
   is-log: false
 
-
+app:
+  version: @project.version@
+  build:
+    time: @timestamp@
 
 
 
