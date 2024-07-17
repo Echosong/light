@@ -53,6 +53,11 @@ public class Const {
     public static String  PACKET_PATH = "packet";
 
     /**
+     * service路径
+     */
+    public  static String SERVICE_PATH = "server";
+
+    /**
      * 表前缀
      */
     public static String TABLE_PREFIX = "Sys";

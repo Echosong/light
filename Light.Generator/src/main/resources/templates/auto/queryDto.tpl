@@ -15,13 +15,10 @@ import java.math.BigDecimal;
 import java.util.*;
 #{import}#
 /**
- * <p>Title:#{tableInfo}# </p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: #{localDate}#</p >
+ * #{UpEntityName}#QueryDTO 查询DTO
  *
  * @author : echosong
- * @version :1.0.0
+ * @date : #{localDate}#
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

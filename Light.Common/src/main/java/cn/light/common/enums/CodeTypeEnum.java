@@ -22,7 +22,7 @@ public enum CodeTypeEnum {
     LIST_VIEW,
     INFO_VIEW,
     MAPPER,
-
+    SERVICE,
     MAPPER_XML,
     //不需要任何
     NULL,

@@ -8,13 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>Title: 自动生成 #{tableInfo}#</p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: #{localDate}#</p >
+ * #{UpEntityName}#Repository
  *
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @date : #{localDate}#
  */
 @Repository
 @SuppressWarnings("ALL")

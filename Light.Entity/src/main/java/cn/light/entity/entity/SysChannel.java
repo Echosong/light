@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  * @author : 二胡子
  * @version :1.0.0
  */
-@AutoEntity(value = "渠道信息表")
+@AutoEntity(value = "渠道信息表", service = true)
 @Getter
 @Setter
 @Entity

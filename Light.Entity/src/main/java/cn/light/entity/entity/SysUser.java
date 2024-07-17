@@ -45,7 +45,7 @@ public class SysUser extends  SysBase implements Serializable {
     @InQueryDTO
     private String username;
 
-    @Column(length = 300, columnDefinition = "密码")
+    @Column(length = 300)
     @Length(min = 6, message = "密码必须大于等于6位")
     @AutoEntityField("密码")
     @NotinListDTO

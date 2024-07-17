@@ -17,13 +17,9 @@ import java.util.*;
 #{import}#
 
 /**
- * <p>Title:#{tableInfo}# </p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: #{localDate}#</p >
- *
+ * #{UpEntityName}#列表传输对象
  * @author : echosong
- * @version :1.0.0
+ * @date : #{localDate}#
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

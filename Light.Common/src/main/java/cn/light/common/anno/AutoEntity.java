@@ -45,6 +45,9 @@ public @interface AutoEntity {
      */
     boolean controller() default  true;
 
+
+    boolean service() default  true;
+
     /**
      * controller 需要生成那些对应方法
      */

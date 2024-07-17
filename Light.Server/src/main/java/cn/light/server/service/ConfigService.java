@@ -1,8 +1,8 @@
 package cn.light.server.service;
 
 
-import cn.light.packet.dto.config.ConfigDTO;
-import cn.light.entity.entity.SysConfig;
+import cn.light.packet.dto.config.*;
+import cn.light.entity.entity.*;
 
 import java.util.List;
 

@@ -5,6 +5,8 @@ import cn.light.common.anno.AutoEntity;
 import jakarta.persistence.Entity;
 import lombok.extern.slf4j.Slf4j;
 
+import java.sql.SQLException;
+
 /**
  * <p>Title: </p >
  * <p>Description: </p >
@@ -49,11 +51,16 @@ public class InitService {
                 Singleton.get(ControllerService.class, clazz).start();
             }
 
+            //service处理
+            if (autoEntity.service()) {
+                Singleton.get(ImplService.class, clazz).start();
+            }
+
             //数据字典写入
             Singleton.get(DictionaryService.class, clazz).start();
 
-        }
 
+        }
 
 
     }

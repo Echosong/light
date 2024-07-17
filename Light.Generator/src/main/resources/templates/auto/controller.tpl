@@ -23,14 +23,11 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: #{tableInfo}#管理</p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: #{localDate}#</p >
+ *  #{tableInfo}# 控制器
  *
  * listPage,save,delete,find,list
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @date : #{localDate}#
  */
 @Tag(name = "#{tableInfo}# 控制器")
 @RestController
