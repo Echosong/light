@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  */
 @Service
 public class #{UpEntityName}#ServiceImpl extends ServiceImpl<#{UpEntityName}#Mapper, #{UpTableName}#> implements #{UpEntityName}#Service {
-        @Resource
-        private  #{UpEntityName}#Repository #{EntityName}#Repository;
+    @Resource
+    private  #{UpEntityName}#Repository #{EntityName}#Repository;
 
 }
