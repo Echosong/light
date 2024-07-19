@@ -10,8 +10,8 @@
         </el-form>
 
         <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
-            <el-button type="success" v-permission="" icon="Plus" plain @click="add">增加</el-button>
-            <el-button type="warning" v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
+            <el-button type="primary"  v-permission="" icon="Plus" plain @click="add">增加</el-button>
+            <el-button type="primary"  v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
         </FunNavigation>
 
         <!-- <div class="c-title">数据列表</div> -->
@@ -20,7 +20,7 @@
             <el-table-column prop="address" label="操作" width="150px" #{fixed}#>
                 <template #default="s">
                     <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
-                    <el-button link  v-permission="" type="info"  @click="info(s.row)">查看</el-button>
+                    <el-button link  v-permission="" type="primary"  @click="info(s.row)">查看</el-button>
                     <el-button link  v-permission="" type="primary"  @click="update(s.row)">修改</el-button>
                     <el-button link  v-permission=""  type="danger" @click="del(s.row)">删除</el-button>
                 </template>

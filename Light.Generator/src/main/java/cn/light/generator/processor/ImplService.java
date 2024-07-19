@@ -65,6 +65,6 @@ public class ImplService  extends BaseService implements ServiceInterface  {
         }
         String tplContent =  this.replaceTpl(templateFile);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
-        Console.log("生成Repository 文件 {} 成功 ", fileName);
+        Console.log("生成Service 文件 {} 成功 ", fileName);
     }
 }
