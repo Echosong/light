@@ -3,13 +3,21 @@
 <mapper namespace="cn.light.entity.mapper.UserMapper">
     <select id="listPage" resultType="cn.light.entity.entity.SysUser">
         select *
-        from sys_user where 1=1
-                 <if test="username != null and username != '' ">
- and username  like CONCAT('%',#{username},'%')
- </if>
-<if test="name != null and name != '' ">
- and name  like CONCAT('%',#{name},'%')
- </if>
+        from sys_user
+        <where>
+            <if test="username != null and username != '' ">
+                and username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="name != null and name != '' ">
+                and name like CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getUserCache" resultType="cn.light.entity.cache.UserCache">
+        select u.*, r.code as roleCode, r.name as roleName from sys_user u
+            left join sys_user_role ur on u.id = ur.user_id
+            left join sys_role r on ur.role_id = r.id
+        where u.id = #{id}
     </select>
 
 </mapper>

@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * 用缓存框架
  * @author hz
  */
-public interface UserCacheRepository extends CrudRepository<SysUser, Integer> {
+public interface UserCacheRepository extends CrudRepository<UserCache, Integer> {
 }

@@ -1,6 +1,7 @@
 package cn.light.server.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.light.entity.cache.UserCache;
 import cn.light.packet.dto.user.LoginUserDTO;
 import cn.light.packet.dto.user.UserCacheDTO;
 import cn.light.packet.dto.user.UserDTO;
@@ -51,7 +52,7 @@ public interface UserService {
     UserDTO getCurrent();
 
 
-    SysUser getUserCache();
+    UserCache getUserCache();
 
     /**
      * 处理分页信息

@@ -1,5 +1,6 @@
 package cn.light.entity.mapper;
 
+import cn.light.entity.cache.UserCache;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.light.packet.dto.user.UserQueryDTO;
 import cn.light.entity.entity.SysUser;
@@ -15,4 +16,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<SysUser> {
     List<SysUser> listPage(UserQueryDTO userQueryDTO);
+
+    UserCache getUserCache(Integer id);
 }

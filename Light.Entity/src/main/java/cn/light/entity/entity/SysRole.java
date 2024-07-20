@@ -25,15 +25,18 @@ import org.hibernate.annotations.DynamicUpdate;
 @Setter
 @DynamicInsert
 @DynamicUpdate
-@AutoEntity(value = "所属客户")
+@AutoEntity(value = "所属角色")
 public class SysRole extends SysBase  {
     @NotNull
-    @AutoEntityField(value = "客户名称")
+    @AutoEntityField(value = "角色名称")
     @InQueryDTO
     private String name;
 
+    @AutoEntityField(value = "角色编码")
+    @InQueryDTO
+    private String code;
+
     @AutoEntityField(value = "描述")
     private String description;
-
 
 }

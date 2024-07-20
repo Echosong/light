@@ -28,4 +28,6 @@ public @interface Permission {
      * 逻辑运算符
      */
     LogicalEnum logical() default LogicalEnum.AND;
+
+    String message() default "权限不足不能访问";
 }

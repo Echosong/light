@@ -14,7 +14,7 @@
     <artifactId>light</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>保险中台项目</name>
+    <name>Light框架</name>
     <description>轻巧的后台管理系统</description>
 
     <properties>
@@ -33,7 +33,6 @@
     <!--控制了版本以后子类可以直接使用该版本-->
     <dependencyManagement>
         <dependencies>
-
             <!--项目核心模块-->
             <dependency>
                 <groupId>cn.light</groupId>

@@ -9,6 +9,7 @@ import cn.hutool.crypto.SmUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
+import cn.light.entity.cache.UserCache;
 import cn.light.entity.cache.UserCacheRepository;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUser;
@@ -171,14 +172,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SysUser getUserCache() {
+    public UserCache getUserCache() {
         String userId = StpUtil.getLoginId().toString();
-        SysUser user = null;
+        UserCache user = null;
         try {
             user = userCacheRepository.findById(Integer.parseInt(userId)).orElse(null);
         }catch (Exception ignored){}
         if (Objects.isNull(user)) {
-            user = userRepository.findById(Integer.parseInt(userId)).orElseThrow(() -> new BaseKnownException("用户不存在"));
+            user = userMapper.getUserCache(Integer.parseInt(userId));
             userCacheRepository.save(user);
         }
         return user;

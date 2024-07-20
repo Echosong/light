@@ -13,4 +13,4 @@ spring:
 #文件上传操作
 file:
   #文件上传目录
-  upload-folder: E:\外包项目整理\light轻巧之光\light\upload\
+  upload-folder: D:\项目资料\light框架\upload\

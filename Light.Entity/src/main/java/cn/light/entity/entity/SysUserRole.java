@@ -22,7 +22,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@AutoEntity(value = "用户角色", dto = false, controller = false, viewFrom = false, viewList = false)
+@AutoEntity(value = "用户角色", dto = false, controller = false, viewFrom = false, viewList = false, service = false)
 public class SysUserRole extends SysBase{
     @AutoEntityField("角色id")
     private Integer roleId;
