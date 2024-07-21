@@ -1,6 +1,5 @@
 package cn.light.server.service.impl;
 
-import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
@@ -9,6 +8,8 @@ import cn.hutool.crypto.SmUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
+import cn.light.entity.cache.SmsCache;
+import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.cache.UserCache;
 import cn.light.entity.cache.UserCacheRepository;
 import cn.light.entity.entity.SysRole;
@@ -18,11 +19,9 @@ import cn.light.entity.mapper.UserMapper;
 import cn.light.entity.repository.RoleRepository;
 import cn.light.entity.repository.UserRepository;
 import cn.light.entity.repository.UserRoleRepository;
-import cn.light.packet.dto.user.LoginUserDTO;
-import cn.light.packet.dto.user.UserCacheDTO;
-import cn.light.packet.dto.user.UserDTO;
-import cn.light.packet.dto.user.UserQueryDTO;
+import cn.light.packet.dto.user.*;
 import cn.light.packet.enums.UserStateEnum;
+import cn.light.server.service.PermissionService;
 import cn.light.server.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +37,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <p>Title: 用户业务处理</p >
- * <p>Description: </p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/27 002720:12</p >
- *
+ * 后台管理员相关账号处理
  * @author : echosong
  * @version :1.0.0
  */
@@ -59,6 +54,10 @@ public class UserServiceImpl implements UserService {
     private  UserMapper userMapper;
     @Resource
     private UserCacheRepository userCacheRepository;
+    @Resource
+    private PermissionService permissionService;
+    @Resource
+    private SmsCacheRepository smsCacheRepository;
 
     /**
      * 登录服务
@@ -66,8 +65,12 @@ public class UserServiceImpl implements UserService {
      * @param loginUserDTO 登录信息
      */
     @Override
-    public SaTokenInfo login(LoginUserDTO loginUserDTO) {
-        log.info("这里base64之前::"+loginUserDTO.getPassword() +"==="+loginUserDTO.getUsername());
+    public LoginResultDTO login(LoginUserDTO loginUserDTO) {
+        SmsCache smsCache = smsCacheRepository.findById(loginUserDTO.getCodeUid())
+                .orElseThrow(() -> new RuntimeException("验证码错误"));
+
+        Assert.isTrue(Objects.equals(smsCache.getContent(), loginUserDTO.getCode()), "验证码错误");
+
         //前端密码简单用了base64处理了下
         loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));
 
@@ -80,7 +83,12 @@ public class UserServiceImpl implements UserService {
         StpUtil.login(byUsername.get().getId());
         byUsername.get().setLoginIp(loginUserDTO.getLoginIp());
         userRepository.save( byUsername.get());
-        return StpUtil.getTokenInfo();
+        UserCache userCache = this.getUserCache();
+        LoginResultDTO resultDTO = DtoMapper.convert(userCache, LoginResultDTO.class);
+        resultDTO.setToken(StpUtil.getTokenInfo().getTokenValue());
+        resultDTO.setMenuList( permissionService.listByUser(userCache.getId()));
+
+        return resultDTO;
     }
 
 

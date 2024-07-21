@@ -2,10 +2,7 @@ package cn.light.server.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.light.entity.cache.UserCache;
-import cn.light.packet.dto.user.LoginUserDTO;
-import cn.light.packet.dto.user.UserCacheDTO;
-import cn.light.packet.dto.user.UserDTO;
-import cn.light.packet.dto.user.UserQueryDTO;
+import cn.light.packet.dto.user.*;
 import cn.light.entity.entity.SysUser;
 import org.springframework.data.domain.Page;
 
@@ -25,7 +22,7 @@ public interface UserService {
      * 登录服务
      * @param loginUserDTO
      */
-    SaTokenInfo login(LoginUserDTO loginUserDTO);
+    LoginResultDTO login(LoginUserDTO loginUserDTO);
 
     /**
      * 注册用户

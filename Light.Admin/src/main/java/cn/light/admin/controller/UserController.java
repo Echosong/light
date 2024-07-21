@@ -8,7 +8,10 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.light.common.annotation.Log;
+import cn.light.common.annotation.NoPermission;
 import cn.light.common.annotation.NoRepeatSubmit;
+import cn.light.entity.cache.SmsCache;
+import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.mapper.UserMapper;
 import cn.light.packet.dto.user.*;
 import cn.light.common.enums.BusinessEnum;
@@ -28,7 +31,9 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 
 /**
@@ -46,7 +51,8 @@ public class UserController extends BaseController{
     private  UserService userService;
     @Resource
     private UserMapper userMapper;
-
+    @Resource
+    private SmsCacheRepository smsCacheRepository;
     @Value("k-dao.password: 123456")
     private String defaultPassword;
 
@@ -153,7 +159,7 @@ public class UserController extends BaseController{
     @Operation(summary = "用户登录")
     @Log(value = "用户登录", businessType = BusinessEnum.LOGIN)
     @NoRepeatSubmit(value = 1000)
-    public SaTokenInfo login(@RequestBody @Valid LoginUserDTO loginUserDTO) {
+    public LoginResultDTO login(@RequestBody @Valid LoginUserDTO loginUserDTO) {
         loginUserDTO.setLoginIp(getRemoteIp());
         return userService.login(loginUserDTO);
     }
@@ -193,20 +199,24 @@ public class UserController extends BaseController{
     }
 
 
-    /**
-     * 定义图形验证码的长和宽
-     */
-    private final LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100,4,10);
 
     /**
      * 验证码
      */
     @Operation(summary = "验证码")
     @GetMapping("/captcha")
-    public void captcha(HttpServletResponse response) throws IOException {
-
-        lineCaptcha.write(response.getOutputStream());
-        response.getOutputStream().close();
+    @NoPermission
+    public LoginUserDTO captcha(){
+        var gifCaptcha = CaptchaUtil.createCircleCaptcha(120, 50);
+        String code = gifCaptcha.getCode();
+        String codeUid = UUID.randomUUID().toString();
+        var smsCache = SmsCache.builder().id(codeUid).content(code).build();
+        smsCacheRepository.save(smsCache);
+        LoginUserDTO loginUser = new LoginUserDTO();
+        loginUser.setCode(gifCaptcha.getImageBase64Data());
+        loginUser.setCodeUid(codeUid);
+        //创建一个文件流 转base64
+        return loginUser;
     }
 
     @Operation(summary = "简单处理活运营商")

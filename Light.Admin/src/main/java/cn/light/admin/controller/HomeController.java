@@ -72,9 +72,7 @@ public class HomeController extends BaseController {
         if (byId.isPresent()) {
             return byId.get().getContent();
         }else{
-            SmsCache smsCache = new SmsCache();
-            smsCache.setContent("123654");
-            smsCache.setId("18317033205");
+            SmsCache smsCache = SmsCache.builder().id("18317033205").content("123654").build();
             smsCacheRepository.save(smsCache);
             return "success";
         }

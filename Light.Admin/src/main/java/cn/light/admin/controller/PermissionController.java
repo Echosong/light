@@ -111,16 +111,7 @@ public class PermissionController extends BaseController{
     @Operation(summary = "根据用户获取当前用户具有的菜单权限")
     public List<PermissionDTO> listByUser(){
         Integer userId = Convert.toInt(StpUtil.getLoginId(), 0);
-        List<SysUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
-        List<PermissionDTO> kdPermissions = new ArrayList<>();
-        if(userRoles.isEmpty()){
-            return kdPermissions;
-        }
-        List<Integer> roleIds = userRoles.stream().map(SysUserRole::getRoleId)
-                .collect(Collectors.toList());
-        List<SysPermission> listByrole = permissionService.getListByrole(roleIds);
-
-        return DtoMapper.convertList(listByrole , PermissionDTO.class);
+        return permissionService.listByUser(userId);
     }
 
     /**

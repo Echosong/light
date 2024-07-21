@@ -18,18 +18,21 @@ import javax.validation.constraints.Pattern;
 @Data
 public class LoginUserDTO {
 
-   @Schema(defaultValue = "账号")
-    @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
+    @Schema(defaultValue = "账号")
+    @Pattern(regexp = "\\d{11}", message = "必须为手机格式")
     private String username;
 
     @Length(min = 6, message = "密码必须大于等于6位")
-   @Schema(defaultValue = "密码")
+    @Schema(defaultValue = "密码")
     private String password;
 
     @Length(min = 3, message = "请输入验证")
-   @Schema(defaultValue = "验证码")
+    @Schema(defaultValue = "验证码")
     private String code;
 
-   @Schema(defaultValue = "登录客户端ip")
+    @Schema(defaultValue = "验证码Uid")
+    private String codeUid;
+
+    @Schema(defaultValue = "登录客户端ip")
     private String loginIp;
 }

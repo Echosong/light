@@ -1,6 +1,7 @@
 package cn.light.entity.cache;
 
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash
 @Getter
 @Setter
+@Builder
 public class SmsCache {
     /**
      * 手机号

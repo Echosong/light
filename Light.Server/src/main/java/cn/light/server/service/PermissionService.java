@@ -3,6 +3,9 @@ package cn.light.server.service;
 
 
 import cn.light.entity.entity.SysPermission;
+import cn.light.entity.mapper.PermissionMapper;
+import cn.light.packet.dto.permission.PermissionDTO;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -15,11 +18,9 @@ import java.util.List;
  * @author : echosong
  * @version :1.0.0
  */
-public interface PermissionService {
-    /**
-     * 根据角色获取角色下所有权限
-     * @param roleIds
-     * @return
-     */
+public interface PermissionService extends IService<SysPermission> {
+
     List<SysPermission> getListByrole(List<Integer> roleIds);
+
+    List<PermissionDTO> listByUser(Integer userId);
 }
