@@ -35,7 +35,7 @@ public class SysDictType extends SysBase{
 
     //分组
     @AutoEntityField(value = "分组")
-    private String group;
+    private String groupName;
 
     /** 状态（1正常 0停用） */
     @AutoEntityField(value = "状态", notes = "1=正常,0=停用", enums = DicTypeStateEnum.class)
