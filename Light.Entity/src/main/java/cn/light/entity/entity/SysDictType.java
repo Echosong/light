@@ -25,9 +25,17 @@ public class SysDictType extends SysBase{
     @AutoEntityField(value = "字典名称")
     private String dictName;
 
+    /** 字典编码 */
+    @AutoEntityField(value = "字典编码")
+    private String dictCode;
+
     /** 字典类型 */
     @AutoEntityField(value = "字典类型")
     private String dictType;
+
+    //分组
+    @AutoEntityField(value = "分组")
+    private String group;
 
     /** 状态（1正常 0停用） */
     @AutoEntityField(value = "状态", notes = "1=正常,0=停用", enums = DicTypeStateEnum.class)
