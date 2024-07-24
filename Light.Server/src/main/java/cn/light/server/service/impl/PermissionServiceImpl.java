@@ -1,7 +1,9 @@
 package cn.light.server.service.impl;
 
 
+import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
+import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysPermission;
 import cn.light.entity.entity.SysRolePermission;
 import cn.light.entity.entity.SysUserRole;
@@ -10,15 +12,15 @@ import cn.light.entity.repository.PermissionRepository;
 import cn.light.entity.repository.RolePermissionRepository;
 import cn.light.entity.repository.UserRoleRepository;
 import cn.light.packet.dto.permission.PermissionDTO;
+import cn.light.packet.dto.permission.PermissionListDTO;
+import cn.light.packet.dto.permission.PermissionQueryDTO;
 import cn.light.server.service.PermissionService;
-import jakarta.annotation.Resource;
-import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -39,11 +41,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     @Resource
     private UserRoleRepository userRoleRepositroy;
 
-    /**
-     * 根据角色获取角色下所有权限
-     * @param roleIds
-     * @return
-     */
+
     @Override
     public List<SysPermission> getListByrole(List<Integer> roleIds) {
 
@@ -67,5 +65,37 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
         List<SysPermission> listByrole = this.getListByrole(roleIds);
 
         return DtoMapper.convertList(listByrole , PermissionDTO.class);
+    }
+
+    @Override
+    public void updateRolePermissions(List<Integer> permissionIds, Integer roleId) {
+        List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Collections.singletonList(roleId));
+        if(!allByRoleIdIn.isEmpty()){
+            rolePermissionRepository.deleteAll(allByRoleIdIn);
+        }
+        List<SysRolePermission> kdRolePermissions = new ArrayList<>();
+        for (Integer permissionId : permissionIds) {
+            SysRolePermission kdRolePermission = new SysRolePermission();
+            kdRolePermission.setPermissionId(permissionId);
+            kdRolePermission.setRoleId(roleId);
+            kdRolePermissions.add(kdRolePermission);
+        }
+        rolePermissionRepository.saveAll(kdRolePermissions);
+    }
+
+    @Override
+    public Page<PermissionListDTO> listPage(PermissionQueryDTO permissionQueryDTO) {
+        Page<SysPermission> dataPages  =  PageUtil.getPage(this.baseMapper::listPage, permissionQueryDTO);
+        return DtoMapper.convertPage(dataPages, PermissionListDTO.class);
+    }
+
+    @Override
+    public void save(PermissionDTO permissionDTO) {
+        SysPermission kdPermission = DtoMapper.convert(permissionDTO, SysPermission.class);
+        if(kdPermission.getParentId() != 0) {
+            permissionRepository.findById(kdPermission.getParentId())
+                    .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
+        }
+        permissionRepository.save(kdPermission);
     }
 }

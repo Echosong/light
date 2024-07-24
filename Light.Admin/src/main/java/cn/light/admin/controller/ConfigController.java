@@ -1,79 +1,70 @@
 package cn.light.admin.controller;
-import cn.light.common.annotation.Log;
+import cn.light.common.annotation.*;
+import cn.light.common.consts.Consts;
 import cn.light.packet.dto.config.ConfigDTO;
 import cn.light.packet.dto.config.ConfigListDTO;
 import cn.light.packet.dto.config.ConfigQueryDTO;
-import cn.light.common.exception.BaseKnownException;
-import cn.light.common.util.DtoMapper;
-import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.SysConfig;
-import cn.light.entity.mapper.ConfigMapper;
-import cn.light.entity.repository.ConfigRepository;
-
+import cn.light.server.service.ConfigService;
+import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: 系统配置管理</p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-01 20:15:44</p >
+ *  系统配置 控制器
+ *  email:zq_songfeigang@163.com
  *
- * listPage,save,delete,find,list
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @date : 2024-07-24 22:40:25
  */
 @Tag(name = "系统配置 控制器")
 @RestController
 @RequestMapping("/config")
 public class ConfigController extends BaseController{
-    @Resource
-    private  ConfigRepository configRepository;
 
     @Resource
-    private ConfigMapper configMapper;
+    private ConfigService configService;
 
     @Operation(summary = "分页查询系统配置")
     @PutMapping("/listPage")
     public Page<ConfigListDTO> listPage(@RequestBody @Valid ConfigQueryDTO queryDTO){
-        Page<SysConfig> dataPages  =  PageUtil.getPage(configMapper::listPage, queryDTO);
-        return DtoMapper.convertPage(dataPages, ConfigListDTO.class);
+        return configService.listPage(queryDTO);
+    }
+
+    @PutMapping("/export")
+    @ApiResultIgnore
+    @Log("导出系统配置")
+    public ResponseEntity<byte[]> export(@RequestBody @Valid ConfigQueryDTO queryDTO) {
+        return configService.export(queryDTO);
     }
 
     @Operation(summary = "新增活更新系统配置")
     @PostMapping("/save")
     @Log("新增|修改系统配置")
     public void save(@RequestBody @Valid ConfigDTO configDTO){
-        SysConfig kdConfig = DtoMapper.convert(configDTO, SysConfig.class);
-        configRepository.save(kdConfig);
+         configService.save(configDTO);
     }
 
-    @Operation(summary = "查询全部系统配置")
-    @GetMapping("/list")
-    public List<ConfigListDTO> list(){
-        List<SysConfig> all = configRepository.findAll();
-        return DtoMapper.convertList(all, ConfigListDTO.class);
-    }
 
-    @Operation(summary = "查询")
+    @Operation(summary = "查询单个明细")
     @GetMapping("/find/{id}")
     public ConfigDTO find(@PathVariable Integer id){
-        SysConfig one = configRepository.findById(id)
-                .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
-        return DtoMapper.convert(one, ConfigDTO.class);
+        return configService.find(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除系统配置")
-    public void delete(@PathVariable Integer id) {
-        configRepository.deleteById(id);
+    @Permission(roles = Consts.ROLE_ADMIN_CODE)
+    public void delete(@PathVariable(value="id") Integer id) {
+        configService.delete(id);
     }
+
+    
 
 }

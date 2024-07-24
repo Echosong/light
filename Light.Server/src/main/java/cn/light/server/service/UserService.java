@@ -4,9 +4,11 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.light.entity.cache.UserCache;
 import cn.light.packet.dto.user.*;
 import cn.light.entity.entity.SysUser;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Title: </p >
@@ -17,7 +19,7 @@ import java.util.List;
  * @author : echosong
  * @version :1.0.0
  */
-public interface UserService {
+public interface UserService extends IService<SysUser> {
     /**
      * 登录服务
      * @param loginUserDTO
@@ -64,4 +66,12 @@ public interface UserService {
      * @param newPassword
      */
     void setPassword(String password, String newPassword);
+
+    List<Map<String, Object>> getMap();
+
+    LoginUserDTO captcha();
+
+    UserDTO find(Integer userId);
+
+    void resetPassword(Integer userId, String defaultPassword);
 }

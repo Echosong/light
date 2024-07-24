@@ -1,6 +1,7 @@
 package cn.light.server.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
@@ -12,6 +13,7 @@ import cn.light.entity.cache.SmsCache;
 import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.cache.UserCache;
 import cn.light.entity.cache.UserCacheRepository;
+import cn.light.entity.entity.SysArticle;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUser;
 import cn.light.entity.entity.SysUserRole;
@@ -23,6 +25,8 @@ import cn.light.packet.dto.user.*;
 import cn.light.packet.enums.UserStateEnum;
 import cn.light.server.service.PermissionService;
 import cn.light.server.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,10 +34,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -43,7 +44,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
     @Resource
     private  UserRepository userRepository;
     @Resource
@@ -239,5 +240,48 @@ public class UserServiceImpl implements UserService {
                 "账号或者密码错误");
         kdUser.setPassword(SmUtil.sm3().digestHex(newPassword));
         userRepository.save(kdUser);
+    }
+
+    @Override
+    public List<Map<String, Object>> getMap() {
+        List<SysUser> all = this.baseMapper.selectList(new LambdaQueryWrapper<SysUser>()
+                .select(SysUser::getId, SysUser::getName)
+                .orderByDesc(SysUser::getId)
+        );
+        List<Map<String, Object>> maps = new ArrayList<>();
+        for (SysUser item : all) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", item.getId());
+            map.put("name", item.getName());
+            maps.add(map);
+        }
+        return maps;
+    }
+
+    @Override
+    public LoginUserDTO captcha() {
+        var gifCaptcha = CaptchaUtil.createCircleCaptcha(120, 50);
+        String code = gifCaptcha.getCode();
+        String codeUid = UUID.randomUUID().toString();
+        var smsCache = SmsCache.builder().id(codeUid).content(code).build();
+        smsCacheRepository.save(smsCache);
+        LoginUserDTO loginUser = new LoginUserDTO();
+        loginUser.setCode(gifCaptcha.getImageBase64Data());
+        loginUser.setCodeUid(codeUid);
+        //创建一个文件流 转base64
+        return loginUser;
+    }
+
+    @Override
+    public UserDTO find(Integer userId) {
+        return DtoMapper.convert(this.baseMapper.selectById(userId), UserDTO.class);
+    }
+
+    @Override
+    public void resetPassword(Integer userId, String defaultPassword) {
+        userRepository.findById(userId).ifPresent(t -> {
+            t.setPassword(SmUtil.sm3().digestHex(defaultPassword));
+            userRepository.save(t);
+        });
     }
 }

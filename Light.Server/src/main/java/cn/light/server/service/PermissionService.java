@@ -5,7 +5,10 @@ package cn.light.server.service;
 import cn.light.entity.entity.SysPermission;
 import cn.light.entity.mapper.PermissionMapper;
 import cn.light.packet.dto.permission.PermissionDTO;
+import cn.light.packet.dto.permission.PermissionListDTO;
+import cn.light.packet.dto.permission.PermissionQueryDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -23,4 +26,10 @@ public interface PermissionService extends IService<SysPermission> {
     List<SysPermission> getListByrole(List<Integer> roleIds);
 
     List<PermissionDTO> listByUser(Integer userId);
+
+    void updateRolePermissions(List<Integer> permissionIds, Integer roleId);
+
+    Page<PermissionListDTO> listPage(PermissionQueryDTO permissionQueryDTO);
+
+    void save(PermissionDTO permissionDTO);
 }

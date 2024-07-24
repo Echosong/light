@@ -1,20 +1,13 @@
 package cn.light.admin.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SmUtil;
 import cn.light.common.annotation.Log;
 import cn.light.common.annotation.NoPermission;
 import cn.light.common.annotation.NoRepeatSubmit;
 import cn.light.common.enums.BusinessEnum;
 import cn.light.common.util.DtoMapper;
-import cn.light.entity.cache.SmsCache;
-import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.entity.SysUser;
-import cn.light.entity.mapper.UserMapper;
-import cn.light.entity.repository.UserRepository;
 import cn.light.packet.dto.user.*;
 import cn.light.packet.enums.UserStateEnum;
 import cn.light.server.service.UserService;
@@ -28,7 +21,9 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 用户管理
@@ -40,22 +35,12 @@ import java.util.*;
 @RequestMapping("/user")
 public class UserController extends BaseController{
     @Resource
-    private  UserRepository userRepository;
-    @Resource
     private  UserService userService;
-    @Resource
-    private UserMapper userMapper;
-    @Resource
-    private SmsCacheRepository smsCacheRepository;
+
     @Value("k-dao.password: 123456")
     private String defaultPassword;
 
 
-    /**
-     * 分页获取用户
-     *
-     * @param user 用户json
-     */
     @PostMapping("/create")
     @Operation(summary = "新增用户")
     @Log("新增用户")
@@ -64,10 +49,7 @@ public class UserController extends BaseController{
         userService.create(user);
     }
 
-    /**
-     * 获取当前的用户
-     *
-     */
+
     @Operation(summary = "获取当前用户")
     @GetMapping("/getCurrent")
     public UserDTO getCurrent() {
@@ -75,22 +57,13 @@ public class UserController extends BaseController{
     }
 
 
-
-
-    /**
-     * 分页查询用户
-     *
-     * @param userQueryDTO 分页查询条件
-     */
     @PutMapping("/listPage")
     @Operation(summary = "分页查询用户")
     public Page<UserListDTO> list(@RequestBody UserQueryDTO userQueryDTO) {
         return  DtoMapper.convertPage(userService.list(userQueryDTO), UserListDTO.class);
     }
 
-    /**
-     * 更新用户
-     */
+
     @PostMapping(path = {"/update","/save"})
     @Operation(summary = "更新用户")
     @Log("更新用户")
@@ -103,21 +76,15 @@ public class UserController extends BaseController{
         userService.update(userDTO);
     }
 
-    /**
-     * 获取所有用户信息
-     *
-
-     */
     @Operation(summary = "获取所有用户")
     @GetMapping("/all")
     public List<UserKeyDTO> all() {
-        List<SysUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
+        List<SysUser> all = userService.list(new LambdaQueryWrapper<SysUser>()
+                .ne(SysUser::getState, UserStateEnum.DELETE.getCode())
+        );
         return DtoMapper.convertList(all, UserKeyDTO.class);
     }
 
-    /**
-     * 设置密码
-     */
     @PostMapping("/setPassword")
     @Operation(summary = "重置设置密码")
     @Log("重置设置密码")
@@ -129,19 +96,12 @@ public class UserController extends BaseController{
         userService.setPassword(password, newPassword);
     }
 
-    /**
-     * 后台管理员重置密码
-     *
-     * @param userId 用户
-     */
     @GetMapping("/resetPassword/{userId}")
     @Operation(summary = "管理员重置密码")
     @Log("管理员重置密码")
     public void resetPassword(@PathVariable(value = "userId") Integer userId) {
-        userRepository.findById(userId).ifPresent(t -> {
-            t.setPassword(SmUtil.sm3().digestHex(this.defaultPassword));
-            userRepository.save(t);
-        });
+        userService.resetPassword(userId, this.defaultPassword);
+
     }
 
     /**
@@ -177,57 +137,27 @@ public class UserController extends BaseController{
     @Operation(summary = "删除")
     @Log("删除用户")
     public void delete(@PathVariable(value = "userId") Integer userId) {
-        userRepository.findById(userId).ifPresent(t -> {
-            t.setState(UserStateEnum.DELETE.getCode());
-            userRepository.save(t);
-        });
+        userService.removeById(userId);
     }
-    /**
-     * 获取某个用户
-     */
 
     @Operation(summary = "获取某个用户")
     @GetMapping("/find/{userId}")
     public UserDTO find(@PathVariable(value = "userId") Integer userId) {
-        return DtoMapper.convert(userRepository.findById(userId).orElse(null), UserDTO.class);
+        return userService.find(userId);
     }
 
 
-
-    /**
-     * 验证码
-     */
     @Operation(summary = "验证码")
     @GetMapping("/captcha")
     @NoPermission
     public LoginUserDTO captcha(){
-        var gifCaptcha = CaptchaUtil.createCircleCaptcha(120, 50);
-        String code = gifCaptcha.getCode();
-        String codeUid = UUID.randomUUID().toString();
-        var smsCache = SmsCache.builder().id(codeUid).content(code).build();
-        smsCacheRepository.save(smsCache);
-        LoginUserDTO loginUser = new LoginUserDTO();
-        loginUser.setCode(gifCaptcha.getImageBase64Data());
-        loginUser.setCodeUid(codeUid);
-        //创建一个文件流 转base64
-        return loginUser;
+        return userService.captcha();
     }
 
     @Operation(summary = "简单处理活运营商")
     @GetMapping("/getMap")
     public List<Map<String, Object>> getMap(){
-        List<SysUser> all = userMapper.selectList(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getId, SysUser::getName, SysUser::getUsername)
-                .orderByDesc(SysUser::getId)
-        );
-        List<Map<String, Object>> maps = new ArrayList<>();
-        for (SysUser item : all) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", item.getId());
-            map.put("name", StrUtil.format("({}){}", item.getUsername(), item.getName()));
-            maps.add(map);
-        }
-        return maps;
+        return userService.getMap();
     }
 
 }

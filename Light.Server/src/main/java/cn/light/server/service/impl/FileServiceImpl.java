@@ -4,16 +4,26 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.light.common.util.DtoMapper;
+import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysFile;
+import cn.light.entity.mapper.FileMapper;
 import cn.light.entity.repository.FileRepository;
 import cn.light.packet.dto.config.ConfigDTO;
+import cn.light.packet.dto.file.FileDTO;
+import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.packet.enums.ConfigGroupEnum;
 import cn.light.packet.enums.StorageTypeEnum;
 import cn.light.server.service.ConfigService;
 import cn.light.server.service.FileService;
 import cn.light.server.service.StorageService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +37,7 @@ import java.util.*;
  */
 @Service
 @Slf4j
-public class FileServiceImpl implements FileService {
+public class FileServiceImpl  extends ServiceImpl<FileMapper, SysFile> implements FileService {
 
     @Resource
     private FileRepository fileRepository;
@@ -85,5 +95,35 @@ public class FileServiceImpl implements FileService {
         SysFile save = fileRepository.save(kdFile);
         map.put("fileId", save.getId().toString());
         return map;
+    }
+
+    @Override
+    public ResponseEntity download(String uuid) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=" + uuid);
+        Optional<SysFile> byUrlPath = fileRepository.findByUuid(uuid);
+        return byUrlPath.map(kdFile -> new ResponseEntity(FileUtil.readBytes(kdFile.getFilePath()), headers, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity(HttpStatus.MULTI_STATUS));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        fileRepository.findById(id).ifPresent(t -> {
+            if (FileUtil.del(t.getFilePath())) {
+                fileRepository.delete(t);
+            }
+        });
+    }
+
+    @Override
+    public void save(FileDTO fileDTO) {
+        SysFile file = DtoMapper.convert(fileDTO, SysFile.class);
+        fileRepository.save(file);
+    }
+
+    @Override
+    public Page<FileDTO> listPage(FileQueryDTO fileQueryDTO) {
+        Page<SysFile> files = PageUtil.getPage(this.baseMapper::listPage, fileQueryDTO);
+        return DtoMapper.convertPage(files, FileDTO.class);
     }
 }

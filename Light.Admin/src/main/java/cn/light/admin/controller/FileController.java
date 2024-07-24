@@ -40,11 +40,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/file")
 public class FileController extends BaseController{
-    @Resource
-    private  FileRepository fileRepository;
-
-    @Resource
-    private FileMapper fileMapper;
 
     @Resource
     private FileService fileService;
@@ -70,12 +65,7 @@ public class FileController extends BaseController{
     @GetMapping({"/download/{uuid}"})
     @Operation(summary = "文件下载")
     public ResponseEntity download(@PathVariable String uuid) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=" + uuid);
-        Optional<SysFile> byUrlPath = fileRepository.findByUuid(uuid);
-        return byUrlPath.map(kdFile -> new ResponseEntity(FileUtil.readBytes(kdFile.getFilePath()), headers, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity(HttpStatus.MULTI_STATUS));
-
+        return fileService.download(uuid);
     }
 
     /**
@@ -86,8 +76,7 @@ public class FileController extends BaseController{
     @PutMapping("/listPage")
     @Operation(summary = "列表分页")
     public Page<FileDTO> list(@RequestBody FileQueryDTO fileQueryDTO) {
-        Page<SysFile> files = PageUtil.getPage(fileMapper::listPage, fileQueryDTO);
-        return DtoMapper.convertPage(files, FileDTO.class);
+       return  fileService.listPage(fileQueryDTO);
     }
 
     /**
@@ -98,19 +87,14 @@ public class FileController extends BaseController{
     @DeleteMapping("delete/{id}")
     @Operation(summary = "删除指定文件")
     public void delete(@PathVariable Integer id) {
-        fileRepository.findById(id).ifPresent(t -> {
-            if (FileUtil.del(t.getFilePath())) {
-                fileRepository.delete(t);
-            }
-        });
+        fileService.delete(id);
     }
 
     @Operation(summary = "新增活更新日志")
     @PostMapping("/save")
     @Log("新增|修改日志")
     public void save(@RequestBody @Valid FileDTO fileDTO){
-        SysFile file = DtoMapper.convert(fileDTO, SysFile.class);
-        fileRepository.save(file);
+        fileService.save(fileDTO);
     }
 
 }

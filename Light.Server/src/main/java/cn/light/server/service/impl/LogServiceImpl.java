@@ -1,73 +1,63 @@
-package cn.light.server.service.impl;
+package  cn.light.server.service.impl;
 
-
-import cn.light.packet.dto.log.LogDTO;
+import cn.hutool.core.date.DateUtil;
+import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
+import cn.light.common.util.ExcelUtil;
+import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysLog;
 import cn.light.entity.entity.SysUser;
+import cn.light.entity.mapper.LogMapper;
 import cn.light.entity.repository.LogRepository;
+import cn.light.packet.dto.log.LogDTO;
+import cn.light.packet.dto.log.LogListDTO;
+import cn.light.packet.dto.log.LogQueryDTO;
 import cn.light.server.service.LogService;
 import cn.light.server.service.UserService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * <p>Title: </p >
- * <p>Description: 日志信息处理</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2022-11-10 21:55</p >
+ * 自动生成 日志 service 实现
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @version : 1.0
+ * @date : 2024-07-24 22:19:23
  */
 @Service
-@Slf4j
-public class LogServiceImpl implements LogService {
-
-    private final LogRepository logRepository;
-
+public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements LogService {
+    @Resource
+    private  LogRepository logRepository;
     @Resource
     private UserService userService;
 
-    @Resource
-    private RedisTemplate<String, SysUser> redisTemplate;
-
-    private final List<SysUser> userList = new ArrayList<>();
-
+    @Override
+    public Page<LogListDTO> listPage(LogQueryDTO queryDTO){
+         Page<SysLog> dataPages  =  PageUtil.getPage(this.baseMapper::listPage, queryDTO);
+         return DtoMapper.convertPage(dataPages, LogListDTO.class);
+    }
 
     @Override
-    public void setUserList() {
-        for (int i = 0; i < 10; i++) {
-            SysUser kdUser = new SysUser();
-            kdUser.setId(i);
-            userList.add(kdUser);
+    public ResponseEntity<byte[]> export(LogQueryDTO queryDTO) {
+        List<SysLog> all = this.baseMapper.listPage(queryDTO);
+        String fileName = "Log"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
+        try {
+            return ExcelUtil.generateImportFile(DtoMapper.convertList(all, LogListDTO.class), fileName, LogListDTO.class);
+        }catch (Exception e) {
+            throw new BaseKnownException(e.getMessage());
         }
     }
 
     @Override
-    public List<SysUser> getUserList() {
-        return userList;
-    }
-
-    @Autowired
-    public LogServiceImpl(LogRepository logRepository) {
-        this.logRepository = logRepository;
-    }
-
-    /**
-     * 记录日志
-     *
-     * @param logDTO 日志
-     */
-    @Override
-    public void save(LogDTO logDTO) {
+    public LogDTO save(LogDTO saveDTO) {
         String userName = null;
         //获取用户信息
         try {
@@ -76,7 +66,25 @@ public class LogServiceImpl implements LogService {
         } catch (Exception ignored) {
             log.warn("获取用户信息失败");
         }
-        logDTO.setUsername(userName);
-        logRepository.save(DtoMapper.convert(logDTO, SysLog.class));
+        saveDTO.setUsername(userName);
+        SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
+        logRepository.save(log);
+        return DtoMapper.convert(log, LogDTO.class);
     }
+
+    @Override
+    public void delete(Integer id) {
+        logRepository.deleteById(id);
+    }
+
+    @Override
+    public LogDTO find(Integer id){
+        SysLog one = logRepository.findById(id)
+                .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
+        return DtoMapper.convert(one, LogDTO.class);
+    }
+
+    
+
+
 }

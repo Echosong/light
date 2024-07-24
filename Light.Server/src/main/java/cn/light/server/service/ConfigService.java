@@ -1,41 +1,33 @@
-package cn.light.server.service;
+package  cn.light.server.service;
 
-
+import cn.light.entity.entity.SysConfig;
 import cn.light.packet.dto.config.*;
-import cn.light.entity.entity.*;
+import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: </p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/28 002817:19</p >
+ * 自动生成 系统配置 service 接口
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @version : 1.0
+ * @date : 2024-07-24 22:40:25
  */
-public interface ConfigService {
-    /**
-     * 获取一组配置数据
-     *
-     * @param group 分组没加
-     * @param key 键名
-     * @return
-     */
+public interface ConfigService extends IService<SysConfig> {
+
+    Page<ConfigListDTO> listPage(ConfigQueryDTO queryDTO);
+
+    ResponseEntity<byte[]> export(ConfigQueryDTO queryDTO);
+
+    ConfigDTO save(ConfigDTO configDTO);
+
+    ConfigDTO find(Integer id);
+
+    void delete(Integer id);
+
+
     ConfigDTO getByGroupAndKey(Integer group, String key);
-
-    /**
-     * 拿到全部配置缓存起来
-     * @return
-     */
-    List<ConfigDTO> listAll();
-
-    /**
-     * 修改保持配置
-     * @param kdConfig
-     */
-    void save(SysConfig kdConfig);
-
-    void update();
 }

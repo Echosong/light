@@ -1,90 +1,71 @@
 package cn.light.admin.controller;
-import cn.light.common.annotation.*;
+
+import cn.light.common.annotation.ApiResultIgnore;
+import cn.light.common.annotation.Log;
+import cn.light.common.annotation.Permission;
+import cn.light.common.consts.Consts;
 import cn.light.packet.dto.dictData.DictDataDTO;
 import cn.light.packet.dto.dictData.DictDataListDTO;
 import cn.light.packet.dto.dictData.DictDataQueryDTO;
-import cn.light.common.exception.BaseKnownException;
-import cn.light.common.util.*;
-import cn.light.entity.entity.SysDictData;
-import cn.light.entity.mapper.DictDataMapper;
-import cn.light.entity.repository.DictDataRepository;
-import org.springframework.http.ResponseEntity;
+import cn.light.server.service.DictDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import cn.hutool.core.date.DateUtil;
-
-import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.io.IOException;
-import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: 字典数据管理</p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-07 23:00:48</p >
+ *  字典数据 控制器
+ *  email:zq_songfeigang@163.com
  *
- * listPage,save,delete,find,list
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @date : 2024-07-24 22:17:47
  */
 @Tag(name = "字典数据 控制器")
 @RestController
 @RequestMapping("/dictData")
 public class DictDataController extends BaseController{
-    @Resource
-    private  DictDataRepository dictDataRepository;
 
     @Resource
-    private DictDataMapper dictDataMapper;
+    private DictDataService dictDataService;
 
     @Operation(summary = "分页查询字典数据")
     @PutMapping("/listPage")
     public Page<DictDataListDTO> listPage(@RequestBody @Valid DictDataQueryDTO queryDTO){
-        Page<SysDictData> dataPages  =  PageUtil.getPage(dictDataMapper::listPage, queryDTO);
-        return DtoMapper.convertPage(dataPages, DictDataListDTO.class);
+        return dictDataService.listPage(queryDTO);
     }
 
     @PutMapping("/export")
     @ApiResultIgnore
     @Log("导出字典数据")
-    public ResponseEntity<byte[]> export(@RequestBody @Valid DictDataQueryDTO queryDTO) throws IOException, IllegalAccessException {
-        List<SysDictData> all = dictDataMapper.listPage(queryDTO);
-        String fileName = "DictData"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
-        return ExcelUtil.generateImportFile(DtoMapper.convertList(all, DictDataListDTO.class), fileName, DictDataListDTO.class);
+    public ResponseEntity<byte[]> export(@RequestBody @Valid DictDataQueryDTO queryDTO) {
+        return dictDataService.export(queryDTO);
     }
 
     @Operation(summary = "新增活更新字典数据")
     @PostMapping("/save")
     @Log("新增|修改字典数据")
     public void save(@RequestBody @Valid DictDataDTO dictDataDTO){
-        SysDictData sysDictData = DtoMapper.convert(dictDataDTO, SysDictData.class);
-        dictDataRepository.save(sysDictData);
+         dictDataService.save(dictDataDTO);
     }
 
-    @Operation(summary = "查询全部字典数据")
-    @GetMapping("/list")
-    public List<DictDataListDTO> list(){
-        List<SysDictData> all = dictDataRepository.findAll();
-        return DtoMapper.convertList(all, DictDataListDTO.class);
-    }
 
-    @Operation(summary = "查询")
+    @Operation(summary = "查询单个明细")
     @GetMapping("/find/{id}")
     public DictDataDTO find(@PathVariable Integer id){
-        SysDictData one = dictDataRepository.findById(id)
-                .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
-        return DtoMapper.convert(one, DictDataDTO.class);
+        return dictDataService.find(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除字典数据")
-    public void delete(@PathVariable Integer id) {
-        dictDataRepository.deleteById(id);
+    @Permission(roles = Consts.ROLE_ADMIN_CODE)
+    public void delete(@PathVariable(value="id") Integer id) {
+        dictDataService.delete(id);
     }
+
+    
 
 }

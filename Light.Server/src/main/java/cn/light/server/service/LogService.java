@@ -1,31 +1,32 @@
-package cn.light.server.service;
+package  cn.light.server.service;
 
+import cn.light.entity.entity.SysLog;
+import cn.light.packet.dto.log.*;
+import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 
-
-import cn.light.packet.dto.log.LogDTO;
-import cn.light.entity.entity.SysUser;
-
-import java.util.List;
+import java.util.*;
 
 /**
- * <p>Title: </p >
- * <p>Description: </p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2022-11-10 21:54</p >
+ * 自动生成 日志 service 接口
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @version : 1.0
+ * @date : 2024-07-24 22:19:23
  */
-public interface LogService {
-    /**
-     * 插入信息
-     * @param logDTO 日志
-     */
-    void save(LogDTO logDTO);
+public interface LogService extends IService<SysLog> {
 
-     List<SysUser> getUserList();
+    Page<LogListDTO> listPage(LogQueryDTO queryDTO);
 
-     void  setUserList();
+    ResponseEntity<byte[]> export(LogQueryDTO queryDTO);
 
+    LogDTO save(LogDTO logDTO);
+
+    LogDTO find(Integer id);
+
+    void delete(Integer id);
+    
 
 }

@@ -13,7 +13,7 @@ public class BaseController {
     @Autowired
     protected HttpServletRequest request;
 
-    public static String getRemortIP(HttpServletRequest request) {
+    public static String getRemoteIp(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
             return request.getRemoteAddr();
         }
@@ -25,7 +25,7 @@ public class BaseController {
      * @return 返回ip信息
      */
     protected String getRemoteIp() {
-        return getRemortIP(request);
+        return getRemoteIp(request);
     }
 
 
