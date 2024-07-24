@@ -27,12 +27,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * <p>Title: </p >
- * <p>Description: 文件管理管理</p >
- * <p>Company: <a href="http://www.hn1024.cn">...</a></p >
- * <p>create date: 2024-01-01 20:15:44</p >
- *
+ * 文件管理管理
  * listPage,save,delete,find,list
+ *
  * @author : echosong
  * @version :1.0.0
  */
