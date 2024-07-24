@@ -18,7 +18,10 @@ import java.util.*;
 
 /**
  * #{UpEntityName}#列表传输对象
- * @author : echosong
+ * email:zq_songfeigang@163.com
+ *
+ * @author : 二胡子
+ * @version : 1.0
  * @date : #{localDate}#
  */
 @EqualsAndHashCode(callSuper = true)

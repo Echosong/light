@@ -2,23 +2,29 @@ package cn.light.server.service;
 
 
 import cn.light.entity.entity.SysRole;
+import cn.light.entity.mapper.RoleMapper;
+import cn.light.packet.dto.role.RoleDTO;
+import cn.light.packet.dto.role.RoleListDTO;
+import com.baomidou.mybatisplus.extension.service.IService;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * <p>Title: </p >
- * <p>Description: 角色</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021/10/28 002816:39</p >
- *
+ * 角色相关接口
  * @author : echosong
  * @version :1.0.0
  */
-public interface RoleService {
-    /**
-     * 根据用户获取当前的角色
-     * @param userId
-     * @return
-     */
+public interface RoleService extends IService<SysRole> {
+
     List<SysRole> listByUser(Integer userId);
+
+    RoleDTO save(RoleDTO roleDTO);
+
+    List<RoleListDTO> selectAll();
+
+    void delete(@NotNull(message = "传入参数id不能为空") Integer id);
+
+    List<Map<String, Object>> getMap();
 }

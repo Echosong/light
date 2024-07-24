@@ -9,7 +9,10 @@ import java.util.List;
 
 /**
  * 自动生成 #{tableInfo}#
+ * email:zq_songfeigang@163.com
+ *
  * @author : 二胡子
+ * @version : 1.0
  * @date : #{localDate}#
  */
 @Mapper

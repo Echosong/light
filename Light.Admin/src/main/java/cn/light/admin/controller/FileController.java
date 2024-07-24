@@ -1,41 +1,35 @@
 package cn.light.admin.controller;
-import cn.hutool.core.date.DateUtil;
+
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.light.admin.config.properties.FileUploadProperties;
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
-import cn.light.packet.dto.file.FileDTO;
-import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysFile;
 import cn.light.entity.mapper.FileMapper;
 import cn.light.entity.repository.FileRepository;
-
+import cn.light.packet.dto.file.FileDTO;
+import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.server.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>Title: </p >
  * <p>Description: 文件管理管理</p >
- * <p>Company: http://www.hn1024.cn</p >
+ * <p>Company: <a href="http://www.hn1024.cn">...</a></p >
  * <p>create date: 2024-01-01 20:15:44</p >
  *
  * listPage,save,delete,find,list
@@ -46,7 +40,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/file")
 public class FileController extends BaseController{
-    private final FileUploadProperties fileUploadProperties;
     @Resource
     private  FileRepository fileRepository;
 
@@ -55,11 +48,6 @@ public class FileController extends BaseController{
 
     @Resource
     private FileService fileService;
-    @Autowired
-    public FileController(FileUploadProperties fileUploadProperties) {
-        this.fileUploadProperties = fileUploadProperties;
-    }
-
     /**
      * 上传文件 整个系统其他关联地方可以考虑存文件或者uuid （），这样一来文件处理方便
      *

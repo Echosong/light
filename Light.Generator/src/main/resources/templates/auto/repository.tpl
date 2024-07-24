@@ -8,11 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * #{UpEntityName}#Repository
- *
- * @author : 二胡子
- * @date : #{localDate}#
- */
+* #{UpEntityName}#Repository
+* email:zq_songfeigang@163.com
+*
+* @author : 二胡子
+* @version : 1.0
+* @date : #{localDate}#
+*/
 @Repository
 @SuppressWarnings("ALL")
 public interface #{UpEntityName}#Repository extends JpaRepository<#{UpTableName}#, Integer> {

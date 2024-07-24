@@ -15,11 +15,13 @@ import java.math.BigDecimal;
 import java.util.*;
 #{import}#
 /**
- * #{UpEntityName}#QueryDTO 查询DTO
- *
- * @author : echosong
- * @date : #{localDate}#
- */
+* #{UpEntityName}#QueryDTO 查询DTO
+* email:zq_songfeigang@163.com
+*
+* @author : 二胡子
+* @version : 1.0
+* @date : #{localDate}#
+*/
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class #{UpEntityName}#QueryDTO extends PageInfo {

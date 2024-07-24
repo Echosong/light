@@ -15,12 +15,10 @@ import java.math.BigDecimal;
 import java.util.*;
 #{import}#
 /**
- * <p>Title: #{tableInfo}#</p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: #{localDate}#</p >
+ * #{tableInfo}# pojo转化
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
+ * @author : 二胡子
  * @version :1.0.0
  */
 @EqualsAndHashCode(callSuper = true)

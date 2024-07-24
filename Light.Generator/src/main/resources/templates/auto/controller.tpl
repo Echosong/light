@@ -24,6 +24,7 @@ import java.util.*;
 
 /**
  *  #{tableInfo}# 控制器
+ *  email:zq_songfeigang@163.com
  *
  * listPage,save,delete,find,list
  * @author : 二胡子
@@ -63,14 +64,8 @@ public class #{UpEntityName}#Controller extends BaseController{
         #{EntityName}#Repository.save(#{TableName}#);
     }
 
-    @Operation(summary = "查询全部#{tableInfo}#")
-    @GetMapping("/list")
-    public List<#{UpEntityName}#ListDTO> list(){
-        List<#{UpTableName}#> all = #{EntityName}#Repository.findAll();
-        return DtoMapper.convertList(all, #{UpEntityName}#ListDTO.class);
-    }
 
-    @Operation(summary = "查询")
+    @Operation(summary = "查询单个明细")
     @GetMapping("/find/{id}")
     public #{UpEntityName}#DTO find(@PathVariable Integer id){
         #{UpTableName}# one = #{EntityName}#Repository.findById(id)
