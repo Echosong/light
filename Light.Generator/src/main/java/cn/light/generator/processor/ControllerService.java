@@ -68,22 +68,24 @@ public class ControllerService extends BaseService implements ServiceInterface {
                             , StrUtil.format("Controller_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
+        String queryParams = assignWhereCondition();
+
         String tplContent = this.replaceTpl(templateFile);
-        tplContent = assignWhereCondition(tplContent);
+        tplContent = StrUtil.replace(tplContent, "#{queryParams}#", queryParams);
+
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
     }
 
     /**
      * 根据queryDTO分配查询条件
      *
-     * @param tplContent 内容
      * @return 模板字符
      */
-    private String assignWhereCondition(String tplContent) {
+    private String assignWhereCondition() {
         Field[] fields = clazz.getDeclaredFields();
 
         List<String> fieldList = new ArrayList<>();
-        String keyName = "";
+        this.keyName = "";
         for (Field field : fields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
                 continue;
@@ -108,18 +110,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
         if (!fieldList.isEmpty()) {
             queryParams = String.join(",", fieldList) + ", ";
         }
-        if(StrUtil.isBlank(keyName)) {
-            String subBefore = StrUtil.subBefore(tplContent, "//start", true);
-            String subAfter = StrUtil.subAfter(tplContent, "//end", true);
-            tplContent = subBefore + subAfter;
-        }else {
-            tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
-            tplContent = StrUtil.replace(tplContent, "//start", "");
-            tplContent = StrUtil.replace(tplContent, "//end", "");
-        }
-        tplContent = StrUtil.replace(tplContent, "#{queryParams}#", queryParams);
-
-        return tplContent;
+        return queryParams;
     }
 
 

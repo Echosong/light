@@ -42,9 +42,13 @@ public class InitService {
                 Singleton.get(DtoService.class, clazz).start();
                 Singleton.get(MapperService.class, clazz).start();
             }
+            try {
+                //视图处理
+                Singleton.get(ViewService.class, clazz).start();
+            }catch (Exception e){
+                log.error("视图处理失败",e);
+            }
 
-            //视图处理
-            Singleton.get(ViewService.class, clazz).start();
 
             //控制器处理
             if (autoEntity.controller()) {

@@ -2,7 +2,7 @@ package cn.light.admin.controller;
 
 import cn.light.common.annotation.Log;
 import cn.light.common.annotation.Permission;
-import cn.light.common.conts.Consts;
+import cn.light.common.consts.Consts;
 import cn.light.entity.entity.SysRole;
 import cn.light.packet.dto.role.RoleDTO;
 import cn.light.packet.dto.role.RoleListDTO;

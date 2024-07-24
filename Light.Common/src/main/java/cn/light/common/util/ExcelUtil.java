@@ -1,8 +1,8 @@
 package cn.light.common.util;
 
 import cn.light.common.annotation.ExcelAnnotation;
-import cn.light.common.conts.IExtendObject;
-import cn.light.common.conts.IntegerConst;
+import cn.light.common.consts.IExtendObject;
+import cn.light.common.consts.IntegerConst;
 import cn.light.common.dto.ExtendColumnInfo;
 import cn.light.common.enums.ExtendColumnTypeEnum;
 import cn.light.common.exception.BaseKnownException;

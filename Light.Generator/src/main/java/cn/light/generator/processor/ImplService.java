@@ -6,10 +6,12 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
+import cn.light.common.anno.AutoEntityField;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.generator.Const;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 
@@ -58,12 +60,26 @@ public class ImplService  extends BaseService implements ServiceInterface  {
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))
                     ,true);
         }
+
+        Field[] fields = clazz.getDeclaredFields();
+        this.keyName = "";
+        for (Field field : fields) {
+            if (!field.isAnnotationPresent(AutoEntityField.class)) {
+                continue;
+            }
+            AutoEntityField annotation = field.getAnnotation(AutoEntityField.class);
+            if (annotation.isKeyName()) {
+                keyName = StrUtil.upperFirst(field.getName());
+            }
+        }
         String templateFile = this.templatePath+"implInterface.tpl";
 
         if(StrUtil.isNotBlank(implStr)){
             templateFile = this.templatePath+"implService.tpl";
         }
         String tplContent =  this.replaceTpl(templateFile);
+
+
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Service 文件 {} 成功 ", fileName);
     }

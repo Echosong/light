@@ -46,6 +46,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
      */
     @Override
     public List<SysPermission> getListByrole(List<Integer> roleIds) {
+
         List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(roleIds);
         Set<Integer> permissionIds = allByRoleIdIn.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toSet());
         return  permissionRepository.getAllByIdIn(new ArrayList<>(permissionIds))

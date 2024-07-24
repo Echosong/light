@@ -1,4 +1,4 @@
-package cn.light.common.conts;
+package cn.light.common.consts;
 
 import java.util.Map;
 

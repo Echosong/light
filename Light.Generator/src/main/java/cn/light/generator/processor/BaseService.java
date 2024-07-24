@@ -71,6 +71,11 @@ public class BaseService {
     protected String  templatePath = "templates/auto/";
 
     /**
+     * 是否需要简单查询
+     */
+    protected String keyName = "";
+
+    /**
      * 获取当前绝对路径
      *
      * @return 获取正式路径
@@ -106,6 +111,16 @@ public class BaseService {
         tplContent = StrUtil.replace(tplContent,"#{import}#",
                 String.join("\r\n", this.importPackage));
         tplContent = StrUtil.replace(tplContent, "#{localDate}#", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+
+        if(StrUtil.isBlank(keyName)) {
+            String subBefore = StrUtil.subBefore(tplContent, "//start", true);
+            String subAfter = StrUtil.subAfter(tplContent, "//end", true);
+            tplContent = subBefore + subAfter;
+        }else {
+            tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
+            tplContent = StrUtil.replace(tplContent, "//start", "");
+            tplContent = StrUtil.replace(tplContent, "//end", "");
+        }
 
         return tplContent;
     }

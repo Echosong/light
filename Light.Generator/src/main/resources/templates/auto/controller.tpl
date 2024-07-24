@@ -1,32 +1,24 @@
 package #{PackageName}#;
 import #{SYS_PATH}.common.annotation.*;
+import #{SYS_PATH}.common.consts.Consts;
 import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#DTO;
 import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#ListDTO;
 import #{SYS_PATH}.packet.dto.#{EntityName}#.#{UpEntityName}#QueryDTO;
-import #{SYS_PATH}.common.exception.BaseKnownException;
-import #{SYS_PATH}.common.util.*;
-import #{SYS_PATH}.entity.entity.#{UpTableName}#;
-import #{SYS_PATH}.entity.mapper.#{UpEntityName}#Mapper;
-import #{SYS_PATH}.entity.repository.#{UpEntityName}#Repository;
+import #{SYS_PATH}.server.service.#{UpEntityName}#Service;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
-import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.io.IOException;
+import jakarta.validation.Valid;
 import java.util.*;
 
 /**
  *  #{tableInfo}# 控制器
  *  email:zq_songfeigang@163.com
  *
- * listPage,save,delete,find,list
  * @author : 二胡子
  * @date : #{localDate}#
  */
@@ -34,68 +26,50 @@ import java.util.*;
 @RestController
 @RequestMapping("/#{EntityName}#")
 public class #{UpEntityName}#Controller extends BaseController{
-    @Resource
-    private  #{UpEntityName}#Repository #{EntityName}#Repository;
 
     @Resource
-    private #{UpEntityName}#Mapper #{EntityName}#Mapper;
+    private #{UpEntityName}#Service #{EntityName}#Service;
 
     @Operation(summary = "分页查询#{tableInfo}#")
     @PutMapping("/listPage")
     public Page<#{UpEntityName}#ListDTO> listPage(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO){
-        Page<#{UpTableName}#> dataPages  =  PageUtil.getPage(#{EntityName}#Mapper::listPage, queryDTO);
-        return DtoMapper.convertPage(dataPages, #{UpEntityName}#ListDTO.class);
+        return #{EntityName}#Service.listPage(queryDTO);
     }
 
     @PutMapping("/export")
     @ApiResultIgnore
     @Log("导出#{tableInfo}#")
-    public ResponseEntity<byte[]> export(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO) throws IOException, IllegalAccessException {
-        List<#{UpTableName}#> all = #{EntityName}#Mapper.listPage(queryDTO);
-        String fileName = "#{UpEntityName}#"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
-        return ExcelUtil.generateImportFile(DtoMapper.convertList(all, #{UpEntityName}#ListDTO.class), fileName, #{UpEntityName}#ListDTO.class);
+    public ResponseEntity<byte[]> export(@RequestBody @Valid #{UpEntityName}#QueryDTO queryDTO) {
+        return #{EntityName}#Service.export(queryDTO);
     }
 
     @Operation(summary = "新增活更新#{tableInfo}#")
     @PostMapping("/save")
     @Log("新增|修改#{tableInfo}#")
     public void save(@RequestBody @Valid #{UpEntityName}#DTO #{EntityName}#DTO){
-        #{UpTableName}# #{TableName}# = DtoMapper.convert(#{EntityName}#DTO, #{UpTableName}#.class);
-        #{EntityName}#Repository.save(#{TableName}#);
+         #{EntityName}#Service.save(#{EntityName}#DTO);
     }
 
 
     @Operation(summary = "查询单个明细")
     @GetMapping("/find/{id}")
     public #{UpEntityName}#DTO find(@PathVariable Integer id){
-        #{UpTableName}# one = #{EntityName}#Repository.findById(id)
-                .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
-        return DtoMapper.convert(one, #{UpEntityName}#DTO.class);
+        return #{EntityName}#Service.find(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "删除")
     @Log("删除#{tableInfo}#")
+    @Permission(roles = Consts.ROLE_ADMIN_CODE)
     public void delete(@PathVariable(value="id") Integer id) {
-        #{EntityName}#Repository.deleteById(id);
+        #{EntityName}#Service.delete(id);
     }
 
     //start
     @Operation(summary = "简单查询#{tableInfo}#")
     @GetMapping("/getMap")
     public List<Map<String, Object>> getMap(){
-         List<#{UpTableName}#> all = #{EntityName}#Mapper.selectList(new LambdaQueryWrapper<#{UpTableName}#>()
-                        .select(#{UpTableName}#::getId, #{UpTableName}#::get#{keyName}#)
-                        .orderByDesc(#{UpTableName}#::getId)
-                );
-        List<Map<String, Object>> maps = new ArrayList<>();
-        for (#{UpTableName}# item : all) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", item.getId());
-            map.put("name", item.get#{keyName}#());
-            maps.add(map);
-        }
-        return maps;
+         return #{EntityName}#Service.getMap();
     }
     //end
 
