@@ -51,6 +51,7 @@ public @interface AutoEntityField {
      */
     boolean isKeyName() default false;
 
+
     /**
      * 表单类型
      */

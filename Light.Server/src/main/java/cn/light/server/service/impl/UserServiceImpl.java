@@ -5,6 +5,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
@@ -13,7 +14,6 @@ import cn.light.entity.cache.SmsCache;
 import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.cache.UserCache;
 import cn.light.entity.cache.UserCacheRepository;
-import cn.light.entity.entity.SysArticle;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUser;
 import cn.light.entity.entity.SysUserRole;
@@ -70,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         SmsCache smsCache = smsCacheRepository.findById(loginUserDTO.getCodeUid())
                 .orElseThrow(() -> new RuntimeException("验证码错误"));
 
-        Assert.isTrue(Objects.equals(smsCache.getContent(), loginUserDTO.getCode()), "验证码错误");
+        Assert.isTrue(smsCache.getContent().equalsIgnoreCase(loginUserDTO.getCode()), "验证码错误");
 
         //前端密码简单用了base64处理了下
         loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));

@@ -50,7 +50,7 @@ public class SysPermission extends  SysBase{
     @Range(min = 0)
     private Integer parentId;
 
-    @AutoEntityField(value = "类型", notes = "权限类型 0：目录   1：菜单   2：按钮")
+    @AutoEntityField(value = "类型", notes = "权限类型 1：目录   2：菜单   3：按钮")
     @Range(min = 0, max = 3)
     private Integer type;
 

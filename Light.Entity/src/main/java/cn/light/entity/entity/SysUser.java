@@ -45,9 +45,8 @@ public class SysUser extends  SysBase implements Serializable {
     @InQueryDTO
     private String username;
 
-    @Column(length = 300)
     @Length(min = 6, message = "密码必须大于等于6位")
-    @AutoEntityField("密码")
+    @AutoEntityField(value = "密码", len = 300)
     @NotinListDTO
     private String password;
 
@@ -65,6 +64,7 @@ public class SysUser extends  SysBase implements Serializable {
     private String name;
 
     @AutoEntityField(value = "状态", notes = "0,1", enums = UserStateEnum.class, htmlType = HtmlTypeEnum.RADIO)
+    @AutoEntityFieldDefault(value = "0")
     private Integer state = 0 ;
 
     @Email

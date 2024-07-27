@@ -1,13 +1,7 @@
 package cn.light.admin.controller;
 
-import cn.hutool.core.io.FileUtil;
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
-import cn.light.common.util.DtoMapper;
-import cn.light.common.util.PageUtil;
-import cn.light.entity.entity.SysFile;
-import cn.light.entity.mapper.FileMapper;
-import cn.light.entity.repository.FileRepository;
 import cn.light.packet.dto.file.FileDTO;
 import cn.light.packet.dto.file.FileQueryDTO;
 import cn.light.server.service.FileService;
@@ -15,8 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * 文件管理管理
