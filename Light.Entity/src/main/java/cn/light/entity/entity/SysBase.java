@@ -1,7 +1,9 @@
 package cn.light.entity.entity;
 
 import cn.light.common.anno.AutoEntityField;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -47,6 +49,7 @@ public class SysBase {
     @Column(updatable = false)
     @CreatedDate
     @AutoEntityField(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
     protected Date createTime;
 
     /**
@@ -54,6 +57,7 @@ public class SysBase {
      */
     @LastModifiedDate
     @AutoEntityField(value = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     protected Date updateTime;
 
     /**
@@ -62,6 +66,7 @@ public class SysBase {
     @Column(updatable = false)
     @CreatedBy
     @AutoEntityField(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
     protected Integer creatorId;
 
     /**
@@ -69,6 +74,7 @@ public class SysBase {
      */
     @LastModifiedBy
     @AutoEntityField(value = "修改人")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     protected Integer updaterId;
 
 

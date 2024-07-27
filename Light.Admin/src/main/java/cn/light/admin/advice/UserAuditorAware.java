@@ -35,7 +35,6 @@ public class UserAuditorAware implements AuditorAware<Integer> {
         try {
             return Optional.ofNullable(Convert.toInt(StpUtil.getLoginId()));
         }catch (Exception e) {
-            log.error("获取当前用户信息异常", e);
             return Optional.of(0);
         }
     }
