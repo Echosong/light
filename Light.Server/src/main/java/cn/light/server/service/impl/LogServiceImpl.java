@@ -8,7 +8,6 @@ import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysLog;
 import cn.light.entity.entity.SysUser;
 import cn.light.entity.mapper.LogMapper;
-import cn.light.entity.repository.LogRepository;
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.dto.log.LogListDTO;
 import cn.light.packet.dto.log.LogQueryDTO;
@@ -23,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 自动生成 日志 service 实现
@@ -34,8 +34,6 @@ import java.util.Objects;
  */
 @Service
 public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements LogService {
-    @Resource
-    private  LogRepository logRepository;
     @Resource
     private UserService userService;
 
@@ -68,18 +66,18 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
         }
         saveDTO.setUsername(userName);
         SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
-        logRepository.save(log);
+        this.saveOrUpdate(log);
         return DtoMapper.convert(log, LogDTO.class);
     }
 
     @Override
     public void delete(Integer id) {
-        logRepository.deleteById(id);
+        this.removeById(id);
     }
 
     @Override
     public LogDTO find(Integer id){
-        SysLog one = logRepository.findById(id)
+        SysLog one = Optional.ofNullable(this.getById(id))
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, LogDTO.class);
     }
