@@ -1,4 +1,4 @@
-package  cn.light.server.service.impl;
+package cn.light.server.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.light.common.exception.BaseKnownException;
@@ -38,18 +38,18 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     private UserService userService;
 
     @Override
-    public Page<LogListDTO> listPage(LogQueryDTO queryDTO){
-         Page<SysLog> dataPages  =  PageUtil.getPage(this.baseMapper::listPage, queryDTO);
-         return DtoMapper.convertPage(dataPages, LogListDTO.class);
+    public Page<LogListDTO> listPage(LogQueryDTO queryDTO) {
+        Page<SysLog> dataPages = PageUtil.getPage(this.baseMapper::listPage, queryDTO);
+        return DtoMapper.convertPage(dataPages, LogListDTO.class);
     }
 
     @Override
     public ResponseEntity<byte[]> export(LogQueryDTO queryDTO) {
         List<SysLog> all = this.baseMapper.listPage(queryDTO);
-        String fileName = "Log"+ DateUtil.format(new Date(), "yyyyMMddHHmm")+".xlsx";
+        String fileName = "Log" + DateUtil.format(new Date(), "yyyyMMddHHmm") + ".xlsx";
         try {
             return ExcelUtil.generateImportFile(DtoMapper.convertList(all, LogListDTO.class), fileName, LogListDTO.class);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new BaseKnownException(e.getMessage());
         }
     }
@@ -76,13 +76,11 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     }
 
     @Override
-    public LogDTO find(Integer id){
+    public LogDTO find(Integer id) {
         SysLog one = Optional.ofNullable(this.getById(id))
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, LogDTO.class);
     }
-
-    
 
 
 }

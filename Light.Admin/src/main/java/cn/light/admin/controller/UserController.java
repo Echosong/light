@@ -5,7 +5,10 @@ import cn.hutool.core.convert.Convert;
 import cn.light.common.annotation.Log;
 import cn.light.common.annotation.NoPermission;
 import cn.light.common.annotation.NoRepeatSubmit;
+import cn.light.common.annotation.Permission;
+import cn.light.common.consts.Consts;
 import cn.light.common.enums.BusinessEnum;
+import cn.light.common.enums.LogicalEnum;
 import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.SysUser;
 import cn.light.packet.dto.user.*;
@@ -50,10 +53,10 @@ public class UserController extends BaseController{
     }
 
 
-    @Operation(summary = "获取当前用户")
-    @GetMapping("/getCurrent")
-    public UserDTO getCurrent() {
-        return  userService.getCurrent();
+    @Operation(summary = "获取当前用户信息")
+    @GetMapping("/getLoginInfo")
+    public LoginResultDTO getLoginInfo() {
+        return  userService.getLoginInfo();
     }
 
 
@@ -135,6 +138,7 @@ public class UserController extends BaseController{
      */
     @DeleteMapping("/delete/{userId}")
     @Operation(summary = "删除")
+    @Permission(logical = LogicalEnum.OR, permissions = Consts.ROLE_ADMIN_CODE)
     @Log("删除用户")
     public void delete(@PathVariable(value = "userId") Integer userId) {
         userService.removeById(userId);

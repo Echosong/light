@@ -2,13 +2,10 @@ package cn.light.admin.controller;
 
 import cn.light.entity.entity.SysLog;
 import cn.light.entity.mapper.LogMapper;
-import cn.light.entity.repository.LogRepository;
-import cn.light.server.service.LogService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,8 +23,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @ActiveProfiles("hz")
 public class LogTest {
-    @Autowired
-    private LogRepository logRepository ;
     @Resource
     private LogMapper logMapper;
     @Test
@@ -35,8 +30,9 @@ public class LogTest {
         SysLog sysLog = new SysLog();
         sysLog.setId(39);
         sysLog.setAddress("xxxxxxxxxxxxxx");
+        //审计可以手动设置，优先
+        sysLog.setUpdaterId(100);
         logMapper.updateById(sysLog);
-
         //证明  了@DynamicInsert和@DynamicUpdate 只对 Mpper有用
     }
 }

@@ -46,6 +46,9 @@ public class SysPermission extends  SysBase{
     @NotBlank(message = "权限标识不能为空")
     private String perms;
 
+    @AutoEntityField("组件")
+    private String component;
+
     @AutoEntityField("父级id")
     @Range(min = 0)
     private Integer parentId;

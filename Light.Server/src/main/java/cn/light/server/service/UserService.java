@@ -44,12 +44,6 @@ public interface UserService extends IService<SysUser> {
      */
     void update(UserDTO userDTO);
 
-    /**
-     * 获取当前用户信息
-     * @return 用户信息
-     */
-    UserDTO getCurrent();
-
 
     UserCache getUserCache();
 
@@ -74,4 +68,6 @@ public interface UserService extends IService<SysUser> {
     UserDTO find(Integer userId);
 
     void resetPassword(Integer userId, String defaultPassword);
+
+    LoginResultDTO getLoginInfo();
 }

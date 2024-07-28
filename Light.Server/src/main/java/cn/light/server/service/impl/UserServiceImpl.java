@@ -84,12 +84,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         StpUtil.login(byUsername.get().getId());
         byUsername.get().setLoginIp(loginUserDTO.getLoginIp());
         userRepository.save( byUsername.get());
-        UserCache userCache = this.getUserCache();
-        LoginResultDTO resultDTO = DtoMapper.convert(userCache, LoginResultDTO.class);
-        resultDTO.setToken(StpUtil.getTokenInfo().getTokenValue());
-        resultDTO.setMenuList( permissionService.listByUser(userCache.getId()));
-
-        return resultDTO;
+        userCacheRepository.deleteById(byUsername.get().getId());
+        return getLoginInfo();
     }
 
 
@@ -159,25 +155,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
             }
         }
         userRepository.save(user);
-    }
-
-    /**
-     * 获取当前用户信息
-     *
-     * @return 用户信息
-     */
-    @Override
-    public UserDTO getCurrent() {
-        Integer userId = Convert.toInt(StpUtil.getLoginId());
-        SysUser kdUser = userRepository.findById(userId)
-                .orElseThrow(() -> new BaseKnownException(600, "用户不存在"));
-
-        List<SysUserRole> userRoles = userRoleRepository.findAllByUserId(kdUser.getId());
-        UserDTO userDTO = DtoMapper.convert(kdUser, UserDTO.class);
-        if(CollUtil.isNotEmpty(userRoles)) {
-            userDTO.setRoleId(userRoles.get(0).getRoleId());
-        }
-        return userDTO;
     }
 
     @Override
@@ -283,5 +260,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
             t.setPassword(SmUtil.sm3().digestHex(defaultPassword));
             userRepository.save(t);
         });
+    }
+
+    @Override
+    public LoginResultDTO getLoginInfo() {
+        UserCache userCache = this.getUserCache();
+        LoginResultDTO resultDTO = DtoMapper.convert(userCache, LoginResultDTO.class);
+        resultDTO.setToken(StpUtil.getTokenInfo().getTokenValue());
+        resultDTO.setMenuList( permissionService.listByUser(userCache.getId()));
+        return resultDTO;
     }
 }

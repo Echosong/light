@@ -1,6 +1,7 @@
 package cn.light.server.service.impl;
 
 
+import cn.hutool.core.util.StrUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
@@ -64,7 +65,18 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
                 .collect(Collectors.toList());
         List<SysPermission> listByrole = this.getListByrole(roleIds);
 
-        return DtoMapper.convertList(listByrole , PermissionDTO.class);
+        List<PermissionDTO> permissions = DtoMapper.convertList(listByrole, PermissionDTO.class);
+        for (PermissionDTO permission : permissions) {
+            if(StrUtil.isBlank(permission.getPerms())){
+                continue;
+            }
+            if(StrUtil.isBlank(permission.getComponent())){
+                permission.setComponent("/"+permission.getPerms().replaceAll("/", "-"));
+            }
+            permission.setPath(permission.getPerms());
+        }
+
+        return permissions;
     }
 
     @Override
@@ -86,7 +98,17 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     @Override
     public Page<PermissionListDTO> listPage(PermissionQueryDTO permissionQueryDTO) {
         Page<SysPermission> dataPages  =  PageUtil.getPage(this.baseMapper::listPage, permissionQueryDTO);
-        return DtoMapper.convertPage(dataPages, PermissionListDTO.class);
+        Page<PermissionListDTO> pageList = DtoMapper.convertPage(dataPages, PermissionListDTO.class);
+        for (PermissionListDTO permission : pageList.getContent()) {
+            if(StrUtil.isBlank(permission.getPerms())){
+                continue;
+            }
+            if(StrUtil.isBlank(permission.getComponent())){
+                permission.setComponent("/"+permission.getPerms().replaceAll("/", "-"));
+            }
+            permission.setPath(permission.getPerms());
+        }
+        return pageList;
     }
 
     @Override

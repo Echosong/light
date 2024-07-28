@@ -9,10 +9,13 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotNull;
+
 import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -28,11 +31,14 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RoleDTO extends SysBaseDTO implements IDictionaryObject {
-    @NotNull(message="{jakarta.validation.constraints.NotNull.message}")
-   @Schema(title="客户名称" )
+    @NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
+    @Schema(title = "客户名称")
     private String name;
 
-   @Schema(title="描述" )
+    @Schema(title = "编码")
+    private String code;
+
+    @Schema(title = "描述")
     private String description;
 
 
