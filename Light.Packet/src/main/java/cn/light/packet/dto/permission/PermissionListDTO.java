@@ -72,5 +72,7 @@ public class PermissionListDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "组件")
     private String component;
 
+    @Schema(title = "子级")
+    private List<PermissionListDTO> children;
 
 }

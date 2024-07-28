@@ -28,17 +28,9 @@ public interface PermissionRepository extends JpaRepository<SysPermission, Integ
      */
     List<SysPermission> getAllByIdIn(List<Integer> ids);
 
+    List<SysPermission> findByParentId(Integer parentId);
 
-    @Query(nativeQuery = true, value = "select  * from sys_permission")
-    List<SysPermission> getListPage(PermissionQueryDTO permissionQueryDTO);
 
-    /**
-     * 分页获取权限信息
-     * @param perms
-     * @param name
-     * @param pageable
-     * @return
-     */
-    @Query(nativeQuery = true, value = "select  * from sys_permission")
-    Page<SysPermission> getAllByPermsAndNameContainingAndType(String perms, String name, Integer type, Pageable pageable);
+
+
 }

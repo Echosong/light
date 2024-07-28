@@ -39,6 +39,10 @@ public class UserListDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "账号")
     private String username;
 
+    @Pattern(message = "必须为11位手机号", regexp = "\\d{11}")
+    @Schema(title = "手机号")
+    private String mobile;
+
     @Range(min = 0, max = 1)
     @Schema(title = "性别")
     @ApiModelPropertyEnum(UserSexEnum.class)

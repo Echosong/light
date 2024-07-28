@@ -45,6 +45,12 @@ public class SysUser extends  SysBase implements Serializable {
     @InQueryDTO
     private String username;
 
+
+    @Pattern(message = "必须为11位手机号", regexp = "\\d{11}")
+    @AutoEntityField(value = "手机号")
+    @InQueryDTO
+    private String mobile;
+
     @Length(min = 6, message = "密码必须大于等于6位")
     @AutoEntityField(value = "密码", len = 300)
     @NotinListDTO

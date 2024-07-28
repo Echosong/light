@@ -38,6 +38,10 @@ public class UserDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "账号")
     private String username;
 
+    @Pattern(message = "必须为11位手机号", regexp = "\\d{11}")
+    @Schema(title = "手机号")
+    private String mobile;
+
     @Length(min = 6, max = 2147483647, message = "密码必须大于等于6位")
     @Schema(title = "密码")
     private String password;

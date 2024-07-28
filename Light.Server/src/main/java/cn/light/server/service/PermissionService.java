@@ -7,6 +7,7 @@ import cn.light.entity.mapper.PermissionMapper;
 import cn.light.packet.dto.permission.PermissionDTO;
 import cn.light.packet.dto.permission.PermissionListDTO;
 import cn.light.packet.dto.permission.PermissionQueryDTO;
+import cn.light.packet.dto.permission.RolePermissionDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.data.domain.Page;
 
@@ -32,4 +33,9 @@ public interface PermissionService extends IService<SysPermission> {
     Page<PermissionListDTO> listPage(PermissionQueryDTO permissionQueryDTO);
 
     void save(PermissionDTO permissionDTO);
+
+    RolePermissionDTO getRoleSelectedMenu(Integer roleId);
+
+    // 根据 parentId 递归获取权限列表
+    List<PermissionListDTO> getTreePermissions(Integer parentId);
 }

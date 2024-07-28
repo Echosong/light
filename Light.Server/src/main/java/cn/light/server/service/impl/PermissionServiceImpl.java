@@ -15,6 +15,7 @@ import cn.light.entity.repository.UserRoleRepository;
 import cn.light.packet.dto.permission.PermissionDTO;
 import cn.light.packet.dto.permission.PermissionListDTO;
 import cn.light.packet.dto.permission.PermissionQueryDTO;
+import cn.light.packet.dto.permission.RolePermissionDTO;
 import cn.light.server.service.PermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
@@ -119,5 +120,34 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
                     .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
         }
         permissionRepository.save(kdPermission);
+    }
+
+    @Override
+    public RolePermissionDTO getRoleSelectedMenu(Integer roleId){
+        List<SysRolePermission> rolePermissions = rolePermissionRepository.getAllByRoleIdIn(List.of(roleId));
+        Set<Integer> permissionIds = rolePermissions.stream().map(SysRolePermission::getPermissionId)
+                .collect(Collectors.toSet());
+        RolePermissionDTO rolePermissionDTO = new RolePermissionDTO();
+        rolePermissionDTO.setMenuTreeList(getTreePermissions(0));
+        rolePermissionDTO.setSelectedMenuId(permissionIds);
+        return rolePermissionDTO;
+    }
+
+
+    @Override
+    public List<PermissionListDTO> getTreePermissions(Integer parentId) {
+        List<PermissionListDTO> permissionList = new ArrayList<>();
+        var permissions = permissionRepository.findByParentId(parentId)
+                .stream()
+                .sorted(Comparator.comparing(SysPermission::getSort))
+                .toList();
+        for (SysPermission permission : permissions) {
+            if (permission.getParentId().equals(parentId)) {
+                PermissionListDTO permissionDTO = DtoMapper.convert(permission, PermissionListDTO.class);
+                permissionDTO.setChildren(getTreePermissions(permission.getId()));
+                permissionList.add(permissionDTO);
+            }
+        }
+        return permissionList;
     }
 }

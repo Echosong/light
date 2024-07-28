@@ -10,6 +10,7 @@ import cn.light.entity.entity.SysPermission;
 import cn.light.packet.dto.permission.PermissionDTO;
 import cn.light.packet.dto.permission.PermissionListDTO;
 import cn.light.packet.dto.permission.PermissionQueryDTO;
+import cn.light.packet.dto.permission.RolePermissionDTO;
 import cn.light.server.service.PermissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,8 +21,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,10 +76,10 @@ public class PermissionController extends BaseController {
     }
 
 
-    @GetMapping("/listByRole/{roleId}")
     @Operation(summary = "根据角色id获取权限")
-    public List<SysPermission> listByRole(@NotBlank @PathVariable(value = "roleId") Integer roleId) {
-        return permissionService.getListByrole(Collections.singletonList(roleId));
+    @GetMapping("/getRoleSelectedMenu/{roleId}")
+    public RolePermissionDTO getRoleSelectedMenu(@PathVariable Integer roleId){
+        return permissionService.getRoleSelectedMenu(roleId);
     }
 
 

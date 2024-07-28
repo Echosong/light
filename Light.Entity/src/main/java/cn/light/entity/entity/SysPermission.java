@@ -3,6 +3,7 @@ package cn.light.entity.entity;
 
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
+import cn.light.common.anno.AutoEntityFieldDefault;
 import cn.light.common.anno.InQueryDTO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import jakarta.persistence.Column;
@@ -58,6 +59,7 @@ public class SysPermission extends  SysBase{
     private Integer type;
 
     @AutoEntityField("排序")
+    @AutoEntityFieldDefault(value = "0")
     private Integer sort = 0;
 
     @AutoEntityField("图标")
