@@ -35,6 +35,16 @@ public class PageInfo {
     @Schema(defaultValue = "排序列名")
     private String sortCol = "id";
 
+    public void setPageSize(int pageSize) {
+        if (pageSize <= 0) {
+            pageSize = 1;
+        }
+        if (pageSize > 1000) {
+            pageSize = 1000;
+        }
+        this.pageSize = pageSize;
+    }
+
     private List<OrderBy> orderByList;
 
     @Getter
@@ -65,8 +75,8 @@ public class PageInfo {
                 Sort sort = Sort.unsorted();
                 int i = 0;
                 for (OrderBy orderBy : orderByList) {
-                    sort = sort.and(Sort.by(orderBy.direction ? Sort.Direction.ASC : Sort.Direction.DESC, i==0? orderBy.column :(","+orderBy.column)));
-                    i = i+1;
+                    sort = sort.and(Sort.by(orderBy.direction ? Sort.Direction.ASC : Sort.Direction.DESC, i == 0 ? orderBy.column : ("," + orderBy.column)));
+                    i = i + 1;
                 }
                 return PageRequest.of(this.page - 1, this.pageSize, sort);
             } else {

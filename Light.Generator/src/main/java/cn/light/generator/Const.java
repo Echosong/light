@@ -19,7 +19,7 @@ public class Const {
     /**
      * 根路径
      */
-    public static String ROOT_PATH = "D:\\项目资料\\light框架";
+    public static String ROOT_PATH = "D:\\项目资料\\light框架\\framework";
 
     /**
      * 静态魔板路径

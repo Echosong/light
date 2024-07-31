@@ -11,7 +11,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -63,7 +62,6 @@ public class Config {
 
     /**
      * 统一处理返回json
-     * @return
      */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer initJackson() {
@@ -81,7 +79,6 @@ public class Config {
 
     /**
      * 注入重复提交切面
-     * @return
      */
     @Bean
     RepeatSubmitAspect repeatSubmitAspect(){
@@ -91,10 +88,10 @@ public class Config {
 
     /***
      * 注入redis 得到 生成自增code bean
-     * @return
      */
     @Bean
     SerialUtil getSerialUtil( ) {
         return new SerialUtil(stringRedisTemplate);
     }
+
 }

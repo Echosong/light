@@ -2,6 +2,8 @@ package cn.light.admin.controller;
 
 import cn.light.entity.entity.SysLog;
 import cn.light.entity.mapper.LogMapper;
+import cn.light.packet.dto.log.LogQueryDTO;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -33,6 +35,12 @@ public class LogTest {
         //审计可以手动设置，优先
         sysLog.setUpdaterId(100);
         logMapper.updateById(sysLog);
+        LogQueryDTO logQueryDTO = new LogQueryDTO();
+
+        var logs = logMapper.selectList(new LambdaQueryWrapper<SysLog>().ne(SysLog::getId, 0));
+        System.out.println(logs.size());
+
+
         //证明  了@DynamicInsert和@DynamicUpdate 只对 Mpper有用
     }
 }
