@@ -9,32 +9,28 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.*;
 import cn.light.packet.enums.ArticleTypeEnum;
 /**
- * <p>Title: 新闻</p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-02 16:39:18</p >
+ * 新闻 pojo转化
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
+ * @author : 二胡子
  * @version :1.0.0
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleDTO extends SysBaseDTO implements IDictionaryObject {
-   @Schema(defaultValue="标题" )
+   @Schema(title="标题" )
     private String title;
 
    @Schema(title="封面图片" )
     private String imgUrl;
 
-   @Schema(title="类型" )
+   @Schema(title="类型" , description="ArticleTypeEnum")
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
     private Integer type;
 
@@ -46,6 +42,9 @@ public class ArticleDTO extends SysBaseDTO implements IDictionaryObject {
 
    @Schema(title="项目id" )
     private Integer projectId;
+
+   @Schema(title="发布时间" )
+    private Date publishTime;
 
 
 }

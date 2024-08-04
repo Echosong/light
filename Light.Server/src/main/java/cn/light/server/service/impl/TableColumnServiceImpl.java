@@ -5,6 +5,7 @@ import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
+import cn.light.entity.cache.TableColumnCacheRepository;
 import cn.light.entity.cache.UserCache;
 import cn.light.entity.entity.SysTableColumn;
 import cn.light.entity.mapper.TableColumnMapper;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 自动生成 存储列设置表 service 实现
@@ -38,6 +38,8 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
     private UserService userService;
     @Resource
     private TableColumnRepository tableColumnRepository;
+    @Resource
+    private TableColumnCacheRepository tableColumnCacheRepository;
 
     @Override
     public Page<TableColumnListDTO> listPage(TableColumnQueryDTO queryDTO){
@@ -60,25 +62,26 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
     public TableColumnDTO save(TableColumnDTO saveDTO) {
         SysTableColumn tableColumn = DtoMapper.convert(saveDTO, SysTableColumn.class);
         UserCache userCache = userService.getUserCache();
+
         tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableColumn.getTableName())
                 .ifPresent(t-> tableColumn.setId(t.getId()));
+        tableColumn.setUserId(userCache.getId());
         this.saveOrUpdate(tableColumn);
+        tableColumnCacheRepository.save(tableColumn);
         return DtoMapper.convert(tableColumn, TableColumnDTO.class);
     }
 
-    @Override
-    public void delete(Integer id) {
-        this.removeById(id);
-    }
 
     @Override
-    public TableColumnDTO find(Integer id){
-        SysTableColumn one = Optional.of(id).map(this::getById)
-                             .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
-        return DtoMapper.convert(one, TableColumnDTO.class);
+    public String getColumns(String tableName) {
+        UserCache userCache = userService.getUserCache();
+        var tableCacheOp = tableColumnCacheRepository.findByUserIdAndTableName(userCache.getId(), tableName);
+        if (tableCacheOp.isPresent()) {
+            return tableCacheOp.get().getColumns();
+        }
+        tableCacheOp = tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableName);
+
+        return tableCacheOp.map(SysTableColumn::getColumns).orElse("");
     }
-
-    
-
 
 }

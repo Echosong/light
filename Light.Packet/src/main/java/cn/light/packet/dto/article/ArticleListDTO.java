@@ -9,46 +9,42 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
-
+import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
-
 import java.math.BigDecimal;
 import java.util.*;
 
 import cn.light.packet.enums.ArticleTypeEnum;
 
 /**
- * <p>Title:新闻 </p >
- * <p>Description: </p >
- * <p>Company: http://www.hn1024.cn</p >
- * <p>create date: 2024-01-02 20:58:09</p >
+ * Article列表传输对象
+ * email:zq_songfeigang@163.com
  *
- * @author : echosong
- * @version :1.0.0
+ * @author : 二胡子
+ * @version : 1.0
+ * @date : 2024-08-04 15:21:27
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ArticleListDTO extends SysBaseDTO implements IDictionaryObject {
-    @Schema(title = "标题")
+   @Schema(title="标题" )
     private String title;
 
-    @Schema(title = "类型")
+   @Schema(title="类型" , description="ArticleTypeEnum")
     @ApiModelPropertyEnum(ArticleTypeEnum.class)
-    private int type;
+    private Integer type;
 
-    @Schema( title = "内容")
+   @Schema(title="内容" )
     private String content;
 
-    @Schema(title = "附件")
+   @Schema(title="附件" )
     private String fileUrl;
 
-    @Schema(title = "项目id")
+   @Schema(title="项目id" )
     private Integer projectId;
+
+   @Schema(title="发布时间" )
+    private Date publishTime;
 
 
 }

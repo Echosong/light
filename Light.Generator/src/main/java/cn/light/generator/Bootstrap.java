@@ -25,11 +25,6 @@ public class Bootstrap {
         if (StrUtil.isBlank(Const.ROOT_PATH)) {
             throw new RuntimeException("项目路路径");
         }
-        //根路径
-        String vueRootPath = Const.ROOT_PATH + "/Light.View";
-        Const.VUE_PATH = vueRootPath + Const.VUE_PATH;
-        Const.VUE_ROOT_ROUTER = vueRootPath + Const.VUE_ROOT_ROUTER;
-
         //正式处理业务
         Set<Class<?>> classes = ClassUtil.scanPackage(Const.SYS_PATH + ".entity.entity");
         for (Class<?> aClass : classes) {

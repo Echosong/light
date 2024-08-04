@@ -1,32 +1,36 @@
 <template>
-    <Dialog v-model="isShow" :title="title" maxHeight="700px">
-        <el-form v-if="m" ref="ruleForm" :rules="rules" :model="m" class="demo-ruleForm"
-                 label-width="120px">
-            #{el-form-item}#
-        </el-form>
+    <a-drawer
+        :title="title"
+        :width="700"
+        :open="isShow"
+        :body-style="{ paddingBottom: '80px' }"
+        @close="isShow = false"
+        destroyOnClose
+    >
+        <a-form v-if="m" ref="ruleForm" :rules="rules" :model="m" :label-col="{ span: 3 }" >
+            #{a-form-item}#
+        </a-form>
         <template #footer>
-            <span class="dialog-footer">
-                <el-button type="primary" @click="ok($parent)">
-                    确定
-                </el-button>
-                <el-button @click="isShow = false">取消</el-button>
-            </span>
+            <a-space>
+                <a-button @click="isShow= false">取消</a-button>
+                <a-button type="primary" @click="onSubmit">保存</a-button>
+            </a-space>
         </template>
-    </Dialog>
+    </a-drawer>
 </template>
 
 <script setup>
-import Dialog from "@/components/dialog/index.vue";
-import {inject, ref} from "vue";
+import {ref} from "vue";
+import {base} from "/@/utils/base"
 //import_file
 //create_editor
+const emits = defineEmits(['reloadList']);
 const props = defineProps(["params"]);
 const m = ref({});
 const title = ref("");
 const isShow = ref(false);
 const rules = {//rule_fields
 }
-const sa = inject('sa')
 const ruleForm = ref();
 const  query = ref({});
 
@@ -34,7 +38,7 @@ async function open(data, parmas)  {
     isShow.value = true;
     if (data) {
         title.value = "修改 #{tableInfo}#";
-        let one = await sa.get("/#{EntityName}#/find/"+data.id);
+        let one = await base.get("/#{EntityName}#/find/"+data.id);
         m.value = one.data;
         m.value = data;
     } else {
@@ -46,18 +50,17 @@ async function open(data, parmas)  {
 }
 
 //提交#{tableInfo}#信息
-function ok(parent) {
-    ruleForm.value.validate(async (valid) => {
-        if (valid) {
-            //replace_editor
-            await sa.post("/#{EntityName}#/save", m.value);
-            parent.f5();
+async function onSubmit() {
+    try {
+        await ruleForm.value.validateFields();
+        //replace_editor
+        base.post("/#{EntityName}#/save", m.value).then(() => {
+            emits('reloadList');
             isShow.value = false;
-        } else {
-            console.log("error submit!!");
-            return false;
-        }
-    });
+        });
+    } catch (err) {
+        base.error('参数验证错误，请仔细填写表单数据!'+ err.message);
+    }
 }
 
 defineExpose({

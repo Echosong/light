@@ -53,7 +53,7 @@ public class SysConfig extends SysBase  {
     @Column(name="`group`")
     private Integer group = 0;
 
-    @AutoEntityField("配置值")
+    @AutoEntityField(value = "配置值", htmlType = HtmlTypeEnum.TEXTAREA)
     private String value;
 
     @AutoEntityField( value = "类型", notes = "配置html展现类型", enums = HtmlTypeEnum.class)

@@ -2,8 +2,6 @@ package cn.light.admin.controller;
 
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.annotation.Log;
-import cn.light.common.annotation.Permission;
-import cn.light.common.consts.Consts;
 import cn.light.packet.dto.tableColumn.TableColumnDTO;
 import cn.light.packet.dto.tableColumn.TableColumnListDTO;
 import cn.light.packet.dto.tableColumn.TableColumnQueryDTO;
@@ -51,21 +49,10 @@ public class TableColumnController extends BaseController{
          tableColumnService.save(tableColumnDTO);
     }
 
-
-    @Operation(summary = "查询单个明细")
-    @GetMapping("/find/{id}")
-    public TableColumnDTO find(@PathVariable Integer id){
-        return tableColumnService.find(id);
+    @Operation(summary = "根据表名查询")
+    @GetMapping("/getColumns/{tableName}")
+    public String findByTableName(@PathVariable String tableName){
+        return tableColumnService.getColumns(tableName);
     }
-
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "删除")
-    @Log("删除存储列设置表")
-    @Permission(roles = Consts.ROLE_ADMIN_CODE)
-    public void delete(@PathVariable(value="id") Integer id) {
-        tableColumnService.delete(id);
-    }
-
-    
 
 }

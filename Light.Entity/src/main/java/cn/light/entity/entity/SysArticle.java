@@ -11,6 +11,8 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.Date;
+
 /**
  * 注意 类型一定要用应用类型，因为允许为null 会带来一些好处
  * @author : echosong
@@ -23,7 +25,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "新闻")
-@AutoCover(value = {CodeTypeEnum.NULL})
 public class SysArticle extends SysBase {
     @AutoEntityField(value = "标题", isKeyName = true)
     @InQueryDTO
@@ -45,6 +46,11 @@ public class SysArticle extends SysBase {
 
     @AutoEntityField(value = "项目id")
     private  Integer projectId;
+
+    //发布时间
+    @AutoEntityField(value = "发布时间")
+    @InQueryDTO
+    private Date publishTime;
 
 
 }

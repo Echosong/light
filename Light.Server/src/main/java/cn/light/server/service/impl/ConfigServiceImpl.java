@@ -71,7 +71,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, SysConfig> impl
 
     @Override
     public ConfigDTO getByGroupAndKey(Integer group, String key) {
-        List<ConfigDTO> kdConfigs = DtoMapper.convertList(this.list(), ConfigDTO.class);
+        List<ConfigDTO> kdConfigs = DtoMapper.convertList(configRepository.findAll(), ConfigDTO.class);
         return kdConfigs.stream()
                 .filter(t-> Objects.equals(group, t.getGroup()) && Objects.equals(t.getKey(), key))
                 .findFirst()

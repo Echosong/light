@@ -4,7 +4,9 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import cn.light.common.anno.*;
+import cn.light.common.dto.ListColumnDTO;
 import cn.light.common.dto.PageInfo;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
@@ -59,7 +61,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if (autoEntity.viewList()) {
             this.viewFrom(declaredFields);
             if(autoEntity.viewInfo()){
-                this.viewInfo(declaredFields);
+                //this.viewInfo(declaredFields);
             }
         }
     }
@@ -68,35 +70,6 @@ public class ViewService extends BaseService implements ServiceInterface {
     private static final String START_ORG = "{org";
     private static final String BASE_ENUM = "BaseEnum";
 
-    /**
-     * 写入配置文件
-     *
-     * @param typeStr 类型字符
-     */
-    private void reWriteConfigJs(String typeStr) {
-        Map<String, String> map = new HashMap<>(12);
-        map.put("name", StrUtil.lowerFirst(this.className));
-        map.put("type", typeStr);
-        String perms = StrUtil.format("{perms: \"{name}-{type}\", view: () => import('@/views/{name}/{type}.vue')},",
-                map);
-        List<String> strings = FileUtil.readLines(Const.VUE_ROOT_ROUTER, Charset.defaultCharset());
-        Set<String> setLine = new HashSet<>();
-
-        for (String string : strings) {
-            string = StrUtil.trim(string);
-            if (!string.startsWith("export default [") && !string.startsWith("]")) {
-                setLine.add(StrUtil.trim(string));
-            }
-        }
-        setLine.add(perms);
-
-        List<String> collect = new ArrayList<>();
-        collect.add("export default [");
-        collect.addAll(setLine);
-        collect.add("];");
-
-        FileUtil.writeLines(collect, Const.VUE_ROOT_ROUTER, Charset.defaultCharset());
-    }
 
 
     /**
@@ -114,11 +87,10 @@ public class ViewService extends BaseService implements ServiceInterface {
         String tplContent = this.replaceTpl(templateFile);
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
-        List<String> tableColumns = new ArrayList<>();
+        List<ListColumnDTO> tableColumns = new ArrayList<>();
         Set<String> importFiles = new HashSet<>();
 
         //追加一个id编号
-        tableColumns.add("<el-table-column type=\"selection\"></el-table-column>");
         int columnCount = 1;
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(AutoEntityField.class)) {
@@ -139,13 +111,13 @@ public class ViewService extends BaseService implements ServiceInterface {
                 columnCount++;
             }
             if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
-                importFiles.add("import Preview from \"@/components/file/preview.vue\";");
+                importFiles.add("import Preview from \"/@/components/framework/base-preview-image/index.vue\";");
             }else if (autoEntityField.htmlType() == HtmlTypeEnum.FILE) {
-                importFiles.add("import Link from \"@/components/file/link.vue\";");
+                importFiles.add("import Link from \"/@/components/framework/base-preview-file/index.vue\";");
             }else if(autoEntityField.htmlType() == HtmlTypeEnum.RADIO){
-                importFiles.add("import ElSwitch from \"@/components/ESwitch/ESwitch.vue\";");
+                importFiles.add("import ESwitch from \"/@/components/framework/base-switch/index.vue\";");
             }else if (autoEntityField.htmlType() == HtmlTypeEnum.SELECT){
-                importFiles.add("import selectData from '@/components/SelectData/index.vue'");
+                importFiles.add("import selectData from '/@/components/framework/base-map/index.vue'");
             }
         }
         PageInfo pageInfo = new PageInfo();
@@ -157,10 +129,10 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
 
         String elContent = String.join("\r\n", fromStr);
-        tplContent = StrUtil.replace(tplContent, "#{el-form-item}#", elContent);
+        tplContent = StrUtil.replace(tplContent, "#{a-form-item}#", elContent);
         //处理枚举下来组件
         if (elContent.contains("<input-enum")) {
-            importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
+            importFiles.add("import InputEnum from \"/@/components/framework/base-enum/index.vue\";");
         }
         if(columnCount >= maxColumnCount){
             tplContent = StrUtil.replaceIgnoreCase(tplContent,"#{fixed}#", "fixed=\"right\"");
@@ -169,12 +141,17 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
 
         tplContent = StrUtil.replace(tplContent, "#{queryPageParams}#", queryParam);
-        tplContent = StrUtil.replace(tplContent, "#{el-table-column}#",
-                String.join("\r\n", tableColumns));
+        ListColumnDTO listColumn = new ListColumnDTO();
+        listColumn.setTitle("操作");
+        listColumn.setWidth(90);
+        listColumn.setFixed("right");
+        listColumn.setDataIndex("action");
+        tableColumns.add(listColumn);
+
+        tplContent = StrUtil.replace(tplContent, "#{listColumns}#", JSONUtil.toJsonStr(tableColumns));
         tplContent = StrUtil.replace(tplContent, "//importFiles", String.join("\r\n", importFiles));
 
         FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
-        this.reWriteConfigJs("list");
     }
 
 
@@ -185,9 +162,9 @@ public class ViewService extends BaseService implements ServiceInterface {
      * @param field 字段
      * @return 处理后字符
      */
-    private String elTableColumn(Field field, AutoEntityField autoEntityField) {
-        String returnValue;
+    private ListColumnDTO elTableColumn(Field field, AutoEntityField autoEntityField) {
         String typeName = field.getName();
+        ListColumnDTO listColumn = new ListColumnDTO();
         try {
             if (!BASE_ENUM.equals(autoEntityField.enums().getSimpleName())) {
                 typeName = typeName + "Enum";
@@ -195,49 +172,10 @@ public class ViewService extends BaseService implements ServiceInterface {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
-        if (autoEntityField.htmlType() == HtmlTypeEnum.UPLOAD) {
-            String uploadListTemplate = """
-                     <el-table-column  label="{}"  #{sortable}# >
-                         <template #default="s">
-                             <Preview :imgUrl="s.row.{}"></Preview>
-                         </template>
-                     </el-table-column>
-                    """;
-            returnValue = StrUtil.format(uploadListTemplate, autoEntityField.value(), typeName);
-        } else if(autoEntityField.htmlType() == HtmlTypeEnum.FILE) {
-            String fileTemplate = """
-                     <el-table-column  label="{}"  #{sortable}# >
-                         <template #default="s">
-                             <Link :fileUrl="s.row.{}"></Link>
-                         </template>
-                     </el-table-column>
-                    """;
-            returnValue =  StrUtil.format(fileTemplate, autoEntityField.value(), typeName);
-        }else if(autoEntityField.htmlType() == HtmlTypeEnum.RADIO){
-            String radioTemplate = """
-                     <el-table-column  label="{}"  #{sortable}# >
-                         <template #default="s">
-                              <ElSwitch v-model="s.row.{}" @change="updateSwitch(s.row)"></ElSwitch>
-                         </template>
-                     </el-table-column>
-                    """;
-            returnValue =  StrUtil.format(radioTemplate, autoEntityField.value(), field.getName());
-        } else {
-            returnValue = StrUtil.format("  <el-table-column  label=\"{}\" #{sortable}# #{overflow}# prop=\"{}\" ></el-table-column>",
-                    autoEntityField.value(), typeName);
-        }
-        if (field.isAnnotationPresent(AutoSorted.class)) {
-            returnValue =  returnValue.replace("#{sortable}#", "sortable");
-        }else{
-            returnValue =  returnValue.replace("#{sortable}#", "");
-        }
-        //:show-overflow-tooltip="true"
-        if (autoEntityField.htmlType() == HtmlTypeEnum.TEXTEDIT || autoEntityField.htmlType() == HtmlTypeEnum.TEXTAREA) {
-            returnValue =  returnValue.replace("#{overflow}#", ":show-overflow-tooltip=\"true\"") ;
-        }else {
-            returnValue = returnValue.replace("#{overflow}#", "");
-        }
-        return returnValue;
+        listColumn.setDataIndex(typeName);
+        listColumn.setTitle(autoEntityField.value());
+        listColumn.setEllipsis(true);
+        return listColumn;
     }
 
 
@@ -253,25 +191,15 @@ public class ViewService extends BaseService implements ServiceInterface {
         String returnValue = "";
         if ("String".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                    <el-form-item label="{}" v-if="!query.{}">
-                     <el-input v-model="p.{}" placeholder="模糊查询"></el-input>
-                    </el-form-item>""", autoEntityField.value(), field.getName(),field.getName());
+                    <a-form-item label="{}" v-if="!query.{}" class="smart-query-form-item">
+                     <a-input v-model:value="p.{}" placeholder="模糊查询"></a-input>
+                    </a-form-item>""", autoEntityField.value(), field.getName(),field.getName());
         }
         if ("Date".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}"  v-if="!query.{}">
-                                      <el-date-picker
-                                        v-model="p.start{}"
-                                        type="datetime"
-                                        value-format="YYYY-MM-DD HH:mm:ss"
-                                        placeholder="开始日期"></el-date-picker>
-                                      -
-                                      <el-date-picker
-                                        v-model="p.end{}"
-                                        type="datetime"
-                                        value-format="YYYY-MM-DD HH:mm:ss"
-                                        placeholder="结束日期"></el-date-picker>
-                                    </el-form-item>""", autoEntityField.value(),field.getName(), StrUtil.upperFirst(field.getName()),
+                            <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
+                               <a-range-picker @change="(rangDate)=> {p.start{} = rangDate[0];p.end{} = rangDate[1];}" value-format="YYYY-MM-DD HH:mm:ss" />
+                            </a-form-item>""", autoEntityField.value(),field.getName(), StrUtil.upperFirst(field.getName()),
                     StrUtil.upperFirst(field.getName()));
         }
 
@@ -279,17 +207,17 @@ public class ViewService extends BaseService implements ServiceInterface {
             Class<? extends BaseEnum> lclazz = autoEntityField.enums();
 
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}"  v-if="!query.{}">
-                                  <input-enum enumName="{}"  v-model="p.{}"></input-enum>
-                            </el-form-item>""",
+                            <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
+                                  <input-enum enumName="{}"  v-model:value="p.{}"></input-enum>
+                            </a-form-item>""",
                     autoEntityField.value(), field.getName(),StrUtil.lowerFirst(lclazz.getSimpleName()), field.getName());
         }
 
         if(autoEntityField.htmlType() == HtmlTypeEnum.SELECT){
             returnValue = StrUtil.format("""
-                            <el-form-item label="{}"  v-if="!query.{}">
-                             <select-data v-model="p.{}" routeName="{}" ></select-data>
-                            </el-form-item>""",
+                            <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
+                             <select-data v-model:value="p.{}" routeName="{}" ></select-data>
+                            </a-form-item>""",
                     autoEntityField.value(), field.getName(), field.getName(), StrUtil.lowerFirst(autoEntityField.source()));
         }
         return returnValue;
@@ -334,14 +262,14 @@ public class ViewService extends BaseService implements ServiceInterface {
         List<String> infoList = new ArrayList<>();
 
         String infoTemplate = """
-                <el-descriptions-item>
+                <a-descriptions-item>
                  <template #label>
                         <div class="cell-item" style="width:100px;">
                           {}
                         </div>
                       </template>
                       {}
-                </el-descriptions-item>
+                </a-descriptions-item>
                 """;
 
         for (Field field : declaredFields) {
@@ -368,7 +296,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             infoList.add(StrUtil.format(infoTemplate, annotation.value(), currentHtml));
 
         }
-        tplContent = tplContent.replace("#{el-descriptions-item}#", StrUtil.join( "", infoList));
+        tplContent = tplContent.replace("#{a-descriptions-item}#", StrUtil.join( "", infoList));
         FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
     }
 
@@ -408,12 +336,7 @@ public class ViewService extends BaseService implements ServiceInterface {
 
             String tipMsg = "";
             if(annotation.notes().length() > 4){
-                tipMsg =  """
-                        <el-tooltip class="item" effect="dark" content="{}" placement="top-start">
-                         #{}#
-                        </el-tooltip>
-                    """;
-                tipMsg = StrUtil.format(tipMsg,  annotation.notes());
+                tipMsg = StrUtil.format("tooltip=\"{}\"",  annotation.notes());
             }
 
             String formItem = "";
@@ -423,84 +346,75 @@ public class ViewService extends BaseService implements ServiceInterface {
 
                 switch (annotation.htmlType()) {
                     case RADIO:
-                        htmlTypeStr = StrUtil.format("<el-switch v-model=\"m.{}\" ></el-switch>", StrUtil.lowerFirst(field.getName()));
+                        htmlTypeStr = StrUtil.format("<e-switch v-model:value=\"m.{}\" ></e-switch>", StrUtil.lowerFirst(field.getName()));
                         break;
                     case SELECT:
-                        htmlTypeStr = StrUtil.format(" <select-data v-model=\"m.{}\" routeName=\"{}\" ></select-data>", StrUtil.lowerFirst(field.getName()),StrUtil.lowerFirst(annotation.source()));
-                        importFiles.add("import selectData from '@/components/SelectData/index.vue'");
+                        htmlTypeStr = StrUtil.format(" <select-data v-model:value=\"m.{}\" routeName=\"{}\" ></select-data>", StrUtil.lowerFirst(field.getName()),StrUtil.lowerFirst(annotation.source()));
+                        importFiles.add("import selectData from '/@/components/framework/base-map/index.vue'");
                         break;
                     case TEXTAREA:
-                        htmlTypeStr = StrUtil.format("<el-input type=\"textarea\"  rows=\"2\" placeholder=\"{}\"  v-model=\"m.{}\">" +
-                                "</el-input>", annotation.value(), StrUtil.lowerFirst(field.getName()));
+                        htmlTypeStr = StrUtil.format("<a-textarea   rows=\"2\" placeholder=\"{}\"  v-model:value=\"m.{}\">" +
+                                "</a-textarea>", annotation.value(), StrUtil.lowerFirst(field.getName()));
                         break;
                     case UPLOAD:
                     case FILE:
                         //暂时一个页面只考虑一个上传
                         htmlTypeStr = getFromUploadFileStr(annotation.htmlType(), field.getName());
-                        importFiles.add(annotation.htmlType() == HtmlTypeEnum.UPLOAD? "import FileImage from \"@/components/file/fileImage.vue\";" : "import File from \"@/components/file/file.vue\";");
+                        importFiles.add(annotation.htmlType() == HtmlTypeEnum.UPLOAD? "import FileImage from \"/@/components/framework/base-upload-image/index.vue\";" : "import File from \"/@/components/framework/base-upload-file/index.vue\";");
                         break;
                     case TEXTEDIT:
-                        htmlTypeStr = StrUtil.format( "<Tinymce ref=\"{}\" v-model=\"m.{}\"></Tinymce> ", field.getName(), StrUtil.lowerFirst(field.getName()));
+                        htmlTypeStr = StrUtil.format( "<Wangeditor ref=\"{}\" :modelValue=\"m.{}\"></Wangeditor> ", field.getName(), StrUtil.lowerFirst(field.getName()));
                         textEdits.add(field.getName());
                         break;
                     default:
                 }
                 formItem = (StrUtil.format("""
-                        <el-form-item label="{}" v-if="!query.{}">
+                        <a-form-item label="{}" v-if="!query.{}" ##>
                         {}
-                        </el-form-item>""",
+                        </a-form-item>""",
                         annotation.value(), field.getName(), htmlTypeStr));
-                if(StrUtil.isNotBlank(tipMsg)) {
-                    elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
-                }else {
-                    elFormItems.add(formItem);
-                }
+
+                elFormItems.add(StrUtil.replace(formItem, "##", tipMsg));
                 continue;
             }
 
             if (!"BaseEnum".equals(annotation.enums().getSimpleName())) {
-                importFiles.add("import InputEnum from \"@/components/enum/InputEnum.vue\";");
+                importFiles.add("import InputEnum from \"/@/components/framework/base-enum/index.vue\";");
                 Class<? extends BaseEnum> lclazz = annotation.enums();
                 formItem = (StrUtil.format("""
-                                <el-form-item label="{}" v-if="!query.{}">
-                                     <input-enum enumName="{}" v-model="m.{}" ></input-enum>
-                                </el-form-item>""", annotation.value(), field.getName(), StrUtil.lowerFirst(lclazz.getSimpleName()),
+                                <a-form-item label="{}" v-if="!query.{}" ##>
+                                     <input-enum enumName="{}" v-model:value="m.{}" ></input-enum>
+                                </a-form-item>""", annotation.value(), field.getName(), StrUtil.lowerFirst(lclazz.getSimpleName()),
                         field.getName()));
-                if(StrUtil.isNotBlank(tipMsg)) {
-                    elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
-                }else {
-                    elFormItems.add(formItem);
-                }
+
+                elFormItems.add(StrUtil.replace(formItem, "##", tipMsg));
+
                 continue;
             }
 
             if ("Date".equals(field.getType().getSimpleName())) {
                 formItem = (StrUtil.format("""
-                      <el-form-item label="{}："  prop="{}" v-if="!query.{}">
-                         <el-date-picker v-model="m.{}" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="{}"></el-date-picker>
-                      </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName(), annotation.value()));
+                      <a-form-item label="{}："  prop="{}" v-if="!query.{}" ##>
+                         <a-date-picker v-model:value="m.{}" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" placeholder="{}"></a-date-picker>
+                      </a-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName(), annotation.value()));
             } else {
                 formItem = (StrUtil.format("""
-                        <el-form-item label="{}"  prop="{}" v-if="!query.{}" >
-                            <el-input v-model="m.{}"></el-input>
-                        </el-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName()));
+                        <a-form-item label="{}"  prop="{}" v-if="!query.{}" ##>
+                            <a-input v-model:value="m.{}"></a-input>
+                        </a-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName()));
             }
-            if(StrUtil.isNotBlank(tipMsg)) {
-                elFormItems.add(StrUtil.replace(tipMsg, "#{}#", formItem));
-            }else {
-                elFormItems.add(formItem);
-            }
+            elFormItems.add(StrUtil.replace(formItem, "##", tipMsg));
         }
         //
         String elContent = String.join("\r\n", elFormItems);
         if(!textEdits.isEmpty()){
             List<String> importEdits = new ArrayList<>();
             List<String> replaceEdits = new ArrayList<>();
-            importFiles.add("import Tinymce from '@/components/Tinymce/Tinymce.vue';");
+            importFiles.add("import Wangeditor from '/@/components/framework/wangeditor/index.vue';");
             for (String textEdit : textEdits) {
                 importEdits.add(StrUtil.format("const {} = ref()", textEdit));
                 String getEditContent = """
-                            let {content}Text = {content}.value.getContent()
+                            let {content}Text = {content}.value.getHtml()
                             if({content}Text){
                                 m.value.{content} = {content}Text
                             }
@@ -517,11 +431,11 @@ public class ViewService extends BaseService implements ServiceInterface {
         }
 
         tplContent = StrUtil.replace(tplContent, "//rule_fields", String.join("\r\n", rulesFields));
-        tplContent = StrUtil.replace(tplContent, "#{el-form-item}#", elContent);
+        tplContent = StrUtil.replace(tplContent, "#{a-form-item}#", elContent);
         tplContent = StrUtil.replace(tplContent, "//data_init","{"+ String.join(",\r\n", ms)+"}");
         tplContent = StrUtil.replace(tplContent, "//import_file", String.join("\r\n", importFiles));
         FileUtil.writeString(tplContent, listPath, Charset.defaultCharset());
-        this.reWriteConfigJs("add");
+       // this.reWriteConfigJs("add");
     }
 
     /**

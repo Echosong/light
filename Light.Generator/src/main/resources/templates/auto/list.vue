@@ -1,123 +1,179 @@
 <template>
-    <div class="app-container">
-        <!-- 参数栏 -->
-        <el-form :inline="true"  v-show="showSearch"  class="demo-form-inline">
-            #{el-form-item}#
-            <el-form-item style="min-width: 0px">
-                <el-button type="primary" icon="Search" @click="f5();">查询</el-button>
-                <el-button  icon="Refresh" plain @click="reset">重置</el-button>
-            </el-form-item>
-        </el-form>
+    <!---------- 查询表单form begin ----------->
+    <a-form class="smart-query-form">
+        <a-row class="smart-query-form-row">
+            #{a-form-item}#
+            <a-form-item class="smart-query-form-item">
+                <a-button-group>
+                    <a-button type="primary" @click="f5">
+                        <template #icon>
+                            <SearchOutlined/>
+                        </template>
+                        查询
+                    </a-button>
+                    <a-button @click="resetQuery" class="smart-margin-left10">
+                        <template #icon>
+                            <ReloadOutlined/>
+                        </template>
+                        重置
+                    </a-button>
+                </a-button-group>
+            </a-form-item>
+        </a-row>
+    </a-form>
+    <!---------- 查询表单form end ----------->
 
-        <FunNavigation @f5="f5" @showFn="showSearch = !showSearch">
-            <el-button type="primary"  v-permission="" icon="Plus" plain @click="add">增加</el-button>
-            <el-button type="primary"  v-permission="" icon="Download" plain @click="exportFile">导出</el-button>
-        </FunNavigation>
+    <a-card size="small" :bordered="false" :hoverable="true">
+        <!---------- 表格操作行 begin ----------->
+        <a-row class="smart-table-btn-block">
+            <div class="smart-table-operate-block">
+                <a-button @click="add" type="primary">
+                    <template #icon>
+                        <PlusOutlined/>
+                    </template>
+                    新建
+                </a-button>
+                <a-button @click="exportFile" type="primary">
+                    <template #icon>
+                        <ArrowDownOutlined/>
+                    </template>
+                    导出
+                </a-button>
+            </div>
+            <div class="smart-table-setting-block">
+                <TableOperator v-model="columns" tableId="log" :refresh="f5"/>
+            </div>
+        </a-row>
+        <!---------- 表格操作行 end ----------->
 
-        <!-- <div class="c-title">数据列表</div> -->
-        <el-table :data="dataList" :header-cell-style="tableHeaderCellStyle" v-loading="loading"  @sort-change="shortChange">
-            #{el-table-column}#
-            <el-table-column prop="address" label="操作" width="150px" #{fixed}#>
-                <template #default="s">
-                    <!--注意这里  v-permission="" 表示 任意权限，如果需要控制权限补充里面内容，比如 user-delete 然后权限表里面加相关权限，并且用户角色设置有关联权限-->
-                    <el-button link  v-permission="" type="primary"  @click="info(s.row)">查看</el-button>
-                    <el-button link  v-permission="" type="primary"  @click="update(s.row)">修改</el-button>
-                    <el-button link  v-permission=""  type="danger" @click="del(s.row)">删除</el-button>
+        <!---------- 表格 begin ----------->
+        <a-table
+            size="small"
+            :dataSource="tableData"
+            :columns="columns"
+            rowKey="positionId"
+            bordered
+            :loading="tableLoading"
+            :pagination="false"
+
+        >
+            <template #bodyCell="{ text, record, column }">
+                <template v-if="column.dataIndex === 'action'">
+                    <div class="smart-table-operate">
+                        <a-button @click="update(record)" type="link">编辑</a-button>
+                        <a-button @click="del(record)" danger type="link">删除</a-button>
+                    </div>
                 </template>
-            </el-table-column>
-        </el-table>
-        <!-- 分页 -->
-        <Pagination :p="p"  @f5="f5"></Pagination>
-    </div>
-    <!-- 增改组件 -->
-    <add-or-update ref="addUpdate"></add-or-update>
-    <current-or-info ref="currentInfo"></current-or-info>
-</template>
+            </template>
+        </a-table>
+        <!---------- 表格 end ----------->
 
+        <Pagination :p="p" @f5="f5" :total="total"></Pagination>
+        <addOrUpdate ref="addUpdate" @reloadList="f5"/>
+
+    </a-card>
+</template>
 <script setup>
 import addOrUpdate from './add.vue';
-import currentOrInfo from './info.vue'
-import {inject, ref, onMounted} from "vue";
-import Pagination from "@/components/file/Pagination.vue";
-import FunNavigation from "@/components/funNavigation/funNavigation.vue";
+import {reactive, ref, onMounted} from 'vue';
+import {base} from '/@/utils/base';
+import Pagination from "/@/components/framework/base-page/index.vue"
+import {smartSentry} from '/@/lib/smart-sentry';
+import TableOperator from '/@/components/support/table-operator/index.vue';
 import {useRouter} from "vue-router";
 //importFiles
+// ---------------------------- 表格列 ----------------------------
+
+const columns = ref(#{listColumns}#);
+
+// ---------------------------- 查询数据表单和方法 ----------------------------
+
 const params = #{queryPageParams}#
-const p = ref(JSON.parse(JSON.stringify(params)))
-const dataList = ref([]);
-const sa = inject('sa')
+// 查询表单form
+let p = reactive({...params});
+// 表格加载loading
+const tableLoading = ref(false);
+// 表格数据
+const tableData = ref([]);
+// 总数
+const total = ref(0);
 const addUpdate = ref()
-const currentInfo = ref();
-const  loading = ref(false)
-const showSearch = ref(true)
 const query = ref({})
+
+// 重置查询条件
+function resetQuery() {
+    let pageSize = p.pageSize;
+    Object.assign(p, params);
+    p.pageSize = pageSize;
+    f5();
+}
+
+// 查询数据
+async function f5() {
+    tableLoading.value = true;
+    try {
+        let queryResult = await base.put('/#{EntityName}#/listPage', p);
+        tableData.value = queryResult.data.content;
+        total.value = queryResult.data.totalElements;
+    } catch (e) {
+        smartSentry.captureError(e);
+    } finally {
+        tableLoading.value = false;
+    }
+}
+
+const router = useRouter();
+
 onMounted(() => {
-    const router = useRouter();
     query.value = router.currentRoute.value.query;
-    p.value = {...params, ...router.currentRoute.value.query}
+    p = {...params, ...router.currentRoute.value.query}
     f5()
 })
 
-// 数据刷新
-async function f5() {
-    loading.value = true
-    const {data} = await sa.put("/#{EntityName}#/listPage", p.value);
-    loading.value = false
-    dataList.value = data.content.map((item) => {
-        return item;
-    });
-    p.value.total  = data.totalElements;
-}
-
 function exportFile() {
-    sa.download("/#{EntityName}#/export", p.value)
+    base.download("/#{EntityName}#/export", p.value)
 }
 
-function reset() {
-    p.value = JSON.parse(JSON.stringify(params))
+// ---------------------------- 添加/修改 ----------------------------
+function update(row) {
+    addUpdate.value.open(row, query.value);
 }
 
-// 删除
+function add() {
+    addUpdate.value.open(null, query.value);
+}
+
+// ---------------------------- 单个删除 ----------------------------
+//确认删除
 function del(data) {
-    sa.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await sa.delete("/#{EntityName}#/delete/" + data.id);
-        console.log(res)
-        sa.arrayDelete(dataList.value, data);
-        sa.ok(res.message);
+    base.confirm('是否删除，此操作不可撤销', async function () {
+        let res = await base.delete("/#{EntityName}#/delete/" + data.id);
+        base.success(res.message);
+        f5();
     }.bind(this));
 }
 
 function shortChange(e) {
     console.log('排序接受', e)
-    p.value.direction = e.order === 'ascending';
-    p.value.sortCol = e.prop;
+    p.direction = e.order === 'ascending';
+    p.sortCol = e.prop;
     f5();
 }
 
 async function updateSwitch(row) {
-    await sa.post('/#{EntityName}#//save', row);
-    sa.ok("更新成功", true)
-}
-
-//更新
-function update(row) {
-    addUpdate.value.open(row, query.value);
+    await base.post('/#{EntityName}#/save', row);
+    base.success("更新成功")
 }
 
 
-//添加
-function add() {
-    addUpdate.value.open(null, query.value);
-}
+// 选择表格行
+const selectedRowKeyList = ref([]);
 
-function info(row) {
-    currentInfo.value.open(row, query.value);
+function onSelectChange(selectedRowKeys) {
+    selectedRowKeyList.value = selectedRowKeys;
 }
 
 defineExpose({
     f5
 })
 </script>
-
-<style>
-</style>

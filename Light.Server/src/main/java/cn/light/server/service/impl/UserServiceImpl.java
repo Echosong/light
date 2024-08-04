@@ -24,12 +24,14 @@ import cn.light.entity.repository.UserRoleRepository;
 import cn.light.packet.dto.user.*;
 import cn.light.packet.enums.UserStateEnum;
 import cn.light.server.service.PermissionService;
+import cn.light.server.service.TableColumnService;
 import cn.light.server.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -159,13 +161,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     @Override
     public UserCache getUserCache() {
-        String userId = StpUtil.getLoginId().toString();
+        Integer userId = 1;
         UserCache user = null;
         try {
-            user = userCacheRepository.findById(Integer.parseInt(userId)).orElse(null);
+            user = userCacheRepository.findById(userId).orElse(null);
         }catch (Exception ignored){}
         if (Objects.isNull(user)) {
-            user = userMapper.getUserCache(Integer.parseInt(userId));
+            user = userMapper.getUserCache(userId);
             userCacheRepository.save(user);
         }
         return user;

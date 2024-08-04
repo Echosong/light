@@ -30,7 +30,7 @@ public class Const {
     /**
      * vue地址
      */
-    public static String  VUE_PATH = "\\src\\views";
+    public static String  VUE_PATH = "D:\\项目资料\\light框架\\light-view\\src\\views";
 
     /**
      * vue 路由
@@ -60,7 +60,7 @@ public class Const {
     /**
      * 表前缀
      */
-    public static String TABLE_PREFIX = "Sys";
+    public static String TABLE_PREFIX = "hz";
 
 
 }

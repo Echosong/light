@@ -24,9 +24,5 @@ public interface TableColumnService extends IService<SysTableColumn> {
 
     TableColumnDTO save(TableColumnDTO tableColumnDTO);
 
-    TableColumnDTO find(Integer id);
-
-    void delete(Integer id);
-    
-
+    String getColumns(String tableName);
 }

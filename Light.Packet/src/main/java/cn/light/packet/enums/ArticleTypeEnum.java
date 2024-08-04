@@ -10,12 +10,12 @@ public enum ArticleTypeEnum  implements BaseEnum {
     /**
      * 文章类型
      */
-    NEW(0, "新闻"),
-    NOTICE(1, "公告"),
+    NEW(10, "新闻"),
+    NOTICE(20, "公告"),
 
-    ARTICLE(3, "文章"),
+    ARTICLE(30, "文章"),
 
-    X(4, "通知");
+    X(40, "通知");
 
     final Integer code;
     final String name;

@@ -44,7 +44,7 @@ public class InitService {
             }
             try {
                 //视图处理
-                //Singleton.get(ViewService.class, clazz).start();
+                Singleton.get(ViewService.class, clazz).start();
             }catch (Exception e){
                 log.error("视图处理失败",e);
             }

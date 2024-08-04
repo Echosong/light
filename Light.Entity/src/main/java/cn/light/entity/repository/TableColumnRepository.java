@@ -20,4 +20,5 @@ import org.springframework.stereotype.Repository;
 public interface TableColumnRepository extends JpaRepository<SysTableColumn, Integer> {
     Optional<SysTableColumn> findByUserIdAndTableName(Integer userId, String tableName);
 
+    List<SysTableColumn> findByUserId(Integer id);
 }

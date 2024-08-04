@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.redis.core.RedisHash;
 
 /**
  * SysTableColumn
@@ -25,12 +26,13 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@RedisHash
 @AutoEntity(value = "存储列设置表", viewInfo = false,
         viewList = false, viewFrom = false)
 //@AutoCover(CodeTypeEnum.SERVICE)
 public class SysTableColumn extends SysBase{
 
-    @AutoEntityField(value = "用户id")
+    @AutoEntityField(value = "用户id 0表示通用")
     private Integer userId;
 
     @AutoEntityField(value = "表名")
