@@ -5,7 +5,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.packet.dto.config.ConfigDTO;
-import cn.light.packet.enums.ConfigGroupEnum;
+import cn.light.packet.enums.system.ConfigGroupEnum;
 import cn.light.server.service.ConfigService;
 import cn.light.server.service.StorageService;
 import jakarta.annotation.Resource;

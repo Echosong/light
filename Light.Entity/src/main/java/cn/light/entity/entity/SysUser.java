@@ -2,12 +2,9 @@ package cn.light.entity.entity;
 
 
 import cn.light.common.anno.*;
-import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.packet.enums.UserRegTypeEnum;
-import cn.light.packet.enums.UserSexEnum;
-import cn.light.packet.enums.UserStateEnum;
-import jakarta.persistence.Column;
+import cn.light.packet.enums.system.UserSexEnum;
+import cn.light.packet.enums.system.UserStateEnum;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

@@ -45,15 +45,6 @@ public class HomeController extends BaseController {
     @Value("${app.build.time}")
     private String buildTime;
 
-
-
-    @GetMapping("/home/unreadCount")
-    @Operation(summary = "获取未读消息数量")
-    public Integer getUnreadCount(){
-        return 10;
-    }
-
-
     @GetMapping("/test")
     @NoPermission
     public String test(){

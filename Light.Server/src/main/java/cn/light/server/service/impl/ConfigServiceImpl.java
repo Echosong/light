@@ -9,7 +9,7 @@ import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
 
-import cn.light.packet.enums.ConfigGroupEnum;
+import cn.light.packet.enums.system.ConfigGroupEnum;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.light.entity.entity.SysConfig;

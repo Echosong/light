@@ -3,7 +3,7 @@ package cn.light.packet.dto.user;
 
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.annotation.ApiModelPropertyEnum;
-import cn.light.packet.enums.UserStateEnum;
+import cn.light.packet.enums.system.UserStateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import lombok.Data;

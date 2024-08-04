@@ -2,20 +2,13 @@ package cn.light.packet.dto.file;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
-import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+
 import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
-import java.math.BigDecimal;
-import java.util.*;
-import cn.light.packet.enums.FileTypeEnum;
+import cn.light.packet.enums.system.FileTypeEnum;
 /**
  * <p>Title: 文件管理</p >
  * <p>Description: </p >

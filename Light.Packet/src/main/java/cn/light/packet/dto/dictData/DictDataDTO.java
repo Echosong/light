@@ -6,7 +6,7 @@ import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import cn.light.packet.enums.YesOrNoEnum;
+import cn.light.packet.enums.system.YesOrNoEnum;
 /**
  * <p>Title: 字典数据</p >
  * <p>Description: </p >

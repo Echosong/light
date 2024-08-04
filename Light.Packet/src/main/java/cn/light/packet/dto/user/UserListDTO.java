@@ -2,7 +2,6 @@ package cn.light.packet.dto.user;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
-import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -10,18 +9,13 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotNull;
 
 import lombok.EqualsAndHashCode;
 
-import java.math.BigDecimal;
-import java.util.*;
-
-import cn.light.packet.enums.UserSexEnum;
-import cn.light.packet.enums.UserStateEnum;
+import cn.light.packet.enums.system.UserSexEnum;
+import cn.light.packet.enums.system.UserStateEnum;
 
 /**
  * <p>Title:用户 </p >

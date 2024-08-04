@@ -64,6 +64,19 @@ public interface BaseEnum {
         return list;
     }
 
+
+    public static boolean isClassExists(String packetClassName) {
+        try {
+            // 尝试通过类名获取 Class 对象
+            Class<?> clazz = Class.forName(packetClassName);
+            // 如果没有抛出异常，则类存在
+            return true;
+        } catch (ClassNotFoundException e) {
+            // 如果捕获到 ClassNotFoundException，则类不存在
+            return false;
+        }
+    }
+
     /**
      *
      * 根据简单得className 枚举 to MapList
@@ -75,13 +88,17 @@ public interface BaseEnum {
         String className = ClassUtil.getClassName(BaseEnum.class, false);
         Class<? extends BaseEnum> clazz;
         try {
-            String packetClassName = className.replace("common.enums.BaseEnum", "packet.enums."+enumClass);
+            String packetClassName = className.replace("common.enums.BaseEnum", "packet.enums.system."+enumClass);
+            if(!isClassExists(packetClassName)){
+                packetClassName = className.replace("common.enums.BaseEnum", "packet.enums.business."+enumClass);
+            }
+            if(!isClassExists(packetClassName)){
+                packetClassName = className.replace(".BaseEnum", "."+enumClass);
+            }
             clazz = (Class<? extends BaseEnum>) Class.forName(packetClassName);
             ClassUtil.getLocationPath(BaseEnum.class);
         }catch (Exception e){
-            String baseClassName = className.replace(".BaseEnum", "."+enumClass);
-            clazz = (Class<? extends BaseEnum>) Class.forName(baseClassName);
-            ClassUtil.getLocationPath(BaseEnum.class);
+            throw new ClassNotFoundException("枚举类不存在");
         }
         return toMap(clazz);
     }

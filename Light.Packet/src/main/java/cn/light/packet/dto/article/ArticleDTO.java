@@ -2,18 +2,13 @@ package cn.light.packet.dto.article;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
-import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
-import java.math.BigDecimal;
+
 import java.util.*;
-import cn.light.packet.enums.ArticleTypeEnum;
+import cn.light.packet.enums.system.ArticleTypeEnum;
 /**
  * 新闻 pojo转化
  * email:zq_songfeigang@163.com

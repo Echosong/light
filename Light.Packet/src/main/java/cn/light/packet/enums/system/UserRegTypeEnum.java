@@ -1,4 +1,4 @@
-package cn.light.packet.enums;
+package cn.light.packet.enums.system;
 
 import cn.light.common.enums.BaseEnum;
 import lombok.Getter;

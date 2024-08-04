@@ -1,22 +1,23 @@
-package cn.light.packet.enums;
+package cn.light.packet.enums.system;
 
 import cn.light.common.enums.BaseEnum;
 import lombok.Getter;
 
 /**
+ * 存储类型
  * @author 二胡子
  */
 
 @Getter
-public enum YesOrNoEnum implements BaseEnum {
+public enum StorageTypeEnum implements BaseEnum {
     /**
-     * 合同文档
+     * 本地存储
      */
-    ON(1, "开启"),
+    LOCAL(10, "本地存储"),
     /**
      * 相关配置
      */
-    OFF(0, "关闭");
+    OSS(20, "阿里云OSS");
 
 
     private final Integer code;
@@ -27,7 +28,7 @@ public enum YesOrNoEnum implements BaseEnum {
      * @param code 编码id
      * @param name 名称
      */
-    YesOrNoEnum(Integer code, String name) {
+    StorageTypeEnum(Integer code, String name) {
         this.code = code;
         this.name = name;
     }

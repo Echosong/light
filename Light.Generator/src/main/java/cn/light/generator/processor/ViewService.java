@@ -208,7 +208,7 @@ public class ViewService extends BaseService implements ServiceInterface {
 
             returnValue = StrUtil.format("""
                             <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
-                                  <input-enum enumName="{}"  v-model:value="p.{}"></input-enum>
+                                  <input-enum enumName="{}"  style="width: 180px;"  v-model="p.{}"></input-enum>
                             </a-form-item>""",
                     autoEntityField.value(), field.getName(),StrUtil.lowerFirst(lclazz.getSimpleName()), field.getName());
         }

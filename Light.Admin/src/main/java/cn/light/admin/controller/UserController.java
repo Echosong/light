@@ -12,7 +12,7 @@ import cn.light.common.enums.LogicalEnum;
 import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.SysUser;
 import cn.light.packet.dto.user.*;
-import cn.light.packet.enums.UserStateEnum;
+import cn.light.packet.enums.system.UserStateEnum;
 import cn.light.server.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;

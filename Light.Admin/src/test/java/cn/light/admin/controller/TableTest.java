@@ -25,8 +25,4 @@ public class TableTest {
     @Resource
     private TableColumnService tableColumnService;
 
-    @Test
-    public void test() {
-        tableColumnService.initUserTable();
-    }
 }
