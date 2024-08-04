@@ -1,7 +1,6 @@
 package cn.light.packet.enums;
 
 import cn.light.common.enums.BaseEnum;
-import lombok.Data;
 import lombok.Getter;
 
 /**
@@ -9,15 +8,15 @@ import lombok.Getter;
  */
 
 @Getter
-public enum DicTypeStateEnum implements BaseEnum {
+public enum YesOrNoEnum implements BaseEnum {
     /**
      * 合同文档
      */
-    ON(10, "开启"),
+    ON(1, "开启"),
     /**
      * 相关配置
      */
-    OFF(20, "关闭");
+    OFF(0, "关闭");
 
 
     private final Integer code;
@@ -28,7 +27,7 @@ public enum DicTypeStateEnum implements BaseEnum {
      * @param code 编码id
      * @param name 名称
      */
-    DicTypeStateEnum(Integer code, String name) {
+    YesOrNoEnum(Integer code, String name) {
         this.code = code;
         this.name = name;
     }

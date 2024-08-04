@@ -2,7 +2,7 @@ package cn.light.entity.entity;
 
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
-import cn.light.packet.enums.DicTypeStateEnum;
+import cn.light.packet.enums.YesOrNoEnum;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +38,6 @@ public class SysDictType extends SysBase{
     private String groupName;
 
     /** 状态（1正常 0停用） */
-    @AutoEntityField(value = "状态", notes = "1=正常,0=停用", enums = DicTypeStateEnum.class)
+    @AutoEntityField(value = "状态", notes = "1=正常,0=停用", enums = YesOrNoEnum.class)
     private Integer state;
 }

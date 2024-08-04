@@ -2,22 +2,12 @@ package cn.light.packet.dto.dictType;
 
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
-import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
-import java.math.BigDecimal;
-import java.util.*;
 
-import cn.light.packet.enums.DicTypeStateEnum;
+import cn.light.packet.enums.YesOrNoEnum;
 
 /**
  * <p>Title:字典类型 </p >
@@ -38,7 +28,7 @@ public class DictTypeListDTO extends SysBaseDTO implements IDictionaryObject {
     private String dictType;
 
    @Schema(title="状态" , description="1=正常,0=停用")
-    @ApiModelPropertyEnum(DicTypeStateEnum.class)
+    @ApiModelPropertyEnum(YesOrNoEnum.class)
     private Integer state;
 
 
