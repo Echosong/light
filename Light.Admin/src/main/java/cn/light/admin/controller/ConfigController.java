@@ -50,19 +50,24 @@ public class ConfigController extends BaseController{
          configService.save(configDTO);
     }
 
+    @Operation(summary = "批量新增活更新系统配置")
+    @PostMapping("/saveList")
+    @Log("批量新增|修改系统配置")
+    public void saveList(@RequestBody @javax.validation.Valid List<ConfigDTO> configDTOList){
+        configService.saveList(configDTOList);
+    }
+
+    @Operation(summary = "获取配置列表")
+    @GetMapping("/getConfigList")
+    public Map<String, List<ConfigListDTO>> getConfigList(){
+        return configService.getConfigList();
+    }
+
 
     @Operation(summary = "查询单个明细")
     @GetMapping("/find/{id}")
     public ConfigDTO find(@PathVariable Integer id){
         return configService.find(id);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "删除")
-    @Log("删除系统配置")
-    @Permission(roles = Consts.ROLE_ADMIN_CODE)
-    public void delete(@PathVariable(value="id") Integer id) {
-        configService.delete(id);
     }
 
     

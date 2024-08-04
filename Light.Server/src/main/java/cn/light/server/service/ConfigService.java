@@ -30,4 +30,8 @@ public interface ConfigService extends IService<SysConfig> {
 
 
     ConfigDTO getByGroupAndKey(Integer group, String key);
+
+    void saveList(List<ConfigDTO> configDTOList);
+
+    Map<String, List<ConfigListDTO>> getConfigList();
 }

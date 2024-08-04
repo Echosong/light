@@ -4,6 +4,7 @@ import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
 import cn.light.common.enums.HtmlTypeEnum;
+import com.baomidou.mybatisplus.annotation.TableField;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
@@ -33,12 +34,13 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @DynamicInsert
 @DynamicUpdate
-@AutoEntity(value = "系统配置", controllerFunction = "list,save")
+@AutoEntity(value = "系统配置", controllerFunction = "list,save", viewFrom = false, viewList = false)
 public class SysConfig extends SysBase  {
     @NotBlank
     @AutoEntityField("配置字段名")
     @InQueryDTO
     @Column(name = "`key`")
+    @TableField(value = "`key`")
     private String key;
 
     @Email
@@ -51,6 +53,7 @@ public class SysConfig extends SysBase  {
     @AutoEntityField(value = "配置分组" )
     @Range(min = 0)
     @Column(name="`group`")
+    @TableField(value = "`group`")
     private Integer group = 0;
 
     @AutoEntityField(value = "配置值", htmlType = HtmlTypeEnum.TEXTAREA)

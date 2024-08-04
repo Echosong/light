@@ -1,11 +1,15 @@
 package  cn.light.server.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
 
+import cn.light.packet.enums.ConfigGroupEnum;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.light.entity.entity.SysConfig;
@@ -17,8 +21,10 @@ import cn.light.packet.dto.config.*;
 import org.springframework.http.ResponseEntity;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 自动生成 系统配置 service 实现
@@ -78,7 +84,35 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, SysConfig> impl
                 .orElse(new ConfigDTO());
     }
 
-    
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveList(List<ConfigDTO> configDTOList) {
+        List<SysConfig> configs = DtoMapper.convertList(configDTOList, SysConfig.class);
+        this.saveOrUpdateBatch(configs);
+    }
+
+    @Override
+    public Map<String, List<ConfigListDTO>> getConfigList() {
+        List<SysConfig> all = configRepository.findAll();
+        List<ConfigListDTO> configLists = DtoMapper.convertList(all, ConfigListDTO.class);
+        //根据 group 分组
+        Map<Integer, List<ConfigListDTO>> collect = configLists.stream().collect(Collectors.groupingBy(ConfigListDTO::getGroup));
+        Map<String, List<ConfigListDTO>> map = new HashMap<>();
+
+        for (Map.Entry<Integer, List<ConfigListDTO>> integerListEntry : collect.entrySet()) {
+            integerListEntry.getValue().forEach(item->{
+                if(StrUtil.contains(item.getDescription(),"{")){
+                    try {
+                        JSONArray bean = JSONUtil.parseArray(item.getDescription());
+                        item.setOptions(bean);
+                    }catch (Exception ignored) {}
+                }
+            });
+            Arrays.stream(ConfigGroupEnum.values()).filter(t -> Objects.equals(t.getCode(), integerListEntry.getKey())).findFirst()
+                    .ifPresent(t -> map.put(t.getName(), integerListEntry.getValue()));
+        }
+        return map;
+    }
 
 
 }

@@ -90,7 +90,6 @@ public class DictionarySerializer extends JsonSerializer<IDictionaryObject> {
                 jsonGenerator.writeStringField(map.get("code"), map.get("value"));
             }
             if (field.isAnnotationPresent(ApiModelPropertyEnum.class)) {
-                jsonGenerator.writeObjectField(field.getName(), value);
                 ApiModelPropertyEnum annotation = field.getAnnotation(ApiModelPropertyEnum.class);
                 Class<? extends BaseEnum> clazz = annotation.value();
                 BaseEnum[] enums = clazz.getEnumConstants();
