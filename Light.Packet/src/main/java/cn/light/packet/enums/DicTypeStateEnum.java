@@ -13,11 +13,11 @@ public enum DicTypeStateEnum implements BaseEnum {
     /**
      * 合同文档
      */
-    ON(1, "开启"),
+    ON(10, "开启"),
     /**
      * 相关配置
      */
-    OFF(0, "关闭");
+    OFF(20, "关闭");
 
 
     private final Integer code;

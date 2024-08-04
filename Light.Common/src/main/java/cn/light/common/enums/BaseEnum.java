@@ -9,11 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Title: </p >
- * <p>Description: 枚举接口，用来处理api文档</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2021-10-3023:00</p >
- *
+ *  枚举注意 code 不要 为0
  * @author : echosong
  * @version :1.0.0
  */

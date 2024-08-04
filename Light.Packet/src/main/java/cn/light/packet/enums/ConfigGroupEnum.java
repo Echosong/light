@@ -12,7 +12,7 @@ public enum ConfigGroupEnum  implements BaseEnum {
     /**
      * 合同文档
      */
-    ADMIN(0, "基本配置"),
+    ADMIN(10, "基本配置"),
     FILE(40, "文件配置"),
     APP(50, "APP配置");
 

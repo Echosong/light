@@ -17,10 +17,10 @@ public enum UserStateEnum implements BaseEnum {
     /**
      * 用户状态
      */
-    NEW(0, "未启用"),
-    ON(1, "正常"),
-    OFF(2, "禁用"),
-    DELETE(3,"删除");
+    NEW(10, "未启用"),
+    ON(20, "正常"),
+    OFF(30, "禁用"),
+    DELETE(40,"删除");
 
 
     private final Integer code;

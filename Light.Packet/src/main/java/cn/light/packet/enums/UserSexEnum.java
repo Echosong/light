@@ -17,8 +17,8 @@ public enum UserSexEnum implements BaseEnum {
     /**
      * 用户状态
      */
-    MALE(0, "男"),
-    WOMAN(1, "女");
+    MALE(10, "男"),
+    WOMAN(20, "女");
 
 
     private final Integer code;
