@@ -23,6 +23,4 @@ public interface MessageMapper extends BaseMapper<SysMessage> {
 
      Long getUnreadCount(Integer receiverId);
 
-
-
 }
