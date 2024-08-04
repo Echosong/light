@@ -20,7 +20,7 @@
         </where>
     </select>
     <select id="getUnreadCount" resultType="java.lang.Long">
-        SELECT count(1)
+        SELECT COUNT(1)
         FROM sys_message
         WHERE (receiver_id = #{receiverId} OR receiver_id = 0)
           AND state <![CDATA[ < ]]>  3 AND type = 5
