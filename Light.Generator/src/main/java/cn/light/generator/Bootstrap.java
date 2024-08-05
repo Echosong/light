@@ -4,6 +4,9 @@ import cn.hutool.core.lang.Singleton;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.Setting;
+import cn.light.common.consts.Consts;
+import cn.light.generator.config.Config;
+import cn.light.generator.config.Const;
 import cn.light.generator.processor.DictionaryService;
 import cn.light.generator.processor.InitService;
 
@@ -20,6 +23,10 @@ import java.util.Set;
  */
 public class Bootstrap {
     public static void main(String[] args) {
+        Config.initialization();
+
+
+
         Const.SYS_PATH = ClassUtil.getPackagePath(Bootstrap.class).replace("/", ".")
                 .replace(".generator", "");
         if (StrUtil.isBlank(Const.ROOT_PATH)) {

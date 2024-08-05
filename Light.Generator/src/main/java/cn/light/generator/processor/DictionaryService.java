@@ -8,7 +8,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.entity.entity.SysBase;
-import cn.light.generator.Const;
+import cn.light.generator.config.Const;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 

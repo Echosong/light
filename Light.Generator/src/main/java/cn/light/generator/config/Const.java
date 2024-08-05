@@ -1,4 +1,4 @@
-package cn.light.generator;
+package cn.light.generator.config;
 
 /**
  * <p>Title: </p >
@@ -19,7 +19,7 @@ public class Const {
     /**
      * 根路径
      */
-    public static String ROOT_PATH = "D:\\项目资料\\light框架\\framework";
+    public static String ROOT_PATH = "";
 
     /**
      * 静态魔板路径
@@ -30,12 +30,8 @@ public class Const {
     /**
      * vue地址
      */
-    public static String  VUE_PATH = "D:\\项目资料\\light框架\\light-view\\src\\views";
+    public static String  VUE_PATH = "";
 
-    /**
-     * vue 路由
-     */
-    public static String  VUE_ROOT_ROUTER = "\\src\\router\\main.js";
 
     /**
      * 开启或者关闭数据库备注

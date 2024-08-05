@@ -11,7 +11,7 @@ import cn.light.common.dto.PageInfo;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.generator.Const;
+import cn.light.generator.config.Const;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

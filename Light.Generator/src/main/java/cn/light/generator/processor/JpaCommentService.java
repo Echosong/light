@@ -8,7 +8,7 @@ import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.AutoEntityFieldDefault;
 import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.generator.Const;
+import cn.light.generator.config.Const;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;

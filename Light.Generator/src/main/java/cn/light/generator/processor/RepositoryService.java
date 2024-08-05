@@ -6,9 +6,8 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
-import cn.light.common.anno.AutoEntity;
 import cn.light.common.enums.CodeTypeEnum;
-import cn.light.generator.Const;
+import cn.light.generator.config.Const;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.Charset;

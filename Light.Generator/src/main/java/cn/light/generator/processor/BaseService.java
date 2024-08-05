@@ -5,7 +5,7 @@ import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoEntity;
-import cn.light.generator.Const;
+import cn.light.generator.config.Const;
 
 
 import java.net.URLDecoder;
