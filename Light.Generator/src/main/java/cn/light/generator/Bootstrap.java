@@ -23,9 +23,8 @@ import java.util.Set;
  */
 public class Bootstrap {
     public static void main(String[] args) {
+        //初始化配置
         Config.initialization();
-
-
 
         Const.SYS_PATH = ClassUtil.getPackagePath(Bootstrap.class).replace("/", ".")
                 .replace(".generator", "");
