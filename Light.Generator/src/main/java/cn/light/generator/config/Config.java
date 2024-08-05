@@ -9,6 +9,7 @@ package cn.light.generator.config;
  * @date : 2024/8/5 7:51
  */
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.ds.DSFactory;
 import cn.hutool.db.ds.GlobalDSFactory;
 import cn.hutool.setting.Setting;
@@ -16,6 +17,9 @@ import cn.hutool.setting.Setting;
   public class Config {
       public static void  initialization() {
           String env = System.getenv("env");
+          if(StrUtil.isBlank(env)){
+              env = "dev";
+          }
           //获取当前路径
           Setting setting = new Setting("db-" + env + ".setting");
           Const.TABLE_PREFIX =  setting.get("db-prefix");
