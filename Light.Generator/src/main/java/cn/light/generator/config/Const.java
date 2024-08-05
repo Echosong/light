@@ -56,7 +56,7 @@ public class Const {
     /**
      * 表前缀
      */
-    public static String TABLE_PREFIX = "hz";
+    public static String TABLE_PREFIX = "";
 
 
 }
