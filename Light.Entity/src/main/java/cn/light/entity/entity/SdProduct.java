@@ -2,6 +2,9 @@ package cn.light.entity.entity;
 
 import cn.light.common.anno.*;
 import cn.light.common.enums.HtmlTypeEnum;
+import cn.light.packet.enums.business.GoodStateEnum;
+import cn.light.packet.enums.business.ProductRuleEnum;
+import cn.light.packet.enums.system.YesOrNoEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -117,7 +120,7 @@ public class SdProduct extends SysBase{
     private String refuseRemark;
 
     /** 是否热卖 */
-    @AutoEntityField(value = "热卖", notes = "是否热卖（0：否，1：是）",enums = HotEnum.class)
+    @AutoEntityField(value = "热卖", notes = "是否热卖（0：否，1：是）",enums = YesOrNoEnum.class)
     private Integer isHot;
 
 

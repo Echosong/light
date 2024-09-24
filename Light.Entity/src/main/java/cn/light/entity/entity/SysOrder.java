@@ -76,8 +76,6 @@ public class SysOrder extends  SysBase{
     @AutoEntityField(value = "供应商名称")
     private String shopName;
 
-    @AutoEntityField(value = "付款过程", enums = OrderPayProcessEnum.class)
-    private Integer payProcess;
 
     @AutoEntityField(value = "支付相关id")
     private Integer financePayId;
@@ -86,9 +84,4 @@ public class SysOrder extends  SysBase{
     @AutoEntityField(value = "发票抬头id")
     private Integer invoiceHeadId;
 
-    @AutoEntityField(value = "类型", enums = OrderTypeEnum.class )
-    private Integer orderType;
-
-    @AutoEntityField(value = "是否平团", enums = YesOrNoEnum.class)
-    private Integer isTeam;
 }

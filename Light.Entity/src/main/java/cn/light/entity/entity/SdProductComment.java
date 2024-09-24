@@ -5,7 +5,6 @@ import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
 import cn.light.common.anno.NotinListDTO;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.packet.enums.GoogTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -44,9 +43,6 @@ public class SdProductComment extends SysBase{
 
     @AutoEntityField(value = "商品id")
     private Integer goodId;
-
-    @AutoEntityField(value = "商品类型", enums = GoogTypeEnum.class)
-    private Integer  goodType;
 
 
     @AutoEntityField(value = "订单id")

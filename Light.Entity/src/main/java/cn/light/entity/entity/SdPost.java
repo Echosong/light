@@ -2,8 +2,6 @@ package cn.light.entity.entity;
 
 import cn.light.common.anno.*;
 import cn.light.common.enums.HtmlTypeEnum;
-import cn.light.packet.enums.PartnerAuditStateEnum;
-import cn.light.packet.enums.PostTypeEnum;
 import cn.light.packet.enums.business.AuditStateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
@@ -64,7 +62,7 @@ public class SdPost extends SysBase{
     @AutoEntityField(value = "是否热门",notes = "1 热门，0 不热门")
     @InQueryDTO
     private Integer isHot;
-    
+
 
     @AutoEntityField(value = "获得的打赏")
     @AutoEntityFieldDefault("0")
