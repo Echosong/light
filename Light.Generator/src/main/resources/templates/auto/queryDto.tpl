@@ -1,5 +1,7 @@
 package #{SYS_PATH}.packet.dto.#{EntityName}#;
 
+import #{SYS_PATH}.packet.enums.system.*;
+import #{SYS_PATH}.packet.enums.business.*;
 import #{SYS_PATH}.common.dto.PageInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import #{SYS_PATH}.common.annotation.ApiModelPropertyEnum;

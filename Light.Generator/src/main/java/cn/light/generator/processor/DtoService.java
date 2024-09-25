@@ -143,7 +143,6 @@ public class DtoService extends BaseService implements ServiceInterface {
                 //处理
                 if (!"BaseEnum".equals(autoEnumName)) {
                     //这个地方要用全路径
-                    this.importPackage.add(StrUtil.format("import {}.{};", autoEntityField.enums().getPackageName(), autoEnumName));
                     builder.append(StrUtil.format("    @ApiModelPropertyEnum({}.class)", autoEnumName));
                     builder.append("\r\n");
                 }
@@ -154,7 +153,7 @@ public class DtoService extends BaseService implements ServiceInterface {
                         fileName = "end"+ StrUtil.upperFirst(field.getName());
                     }
                 }
-                builder.append(StrUtil.format("    private {} {};", typeString, fileName));
+                builder.append(StrUtil.format("   private {} {};", typeString, fileName));
                 builder.append("\r\n\r\n");
             }
         }
