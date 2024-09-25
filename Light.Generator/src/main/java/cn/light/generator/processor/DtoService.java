@@ -135,7 +135,7 @@ public class DtoService extends BaseService implements ServiceInterface {
                     notes = StrUtil.format(", description = \"{}\"", notes);
                 }
 
-                builder.append(StrUtil.format("    @Schema(title = \"{}\" {})", autoEntityField.value(),
+                builder.append(StrUtil.format("    @Schema(title = \"{}\"{})", autoEntityField.value(),
                         notes));
                 builder.append("\r\n");
                 String autoEnumName = autoEntityField.enums().getSimpleName();
@@ -214,11 +214,11 @@ public class DtoService extends BaseService implements ServiceInterface {
             Pattern annotation = field.getAnnotation(Pattern.class);
             List<String> listAn = new ArrayList<>();
             if (StrUtil.isNotEmpty(annotation.message()) && !annotation.message().startsWith(START_WITH)) {
-                listAn.add("message = \"" + annotation.message() + "\"");
+                listAn.add(" message = \"" + annotation.message() + "\"");
             }
             if (StrUtil.isNotEmpty(annotation.regexp())) {
                 String patternStr = annotation.regexp().replace("\\", "\\\\");
-                listAn.add("regexp = \"" + patternStr + "\"");
+                listAn.add(" regexp = \"" + patternStr + "\"");
             }
             validBuilder.append(StrUtil.format(pattter, String.join(",", listAn)));
             validBuilder.append("\r\n");
