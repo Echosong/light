@@ -40,7 +40,6 @@ async function open(data, parmas)  {
         title.value = "修改 #{tableInfo}#";
         let one = await base.get("/#{EntityName}#/find/"+data.id);
         m.value = one.data;
-        m.value = data;
     } else {
         let mdata  = //data_init
         query.value = parmas || {};
