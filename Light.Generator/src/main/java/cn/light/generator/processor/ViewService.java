@@ -198,7 +198,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if ("Date".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
                             <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
-                               <a-range-picker @change="(rangDate)=> {p.start{} = rangDate[0];p.end{} = rangDate[1];}" value-format="YYYY-MM-DD HH:mm:ss" />
+                               <a-range-picker show-time @change="(rangDate)=> {p.start{} = rangDate[0];p.end{} = rangDate[1];}" />
                             </a-form-item>""", autoEntityField.value(),field.getName(), StrUtil.upperFirst(field.getName()),
                     StrUtil.upperFirst(field.getName()));
         }
