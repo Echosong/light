@@ -7,7 +7,7 @@
         @close="isShow = false"
         destroyOnClose
     >
-        <a-form v-if="m" ref="ruleForm" :rules="rules" :model="m" :label-col="{ span: 3 }" >
+        <a-form v-if="m" ref="ruleForm" :rules="rules" :model="m" :label-col="{ span: 4 }" >
             #{a-form-item}#
         </a-form>
         <template #footer>
