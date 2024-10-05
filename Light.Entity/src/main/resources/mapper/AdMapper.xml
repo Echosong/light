@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.AdMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysAd">
+        select *
+        from sys_ad
+        <where>
+          <if test="position != null "> 
+ and position = #{position} 
+ </if>
+<if test="name != null and name != '' ">
+ and name  like CONCAT('%',#{name},'%')
+ </if>
+        </where>
+    </select>
+
+</mapper>
