@@ -7,6 +7,7 @@ import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.dto.log.LogListDTO;
 import cn.light.packet.dto.log.LogQueryDTO;
 import cn.light.server.service.LogService;
+import cn.light.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,11 +32,20 @@ public class LogController extends BaseController{
 
     @Resource
     private LogService logService;
+    @Resource
+    private UserService userService;
 
     @Operation(summary = "分页查询日志")
     @PutMapping("/listPage")
     @NoPermission
     public Page<LogListDTO> listPage(@RequestBody @Valid LogQueryDTO queryDTO){
+        return logService.listPage(queryDTO);
+    }
+
+    @Operation(summary = "获取当前登录用户的日志")
+    @PutMapping("/currentListPage")
+    public Page<LogListDTO> currentListPage(@RequestBody @Valid LogQueryDTO queryDTO){
+        queryDTO.setUsername(userService.getUserCache().getUsername());
         return logService.listPage(queryDTO);
     }
 

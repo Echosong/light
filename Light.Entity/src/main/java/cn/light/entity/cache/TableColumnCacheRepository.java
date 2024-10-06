@@ -17,7 +17,4 @@ import java.util.Optional;
 public interface TableColumnCacheRepository  extends JpaRepository<SysTableColumn, String> {
     Optional<SysTableColumn> findByUserIdAndTableName(Integer userId, String tableName);
 
-    List<SysTableColumn> findByUserId(Integer userId);
-
-
 }

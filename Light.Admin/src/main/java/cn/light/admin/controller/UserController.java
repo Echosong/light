@@ -67,6 +67,14 @@ public class UserController extends BaseController{
     }
 
 
+    @PostMapping(path = {"/currentUpdate"})
+    @Operation(summary = "更新用户")
+    @Log("更新用户")
+    public void currentUpdate(@RequestBody UserDTO userDTO) {
+        userService.currentUpdate(userDTO);
+    }
+
+
     @PostMapping(path = {"/update","/save"})
     @Operation(summary = "更新用户")
     @Log("更新用户")

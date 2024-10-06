@@ -3,6 +3,7 @@ package cn.light.entity.entity;
 import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.common.anno.InQueryDTO;
+import cn.light.common.anno.NotinListDTO;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.packet.enums.business.FeedbackCategoryEnum;
 import jakarta.persistence.Entity;
@@ -24,9 +25,10 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @AutoEntity(value = "意见反馈")
 //@AutoCover(value = {CodeTypeEnum.LIST_VIEW, CodeTypeEnum.QUERY_DTO})
-public class SdFeedback extends SysBase {
+public class SysFeedback extends SysBase {
 
     @AutoEntityField(value = "用户id")
+    @NotinListDTO
     private Integer userId;
 
     @AutoEntityField(value = "用户账号")

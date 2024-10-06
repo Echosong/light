@@ -268,4 +268,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         resultDTO.setMenuList( permissionService.listByUser(userCache.getId()));
         return resultDTO;
     }
+
+    @Override
+    public void currentUpdate(UserDTO userDTO) {
+        UserCache userCache = this.getUserCache();
+        this.lambdaUpdate()
+                .set(SysUser::getInfo,userDTO.getInfo())
+                .set(SysUser::getEmail,userDTO.getEmail())
+                .set(SysUser::getSex,userDTO.getSex())
+                .eq(SysUser::getId,userCache.getId())
+                .update();
+        userCacheRepository.deleteById(userCache.getId());
+    }
 }

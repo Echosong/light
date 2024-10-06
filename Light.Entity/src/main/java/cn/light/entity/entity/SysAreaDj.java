@@ -4,6 +4,7 @@ import cn.light.common.anno.AutoEntity;
 import cn.light.common.anno.AutoEntityField;
 import cn.light.packet.enums.business.AdStateEnum;
 import cn.light.packet.enums.business.AreaTypeEnum;
+import cn.light.packet.enums.system.YesOrNoEnum;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @AutoEntity(value = "行政区划实体")
-//@AutoCover(value = {CodeTypeEnum.CONTROLLER})
-public class SdAreaDj extends  SysBase{
+//@AutoCover(value = {CodeTypeEnum.ALL})
+public class SysAreaDj extends  SysBase{
     @AutoEntityField(value = "父级code")
     private String parentCode;
 
@@ -35,7 +36,7 @@ public class SdAreaDj extends  SysBase{
     @AutoEntityField(value = "状态", enums = AdStateEnum.class)
     private Integer status;
 
-    @AutoEntityField(value = "是否修改0否1是")
+    @AutoEntityField(value = "是否修改",  enums = YesOrNoEnum.class)
     private Integer isAdd;
 
     @AutoEntityField(value = "省市区", enums = AreaTypeEnum.class)

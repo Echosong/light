@@ -70,4 +70,6 @@ public interface UserService extends IService<SysUser> {
     void resetPassword(Integer userId, String defaultPassword);
 
     LoginResultDTO getLoginInfo();
+
+    void currentUpdate(UserDTO userDTO);
 }
