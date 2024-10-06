@@ -1,6 +1,7 @@
 package cn.light.server.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
@@ -64,24 +65,25 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
 
     @Override
     public void save(LogDTO saveDTO) {
-        String userName;
-        //获取用户信息
-        try {
-            SysUser user = userService.getUserCache();
-            userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
-        } catch (Exception ignored) {
-            //正则提取 username: (.*?)
-            String regex = "\"username\":\"([^\"]*)\"";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(saveDTO.getParams());
-            if (matcher.find()) {
-                userName = matcher.group(1); // group(1)获取第一个括号内的内容
-            }else{
-                userName = "未知用户";
+        if(StrUtil.isBlank(saveDTO.getUsername())) {
+            String userName;
+            //获取用户信息
+            try {
+                SysUser user = userService.getUserCache();
+                userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
+            } catch (Exception ignored) {
+                //正则提取 username: (.*?) 为了记录登录失败的那些账号
+                String regex = "\"username\":\"([^\"]*)\"";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(saveDTO.getParams());
+                if (matcher.find()) {
+                    userName = matcher.group(1); // group(1)获取第一个括号内的内容
+                }else{
+                    userName = "未知用户";
+                }
             }
+            saveDTO.setUsername(userName);
         }
-        saveDTO.setUsername(userName);
-
         CompletableFuture.runAsync(()-> {
             SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
             this.saveOrUpdate(log);
