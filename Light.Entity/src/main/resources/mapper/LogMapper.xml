@@ -3,16 +3,29 @@
 <mapper namespace="cn.light.entity.mapper.LogMapper">
     <select id="listPage" resultType="cn.light.entity.entity.SysLog">
         select *
-        from sys_log where 1=1
-        <if test="username != null and username != '' ">
-            and username like CONCAT('%',#{username},'%')
-        </if>
-        <if test="description != null and description != '' ">
-            and description like CONCAT('%',#{description},'%')
-        </if>
-        <if test="logType != null ">
-            and log_type = #{logType}
-        </if>
+        from sys_log
+        <where>
+            <if test="username != null and username != '' ">
+                and username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="description != null and description != '' ">
+                and description like CONCAT('%',#{description},'%')
+            </if>
+            <if test="logType != null ">
+                and log_type = #{logType}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and create_time &gt;= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and create_time &lt;= #{endDate}
+            </if>
+
+            <if test="state != null">
+                and state = #{state}
+            </if>
+
+        </where>
     </select>
 
 </mapper>

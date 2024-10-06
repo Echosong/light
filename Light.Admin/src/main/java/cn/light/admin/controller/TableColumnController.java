@@ -42,6 +42,14 @@ public class TableColumnController extends BaseController{
         return tableColumnService.export(queryDTO);
     }
 
+    @GetMapping("/delete/{tableName}")
+    @Operation(summary = "删除")
+    @Log("删除存储列设置表")
+    public void delete(@PathVariable String tableName){
+         tableColumnService.delete(tableName);
+    }
+
+
     @Operation(summary = "新增活更新存储列设置表")
     @PostMapping("/save")
     @Log("新增|修改存储列设置表")

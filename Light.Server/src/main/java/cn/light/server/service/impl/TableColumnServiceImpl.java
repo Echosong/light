@@ -20,6 +20,7 @@ import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -82,6 +83,18 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
         tableCacheOp = tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableName);
 
         return tableCacheOp.map(SysTableColumn::getColumns).orElse("");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(String tableName) {
+        UserCache userCache = userService.getUserCache();
+        var tableCacheOp = tableColumnCacheRepository.findByUserIdAndTableName(userCache.getId(), tableName);
+        tableCacheOp.ifPresent(sysTableColumn -> tableColumnCacheRepository.delete(sysTableColumn));
+
+        tableCacheOp = tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableName);
+        tableCacheOp.ifPresent(sysTableColumn -> tableColumnRepository.delete(sysTableColumn));
+
     }
 
 }
