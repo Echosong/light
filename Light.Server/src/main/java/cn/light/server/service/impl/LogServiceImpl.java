@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 自动生成 日志 service 实现
@@ -56,13 +58,21 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
 
     @Override
     public LogDTO save(LogDTO saveDTO) {
-        String userName = null;
+        String userName;
         //获取用户信息
         try {
             SysUser user = userService.getUserCache();
             userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
         } catch (Exception ignored) {
-            log.warn("获取用户信息失败");
+            //正则提取 username: (.*?)
+            String regex = "\"username\":\"([^\"]*)\"";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(saveDTO.getParams());
+            if (matcher.find()) {
+                userName = matcher.group(1); // group(1)获取第一个括号内的内容
+            }else{
+                userName = "未知用户";
+            }
         }
         saveDTO.setUsername(userName);
         SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
