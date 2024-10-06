@@ -23,6 +23,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,6 +41,9 @@ import java.util.regex.Pattern;
 public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements LogService {
     @Resource
     private UserService userService;
+
+    //全局专门线程来处理日志
+    private static final ExecutorService LOG_EXECUTOR = Executors.newSingleThreadExecutor();
 
     @Override
     public Page<LogListDTO> listPage(LogQueryDTO queryDTO) {
@@ -57,7 +63,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     }
 
     @Override
-    public LogDTO save(LogDTO saveDTO) {
+    public void save(LogDTO saveDTO) {
         String userName;
         //获取用户信息
         try {
@@ -75,9 +81,12 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
             }
         }
         saveDTO.setUsername(userName);
-        SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
-        this.saveOrUpdate(log);
-        return DtoMapper.convert(log, LogDTO.class);
+
+        CompletableFuture.runAsync(()-> {
+            SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
+            this.saveOrUpdate(log);
+        }, LOG_EXECUTOR);
+
     }
 
     @Override

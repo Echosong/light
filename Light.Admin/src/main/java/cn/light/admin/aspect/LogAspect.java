@@ -19,6 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.annotation.Log;
 import cn.light.packet.dto.log.LogDTO;
+import cn.light.packet.enums.system.YesOrNoEnum;
 import cn.light.server.service.LogService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * <p>Title: 日志处理</p >
@@ -56,6 +60,8 @@ public class LogAspect {
     private final LogService logService;
 
     private final HttpServletRequest request;
+
+
 
 
     @Autowired
@@ -100,6 +106,11 @@ public class LogAspect {
             logDTO.setBrowser(request.getHeader("User-Agent"));
             logDTO.setDescription(aopLog.value());
             logDTO.setExceptionDetail(exceptionMessage);
+            if(StrUtil.isBlank(exceptionMessage)){
+                logDTO.setState(YesOrNoEnum.ON.getCode());
+            }else{
+                logDTO.setState(YesOrNoEnum.OFF.getCode());
+            }
             logDTO.setTime(System.currentTimeMillis() - startTime);
             logDTO.setParams(getParameter(method, joinPoint.getArgs()));
             logDTO.setMethod(methodName);

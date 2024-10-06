@@ -54,7 +54,6 @@ public class SysUser extends  SysBase implements Serializable {
     private String password;
 
     @AutoEntityField(value = "性别", enums = UserSexEnum.class)
-    @Range(min = 0, max = 1)
     @AutoSorted
     private Integer sex;
 

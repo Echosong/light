@@ -4,6 +4,7 @@ import cn.light.common.annotation.ApiModelPropertyEnum;
 import cn.light.common.component.IDictionaryObject;
 import cn.light.common.dto.SysBaseDTO;
 import cn.light.common.enums.BusinessEnum;
+import cn.light.packet.enums.system.YesOrNoEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +35,7 @@ public class LogDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "描述")
     private String description;
 
-    @Schema(title = "浏览器")
+    @Schema(title = "客户端")
     private String browser;
 
     @Schema(title = "请求耗时")
@@ -48,6 +49,10 @@ public class LogDTO extends SysBaseDTO implements IDictionaryObject {
 
     @Schema(title = "请求路径")
     private String urlPath;
+
+    @Schema(title = "状态", description = "YesOrNoEnum0,1")
+    @ApiModelPropertyEnum(YesOrNoEnum.class)
+    private Integer state;
 
     @Schema(title = "异常详情")
     private String exceptionDetail;
