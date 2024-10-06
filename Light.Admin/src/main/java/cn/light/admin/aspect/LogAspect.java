@@ -18,9 +18,12 @@ package cn.light.admin.aspect;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.annotation.Log;
+import cn.light.entity.cache.UserCache;
+import cn.light.entity.entity.SysUser;
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.enums.system.YesOrNoEnum;
 import cn.light.server.service.LogService;
+import cn.light.server.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -35,13 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
 
 /**
  * <p>Title: 日志处理</p >
@@ -61,13 +58,15 @@ public class LogAspect {
 
     private final HttpServletRequest request;
 
+    private final UserService userService;
 
 
 
     @Autowired
-    public LogAspect(LogService logService, HttpServletRequest request) {
+    public LogAspect(LogService logService, UserService userService, HttpServletRequest request) {
         this.logService = logService;
         this.request = request;
+        this.userService = userService;
     }
 
 
@@ -89,6 +88,12 @@ public class LogAspect {
         long startTime =  System.currentTimeMillis();
         Object result = null;
         String exceptionMessage = "";
+        String userName = "";
+        //如果退出登录用户要先获取要不然执行以后获取用户就不存在了
+        try {
+            userName = Optional.ofNullable(userService.getUserCache()).map(UserCache::getUsername).orElse("");
+        }catch (Exception ignored){}
+
         try {
             result = joinPoint.proceed();
         }catch (Exception e){
@@ -102,7 +107,7 @@ public class LogAspect {
             String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
             LogDTO logDTO = new LogDTO();
             logDTO.setLogType(aopLog.businessType().getCode());
-            logDTO.setRequestIp(getRemortIP(request));
+            logDTO.setRequestIp(getIp(request));
             logDTO.setBrowser(request.getHeader("User-Agent"));
             logDTO.setDescription(aopLog.value());
             logDTO.setExceptionDetail(exceptionMessage);
@@ -111,6 +116,7 @@ public class LogAspect {
             }else{
                 logDTO.setState(YesOrNoEnum.OFF.getCode());
             }
+            logDTO.setUsername(userName);
             logDTO.setTime(System.currentTimeMillis() - startTime);
             logDTO.setParams(getParameter(method, joinPoint.getArgs()));
             logDTO.setMethod(methodName);
@@ -119,13 +125,12 @@ public class LogAspect {
         }
         return result;
     }
-    public static String getRemortIP(HttpServletRequest request) {
+    public  String getIp(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
             return request.getRemoteAddr();
         }
         return request.getHeader("x-forwarded-for");
     }
-
 
     /**
      * 根据方法和传入的参数获取请求参数
