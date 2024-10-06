@@ -57,7 +57,6 @@ public class LogAspect {
 
     private final HttpServletRequest request;
 
-    ThreadLocal<Long> currentTime = new ThreadLocal<>();
 
     @Autowired
     public LogAspect(LogService logService, HttpServletRequest request) {
@@ -81,8 +80,33 @@ public class LogAspect {
      */
     @Around("logPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        writeLog(joinPoint);
-        return joinPoint.proceed();
+        long startTime =  System.currentTimeMillis();
+        Object result = null;
+        String exceptionMessage = "";
+        try {
+            result = joinPoint.proceed();
+        }catch (Exception e){
+            exceptionMessage = e.getMessage();
+            throw  e;
+        }finally {
+            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+            Method method = signature.getMethod();
+            Log aopLog = method.getAnnotation(Log.class);
+            // 方法路径
+            String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+            LogDTO logDTO = new LogDTO();
+            logDTO.setLogType(aopLog.businessType().getCode());
+            logDTO.setRequestIp(getRemortIP(request));
+            logDTO.setBrowser(request.getHeader("User-Agent"));
+            logDTO.setDescription(aopLog.value());
+            logDTO.setExceptionDetail(exceptionMessage);
+            logDTO.setTime(System.currentTimeMillis() - startTime);
+            logDTO.setParams(getParameter(method, joinPoint.getArgs()));
+            logDTO.setMethod(methodName);
+            logDTO.setUrlPath(request.getRequestURI());
+            logService.save(logDTO);
+        }
+        return result;
     }
     public static String getRemortIP(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
@@ -90,28 +114,6 @@ public class LogAspect {
         }
         return request.getHeader("x-forwarded-for");
     }
-    private void writeLog(ProceedingJoinPoint joinPoint) {
-        currentTime.set(System.currentTimeMillis());
-
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        Log aopLog = method.getAnnotation(Log.class);
-        // 方法路径
-        String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
-        LogDTO logDTO = new LogDTO();
-        logDTO.setLogType(aopLog.businessType().getCode());
-        logDTO.setRequestIp(getRemortIP(request));
-        logDTO.setBrowser(request.getHeader("User-Agent"));
-        logDTO.setDescription(aopLog.value());
-        logDTO.setExceptionDetail("");
-        logDTO.setTime(System.currentTimeMillis() - currentTime.get());
-        logDTO.setParams(getParameter(method, joinPoint.getArgs()));
-        logDTO.setMethod(methodName);
-        logService.save(logDTO);
-        currentTime.remove();
-    }
-
-
 
 
     /**

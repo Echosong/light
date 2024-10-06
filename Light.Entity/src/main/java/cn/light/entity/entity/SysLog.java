@@ -25,12 +25,16 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@AutoCover({CodeTypeEnum.NULL})
+//@AutoCover({CodeTypeEnum.ADD_VIEW, CodeTypeEnum.LIST_VIEW, CodeTypeEnum.LIST_DTO, CodeTypeEnum.DTO})
 public class SysLog extends SysBase {
 
     @AutoEntityField(value = "用户")
     @InQueryDTO
     private String username;
+
+    @AutoEntityField(value = "日志类型", enums = BusinessEnum.class)
+    @InQueryDTO
+    private Integer logType;
 
     @AutoEntityField(value = "请求ip")
     private String requestIp;
@@ -41,7 +45,6 @@ public class SysLog extends SysBase {
     @AutoEntityField(value = "描述")
     @InQueryDTO
     private String description;
-
 
     @AutoEntityField(value = "浏览器", htmlType = HtmlTypeEnum.TEXTAREA)
     private String browser;
@@ -55,9 +58,9 @@ public class SysLog extends SysBase {
     @AutoEntityField(value = "参数", htmlType = HtmlTypeEnum.TEXTAREA)
     private String params;
 
-    @AutoEntityField(value = "日志类型", enums = BusinessEnum.class)
-    @InQueryDTO
-    private Integer logType;
+    @AutoEntityField(value = "请求路径")
+    private String urlPath;
+
 
     @AutoEntityField(value = "异常详情", htmlType = HtmlTypeEnum.TEXTAREA)
     @NotinListDTO
