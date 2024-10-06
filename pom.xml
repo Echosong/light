@@ -14,8 +14,8 @@
     <artifactId>light</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>zone-backend</name>
-    <description>园区管理系统</description>
+    <name>轻巧之光</name>
+    <description>轻巧之光</description>
 
     <properties>
         <java.version>21</java.version>
