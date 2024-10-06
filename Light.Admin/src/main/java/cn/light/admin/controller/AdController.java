@@ -20,6 +20,7 @@ import java.util.*;
  *  email:zq_songfeigang@163.com
  *
  * @author : 二胡子
+ * @date : 2024-09-27 20:49:32
  * @date : 2024-10-05 21:07:18
  */
 @Tag(name = "广告管理 控制器")
@@ -32,6 +33,7 @@ public class AdController extends BaseController{
 
     @Operation(summary = "分页查询广告管理")
     @PutMapping("/listPage")
+    @Permission(permissions = {"ad-list"})
     public Page<AdListDTO> listPage(@RequestBody @Valid AdQueryDTO queryDTO){
         return adService.listPage(queryDTO);
     }
