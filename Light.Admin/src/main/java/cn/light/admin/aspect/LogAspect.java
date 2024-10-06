@@ -19,7 +19,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.annotation.Log;
 import cn.light.entity.cache.UserCache;
-import cn.light.entity.entity.SysUser;
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.enums.system.YesOrNoEnum;
 import cn.light.server.service.LogService;
@@ -125,6 +124,11 @@ public class LogAspect {
         }
         return result;
     }
+
+    /**
+     * 获取ip 需要注意，如果是直接客户端请求那么 getRemoteAddr 就是真实ip下面写法反而容易被模拟
+     * 用 nginx 代理的形式下面才能获取到真实ip
+     */
     public  String getIp(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
             return request.getRemoteAddr();
