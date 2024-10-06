@@ -38,4 +38,5 @@ public interface PermissionService extends IService<SysPermission> {
 
     // 根据 parentId 递归获取权限列表
     List<PermissionListDTO> getTreePermissions(Integer parentId);
+
 }

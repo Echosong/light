@@ -1,10 +1,14 @@
 package cn.light.server.service.impl;
 
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
+import cn.light.entity.cache.UserPermissionCache;
+import cn.light.entity.cache.UserPermissionCacheRepository;
 import cn.light.entity.entity.SysPermission;
 import cn.light.entity.entity.SysRolePermission;
 import cn.light.entity.entity.SysUserRole;
@@ -42,6 +46,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     private  PermissionRepository permissionRepository;
     @Resource
     private UserRoleRepository userRoleRepositroy;
+    @Resource
+    private UserPermissionCacheRepository userPermissionCacheRepository;
 
 
     @Override
@@ -57,6 +63,11 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
 
     @Override
     public List<PermissionDTO> listByUser(Integer userId) {
+        Optional<UserPermissionCache> userPermissionCacheOptional = userPermissionCacheRepository.findById(userId);
+        if (userPermissionCacheOptional.isPresent()){
+            return userPermissionCacheOptional.get().getPermissions();
+        }
+
         List<SysUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
         List<PermissionDTO> kdPermissions = new ArrayList<>();
         if(userRoles.isEmpty()){
@@ -76,6 +87,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
             }
             permission.setPath(permission.getPerms());
         }
+        userPermissionCacheRepository.save(new UserPermissionCache(userId, permissions));
 
         return permissions;
     }
@@ -94,6 +106,11 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
             kdRolePermissions.add(kdRolePermission);
         }
         rolePermissionRepository.saveAll(kdRolePermissions);
+        //清理角色下所有用户缓存
+        List<SysUserRole> allByRoleId = userRoleRepositroy.findAllByRoleId(roleId);
+        for (SysUserRole sysUserRole : allByRoleId) {
+            userPermissionCacheRepository.deleteById(sysUserRole.getUserId());
+        }
     }
 
     @Override

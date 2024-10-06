@@ -32,6 +32,7 @@ public class ArticleController extends BaseController{
 
     @Operation(summary = "分页查询新闻")
     @PutMapping("/listPage")
+    @Permission(permissions = {"article-list"})
     public Page<ArticleListDTO> listPage(@RequestBody @Valid ArticleQueryDTO queryDTO){
         return articleService.listPage(queryDTO);
     }
