@@ -245,7 +245,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         Map<String,String> map = new HashMap<>();
         map.put("componentName", componentName);
         map.put("fieldName", fieldName);
-        String fromUploadFileStr = " <{componentName} @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
+        String fromUploadFileStr = " <{componentName} :key=\"m.{fieldName}\" @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
         return  StrUtil.format(fromUploadFileStr, map);
     }
 
