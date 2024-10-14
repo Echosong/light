@@ -9,7 +9,7 @@ spring:
       host: 127.0.0.1
       port: 6379
       password: _sys31UC
-      database: 8
+      database: 10
 #文件上传操作
 file:
   #文件上传目录
