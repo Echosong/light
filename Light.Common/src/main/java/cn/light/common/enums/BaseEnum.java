@@ -64,6 +64,20 @@ public interface BaseEnum {
         return list;
     }
 
+    static <T extends BaseEnum> String getName(Integer code, Class<T> tClass) {
+        T[] enums = tClass.getEnumConstants();
+
+        if (Objects.isNull(enums)) {
+            return null;
+        }
+
+        Optional<T> optional = Arrays.stream(enums)
+                .filter(em -> Objects.equals(em.getCode(), code))
+                .findFirst();
+
+        return optional.map(T::getName).orElse(null);
+    }
+
 
     public static boolean isClassExists(String packetClassName) {
         try {
