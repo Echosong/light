@@ -51,19 +51,22 @@ public interface BaseEnum {
         return maps;
     }
 
+    //根据code 获取枚举
+    static <T extends BaseEnum> T valueOf(Integer code, Class<T> tClass) {
+        T[] enums = tClass.getEnumConstants();
 
-    //反射获取某个包 以及子包下所有类名称
-    static  List<String> getClassName(Class<?> clazz){
-        List<String> list = new ArrayList<>();
-        for (Class<?> c : clazz.getClasses()) {
-            if (c.isEnum()) {
-                list.add(c.getName());
-                list.addAll(getClassName(c));
-            }
+        if (Objects.isNull(enums)) {
+            return null;
         }
-        return list;
+
+        Optional<T> optional = Arrays.stream(enums)
+                .filter(em -> Objects.equals(em.getCode(), code))
+                .findFirst();
+
+        return optional.orElse(null);
     }
 
+    //根据 code 获取 name
     static <T extends BaseEnum> String getName(Integer code, Class<T> tClass) {
         T[] enums = tClass.getEnumConstants();
 
@@ -79,7 +82,7 @@ public interface BaseEnum {
     }
 
 
-    public static boolean isClassExists(String packetClassName) {
+    static boolean isClassExists(String packetClassName) {
         try {
             // 尝试通过类名获取 Class 对象
             Class<?> clazz = Class.forName(packetClassName);
