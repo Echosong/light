@@ -130,7 +130,7 @@ onMounted(() => {
 })
 
 function exportFile() {
-    base.download("/#{EntityName}#/export", p.value)
+    base.download("/#{EntityName}#/export", p)
 }
 
 // ---------------------------- 添加/修改 ----------------------------
