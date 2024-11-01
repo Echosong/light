@@ -1,6 +1,7 @@
 package  cn.light.server.service;
 
 import cn.light.entity.entity.SysLog;
+import cn.light.entity.entity.SysUser;
 import cn.light.packet.dto.log.*;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public interface LogService extends IService<SysLog> {
 
     ResponseEntity<byte[]> export(LogQueryDTO queryDTO);
 
-    LogDTO save(LogDTO logDTO);
+    void save(LogDTO logDTO);
 
     LogDTO find(Integer id);
 

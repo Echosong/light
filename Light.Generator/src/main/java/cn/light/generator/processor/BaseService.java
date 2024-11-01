@@ -33,19 +33,18 @@ public class BaseService {
             this.autoEntity = clazz.getAnnotation(AutoEntity.class);
             this.tableInfo = autoEntity.value();
         }
+
+
         //表名称
         this.tableName = clazz.getSimpleName();
+
         if(StrUtil.startWith(this.tableName,"Sys")){
             this.className = StrUtil.subAfter(this.tableName,"Sys", false);
-            if(!StrUtil.endWith(Const.VUE_PATH, "system")) {
-                Const.VUE_PATH = Const.VUE_PATH + "/system";
-            }
+            Const.VUE_PATH = Const.VUE_PATH_TEMP + "/system";
         }else {
             //类目
             this.className = StrUtil.subAfter(this.tableName, Const.TABLE_PREFIX, false);
-            if(!StrUtil.endWith(Const.VUE_PATH, Const.TABLE_PREFIX)) {
-                Const.VUE_PATH = Const.VUE_PATH + "/" + Const.TABLE_PREFIX;
-            }
+            Const.VUE_PATH = Const.VUE_PATH_TEMP + "/business" ;
         }
     }
 

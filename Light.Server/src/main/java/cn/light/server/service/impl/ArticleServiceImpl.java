@@ -35,6 +35,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, SysArticle> i
     private  ArticleRepository articleRepository;
 
     @Override
+    public ArticleRepository baseRepository(){
+        return articleRepository;
+    }
+
+    @Override
     public Page<ArticleListDTO> listPage(ArticleQueryDTO queryDTO){
          Page<SysArticle> dataPages  =  PageUtil.getPage(this.baseMapper::listPage, queryDTO);
          return DtoMapper.convertPage(dataPages, ArticleListDTO.class);

@@ -15,4 +15,6 @@ import java.util.List;
 @Mapper
 public interface PermissionMapper extends BaseMapper<SysPermission> {
     List<SysPermission> listPage(PermissionQueryDTO permissionQueryDTO);
+
+    List<SysPermission> getListByUserId(Integer userId);
 }

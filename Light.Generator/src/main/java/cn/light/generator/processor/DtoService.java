@@ -132,10 +132,10 @@ public class DtoService extends BaseService implements ServiceInterface {
                     notes += autoEntityField.notes();
                 }
                 if(StrUtil.isNotBlank(notes)) {
-                    notes = StrUtil.format(", description=\"{}\"", notes);
+                    notes = StrUtil.format(", description = \"{}\"", notes);
                 }
 
-                builder.append(StrUtil.format("   @Schema(title=\"{}\" {})", autoEntityField.value(),
+                builder.append(StrUtil.format("    @Schema(title = \"{}\"{})", autoEntityField.value(),
                         notes));
                 builder.append("\r\n");
                 String autoEnumName = autoEntityField.enums().getSimpleName();
@@ -143,7 +143,6 @@ public class DtoService extends BaseService implements ServiceInterface {
                 //处理
                 if (!"BaseEnum".equals(autoEnumName)) {
                     //这个地方要用全路径
-                    this.importPackage.add(StrUtil.format("import {}.{};", autoEntityField.enums().getPackageName(), autoEnumName));
                     builder.append(StrUtil.format("    @ApiModelPropertyEnum({}.class)", autoEnumName));
                     builder.append("\r\n");
                 }
@@ -182,7 +181,7 @@ public class DtoService extends BaseService implements ServiceInterface {
             NotNull notNull = field.getAnnotation(NotNull.class);
             String message = "";
             if (!notNull.message().startsWith(START_WITH)) {
-                message = StrUtil.format("(message=\"{}\")", notNull.message());
+                message = StrUtil.format("(message = \"{}\")", notNull.message());
             }
             validBuilder.append(StrUtil.format("    @NotNull{}", message));
             validBuilder.append("\r\n");
@@ -191,7 +190,7 @@ public class DtoService extends BaseService implements ServiceInterface {
             NotBlank notNull = field.getAnnotation(NotBlank.class);
             String message = "";
             if (!notNull.message().startsWith(START_WITH)) {
-                message = StrUtil.format("(message=\"{}\")", notNull.message());
+                message = StrUtil.format("(message = \"{}\")", notNull.message());
             }
             validBuilder.append(StrUtil.format("    @NotBlank{}", message));
             validBuilder.append("\r\n");
@@ -200,7 +199,7 @@ public class DtoService extends BaseService implements ServiceInterface {
             Email notNull = field.getAnnotation(Email.class);
             String message = "";
             if (!notNull.message().startsWith(START_WITH)) {
-                message = StrUtil.format("(message=\"{}\")", notNull.message());
+                message = StrUtil.format("(message = \"{}\")", notNull.message());
             }
             validBuilder.append(StrUtil.format("    @Email{}", message));
             validBuilder.append("\r\n");
@@ -215,11 +214,11 @@ public class DtoService extends BaseService implements ServiceInterface {
             Pattern annotation = field.getAnnotation(Pattern.class);
             List<String> listAn = new ArrayList<>();
             if (StrUtil.isNotEmpty(annotation.message()) && !annotation.message().startsWith(START_WITH)) {
-                listAn.add("message=\"" + annotation.message() + "\"");
+                listAn.add(" message = \"" + annotation.message() + "\"");
             }
             if (StrUtil.isNotEmpty(annotation.regexp())) {
                 String patternStr = annotation.regexp().replace("\\", "\\\\");
-                listAn.add("regexp=\"" + patternStr + "\"");
+                listAn.add(" regexp = \"" + patternStr + "\"");
             }
             validBuilder.append(StrUtil.format(pattter, String.join(",", listAn)));
             validBuilder.append("\r\n");
@@ -235,12 +234,12 @@ public class DtoService extends BaseService implements ServiceInterface {
 
     private void conditional(StringBuilder validBuilder, String rangStr, long min, long max, String message2) {
         List<String> listAn = new ArrayList<>();
-        listAn.add("min=" + min);
+        listAn.add("min = " + min);
         if (max != MAX) {
-            listAn.add("max=" + max);
+            listAn.add("max = " + max);
         }
         if (StrUtil.isNotEmpty(message2) && !message2.startsWith(START_ORG)) {
-            listAn.add("message=\"" + message2 + "\"");
+            listAn.add("message = \"" + message2 + "\"");
         }
         validBuilder.append(StrUtil.format(rangStr, String.join(",", listAn)));
         validBuilder.append("\r\n");

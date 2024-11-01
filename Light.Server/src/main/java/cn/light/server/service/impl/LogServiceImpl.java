@@ -1,6 +1,7 @@
 package cn.light.server.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
@@ -23,6 +24,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 自动生成 日志 service 实现
@@ -36,6 +42,9 @@ import java.util.Optional;
 public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements LogService {
     @Resource
     private UserService userService;
+
+    //全局专门线程来处理日志
+    private static final ExecutorService LOG_EXECUTOR = Executors.newSingleThreadExecutor();
 
     @Override
     public Page<LogListDTO> listPage(LogQueryDTO queryDTO) {
@@ -55,19 +64,31 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     }
 
     @Override
-    public LogDTO save(LogDTO saveDTO) {
-        String userName = null;
-        //获取用户信息
-        try {
-            SysUser user = userService.getUserCache();
-            userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
-        } catch (Exception ignored) {
-            log.warn("获取用户信息失败");
+    public void save(LogDTO saveDTO) {
+        if(StrUtil.isBlank(saveDTO.getUsername())) {
+            String userName;
+            //获取用户信息
+            try {
+                SysUser user = userService.getUserCache();
+                userName = Objects.isNull(user) ? "未知用户" : user.getUsername();
+            } catch (Exception ignored) {
+                //正则提取 username: (.*?) 为了记录登录失败的那些账号
+                String regex = "\"username\":\"([^\"]*)\"";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(saveDTO.getParams());
+                if (matcher.find()) {
+                    userName = matcher.group(1); // group(1)获取第一个括号内的内容
+                }else{
+                    userName = "未知用户";
+                }
+            }
+            saveDTO.setUsername(userName);
         }
-        saveDTO.setUsername(userName);
-        SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
-        this.saveOrUpdate(log);
-        return DtoMapper.convert(log, LogDTO.class);
+        CompletableFuture.runAsync(()-> {
+            SysLog log = DtoMapper.convert(saveDTO, SysLog.class);
+            this.saveOrUpdate(log);
+        }, LOG_EXECUTOR);
+
     }
 
     @Override

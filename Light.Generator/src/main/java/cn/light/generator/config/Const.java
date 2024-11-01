@@ -32,6 +32,9 @@ public class Const {
      */
     public static String  VUE_PATH = "";
 
+    //存储最初路径使用
+    public static String VUE_PATH_TEMP = "";
+
 
     /**
      * 开启或者关闭数据库备注

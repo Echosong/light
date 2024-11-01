@@ -25,6 +25,7 @@ import cn.hutool.setting.Setting;
           Const.TABLE_PREFIX =  setting.get("db-prefix");
           Const.ROOT_PATH =   setting.get("path-base");
           Const.VUE_PATH =   setting.get("path-vue");
+          Const.VUE_PATH_TEMP = setting.get("path-vue");
           //移除db不认的部分 避免影响
           setting.remove("path-base");
           setting.remove("path-vue");

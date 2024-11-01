@@ -12,9 +12,9 @@ import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.generator.config.Const;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -198,7 +198,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if ("Date".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
                             <a-form-item label="{}"  v-if="!query.{}" class="smart-query-form-item">
-                               <a-range-picker @change="(rangDate)=> {p.start{} = rangDate[0];p.end{} = rangDate[1];}" value-format="YYYY-MM-DD HH:mm:ss" />
+                               <a-range-picker show-time @change="(rangDate)=> {p.start{} = rangDate[0];p.end{} = rangDate[1];}" />
                             </a-form-item>""", autoEntityField.value(),field.getName(), StrUtil.upperFirst(field.getName()),
                     StrUtil.upperFirst(field.getName()));
         }
@@ -245,7 +245,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         Map<String,String> map = new HashMap<>();
         map.put("componentName", componentName);
         map.put("fieldName", fieldName);
-        String fromUploadFileStr = " <{componentName} @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
+        String fromUploadFileStr = " <{componentName} :key=\"m.{fieldName}\" @onremove=\"m.{fieldName} = ''\" @onSuccess=\"m.{fieldName} = $event\" :file=\"m.{fieldName}\" />";
         return  StrUtil.format(fromUploadFileStr, map);
     }
 

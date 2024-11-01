@@ -18,8 +18,11 @@ package cn.light.admin.aspect;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import cn.light.common.annotation.Log;
+import cn.light.entity.cache.UserCache;
 import cn.light.packet.dto.log.LogDTO;
+import cn.light.packet.enums.system.YesOrNoEnum;
 import cn.light.server.service.LogService;
+import cn.light.server.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,10 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Title: 日志处理</p >
@@ -57,12 +57,15 @@ public class LogAspect {
 
     private final HttpServletRequest request;
 
-    ThreadLocal<Long> currentTime = new ThreadLocal<>();
+    private final UserService userService;
+
+
 
     @Autowired
-    public LogAspect(LogService logService, HttpServletRequest request) {
+    public LogAspect(LogService logService, UserService userService, HttpServletRequest request) {
         this.logService = logService;
         this.request = request;
+        this.userService = userService;
     }
 
 
@@ -81,38 +84,57 @@ public class LogAspect {
      */
     @Around("logPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        writeLog(joinPoint);
-        return joinPoint.proceed();
+        long startTime =  System.currentTimeMillis();
+        Object result = null;
+        String exceptionMessage = "";
+        String userName = "";
+        //如果退出登录用户要先获取要不然执行以后获取用户就不存在了
+        try {
+            userName = Optional.ofNullable(userService.getUserCache()).map(UserCache::getUsername).orElse("");
+        }catch (Exception ignored){}
+
+        try {
+            result = joinPoint.proceed();
+        }catch (Exception e){
+            exceptionMessage = e.getMessage();
+            throw  e;
+        }finally {
+            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+            Method method = signature.getMethod();
+            Log aopLog = method.getAnnotation(Log.class);
+            // 方法路径
+            String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+            LogDTO logDTO = new LogDTO();
+            logDTO.setLogType(aopLog.businessType().getCode());
+            logDTO.setRequestIp(getIp(request));
+            logDTO.setBrowser(request.getHeader("User-Agent"));
+            logDTO.setDescription(aopLog.value());
+            logDTO.setExceptionDetail(exceptionMessage);
+            if(StrUtil.isBlank(exceptionMessage)){
+                logDTO.setState(YesOrNoEnum.ON.getCode());
+            }else{
+                logDTO.setState(YesOrNoEnum.OFF.getCode());
+            }
+            logDTO.setUsername(userName);
+            logDTO.setTime(System.currentTimeMillis() - startTime);
+            logDTO.setParams(getParameter(method, joinPoint.getArgs()));
+            logDTO.setMethod(methodName);
+            logDTO.setUrlPath(request.getRequestURI());
+            logService.save(logDTO);
+        }
+        return result;
     }
-    public static String getRemortIP(HttpServletRequest request) {
+
+    /**
+     * 获取ip 需要注意，如果是直接客户端请求那么 getRemoteAddr 就是真实ip下面写法反而容易被模拟
+     * 用 nginx 代理的形式下面才能获取到真实ip
+     */
+    public  String getIp(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
             return request.getRemoteAddr();
         }
         return request.getHeader("x-forwarded-for");
     }
-    private void writeLog(ProceedingJoinPoint joinPoint) {
-        currentTime.set(System.currentTimeMillis());
-
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        Log aopLog = method.getAnnotation(Log.class);
-        // 方法路径
-        String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
-        LogDTO logDTO = new LogDTO();
-        logDTO.setLogType(aopLog.businessType().getCode());
-        logDTO.setRequestIp(getRemortIP(request));
-        logDTO.setBrowser(request.getHeader("User-Agent"));
-        logDTO.setDescription(aopLog.value());
-        logDTO.setExceptionDetail("");
-        logDTO.setTime(System.currentTimeMillis() - currentTime.get());
-        logDTO.setParams(getParameter(method, joinPoint.getArgs()));
-        logDTO.setMethod(methodName);
-        logService.save(logDTO);
-        currentTime.remove();
-    }
-
-
-
 
     /**
      * 根据方法和传入的参数获取请求参数

@@ -59,7 +59,6 @@ public class PermissionController extends BaseController {
 
     @GetMapping("/all")
     @Operation(summary = "获取所有权限")
-    @Cacheable(value = "Permission_all", key = "'all'")
     public List<PermissionDTO> all() {
         return DtoMapper.convertList(permissionService.list().stream()
                         .sorted(Comparator.comparing(SysPermission::getSort))

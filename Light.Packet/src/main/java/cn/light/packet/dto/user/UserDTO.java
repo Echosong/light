@@ -76,5 +76,6 @@ public class UserDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "角色名称")
     private String roleName;
 
-
+    @Schema(title = "角色code")
+    private String roleCode;
 }

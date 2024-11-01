@@ -1,6 +1,7 @@
 package  cn.light.server.service;
 
 import cn.light.entity.entity.SysArticle;
+import cn.light.entity.repository.ArticleRepository;
 import cn.light.packet.dto.article.*;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ public interface ArticleService extends IService<SysArticle> {
     void delete(Integer id);
     
     List<Map<String, Object>> getMap();
+
+    ArticleRepository baseRepository();
     
 
 }

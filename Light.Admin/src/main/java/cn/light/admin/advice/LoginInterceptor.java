@@ -1,6 +1,7 @@
 package cn.light.admin.advice;
 
 import cn.dev33.satoken.exception.SaTokenException;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.light.common.annotation.NoPermission;
 import cn.light.common.annotation.Permission;
@@ -35,16 +36,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             if(Objects.nonNull(methodAnnotation)){
                 return true;
             }
-            UserCache user = SpringUtil.getBean(UserService.class).getUserCache();
-            Permission permission = h.getMethodAnnotation(Permission.class);
-            //处理权限问题
-            if(Objects.nonNull(permission)){
-                if(Arrays.stream(permission.roles()).noneMatch(role -> role.equals(user.getRoleCode()))){
-                    throw new SaTokenException( permission.message());
-                }
-            }
-            //TODO 进一步判断权限码问题
-
+            //这里保留处理是否登录权限
+            SpringUtil.getBean(UserService.class).getUserCache();
             return  true;
         }
         return true;

@@ -8,5 +8,12 @@
  and name  like CONCAT('%',#{name},'%')
  </if>
     </select>
+    <select id="getListByUserId" resultType="cn.light.entity.entity.SysPermission">
+        select p.perms, p.id
+        from sys_permission p
+        left join sys_role_permission rp on p.id = rp.permission_id
+        left join sys_user_role ur on rp.role_id = ur.role_id
+        where ur.user_id = #{userId}
+    </select>
 
 </mapper>

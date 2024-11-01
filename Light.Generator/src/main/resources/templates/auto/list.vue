@@ -126,12 +126,11 @@ const router = useRouter();
 
 onMounted(() => {
     query.value = router.currentRoute.value.query;
-    p = {...params, ...router.currentRoute.value.query}
     f5()
 })
 
 function exportFile() {
-    base.download("/#{EntityName}#/export", p.value)
+    base.download("/#{EntityName}#/export", p)
 }
 
 // ---------------------------- 添加/修改 ----------------------------
