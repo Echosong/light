@@ -27,7 +27,7 @@ public class LocalServiceImpl implements  StorageService{
     private ConfigService configService;
     @Override
     public String uploadFile(MultipartFile file, String fileName) {
-        ConfigDTO ossConfig = configService.getByGroupAndKey(ConfigGroupEnum.ADMIN.getCode(), "localConfig");
+        ConfigDTO ossConfig = configService.getByGroupAndKey(ConfigGroupEnum.FILE.getCode(), "localConfig");
         JSONObject ossJson = JSONUtil.parseObj(ossConfig.getValue());
         String localPath = ossJson.getStr("localPath");
         //注意这里，可以是后台地址的一个子目录

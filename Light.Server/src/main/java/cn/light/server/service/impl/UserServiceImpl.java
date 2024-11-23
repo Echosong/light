@@ -157,7 +157,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     @Override
     public UserCache getUserCache() {
-        Integer userId = 1;
+        Integer userId = Convert.toInt(StpUtil.getLoginId(), 0);
         UserCache user = null;
         try {
             user = userCacheRepository.findById(userId).orElse(null);
@@ -274,6 +274,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         UserCache userCache = this.getUserCache();
         this.lambdaUpdate()
                 .set(SysUser::getInfo,userDTO.getInfo())
+                .set(SysUser::getName, userDTO.getName())
                 .set(SysUser::getEmail,userDTO.getEmail())
                 .set(SysUser::getSex,userDTO.getSex())
                 .eq(SysUser::getId,userCache.getId())
