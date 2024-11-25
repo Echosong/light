@@ -20,6 +20,10 @@
 - **Egzosn 聚合支付**：集成多种支付渠道，简化支付接口接入。
 - **ApiFox、Swagger**：支持API接口的调试与文档自动生成。
 
+ **前端相关**
+
+Light框架采用前后端分离。 本项目为 轻巧之光（lightAdmin） 后端，其前端项目地址为 [light-admin](https://github.com/Echosong/light)
+
 
 ## 三、后端整体架构
 ```
