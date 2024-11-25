@@ -22,7 +22,7 @@
 
  **前端相关**
 
-Light框架采用前后端分离。 本项目为 轻巧之光（lightAdmin） 后端，其前端项目地址为 [light-admin](https://github.com/Echosong/light)
+Light框架采用前后端分离。 本项目是“轻巧之光”（lightAdmin）的后端部分，其前端项目的代码仓库位于 [light-view](https://github.com/Echosong/light-view)。
 
 
 ## 三、后端整体架构
