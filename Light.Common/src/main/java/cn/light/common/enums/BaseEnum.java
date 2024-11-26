@@ -3,10 +3,7 @@ package cn.light.common.enums;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.json.JSONUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *  枚举注意 code 不要 为0
