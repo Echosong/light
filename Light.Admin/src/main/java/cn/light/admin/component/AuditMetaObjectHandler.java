@@ -7,6 +7,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -31,13 +32,17 @@ public class AuditMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
 
         this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
-        this.strictInsertFill(metaObject, "creatorId", Integer.class, getUserId());
+        if(Objects.isNull(metaObject.getValue("creatorId"))) {
+            this.strictInsertFill(metaObject, "creatorId", Integer.class, getUserId());
+        }
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
-        this.strictUpdateFill(metaObject, "updaterId", Integer.class, getUserId());
+        if(Objects.isNull(metaObject.getValue("updaterId"))) {
+            this.strictInsertFill(metaObject, "updaterId", Integer.class, getUserId());
+        }
     }
 }
 
