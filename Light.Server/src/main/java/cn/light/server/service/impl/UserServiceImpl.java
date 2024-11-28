@@ -3,6 +3,7 @@ package cn.light.server.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.SmUtil;
 import cn.light.common.exception.BaseKnownException;
@@ -113,7 +114,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
      */
     @Override
     public List<UserCacheDTO> getAllCache() {
-        List<SysUser> all = userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode());
+        List<UserCache> all = userCacheRepository.findAll();
+        if(CollUtil.isEmpty(all)) {
+             all = DtoMapper.convertList(userRepository.getAllByStateNot(UserStateEnum.DELETE.getCode()), UserCache.class);
+             userCacheRepository.saveAll(all);
+        }
         return DtoMapper.convertList(all, UserCacheDTO.class);
     }
 
