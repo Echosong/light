@@ -3,6 +3,7 @@ package cn.light.generator.processor;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
@@ -41,7 +42,7 @@ public class ControllerService extends BaseService implements ServiceInterface {
     public void start() {
         this.packageName = Const.SYS_PATH + StrUtil.format(".{}.controller", Const.ADMIN_PATH);
 
-        String templateFile = this.templatePath + "controller.tpl";
+        String templateFile = "controller.tpl";
 
         //这里因为运行时没有Admin 的
         String entityPackageName = Const.SYS_PATH + ".common";
@@ -69,8 +70,9 @@ public class ControllerService extends BaseService implements ServiceInterface {
         }
         String queryParams = assignWhereCondition();
 
-        String tplContent = this.replaceTpl(templateFile);
-        tplContent = StrUtil.replace(tplContent, "#{queryParams}#", queryParams);
+        Dict dict = this.replaceTpl(templateFile);
+        dict.set("queryParams", queryParams);
+        String tplContent = template.render(dict);
 
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
     }

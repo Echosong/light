@@ -151,6 +151,12 @@
                 <version>3.17.4</version>
             </dependency>
 
+            <!--简单模板引擎-->
+            <dependency>
+                <groupId>com.jfinal</groupId>
+                <artifactId>enjoy</artifactId>
+                <version>5.2.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

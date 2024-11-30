@@ -77,7 +77,7 @@ public class ImplService  extends BaseService implements ServiceInterface  {
         if(StrUtil.isNotBlank(implStr)){
             templateFile = this.templatePath+"implService.tpl";
         }
-        String tplContent =  this.replaceTpl(templateFile);
+        String tplContent =  "";//this.replaceTpl(templateFile);
 
 
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());

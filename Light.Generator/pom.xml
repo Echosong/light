@@ -46,6 +46,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>enjoy</artifactId>
+        </dependency>
+
     </dependencies>
 
     <properties>

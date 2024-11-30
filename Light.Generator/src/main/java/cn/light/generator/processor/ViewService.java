@@ -84,7 +84,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                 return;
             }
         }
-        String tplContent = this.replaceTpl(templateFile);
+        String tplContent = "";// this.replaceTpl(templateFile);
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
         List<ListColumnDTO> tableColumns = new ArrayList<>();
@@ -258,7 +258,7 @@ public class ViewService extends BaseService implements ServiceInterface {
                 return;
             }
         }
-        String tplContent = this.replaceTpl(templateFile);
+        String tplContent = "";//this.replaceTpl(templateFile);
         List<String> infoList = new ArrayList<>();
 
         String infoTemplate = """
@@ -314,7 +314,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             }
         }
 
-        String tplContent = this.replaceTpl(templateFile);
+        String tplContent = "";//this.replaceTpl(templateFile);
         List<String> elFormItems = new ArrayList<>();
         List<String> ms = new ArrayList<>();
         List<String> rulesFields = new ArrayList<>();

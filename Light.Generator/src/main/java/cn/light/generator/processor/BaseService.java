@@ -2,14 +2,20 @@ package cn.light.generator.processor;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.template.Template;
+import cn.hutool.extra.template.TemplateConfig;
+import cn.hutool.extra.template.TemplateEngine;
+import cn.hutool.extra.template.TemplateUtil;
 import cn.light.common.anno.AutoEntity;
 import cn.light.generator.config.Const;
 
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -34,7 +40,6 @@ public class BaseService {
             this.tableInfo = autoEntity.value();
         }
 
-
         //表名称
         this.tableName = clazz.getSimpleName();
 
@@ -46,7 +51,25 @@ public class BaseService {
             this.className = StrUtil.subAfter(this.tableName, Const.TABLE_PREFIX, false);
             Const.VUE_PATH = Const.VUE_PATH_TEMP + "/business" ;
         }
+
+        if(Objects.isNull(engine)){
+            TemplateConfig templateConfig = new TemplateConfig(Const.TEMPLATE_PATH, TemplateConfig.ResourceMode.CLASSPATH);
+            templateConfig.setCharset(StandardCharsets.UTF_8);
+            engine = TemplateUtil.createEngine(templateConfig);
+        }
     }
+
+
+    /**
+     * 模板对象
+     */
+    protected Template template;
+
+    /**
+     * 模板引擎
+     */
+    protected TemplateEngine engine;
+
 
     /**
      * 表名
@@ -73,7 +96,7 @@ public class BaseService {
     /**
      * 模板文件
      */
-    protected String  templatePath = "templates/auto/";
+    protected String  templatePath = Const.TEMPLATE_PATH;
 
     /**
      * 是否需要简单查询
@@ -88,7 +111,7 @@ public class BaseService {
     protected String getRealPath(String packageName) {
         List<String> paths = new ArrayList<>(ClassUtil.getClassPaths(packageName));
         try {
-            String path =  URLDecoder.decode(paths.get(0),"utf-8");
+            String path =  URLDecoder.decode(paths.get(0), StandardCharsets.UTF_8);
             path = StrUtil.replaceIgnoreCase(path, "target/classes", "src/main/java");
             path = StrUtil.replaceIgnoreCase(path, "target/test-classes", "src/main/java");
             return  StrUtil.trim(path);
@@ -102,32 +125,21 @@ public class BaseService {
      * @param tplName 模板路径名
      * @return 初步处理后模板内容
      */
-    protected String replaceTpl(String tplName){
-        String tplContent =  ResourceUtil.readStr(tplName, Charset.defaultCharset());
-        //替换表说明
-        tplContent = tplContent.replace("#{tableInfo}#", tableInfo);
-        tplContent = tplContent.replace("#{SYS_PATH}", Const.SYS_PATH);
-        tplContent = tplContent.replace("#{EntityName}#", StrUtil.lowerFirst(className));
-        tplContent = tplContent.replace("#{UpEntityName}#", className);
-        tplContent = tplContent.replace("#{UpTableName}#", StrUtil.upperFirst(tableName));
-        tplContent = tplContent.replace("#{TableName}#", StrUtil.lowerFirst(tableName));
-        tplContent = tplContent.replace("#{PackageName}#", packageName);
-        tplContent = tplContent.replace("#{table_name}#", StrUtil.toUnderlineCase(tableName).toLowerCase());
-        tplContent = StrUtil.replace(tplContent,"#{import}#",
-                String.join("\r\n", this.importPackage));
-        tplContent = StrUtil.replace(tplContent, "#{localDate}#", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-
-        if(StrUtil.isBlank(keyName)) {
-            String subBefore = StrUtil.subBefore(tplContent, "//start", true);
-            String subAfter = StrUtil.subAfter(tplContent, "//end", true);
-            tplContent = subBefore + subAfter;
-        }else {
-            tplContent = StrUtil.replace(tplContent, "#{keyName}#", keyName);
-            tplContent = StrUtil.replace(tplContent, "//start", "");
-            tplContent = StrUtil.replace(tplContent, "//end", "");
-        }
-
-        return tplContent;
+    protected Dict replaceTpl(String tplName){
+        template = engine.getTemplate(tplName);
+        Dict dict = Dict.create();
+        dict.set("tableInfo", tableInfo);
+        dict.set("SYS_PATH", Const.SYS_PATH);
+        dict.set("EntityName", StrUtil.lowerFirst(className));
+        dict.set("UpEntityName", StrUtil.upperFirst(className));
+        dict.set("UpTableName", StrUtil.upperFirst(tableName));
+        dict.set("TableName", StrUtil.lowerFirst(tableName));
+        dict.set("PackageName", packageName);
+        dict.set("tableName",StrUtil.toUnderlineCase(tableName).toLowerCase());
+        dict.set("import",String.join("\r\n", this.importPackage));
+        dict.set("localDate", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+        dict.set("keyName",keyName);
+        return dict;
     }
 
 

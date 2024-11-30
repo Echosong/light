@@ -23,36 +23,36 @@ import java.time.LocalDateTime;
  * @version :1.0.0
  */
 @Slf4j
-public class RepositoryService extends  BaseService implements ServiceInterface{
+public class RepositoryService extends BaseService implements ServiceInterface {
 
-    RepositoryService(Class<?> clazz){
+    RepositoryService(Class<?> clazz) {
         super(clazz);
     }
 
 
-    public void getFile(){
-        String repositoryName = className+"Repository";
-        String repositoryPath = super.getRealPath(packageName)+"/repository";
+    public void getFile() {
+        String repositoryName = className + "Repository";
+        String repositoryPath = super.getRealPath(packageName) + "/repository";
 
-        String fileName = repositoryPath +"/"+ repositoryName +".java";
-        if(FileUtil.isFile(fileName)){
+        String fileName = repositoryPath + "/" + repositoryName + ".java";
+        if (FileUtil.isFile(fileName)) {
             log.info("文件 {} 已经存在不需要从新生成，请确认，如果需要重新生成先删掉", fileName);
             boolean autoCover = clazz.isAnnotationPresent(AutoCover.class);
-            if(!autoCover){
+            if (!autoCover) {
                 return;
             }
             AutoCover annotation = clazz.getAnnotation(AutoCover.class);
-            if( !ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.REPOSITORY, CodeTypeEnum.ALL)){
+            if (!ArrayUtil.containsAny(annotation.value(), CodeTypeEnum.REPOSITORY, CodeTypeEnum.ALL)) {
                 return;
             }
             //进行备份
             FileUtil.copy(fileName, fileName.replace(".java"
-                    , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(),"yyyMMddHHmmss")))
-                    ,true);
+                            , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
+                    , true);
         }
-        String templateFile = this.templatePath+"repository.tpl";
+        String templateFile = this.templatePath + "repository.tpl";
 
-        String tplContent =  this.replaceTpl(templateFile);
+        String tplContent ="";// this.replaceTpl(templateFile);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Repository 文件 {} 成功 ", fileName);
     }
@@ -63,7 +63,7 @@ public class RepositoryService extends  BaseService implements ServiceInterface{
      */
     @Override
     public void start() {
-        this.packageName = Const.SYS_PATH +".entity";
+        this.packageName = Const.SYS_PATH + ".entity";
         this.getFile();
     }
 

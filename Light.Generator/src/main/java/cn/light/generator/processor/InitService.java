@@ -34,7 +34,7 @@ public class InitService {
         if (clazz.isAnnotationPresent(AutoEntity.class)) {
             AutoEntity autoEntity = clazz.getAnnotation(AutoEntity.class);
 
-            //处理数据库备注相关
+           /* //处理数据库备注相关
             Singleton.get(JpaCommentService.class, clazz).start();
 
             //DTO处理
@@ -58,7 +58,7 @@ public class InitService {
             //service处理
             if (autoEntity.service()) {
                 Singleton.get(ImplService.class, clazz).start();
-            }
+            }*/
 
             //数据字典写入
             Singleton.get(DictionaryService.class, clazz).start();

@@ -52,7 +52,7 @@ public class MapperService extends BaseService implements ServiceInterface {
                     , true);
         }
         String templateFile = this.templatePath + "mapper.tpl";
-        String tplContent = this.replaceTpl(templateFile);
+        String tplContent = "";//this.replaceTpl(templateFile);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Mapper.java 文件 {} 成功 ", fileName);
     }
@@ -82,7 +82,7 @@ public class MapperService extends BaseService implements ServiceInterface {
             Console.log("生成Mapper.xml 文件 {} 已经存在 ", fileName);
         }
         String templateFile = this.templatePath + "mapperXml.tpl";
-        String tplContent = this.replaceTpl(templateFile);
+        String tplContent =""; //this.replaceTpl(templateFile);
         tplContent = assignWhereCondition(tplContent);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Mapper.xml 文件 {} 生成成功 ", fileName);

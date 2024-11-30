@@ -157,7 +157,7 @@ public class DtoService extends BaseService implements ServiceInterface {
                 builder.append("\r\n\r\n");
             }
         }
-        String tpl = this.replaceTpl(querDtoTpl);
+        String tpl = "";//this.replaceTpl(querDtoTpl);
         tpl = tpl.replace("#{fields}#", builder.toString());
         FileUtil.writeString(tpl, dtoName, Charset.defaultCharset());
     }

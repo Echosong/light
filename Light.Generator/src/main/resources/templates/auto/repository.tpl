@@ -17,6 +17,9 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 @SuppressWarnings("ALL")
-public interface #{UpEntityName}#Repository extends JpaRepository<#{UpTableName}#, Integer> {
-
+public interface #(UpEntityName)Repository extends JpaRepository<#{UpTableName}#, Integer> {
+    #if (is_search)
+    @Query(value = "select t from #{UpTableName}# t where 1=1 ")
+    Page<#{UpTableName}#> findAll(Pageable pageable);
+    #end
 }
