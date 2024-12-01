@@ -112,7 +112,7 @@ function resetQuery() {
 async function f5() {
     tableLoading.value = true;
     try {
-        let queryResult = await base.put('/#{EntityName}#/listPage', p);
+        let queryResult = await base.put('/#(EntityName)/listPage', p);
         tableData.value = queryResult.data.content;
         total.value = queryResult.data.totalElements;
     } catch (e) {
@@ -130,7 +130,7 @@ onMounted(() => {
 })
 
 function exportFile() {
-    base.download("/#{EntityName}#/export", p)
+    base.download("/#(EntityName)/export", p)
 }
 
 // ---------------------------- 添加/修改 ----------------------------
@@ -146,7 +146,7 @@ function add() {
 //确认删除
 function del(data) {
     base.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await base.delete("/#{EntityName}#/delete/" + data.id);
+        let res = await base.delete("/#(EntityName)/delete/" + data.id);
         base.success(res.message);
         f5();
     }.bind(this));
@@ -160,7 +160,7 @@ function shortChange(e) {
 }
 
 async function updateSwitch(row) {
-    await base.post('/#{EntityName}#/save', row);
+    await base.post('/#(EntityName)/save', row);
     base.success("更新成功")
 }
 

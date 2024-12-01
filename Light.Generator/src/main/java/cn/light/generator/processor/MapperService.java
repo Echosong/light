@@ -3,6 +3,7 @@ package cn.light.generator.processor;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
@@ -51,8 +52,10 @@ public class MapperService extends BaseService implements ServiceInterface {
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
-        String templateFile = this.templatePath + "mapper.tpl";
-        String tplContent = "";//this.replaceTpl(templateFile);
+
+        Dict dict = this.replaceTpl("mapper.tpl");
+        String tplContent = template.render(dict);
+
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Mapper.java 文件 {} 成功 ", fileName);
     }
@@ -81,9 +84,11 @@ public class MapperService extends BaseService implements ServiceInterface {
             //进行备份
             Console.log("生成Mapper.xml 文件 {} 已经存在 ", fileName);
         }
-        String templateFile = this.templatePath + "mapperXml.tpl";
-        String tplContent =""; //this.replaceTpl(templateFile);
-        tplContent = assignWhereCondition(tplContent);
+
+        Dict dict = this.replaceTpl("mapperXml.tpl");
+        dict.set("sql_where", assignWhereCondition());
+        String tplContent = template.render(dict);
+
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Mapper.xml 文件 {} 生成成功 ", fileName);
     }
@@ -91,10 +96,9 @@ public class MapperService extends BaseService implements ServiceInterface {
     /**
      * 根据queryDTO分配查询条件 用jpql 要好些
      *
-     * @param tplContent 模板内容
      * @return 解析字符串
      */
-    private String assignWhereCondition(String tplContent) {
+    private String assignWhereCondition() {
         Field[] fields = clazz.getDeclaredFields();
         List<String> fieldList = new ArrayList<>();
         for (Field field : fields) {
@@ -134,8 +138,9 @@ public class MapperService extends BaseService implements ServiceInterface {
         if (!fieldList.isEmpty()) {
             queryFields = String.join("\n", fieldList);
         }
-        tplContent = StrUtil.replace(tplContent, "#{sql_where}#", queryFields);
-        return tplContent;
+
+        return queryFields;
+
     }
 
     /**

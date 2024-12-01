@@ -3,6 +3,7 @@ package cn.light.generator.processor;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
@@ -77,7 +78,10 @@ public class ImplService  extends BaseService implements ServiceInterface  {
         if(StrUtil.isNotBlank(implStr)){
             templateFile = this.templatePath+"implService.tpl";
         }
-        String tplContent =  "";//this.replaceTpl(templateFile);
+
+        Dict dict = this.replaceTpl(templateFile);
+
+        String tplContent =  template.render(dict);
 
 
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());

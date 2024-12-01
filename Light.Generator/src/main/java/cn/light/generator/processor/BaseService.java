@@ -51,12 +51,6 @@ public class BaseService {
             this.className = StrUtil.subAfter(this.tableName, Const.TABLE_PREFIX, false);
             Const.VUE_PATH = Const.VUE_PATH_TEMP + "/business" ;
         }
-
-        if(Objects.isNull(engine)){
-            TemplateConfig templateConfig = new TemplateConfig(Const.TEMPLATE_PATH, TemplateConfig.ResourceMode.CLASSPATH);
-            templateConfig.setCharset(StandardCharsets.UTF_8);
-            engine = TemplateUtil.createEngine(templateConfig);
-        }
     }
 
 
@@ -64,12 +58,6 @@ public class BaseService {
      * 模板对象
      */
     protected Template template;
-
-    /**
-     * 模板引擎
-     */
-    protected TemplateEngine engine;
-
 
     /**
      * 表名
@@ -126,7 +114,7 @@ public class BaseService {
      * @return 初步处理后模板内容
      */
     protected Dict replaceTpl(String tplName){
-        template = engine.getTemplate(tplName);
+        template = SingleEngine.getInstance().getTemplate(tplName);
         Dict dict = Dict.create();
         dict.set("tableInfo", tableInfo);
         dict.set("SYS_PATH", Const.SYS_PATH);

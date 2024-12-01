@@ -37,23 +37,23 @@ const  query = ref({});
 async function open(data, parmas)  {
     isShow.value = true;
     if (data) {
-        title.value = "修改 #{tableInfo}#";
-        let one = await base.get("/#{EntityName}#/find/"+data.id);
+        title.value = "修改 #(tableInfo)";
+        let one = await base.get("/#(EntityName)/find/"+data.id);
         m.value = one.data;
     } else {
         let mdata  = //data_init
         query.value = parmas || {};
         m.value ={...mdata, ...parmas}
-        title.value = "添加 #{tableInfo}#";
+        title.value = "添加 #(tableInfo)";
     }
 }
 
-//提交#{tableInfo}#信息
+//提交#(tableInfo)信息
 async function onSubmit() {
     try {
         await ruleForm.value.validateFields();
         //replace_editor
-        base.post("/#{EntityName}#/save", m.value).then(() => {
+        base.post("/#(EntityName)/save", m.value).then(() => {
             emits('reloadList');
             isShow.value = false;
         });

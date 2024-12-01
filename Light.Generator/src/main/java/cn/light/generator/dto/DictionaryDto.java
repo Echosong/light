@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * DictionaryDto
+ * 数据字典生成dto
  * email:zq_songfeigang@163.com
  *
  * @author : 二胡子

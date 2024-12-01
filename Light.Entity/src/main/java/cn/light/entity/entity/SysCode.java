@@ -25,4 +25,7 @@ public class SysCode extends SysBase{
 
     @AutoEntityField(value = "单号")
     private Long number;
+
+    @AutoEntityField(value = "哈希值")
+    private String hashCode;
 }

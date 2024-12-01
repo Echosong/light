@@ -1,25 +1,17 @@
-package #{PackageName}#.repository;
-import java.util.*;
-import java.math.BigDecimal;
-import #{SYS_PATH}.entity.entity.#{UpTableName}#;
-import org.springframework.data.domain.Page;
+package #(PackageName).repository;
+import #(SYS_PATH).entity.entity.#(UpTableName);
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
-* #{UpEntityName}#Repository
+* #(UpEntityName)Repository
 * email:zq_songfeigang@163.com
 *
 * @author : 二胡子
 * @version : 1.0
-* @date : #{localDate}#
+* @date : #(localDate)
 */
 @Repository
-@SuppressWarnings("ALL")
-public interface #(UpEntityName)Repository extends JpaRepository<#{UpTableName}#, Integer> {
-    #if (is_search)
-    @Query(value = "select t from #{UpTableName}# t where 1=1 ")
-    Page<#{UpTableName}#> findAll(Pageable pageable);
-    #end
+public interface #(UpEntityName)Repository extends JpaRepository<#(UpTableName), Integer> {
+
 }

@@ -2,6 +2,7 @@ package cn.light.generator.processor;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
@@ -77,14 +78,15 @@ public class ViewService extends BaseService implements ServiceInterface {
      */
     @SuppressWarnings("AlibabaUndefineMagicConstant")
     private void listView(Field[] declaredFields) {
-        String templateFile = this.templatePath + "list.vue";
+        String templateFile =  "list.vue";
         String listPath = vuePath + "/list.vue";
         if (FileUtil.isFile(listPath)) {
             if(reWrite(listPath, CodeTypeEnum.LIST_VIEW)){
                 return;
             }
         }
-        String tplContent = "";// this.replaceTpl(templateFile);
+        Dict dict = this.replaceTpl(templateFile);
+        String tplContent = template.render(dict);
         List<String> paramsList = new ArrayList<>();
         List<String> fromStr = new ArrayList<>();
         List<ListColumnDTO> tableColumns = new ArrayList<>();
@@ -250,7 +252,7 @@ public class ViewService extends BaseService implements ServiceInterface {
     }
 
     private void viewInfo(Field[] declaredFields){
-        String templateFile = this.templatePath + "info.vue";
+        String templateFile = "info.vue";
 
         String listPath = vuePath + "/info.vue";
         if (FileUtil.isFile(listPath)) {
@@ -258,7 +260,10 @@ public class ViewService extends BaseService implements ServiceInterface {
                 return;
             }
         }
-        String tplContent = "";//this.replaceTpl(templateFile);
+
+        Dict dict = this.replaceTpl(templateFile);
+
+        String tplContent = template.render(dict);
         List<String> infoList = new ArrayList<>();
 
         String infoTemplate = """
@@ -305,7 +310,7 @@ public class ViewService extends BaseService implements ServiceInterface {
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void viewFrom(Field[] declaredFields) {
-        String templateFile = this.templatePath + "add.vue";
+        String templateFile =  "add.vue";
 
         String listPath = vuePath + "/add.vue";
         if (FileUtil.isFile(listPath)) {
@@ -313,8 +318,9 @@ public class ViewService extends BaseService implements ServiceInterface {
                 return;
             }
         }
+        Dict dict = this.replaceTpl(templateFile);
 
-        String tplContent = "";//this.replaceTpl(templateFile);
+        String tplContent = template.render(dict);
         List<String> elFormItems = new ArrayList<>();
         List<String> ms = new ArrayList<>();
         List<String> rulesFields = new ArrayList<>();

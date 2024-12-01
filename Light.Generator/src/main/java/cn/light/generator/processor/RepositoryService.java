@@ -3,6 +3,7 @@ package cn.light.generator.processor;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.anno.AutoCover;
@@ -50,9 +51,10 @@ public class RepositoryService extends BaseService implements ServiceInterface {
                             , StrUtil.format("_{}.txt", DateUtil.format(LocalDateTime.now(), "yyyMMddHHmmss")))
                     , true);
         }
-        String templateFile = this.templatePath + "repository.tpl";
-
-        String tplContent ="";// this.replaceTpl(templateFile);
+        String templateFile =  "repository.tpl";
+        //模板渲染
+        Dict dict = this.replaceTpl(templateFile);
+        String tplContent = template.render(dict);
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Repository 文件 {} 成功 ", fileName);
     }

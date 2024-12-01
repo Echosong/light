@@ -24,9 +24,9 @@ const one = ref({});
 
 async function open(row, query)  {
     isShow.value = true;
-    title.value = "查看#{tableInfo}#";
+    title.value = "查看#(tableInfo)";
     //获取当个信息
-    const {data} = await sa.get("/#{EntityName}#/find/"+row.id);
+    const {data} = await sa.get("/#(EntityName)/find/"+row.id);
     one.value = data;
 }
 defineExpose({

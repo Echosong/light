@@ -1,9 +1,7 @@
 package cn.light.entity.entity;
 
-import cn.light.common.anno.AutoEntity;
-import cn.light.common.anno.AutoEntityField;
-import cn.light.common.anno.AutoEntityFieldDefault;
-import cn.light.common.anno.InQueryDTO;
+import cn.light.common.anno.*;
+import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.packet.enums.system.AdPositionEnum;
 import cn.light.packet.enums.system.YesOrNoEnum;
