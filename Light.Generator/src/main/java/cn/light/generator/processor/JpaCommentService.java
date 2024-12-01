@@ -13,11 +13,8 @@ import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.generator.config.Const;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.Md5Crypt;
 
 import java.lang.reflect.Field;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Objects;
