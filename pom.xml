@@ -52,7 +52,6 @@
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
-
             <dependency>
                 <groupId>cn.light</groupId>
                 <artifactId>Light.Packet</artifactId>
@@ -78,7 +77,7 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>8.0.28</version>
             </dependency>
-
+            <!--对象池化工具-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
@@ -124,7 +123,7 @@
                 <artifactId>sa-token-redis</artifactId>
                 <version>1.37.0</version>
             </dependency>
-
+            <!--execl相关文件操作-->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-scratchpad</artifactId>
