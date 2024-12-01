@@ -13,9 +13,9 @@ import cn.light.common.enums.BaseEnum;
 import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.DtoTplEnum;
 import cn.light.generator.config.Const;
+import jakarta.validation.constraints.*;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.constraints.*;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;

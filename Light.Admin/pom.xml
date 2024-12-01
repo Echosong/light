@@ -101,12 +101,6 @@
 		</dependency>
 
 
-		<!--参数验证码-->
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-
 		<!--nosql redis-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -129,11 +123,6 @@
 			<artifactId>sa-token-redis</artifactId>
 		</dependency>
 
-
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

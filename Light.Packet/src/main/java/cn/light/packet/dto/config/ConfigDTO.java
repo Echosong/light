@@ -5,13 +5,8 @@ import cn.light.common.component.IDictionaryObject;
 import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.*;
@@ -28,23 +23,22 @@ import cn.light.common.enums.HtmlTypeEnum;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ConfigDTO extends SysBaseDTO implements IDictionaryObject {
-    @NotBlank(message="{jakarta.validation.constraints.NotBlank.message}")
+    @NotBlank
    @Schema(title="配置字段名" )
     private String key;
 
-    @Email(message="{jakarta.validation.constraints.Email.message}")
-    @Length(min=6,max=16,message="长度必须为6-16")
+    @Email
+    @Size(min=6,max=16,message="长度必须为6-16")
    @Schema(title="配置说明" )
     private String name;
 
-    @Range(min=0)
+    @Min(value=0)
    @Schema(title="配置分组" )
     private Integer group;
 
    @Schema(title="配置值" )
     private String value;
 
-    @Range(min=0,max=10,message="必须大于")
    @Schema(title="类型" , description="配置html展现类型")
     @ApiModelPropertyEnum(HtmlTypeEnum.class)
     private Integer type;

@@ -7,11 +7,10 @@ import cn.light.packet.enums.system.UserStateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
+import jakarta.validation.constraints.*;
+
 import java.util.Objects;
 
 /**
@@ -27,22 +26,22 @@ import java.util.Objects;
 @Data
 public class RegDTO {
 
-   @Schema(defaultValue = "账号直接用手机号")
+    @Schema(defaultValue = "账号直接用手机号")
     @NotNull
     @Column(unique = true, length = 11, name = "username")
-    @Pattern(regexp ="\\d{11}", message = "必须为手机格式")
+    @Pattern(regexp = "\\d{11}", message = "必须为手机格式")
     private String username;
 
-    @Length(min = 6, message = "密码必须大于等于6位")
-   @Schema(defaultValue = "密码")
+    @Size(min = 6, message = "密码必须大于等于6位")
+    @Schema(defaultValue = "密码")
     private String password;
 
-   @Schema(defaultValue = "姓名")
-    @Length(min = 2, message = "姓名必须大于两个字符")
+    @Schema(defaultValue = "姓名")
+    @Size(min = 2, message = "姓名必须大于两个字符")
     private String name;
 
     @AutoEntityField("身高")
-    @Range(min = 0, max = 2)
+    @Size(min = 0, max = 2)
     private Double height;
 
     @AutoEntityField("体重")
@@ -51,22 +50,22 @@ public class RegDTO {
     @AutoEntityField("昵称")
     private String nick;
 
-   @Schema(defaultValue = "状态默认开启", allowableValues = "0,1,2" )
+    @Schema(defaultValue = "状态默认开启", allowableValues = "0,1,2")
     @ApiModelPropertyEnum(value = UserStateEnum.class)
-    private Integer state = 0 ;
+    private Integer state = 0;
 
-   @Schema(defaultValue = "性别 0 男 1 女")
+    @Schema(defaultValue = "性别 0 男 1 女")
     private Integer sex;
 
-   @Schema(defaultValue = "0 线下注册 1 微信注册， 2 支付宝小程序， 3 app")
+    @Schema(defaultValue = "0 线下注册 1 微信注册， 2 支付宝小程序， 3 app")
     private String type;
 
-   @Schema(defaultValue = "获取性别")
-    public String getSexEnum(){
-        return Objects.equals(sex, 0)?"男":"女";
+    @Schema(defaultValue = "获取性别")
+    public String getSexEnum() {
+        return Objects.equals(sex, 0) ? "男" : "女";
     }
 
-   @Schema(defaultValue = "email")
+    @Schema(defaultValue = "email")
     private String email;
 
     @AutoEntityField("身份证正面")

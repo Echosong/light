@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import cn.light.common.annotation.ApiModelPropertyEnum;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
 import cn.light.packet.enums.system.FileTypeEnum;
 /**

@@ -5,14 +5,9 @@ import cn.light.common.component.IDictionaryObject;
 import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
 
 import lombok.EqualsAndHashCode;
 
@@ -31,7 +26,7 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RoleDTO extends SysBaseDTO implements IDictionaryObject {
-    @NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
+    @NotNull
     @Schema(title = "客户名称")
     private String name;
 

@@ -1,10 +1,10 @@
 package cn.light.packet.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Pattern;
 
 /**
  * <p>Title: </p >
@@ -22,11 +22,11 @@ public class LoginUserDTO {
     @Pattern(regexp = "\\d{11}", message = "必须为手机格式")
     private String username;
 
-    @Length(min = 6, message = "密码必须大于等于6位")
+    @Size(min = 6, message = "密码必须大于等于6位")
     @Schema(defaultValue = "密码")
     private String password;
 
-    @Length(min = 3, message = "请输入验证")
+    @Size(min = 3, message = "请输入验证")
     @Schema(defaultValue = "验证码")
     private String code;
 

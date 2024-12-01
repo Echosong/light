@@ -53,7 +53,7 @@ public class ConfigController extends BaseController{
     @Operation(summary = "批量新增活更新系统配置")
     @PostMapping("/saveList")
     @Log("批量新增|修改系统配置")
-    public void saveList(@RequestBody @javax.validation.Valid List<ConfigDTO> configDTOList){
+    public void saveList(@RequestBody @Valid List<ConfigDTO> configDTOList){
         configService.saveList(configDTOList);
     }
 

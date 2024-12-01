@@ -7,13 +7,9 @@ import cn.light.common.dto.PageInfo;
 import cn.light.common.dto.SysBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotNull;
+
+import jakarta.validation.constraints.*;
 
 import lombok.EqualsAndHashCode;
 
@@ -46,11 +42,10 @@ public class PermissionDTO extends SysBaseDTO implements IDictionaryObject {
     @Schema(title = "权限标识")
     private String perms;
 
-    @Range(min = 0)
+    @Min(value = 0)
     @Schema(title = "父级id")
     private Integer parentId;
 
-    @Range(min = 0, max = 3)
     @Schema(title = "类型", description = "权限类型 0：目录   1：菜单   2：按钮")
     private Integer type;
 
