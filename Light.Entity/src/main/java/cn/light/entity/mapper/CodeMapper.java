@@ -36,9 +36,13 @@ public interface CodeMapper extends BaseMapper<SysCode> {
             code.setNumber(1L);
             this.insert(code);
         }else{
-            code.setNumber(code.getNumber()+1);
+            if(code.getNumber() >= 999999){
+                code.setNumber(1L);
+            }else {
+                code.setNumber(code.getNumber() + 1);
+            }
             this.updateById(code);
         }
-        return DateUtil.format(new Date(), "yyMMdd") + StrUtil.fillBefore(code.getNumber()+"", '0', 5);
+        return DateUtil.format(new Date(), "yyMMdd") + StrUtil.fillBefore(code.getNumber()+"", '0', 6);
     }
 }
