@@ -155,6 +155,7 @@ function handleDelete(data) {
     });
 }
 
+//------------------排序 操作开启----------------------------
 function handleShortChange(e) {
     console.log('排序接受', e);
     p.direction = e.order === 'ascending';
@@ -172,7 +173,7 @@ async function handleUpdateSwitch(row) {
 }
 
 
-// 选择表格行
+// --------------------选择表格行---------------------------------
 const selectedRowKeyList = ref([]);
 
 function handleSelectChange(selectedRowKeys) {
