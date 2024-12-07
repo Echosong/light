@@ -31,36 +31,12 @@ import java.util.*;
 @Slf4j
 public class DictionarySerializer extends JsonSerializer<IDictionaryObject> {
 
-    private final UserService userService;
-
-    public DictionarySerializer(StringRedisTemplate redisTemplate, UserService userService) {
+    public DictionarySerializer(StringRedisTemplate redisTemplate) {
         assert redisTemplate != null;
-        this.userService = userService;
+
     }
 
-    /**
-     * 插入创建人，更新人
-     *
-     * @param fieldName 字段名
-     * @return 用户插入
-     */
-    private Map<String, String> insertUserInfo(String fieldName, Integer value) {
-        Map<String, String> map = new HashMap<>(2);
-        List<String> userIds = Arrays.asList("creatorId", "updaterId");
-        if (!userIds.contains(fieldName)) {
-            return map;
-        }
-        //TODO 注意一定是内部操作系统才这么干，这里其实应该是后台操作人员，前端用户不要放这里
-        List<UserCacheDTO> all = userService.getAllCache();
-        all.stream().filter(t -> Objects.equals( t.getId(),value))
-                .findFirst()
-                .ifPresent(t -> {
-                    String key = "creatorId".equals(fieldName) ? "creatorName" : "updaterName";
-                    map.put("code", key);
-                    map.put("value", t.getName());
-                });
-        return map;
-    }
+
 
 
     @Override
@@ -84,10 +60,6 @@ public class DictionarySerializer extends JsonSerializer<IDictionaryObject> {
                 value = ReflectUtil.getFieldValue(object, field);
             } catch (Exception e) {
                 log.warn("反射处理异常，请联系产品部门修复:设置对象属性失败：{}", field.getName());
-            }
-            Map<String, String> map = insertUserInfo(field.getName(), Convert.toInt(value, 0));
-            if (!map.isEmpty()) {
-                jsonGenerator.writeStringField(map.get("code"), map.get("value"));
             }
             if (field.isAnnotationPresent(ApiModelPropertyEnum.class)) {
                 ApiModelPropertyEnum annotation = field.getAnnotation(ApiModelPropertyEnum.class);

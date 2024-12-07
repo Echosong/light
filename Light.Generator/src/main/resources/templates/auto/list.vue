@@ -5,7 +5,7 @@
             #{a-form-item}#
             <a-form-item class="smart-query-form-item">
                 <a-button-group>
-                    <a-button type="primary" @click="f5">
+                    <a-button type="primary" @click="fetchData">
                         <template #icon>
                             <SearchOutlined/>
                         </template>
@@ -27,13 +27,13 @@
         <!---------- 表格操作行 begin ----------->
         <a-row class="smart-table-btn-block">
             <div class="smart-table-operate-block">
-                <a-button @click="add" type="primary">
+                <a-button @click="handleAdd" type="primary">
                     <template #icon>
                         <PlusOutlined/>
                     </template>
                     新建
                 </a-button>
-                <a-button @click="exportFile" type="primary">
+                <a-button @click="exportData" type="primary">
                     <template #icon>
                         <ArrowDownOutlined/>
                     </template>
@@ -41,7 +41,7 @@
                 </a-button>
             </div>
             <div class="smart-table-setting-block">
-                <TableOperator v-model="columns" tableId="log" :refresh="f5"/>
+                <TableOperator v-model="columns" tableId="log" :refresh="fetchData"/>
             </div>
         </a-row>
         <!---------- 表格操作行 end ----------->
@@ -60,16 +60,15 @@
             <template #bodyCell="{ text, record, column }">
                 <template v-if="column.dataIndex === 'action'">
                     <div class="smart-table-operate">
-                        <a-button @click="update(record)" type="link">编辑</a-button>
-                        <a-button @click="del(record)" danger type="link">删除</a-button>
+                        <a-button @click="handleEdit(record)" type="link">编辑</a-button>
+                        <a-button @click="handleDelete(record)" danger type="link">删除</a-button>
                     </div>
                 </template>
             </template>
         </a-table>
         <!---------- 表格 end ----------->
-
-        <Pagination :p="p" @f5="f5" :total="total"></Pagination>
-        <addOrUpdate ref="addUpdate" @reloadList="f5"/>
+        <Pagination :p="p" @f5="fetchData" :total="total"></Pagination>
+        <addOrUpdate ref="addUpdate" @reloadList="fetchData"/>
 
     </a-card>
 </template>
@@ -105,11 +104,11 @@ function resetQuery() {
     let pageSize = p.pageSize;
     Object.assign(p, params);
     p.pageSize = pageSize;
-    f5();
+    fetchData();
 }
 
 // 查询数据
-async function f5() {
+async function fetchData() {
     tableLoading.value = true;
     try {
         let queryResult = await base.put('/#(EntityName)/listPage', p);
@@ -126,7 +125,7 @@ const router = useRouter();
 
 onMounted(() => {
     query.value = router.currentRoute.value.query;
-    f5()
+    fetchData()
 })
 
 function exportFile() {
@@ -134,45 +133,54 @@ function exportFile() {
 }
 
 // ---------------------------- 添加/修改 ----------------------------
-function update(row) {
+function handleEdit(row) {
     addUpdate.value.open(row, query.value);
 }
 
-function add() {
+function handleAdd() {
     addUpdate.value.open(null, query.value);
 }
 
 // ---------------------------- 单个删除 ----------------------------
 //确认删除
-function del(data) {
-    base.confirm('是否删除，此操作不可撤销', async function () {
-        let res = await base.delete("/#(EntityName)/delete/" + data.id);
-        base.success(res.message);
-        f5();
-    }.bind(this));
+function handleDelete(data) {
+    base.confirm('是否删除，此操作不可撤销', async () => {
+        try {
+            const res = await base.delete(`/#(EntityName)/delete/${data.id}`);
+            base.success(res.message);
+            fetchData();
+        } catch (e) {
+            smartSentry.captureError(e);
+        }
+    });
 }
 
-function shortChange(e) {
-    console.log('排序接受', e)
+//------------------排序 操作开启----------------------------
+function handleShortChange(e) {
+    console.log('排序接受', e);
     p.direction = e.order === 'ascending';
     p.sortCol = e.prop;
-    f5();
+    fetchData();
 }
 
-async function updateSwitch(row) {
-    await base.post('/#(EntityName)/save', row);
-    base.success("更新成功")
+async function handleUpdateSwitch(row) {
+    try {
+        await base.post('/#(EntityName)/save', row);
+        base.success("更新成功");
+    } catch (e) {
+        smartSentry.captureError(e);
+    }
 }
 
 
-// 选择表格行
+// --------------------选择表格行---------------------------------
 const selectedRowKeyList = ref([]);
 
-function onSelectChange(selectedRowKeys) {
+function handleSelectChange(selectedRowKeys) {
     selectedRowKeyList.value = selectedRowKeys;
 }
 
 defineExpose({
-    f5
+    fetchData
 })
 </script>
