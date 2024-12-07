@@ -44,9 +44,6 @@ public class Config {
     @Resource
     HttpServletRequest request;
 
-    @Resource
-    UserService userService;
-
     /**
      * Date格式化字符串
      */
@@ -67,7 +64,7 @@ public class Config {
     public Jackson2ObjectMapperBuilderCustomizer initJackson() {
         return builder -> {
             //这里的ByType 可以失败类类型，属性类型
-            builder.serializerByType(IDictionaryObject.class, new DictionarySerializer(stringRedisTemplate,userService));
+            builder.serializerByType(IDictionaryObject.class, new DictionarySerializer(stringRedisTemplate));
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT)));
             builder.serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_FORMAT)));
             builder.serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(TIME_FORMAT)));
