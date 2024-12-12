@@ -286,4 +286,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
                 .update();
         userCacheRepository.deleteById(userCache.getId());
     }
+
+    @Override
+    public void delete(Integer userId) {
+        this.removeById(userId);
+        List<SysUserRole> allByUserId = userRoleRepository.findAllByUserId(userId);
+        userRoleRepository.deleteAll(allByUserId);
+    }
 }

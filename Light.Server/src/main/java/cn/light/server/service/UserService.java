@@ -72,4 +72,6 @@ public interface UserService extends IService<SysUser> {
     LoginResultDTO getLoginInfo();
 
     void currentUpdate(UserDTO userDTO);
+
+    void delete(Integer userId);
 }

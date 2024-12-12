@@ -1,7 +1,6 @@
 package cn.light.admin.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.convert.Convert;
 import cn.light.common.annotation.Log;
 import cn.light.common.annotation.NoPermission;
 import cn.light.common.annotation.NoRepeatSubmit;
@@ -23,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -148,7 +148,7 @@ public class UserController extends BaseController{
     @Permission(logical = LogicalEnum.OR, permissions = Consts.ROLE_ADMIN_CODE)
     @Log("删除用户")
     public void delete(@PathVariable(value = "userId") Integer userId) {
-        userService.removeById(userId);
+        userService.delete(userId);
     }
 
     @Operation(summary = "获取某个用户")
