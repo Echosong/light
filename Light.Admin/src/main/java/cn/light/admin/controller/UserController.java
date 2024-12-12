@@ -39,7 +39,7 @@ public class UserController extends BaseController{
     @Resource
     private  UserService userService;
 
-    @Value("k-dao.password: 123456")
+    @Value("123456")
     private String defaultPassword;
 
 
@@ -74,16 +74,16 @@ public class UserController extends BaseController{
     }
 
 
-    @PostMapping(path = {"/update","/save"})
+    @PostMapping("/save")
     @Operation(summary = "更新用户")
     @Log("更新用户")
     public void update(@RequestBody UserDTO userDTO) {
-        Integer userId = userDTO.getId();
-        if (Objects.isNull(userId)) {
-            userId = Convert.toInt(StpUtil.getLoginId(), 0);
+        if (Objects.isNull(userDTO.getId())) {
+            userDTO.setRegIp(getRemoteIp());
+            userService.create(userDTO);
+        } else {
+            userService.update(userDTO);
         }
-        userDTO.setId(userId);
-        userService.update(userDTO);
     }
 
     @Operation(summary = "获取所有用户")
