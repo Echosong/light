@@ -10,4 +10,6 @@ package cn.light.common.consts;
  */
 public interface Consts {
     String ROLE_ADMIN_CODE = "admin";
+
+    String DEFAULT_PASSWORD = "123456";
 }

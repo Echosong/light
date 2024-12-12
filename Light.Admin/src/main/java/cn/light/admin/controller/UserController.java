@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +37,6 @@ import java.util.Objects;
 public class UserController extends BaseController{
     @Resource
     private  UserService userService;
-
-    @Value("123456")
-    private String defaultPassword;
-
 
     @PostMapping("/create")
     @Operation(summary = "新增用户")
@@ -109,9 +104,9 @@ public class UserController extends BaseController{
     @GetMapping("/resetPassword/{userId}")
     @Operation(summary = "管理员重置密码")
     @Log("管理员重置密码")
-    public void resetPassword(@PathVariable(value = "userId") Integer userId) {
-        userService.resetPassword(userId, this.defaultPassword);
-
+    public String resetPassword(@PathVariable(value = "userId") Integer userId) {
+        userService.resetPassword(userId, Consts.DEFAULT_PASSWORD);
+        return "重置密码成功，新密码为：" + Consts.DEFAULT_PASSWORD;
     }
 
     /**
