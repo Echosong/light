@@ -194,7 +194,7 @@ public class ViewService extends BaseService implements ServiceInterface {
         if ("String".equals(field.getType().getSimpleName())) {
             returnValue = StrUtil.format("""
                     <a-form-item label="{}" v-if="!query.{}" class="smart-query-form-item">
-                     <a-input v-model:value="p.{}" placeholder="模糊查询"></a-input>
+                     <a-input v-model:value="p.{}" placeholder="模糊查询" :allow-clear="true"></a-input>
                     </a-form-item>""", autoEntityField.value(), field.getName(),field.getName());
         }
         if ("Date".equals(field.getType().getSimpleName())) {
@@ -406,7 +406,7 @@ public class ViewService extends BaseService implements ServiceInterface {
             } else {
                 formItem = (StrUtil.format("""
                         <a-form-item label="{}"  prop="{}" v-if="!query.{}" ##>
-                            <a-input v-model:value="m.{}"></a-input>
+                            <a-input v-model:value="m.{}" :allow-clear="true"></a-input>
                         </a-form-item>""", annotation.value(), field.getName(),field.getName(), field.getName()));
             }
             elFormItems.add(StrUtil.replace(formItem, "##", tipMsg));
