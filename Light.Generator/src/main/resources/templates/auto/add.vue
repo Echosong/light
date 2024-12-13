@@ -13,7 +13,7 @@
         <template #footer>
             <a-space>
                 <a-button @click="isShow= false">取消</a-button>
-                <a-button type="primary" @click="handleSubmit">保存</a-button>
+                <a-button type="primary" @click="handleSubmit" :loading="submitLoading">保存</a-button>
             </a-space>
         </template>
     </a-drawer>
@@ -34,6 +34,7 @@ const rules = {//rule_fields
 }
 const formRef = ref();
 const  query = ref({});
+const submitLoading = ref(false);
 
 async function openDrawer(data, parmas)  {
     isShow.value = true;
@@ -51,15 +52,17 @@ async function openDrawer(data, parmas)  {
 
 //提交#(tableInfo)信息
 async function handleSubmit() {
+    await formRef.value.validateFields();
     try {
-        await formRef.value.validateFields();
+        submitLoading.value = true;
         //replace_editor
-        base.post("/#(EntityName)/save", m.value).then(() => {
-            emits('reloadList');
-            isShow.value = false;
-        });
+        await base.post("/#(EntityName)/save", m.value);
+        emits('reloadList');
+        isShow.value = false;
     } catch (err) {
-        base.error('参数验证错误，请仔细填写表单数据!'+ err.message);
+        console.log(err);
+    }finally {
+        submitLoading.value = false;
     }
 }
 
