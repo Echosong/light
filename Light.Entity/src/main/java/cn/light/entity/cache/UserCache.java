@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.RedisHash;
  */
 @Getter
 @Setter
-@RedisHash
+@RedisHash(timeToLive = 60*60*24)
 public class UserCache extends SysUser {
     @AutoEntityField(value = "token")
     private String token;

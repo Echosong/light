@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@RedisHash
+@RedisHash(timeToLive = 60*60*24)
 @AllArgsConstructor
 public class UserPermissionCache {
     /**
@@ -29,7 +29,7 @@ public class UserPermissionCache {
     private Integer id;
 
     /**
-     * 短信内容
+     * 权限信息
      */
     private List<PermissionDTO> permissions;
 }

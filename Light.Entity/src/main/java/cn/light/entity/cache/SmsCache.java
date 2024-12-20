@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisHash;
  * @author : 二胡子
  * @version :1.0.0
  */
-@RedisHash
+@RedisHash(timeToLive = 60*5)
 @Getter
 @Setter
 @Builder
