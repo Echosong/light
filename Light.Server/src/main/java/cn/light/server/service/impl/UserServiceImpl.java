@@ -70,6 +70,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
                 .orElseThrow(() -> new RuntimeException("验证码错误"));
 
         Assert.isTrue(smsCache.getContent().equalsIgnoreCase(loginUserDTO.getCode()), "验证码错误");
+        //删除
+        smsCacheRepository.deleteById(loginUserDTO.getCodeUid());
 
         //前端密码简单用了base64处理了下
         loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));

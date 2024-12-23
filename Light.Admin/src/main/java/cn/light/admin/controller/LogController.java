@@ -37,7 +37,6 @@ public class LogController extends BaseController{
 
     @Operation(summary = "分页查询日志")
     @PutMapping("/listPage")
-    @NoPermission
     public Page<LogListDTO> listPage(@RequestBody @Valid LogQueryDTO queryDTO){
         return logService.listPage(queryDTO);
     }
