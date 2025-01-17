@@ -9,7 +9,6 @@ import cn.light.entity.cache.TableColumnCacheRepository;
 import cn.light.entity.cache.UserCache;
 import cn.light.entity.entity.SysTableColumn;
 import cn.light.entity.mapper.TableColumnMapper;
-import cn.light.entity.repository.TableColumnRepository;
 import cn.light.packet.dto.tableColumn.TableColumnDTO;
 import cn.light.packet.dto.tableColumn.TableColumnListDTO;
 import cn.light.packet.dto.tableColumn.TableColumnQueryDTO;
@@ -24,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 自动生成 存储列设置表 service 实现
@@ -37,8 +37,6 @@ import java.util.List;
 public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTableColumn> implements TableColumnService {
     @Resource
     private UserService userService;
-    @Resource
-    private TableColumnRepository tableColumnRepository;
     @Resource
     private TableColumnCacheRepository tableColumnCacheRepository;
 
@@ -64,8 +62,11 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
         SysTableColumn tableColumn = DtoMapper.convert(saveDTO, SysTableColumn.class);
         UserCache userCache = userService.getUserCache();
 
-        tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableColumn.getTableName())
+        this.lambdaQuery().eq(SysTableColumn::getUserId, userCache.getId())
+                .eq(SysTableColumn::getTableName, tableColumn.getTableName())
+                .oneOpt()
                 .ifPresent(t-> tableColumn.setId(t.getId()));
+
         tableColumn.setUserId(userCache.getId());
         this.saveOrUpdate(tableColumn);
         tableColumnCacheRepository.save(tableColumn);
@@ -80,9 +81,9 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
         if (tableCacheOp.isPresent()) {
             return tableCacheOp.get().getColumns();
         }
-        tableCacheOp = tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableName);
+        var tableColumn = this.getBaseMapper().findByUserIdAndTableName(userCache.getId(), tableName);
 
-        return tableCacheOp.map(SysTableColumn::getColumns).orElse("");
+        return Optional.ofNullable(tableColumn).map(SysTableColumn::getColumns).orElse("");
     }
 
     @Override
@@ -92,8 +93,9 @@ public class TableColumnServiceImpl extends ServiceImpl<TableColumnMapper, SysTa
         var tableCacheOp = tableColumnCacheRepository.findByUserIdAndTableName(userCache.getId(), tableName);
         tableCacheOp.ifPresent(sysTableColumn -> tableColumnCacheRepository.delete(sysTableColumn));
 
-        tableCacheOp = tableColumnRepository.findByUserIdAndTableName(userCache.getId(), tableName);
-        tableCacheOp.ifPresent(sysTableColumn -> tableColumnRepository.delete(sysTableColumn));
+        var tableColumn = this.getBaseMapper().findByUserIdAndTableName(userCache.getId(), tableName);
+
+        Optional.ofNullable(tableColumn).ifPresent(this::removeById);
 
     }
 

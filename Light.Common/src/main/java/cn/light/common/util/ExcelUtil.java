@@ -1,5 +1,6 @@
 package cn.light.common.util;
 
+import cn.hutool.core.util.ReflectUtil;
 import cn.light.common.annotation.ExcelAnnotation;
 import cn.light.common.consts.IExtendObject;
 import cn.light.common.consts.IntegerConst;
@@ -28,10 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * <p>Title: light</p >
- * <p>Description: ExcelUtil</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2024/1/2 12:05 </p >
+ * <p>Title: light</p>
+ * <p>Description: ExcelUtil</p>
+ * <p>Company: www.hn1024.cn</p>
+ * <p>create date: 2024/1/2 12:05 </p>
  *
  * @author : 二胡子
  * @version :1.0.0
@@ -52,12 +53,12 @@ public class ExcelUtil {
     public static ResponseEntity<byte[]> generateImportFile(Object example, String tableName) throws IOException, IllegalAccessException {
         List list = new ArrayList();
         list.add(example);
-        return generateImportFile((List)list, tableName, (Class)example.getClass());
+        return generateImportFile((List) list, tableName, (Class) example.getClass());
     }
 
     public static ResponseEntity<byte[]> generateImportFile(Class clas, String tableName) throws IOException, IllegalAccessException {
         List list = new ArrayList();
-        return generateImportFile((List)list, tableName, (Class)clas);
+        return generateImportFile((List) list, tableName, (Class) clas);
     }
 
     public static ResponseEntity<byte[]> generateImportFile(List list, String tableName, Class clas) throws IllegalAccessException, IOException {
@@ -79,13 +80,13 @@ public class ExcelUtil {
         HSSFSheet hssfSheet = hssfWorkbook.createSheet(tableName);
         HSSFRow hssfRowCn = hssfSheet.createRow(0);
         HSSFRow hssfRow = hssfSheet.createRow(1);
-        Field[] fields = ReflectUtil.getAllFields(clas);
+        Field[] fields = ReflectUtil.getFields(clas);
         HSSFRow[] valueRows = new HSSFRow[list.size()];
         int columnSqu = 0;
 
         HSSFCell hssfCell;
         int i;
-        for(i = 0; i < fields.length; ++i) {
+        for (i = 0; i < fields.length; ++i) {
             ExcelAnnotation excelAnnotation = fields[i].getAnnotation(ExcelAnnotation.class);
             if (excelAnnotation != null) {
                 if (excelAnnotation.ignore()) {
@@ -97,7 +98,7 @@ public class ExcelUtil {
                 }
             }
 
-            Schema apiModelProperties = (Schema)fields[i].getAnnotation(Schema.class);
+            Schema apiModelProperties = (Schema) fields[i].getAnnotation(Schema.class);
             if (apiModelProperties != null) {
                 if (apiModelProperties.hidden()) {
                     continue;
@@ -110,7 +111,7 @@ public class ExcelUtil {
             hssfCell = hssfRow.createCell(columnSqu);
             hssfCell.setCellValue(fields[i].getName());
 
-            for(int j = 0; j < list.size(); ++j) {
+            for (int j = 0; j < list.size(); ++j) {
                 Object value = fields[i].get(list.get(j));
                 if (value != null) {
                     if (valueRows[j] == null) {
@@ -119,7 +120,7 @@ public class ExcelUtil {
 
                     hssfCell = valueRows[j].createCell(columnSqu);
                     if (fields[i].getType() == Date.class) {
-                        hssfCell.setCellValue(SIMPLE_DATE_TIME_FORMAT.format((Date)value));
+                        hssfCell.setCellValue(SIMPLE_DATE_TIME_FORMAT.format((Date) value));
                     } else {
                         hssfCell.setCellValue(value.toString());
                     }
@@ -130,15 +131,15 @@ public class ExcelUtil {
         }
 
         if (columnInfos != null && columnInfos.size() > 0) {
-            for(i = 0; i < columnInfos.size(); ++i) {
-                ExtendColumnInfo info = (ExtendColumnInfo)columnInfos.get(i);
+            for (i = 0; i < columnInfos.size(); ++i) {
+                ExtendColumnInfo info = (ExtendColumnInfo) columnInfos.get(i);
                 hssfCell = hssfRowCn.createCell(columnSqu);
                 hssfCell.setCellValue(info.getChName());
                 hssfCell = hssfRow.createCell(columnSqu);
                 hssfCell.setCellValue(info.getColumnName());
                 if (list.size() > 0 && list.get(0) instanceof IExtendObject) {
-                    for(int j = 0; j < list.size(); ++j) {
-                        IExtendObject iExtendObject = (IExtendObject)list.get(j);
+                    for (int j = 0; j < list.size(); ++j) {
+                        IExtendObject iExtendObject = (IExtendObject) list.get(j);
                         hssfCell = valueRows[j].createCell(columnSqu);
                         addCell(hssfCell, info, iExtendObject);
                     }
@@ -147,7 +148,6 @@ public class ExcelUtil {
                 ++columnSqu;
             }
         }
-
     }
 
     private static void addCell(HSSFCell hssfCell, ExtendColumnInfo info, IExtendObject iExtendObject) {
@@ -166,7 +166,6 @@ public class ExcelUtil {
                 }
             }
         }
-
     }
 
     public static ResponseEntity<byte[]> generateHttpExcelFile(HSSFWorkbook hssfWorkbook, String tableName) throws IOException {
@@ -177,9 +176,8 @@ public class ExcelUtil {
         return new ResponseEntity(baos.toByteArray(), headers, HttpStatus.OK);
     }
 
-
     public static <T> List<T> getEntityList(MultipartFile file, int sheetNum, Class clazz) throws IOException, IllegalAccessException {
-        return getEntityList(file, sheetNum, clazz, (List)null);
+        return getEntityList(file, sheetNum, clazz, (List) null);
     }
 
     public static <T> List<T> getEntityList(MultipartFile file, int sheetNum, Class clazz, List<ExtendColumnInfo> extendColumnInfos) throws IOException, IllegalAccessException {
@@ -188,36 +186,36 @@ public class ExcelUtil {
         Sheet sheet = wb.getSheetAt(sheetNum);
         DataFormatter formatter = new DataFormatter();
         if (sheet == null) {
-            throw new BaseKnownException(500,"没有工作sheet");
+            throw new BaseKnownException(500, "没有工作sheet");
         } else {
             List<String> properties = getProrpertys(sheet);
-            Field[] fields = ReflectUtil.getAllFields(clazz);
+            Field[] fields = ReflectUtil.getFields(clazz);
             Field[] var11 = fields;
             int var12 = fields.length;
 
             int r;
-            for(r = 0; r < var12; ++r) {
+            for (r = 0; r < var12; ++r) {
                 Field f = var11[r];
                 f.setAccessible(true);
             }
 
             List<T> entityList = new ArrayList();
 
-            for(r = 2; r <= sheet.getLastRowNum(); ++r) {
+            for (r = 2; r <= sheet.getLastRowNum(); ++r) {
                 Row row = sheet.getRow(r);
                 if (row != null) {
                     T entity = (T) BeanUtils.instantiateClass(clazz);
                     IExtendObject iExtendObject = null;
                     if (entity instanceof IExtendObject) {
-                        iExtendObject = (IExtendObject)entity;
+                        iExtendObject = (IExtendObject) entity;
                         iExtendObject.setExtend(new HashMap(IntegerConst.MAP_SIZE));
                     }
 
-                    for(int i = 0; i < properties.size(); ++i) {
+                    for (int i = 0; i < properties.size(); ++i) {
                         Field[] var17 = fields;
                         int var18 = fields.length;
 
-                        for(int var19 = 0; var19 < var18; ++var19) {
+                        for (int var19 = 0; var19 < var18; ++var19) {
                             Field f = var17[var19];
                             if (f.getName().equals(properties.get(i))) {
                                 field = f;
@@ -244,8 +242,8 @@ public class ExcelUtil {
                                 ExtendColumnInfo cellPropertyExtendInfo = null;
                                 Iterator var26 = extendColumnInfos.iterator();
 
-                                while(var26.hasNext()) {
-                                    ExtendColumnInfo extendColumnInfo = (ExtendColumnInfo)var26.next();
+                                while (var26.hasNext()) {
+                                    ExtendColumnInfo extendColumnInfo = (ExtendColumnInfo) var26.next();
                                     if (extendColumnInfo.getColumnName().equals(properties.get(i))) {
                                         cellPropertyExtendInfo = extendColumnInfo;
                                         break;
@@ -268,12 +266,11 @@ public class ExcelUtil {
         }
     }
 
-
     private static List<String> getProrpertys(Sheet sheet) {
         List<String> properties = new ArrayList();
         Row row = sheet.getRow(1);
 
-        for(int i = 0; i < row.getLastCellNum(); ++i) {
+        for (int i = 0; i < row.getLastCellNum(); ++i) {
             properties.add(row.getCell(i).getStringCellValue());
         }
 
@@ -284,16 +281,16 @@ public class ExcelUtil {
         String fileName = file.getOriginalFilename();
         InputStream is = file.getInputStream();
         Object wb;
-        if (fileName.matches("^.+\\.(?i)(xls)$")) {
+        if (fileName.matches(XLS_FILE_NAME_REGEX)) {
             wb = new HSSFWorkbook(is);
         } else {
-            if (!fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            if (!fileName.matches(XLSX_FILE_NAME_REGEX)) {
                 throw new BaseKnownException(500, "execl失败");
             }
 
             wb = new HSSFWorkbook(is);
         }
 
-        return (Workbook)wb;
+        return (Workbook) wb;
     }
 }

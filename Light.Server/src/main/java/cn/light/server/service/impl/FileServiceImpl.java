@@ -8,7 +8,6 @@ import cn.light.common.util.DtoMapper;
 import cn.light.common.util.PageUtil;
 import cn.light.entity.entity.SysFile;
 import cn.light.entity.mapper.FileMapper;
-import cn.light.entity.repository.FileRepository;
 import cn.light.packet.dto.config.ConfigDTO;
 import cn.light.packet.dto.file.FileDTO;
 import cn.light.packet.dto.file.FileQueryDTO;
@@ -17,6 +16,7 @@ import cn.light.packet.enums.system.StorageTypeEnum;
 import cn.light.server.service.ConfigService;
 import cn.light.server.service.FileService;
 import cn.light.server.service.StorageService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +39,6 @@ import java.util.*;
 @Slf4j
 public class FileServiceImpl  extends ServiceImpl<FileMapper, SysFile> implements FileService {
 
-    @Resource
-    private FileRepository fileRepository;
     @Resource
     private ConfigService configService;
 
@@ -92,8 +90,8 @@ public class FileServiceImpl  extends ServiceImpl<FileMapper, SysFile> implement
         kdFile.setExtend(extName);
         kdFile.setFileType(1);
         kdFile.setUrlPath(format + "/" + newFilename);
-        SysFile save = fileRepository.save(kdFile);
-        map.put("fileId", save.getId().toString());
+        this.saveOrUpdate(kdFile);
+        map.put("fileId", kdFile.getId().toString());
         return map;
     }
 
@@ -101,16 +99,18 @@ public class FileServiceImpl  extends ServiceImpl<FileMapper, SysFile> implement
     public ResponseEntity download(String uuid) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=" + uuid);
-        Optional<SysFile> byUrlPath = fileRepository.findByUuid(uuid);
-        return byUrlPath.map(kdFile -> new ResponseEntity(FileUtil.readBytes(kdFile.getFilePath()), headers, HttpStatus.OK))
+        SysFile file = this.baseMapper.selectOne(new LambdaQueryWrapper<SysFile>().eq(SysFile::getUuid, uuid));
+
+        return Optional.ofNullable(file)
+                .map(kdFile -> new ResponseEntity(FileUtil.readBytes(kdFile.getFilePath()), headers, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.MULTI_STATUS));
     }
 
     @Override
     public void delete(Integer id) {
-        fileRepository.findById(id).ifPresent(t -> {
+        this.getOptById(id).ifPresent(t -> {
             if (FileUtil.del(t.getFilePath())) {
-                fileRepository.delete(t);
+                this.removeById(t);
             }
         });
     }
@@ -118,7 +118,7 @@ public class FileServiceImpl  extends ServiceImpl<FileMapper, SysFile> implement
     @Override
     public void save(FileDTO fileDTO) {
         SysFile file = DtoMapper.convert(fileDTO, SysFile.class);
-        fileRepository.save(file);
+        this.saveOrUpdate(file);
     }
 
     @Override

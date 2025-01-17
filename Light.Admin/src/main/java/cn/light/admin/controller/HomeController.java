@@ -8,8 +8,8 @@ import cn.light.common.util.DtoMapper;
 import cn.light.entity.cache.SmsCache;
 import cn.light.entity.cache.SmsCacheRepository;
 import cn.light.entity.entity.SysUser;
-import cn.light.entity.repository.UserRepository;
 import cn.light.packet.dto.user.UserDTO;
+import cn.light.server.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -34,7 +34,7 @@ import java.util.*;
 public class HomeController extends BaseController {
 
     @Resource
-    private  UserRepository userRepository;
+    private UserService userService;
 
     @Resource
     private SmsCacheRepository smsCacheRepository;
@@ -94,7 +94,7 @@ public class HomeController extends BaseController {
         SysUser userDb = DtoMapper.convert(userDTO, SysUser.class);
         //新注册用户暂时给0
         userDb.setState(0);
-        userRepository.save(userDb);
+        userService.save(userDb);
     }
 
     /**

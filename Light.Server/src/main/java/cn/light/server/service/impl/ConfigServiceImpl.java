@@ -10,11 +10,9 @@ import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
 
 import cn.light.packet.enums.system.ConfigGroupEnum;
-import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.light.entity.entity.SysConfig;
 import cn.light.entity.mapper.ConfigMapper;
-import cn.light.entity.repository.ConfigRepository;
 import cn.light.server.service.ConfigService;
 import cn.light.packet.dto.config.*;
 
@@ -36,8 +34,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, SysConfig> implements ConfigService {
-    @Resource
-    private  ConfigRepository configRepository;
 
     @Override
     public Page<ConfigListDTO> listPage(ConfigQueryDTO queryDTO){
@@ -57,27 +53,28 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, SysConfig> impl
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ConfigDTO save(ConfigDTO saveDTO) {
         SysConfig config = DtoMapper.convert(saveDTO, SysConfig.class);
-        configRepository.save(config);
+        this.saveOrUpdate(config);
         return DtoMapper.convert(config, ConfigDTO.class);
     }
 
     @Override
     public void delete(Integer id) {
-        configRepository.deleteById(id);
+        this.removeById(id);
     }
 
     @Override
     public ConfigDTO find(Integer id){
-        SysConfig one = configRepository.findById(id)
+        SysConfig one = this.getOptById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ConfigDTO.class);
     }
 
     @Override
     public ConfigDTO getByGroupAndKey(Integer group, String key) {
-        List<ConfigDTO> kdConfigs = DtoMapper.convertList(configRepository.findAll(), ConfigDTO.class);
+        List<ConfigDTO> kdConfigs = DtoMapper.convertList(this.list(), ConfigDTO.class);
         return kdConfigs.stream()
                 .filter(t-> Objects.equals(group, t.getGroup()) && Objects.equals(t.getKey(), key))
                 .findFirst()
@@ -93,7 +90,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, SysConfig> impl
 
     @Override
     public Map<String, List<ConfigListDTO>> getConfigList() {
-        List<SysConfig> all = configRepository.findAll();
+        List<SysConfig> all = this.list();
         List<ConfigListDTO> configLists = DtoMapper.convertList(all, ConfigListDTO.class);
         //根据 group 分组
         Map<Integer, List<ConfigListDTO>> collect = configLists.stream().collect(Collectors.groupingBy(ConfigListDTO::getGroup));

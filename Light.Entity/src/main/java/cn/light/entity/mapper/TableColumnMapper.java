@@ -20,4 +20,11 @@ import java.util.Optional;
 @Mapper
 public interface TableColumnMapper extends BaseMapper<SysTableColumn> {
     List<SysTableColumn> listPage(TableColumnQueryDTO tableColumnQueryDTO);
+
+    default SysTableColumn findByUserIdAndTableName(Integer user, String tableName){
+        return this.selectOne(new LambdaQueryWrapper<SysTableColumn>()
+                .eq(SysTableColumn::getUserId, user)
+                .eq(SysTableColumn::getTableName, tableName)
+        );
+    }
 }

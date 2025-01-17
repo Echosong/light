@@ -1,8 +1,6 @@
 package cn.light.admin.controller;
 import cn.light.common.annotation.*;
 import cn.light.common.consts.Consts;
-import cn.light.entity.mapper.LogMapper;
-import cn.light.entity.repository.LogRepository;
 import cn.light.packet.dto.log.LogDTO;
 import cn.light.packet.dto.log.LogListDTO;
 import cn.light.packet.dto.log.LogQueryDTO;

@@ -5,19 +5,17 @@ import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
 import cn.light.common.util.ExcelUtil;
 import cn.light.common.util.PageUtil;
-
-import jakarta.annotation.Resource;
-import org.springframework.stereotype.Service;
 import cn.light.entity.entity.SysArticle;
 import cn.light.entity.mapper.ArticleMapper;
-import cn.light.entity.repository.ArticleRepository;
+import cn.light.packet.dto.article.ArticleDTO;
+import cn.light.packet.dto.article.ArticleListDTO;
+import cn.light.packet.dto.article.ArticleQueryDTO;
 import cn.light.server.service.ArticleService;
-import cn.light.packet.dto.article.*;
-
-import org.springframework.http.ResponseEntity;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -31,13 +29,7 @@ import java.util.*;
  */
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, SysArticle> implements ArticleService {
-    @Resource
-    private  ArticleRepository articleRepository;
 
-    @Override
-    public ArticleRepository baseRepository(){
-        return articleRepository;
-    }
 
     @Override
     public Page<ArticleListDTO> listPage(ArticleQueryDTO queryDTO){
@@ -59,18 +51,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, SysArticle> i
     @Override
     public ArticleDTO save(ArticleDTO saveDTO) {
         SysArticle article = DtoMapper.convert(saveDTO, SysArticle.class);
-        articleRepository.save(article);
+        this.saveOrUpdate(article);
         return DtoMapper.convert(article, ArticleDTO.class);
     }
 
     @Override
     public void delete(Integer id) {
-        articleRepository.deleteById(id);
+        this.removeById(id);
     }
 
     @Override
     public ArticleDTO find(Integer id){
-        SysArticle one = articleRepository.findById(id)
+        SysArticle one = this.getOptById(id)
                 .orElseThrow(() -> new BaseKnownException(500, "该数据不存在"));
         return DtoMapper.convert(one, ArticleDTO.class);
     }
