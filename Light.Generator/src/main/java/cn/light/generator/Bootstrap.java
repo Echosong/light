@@ -15,11 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
 /**
- * <p>Title: light</p >
- * <p>Description: Bootstrap</p >
- * <p>Company: www.hn1024.cn</p >
- * <p>create date: 2024/1/1 17:41 </p >
- *
+ * 启动类
  * @author : 二胡子
  * @version :1.0.0
  */
@@ -39,18 +35,6 @@ public class Bootstrap {
 
         long start = System.currentTimeMillis();
 
-        //多线程处理
-        CompletableFuture.runAsync(() -> {
-            // 生成 repository
-            log.info("======================开始生成 repository ==========================================");
-            for (Class<?> clazz : classes) {
-                if (clazz.isAnnotationPresent(Entity.class)) {
-                    Singleton.get(RepositoryService.class, clazz).start();
-                }
-            }
-            log.info("=============================结束生成 repository ::" + (System.currentTimeMillis() - start) + " ms============================");
-
-        }, Executors.newSingleThreadExecutor());
 
         //生成数据字典
         CompletableFuture.runAsync(() -> {
@@ -84,8 +68,8 @@ public class Bootstrap {
                     AutoEntity autoEntity = clazz.getAnnotation(AutoEntity.class);
                     if (autoEntity.dto()) {
                         Singleton.get(DtoService.class, clazz).start();
-                        Singleton.get(MapperService.class, clazz).start();
                     }
+                    Singleton.get(MapperService.class, clazz).start();
                 }
             }
             log.info("====================结束生成 生成 Mapper+ DTO对象， 执行时长 " + (System.currentTimeMillis() - start) + " ms============================");
