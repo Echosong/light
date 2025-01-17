@@ -174,6 +174,9 @@ public class ViewService extends BaseService implements ServiceInterface {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
+        if(field.isAnnotationPresent(AutoSorted.class)){
+            listColumn.setSorter(true);
+        }
         listColumn.setDataIndex(typeName);
         listColumn.setTitle(autoEntityField.value());
         listColumn.setEllipsis(true);

@@ -5,8 +5,7 @@ import cn.light.common.util.DtoMapper;
 import cn.light.entity.entity.SysRole;
 import cn.light.entity.entity.SysUserRole;
 import cn.light.entity.mapper.RoleMapper;
-import cn.light.entity.repository.RoleRepository;
-import cn.light.entity.repository.UserRoleRepository;
+import cn.light.entity.mapper.UserRoleMapper;
 import cn.light.packet.dto.role.RoleDTO;
 import cn.light.packet.dto.role.RoleListDTO;
 import cn.light.server.service.RoleService;
@@ -31,13 +30,11 @@ import java.util.stream.Collectors;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRole> implements RoleService {
     @Resource
-    private  UserRoleRepository userRoleRepository;
-    @Resource
-    private RoleRepository roleRepository;
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public List<SysRole> listByUser(Integer userId) {
-        List<SysUserRole> allByUserId = userRoleRepository.findAllByUserId(userId);
+        List<SysUserRole> allByUserId = userRoleMapper.findAllByUserId(userId);
         List<Integer> roleIds = allByUserId.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
         return this.baseMapper.selectBatchIds(roleIds);
     }
@@ -45,7 +42,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRole> implements
     @Override
     public RoleDTO save(RoleDTO roleDTO){
         SysRole sysRole = DtoMapper.convert(roleDTO, SysRole.class);
-        this.roleRepository.save(sysRole);
+        this.saveOrUpdate(sysRole);
         return DtoMapper.convert(sysRole, RoleDTO.class);
     }
 
@@ -56,7 +53,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRole> implements
 
     @Override
     public void delete(@NotNull(message = "传入参数id不能为空") Integer id){
-        List<SysUserRole> allByRoleId = userRoleRepository.findAllByRoleId(id);
+        List<SysUserRole> allByRoleId = userRoleMapper.findAllByRoleId(id);
         Assert.isTrue(allByRoleId.isEmpty(), "已经有用户归属改部门，所以不能删除");
         this.removeById(id);
     }

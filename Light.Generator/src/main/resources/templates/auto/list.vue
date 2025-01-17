@@ -55,7 +55,7 @@
             bordered
             :loading="tableLoading"
             :pagination="false"
-
+            :on-change="shortChange"
         >
             <template #bodyCell="{ text, record, column }">
                 <template v-if="column.dataIndex === 'action'">
@@ -156,10 +156,10 @@ function handleDelete(data) {
 }
 
 //------------------排序 操作开启----------------------------
-function handleShortChange(e) {
-    console.log('排序接受', e);
-    p.direction = e.order === 'ascending';
-    p.sortCol = e.prop;
+function shortChange(e, e1, e2) {
+    console.log('排序接受', e, e1, e2)
+    p.direction = e2.order === 'ascend';
+    p.sortCol = e2.dataIndex;
     fetchData();
 }
 

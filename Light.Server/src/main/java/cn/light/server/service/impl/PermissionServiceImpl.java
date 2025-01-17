@@ -1,8 +1,5 @@
 package cn.light.server.service.impl;
 
-
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import cn.light.common.exception.BaseKnownException;
 import cn.light.common.util.DtoMapper;
@@ -13,14 +10,14 @@ import cn.light.entity.entity.SysPermission;
 import cn.light.entity.entity.SysRolePermission;
 import cn.light.entity.entity.SysUserRole;
 import cn.light.entity.mapper.PermissionMapper;
-import cn.light.entity.repository.PermissionRepository;
-import cn.light.entity.repository.RolePermissionRepository;
-import cn.light.entity.repository.UserRoleRepository;
+import cn.light.entity.mapper.RolePermissionMapper;
+import cn.light.entity.mapper.UserRoleMapper;
 import cn.light.packet.dto.permission.PermissionDTO;
 import cn.light.packet.dto.permission.PermissionListDTO;
 import cn.light.packet.dto.permission.PermissionQueryDTO;
 import cn.light.packet.dto.permission.RolePermissionDTO;
 import cn.light.server.service.PermissionService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -41,11 +38,9 @@ import java.util.stream.Collectors;
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPermission> implements PermissionService  {
     @Resource
-    private  RolePermissionRepository rolePermissionRepository;
+    private RolePermissionMapper rolePermissionMapper;
     @Resource
-    private  PermissionRepository permissionRepository;
-    @Resource
-    private UserRoleRepository userRoleRepositroy;
+    private UserRoleMapper userRoleMapper;
     @Resource
     private UserPermissionCacheRepository userPermissionCacheRepository;
 
@@ -53,9 +48,9 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     @Override
     public List<SysPermission> getListByrole(List<Integer> roleIds) {
 
-        List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(roleIds);
+        List<SysRolePermission> allByRoleIdIn = rolePermissionMapper.getAllByRoleIdIn(roleIds);
         Set<Integer> permissionIds = allByRoleIdIn.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toSet());
-        return  permissionRepository.getAllByIdIn(new ArrayList<>(permissionIds))
+        return  this.baseMapper.selectBatchIds(permissionIds)
                 .stream()
                 .sorted(Comparator.comparing(SysPermission::getSort))
                 .collect(Collectors.toList());
@@ -68,7 +63,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
             return userPermissionCacheOptional.get().getPermissions();
         }
 
-        List<SysUserRole> userRoles = userRoleRepositroy.findAllByUserId(userId);
+        List<SysUserRole> userRoles = userRoleMapper.findAllByUserId(userId);
         List<PermissionDTO> kdPermissions = new ArrayList<>();
         if(userRoles.isEmpty()){
             return kdPermissions;
@@ -94,20 +89,17 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
 
     @Override
     public void updateRolePermissions(List<Integer> permissionIds, Integer roleId) {
-        List<SysRolePermission> allByRoleIdIn = rolePermissionRepository.getAllByRoleIdIn(Collections.singletonList(roleId));
-        if(!allByRoleIdIn.isEmpty()){
-            rolePermissionRepository.deleteAll(allByRoleIdIn);
-        }
-        List<SysRolePermission> kdRolePermissions = new ArrayList<>();
+        rolePermissionMapper.delete(new LambdaQueryWrapper<SysRolePermission>().eq(SysRolePermission::getRoleId, roleId));
+
         for (Integer permissionId : permissionIds) {
             SysRolePermission kdRolePermission = new SysRolePermission();
             kdRolePermission.setPermissionId(permissionId);
             kdRolePermission.setRoleId(roleId);
-            kdRolePermissions.add(kdRolePermission);
+            rolePermissionMapper.insert(kdRolePermission);
         }
-        rolePermissionRepository.saveAll(kdRolePermissions);
+
         //清理角色下所有用户缓存
-        List<SysUserRole> allByRoleId = userRoleRepositroy.findAllByRoleId(roleId);
+        List<SysUserRole> allByRoleId = userRoleMapper.findAllByRoleId(roleId);
         for (SysUserRole sysUserRole : allByRoleId) {
             userPermissionCacheRepository.deleteById(sysUserRole.getUserId());
         }
@@ -133,15 +125,15 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     public void save(PermissionDTO permissionDTO) {
         SysPermission kdPermission = DtoMapper.convert(permissionDTO, SysPermission.class);
         if(kdPermission.getParentId() != 0) {
-            permissionRepository.findById(kdPermission.getParentId())
+            this.getOptById(kdPermission.getParentId())
                     .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
         }
-        permissionRepository.save(kdPermission);
+        this.save(kdPermission);
     }
 
     @Override
     public RolePermissionDTO getRoleSelectedMenu(Integer roleId){
-        List<SysRolePermission> rolePermissions = rolePermissionRepository.getAllByRoleIdIn(List.of(roleId));
+        List<SysRolePermission> rolePermissions = rolePermissionMapper.getAllByRoleIdIn(List.of(roleId));
         Set<Integer> permissionIds = rolePermissions.stream().map(SysRolePermission::getPermissionId)
                 .collect(Collectors.toSet());
         RolePermissionDTO rolePermissionDTO = new RolePermissionDTO();
@@ -154,10 +146,10 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
     @Override
     public List<PermissionListDTO> getTreePermissions(Integer parentId) {
         List<PermissionListDTO> permissionList = new ArrayList<>();
-        var permissions = permissionRepository.findByParentId(parentId)
-                .stream()
-                .sorted(Comparator.comparing(SysPermission::getSort))
-                .toList();
+        var permissions = this.lambdaQuery().eq(SysPermission::getParentId, parentId)
+                .orderByAsc(SysPermission::getSort)
+                .list();
+
         for (SysPermission permission : permissions) {
             if (permission.getParentId().equals(parentId)) {
                 PermissionListDTO permissionDTO = DtoMapper.convert(permission, PermissionListDTO.class);

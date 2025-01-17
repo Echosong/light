@@ -86,7 +86,7 @@ public class ExcelUtil {
         HSSFCell hssfCell;
         int i;
         for(i = 0; i < fields.length; ++i) {
-            ExcelAnnotation excelAnnotation = (ExcelAnnotation)fields[i].getAnnotation(ExcelAnnotation.class);
+            ExcelAnnotation excelAnnotation = fields[i].getAnnotation(ExcelAnnotation.class);
             if (excelAnnotation != null) {
                 if (excelAnnotation.ignore()) {
                     continue;

@@ -56,7 +56,7 @@ public class MapperService extends BaseService implements ServiceInterface {
         Dict dict = this.replaceTpl("mapper.tpl");
         String tplContent = template.render(dict);
 
-        FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
+
         Console.log("生成Mapper.java 文件 {} 成功 ", fileName);
     }
 

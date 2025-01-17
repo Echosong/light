@@ -37,4 +37,7 @@ public class ListColumnDTO {
     @Schema(defaultValue = "列固定位置,默认不固定 left | right")
     private String fixed;
 
+    @Schema(defaultValue = "排序字段")
+    private Boolean sorter = false;
+
 }
