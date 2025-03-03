@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.PermissionMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysPermission">
+        select *
+        from sys_permission where 1=1
+                 <if test="name != null and name != '' ">
+ and name  like CONCAT('%',#{name},'%')
+ </if>
+    </select>
+    <select id="getListByUserId" resultType="cn.light.entity.entity.SysPermission">
+        select p.perms, p.id
+        from sys_permission p
+        left join sys_role_permission rp on p.id = rp.permission_id
+        left join sys_user_role ur on rp.role_id = ur.role_id
+        where ur.user_id = #{userId}
+    </select>
+
+</mapper>

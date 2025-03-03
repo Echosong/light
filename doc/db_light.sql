@@ -1,0 +1,4378 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost1
+ Source Server Type    : MySQL
+ Source Server Version : 50726
+ Source Host           : localhost:3306
+ Source Schema         : db_light
+
+ Target Server Type    : MySQL
+ Target Server Version : 50726
+ File Encoding         : 65001
+
+ Date: 01/12/2024 21:04:49
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sys_ad
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_ad`;
+CREATE TABLE `sys_ad`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `image` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片',
+  `info` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '关联的实体',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `position` int(11) NULL DEFAULT NULL COMMENT '位置{\n    \"40\": \"商城Banner\",\n    \"10\": \"首页Banner\",\n    \"50\": \"引导\",\n    \"20\": \"园区Banner\",\n    \"30\": \"园区底部广告位\"\n}',
+  `relation_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联代码',
+  `state` int(11) NOT NULL DEFAULT 10 COMMENT '状态{\n    \"0\": \"关闭\",\n    \"1\": \"开启\"\n}',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '跳转位置',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '广告管理' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_ad
+-- ----------------------------
+INSERT INTO `sys_ad` VALUES (1, '2024-11-26 22:02:06.000000', 1, '2024-11-26 22:02:11.000000', NULL, 1, '4', '44', '4', 4, '4', 1, '22');
+
+-- ----------------------------
+-- Table structure for sys_area_dj
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_area_dj`;
+CREATE TABLE `sys_area_dj`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `area_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省市区县',
+  `area_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省市区县名',
+  `is_add` int(11) NULL DEFAULT NULL COMMENT '是否修改{\n    \"0\": \"关闭\",\n    \"1\": \"开启\"\n}',
+  `pinyin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '拼音',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态{\n    \"20\": \"隐藏\",\n    \"10\": \"显示\"\n}',
+  `type` int(11) NULL DEFAULT NULL COMMENT '省市区{\n    \"1\": \"省\",\n    \"2\": \"市\",\n    \"3\": \"区/县\"\n}',
+  `parent_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父级code',
+  `partner_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3593 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '行政区划实体' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_area_dj
+-- ----------------------------
+INSERT INTO `sys_area_dj` VALUES (1, NULL, NULL, NULL, NULL, NULL, '820001', '澳门', NULL, 'A', 10, 0, '820000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2, NULL, NULL, NULL, NULL, NULL, '820002', '澳门特别行政区', NULL, 'A', 10, 0, '820001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3, NULL, NULL, NULL, NULL, NULL, '810000', '香港', NULL, 'X', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (4, NULL, NULL, NULL, NULL, NULL, '810001', '香港', NULL, 'X', 10, 2, '810000', NULL);
+INSERT INTO `sys_area_dj` VALUES (5, NULL, NULL, NULL, NULL, NULL, '810019', '元朗区', NULL, 'Y', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (6, NULL, NULL, NULL, NULL, NULL, '810018', '大埔区', NULL, 'D', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (7, NULL, NULL, NULL, NULL, NULL, '810016', '北区', NULL, 'B', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (8, NULL, NULL, NULL, NULL, NULL, '810015', '离岛区', NULL, 'L', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (9, NULL, NULL, NULL, NULL, NULL, '810014', '湾仔区', NULL, 'W', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (10, NULL, NULL, NULL, NULL, NULL, '810013', '深水步区', NULL, 'S', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (11, NULL, NULL, NULL, NULL, NULL, '810012', '观塘区', NULL, 'G', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (12, NULL, NULL, NULL, NULL, NULL, '810011', '东区', NULL, 'D', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (13, NULL, NULL, NULL, NULL, NULL, '810010', '荃湾区', NULL, 'W', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (14, NULL, NULL, NULL, NULL, NULL, '810009', '屯门区', NULL, 'T', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (15, NULL, NULL, NULL, NULL, NULL, '810008', '西贡区', NULL, 'X', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (16, NULL, NULL, NULL, NULL, NULL, '810007', '葵青区', NULL, 'K', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (17, NULL, NULL, NULL, NULL, NULL, '810006', '油尖旺区', NULL, 'Y', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (18, NULL, NULL, NULL, NULL, NULL, '810005', '黄大仙区', NULL, 'H', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (19, NULL, NULL, NULL, NULL, NULL, '810004', '南区', NULL, 'N', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (20, NULL, NULL, NULL, NULL, NULL, '810003', '九龙城区', NULL, 'J', 10, 2, '810000', NULL);
+INSERT INTO `sys_area_dj` VALUES (21, NULL, NULL, NULL, NULL, NULL, '810002', '中西区', NULL, 'Z', 10, 3, '810001', NULL);
+INSERT INTO `sys_area_dj` VALUES (22, NULL, NULL, NULL, NULL, NULL, '710000', '台湾省', NULL, 'T', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (23, NULL, NULL, NULL, NULL, NULL, '710003', '台湾', NULL, 'T', 10, 2, '710000', NULL);
+INSERT INTO `sys_area_dj` VALUES (24, NULL, NULL, NULL, NULL, NULL, '710004', '花莲县', NULL, 'H', 10, 3, '710003', NULL);
+INSERT INTO `sys_area_dj` VALUES (25, NULL, NULL, NULL, NULL, NULL, '910007', '阿拉尔市', NULL, 'A', 10, 3, '659002', NULL);
+INSERT INTO `sys_area_dj` VALUES (26, NULL, NULL, NULL, NULL, NULL, '710002', '台北县', NULL, 'T', 10, 3, '710003', NULL);
+INSERT INTO `sys_area_dj` VALUES (27, NULL, NULL, NULL, NULL, NULL, '650000', '新疆维吾尔自治区', NULL, 'X', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (28, NULL, NULL, NULL, NULL, NULL, '910006', '石河子市', NULL, 'S', 10, 3, '659001', NULL);
+INSERT INTO `sys_area_dj` VALUES (29, NULL, NULL, NULL, NULL, NULL, '659004', '五家渠市', NULL, 'W', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (30, NULL, NULL, NULL, NULL, NULL, '659003', '图木舒克市', NULL, 'T', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (31, NULL, NULL, NULL, NULL, NULL, '659002', '阿拉尔市', NULL, 'A', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (32, NULL, NULL, NULL, NULL, NULL, '659001', '石河子市', NULL, 'S', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (33, NULL, NULL, NULL, NULL, NULL, '654300', '阿勒泰地区', NULL, 'A', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (34, NULL, NULL, NULL, NULL, NULL, '654326', '吉木乃县', NULL, 'J', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (35, NULL, NULL, NULL, NULL, NULL, '654325', '青河县', NULL, 'Q', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (36, NULL, NULL, NULL, NULL, NULL, '654324', '哈巴河县', NULL, 'H', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (37, NULL, NULL, NULL, NULL, NULL, '654323', '福海县', NULL, 'F', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (38, NULL, NULL, NULL, NULL, NULL, '654322', '富蕴县', NULL, 'F', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (39, NULL, NULL, NULL, NULL, NULL, '654321', '布尔津县', NULL, 'B', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (40, NULL, NULL, NULL, NULL, NULL, '654301', '阿勒泰市', NULL, 'A', 10, 3, '654300', NULL);
+INSERT INTO `sys_area_dj` VALUES (41, NULL, NULL, NULL, NULL, NULL, '654200', '塔城地区', NULL, 'T', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (42, NULL, NULL, NULL, NULL, NULL, '654226', '和布克赛尔蒙古自治县', NULL, 'H', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (43, NULL, NULL, NULL, NULL, NULL, '654225', '裕民县', NULL, 'Y', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (44, NULL, NULL, NULL, NULL, NULL, '654224', '托里县', NULL, 'T', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (45, NULL, NULL, NULL, NULL, NULL, '654223', '沙湾县', NULL, 'S', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (46, NULL, NULL, NULL, NULL, NULL, '654221', '额敏县', NULL, 'E', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (47, NULL, NULL, NULL, NULL, NULL, '654202', '乌苏市', NULL, 'W', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (48, NULL, NULL, NULL, NULL, NULL, '654201', '塔城市', NULL, 'T', 10, 3, '654200', NULL);
+INSERT INTO `sys_area_dj` VALUES (49, NULL, NULL, NULL, NULL, NULL, '654000', '伊犁哈萨克自治州', NULL, 'Y', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (50, NULL, NULL, NULL, NULL, NULL, '654028', '尼勒克县', NULL, 'N', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (51, NULL, NULL, NULL, NULL, NULL, '654027', '特克斯县', NULL, 'T', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (52, NULL, NULL, NULL, NULL, NULL, '654026', '昭苏县', NULL, 'Z', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (53, NULL, NULL, NULL, NULL, NULL, '654025', '新源县', NULL, 'X', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (54, NULL, NULL, NULL, NULL, NULL, '654024', '巩留县', NULL, 'G', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (55, NULL, NULL, NULL, NULL, NULL, '654023', '霍城县', NULL, 'H', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (56, NULL, NULL, NULL, NULL, NULL, '654022', '察布查尔锡伯自治县', NULL, 'C', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (57, NULL, NULL, NULL, NULL, NULL, '654021', '伊宁县', 1, 'Y', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (58, NULL, NULL, NULL, NULL, NULL, '654003', '奎屯市', NULL, 'K', 10, 3, '654000', NULL);
+INSERT INTO `sys_area_dj` VALUES (59, NULL, NULL, NULL, NULL, NULL, '654002', '伊宁市', 1, 'Y', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (60, NULL, NULL, NULL, NULL, NULL, '653200', '和田地区', NULL, 'H', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (61, NULL, NULL, NULL, NULL, NULL, '653227', '民丰县', NULL, 'M', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (62, NULL, NULL, NULL, NULL, NULL, '653226', '于田县', NULL, 'Y', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (63, NULL, NULL, NULL, NULL, NULL, '653225', '策勒县', NULL, 'C', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (64, NULL, NULL, NULL, NULL, NULL, '653224', '洛浦县', NULL, 'L', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (65, NULL, NULL, NULL, NULL, NULL, '653223', '皮山县', NULL, 'P', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (66, NULL, NULL, NULL, NULL, NULL, '653222', '墨玉县', NULL, 'M', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (67, NULL, NULL, NULL, NULL, NULL, '653221', '和田县', NULL, 'H', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (68, NULL, NULL, NULL, NULL, NULL, '653201', '和田市', NULL, 'H', 10, 3, '653200', NULL);
+INSERT INTO `sys_area_dj` VALUES (69, NULL, NULL, NULL, NULL, NULL, '653100', '喀什地区', NULL, 'K', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (70, NULL, NULL, NULL, NULL, NULL, '653131', '塔什库尔干塔吉克自治县', NULL, 'T', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (71, NULL, NULL, NULL, NULL, NULL, '653130', '巴楚县', NULL, 'B', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (72, NULL, NULL, NULL, NULL, NULL, '653129', '伽师县', NULL, 'S', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (73, NULL, NULL, NULL, NULL, NULL, '653128', '岳普湖县', NULL, 'Y', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (74, NULL, NULL, NULL, NULL, NULL, '653127', '麦盖提县', NULL, 'M', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (75, NULL, NULL, NULL, NULL, NULL, '653126', '叶城县', NULL, 'Y', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (76, NULL, NULL, NULL, NULL, NULL, '653125', '莎车县', NULL, 'S', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (77, NULL, NULL, NULL, NULL, NULL, '653124', '泽普县', NULL, 'Z', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (78, NULL, NULL, NULL, NULL, NULL, '653123', '英吉沙县', NULL, 'Y', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (79, NULL, NULL, NULL, NULL, NULL, '653122', '疏勒县', NULL, 'S', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (80, NULL, NULL, NULL, NULL, NULL, '653121', '疏附县', NULL, 'S', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (81, NULL, NULL, NULL, NULL, NULL, '653101', '喀什市', NULL, 'K', 10, 3, '653100', NULL);
+INSERT INTO `sys_area_dj` VALUES (82, NULL, NULL, NULL, NULL, NULL, '653000', '克孜勒苏柯尔克孜自治州', NULL, 'K', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (83, NULL, NULL, NULL, NULL, NULL, '653024', '乌恰县', NULL, 'W', 10, 3, '653000', NULL);
+INSERT INTO `sys_area_dj` VALUES (84, NULL, NULL, NULL, NULL, NULL, '653023', '阿合奇县', NULL, 'A', 10, 3, '653000', NULL);
+INSERT INTO `sys_area_dj` VALUES (85, NULL, NULL, NULL, NULL, NULL, '653022', '阿克陶县', NULL, 'A', 10, 3, '653000', NULL);
+INSERT INTO `sys_area_dj` VALUES (86, NULL, NULL, NULL, NULL, NULL, '653001', '阿图什市', NULL, 'A', 10, 3, '653000', NULL);
+INSERT INTO `sys_area_dj` VALUES (87, NULL, NULL, NULL, NULL, NULL, '652900', '阿克苏地区', NULL, 'A', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (88, NULL, NULL, NULL, NULL, NULL, '652929', '柯坪县', NULL, 'K', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (89, NULL, NULL, NULL, NULL, NULL, '652928', '阿瓦提县', NULL, 'A', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (90, NULL, NULL, NULL, NULL, NULL, '652927', '乌什县', NULL, 'W', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (91, NULL, NULL, NULL, NULL, NULL, '652926', '拜城县', NULL, 'B', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (92, NULL, NULL, NULL, NULL, NULL, '652925', '新和县', NULL, 'X', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (93, NULL, NULL, NULL, NULL, NULL, '652924', '沙雅县', NULL, 'S', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (94, NULL, NULL, NULL, NULL, NULL, '652923', '库车县', NULL, 'K', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (95, NULL, NULL, NULL, NULL, NULL, '652922', '温宿县', NULL, 'W', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (96, NULL, NULL, NULL, NULL, NULL, '652901', '阿克苏市', NULL, 'A', 10, 3, '652900', NULL);
+INSERT INTO `sys_area_dj` VALUES (97, NULL, NULL, NULL, NULL, NULL, '652800', '巴音郭楞蒙古自治州', NULL, 'B', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (98, NULL, NULL, NULL, NULL, NULL, '652829', '博湖县', NULL, 'B', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (99, NULL, NULL, NULL, NULL, NULL, '652828', '和硕县', NULL, 'H', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (100, NULL, NULL, NULL, NULL, NULL, '652827', '和静县', NULL, 'H', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (101, NULL, NULL, NULL, NULL, NULL, '652826', '焉耆回族自治县', NULL, 'Y', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (102, NULL, NULL, NULL, NULL, NULL, '652825', '且末县', NULL, 'Q', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (103, NULL, NULL, NULL, NULL, NULL, '652824', '若羌县', NULL, 'R', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (104, NULL, NULL, NULL, NULL, NULL, '652823', '尉犁县', NULL, 'W', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (105, NULL, NULL, NULL, NULL, NULL, '652822', '轮台县', NULL, 'L', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (106, NULL, NULL, NULL, NULL, NULL, '652801', '库尔勒市', NULL, 'K', 10, 3, '652800', NULL);
+INSERT INTO `sys_area_dj` VALUES (107, NULL, NULL, NULL, NULL, NULL, '652700', '博尔塔拉蒙古自治州', NULL, 'B', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (108, NULL, NULL, NULL, NULL, NULL, '652723', '温泉县', NULL, 'W', 10, 3, '652700', NULL);
+INSERT INTO `sys_area_dj` VALUES (109, NULL, NULL, NULL, NULL, NULL, '652722', '精河县', NULL, 'J', 10, 3, '652700', NULL);
+INSERT INTO `sys_area_dj` VALUES (110, NULL, NULL, NULL, NULL, NULL, '652701', '博乐市', NULL, 'B', 10, 3, '652700', NULL);
+INSERT INTO `sys_area_dj` VALUES (111, NULL, NULL, NULL, NULL, NULL, '652300', '昌吉回族自治州', NULL, 'C', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (112, NULL, NULL, NULL, NULL, NULL, '652328', '木垒哈萨克自治县', NULL, 'M', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (113, NULL, NULL, NULL, NULL, NULL, '652327', '吉木萨尔县', NULL, 'J', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (114, NULL, NULL, NULL, NULL, NULL, '652325', '奇台县', NULL, 'Q', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (115, NULL, NULL, NULL, NULL, NULL, '652324', '玛纳斯县', NULL, 'M', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (116, NULL, NULL, NULL, NULL, NULL, '652323', '呼图壁县', NULL, 'H', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (117, NULL, NULL, NULL, NULL, NULL, '652303', '米泉市', NULL, 'M', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (118, NULL, NULL, NULL, NULL, NULL, '652302', '阜康市', NULL, 'F', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (119, NULL, NULL, NULL, NULL, NULL, '652301', '昌吉市', NULL, 'C', 10, 3, '652300', NULL);
+INSERT INTO `sys_area_dj` VALUES (120, NULL, NULL, NULL, NULL, NULL, '652200', '哈密地区', NULL, 'H', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (121, NULL, NULL, NULL, NULL, NULL, '652223', '伊吾县', NULL, 'Y', 10, 3, '652200', NULL);
+INSERT INTO `sys_area_dj` VALUES (122, NULL, NULL, NULL, NULL, NULL, '652222', '巴里坤哈萨克自治县', NULL, 'B', 10, 3, '652200', NULL);
+INSERT INTO `sys_area_dj` VALUES (123, NULL, NULL, NULL, NULL, NULL, '652201', '哈密市', NULL, 'H', 10, 3, '652200', NULL);
+INSERT INTO `sys_area_dj` VALUES (124, NULL, NULL, NULL, NULL, NULL, '652100', '吐鲁番地区', NULL, 'T', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (125, NULL, NULL, NULL, NULL, NULL, '652123', '托克逊县', NULL, 'T', 10, 3, '652100', NULL);
+INSERT INTO `sys_area_dj` VALUES (126, NULL, NULL, NULL, NULL, NULL, '652122', '鄯善县', NULL, 'S', 10, 3, '652100', NULL);
+INSERT INTO `sys_area_dj` VALUES (127, NULL, NULL, NULL, NULL, NULL, '652101', '吐鲁番市', NULL, 'T', 10, 3, '652100', NULL);
+INSERT INTO `sys_area_dj` VALUES (128, NULL, NULL, NULL, NULL, NULL, '650200', '克拉玛依市', NULL, 'K', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (129, NULL, NULL, NULL, NULL, NULL, '650205', '乌尔禾区', NULL, 'W', 10, 3, '650200', NULL);
+INSERT INTO `sys_area_dj` VALUES (130, NULL, NULL, NULL, NULL, NULL, '650204', '白碱滩区', NULL, 'B', 10, 3, '650200', NULL);
+INSERT INTO `sys_area_dj` VALUES (131, NULL, NULL, NULL, NULL, NULL, '650203', '克拉玛依区', NULL, 'K', 10, 3, '650200', NULL);
+INSERT INTO `sys_area_dj` VALUES (132, NULL, NULL, NULL, NULL, NULL, '650202', '独山子区', NULL, 'D', 10, 3, '650200', NULL);
+INSERT INTO `sys_area_dj` VALUES (133, NULL, NULL, NULL, NULL, NULL, '650201', '市辖区', NULL, 'S', 10, 3, '650200', NULL);
+INSERT INTO `sys_area_dj` VALUES (134, NULL, NULL, NULL, NULL, NULL, '650100', '乌鲁木齐市', NULL, 'W', 10, 2, '650000', NULL);
+INSERT INTO `sys_area_dj` VALUES (135, NULL, NULL, NULL, NULL, NULL, '650121', '乌鲁木齐县', NULL, 'W', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (136, NULL, NULL, NULL, NULL, NULL, '650108', '东山区', NULL, 'D', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (137, NULL, NULL, NULL, NULL, NULL, '650107', '达坂城区', NULL, 'D', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (138, NULL, NULL, NULL, NULL, NULL, '650106', '头屯河区', NULL, 'T', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (139, NULL, NULL, NULL, NULL, NULL, '650105', '水磨沟区', NULL, 'S', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (140, NULL, NULL, NULL, NULL, NULL, '650104', '新市区', NULL, 'X', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (141, NULL, NULL, NULL, NULL, NULL, '650103', '沙依巴克区', NULL, 'S', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (142, NULL, NULL, NULL, NULL, NULL, '650102', '天山区', NULL, 'T', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (143, NULL, NULL, NULL, NULL, NULL, '650101', '市辖区', NULL, 'S', 10, 3, '650100', NULL);
+INSERT INTO `sys_area_dj` VALUES (144, NULL, NULL, NULL, NULL, NULL, '640000', '宁夏回族自治区', NULL, 'N', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (145, NULL, NULL, NULL, NULL, NULL, '640500', '中卫市', NULL, 'Z', 10, 2, '640000', NULL);
+INSERT INTO `sys_area_dj` VALUES (146, NULL, NULL, NULL, NULL, NULL, '640522', '海原县', NULL, 'H', 10, 3, '640500', NULL);
+INSERT INTO `sys_area_dj` VALUES (147, NULL, NULL, NULL, NULL, NULL, '640521', '中宁县', NULL, 'Z', 10, 3, '640500', NULL);
+INSERT INTO `sys_area_dj` VALUES (148, NULL, NULL, NULL, NULL, NULL, '640502', '沙坡头区', NULL, 'S', 10, 3, '640500', NULL);
+INSERT INTO `sys_area_dj` VALUES (149, NULL, NULL, NULL, NULL, NULL, '640501', '市辖区', NULL, 'S', 10, 3, '640500', NULL);
+INSERT INTO `sys_area_dj` VALUES (150, NULL, NULL, NULL, NULL, NULL, '640400', '固原市', NULL, 'G', 10, 2, '640000', NULL);
+INSERT INTO `sys_area_dj` VALUES (151, NULL, NULL, NULL, NULL, NULL, '640425', '彭阳县', NULL, 'P', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (152, NULL, NULL, NULL, NULL, NULL, '640424', '泾源县', NULL, 'Y', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (153, NULL, NULL, NULL, NULL, NULL, '640423', '隆德县', NULL, 'L', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (154, NULL, NULL, NULL, NULL, NULL, '640422', '西吉县', NULL, 'X', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (155, NULL, NULL, NULL, NULL, NULL, '640402', '原州区', NULL, 'Y', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (156, NULL, NULL, NULL, NULL, NULL, '640401', '市辖区', NULL, 'S', 10, 3, '640400', NULL);
+INSERT INTO `sys_area_dj` VALUES (157, NULL, NULL, NULL, NULL, NULL, '640300', '吴忠市', NULL, 'W', 10, 2, '640000', NULL);
+INSERT INTO `sys_area_dj` VALUES (158, NULL, NULL, NULL, NULL, NULL, '640381', '青铜峡市', NULL, 'Q', 10, 3, '640300', NULL);
+INSERT INTO `sys_area_dj` VALUES (159, NULL, NULL, NULL, NULL, NULL, '640324', '同心县', NULL, 'T', 10, 3, '640300', NULL);
+INSERT INTO `sys_area_dj` VALUES (160, NULL, NULL, NULL, NULL, NULL, '640323', '盐池县', NULL, 'Y', 10, 3, '640300', NULL);
+INSERT INTO `sys_area_dj` VALUES (161, NULL, NULL, NULL, NULL, NULL, '640302', '利通区', NULL, 'L', 10, 3, '640300', NULL);
+INSERT INTO `sys_area_dj` VALUES (162, NULL, NULL, NULL, NULL, NULL, '640301', '市辖区', NULL, 'S', 10, 3, '640300', NULL);
+INSERT INTO `sys_area_dj` VALUES (163, NULL, NULL, NULL, NULL, NULL, '640200', '石嘴山市', NULL, 'S', 10, 2, '640000', NULL);
+INSERT INTO `sys_area_dj` VALUES (164, NULL, NULL, NULL, NULL, NULL, '640221', '平罗县', NULL, 'P', 10, 3, '640200', NULL);
+INSERT INTO `sys_area_dj` VALUES (165, NULL, NULL, NULL, NULL, NULL, '640205', '惠农区', NULL, 'H', 10, 3, '640200', NULL);
+INSERT INTO `sys_area_dj` VALUES (166, NULL, NULL, NULL, NULL, NULL, '640202', '大武口区', NULL, 'D', 10, 3, '640200', NULL);
+INSERT INTO `sys_area_dj` VALUES (167, NULL, NULL, NULL, NULL, NULL, '640201', '市辖区', NULL, 'S', 10, 3, '640200', NULL);
+INSERT INTO `sys_area_dj` VALUES (168, NULL, NULL, NULL, NULL, NULL, '640100', '银川市', NULL, 'Y', 10, 2, '640000', NULL);
+INSERT INTO `sys_area_dj` VALUES (169, NULL, NULL, NULL, NULL, NULL, '640181', '灵武市', NULL, 'L', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (170, NULL, NULL, NULL, NULL, NULL, '640122', '贺兰县', NULL, 'H', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (171, NULL, NULL, NULL, NULL, NULL, '640121', '永宁县', NULL, 'Y', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (172, NULL, NULL, NULL, NULL, NULL, '640106', '金凤区', NULL, 'J', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (173, NULL, NULL, NULL, NULL, NULL, '640105', '西夏区', NULL, 'X', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (174, NULL, NULL, NULL, NULL, NULL, '640104', '兴庆区', NULL, 'X', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (175, NULL, NULL, NULL, NULL, NULL, '640101', '市辖区', NULL, 'S', 10, 3, '640100', NULL);
+INSERT INTO `sys_area_dj` VALUES (176, NULL, NULL, NULL, NULL, NULL, '630000', '青海省', NULL, 'Q', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (177, NULL, NULL, NULL, NULL, NULL, '632800', '海西蒙古族藏族自治州', NULL, 'H', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (178, NULL, NULL, NULL, NULL, NULL, '632823', '天峻县', NULL, 'T', 10, 3, '632800', NULL);
+INSERT INTO `sys_area_dj` VALUES (179, NULL, NULL, NULL, NULL, NULL, '632822', '都兰县', NULL, 'D', 10, 3, '632800', NULL);
+INSERT INTO `sys_area_dj` VALUES (180, NULL, NULL, NULL, NULL, NULL, '632821', '乌兰县', NULL, 'W', 10, 3, '632800', NULL);
+INSERT INTO `sys_area_dj` VALUES (181, NULL, NULL, NULL, NULL, NULL, '632802', '德令哈市', NULL, 'D', 10, 3, '632800', NULL);
+INSERT INTO `sys_area_dj` VALUES (182, NULL, NULL, NULL, NULL, NULL, '632801', '格尔木市', NULL, 'G', 10, 3, '632800', NULL);
+INSERT INTO `sys_area_dj` VALUES (183, NULL, NULL, NULL, NULL, NULL, '632700', '玉树藏族自治州', NULL, 'Y', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (184, NULL, NULL, NULL, NULL, NULL, '632726', '曲麻莱县', NULL, 'Q', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (185, NULL, NULL, NULL, NULL, NULL, '632725', '囊谦县', NULL, 'N', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (186, NULL, NULL, NULL, NULL, NULL, '632724', '治多县', NULL, 'Z', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (187, NULL, NULL, NULL, NULL, NULL, '632723', '称多县', NULL, 'C', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (188, NULL, NULL, NULL, NULL, NULL, '632722', '杂多县', NULL, 'Z', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (189, NULL, NULL, NULL, NULL, NULL, '632721', '玉树县', NULL, 'Y', 10, 3, '632700', NULL);
+INSERT INTO `sys_area_dj` VALUES (190, NULL, NULL, NULL, NULL, NULL, '632600', '果洛藏族自治州', NULL, 'G', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (191, NULL, NULL, NULL, NULL, NULL, '632626', '玛多县', NULL, 'M', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (192, NULL, NULL, NULL, NULL, NULL, '632625', '久治县', NULL, 'J', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (193, NULL, NULL, NULL, NULL, NULL, '632624', '达日县', NULL, 'D', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (194, NULL, NULL, NULL, NULL, NULL, '632623', '甘德县', NULL, 'G', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (195, NULL, NULL, NULL, NULL, NULL, '632622', '班玛县', NULL, 'B', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (196, NULL, NULL, NULL, NULL, NULL, '632621', '玛沁县', NULL, 'M', 10, 3, '632600', NULL);
+INSERT INTO `sys_area_dj` VALUES (197, NULL, NULL, NULL, NULL, NULL, '632500', '海南藏族自治州', NULL, 'H', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (198, NULL, NULL, NULL, NULL, NULL, '632525', '贵南县', NULL, 'G', 10, 3, '632500', NULL);
+INSERT INTO `sys_area_dj` VALUES (199, NULL, NULL, NULL, NULL, NULL, '632524', '兴海县', NULL, 'X', 10, 3, '632500', NULL);
+INSERT INTO `sys_area_dj` VALUES (200, NULL, NULL, NULL, NULL, NULL, '632523', '贵德县', NULL, 'G', 10, 3, '632500', NULL);
+INSERT INTO `sys_area_dj` VALUES (201, NULL, NULL, NULL, NULL, NULL, '632522', '同德县', NULL, 'T', 10, 3, '632500', NULL);
+INSERT INTO `sys_area_dj` VALUES (202, NULL, NULL, NULL, NULL, NULL, '632521', '共和县', NULL, 'G', 10, 3, '632500', NULL);
+INSERT INTO `sys_area_dj` VALUES (203, NULL, NULL, NULL, NULL, NULL, '632300', '黄南藏族自治州', NULL, 'H', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (204, NULL, NULL, NULL, NULL, NULL, '632324', '河南蒙古族自治县', NULL, 'H', 10, 3, '632300', NULL);
+INSERT INTO `sys_area_dj` VALUES (205, NULL, NULL, NULL, NULL, NULL, '632323', '泽库县', NULL, 'Z', 10, 3, '632300', NULL);
+INSERT INTO `sys_area_dj` VALUES (206, NULL, NULL, NULL, NULL, NULL, '632322', '尖扎县', NULL, 'J', 10, 3, '632300', NULL);
+INSERT INTO `sys_area_dj` VALUES (207, NULL, NULL, NULL, NULL, NULL, '632321', '同仁县', NULL, 'T', 10, 3, '632300', NULL);
+INSERT INTO `sys_area_dj` VALUES (208, NULL, NULL, NULL, NULL, NULL, '632200', '海北藏族自治州', NULL, 'H', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (209, NULL, NULL, NULL, NULL, NULL, '632224', '刚察县', NULL, 'G', 10, 3, '632200', NULL);
+INSERT INTO `sys_area_dj` VALUES (210, NULL, NULL, NULL, NULL, NULL, '632223', '海晏县', NULL, 'H', 10, 3, '632200', NULL);
+INSERT INTO `sys_area_dj` VALUES (211, NULL, NULL, NULL, NULL, NULL, '632222', '祁连县', NULL, 'Q', 10, 3, '632200', NULL);
+INSERT INTO `sys_area_dj` VALUES (212, NULL, NULL, NULL, NULL, NULL, '632221', '门源回族自治县', NULL, 'M', 10, 3, '632200', NULL);
+INSERT INTO `sys_area_dj` VALUES (213, NULL, NULL, NULL, NULL, NULL, '632100', '海东地区', NULL, 'H', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (214, NULL, NULL, NULL, NULL, NULL, '632128', '循化撒拉族自治县', NULL, 'X', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (215, NULL, NULL, NULL, NULL, NULL, '632127', '化隆回族自治县', NULL, 'H', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (216, NULL, NULL, NULL, NULL, NULL, '632126', '互助土族自治县', NULL, 'H', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (217, NULL, NULL, NULL, NULL, NULL, '632123', '乐都县', NULL, 'L', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (218, NULL, NULL, NULL, NULL, NULL, '632122', '民和回族土族自治县', NULL, 'M', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (219, NULL, NULL, NULL, NULL, NULL, '632121', '平安县', NULL, 'P', 10, 3, '632100', NULL);
+INSERT INTO `sys_area_dj` VALUES (220, NULL, NULL, NULL, NULL, NULL, '630100', '西宁市', NULL, 'X', 10, 2, '630000', NULL);
+INSERT INTO `sys_area_dj` VALUES (221, NULL, NULL, NULL, NULL, NULL, '630123', '湟源县', NULL, 'Y', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (222, NULL, NULL, NULL, NULL, NULL, '630122', '湟中县', NULL, 'Z', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (223, NULL, NULL, NULL, NULL, NULL, '630121', '大通回族土族自治县', NULL, 'D', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (224, NULL, NULL, NULL, NULL, NULL, '630105', '城北区', NULL, 'C', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (225, NULL, NULL, NULL, NULL, NULL, '630104', '城西区', NULL, 'C', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (226, NULL, NULL, NULL, NULL, NULL, '630103', '城中区', NULL, 'C', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (227, NULL, NULL, NULL, NULL, NULL, '630102', '城东区', NULL, 'C', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (228, NULL, NULL, NULL, NULL, NULL, '630101', '市辖区', NULL, 'S', 10, 3, '630100', NULL);
+INSERT INTO `sys_area_dj` VALUES (229, NULL, NULL, NULL, NULL, NULL, '620000', '甘肃省', NULL, 'G', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (230, NULL, NULL, NULL, NULL, NULL, '623000', '甘南藏族自治州', NULL, 'G', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (231, NULL, NULL, NULL, NULL, NULL, '623027', '夏河县', NULL, 'X', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (232, NULL, NULL, NULL, NULL, NULL, '623026', '碌曲县', NULL, 'L', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (233, NULL, NULL, NULL, NULL, NULL, '623025', '玛曲县', NULL, 'M', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (234, NULL, NULL, NULL, NULL, NULL, '623024', '迭部县', NULL, 'D', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (235, NULL, NULL, NULL, NULL, NULL, '623023', '舟曲县', NULL, 'Z', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (236, NULL, NULL, NULL, NULL, NULL, '623022', '卓尼县', NULL, 'Z', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (237, NULL, NULL, NULL, NULL, NULL, '623021', '临潭县', NULL, 'L', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (238, NULL, NULL, NULL, NULL, NULL, '623001', '合作市', NULL, 'H', 10, 3, '623000', NULL);
+INSERT INTO `sys_area_dj` VALUES (239, NULL, NULL, NULL, NULL, NULL, '622900', '临夏回族自治州', NULL, 'L', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (240, NULL, NULL, NULL, NULL, NULL, '622927', '积石山保安族东乡族撒拉族自治县', NULL, 'J', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (241, NULL, NULL, NULL, NULL, NULL, '622926', '东乡族自治县', NULL, 'D', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (242, NULL, NULL, NULL, NULL, NULL, '622925', '和政县', NULL, 'H', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (243, NULL, NULL, NULL, NULL, NULL, '622924', '广河县', NULL, 'G', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (244, NULL, NULL, NULL, NULL, NULL, '622923', '永靖县', NULL, 'Y', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (245, NULL, NULL, NULL, NULL, NULL, '622922', '康乐县', NULL, 'K', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (246, NULL, NULL, NULL, NULL, NULL, '622921', '临夏县', NULL, 'L', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (247, NULL, NULL, NULL, NULL, NULL, '622901', '临夏市', NULL, 'L', 10, 3, '622900', NULL);
+INSERT INTO `sys_area_dj` VALUES (248, NULL, NULL, NULL, NULL, NULL, '621200', '陇南市', NULL, 'L', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (249, NULL, NULL, NULL, NULL, NULL, '621228', '两当县', NULL, 'L', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (250, NULL, NULL, NULL, NULL, NULL, '621227', '徽　县', NULL, 'H', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (251, NULL, NULL, NULL, NULL, NULL, '621226', '礼　县', NULL, 'L', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (252, NULL, NULL, NULL, NULL, NULL, '621225', '西和县', NULL, 'X', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (253, NULL, NULL, NULL, NULL, NULL, '621224', '康　县', NULL, 'K', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (254, NULL, NULL, NULL, NULL, NULL, '621223', '宕昌县', NULL, 'C', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (255, NULL, NULL, NULL, NULL, NULL, '621222', '文　县', NULL, 'W', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (256, NULL, NULL, NULL, NULL, NULL, '621221', '成　县', NULL, 'C', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (257, NULL, NULL, NULL, NULL, NULL, '621202', '武都区', NULL, 'W', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (258, NULL, NULL, NULL, NULL, NULL, '621201', '市辖区', NULL, 'S', 10, 3, '621200', NULL);
+INSERT INTO `sys_area_dj` VALUES (259, NULL, NULL, NULL, NULL, NULL, '621100', '定西市', NULL, 'D', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (260, NULL, NULL, NULL, NULL, NULL, '621126', '岷　县', NULL, 'X', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (261, NULL, NULL, NULL, NULL, NULL, '621125', '漳　县', NULL, 'Z', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (262, NULL, NULL, NULL, NULL, NULL, '621124', '临洮县', NULL, 'L', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (263, NULL, NULL, NULL, NULL, NULL, '621123', '渭源县', NULL, 'W', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (264, NULL, NULL, NULL, NULL, NULL, '621122', '陇西县', NULL, 'L', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (265, NULL, NULL, NULL, NULL, NULL, '621121', '通渭县', NULL, 'T', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (266, NULL, NULL, NULL, NULL, NULL, '621102', '安定区', NULL, 'A', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (267, NULL, NULL, NULL, NULL, NULL, '621101', '市辖区', NULL, 'S', 10, 3, '621100', NULL);
+INSERT INTO `sys_area_dj` VALUES (268, NULL, NULL, NULL, NULL, NULL, '621000', '庆阳市', NULL, 'Q', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (269, NULL, NULL, NULL, NULL, NULL, '621027', '镇原县', NULL, 'Z', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (270, NULL, NULL, NULL, NULL, NULL, '621026', '宁　县', NULL, 'N', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (271, NULL, NULL, NULL, NULL, NULL, '621025', '正宁县', NULL, 'Z', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (272, NULL, NULL, NULL, NULL, NULL, '621024', '合水县', NULL, 'H', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (273, NULL, NULL, NULL, NULL, NULL, '621023', '华池县', NULL, 'H', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (274, NULL, NULL, NULL, NULL, NULL, '621022', '环　县', NULL, 'H', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (275, NULL, NULL, NULL, NULL, NULL, '621021', '庆城县', NULL, 'Q', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (276, NULL, NULL, NULL, NULL, NULL, '621002', '西峰区', NULL, 'X', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (277, NULL, NULL, NULL, NULL, NULL, '621001', '市辖区', NULL, 'S', 10, 3, '621000', NULL);
+INSERT INTO `sys_area_dj` VALUES (278, NULL, NULL, NULL, NULL, NULL, '620900', '酒泉市', NULL, 'J', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (279, NULL, NULL, NULL, NULL, NULL, '620982', '敦煌市', NULL, 'D', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (280, NULL, NULL, NULL, NULL, NULL, '620981', '玉门市', NULL, 'Y', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (281, NULL, NULL, NULL, NULL, NULL, '620924', '阿克塞哈萨克族自治县', NULL, 'A', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (282, NULL, NULL, NULL, NULL, NULL, '620923', '肃北蒙古族自治县', NULL, 'S', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (283, NULL, NULL, NULL, NULL, NULL, '620922', '安西县', NULL, 'A', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (284, NULL, NULL, NULL, NULL, NULL, '620921', '金塔县', NULL, 'J', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (285, NULL, NULL, NULL, NULL, NULL, '620902', '肃州区', NULL, 'S', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (286, NULL, NULL, NULL, NULL, NULL, '620901', '市辖区', NULL, 'S', 10, 3, '620900', NULL);
+INSERT INTO `sys_area_dj` VALUES (287, NULL, NULL, NULL, NULL, NULL, '620800', '平凉市', NULL, 'P', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (288, NULL, NULL, NULL, NULL, NULL, '620826', '静宁县', NULL, 'J', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (289, NULL, NULL, NULL, NULL, NULL, '620825', '庄浪县', NULL, 'Z', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (290, NULL, NULL, NULL, NULL, NULL, '620824', '华亭县', NULL, 'H', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (291, NULL, NULL, NULL, NULL, NULL, '620823', '崇信县', NULL, 'C', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (292, NULL, NULL, NULL, NULL, NULL, '620822', '灵台县', NULL, 'L', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (293, NULL, NULL, NULL, NULL, NULL, '620821', '泾川县', NULL, 'C', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (294, NULL, NULL, NULL, NULL, NULL, '620802', '崆峒区', NULL, 'Q', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (295, NULL, NULL, NULL, NULL, NULL, '620801', '市辖区', NULL, 'S', 10, 3, '620800', NULL);
+INSERT INTO `sys_area_dj` VALUES (296, NULL, NULL, NULL, NULL, NULL, '620700', '张掖市', NULL, 'Z', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (297, NULL, NULL, NULL, NULL, NULL, '620725', '山丹县', NULL, 'S', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (298, NULL, NULL, NULL, NULL, NULL, '620724', '高台县', NULL, 'G', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (299, NULL, NULL, NULL, NULL, NULL, '620723', '临泽县', NULL, 'L', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (300, NULL, NULL, NULL, NULL, NULL, '620722', '民乐县', NULL, 'M', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (301, NULL, NULL, NULL, NULL, NULL, '620721', '肃南裕固族自治县', NULL, 'S', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (302, NULL, NULL, NULL, NULL, NULL, '620702', '甘州区', NULL, 'G', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (303, NULL, NULL, NULL, NULL, NULL, '620701', '市辖区', NULL, 'S', 10, 3, '620700', NULL);
+INSERT INTO `sys_area_dj` VALUES (304, NULL, NULL, NULL, NULL, NULL, '620600', '武威市', NULL, 'W', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (305, NULL, NULL, NULL, NULL, NULL, '620623', '天祝藏族自治县', NULL, 'T', 10, 3, '620600', NULL);
+INSERT INTO `sys_area_dj` VALUES (306, NULL, NULL, NULL, NULL, NULL, '620622', '古浪县', NULL, 'G', 10, 3, '620600', NULL);
+INSERT INTO `sys_area_dj` VALUES (307, NULL, NULL, NULL, NULL, NULL, '620621', '民勤县', NULL, 'M', 10, 3, '620600', NULL);
+INSERT INTO `sys_area_dj` VALUES (308, NULL, NULL, NULL, NULL, NULL, '620602', '凉州区', NULL, 'L', 10, 3, '620600', NULL);
+INSERT INTO `sys_area_dj` VALUES (309, NULL, NULL, NULL, NULL, NULL, '620601', '市辖区', NULL, 'S', 10, 3, '620600', NULL);
+INSERT INTO `sys_area_dj` VALUES (310, NULL, NULL, NULL, NULL, NULL, '620500', '天水市', NULL, 'T', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (311, NULL, NULL, NULL, NULL, NULL, '620525', '张家川回族自治县', NULL, 'Z', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (312, NULL, NULL, NULL, NULL, NULL, '620524', '武山县', NULL, 'W', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (313, NULL, NULL, NULL, NULL, NULL, '620523', '甘谷县', NULL, 'G', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (314, NULL, NULL, NULL, NULL, NULL, '620522', '秦安县', NULL, 'Q', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (315, NULL, NULL, NULL, NULL, NULL, '620521', '清水县', NULL, 'Q', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (316, NULL, NULL, NULL, NULL, NULL, '620503', '北道区', NULL, 'B', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (317, NULL, NULL, NULL, NULL, NULL, '620502', '秦城区', NULL, 'Q', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (318, NULL, NULL, NULL, NULL, NULL, '620501', '市辖区', NULL, 'S', 10, 3, '620500', NULL);
+INSERT INTO `sys_area_dj` VALUES (319, NULL, NULL, NULL, NULL, NULL, '620400', '白银市', NULL, 'B', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (320, NULL, NULL, NULL, NULL, NULL, '620423', '景泰县', NULL, 'J', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (321, NULL, NULL, NULL, NULL, NULL, '620422', '会宁县', NULL, 'H', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (322, NULL, NULL, NULL, NULL, NULL, '620421', '靖远县', NULL, 'J', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (323, NULL, NULL, NULL, NULL, NULL, '620403', '平川区', NULL, 'P', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (324, NULL, NULL, NULL, NULL, NULL, '620402', '白银区', NULL, 'B', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (325, NULL, NULL, NULL, NULL, NULL, '620401', '市辖区', NULL, 'S', 10, 3, '620400', NULL);
+INSERT INTO `sys_area_dj` VALUES (326, NULL, NULL, NULL, NULL, NULL, '620300', '金昌市', NULL, 'J', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (327, NULL, NULL, NULL, NULL, NULL, '620321', '永昌县', NULL, 'Y', 10, 3, '620300', NULL);
+INSERT INTO `sys_area_dj` VALUES (328, NULL, NULL, NULL, NULL, NULL, '620302', '金川区', NULL, 'J', 10, 3, '620300', NULL);
+INSERT INTO `sys_area_dj` VALUES (329, NULL, NULL, NULL, NULL, NULL, '620301', '市辖区', NULL, 'S', 10, 3, '620300', NULL);
+INSERT INTO `sys_area_dj` VALUES (330, NULL, NULL, NULL, NULL, NULL, '620200', '嘉峪关市', NULL, 'J', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (331, NULL, NULL, NULL, NULL, NULL, '620201', '市辖区', NULL, 'S', 10, 3, '620200', NULL);
+INSERT INTO `sys_area_dj` VALUES (332, NULL, NULL, NULL, NULL, NULL, '620100', '兰州市', NULL, 'L', 10, 2, '620000', NULL);
+INSERT INTO `sys_area_dj` VALUES (333, NULL, NULL, NULL, NULL, NULL, '620123', '榆中县', NULL, 'Y', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (334, NULL, NULL, NULL, NULL, NULL, '620122', '皋兰县', NULL, 'G', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (335, NULL, NULL, NULL, NULL, NULL, '620121', '永登县', NULL, 'Y', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (336, NULL, NULL, NULL, NULL, NULL, '620111', '红古区', NULL, 'H', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (337, NULL, NULL, NULL, NULL, NULL, '620105', '安宁区', NULL, 'A', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (338, NULL, NULL, NULL, NULL, NULL, '620104', '西固区', NULL, 'X', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (339, NULL, NULL, NULL, NULL, NULL, '620103', '七里河区', NULL, 'Q', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (340, NULL, NULL, NULL, NULL, NULL, '620102', '城关区', NULL, 'C', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (341, NULL, NULL, NULL, NULL, NULL, '620101', '市辖区', NULL, 'S', 10, 3, '620100', NULL);
+INSERT INTO `sys_area_dj` VALUES (342, NULL, NULL, NULL, NULL, NULL, '610000', '陕西省', NULL, 'S', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (343, NULL, NULL, NULL, NULL, NULL, '611000', '商洛市', NULL, 'S', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (344, NULL, NULL, NULL, NULL, NULL, '611026', '柞水县', NULL, 'Z', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (345, NULL, NULL, NULL, NULL, NULL, '611025', '镇安县', NULL, 'Z', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (346, NULL, NULL, NULL, NULL, NULL, '611024', '山阳县', NULL, 'S', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (347, NULL, NULL, NULL, NULL, NULL, '611023', '商南县', NULL, 'S', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (348, NULL, NULL, NULL, NULL, NULL, '611022', '丹凤县', NULL, 'D', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (349, NULL, NULL, NULL, NULL, NULL, '611021', '洛南县', NULL, 'L', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (350, NULL, NULL, NULL, NULL, NULL, '611002', '商州区', NULL, 'S', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (351, NULL, NULL, NULL, NULL, NULL, '611001', '市辖区', NULL, 'S', 10, 3, '611000', NULL);
+INSERT INTO `sys_area_dj` VALUES (352, NULL, NULL, NULL, NULL, NULL, '610900', '安康市', NULL, 'A', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (353, NULL, NULL, NULL, NULL, NULL, '610929', '白河县', NULL, 'B', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (354, NULL, NULL, NULL, NULL, NULL, '610928', '旬阳县', NULL, 'X', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (355, NULL, NULL, NULL, NULL, NULL, '610927', '镇坪县', NULL, 'Z', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (356, NULL, NULL, NULL, NULL, NULL, '610926', '平利县', NULL, 'P', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (357, NULL, NULL, NULL, NULL, NULL, '610925', '岚皋县', NULL, 'G', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (358, NULL, NULL, NULL, NULL, NULL, '610924', '紫阳县', NULL, 'Z', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (359, NULL, NULL, NULL, NULL, NULL, '610923', '宁陕县', NULL, 'N', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (360, NULL, NULL, NULL, NULL, NULL, '610922', '石泉县', NULL, 'S', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (361, NULL, NULL, NULL, NULL, NULL, '610921', '汉阴县', NULL, 'H', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (362, NULL, NULL, NULL, NULL, NULL, '610902', '汉滨区', NULL, 'H', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (363, NULL, NULL, NULL, NULL, NULL, '610901', '市辖区', NULL, 'S', 10, 3, '610900', NULL);
+INSERT INTO `sys_area_dj` VALUES (364, NULL, NULL, NULL, NULL, NULL, '610800', '榆林市', NULL, 'Y', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (365, NULL, NULL, NULL, NULL, NULL, '610831', '子洲县', NULL, 'Z', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (366, NULL, NULL, NULL, NULL, NULL, '610830', '清涧县', NULL, 'Q', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (367, NULL, NULL, NULL, NULL, NULL, '610829', '吴堡县', NULL, 'W', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (368, NULL, NULL, NULL, NULL, NULL, '610828', '佳　县', NULL, 'J', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (369, NULL, NULL, NULL, NULL, NULL, '610827', '米脂县', NULL, 'M', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (370, NULL, NULL, NULL, NULL, NULL, '610826', '绥德县', NULL, 'S', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (371, NULL, NULL, NULL, NULL, NULL, '610825', '定边县', NULL, 'D', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (372, NULL, NULL, NULL, NULL, NULL, '610824', '靖边县', NULL, 'J', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (373, NULL, NULL, NULL, NULL, NULL, '610823', '横山县', NULL, 'H', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (374, NULL, NULL, NULL, NULL, NULL, '610822', '府谷县', NULL, 'F', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (375, NULL, NULL, NULL, NULL, NULL, '610821', '神木县', NULL, 'S', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (376, NULL, NULL, NULL, NULL, NULL, '610802', '榆阳区', NULL, 'Y', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (377, NULL, NULL, NULL, NULL, NULL, '610801', '市辖区', NULL, 'S', 10, 3, '610800', NULL);
+INSERT INTO `sys_area_dj` VALUES (378, NULL, NULL, NULL, NULL, NULL, '610700', '汉中市', NULL, 'H', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (379, NULL, NULL, NULL, NULL, NULL, '610730', '佛坪县', NULL, 'F', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (380, NULL, NULL, NULL, NULL, NULL, '610729', '留坝县', NULL, 'L', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (381, NULL, NULL, NULL, NULL, NULL, '610728', '镇巴县', NULL, 'Z', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (382, NULL, NULL, NULL, NULL, NULL, '610727', '略阳县', NULL, 'L', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (383, NULL, NULL, NULL, NULL, NULL, '610726', '宁强县', NULL, 'N', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (384, NULL, NULL, NULL, NULL, NULL, '610725', '勉　县', NULL, 'M', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (385, NULL, NULL, NULL, NULL, NULL, '610724', '西乡县', NULL, 'X', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (386, NULL, NULL, NULL, NULL, NULL, '610723', '洋　县', NULL, 'Y', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (387, NULL, NULL, NULL, NULL, NULL, '610722', '城固县', NULL, 'C', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (388, NULL, NULL, NULL, NULL, NULL, '610721', '南郑县', NULL, 'N', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (389, NULL, NULL, NULL, NULL, NULL, '610702', '汉台区', NULL, 'H', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (390, NULL, NULL, NULL, NULL, NULL, '610701', '市辖区', NULL, 'S', 10, 3, '610700', NULL);
+INSERT INTO `sys_area_dj` VALUES (391, NULL, NULL, NULL, NULL, NULL, '610600', '延安市', NULL, 'Y', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (392, NULL, NULL, NULL, NULL, NULL, '610632', '黄陵县', NULL, 'H', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (393, NULL, NULL, NULL, NULL, NULL, '610631', '黄龙县', NULL, 'H', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (394, NULL, NULL, NULL, NULL, NULL, '610630', '宜川县', NULL, 'Y', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (395, NULL, NULL, NULL, NULL, NULL, '610629', '洛川县', NULL, 'L', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (396, NULL, NULL, NULL, NULL, NULL, '610628', '富　县', NULL, 'F', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (397, NULL, NULL, NULL, NULL, NULL, '610627', '甘泉县', NULL, 'G', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (398, NULL, NULL, NULL, NULL, NULL, '610626', '吴旗县', NULL, 'W', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (399, NULL, NULL, NULL, NULL, NULL, '610625', '志丹县', NULL, 'Z', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (400, NULL, NULL, NULL, NULL, NULL, '610624', '安塞县', NULL, 'A', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (401, NULL, NULL, NULL, NULL, NULL, '610623', '子长县', NULL, 'Z', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (402, NULL, NULL, NULL, NULL, NULL, '610622', '延川县', NULL, 'Y', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (403, NULL, NULL, NULL, NULL, NULL, '610621', '延长县', NULL, 'Y', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (404, NULL, NULL, NULL, NULL, NULL, '610602', '宝塔区', NULL, 'B', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (405, NULL, NULL, NULL, NULL, NULL, '610601', '市辖区', NULL, 'S', 10, 3, '610600', NULL);
+INSERT INTO `sys_area_dj` VALUES (406, NULL, NULL, NULL, NULL, NULL, '610500', '渭南市', NULL, 'W', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (407, NULL, NULL, NULL, NULL, NULL, '610582', '华阴市', NULL, 'H', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (408, NULL, NULL, NULL, NULL, NULL, '610581', '韩城市', NULL, 'H', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (409, NULL, NULL, NULL, NULL, NULL, '610528', '富平县', NULL, 'F', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (410, NULL, NULL, NULL, NULL, NULL, '610527', '白水县', NULL, 'B', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (411, NULL, NULL, NULL, NULL, NULL, '610526', '蒲城县', NULL, 'P', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (412, NULL, NULL, NULL, NULL, NULL, '610525', '澄城县', NULL, 'C', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (413, NULL, NULL, NULL, NULL, NULL, '610524', '合阳县', NULL, 'H', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (414, NULL, NULL, NULL, NULL, NULL, '610523', '大荔县', NULL, 'D', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (415, NULL, NULL, NULL, NULL, NULL, '610522', '潼关县', NULL, 'G', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (416, NULL, NULL, NULL, NULL, NULL, '610521', '华　县', NULL, 'H', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (417, NULL, NULL, NULL, NULL, NULL, '610502', '临渭区', NULL, 'L', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (418, NULL, NULL, NULL, NULL, NULL, '610501', '市辖区', NULL, 'S', 10, 3, '610500', NULL);
+INSERT INTO `sys_area_dj` VALUES (419, NULL, NULL, NULL, NULL, NULL, '610400', '咸阳市', NULL, 'X', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (420, NULL, NULL, NULL, NULL, NULL, '610481', '兴平市', NULL, 'X', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (421, NULL, NULL, NULL, NULL, NULL, '610431', '武功县', NULL, 'W', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (422, NULL, NULL, NULL, NULL, NULL, '610430', '淳化县', NULL, 'C', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (423, NULL, NULL, NULL, NULL, NULL, '610429', '旬邑县', NULL, 'X', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (424, NULL, NULL, NULL, NULL, NULL, '610428', '长武县', NULL, 'C', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (425, NULL, NULL, NULL, NULL, NULL, '610427', '彬　县', NULL, 'B', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (426, NULL, NULL, NULL, NULL, NULL, '610426', '永寿县', NULL, 'Y', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (427, NULL, NULL, NULL, NULL, NULL, '610425', '礼泉县', NULL, 'L', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (428, NULL, NULL, NULL, NULL, NULL, '610424', '乾　县', NULL, 'Q', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (429, NULL, NULL, NULL, NULL, NULL, '610423', '泾阳县', NULL, 'Y', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (430, NULL, NULL, NULL, NULL, NULL, '610422', '三原县', NULL, 'S', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (431, NULL, NULL, NULL, NULL, NULL, '610404', '渭城区', NULL, 'W', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (432, NULL, NULL, NULL, NULL, NULL, '610403', '杨凌区', NULL, 'Y', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (433, NULL, NULL, NULL, NULL, NULL, '610402', '秦都区', NULL, 'Q', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (434, NULL, NULL, NULL, NULL, NULL, '610401', '市辖区', NULL, 'S', 10, 3, '610400', NULL);
+INSERT INTO `sys_area_dj` VALUES (435, NULL, NULL, NULL, NULL, NULL, '610300', '宝鸡市', NULL, 'B', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (436, NULL, NULL, NULL, NULL, NULL, '610331', '太白县', NULL, 'T', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (437, NULL, NULL, NULL, NULL, NULL, '610330', '凤　县', NULL, 'F', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (438, NULL, NULL, NULL, NULL, NULL, '610329', '麟游县', NULL, 'Y', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (439, NULL, NULL, NULL, NULL, NULL, '610328', '千阳县', NULL, 'Q', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (440, NULL, NULL, NULL, NULL, NULL, '610327', '陇　县', NULL, 'L', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (441, NULL, NULL, NULL, NULL, NULL, '610326', '眉　县', NULL, 'M', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (442, NULL, NULL, NULL, NULL, NULL, '610324', '扶风县', NULL, 'F', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (443, NULL, NULL, NULL, NULL, NULL, '610323', '岐山县', NULL, 'S', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (444, NULL, NULL, NULL, NULL, NULL, '610322', '凤翔县', NULL, 'F', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (445, NULL, NULL, NULL, NULL, NULL, '610304', '陈仓区', NULL, 'C', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (446, NULL, NULL, NULL, NULL, NULL, '610303', '金台区', NULL, 'J', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (447, NULL, NULL, NULL, NULL, NULL, '610302', '渭滨区', NULL, 'W', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (448, NULL, NULL, NULL, NULL, NULL, '610301', '市辖区', NULL, 'S', 10, 3, '610300', NULL);
+INSERT INTO `sys_area_dj` VALUES (449, NULL, NULL, NULL, NULL, NULL, '610200', '铜川市', NULL, 'T', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (450, NULL, NULL, NULL, NULL, NULL, '610222', '宜君县', NULL, 'Y', 10, 3, '610200', NULL);
+INSERT INTO `sys_area_dj` VALUES (451, NULL, NULL, NULL, NULL, NULL, '610204', '耀州区', NULL, 'Y', 10, 3, '610200', NULL);
+INSERT INTO `sys_area_dj` VALUES (452, NULL, NULL, NULL, NULL, NULL, '610203', '印台区', NULL, 'Y', 10, 3, '610200', NULL);
+INSERT INTO `sys_area_dj` VALUES (453, NULL, NULL, NULL, NULL, NULL, '610202', '王益区', NULL, 'W', 10, 3, '610200', NULL);
+INSERT INTO `sys_area_dj` VALUES (454, NULL, NULL, NULL, NULL, NULL, '610201', '市辖区', NULL, 'S', 10, 3, '610200', NULL);
+INSERT INTO `sys_area_dj` VALUES (455, NULL, NULL, NULL, NULL, NULL, '610100', '西安市', NULL, 'X', 10, 2, '610000', NULL);
+INSERT INTO `sys_area_dj` VALUES (456, NULL, NULL, NULL, NULL, NULL, '610126', '高陵县', NULL, 'G', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (457, NULL, NULL, NULL, NULL, NULL, '610125', '户　县', NULL, 'H', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (458, NULL, NULL, NULL, NULL, NULL, '610124', '周至县', NULL, 'Z', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (459, NULL, NULL, NULL, NULL, NULL, '610122', '蓝田县', NULL, 'L', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (460, NULL, NULL, NULL, NULL, NULL, '610116', '长安区', NULL, 'C', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (461, NULL, NULL, NULL, NULL, NULL, '610115', '临潼区', NULL, 'L', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (462, NULL, NULL, NULL, NULL, NULL, '610114', '阎良区', NULL, 'Y', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (463, NULL, NULL, NULL, NULL, NULL, '610113', '雁塔区', NULL, 'Y', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (464, NULL, NULL, NULL, NULL, NULL, '610112', '未央区', NULL, 'W', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (465, NULL, NULL, NULL, NULL, NULL, '610111', '灞桥区', NULL, 'Q', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (466, NULL, NULL, NULL, NULL, NULL, '610104', '莲湖区', NULL, 'L', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (467, NULL, NULL, NULL, NULL, NULL, '610103', '碑林区', NULL, 'B', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (468, NULL, NULL, NULL, NULL, NULL, '610102', '新城区', NULL, 'X', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (469, NULL, NULL, NULL, NULL, NULL, '610101', '市辖区', NULL, 'S', 10, 3, '610100', NULL);
+INSERT INTO `sys_area_dj` VALUES (470, NULL, NULL, NULL, NULL, NULL, '540000', '西藏自治区', NULL, 'X', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (471, NULL, NULL, NULL, NULL, NULL, '542600', '林芝地区', NULL, 'L', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (472, NULL, NULL, NULL, NULL, NULL, '542627', '朗　县', NULL, 'L', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (473, NULL, NULL, NULL, NULL, NULL, '542626', '察隅县', NULL, 'C', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (474, NULL, NULL, NULL, NULL, NULL, '542625', '波密县', NULL, 'B', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (475, NULL, NULL, NULL, NULL, NULL, '542624', '墨脱县', NULL, 'M', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (476, NULL, NULL, NULL, NULL, NULL, '542623', '米林县', NULL, 'M', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (477, NULL, NULL, NULL, NULL, NULL, '542622', '工布江达县', NULL, 'G', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (478, NULL, NULL, NULL, NULL, NULL, '542621', '林芝县', NULL, 'L', 10, 3, '542600', NULL);
+INSERT INTO `sys_area_dj` VALUES (479, NULL, NULL, NULL, NULL, NULL, '542500', '阿里地区', NULL, 'A', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (480, NULL, NULL, NULL, NULL, NULL, '542527', '措勤县', NULL, 'C', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (481, NULL, NULL, NULL, NULL, NULL, '542526', '改则县', NULL, 'G', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (482, NULL, NULL, NULL, NULL, NULL, '542525', '革吉县', NULL, 'G', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (483, NULL, NULL, NULL, NULL, NULL, '542524', '日土县', NULL, 'R', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (484, NULL, NULL, NULL, NULL, NULL, '542523', '噶尔县', NULL, 'G', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (485, NULL, NULL, NULL, NULL, NULL, '542522', '札达县', NULL, 'Z', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (486, NULL, NULL, NULL, NULL, NULL, '542521', '普兰县', NULL, 'P', 10, 3, '542500', NULL);
+INSERT INTO `sys_area_dj` VALUES (487, NULL, NULL, NULL, NULL, NULL, '542400', '那曲地区', NULL, 'N', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (488, NULL, NULL, NULL, NULL, NULL, '542430', '尼玛县', NULL, 'N', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (489, NULL, NULL, NULL, NULL, NULL, '542429', '巴青县', NULL, 'B', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (490, NULL, NULL, NULL, NULL, NULL, '542428', '班戈县', NULL, 'B', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (491, NULL, NULL, NULL, NULL, NULL, '542427', '索　县', NULL, 'S', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (492, NULL, NULL, NULL, NULL, NULL, '542426', '申扎县', NULL, 'S', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (493, NULL, NULL, NULL, NULL, NULL, '542425', '安多县', NULL, 'A', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (494, NULL, NULL, NULL, NULL, NULL, '542424', '聂荣县', NULL, 'N', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (495, NULL, NULL, NULL, NULL, NULL, '542423', '比如县', NULL, 'B', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (496, NULL, NULL, NULL, NULL, NULL, '542422', '嘉黎县', NULL, 'J', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (497, NULL, NULL, NULL, NULL, NULL, '542421', '那曲县', NULL, 'N', 10, 3, '542400', NULL);
+INSERT INTO `sys_area_dj` VALUES (498, NULL, NULL, NULL, NULL, NULL, '542300', '日喀则地区', NULL, 'R', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (499, NULL, NULL, NULL, NULL, NULL, '542338', '岗巴县', NULL, 'G', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (500, NULL, NULL, NULL, NULL, NULL, '542337', '萨嘎县', NULL, 'S', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (501, NULL, NULL, NULL, NULL, NULL, '542336', '聂拉木县', NULL, 'N', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (502, NULL, NULL, NULL, NULL, NULL, '542335', '吉隆县', NULL, 'J', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (503, NULL, NULL, NULL, NULL, NULL, '542334', '亚东县', NULL, 'Y', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (504, NULL, NULL, NULL, NULL, NULL, '542333', '仲巴县', NULL, 'Z', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (505, NULL, NULL, NULL, NULL, NULL, '542332', '定结县', NULL, 'D', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (506, NULL, NULL, NULL, NULL, NULL, '542331', '康马县', NULL, 'K', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (507, NULL, NULL, NULL, NULL, NULL, '542330', '仁布县', NULL, 'R', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (508, NULL, NULL, NULL, NULL, NULL, '542329', '白朗县', NULL, 'B', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (509, NULL, NULL, NULL, NULL, NULL, '542328', '谢通门县', NULL, 'X', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (510, NULL, NULL, NULL, NULL, NULL, '542327', '昂仁县', NULL, 'A', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (511, NULL, NULL, NULL, NULL, NULL, '542326', '拉孜县', NULL, 'L', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (512, NULL, NULL, NULL, NULL, NULL, '542325', '萨迦县', NULL, 'S', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (513, NULL, NULL, NULL, NULL, NULL, '542324', '定日县', NULL, 'D', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (514, NULL, NULL, NULL, NULL, NULL, '542323', '江孜县', NULL, 'J', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (515, NULL, NULL, NULL, NULL, NULL, '542322', '南木林县', NULL, 'N', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (516, NULL, NULL, NULL, NULL, NULL, '542301', '日喀则市', NULL, 'R', 10, 3, '542300', NULL);
+INSERT INTO `sys_area_dj` VALUES (517, NULL, NULL, NULL, NULL, NULL, '542200', '山南地区', NULL, 'S', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (518, NULL, NULL, NULL, NULL, NULL, '542233', '浪卡子县', NULL, 'L', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (519, NULL, NULL, NULL, NULL, NULL, '542232', '错那县', NULL, 'C', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (520, NULL, NULL, NULL, NULL, NULL, '542231', '隆子县', NULL, 'L', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (521, NULL, NULL, NULL, NULL, NULL, '542229', '加查县', NULL, 'J', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (522, NULL, NULL, NULL, NULL, NULL, '542228', '洛扎县', NULL, 'L', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (523, NULL, NULL, NULL, NULL, NULL, '542227', '措美县', NULL, 'C', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (524, NULL, NULL, NULL, NULL, NULL, '542226', '曲松县', NULL, 'Q', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (525, NULL, NULL, NULL, NULL, NULL, '542225', '琼结县', NULL, 'Q', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (526, NULL, NULL, NULL, NULL, NULL, '542224', '桑日县', NULL, 'S', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (527, NULL, NULL, NULL, NULL, NULL, '542223', '贡嘎县', NULL, 'G', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (528, NULL, NULL, NULL, NULL, NULL, '542222', '扎囊县', NULL, 'Z', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (529, NULL, NULL, NULL, NULL, NULL, '542221', '乃东县', NULL, 'N', 10, 3, '542200', NULL);
+INSERT INTO `sys_area_dj` VALUES (530, NULL, NULL, NULL, NULL, NULL, '542100', '昌都地区', NULL, 'C', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (531, NULL, NULL, NULL, NULL, NULL, '542133', '边坝县', NULL, 'B', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (532, NULL, NULL, NULL, NULL, NULL, '542132', '洛隆县', NULL, 'L', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (533, NULL, NULL, NULL, NULL, NULL, '542129', '芒康县', NULL, 'M', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (534, NULL, NULL, NULL, NULL, NULL, '542128', '左贡县', NULL, 'Z', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (535, NULL, NULL, NULL, NULL, NULL, '542127', '八宿县', NULL, 'B', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (536, NULL, NULL, NULL, NULL, NULL, '542126', '察雅县', NULL, 'C', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (537, NULL, NULL, NULL, NULL, NULL, '542125', '丁青县', NULL, 'D', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (538, NULL, NULL, NULL, NULL, NULL, '542124', '类乌齐县', NULL, 'L', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (539, NULL, NULL, NULL, NULL, NULL, '542123', '贡觉县', NULL, 'G', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (540, NULL, NULL, NULL, NULL, NULL, '542122', '江达县', NULL, 'J', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (541, NULL, NULL, NULL, NULL, NULL, '542121', '昌都县', NULL, 'C', 10, 3, '542100', NULL);
+INSERT INTO `sys_area_dj` VALUES (542, NULL, NULL, NULL, NULL, NULL, '540100', '拉萨市', NULL, 'L', 10, 2, '540000', NULL);
+INSERT INTO `sys_area_dj` VALUES (543, NULL, NULL, NULL, NULL, NULL, '540127', '墨竹工卡县', NULL, 'M', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (544, NULL, NULL, NULL, NULL, NULL, '540126', '达孜县', NULL, 'D', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (545, NULL, NULL, NULL, NULL, NULL, '540125', '堆龙德庆县', NULL, 'D', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (546, NULL, NULL, NULL, NULL, NULL, '540124', '曲水县', NULL, 'Q', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (547, NULL, NULL, NULL, NULL, NULL, '540123', '尼木县', NULL, 'N', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (548, NULL, NULL, NULL, NULL, NULL, '540122', '当雄县', NULL, 'D', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (549, NULL, NULL, NULL, NULL, NULL, '540121', '林周县', NULL, 'L', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (550, NULL, NULL, NULL, NULL, NULL, '540102', '城关区', NULL, 'C', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (551, NULL, NULL, NULL, NULL, NULL, '540101', '市辖区', NULL, 'S', 10, 3, '540100', NULL);
+INSERT INTO `sys_area_dj` VALUES (552, NULL, NULL, NULL, NULL, NULL, '530000', '云南省', NULL, 'Y', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (553, NULL, NULL, NULL, NULL, NULL, '533400', '迪庆藏族自治州', NULL, 'D', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (554, NULL, NULL, NULL, NULL, NULL, '533423', '维西傈僳族自治县', NULL, 'W', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (555, NULL, NULL, NULL, NULL, NULL, '533422', '德钦县', NULL, 'D', 10, 3, '533400', NULL);
+INSERT INTO `sys_area_dj` VALUES (556, NULL, NULL, NULL, NULL, NULL, '533421', '香格里拉县', NULL, 'X', 10, 3, '533400', NULL);
+INSERT INTO `sys_area_dj` VALUES (557, NULL, NULL, NULL, NULL, NULL, '533300', '怒江傈僳族自治州', NULL, 'N', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (558, NULL, NULL, NULL, NULL, NULL, '533325', '兰坪白族普米族自治县', NULL, 'L', 10, 3, '533300', NULL);
+INSERT INTO `sys_area_dj` VALUES (559, NULL, NULL, NULL, NULL, NULL, '533324', '贡山独龙族怒族自治县', NULL, 'G', 10, 3, '533300', NULL);
+INSERT INTO `sys_area_dj` VALUES (560, NULL, NULL, NULL, NULL, NULL, '533323', '福贡县', NULL, 'F', 10, 3, '533300', NULL);
+INSERT INTO `sys_area_dj` VALUES (561, NULL, NULL, NULL, NULL, NULL, '533321', '泸水县', NULL, 'L', 10, 3, '533300', NULL);
+INSERT INTO `sys_area_dj` VALUES (562, NULL, NULL, NULL, NULL, NULL, '533100', '德宏傣族景颇族自治州', NULL, 'D', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (563, NULL, NULL, NULL, NULL, NULL, '533124', '陇川县', NULL, 'L', 10, 3, '533100', NULL);
+INSERT INTO `sys_area_dj` VALUES (564, NULL, NULL, NULL, NULL, NULL, '533123', '盈江县', NULL, 'Y', 10, 3, '533100', NULL);
+INSERT INTO `sys_area_dj` VALUES (565, NULL, NULL, NULL, NULL, NULL, '533122', '梁河县', NULL, 'L', 10, 3, '533100', NULL);
+INSERT INTO `sys_area_dj` VALUES (566, NULL, NULL, NULL, NULL, NULL, '533103', '潞西市', NULL, 'L', 10, 3, '533100', NULL);
+INSERT INTO `sys_area_dj` VALUES (567, NULL, NULL, NULL, NULL, NULL, '533102', '瑞丽市', NULL, 'R', 10, 3, '533100', NULL);
+INSERT INTO `sys_area_dj` VALUES (568, NULL, NULL, NULL, NULL, NULL, '532900', '大理白族自治州', NULL, 'D', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (569, NULL, NULL, NULL, NULL, NULL, '532932', '鹤庆县', NULL, 'H', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (570, NULL, NULL, NULL, NULL, NULL, '532931', '剑川县', NULL, 'J', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (571, NULL, NULL, NULL, NULL, NULL, '532930', '洱源县', NULL, 'E', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (572, NULL, NULL, NULL, NULL, NULL, '532929', '云龙县', NULL, 'Y', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (573, NULL, NULL, NULL, NULL, NULL, '532928', '永平县', NULL, 'Y', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (574, NULL, NULL, NULL, NULL, NULL, '532927', '巍山彝族回族自治县', NULL, 'W', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (575, NULL, NULL, NULL, NULL, NULL, '532926', '南涧彝族自治县', NULL, 'N', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (576, NULL, NULL, NULL, NULL, NULL, '532925', '弥渡县', NULL, 'M', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (577, NULL, NULL, NULL, NULL, NULL, '532924', '宾川县', NULL, 'B', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (578, NULL, NULL, NULL, NULL, NULL, '532923', '祥云县', NULL, 'X', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (579, NULL, NULL, NULL, NULL, NULL, '532922', '漾濞彝族自治县', NULL, 'Y', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (580, NULL, NULL, NULL, NULL, NULL, '532901', '大理市', NULL, 'D', 10, 3, '532900', NULL);
+INSERT INTO `sys_area_dj` VALUES (581, NULL, NULL, NULL, NULL, NULL, '532800', '西双版纳傣族自治州', NULL, 'X', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (582, NULL, NULL, NULL, NULL, NULL, '532823', '勐腊县', NULL, 'L', 10, 3, '532800', NULL);
+INSERT INTO `sys_area_dj` VALUES (583, NULL, NULL, NULL, NULL, NULL, '532822', '勐海县', NULL, 'H', 10, 3, '532800', NULL);
+INSERT INTO `sys_area_dj` VALUES (584, NULL, NULL, NULL, NULL, NULL, '532801', '景洪市', NULL, 'J', 10, 3, '532800', NULL);
+INSERT INTO `sys_area_dj` VALUES (585, NULL, NULL, NULL, NULL, NULL, '532600', '文山壮族苗族自治州', NULL, 'W', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (586, NULL, NULL, NULL, NULL, NULL, '532628', '富宁县', NULL, 'F', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (587, NULL, NULL, NULL, NULL, NULL, '532627', '广南县', NULL, 'G', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (588, NULL, NULL, NULL, NULL, NULL, '532626', '丘北县', NULL, 'Q', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (589, NULL, NULL, NULL, NULL, NULL, '532625', '马关县', NULL, 'M', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (590, NULL, NULL, NULL, NULL, NULL, '532624', '麻栗坡县', NULL, 'M', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (591, NULL, NULL, NULL, NULL, NULL, '532623', '西畴县', NULL, 'X', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (592, NULL, NULL, NULL, NULL, NULL, '532622', '砚山县', NULL, 'Y', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (593, NULL, NULL, NULL, NULL, NULL, '532621', '文山县', NULL, 'W', 10, 3, '532600', NULL);
+INSERT INTO `sys_area_dj` VALUES (594, NULL, NULL, NULL, NULL, NULL, '532500', '红河哈尼族彝族自治州', NULL, 'H', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (595, NULL, NULL, NULL, NULL, NULL, '532532', '河口瑶族自治县', NULL, 'H', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (596, NULL, NULL, NULL, NULL, NULL, '532531', '绿春县', NULL, 'L', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (597, NULL, NULL, NULL, NULL, NULL, '532530', '金平苗族瑶族傣族自治县', NULL, 'J', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (598, NULL, NULL, NULL, NULL, NULL, '532529', '红河县', NULL, 'H', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (599, NULL, NULL, NULL, NULL, NULL, '532528', '元阳县', NULL, 'Y', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (600, NULL, NULL, NULL, NULL, NULL, '532527', '泸西县', NULL, 'L', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (601, NULL, NULL, NULL, NULL, NULL, '532526', '弥勒县', NULL, 'M', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (602, NULL, NULL, NULL, NULL, NULL, '532525', '石屏县', NULL, 'S', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (603, NULL, NULL, NULL, NULL, NULL, '532524', '建水县', NULL, 'J', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (604, NULL, NULL, NULL, NULL, NULL, '532523', '屏边苗族自治县', NULL, 'P', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (605, NULL, NULL, NULL, NULL, NULL, '532522', '蒙自县', NULL, 'M', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (606, NULL, NULL, NULL, NULL, NULL, '532502', '开远市', NULL, 'K', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (607, NULL, NULL, NULL, NULL, NULL, '532501', '个旧市', NULL, 'G', 10, 3, '532500', NULL);
+INSERT INTO `sys_area_dj` VALUES (608, NULL, NULL, NULL, NULL, NULL, '532300', '楚雄彝族自治州', NULL, 'C', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (609, NULL, NULL, NULL, NULL, NULL, '532331', '禄丰县', NULL, 'L', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (610, NULL, NULL, NULL, NULL, NULL, '532329', '武定县', NULL, 'W', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (611, NULL, NULL, NULL, NULL, NULL, '532328', '元谋县', NULL, 'Y', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (612, NULL, NULL, NULL, NULL, NULL, '532327', '永仁县', NULL, 'Y', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (613, NULL, NULL, NULL, NULL, NULL, '532326', '大姚县', NULL, 'D', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (614, NULL, NULL, NULL, NULL, NULL, '532325', '姚安县', NULL, 'Y', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (615, NULL, NULL, NULL, NULL, NULL, '532324', '南华县', NULL, 'N', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (616, NULL, NULL, NULL, NULL, NULL, '532323', '牟定县', NULL, 'M', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (617, NULL, NULL, NULL, NULL, NULL, '532322', '双柏县', NULL, 'S', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (618, NULL, NULL, NULL, NULL, NULL, '532301', '楚雄市', NULL, 'C', 10, 3, '532300', NULL);
+INSERT INTO `sys_area_dj` VALUES (619, NULL, NULL, NULL, NULL, NULL, '530900', '临沧市', NULL, 'L', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (620, NULL, NULL, NULL, NULL, NULL, '530927', '沧源佤族自治县', NULL, 'C', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (621, NULL, NULL, NULL, NULL, NULL, '530926', '耿马傣族佤族自治县', NULL, 'G', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (622, NULL, NULL, NULL, NULL, NULL, '530925', '双江拉祜族佤族布朗族傣族自治县', NULL, 'S', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (623, NULL, NULL, NULL, NULL, NULL, '530924', '镇康县', NULL, 'Z', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (624, NULL, NULL, NULL, NULL, NULL, '530923', '永德县', NULL, 'Y', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (625, NULL, NULL, NULL, NULL, NULL, '530922', '云　县', NULL, 'Y', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (626, NULL, NULL, NULL, NULL, NULL, '530921', '凤庆县', NULL, 'F', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (627, NULL, NULL, NULL, NULL, NULL, '530902', '临翔区', NULL, 'L', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (628, NULL, NULL, NULL, NULL, NULL, '530901', '市辖区', NULL, 'S', 10, 3, '530900', NULL);
+INSERT INTO `sys_area_dj` VALUES (629, NULL, NULL, NULL, NULL, NULL, '530800', '思茅市', NULL, 'S', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (630, NULL, NULL, NULL, NULL, NULL, '530829', '西盟佤族自治县', NULL, 'X', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (631, NULL, NULL, NULL, NULL, NULL, '530828', '澜沧拉祜族自治县', NULL, 'L', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (632, NULL, NULL, NULL, NULL, NULL, '530827', '孟连傣族拉祜族佤族自治县', NULL, 'M', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (633, NULL, NULL, NULL, NULL, NULL, '530826', '江城哈尼族彝族自治县', NULL, 'J', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (634, NULL, NULL, NULL, NULL, NULL, '530825', '镇沅彝族哈尼族拉祜族自治县', NULL, 'Z', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (635, NULL, NULL, NULL, NULL, NULL, '530824', '景谷傣族彝族自治县', NULL, 'J', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (636, NULL, NULL, NULL, NULL, NULL, '530823', '景东彝族自治县', NULL, 'J', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (637, NULL, NULL, NULL, NULL, NULL, '530822', '墨江哈尼族自治县', NULL, 'M', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (638, NULL, NULL, NULL, NULL, NULL, '530821', '普洱哈尼族彝族自治县', NULL, 'P', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (639, NULL, NULL, NULL, NULL, NULL, '530802', '翠云区', NULL, 'C', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (640, NULL, NULL, NULL, NULL, NULL, '530801', '市辖区', NULL, 'S', 10, 3, '530800', NULL);
+INSERT INTO `sys_area_dj` VALUES (641, NULL, NULL, NULL, NULL, NULL, '530700', '丽江市', NULL, 'L', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (642, NULL, NULL, NULL, NULL, NULL, '530724', '宁蒗彝族自治县', NULL, 'N', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (643, NULL, NULL, NULL, NULL, NULL, '530723', '华坪县', NULL, 'H', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (644, NULL, NULL, NULL, NULL, NULL, '530722', '永胜县', NULL, 'Y', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (645, NULL, NULL, NULL, NULL, NULL, '530721', '玉龙纳西族自治县', NULL, 'Y', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (646, NULL, NULL, NULL, NULL, NULL, '530702', '古城区', NULL, 'G', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (647, NULL, NULL, NULL, NULL, NULL, '530701', '市辖区', NULL, 'S', 10, 3, '530700', NULL);
+INSERT INTO `sys_area_dj` VALUES (648, NULL, NULL, NULL, NULL, NULL, '530600', '昭通市', NULL, 'Z', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (649, NULL, NULL, NULL, NULL, NULL, '530630', '水富县', NULL, 'S', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (650, NULL, NULL, NULL, NULL, NULL, '530629', '威信县', NULL, 'W', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (651, NULL, NULL, NULL, NULL, NULL, '530628', '彝良县', NULL, 'Y', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (652, NULL, NULL, NULL, NULL, NULL, '530627', '镇雄县', NULL, 'Z', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (653, NULL, NULL, NULL, NULL, NULL, '530626', '绥江县', NULL, 'S', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (654, NULL, NULL, NULL, NULL, NULL, '530625', '永善县', NULL, 'Y', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (655, NULL, NULL, NULL, NULL, NULL, '530624', '大关县', NULL, 'D', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (656, NULL, NULL, NULL, NULL, NULL, '530623', '盐津县', NULL, 'Y', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (657, NULL, NULL, NULL, NULL, NULL, '530622', '巧家县', NULL, 'Q', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (658, NULL, NULL, NULL, NULL, NULL, '530621', '鲁甸县', NULL, 'L', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (659, NULL, NULL, NULL, NULL, NULL, '530602', '昭阳区', NULL, 'Z', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (660, NULL, NULL, NULL, NULL, NULL, '530601', '市辖区', NULL, 'S', 10, 3, '530600', NULL);
+INSERT INTO `sys_area_dj` VALUES (661, NULL, NULL, NULL, NULL, NULL, '530500', '保山市', NULL, 'B', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (662, NULL, NULL, NULL, NULL, NULL, '530524', '昌宁县', NULL, 'C', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (663, NULL, NULL, NULL, NULL, NULL, '530523', '龙陵县', NULL, 'L', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (664, NULL, NULL, NULL, NULL, NULL, '530522', '腾冲县', NULL, 'T', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (665, NULL, NULL, NULL, NULL, NULL, '530521', '施甸县', NULL, 'S', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (666, NULL, NULL, NULL, NULL, NULL, '530502', '隆阳区', NULL, 'L', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (667, NULL, NULL, NULL, NULL, NULL, '530501', '市辖区', NULL, 'S', 10, 3, '530500', NULL);
+INSERT INTO `sys_area_dj` VALUES (668, NULL, NULL, NULL, NULL, NULL, '530400', '玉溪市', NULL, 'Y', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (669, NULL, NULL, NULL, NULL, NULL, '530428', '元江哈尼族彝族傣族自治县', NULL, 'Y', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (670, NULL, NULL, NULL, NULL, NULL, '530427', '新平彝族傣族自治县', NULL, 'X', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (671, NULL, NULL, NULL, NULL, NULL, '530426', '峨山彝族自治县', NULL, 'E', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (672, NULL, NULL, NULL, NULL, NULL, '530425', '易门县', NULL, 'Y', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (673, NULL, NULL, NULL, NULL, NULL, '530424', '华宁县', NULL, 'H', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (674, NULL, NULL, NULL, NULL, NULL, '530423', '通海县', NULL, 'T', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (675, NULL, NULL, NULL, NULL, NULL, '530422', '澄江县', NULL, 'C', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (676, NULL, NULL, NULL, NULL, NULL, '530421', '江川县', NULL, 'J', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (677, NULL, NULL, NULL, NULL, NULL, '530402', '红塔区', NULL, 'H', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (678, NULL, NULL, NULL, NULL, NULL, '530401', '市辖区', NULL, 'S', 10, 3, '530400', NULL);
+INSERT INTO `sys_area_dj` VALUES (679, NULL, NULL, NULL, NULL, NULL, '530300', '曲靖市', NULL, 'Q', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (680, NULL, NULL, NULL, NULL, NULL, '530381', '宣威市', NULL, 'X', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (681, NULL, NULL, NULL, NULL, NULL, '530328', '沾益县', NULL, 'Z', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (682, NULL, NULL, NULL, NULL, NULL, '530326', '会泽县', NULL, 'H', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (683, NULL, NULL, NULL, NULL, NULL, '530325', '富源县', NULL, 'F', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (684, NULL, NULL, NULL, NULL, NULL, '530324', '罗平县', NULL, 'L', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (685, NULL, NULL, NULL, NULL, NULL, '530323', '师宗县', NULL, 'S', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (686, NULL, NULL, NULL, NULL, NULL, '530322', '陆良县', NULL, 'L', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (687, NULL, NULL, NULL, NULL, NULL, '530321', '马龙县', NULL, 'M', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (688, NULL, NULL, NULL, NULL, NULL, '530302', '麒麟区', NULL, 'Q', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (689, NULL, NULL, NULL, NULL, NULL, '530301', '市辖区', NULL, 'S', 10, 3, '530300', NULL);
+INSERT INTO `sys_area_dj` VALUES (690, NULL, NULL, NULL, NULL, NULL, '530100', '昆明市', NULL, 'K', 10, 2, '530000', NULL);
+INSERT INTO `sys_area_dj` VALUES (691, NULL, NULL, NULL, NULL, NULL, '530181', '安宁市', NULL, 'A', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (692, NULL, NULL, NULL, NULL, NULL, '530129', '寻甸回族彝族自治县', NULL, 'X', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (693, NULL, NULL, NULL, NULL, NULL, '530128', '禄劝彝族苗族自治县', NULL, 'L', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (694, NULL, NULL, NULL, NULL, NULL, '530127', '嵩明县', NULL, 'M', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (695, NULL, NULL, NULL, NULL, NULL, '530126', '石林彝族自治县', NULL, 'S', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (696, NULL, NULL, NULL, NULL, NULL, '530125', '宜良县', NULL, 'Y', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (697, NULL, NULL, NULL, NULL, NULL, '530124', '富民县', NULL, 'F', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (698, NULL, NULL, NULL, NULL, NULL, '530122', '晋宁县', NULL, 'J', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (699, NULL, NULL, NULL, NULL, NULL, '530121', '呈贡县', NULL, 'C', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (700, NULL, NULL, NULL, NULL, NULL, '530113', '东川区', NULL, 'D', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (701, NULL, NULL, NULL, NULL, NULL, '530112', '西山区', NULL, 'X', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (702, NULL, NULL, NULL, NULL, NULL, '530111', '官渡区', NULL, 'G', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (703, NULL, NULL, NULL, NULL, NULL, '530103', '盘龙区', NULL, 'P', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (704, NULL, NULL, NULL, NULL, NULL, '530102', '五华区', NULL, 'W', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (705, NULL, NULL, NULL, NULL, NULL, '530101', '市辖区', NULL, 'S', 10, 3, '530100', NULL);
+INSERT INTO `sys_area_dj` VALUES (706, NULL, NULL, NULL, NULL, NULL, '520000', '贵州省', NULL, 'G', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (707, NULL, NULL, NULL, NULL, NULL, '522700', '黔南布依族苗族自治州', NULL, 'Q', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (708, NULL, NULL, NULL, NULL, NULL, '522732', '三都水族自治县', NULL, 'S', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (709, NULL, NULL, NULL, NULL, NULL, '522731', '惠水县', NULL, 'H', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (710, NULL, NULL, NULL, NULL, NULL, '522730', '龙里县', NULL, 'L', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (711, NULL, NULL, NULL, NULL, NULL, '522729', '长顺县', NULL, 'C', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (712, NULL, NULL, NULL, NULL, NULL, '522728', '罗甸县', NULL, 'L', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (713, NULL, NULL, NULL, NULL, NULL, '522727', '平塘县', NULL, 'P', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (714, NULL, NULL, NULL, NULL, NULL, '522726', '独山县', NULL, 'D', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (715, NULL, NULL, NULL, NULL, NULL, '522725', '瓮安县', NULL, 'W', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (716, NULL, NULL, NULL, NULL, NULL, '522723', '贵定县', NULL, 'G', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (717, NULL, NULL, NULL, NULL, NULL, '522722', '荔波县', NULL, 'L', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (718, NULL, NULL, NULL, NULL, NULL, '522702', '福泉市', NULL, 'F', 10, 3, '522700', NULL);
+INSERT INTO `sys_area_dj` VALUES (719, NULL, NULL, NULL, NULL, NULL, '522701', '都匀市', 1, 'D', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (720, NULL, NULL, NULL, NULL, NULL, '522600', '黔东南苗族侗族自治州', NULL, 'Q', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (721, NULL, NULL, NULL, NULL, NULL, '522636', '丹寨县', NULL, 'D', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (722, NULL, NULL, NULL, NULL, NULL, '522635', '麻江县', NULL, 'M', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (723, NULL, NULL, NULL, NULL, NULL, '522634', '雷山县', NULL, 'L', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (724, NULL, NULL, NULL, NULL, NULL, '522633', '从江县', NULL, 'C', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (725, NULL, NULL, NULL, NULL, NULL, '522632', '榕江县', NULL, 'J', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (726, NULL, NULL, NULL, NULL, NULL, '522631', '黎平县', NULL, 'L', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (727, NULL, NULL, NULL, NULL, NULL, '522630', '台江县', NULL, 'T', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (728, NULL, NULL, NULL, NULL, NULL, '522629', '剑河县', NULL, 'J', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (729, NULL, NULL, NULL, NULL, NULL, '522628', '锦屏县', NULL, 'J', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (730, NULL, NULL, NULL, NULL, NULL, '522627', '天柱县', NULL, 'T', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (731, NULL, NULL, NULL, NULL, NULL, '522626', '岑巩县', NULL, 'G', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (732, NULL, NULL, NULL, NULL, NULL, '522625', '镇远县', NULL, 'Z', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (733, NULL, NULL, NULL, NULL, NULL, '522624', '三穗县', NULL, 'S', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (734, NULL, NULL, NULL, NULL, NULL, '522623', '施秉县', NULL, 'S', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (735, NULL, NULL, NULL, NULL, NULL, '522622', '黄平县', NULL, 'H', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (736, NULL, NULL, NULL, NULL, NULL, '522601', '凯里市', NULL, 'K', 10, 3, '522600', NULL);
+INSERT INTO `sys_area_dj` VALUES (737, NULL, NULL, NULL, NULL, NULL, '522400', '毕节地区', NULL, 'B', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (738, NULL, NULL, NULL, NULL, NULL, '522428', '赫章县', NULL, 'H', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (739, NULL, NULL, NULL, NULL, NULL, '522427', '威宁彝族回族苗族自治县', NULL, 'W', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (740, NULL, NULL, NULL, NULL, NULL, '522426', '纳雍县', NULL, 'N', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (741, NULL, NULL, NULL, NULL, NULL, '522425', '织金县', NULL, 'Z', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (742, NULL, NULL, NULL, NULL, NULL, '522424', '金沙县', NULL, 'J', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (743, NULL, NULL, NULL, NULL, NULL, '522423', '黔西县', NULL, 'Q', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (744, NULL, NULL, NULL, NULL, NULL, '522422', '大方县', NULL, 'D', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (745, NULL, NULL, NULL, NULL, NULL, '522401', '毕节市', NULL, 'B', 10, 3, '522400', NULL);
+INSERT INTO `sys_area_dj` VALUES (746, NULL, NULL, NULL, NULL, NULL, '522300', '黔西南布依族苗族自治州', NULL, 'Q', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (747, NULL, NULL, NULL, NULL, NULL, '522328', '安龙县', NULL, 'A', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (748, NULL, NULL, NULL, NULL, NULL, '522327', '册亨县', NULL, 'C', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (749, NULL, NULL, NULL, NULL, NULL, '522326', '望谟县', NULL, 'W', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (750, NULL, NULL, NULL, NULL, NULL, '522325', '贞丰县', NULL, 'Z', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (751, NULL, NULL, NULL, NULL, NULL, '522324', '晴隆县', NULL, 'Q', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (752, NULL, NULL, NULL, NULL, NULL, '522323', '普安县', NULL, 'P', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (753, NULL, NULL, NULL, NULL, NULL, '522322', '兴仁县', NULL, 'X', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (754, NULL, NULL, NULL, NULL, NULL, '522301', '兴义市', NULL, 'X', 10, 3, '522300', NULL);
+INSERT INTO `sys_area_dj` VALUES (755, NULL, NULL, NULL, NULL, NULL, '522200', '铜仁地区', NULL, 'T', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (756, NULL, NULL, NULL, NULL, NULL, '522230', '万山特区', NULL, 'W', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (757, NULL, NULL, NULL, NULL, NULL, '522229', '松桃苗族自治县', NULL, 'S', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (758, NULL, NULL, NULL, NULL, NULL, '522228', '沿河土家族自治县', NULL, 'Y', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (759, NULL, NULL, NULL, NULL, NULL, '522227', '德江县', NULL, 'D', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (760, NULL, NULL, NULL, NULL, NULL, '522226', '印江土家族苗族自治县', NULL, 'Y', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (761, NULL, NULL, NULL, NULL, NULL, '522225', '思南县', NULL, 'S', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (762, NULL, NULL, NULL, NULL, NULL, '522224', '石阡县', NULL, 'S', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (763, NULL, NULL, NULL, NULL, NULL, '522223', '玉屏侗族自治县', NULL, 'Y', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (764, NULL, NULL, NULL, NULL, NULL, '522222', '江口县', NULL, 'J', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (765, NULL, NULL, NULL, NULL, NULL, '522201', '铜仁市', NULL, 'T', 10, 3, '522200', NULL);
+INSERT INTO `sys_area_dj` VALUES (766, NULL, NULL, NULL, NULL, NULL, '520400', '安顺市', NULL, 'A', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (767, NULL, NULL, NULL, NULL, NULL, '520425', '紫云苗族布依族自治县', NULL, 'Z', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (768, NULL, NULL, NULL, NULL, NULL, '520424', '关岭布依族苗族自治县', NULL, 'G', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (769, NULL, NULL, NULL, NULL, NULL, '520423', '镇宁布依族苗族自治县', NULL, 'Z', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (770, NULL, NULL, NULL, NULL, NULL, '520422', '普定县', NULL, 'P', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (771, NULL, NULL, NULL, NULL, NULL, '520421', '平坝县', NULL, 'P', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (772, NULL, NULL, NULL, NULL, NULL, '520402', '西秀区', NULL, 'X', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (773, NULL, NULL, NULL, NULL, NULL, '520401', '市辖区', NULL, 'S', 10, 3, '520400', NULL);
+INSERT INTO `sys_area_dj` VALUES (774, NULL, NULL, NULL, NULL, NULL, '520300', '遵义市', NULL, 'Z', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (775, NULL, NULL, NULL, NULL, NULL, '520382', '仁怀市', NULL, 'R', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (776, NULL, NULL, NULL, NULL, NULL, '520381', '赤水市', NULL, 'C', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (777, NULL, NULL, NULL, NULL, NULL, '520330', '习水县', NULL, 'X', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (778, NULL, NULL, NULL, NULL, NULL, '520329', '余庆县', NULL, 'Y', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (779, NULL, NULL, NULL, NULL, NULL, '520328', '湄潭县', NULL, 'T', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (780, NULL, NULL, NULL, NULL, NULL, '520327', '凤冈县', NULL, 'F', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (781, NULL, NULL, NULL, NULL, NULL, '520326', '务川仡佬族苗族自治县', NULL, 'W', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (782, NULL, NULL, NULL, NULL, NULL, '520325', '道真仡佬族苗族自治县', NULL, 'D', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (783, NULL, NULL, NULL, NULL, NULL, '520324', '正安县', NULL, 'Z', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (784, NULL, NULL, NULL, NULL, NULL, '520323', '绥阳县', NULL, 'S', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (785, NULL, NULL, NULL, NULL, NULL, '520322', '桐梓县', NULL, 'T', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (786, NULL, NULL, NULL, NULL, NULL, '520321', '遵义县', NULL, 'Z', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (787, NULL, NULL, NULL, NULL, NULL, '520303', '汇川区', NULL, 'H', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (788, NULL, NULL, NULL, NULL, NULL, '520302', '红花岗区', NULL, 'H', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (789, NULL, NULL, NULL, NULL, NULL, '520301', '市辖区', NULL, 'S', 10, 3, '520300', NULL);
+INSERT INTO `sys_area_dj` VALUES (790, NULL, NULL, NULL, NULL, NULL, '520200', '六盘水市', NULL, 'L', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (791, NULL, NULL, NULL, NULL, NULL, '520222', '盘　县', NULL, 'P', 10, 3, '520200', NULL);
+INSERT INTO `sys_area_dj` VALUES (792, NULL, NULL, NULL, NULL, NULL, '520221', '水城县', NULL, 'S', 10, 3, '520200', NULL);
+INSERT INTO `sys_area_dj` VALUES (793, NULL, NULL, NULL, NULL, NULL, '520203', '六枝特区', NULL, 'L', 10, 3, '520200', NULL);
+INSERT INTO `sys_area_dj` VALUES (794, NULL, NULL, NULL, NULL, NULL, '520201', '钟山区', NULL, 'Z', 10, 3, '520200', NULL);
+INSERT INTO `sys_area_dj` VALUES (795, NULL, NULL, NULL, NULL, NULL, '520100', '贵阳市', NULL, 'G', 10, 2, '520000', NULL);
+INSERT INTO `sys_area_dj` VALUES (796, NULL, NULL, NULL, NULL, NULL, '520181', '清镇市', NULL, 'Q', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (797, NULL, NULL, NULL, NULL, NULL, '520123', '修文县', NULL, 'X', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (798, NULL, NULL, NULL, NULL, NULL, '520122', '息烽县', NULL, 'X', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (799, NULL, NULL, NULL, NULL, NULL, '520121', '开阳县', NULL, 'K', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (800, NULL, NULL, NULL, NULL, NULL, '520114', '小河区', NULL, 'X', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (801, NULL, NULL, NULL, NULL, NULL, '520113', '白云区', NULL, 'B', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (802, NULL, NULL, NULL, NULL, NULL, '520112', '乌当区', NULL, 'W', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (803, NULL, NULL, NULL, NULL, NULL, '520111', '花溪区', NULL, 'H', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (804, NULL, NULL, NULL, NULL, NULL, '520103', '云岩区', NULL, 'Y', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (805, NULL, NULL, NULL, NULL, NULL, '520102', '南明区', NULL, 'N', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (806, NULL, NULL, NULL, NULL, NULL, '520101', '市辖区', NULL, 'S', 10, 3, '520100', NULL);
+INSERT INTO `sys_area_dj` VALUES (807, NULL, NULL, NULL, NULL, NULL, '510000', '四川省', NULL, 'S', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (808, NULL, NULL, NULL, NULL, NULL, '513400', '凉山彝族自治州', NULL, 'L', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (809, NULL, NULL, NULL, NULL, NULL, '513437', '雷波县', NULL, 'L', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (810, NULL, NULL, NULL, NULL, NULL, '513436', '美姑县', NULL, 'M', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (811, NULL, NULL, NULL, NULL, NULL, '513435', '甘洛县', NULL, 'G', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (812, NULL, NULL, NULL, NULL, NULL, '513434', '越西县', NULL, 'Y', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (813, NULL, NULL, NULL, NULL, NULL, '513433', '冕宁县', NULL, 'M', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (814, NULL, NULL, NULL, NULL, NULL, '513432', '喜德县', NULL, 'X', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (815, NULL, NULL, NULL, NULL, NULL, '513431', '昭觉县', NULL, 'Z', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (816, NULL, NULL, NULL, NULL, NULL, '513430', '金阳县', NULL, 'J', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (817, NULL, NULL, NULL, NULL, NULL, '513429', '布拖县', NULL, 'B', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (818, NULL, NULL, NULL, NULL, NULL, '513428', '普格县', NULL, 'P', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (819, NULL, NULL, NULL, NULL, NULL, '513427', '宁南县', NULL, 'N', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (820, NULL, NULL, NULL, NULL, NULL, '513426', '会东县', NULL, 'H', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (821, NULL, NULL, NULL, NULL, NULL, '513425', '会理县', NULL, 'H', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (822, NULL, NULL, NULL, NULL, NULL, '513424', '德昌县', NULL, 'D', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (823, NULL, NULL, NULL, NULL, NULL, '513423', '盐源县', NULL, 'Y', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (824, NULL, NULL, NULL, NULL, NULL, '513422', '木里藏族自治县', NULL, 'M', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (825, NULL, NULL, NULL, NULL, NULL, '513401', '西昌市', NULL, 'X', 10, 3, '513400', NULL);
+INSERT INTO `sys_area_dj` VALUES (826, NULL, NULL, NULL, NULL, NULL, '513300', '甘孜藏族自治州', NULL, 'G', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (827, NULL, NULL, NULL, NULL, NULL, '513338', '得荣县', NULL, 'D', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (828, NULL, NULL, NULL, NULL, NULL, '513337', '稻城县', NULL, 'D', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (829, NULL, NULL, NULL, NULL, NULL, '513336', '乡城县', NULL, 'X', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (830, NULL, NULL, NULL, NULL, NULL, '513335', '巴塘县', NULL, 'B', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (831, NULL, NULL, NULL, NULL, NULL, '513334', '理塘县', NULL, 'L', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (832, NULL, NULL, NULL, NULL, NULL, '513333', '色达县', NULL, 'S', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (833, NULL, NULL, NULL, NULL, NULL, '513332', '石渠县', NULL, 'S', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (834, NULL, NULL, NULL, NULL, NULL, '513331', '白玉县', NULL, 'B', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (835, NULL, NULL, NULL, NULL, NULL, '513330', '德格县', NULL, 'D', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (836, NULL, NULL, NULL, NULL, NULL, '513329', '新龙县', NULL, 'X', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (837, NULL, NULL, NULL, NULL, NULL, '513328', '甘孜县', NULL, 'G', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (838, NULL, NULL, NULL, NULL, NULL, '513327', '炉霍县', NULL, 'L', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (839, NULL, NULL, NULL, NULL, NULL, '513326', '道孚县', NULL, 'D', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (840, NULL, NULL, NULL, NULL, NULL, '513325', '雅江县', NULL, 'Y', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (841, NULL, NULL, NULL, NULL, NULL, '513324', '九龙县', NULL, 'J', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (842, NULL, NULL, NULL, NULL, NULL, '513323', '丹巴县', NULL, 'D', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (843, NULL, NULL, NULL, NULL, NULL, '513322', '泸定县', NULL, 'L', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (844, NULL, NULL, NULL, NULL, NULL, '513321', '康定县', NULL, 'K', 10, 3, '513300', NULL);
+INSERT INTO `sys_area_dj` VALUES (845, NULL, NULL, NULL, NULL, NULL, '513200', '阿坝藏族羌族自治州', NULL, 'A', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (846, NULL, NULL, NULL, NULL, NULL, '513233', '红原县', NULL, 'H', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (847, NULL, NULL, NULL, NULL, NULL, '513232', '若尔盖县', NULL, 'R', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (848, NULL, NULL, NULL, NULL, NULL, '513231', '阿坝县', NULL, 'A', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (849, NULL, NULL, NULL, NULL, NULL, '513230', '壤塘县', NULL, 'R', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (850, NULL, NULL, NULL, NULL, NULL, '513229', '马尔康县', NULL, 'M', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (851, NULL, NULL, NULL, NULL, NULL, '513228', '黑水县', NULL, 'H', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (852, NULL, NULL, NULL, NULL, NULL, '513227', '小金县', NULL, 'X', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (853, NULL, NULL, NULL, NULL, NULL, '513226', '金川县', NULL, 'J', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (854, NULL, NULL, NULL, NULL, NULL, '513225', '九寨沟县', NULL, 'J', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (855, NULL, NULL, NULL, NULL, NULL, '513224', '松潘县', NULL, 'S', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (856, NULL, NULL, NULL, NULL, NULL, '513223', '茂　县', NULL, 'M', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (857, NULL, NULL, NULL, NULL, NULL, '513222', '理　县', NULL, 'L', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (858, NULL, NULL, NULL, NULL, NULL, '513221', '汶川县', NULL, 'C', 10, 3, '513200', NULL);
+INSERT INTO `sys_area_dj` VALUES (859, NULL, NULL, NULL, NULL, NULL, '512000', '资阳市', NULL, 'Z', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (860, NULL, NULL, NULL, NULL, NULL, '512081', '简阳市', NULL, 'J', 10, 3, '512000', NULL);
+INSERT INTO `sys_area_dj` VALUES (861, NULL, NULL, NULL, NULL, NULL, '512022', '乐至县', NULL, 'L', 10, 3, '512000', NULL);
+INSERT INTO `sys_area_dj` VALUES (862, NULL, NULL, NULL, NULL, NULL, '512021', '安岳县', NULL, 'A', 10, 3, '512000', NULL);
+INSERT INTO `sys_area_dj` VALUES (863, NULL, NULL, NULL, NULL, NULL, '512002', '雁江区', NULL, 'Y', 10, 3, '512000', NULL);
+INSERT INTO `sys_area_dj` VALUES (864, NULL, NULL, NULL, NULL, NULL, '512001', '市辖区', NULL, 'S', 10, 3, '512000', NULL);
+INSERT INTO `sys_area_dj` VALUES (865, NULL, NULL, NULL, NULL, NULL, '511900', '巴中市', NULL, 'B', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (866, NULL, NULL, NULL, NULL, NULL, '511923', '平昌县', NULL, 'P', 10, 3, '511900', NULL);
+INSERT INTO `sys_area_dj` VALUES (867, NULL, NULL, NULL, NULL, NULL, '511922', '南江县', NULL, 'N', 10, 3, '511900', NULL);
+INSERT INTO `sys_area_dj` VALUES (868, NULL, NULL, NULL, NULL, NULL, '511921', '通江县', NULL, 'T', 10, 3, '511900', NULL);
+INSERT INTO `sys_area_dj` VALUES (869, NULL, NULL, NULL, NULL, NULL, '511902', '巴州区', NULL, 'B', 10, 3, '511900', NULL);
+INSERT INTO `sys_area_dj` VALUES (870, NULL, NULL, NULL, NULL, NULL, '511901', '市辖区', NULL, 'S', 10, 3, '511900', NULL);
+INSERT INTO `sys_area_dj` VALUES (871, NULL, NULL, NULL, NULL, NULL, '511800', '雅安市', NULL, 'Y', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (872, NULL, NULL, NULL, NULL, NULL, '511827', '宝兴县', NULL, 'B', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (873, NULL, NULL, NULL, NULL, NULL, '511826', '芦山县', NULL, 'L', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (874, NULL, NULL, NULL, NULL, NULL, '511825', '天全县', NULL, 'T', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (875, NULL, NULL, NULL, NULL, NULL, '511824', '石棉县', NULL, 'S', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (876, NULL, NULL, NULL, NULL, NULL, '511823', '汉源县', NULL, 'H', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (877, NULL, NULL, NULL, NULL, NULL, '511822', '荥经县', NULL, 'J', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (878, NULL, NULL, NULL, NULL, NULL, '511821', '名山县', NULL, 'M', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (879, NULL, NULL, NULL, NULL, NULL, '511802', '雨城区', NULL, 'Y', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (880, NULL, NULL, NULL, NULL, NULL, '511801', '市辖区', NULL, 'S', 10, 3, '511800', NULL);
+INSERT INTO `sys_area_dj` VALUES (881, NULL, NULL, NULL, NULL, NULL, '511700', '达州市', NULL, 'D', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (882, NULL, NULL, NULL, NULL, NULL, '511781', '万源市', NULL, 'W', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (883, NULL, NULL, NULL, NULL, NULL, '511725', '渠　县', NULL, 'Q', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (884, NULL, NULL, NULL, NULL, NULL, '511724', '大竹县', NULL, 'D', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (885, NULL, NULL, NULL, NULL, NULL, '511723', '开江县', NULL, 'K', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (886, NULL, NULL, NULL, NULL, NULL, '511722', '宣汉县', NULL, 'X', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (887, NULL, NULL, NULL, NULL, NULL, '511721', '达　县', NULL, 'D', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (888, NULL, NULL, NULL, NULL, NULL, '511702', '通川区', NULL, 'T', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (889, NULL, NULL, NULL, NULL, NULL, '511701', '市辖区', NULL, 'S', 10, 3, '511700', NULL);
+INSERT INTO `sys_area_dj` VALUES (890, NULL, NULL, NULL, NULL, NULL, '511600', '广安市', NULL, 'G', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (891, NULL, NULL, NULL, NULL, NULL, '511681', '华莹市', NULL, 'H', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (892, NULL, NULL, NULL, NULL, NULL, '511623', '邻水县', NULL, 'L', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (893, NULL, NULL, NULL, NULL, NULL, '511622', '武胜县', NULL, 'W', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (894, NULL, NULL, NULL, NULL, NULL, '511621', '岳池县', NULL, 'Y', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (895, NULL, NULL, NULL, NULL, NULL, '511602', '广安区', NULL, 'G', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (896, NULL, NULL, NULL, NULL, NULL, '511601', '市辖区', NULL, 'S', 10, 3, '511600', NULL);
+INSERT INTO `sys_area_dj` VALUES (897, NULL, NULL, NULL, NULL, NULL, '511500', '宜宾市', NULL, 'Y', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (898, NULL, NULL, NULL, NULL, NULL, '511529', '屏山县', NULL, 'P', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (899, NULL, NULL, NULL, NULL, NULL, '511528', '兴文县', NULL, 'X', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (900, NULL, NULL, NULL, NULL, NULL, '511527', '筠连县', NULL, 'L', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (901, NULL, NULL, NULL, NULL, NULL, '511526', '珙　县', NULL, 'X', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (902, NULL, NULL, NULL, NULL, NULL, '511525', '高　县', NULL, 'G', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (903, NULL, NULL, NULL, NULL, NULL, '511524', '长宁县', NULL, 'C', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (904, NULL, NULL, NULL, NULL, NULL, '511523', '江安县', NULL, 'J', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (905, NULL, NULL, NULL, NULL, NULL, '511522', '南溪县', NULL, 'N', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (906, NULL, NULL, NULL, NULL, NULL, '511521', '宜宾县', NULL, 'Y', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (907, NULL, NULL, NULL, NULL, NULL, '511502', '翠屏区', NULL, 'C', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (908, NULL, NULL, NULL, NULL, NULL, '511501', '市辖区', NULL, 'S', 10, 3, '511500', NULL);
+INSERT INTO `sys_area_dj` VALUES (909, NULL, NULL, NULL, NULL, NULL, '511400', '眉山市', NULL, 'M', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (910, NULL, NULL, NULL, NULL, NULL, '511425', '青神县', NULL, 'Q', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (911, NULL, NULL, NULL, NULL, NULL, '511424', '丹棱县', NULL, 'D', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (912, NULL, NULL, NULL, NULL, NULL, '511423', '洪雅县', NULL, 'H', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (913, NULL, NULL, NULL, NULL, NULL, '511422', '彭山县', NULL, 'P', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (914, NULL, NULL, NULL, NULL, NULL, '511421', '仁寿县', NULL, 'R', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (915, NULL, NULL, NULL, NULL, NULL, '511402', '东坡区', NULL, 'D', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (916, NULL, NULL, NULL, NULL, NULL, '511401', '市辖区', NULL, 'S', 10, 3, '511400', NULL);
+INSERT INTO `sys_area_dj` VALUES (917, NULL, NULL, NULL, NULL, NULL, '511300', '南充市', NULL, 'N', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (918, NULL, NULL, NULL, NULL, NULL, '511381', '阆中市', NULL, 'Z', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (919, NULL, NULL, NULL, NULL, NULL, '511325', '西充县', NULL, 'X', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (920, NULL, NULL, NULL, NULL, NULL, '511324', '仪陇县', NULL, 'Y', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (921, NULL, NULL, NULL, NULL, NULL, '511323', '蓬安县', NULL, 'P', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (922, NULL, NULL, NULL, NULL, NULL, '511322', '营山县', NULL, 'Y', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (923, NULL, NULL, NULL, NULL, NULL, '511321', '南部县', NULL, 'N', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (924, NULL, NULL, NULL, NULL, NULL, '511304', '嘉陵区', NULL, 'J', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (925, NULL, NULL, NULL, NULL, NULL, '511303', '高坪区', NULL, 'G', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (926, NULL, NULL, NULL, NULL, NULL, '511302', '顺庆区', NULL, 'S', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (927, NULL, NULL, NULL, NULL, NULL, '511301', '市辖区', NULL, 'S', 10, 3, '511300', NULL);
+INSERT INTO `sys_area_dj` VALUES (928, NULL, NULL, NULL, NULL, NULL, '511100', '乐山市', NULL, 'L', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (929, NULL, NULL, NULL, NULL, NULL, '511181', '峨眉山市', NULL, 'E', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (930, NULL, NULL, NULL, NULL, NULL, '511133', '马边彝族自治县', NULL, 'M', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (931, NULL, NULL, NULL, NULL, NULL, '511132', '峨边彝族自治县', NULL, 'E', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (932, NULL, NULL, NULL, NULL, NULL, '511129', '沐川县', NULL, 'C', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (933, NULL, NULL, NULL, NULL, NULL, '511126', '夹江县', NULL, 'J', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (934, NULL, NULL, NULL, NULL, NULL, '511124', '井研县', NULL, 'J', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (935, NULL, NULL, NULL, NULL, NULL, '511123', '犍为县', NULL, 'W', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (936, NULL, NULL, NULL, NULL, NULL, '511113', '金口河区', NULL, 'J', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (937, NULL, NULL, NULL, NULL, NULL, '511112', '五通桥区', NULL, 'W', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (938, NULL, NULL, NULL, NULL, NULL, '511111', '沙湾区', NULL, 'S', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (939, NULL, NULL, NULL, NULL, NULL, '511102', '市中区', NULL, 'S', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (940, NULL, NULL, NULL, NULL, NULL, '511101', '市辖区', NULL, 'S', 10, 3, '511100', NULL);
+INSERT INTO `sys_area_dj` VALUES (941, NULL, NULL, NULL, NULL, NULL, '511000', '内江市', NULL, 'N', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (942, NULL, NULL, NULL, NULL, NULL, '511028', '隆昌县', NULL, 'L', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (943, NULL, NULL, NULL, NULL, NULL, '511025', '资中县', NULL, 'Z', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (944, NULL, NULL, NULL, NULL, NULL, '511024', '威远县', NULL, 'W', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (945, NULL, NULL, NULL, NULL, NULL, '511011', '东兴区', NULL, 'D', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (946, NULL, NULL, NULL, NULL, NULL, '511002', '市中区', NULL, 'S', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (947, NULL, NULL, NULL, NULL, NULL, '511001', '市辖区', NULL, 'S', 10, 3, '511000', NULL);
+INSERT INTO `sys_area_dj` VALUES (948, NULL, NULL, NULL, NULL, NULL, '510900', '遂宁市', NULL, 'S', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (949, NULL, NULL, NULL, NULL, NULL, '510923', '大英县', NULL, 'D', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (950, NULL, NULL, NULL, NULL, NULL, '510922', '射洪县', NULL, 'S', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (951, NULL, NULL, NULL, NULL, NULL, '510921', '蓬溪县', NULL, 'P', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (952, NULL, NULL, NULL, NULL, NULL, '510904', '安居区', NULL, 'A', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (953, NULL, NULL, NULL, NULL, NULL, '510903', '船山区', NULL, 'C', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (954, NULL, NULL, NULL, NULL, NULL, '510901', '市辖区', NULL, 'S', 10, 3, '510900', NULL);
+INSERT INTO `sys_area_dj` VALUES (955, NULL, NULL, NULL, NULL, NULL, '510800', '广元市', NULL, 'G', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (956, NULL, NULL, NULL, NULL, NULL, '510824', '苍溪县', NULL, 'C', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (957, NULL, NULL, NULL, NULL, NULL, '510823', '剑阁县', NULL, 'J', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (958, NULL, NULL, NULL, NULL, NULL, '510822', '青川县', NULL, 'Q', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (959, NULL, NULL, NULL, NULL, NULL, '510821', '旺苍县', NULL, 'W', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (960, NULL, NULL, NULL, NULL, NULL, '510812', '朝天区', NULL, 'C', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (961, NULL, NULL, NULL, NULL, NULL, '510811', '元坝区', NULL, 'Y', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (962, NULL, NULL, NULL, NULL, NULL, '510802', '市中区', NULL, 'S', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (963, NULL, NULL, NULL, NULL, NULL, '510801', '市辖区', NULL, 'S', 10, 3, '510800', NULL);
+INSERT INTO `sys_area_dj` VALUES (964, NULL, NULL, NULL, NULL, NULL, '510700', '绵阳市', NULL, 'M', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (965, NULL, NULL, NULL, NULL, NULL, '510781', '江油市', NULL, 'J', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (966, NULL, NULL, NULL, NULL, NULL, '510727', '平武县', NULL, 'P', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (967, NULL, NULL, NULL, NULL, NULL, '510726', '北川羌族自治县', NULL, 'B', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (968, NULL, NULL, NULL, NULL, NULL, '510725', '梓潼县', NULL, 'X', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (969, NULL, NULL, NULL, NULL, NULL, '510724', '安　县', NULL, 'A', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (970, NULL, NULL, NULL, NULL, NULL, '510723', '盐亭县', NULL, 'Y', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (971, NULL, NULL, NULL, NULL, NULL, '510722', '三台县', NULL, 'S', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (972, NULL, NULL, NULL, NULL, NULL, '510704', '游仙区', NULL, 'Y', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (973, NULL, NULL, NULL, NULL, NULL, '510703', '涪城区', NULL, 'F', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (974, NULL, NULL, NULL, NULL, NULL, '510701', '市辖区', NULL, 'S', 10, 3, '510700', NULL);
+INSERT INTO `sys_area_dj` VALUES (975, NULL, NULL, NULL, NULL, NULL, '510600', '德阳市', NULL, 'D', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (976, NULL, NULL, NULL, NULL, NULL, '510683', '绵竹市', NULL, 'M', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (977, NULL, NULL, NULL, NULL, NULL, '510682', '什邡市', NULL, 'S', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (978, NULL, NULL, NULL, NULL, NULL, '510681', '广汉市', NULL, 'G', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (979, NULL, NULL, NULL, NULL, NULL, '510626', '罗江县', NULL, 'L', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (980, NULL, NULL, NULL, NULL, NULL, '510623', '中江县', NULL, 'Z', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (981, NULL, NULL, NULL, NULL, NULL, '510603', '旌阳区', NULL, 'Y', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (982, NULL, NULL, NULL, NULL, NULL, '510601', '市辖区', NULL, 'S', 10, 3, '510600', NULL);
+INSERT INTO `sys_area_dj` VALUES (983, NULL, NULL, NULL, NULL, NULL, '510500', '泸州市', NULL, 'L', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (984, NULL, NULL, NULL, NULL, NULL, '510525', '古蔺县', NULL, 'G', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (985, NULL, NULL, NULL, NULL, NULL, '510524', '叙永县', NULL, 'X', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (986, NULL, NULL, NULL, NULL, NULL, '510522', '合江县', NULL, 'H', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (987, NULL, NULL, NULL, NULL, NULL, '510521', '泸　县', NULL, 'L', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (988, NULL, NULL, NULL, NULL, NULL, '510504', '龙马潭区', NULL, 'L', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (989, NULL, NULL, NULL, NULL, NULL, '510503', '纳溪区', NULL, 'N', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (990, NULL, NULL, NULL, NULL, NULL, '510502', '江阳区', NULL, 'J', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (991, NULL, NULL, NULL, NULL, NULL, '510501', '市辖区', NULL, 'S', 10, 3, '510500', NULL);
+INSERT INTO `sys_area_dj` VALUES (992, NULL, NULL, NULL, NULL, NULL, '510400', '攀枝花市', NULL, 'P', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (993, NULL, NULL, NULL, NULL, NULL, '510422', '盐边县', NULL, 'Y', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (994, NULL, NULL, NULL, NULL, NULL, '510421', '米易县', NULL, 'M', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (995, NULL, NULL, NULL, NULL, NULL, '510411', '仁和区', NULL, 'R', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (996, NULL, NULL, NULL, NULL, NULL, '510403', '西　区', NULL, 'X', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (997, NULL, NULL, NULL, NULL, NULL, '510402', '东　区', NULL, 'D', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (998, NULL, NULL, NULL, NULL, NULL, '510401', '市辖区', NULL, 'S', 10, 3, '510400', NULL);
+INSERT INTO `sys_area_dj` VALUES (999, NULL, NULL, NULL, NULL, NULL, '510300', '自贡市', NULL, 'Z', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1000, NULL, NULL, NULL, NULL, NULL, '510322', '富顺县', NULL, 'F', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1001, NULL, NULL, NULL, NULL, NULL, '510321', '荣　县', NULL, 'R', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1002, NULL, NULL, NULL, NULL, NULL, '510311', '沿滩区', NULL, 'Y', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1003, NULL, NULL, NULL, NULL, NULL, '510304', '大安区', NULL, 'D', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1004, NULL, NULL, NULL, NULL, NULL, '510303', '贡井区', NULL, 'G', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1005, NULL, NULL, NULL, NULL, NULL, '510302', '自流井区', NULL, 'Z', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1006, NULL, NULL, NULL, NULL, NULL, '510301', '市辖区', NULL, 'S', 10, 3, '510300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1007, NULL, NULL, NULL, NULL, NULL, '510100', '成都市', NULL, 'C', 10, 2, '510000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1008, NULL, NULL, NULL, NULL, NULL, '510184', '崇州市', NULL, 'C', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1009, NULL, NULL, NULL, NULL, NULL, '510183', '邛崃市', NULL, 'S', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1010, NULL, NULL, NULL, NULL, NULL, '510182', '彭州市', NULL, 'P', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1011, NULL, NULL, NULL, NULL, NULL, '510181', '都江堰市', NULL, 'D', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1012, NULL, NULL, NULL, NULL, NULL, '510132', '新津县', NULL, 'X', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1013, NULL, NULL, NULL, NULL, NULL, '510131', '蒲江县', NULL, 'P', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1014, NULL, NULL, NULL, NULL, NULL, '510129', '大邑县', NULL, 'D', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1015, NULL, NULL, NULL, NULL, NULL, '510124', '郫　县', NULL, 'X', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1016, NULL, NULL, NULL, NULL, NULL, '510122', '双流县', NULL, 'S', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1017, NULL, NULL, NULL, NULL, NULL, '510121', '金堂县', NULL, 'J', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1018, NULL, NULL, NULL, NULL, NULL, '510115', '温江区', NULL, 'W', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1019, NULL, NULL, NULL, NULL, NULL, '510114', '新都区', NULL, 'X', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1020, NULL, NULL, NULL, NULL, NULL, '510113', '青白江区', NULL, 'Q', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1021, NULL, NULL, NULL, NULL, NULL, '510112', '龙泉驿区', NULL, 'L', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1022, NULL, NULL, NULL, NULL, NULL, '510108', '成华区', NULL, 'C', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1023, NULL, NULL, NULL, NULL, NULL, '510107', '武侯区', NULL, 'W', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1024, NULL, NULL, NULL, NULL, NULL, '510106', '金牛区', NULL, 'J', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1025, NULL, NULL, NULL, NULL, NULL, '510105', '青羊区', NULL, 'Q', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1026, NULL, NULL, NULL, NULL, NULL, '510104', '锦江区', NULL, 'J', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1027, NULL, NULL, NULL, NULL, NULL, '510101', '市辖区', NULL, 'S', 10, 3, '510100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1028, NULL, NULL, NULL, NULL, NULL, '500000', '重庆市', NULL, 'C', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1029, NULL, NULL, NULL, NULL, NULL, '500384', '南川市', NULL, 'N', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1030, NULL, NULL, NULL, NULL, NULL, '500383', '永川市', NULL, 'Y', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1031, NULL, NULL, NULL, NULL, NULL, '500382', '合川市', NULL, 'H', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1032, NULL, NULL, NULL, NULL, NULL, '500381', '江津市', NULL, 'J', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1033, NULL, NULL, NULL, NULL, NULL, '500200', '重庆', NULL, 'C', 10, 2, '500000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1034, NULL, NULL, NULL, NULL, NULL, '500243', '彭水苗族土家族自治县', NULL, 'P', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1035, NULL, NULL, NULL, NULL, NULL, '500242', '酉阳土家族苗族自治县', NULL, 'Y', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1036, NULL, NULL, NULL, NULL, NULL, '500241', '秀山土家族苗族自治县', NULL, 'X', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1037, NULL, NULL, NULL, NULL, NULL, '500240', '石柱土家族自治县', NULL, 'S', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1038, NULL, NULL, NULL, NULL, NULL, '500238', '巫溪县', NULL, 'W', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1039, NULL, NULL, NULL, NULL, NULL, '500237', '巫山县', NULL, 'W', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1040, NULL, NULL, NULL, NULL, NULL, '500236', '奉节县', NULL, 'F', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1041, NULL, NULL, NULL, NULL, NULL, '500235', '云阳县', NULL, 'Y', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1042, NULL, NULL, NULL, NULL, NULL, '500234', '开　县', NULL, 'K', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1043, NULL, NULL, NULL, NULL, NULL, '500233', '忠　县', NULL, 'Z', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1044, NULL, NULL, NULL, NULL, NULL, '500232', '武隆县', NULL, 'W', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1045, NULL, NULL, NULL, NULL, NULL, '500231', '垫江县', NULL, 'D', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1046, NULL, NULL, NULL, NULL, NULL, '500230', '丰都县', NULL, 'F', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1047, NULL, NULL, NULL, NULL, NULL, '500229', '城口县', NULL, 'C', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1048, NULL, NULL, NULL, NULL, NULL, '500228', '梁平县', NULL, 'L', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1049, NULL, NULL, NULL, NULL, NULL, '500227', '璧山县', NULL, 'S', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1050, NULL, NULL, NULL, NULL, NULL, '500226', '荣昌县', NULL, 'R', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1051, NULL, NULL, NULL, NULL, NULL, '500225', '大足县', NULL, 'D', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1052, NULL, NULL, NULL, NULL, NULL, '500224', '铜梁县', NULL, 'T', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1053, NULL, NULL, NULL, NULL, NULL, '500223', '潼南县', NULL, 'N', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1054, NULL, NULL, NULL, NULL, NULL, '500222', '綦江县', NULL, 'J', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1055, NULL, NULL, NULL, NULL, NULL, '910008', '图木舒克市', NULL, 'T', 10, 3, '659003', NULL);
+INSERT INTO `sys_area_dj` VALUES (1056, NULL, NULL, NULL, NULL, NULL, '500115', '长寿区', NULL, 'C', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1057, NULL, NULL, NULL, NULL, NULL, '500114', '黔江区', NULL, 'Q', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1058, NULL, NULL, NULL, NULL, NULL, '500113', '巴南区', NULL, 'B', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1059, NULL, NULL, NULL, NULL, NULL, '500112', '渝北区', NULL, 'Y', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1060, NULL, NULL, NULL, NULL, NULL, '500111', '双桥区', NULL, 'S', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1061, NULL, NULL, NULL, NULL, NULL, '500110', '万盛区', NULL, 'W', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1062, NULL, NULL, NULL, NULL, NULL, '500109', '北碚区', NULL, 'B', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1063, NULL, NULL, NULL, NULL, NULL, '500108', '南岸区', NULL, 'N', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1064, NULL, NULL, NULL, NULL, NULL, '500107', '九龙坡区', NULL, 'J', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1065, NULL, NULL, NULL, NULL, NULL, '500106', '沙坪坝区', NULL, 'S', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1066, NULL, NULL, NULL, NULL, NULL, '500105', '江北区', NULL, 'J', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1067, NULL, NULL, NULL, NULL, NULL, '500104', '大渡口区', NULL, 'D', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1068, NULL, NULL, NULL, NULL, NULL, '500103', '渝中区', NULL, 'Y', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1069, NULL, NULL, NULL, NULL, NULL, '500102', '涪陵区', NULL, 'F', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1070, NULL, NULL, NULL, NULL, NULL, '500101', '万州区', NULL, 'W', 10, 3, '500200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1071, NULL, NULL, NULL, NULL, NULL, '460000', '海南省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1072, NULL, NULL, NULL, NULL, NULL, '469001', '五指山市', NULL, 'W', 10, 2, '460000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1073, NULL, NULL, NULL, NULL, NULL, '460200', '三亚市', NULL, 'S', 10, 2, '460000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1074, NULL, NULL, NULL, NULL, NULL, '460201', '市辖区', NULL, 'S', 10, 3, '460200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1075, NULL, NULL, NULL, NULL, NULL, '460100', '海口市', NULL, 'H', 10, 2, '460000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1076, NULL, NULL, NULL, NULL, NULL, '460108', '美兰区', NULL, 'M', 10, 3, '460100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1077, NULL, NULL, NULL, NULL, NULL, '460107', '琼山区', NULL, 'Q', 10, 3, '460100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1078, NULL, NULL, NULL, NULL, NULL, '460106', '龙华区', NULL, 'L', 10, 3, '460100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1079, NULL, NULL, NULL, NULL, NULL, '460105', '秀英区', NULL, 'X', 10, 3, '460100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1080, NULL, NULL, NULL, NULL, NULL, '460101', '市辖区', NULL, 'S', 10, 3, '460100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1081, NULL, NULL, NULL, NULL, NULL, '450000', '广西壮族自治区', NULL, 'G', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1082, NULL, NULL, NULL, NULL, NULL, '451400', '崇左市', NULL, 'C', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1083, NULL, NULL, NULL, NULL, NULL, '451481', '凭祥市', NULL, 'P', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1084, NULL, NULL, NULL, NULL, NULL, '451425', '天等县', NULL, 'T', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1085, NULL, NULL, NULL, NULL, NULL, '451424', '大新县', NULL, 'D', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1086, NULL, NULL, NULL, NULL, NULL, '451423', '龙州县', NULL, 'L', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1087, NULL, NULL, NULL, NULL, NULL, '451422', '宁明县', NULL, 'N', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1088, NULL, NULL, NULL, NULL, NULL, '451421', '扶绥县', NULL, 'F', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1089, NULL, NULL, NULL, NULL, NULL, '451402', '江洲区', NULL, 'J', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1090, NULL, NULL, NULL, NULL, NULL, '451401', '市辖区', NULL, 'S', 10, 3, '451400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1091, NULL, NULL, NULL, NULL, NULL, '451300', '来宾市', NULL, 'L', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1092, NULL, NULL, NULL, NULL, NULL, '451381', '合山市', NULL, 'H', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1093, NULL, NULL, NULL, NULL, NULL, '451324', '金秀瑶族自治县', NULL, 'J', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1094, NULL, NULL, NULL, NULL, NULL, '451323', '武宣县', NULL, 'W', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1095, NULL, NULL, NULL, NULL, NULL, '451322', '象州县', NULL, 'X', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1096, NULL, NULL, NULL, NULL, NULL, '451321', '忻城县', NULL, 'X', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1097, NULL, NULL, NULL, NULL, NULL, '451302', '兴宾区', NULL, 'X', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1098, NULL, NULL, NULL, NULL, NULL, '451301', '市辖区', NULL, 'S', 10, 3, '451300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1099, NULL, NULL, NULL, NULL, NULL, '451200', '河池市', NULL, 'H', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1100, NULL, NULL, NULL, NULL, NULL, '451281', '宜州市', NULL, 'Y', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1101, NULL, NULL, NULL, NULL, NULL, '451229', '大化瑶族自治县', NULL, 'D', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1102, NULL, NULL, NULL, NULL, NULL, '451228', '都安瑶族自治县', NULL, 'D', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1103, NULL, NULL, NULL, NULL, NULL, '451227', '巴马瑶族自治县', NULL, 'B', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1104, NULL, NULL, NULL, NULL, NULL, '451226', '环江毛南族自治县', NULL, 'H', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1105, NULL, NULL, NULL, NULL, NULL, '451225', '罗城仫佬族自治县', NULL, 'L', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1106, NULL, NULL, NULL, NULL, NULL, '451224', '东兰县', NULL, 'D', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1107, NULL, NULL, NULL, NULL, NULL, '451223', '凤山县', NULL, 'F', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1108, NULL, NULL, NULL, NULL, NULL, '451222', '天峨县', NULL, 'T', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1109, NULL, NULL, NULL, NULL, NULL, '451221', '南丹县', NULL, 'N', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1110, NULL, NULL, NULL, NULL, NULL, '451202', '金城江区', NULL, 'J', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1111, NULL, NULL, NULL, NULL, NULL, '451201', '市辖区', NULL, 'S', 10, 3, '451200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1112, NULL, NULL, NULL, NULL, NULL, '451100', '贺州市', NULL, 'H', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1113, NULL, NULL, NULL, NULL, NULL, '451123', '富川瑶族自治县', NULL, 'F', 10, 3, '451100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1114, NULL, NULL, NULL, NULL, NULL, '451122', '钟山县', NULL, 'Z', 10, 3, '451100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1115, NULL, NULL, NULL, NULL, NULL, '451121', '昭平县', NULL, 'Z', 10, 3, '451100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1116, NULL, NULL, NULL, NULL, NULL, '451102', '八步区', NULL, 'B', 10, 3, '451100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1117, NULL, NULL, NULL, NULL, NULL, '451101', '市辖区', NULL, 'S', 10, 3, '451100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1118, NULL, NULL, NULL, NULL, NULL, '451000', '百色市', NULL, 'B', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1119, NULL, NULL, NULL, NULL, NULL, '451031', '隆林各族自治县', NULL, 'L', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1120, NULL, NULL, NULL, NULL, NULL, '451030', '西林县', NULL, 'X', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1121, NULL, NULL, NULL, NULL, NULL, '451029', '田林县', NULL, 'T', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1122, NULL, NULL, NULL, NULL, NULL, '451028', '乐业县', NULL, 'L', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1123, NULL, NULL, NULL, NULL, NULL, '451027', '凌云县', NULL, 'L', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1124, NULL, NULL, NULL, NULL, NULL, '451026', '那坡县', NULL, 'N', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1125, NULL, NULL, NULL, NULL, NULL, '451025', '靖西县', NULL, 'J', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1126, NULL, NULL, NULL, NULL, NULL, '451024', '德保县', NULL, 'D', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1127, NULL, NULL, NULL, NULL, NULL, '451023', '平果县', NULL, 'P', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1128, NULL, NULL, NULL, NULL, NULL, '451022', '田东县', NULL, 'T', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1129, NULL, NULL, NULL, NULL, NULL, '451021', '田阳县', NULL, 'T', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1130, NULL, NULL, NULL, NULL, NULL, '451002', '右江区', NULL, 'Y', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1131, NULL, NULL, NULL, NULL, NULL, '451001', '市辖区', NULL, 'S', 10, 3, '451000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1132, NULL, NULL, NULL, NULL, NULL, '450900', '玉林市', NULL, 'Y', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1133, NULL, NULL, NULL, NULL, NULL, '450981', '北流市', NULL, 'B', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1134, NULL, NULL, NULL, NULL, NULL, '450924', '兴业县', NULL, 'X', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1135, NULL, NULL, NULL, NULL, NULL, '450923', '博白县', NULL, 'B', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1136, NULL, NULL, NULL, NULL, NULL, '450922', '陆川县', NULL, 'L', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1137, NULL, NULL, NULL, NULL, NULL, '450921', '容　县', NULL, 'R', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1138, NULL, NULL, NULL, NULL, NULL, '450902', '玉州区', NULL, 'Y', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1139, NULL, NULL, NULL, NULL, NULL, '450901', '市辖区', NULL, 'S', 10, 3, '450900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1140, NULL, NULL, NULL, NULL, NULL, '450800', '贵港市', NULL, 'G', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1141, NULL, NULL, NULL, NULL, NULL, '450881', '桂平市', NULL, 'G', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1142, NULL, NULL, NULL, NULL, NULL, '450821', '平南县', NULL, 'P', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1143, NULL, NULL, NULL, NULL, NULL, '450804', '覃塘区', NULL, 'T', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1144, NULL, NULL, NULL, NULL, NULL, '450803', '港南区', NULL, 'G', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1145, NULL, NULL, NULL, NULL, NULL, '450802', '港北区', NULL, 'G', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1146, NULL, NULL, NULL, NULL, NULL, '450801', '市辖区', NULL, 'S', 10, 3, '450800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1147, NULL, NULL, NULL, NULL, NULL, '450700', '钦州市', NULL, 'Q', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1148, NULL, NULL, NULL, NULL, NULL, '450722', '浦北县', NULL, 'P', 10, 3, '450700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1149, NULL, NULL, NULL, NULL, NULL, '450721', '灵山县', NULL, 'L', 10, 3, '450700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1150, NULL, NULL, NULL, NULL, NULL, '450703', '钦北区', NULL, 'Q', 10, 3, '450700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1151, NULL, NULL, NULL, NULL, NULL, '450702', '钦南区', NULL, 'Q', 10, 3, '450700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1152, NULL, NULL, NULL, NULL, NULL, '450701', '市辖区', NULL, 'S', 10, 3, '450700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1153, NULL, NULL, NULL, NULL, NULL, '450600', '防城港市', NULL, 'F', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1154, NULL, NULL, NULL, NULL, NULL, '450681', '东兴市', NULL, 'D', 10, 3, '450600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1155, NULL, NULL, NULL, NULL, NULL, '450621', '上思县', NULL, 'S', 10, 3, '450600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1156, NULL, NULL, NULL, NULL, NULL, '450603', '防城区', NULL, 'F', 10, 3, '450600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1157, NULL, NULL, NULL, NULL, NULL, '450602', '港口区', NULL, 'G', 10, 3, '450600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1158, NULL, NULL, NULL, NULL, NULL, '450601', '市辖区', NULL, 'S', 10, 3, '450600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1159, NULL, NULL, NULL, NULL, NULL, '450500', '北海市', NULL, 'B', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1160, NULL, NULL, NULL, NULL, NULL, '450521', '合浦县', NULL, 'H', 10, 3, '450500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1161, NULL, NULL, NULL, NULL, NULL, '450512', '铁山港区', NULL, 'T', 10, 3, '450500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1162, NULL, NULL, NULL, NULL, NULL, '450503', '银海区', NULL, 'Y', 10, 3, '450500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1163, NULL, NULL, NULL, NULL, NULL, '450502', '海城区', NULL, 'H', 10, 3, '450500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1164, NULL, NULL, NULL, NULL, NULL, '450501', '市辖区', NULL, 'S', 10, 3, '450500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1165, NULL, NULL, NULL, NULL, NULL, '450400', '梧州市', NULL, 'W', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1166, NULL, NULL, NULL, NULL, NULL, '450481', '岑溪市', NULL, 'X', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1167, NULL, NULL, NULL, NULL, NULL, '450423', '蒙山县', NULL, 'M', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1168, NULL, NULL, NULL, NULL, NULL, '450422', '藤　县', NULL, 'T', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1169, NULL, NULL, NULL, NULL, NULL, '450421', '苍梧县', NULL, 'C', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1170, NULL, NULL, NULL, NULL, NULL, '450405', '长洲区', NULL, 'C', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1171, NULL, NULL, NULL, NULL, NULL, '450404', '蝶山区', NULL, 'D', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1172, NULL, NULL, NULL, NULL, NULL, '450403', '万秀区', NULL, 'W', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1173, NULL, NULL, NULL, NULL, NULL, '450401', '市辖区', NULL, 'S', 10, 3, '450400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1174, NULL, NULL, NULL, NULL, NULL, '450300', '桂林市', NULL, 'G', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1175, NULL, NULL, NULL, NULL, NULL, '450332', '恭城瑶族自治县', NULL, 'G', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1176, NULL, NULL, NULL, NULL, NULL, '450331', '荔蒲县', NULL, 'L', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1177, NULL, NULL, NULL, NULL, NULL, '450330', '平乐县', NULL, 'P', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1178, NULL, NULL, NULL, NULL, NULL, '450329', '资源县', NULL, 'Z', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1179, NULL, NULL, NULL, NULL, NULL, '450328', '龙胜各族自治县', NULL, 'L', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1180, NULL, NULL, NULL, NULL, NULL, '450327', '灌阳县', NULL, 'G', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1181, NULL, NULL, NULL, NULL, NULL, '450326', '永福县', NULL, 'Y', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1182, NULL, NULL, NULL, NULL, NULL, '450325', '兴安县', NULL, 'X', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1183, NULL, NULL, NULL, NULL, NULL, '450324', '全州县', NULL, 'Q', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1184, NULL, NULL, NULL, NULL, NULL, '450323', '灵川县', NULL, 'L', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1185, NULL, NULL, NULL, NULL, NULL, '450322', '临桂县', NULL, 'L', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1186, NULL, NULL, NULL, NULL, NULL, '450321', '阳朔县', NULL, 'Y', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1187, NULL, NULL, NULL, NULL, NULL, '450311', '雁山区', NULL, 'Y', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1188, NULL, NULL, NULL, NULL, NULL, '450305', '七星区', NULL, 'Q', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1189, NULL, NULL, NULL, NULL, NULL, '450304', '象山区', NULL, 'X', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1190, NULL, NULL, NULL, NULL, NULL, '450303', '叠彩区', NULL, 'D', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1191, NULL, NULL, NULL, NULL, NULL, '450302', '秀峰区', NULL, 'X', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1192, NULL, NULL, NULL, NULL, NULL, '450301', '市辖区', NULL, 'S', 10, 3, '450300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1193, NULL, NULL, NULL, NULL, NULL, '450200', '柳州市', NULL, 'L', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1194, NULL, NULL, NULL, NULL, NULL, '450226', '三江侗族自治县', NULL, 'S', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1195, NULL, NULL, NULL, NULL, NULL, '450225', '融水苗族自治县', NULL, 'R', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1196, NULL, NULL, NULL, NULL, NULL, '450224', '融安县', NULL, 'R', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1197, NULL, NULL, NULL, NULL, NULL, '450223', '鹿寨县', NULL, 'L', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1198, NULL, NULL, NULL, NULL, NULL, '450222', '柳城县', NULL, 'L', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1199, NULL, NULL, NULL, NULL, NULL, '450221', '柳江县', NULL, 'L', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1200, NULL, NULL, NULL, NULL, NULL, '450205', '柳北区', NULL, 'L', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1201, NULL, NULL, NULL, NULL, NULL, '450204', '柳南区', NULL, 'L', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1202, NULL, NULL, NULL, NULL, NULL, '450203', '鱼峰区', NULL, 'Y', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1203, NULL, NULL, NULL, NULL, NULL, '450202', '城中区', NULL, 'C', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1204, NULL, NULL, NULL, NULL, NULL, '450201', '市辖区', NULL, 'S', 10, 3, '450200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1205, NULL, NULL, NULL, NULL, NULL, '450100', '南宁市', NULL, 'N', 10, 2, '450000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1206, NULL, NULL, NULL, NULL, NULL, '450127', '横　县', NULL, 'H', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1207, NULL, NULL, NULL, NULL, NULL, '450126', '宾阳县', NULL, 'B', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1208, NULL, NULL, NULL, NULL, NULL, '450125', '上林县', NULL, 'S', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1209, NULL, NULL, NULL, NULL, NULL, '450124', '马山县', NULL, 'M', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1210, NULL, NULL, NULL, NULL, NULL, '450123', '隆安县', NULL, 'L', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1211, NULL, NULL, NULL, NULL, NULL, '450122', '武鸣县', NULL, 'W', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1212, NULL, NULL, NULL, NULL, NULL, '450109', '邕宁区', NULL, 'N', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1213, NULL, NULL, NULL, NULL, NULL, '450108', '良庆区', NULL, 'L', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1214, NULL, NULL, NULL, NULL, NULL, '450107', '西乡塘区', NULL, 'X', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1215, NULL, NULL, NULL, NULL, NULL, '450105', '江南区', NULL, 'J', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1216, NULL, NULL, NULL, NULL, NULL, '450103', '青秀区', NULL, 'Q', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1217, NULL, NULL, NULL, NULL, NULL, '450102', '兴宁区', NULL, 'X', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1218, NULL, NULL, NULL, NULL, NULL, '450101', '市辖区', NULL, 'S', 10, 3, '450100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1219, NULL, NULL, NULL, NULL, NULL, '440000', '广东省', NULL, 'G', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1220, NULL, NULL, NULL, NULL, NULL, '445300', '云浮市', NULL, 'Y', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1221, NULL, NULL, NULL, NULL, NULL, '445381', '罗定市', NULL, 'L', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1222, NULL, NULL, NULL, NULL, NULL, '445323', '云安县', NULL, 'Y', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1223, NULL, NULL, NULL, NULL, NULL, '445322', '郁南县', NULL, 'Y', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1224, NULL, NULL, NULL, NULL, NULL, '445321', '新兴县', NULL, 'X', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1225, NULL, NULL, NULL, NULL, NULL, '445302', '云城区', NULL, 'Y', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1226, NULL, NULL, NULL, NULL, NULL, '445301', '市辖区', NULL, 'S', 10, 3, '445300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1227, NULL, NULL, NULL, NULL, NULL, '445200', '揭阳市', NULL, 'J', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1228, NULL, NULL, NULL, NULL, NULL, '445281', '普宁市', NULL, 'P', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1229, NULL, NULL, NULL, NULL, NULL, '445224', '惠来县', NULL, 'H', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1230, NULL, NULL, NULL, NULL, NULL, '445222', '揭西县', NULL, 'J', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1231, NULL, NULL, NULL, NULL, NULL, '445221', '揭东县', NULL, 'J', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1232, NULL, NULL, NULL, NULL, NULL, '445202', '榕城区', NULL, 'C', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1233, NULL, NULL, NULL, NULL, NULL, '445201', '市辖区', NULL, 'S', 10, 3, '445200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1234, NULL, NULL, NULL, NULL, NULL, '445100', '潮州市', NULL, 'C', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1235, NULL, NULL, NULL, NULL, NULL, '445122', '饶平县', NULL, 'R', 10, 3, '445100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1236, NULL, NULL, NULL, NULL, NULL, '445121', '潮安县', NULL, 'C', 10, 3, '445100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1237, NULL, NULL, NULL, NULL, NULL, '445102', '湘桥区', NULL, 'X', 10, 3, '445100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1238, NULL, NULL, NULL, NULL, NULL, '445101', '市辖区', NULL, 'S', 10, 3, '445100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1239, NULL, NULL, NULL, NULL, NULL, '442000', '中山市', NULL, 'Z', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1240, NULL, NULL, NULL, NULL, NULL, '910005', '中山市', NULL, 'Z', 10, 3, '442000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1241, NULL, NULL, NULL, NULL, NULL, '441900', '东莞市', NULL, 'D', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1242, NULL, NULL, NULL, NULL, NULL, '441800', '清远市', NULL, 'Q', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1243, NULL, NULL, NULL, NULL, NULL, '441882', '连州市', NULL, 'L', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1244, NULL, NULL, NULL, NULL, NULL, '441881', '英德市', NULL, 'Y', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1245, NULL, NULL, NULL, NULL, NULL, '441827', '清新县', NULL, 'Q', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1246, NULL, NULL, NULL, NULL, NULL, '441826', '连南瑶族自治县', NULL, 'L', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1247, NULL, NULL, NULL, NULL, NULL, '441825', '连山壮族瑶族自治县', NULL, 'L', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1248, NULL, NULL, NULL, NULL, NULL, '441823', '阳山县', NULL, 'Y', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1249, NULL, NULL, NULL, NULL, NULL, '441821', '佛冈县', NULL, 'F', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1250, NULL, NULL, NULL, NULL, NULL, '441802', '清城区', NULL, 'Q', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1251, NULL, NULL, NULL, NULL, NULL, '441801', '市辖区', NULL, 'S', 10, 3, '441800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1252, NULL, NULL, NULL, NULL, NULL, '441700', '阳江市', NULL, 'Y', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1253, NULL, NULL, NULL, NULL, NULL, '441781', '阳春市', NULL, 'Y', 10, 3, '441700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1254, NULL, NULL, NULL, NULL, NULL, '441723', '阳东县', NULL, 'Y', 10, 3, '441700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1255, NULL, NULL, NULL, NULL, NULL, '441721', '阳西县', NULL, 'Y', 10, 3, '441700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1256, NULL, NULL, NULL, NULL, NULL, '441702', '江城区', NULL, 'J', 10, 3, '441700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1257, NULL, NULL, NULL, NULL, NULL, '441701', '市辖区', NULL, 'S', 10, 3, '441700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1258, NULL, NULL, NULL, NULL, NULL, '441600', '河源市', NULL, 'H', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1259, NULL, NULL, NULL, NULL, NULL, '441625', '东源县', NULL, 'D', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1260, NULL, NULL, NULL, NULL, NULL, '441624', '和平县', NULL, 'H', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1261, NULL, NULL, NULL, NULL, NULL, '441623', '连平县', NULL, 'L', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1262, NULL, NULL, NULL, NULL, NULL, '441622', '龙川县', NULL, 'L', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1263, NULL, NULL, NULL, NULL, NULL, '441621', '紫金县', NULL, 'Z', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1264, NULL, NULL, NULL, NULL, NULL, '441602', '源城区', NULL, 'Y', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1265, NULL, NULL, NULL, NULL, NULL, '441601', '市辖区', NULL, 'S', 10, 3, '441600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1266, NULL, NULL, NULL, NULL, NULL, '441500', '汕尾市', NULL, 'S', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1267, NULL, NULL, NULL, NULL, NULL, '441581', '陆丰市', NULL, 'L', 10, 3, '441500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1268, NULL, NULL, NULL, NULL, NULL, '441523', '陆河县', NULL, 'L', 10, 3, '441500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1269, NULL, NULL, NULL, NULL, NULL, '441521', '海丰县', NULL, 'H', 10, 3, '441500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1270, NULL, NULL, NULL, NULL, NULL, '441502', '城　区', NULL, 'C', 10, 3, '441500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1271, NULL, NULL, NULL, NULL, NULL, '441501', '市辖区', NULL, 'S', 10, 3, '441500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1272, NULL, NULL, NULL, NULL, NULL, '441400', '梅州市', NULL, 'M', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1273, NULL, NULL, NULL, NULL, NULL, '441481', '兴宁市', NULL, 'X', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1274, NULL, NULL, NULL, NULL, NULL, '441427', '蕉岭县', NULL, 'J', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1275, NULL, NULL, NULL, NULL, NULL, '441426', '平远县', NULL, 'P', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1276, NULL, NULL, NULL, NULL, NULL, '441424', '五华县', NULL, 'W', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1277, NULL, NULL, NULL, NULL, NULL, '441423', '丰顺县', NULL, 'F', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1278, NULL, NULL, NULL, NULL, NULL, '441422', '大埔县', NULL, 'D', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1279, NULL, NULL, NULL, NULL, NULL, '441421', '梅　县', NULL, 'M', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1280, NULL, NULL, NULL, NULL, NULL, '441402', '梅江区', NULL, 'M', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1281, NULL, NULL, NULL, NULL, NULL, '441401', '市辖区', NULL, 'S', 10, 3, '441400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1282, NULL, NULL, NULL, NULL, NULL, '441300', '惠州市', NULL, 'H', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1283, NULL, NULL, NULL, NULL, NULL, '441324', '龙门县', NULL, 'L', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1284, NULL, NULL, NULL, NULL, NULL, '441323', '惠东县', NULL, 'H', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1285, NULL, NULL, NULL, NULL, NULL, '441322', '博罗县', NULL, 'B', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1286, NULL, NULL, NULL, NULL, NULL, '441303', '惠阳区', NULL, 'H', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1287, NULL, NULL, NULL, NULL, NULL, '441302', '惠城区', NULL, 'H', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1288, NULL, NULL, NULL, NULL, NULL, '441301', '市辖区', NULL, 'S', 10, 3, '441300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1289, NULL, NULL, NULL, NULL, NULL, '441200', '肇庆市', NULL, 'Z', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1290, NULL, NULL, NULL, NULL, NULL, '441284', '四会市', NULL, 'S', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1291, NULL, NULL, NULL, NULL, NULL, '441283', '高要市', NULL, 'G', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1292, NULL, NULL, NULL, NULL, NULL, '441226', '德庆县', NULL, 'D', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1293, NULL, NULL, NULL, NULL, NULL, '441225', '封开县', NULL, 'F', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1294, NULL, NULL, NULL, NULL, NULL, '441224', '怀集县', NULL, 'H', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1295, NULL, NULL, NULL, NULL, NULL, '441223', '广宁县', NULL, 'G', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1296, NULL, NULL, NULL, NULL, NULL, '441203', '鼎湖区', NULL, 'D', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1297, NULL, NULL, NULL, NULL, NULL, '441202', '端州区', NULL, 'D', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1298, NULL, NULL, NULL, NULL, NULL, '441201', '市辖区', NULL, 'S', 10, 3, '441200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1299, NULL, NULL, NULL, NULL, NULL, '440900', '茂名市', NULL, 'M', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1300, NULL, NULL, NULL, NULL, NULL, '440983', '信宜市', NULL, 'X', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1301, NULL, NULL, NULL, NULL, NULL, '440982', '化州市', NULL, 'H', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1302, NULL, NULL, NULL, NULL, NULL, '440981', '高州市', NULL, 'G', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1303, NULL, NULL, NULL, NULL, NULL, '440923', '电白县', NULL, 'D', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1304, NULL, NULL, NULL, NULL, NULL, '440903', '茂港区', NULL, 'M', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1305, NULL, NULL, NULL, NULL, NULL, '440902', '茂南区', NULL, 'M', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1306, NULL, NULL, NULL, NULL, NULL, '440901', '市辖区', NULL, 'S', 10, 3, '440900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1307, NULL, NULL, NULL, NULL, NULL, '440800', '湛江市', NULL, 'Z', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1308, NULL, NULL, NULL, NULL, NULL, '440883', '吴川市', NULL, 'W', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1309, NULL, NULL, NULL, NULL, NULL, '440882', '雷州市', NULL, 'L', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1310, NULL, NULL, NULL, NULL, NULL, '440881', '廉江市', NULL, 'L', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1311, NULL, NULL, NULL, NULL, NULL, '440825', '徐闻县', NULL, 'X', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1312, NULL, NULL, NULL, NULL, NULL, '440823', '遂溪县', NULL, 'S', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1313, NULL, NULL, NULL, NULL, NULL, '440811', '麻章区', NULL, 'M', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1314, NULL, NULL, NULL, NULL, NULL, '440804', '坡头区', NULL, 'P', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1315, NULL, NULL, NULL, NULL, NULL, '440803', '霞山区', NULL, 'X', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1316, NULL, NULL, NULL, NULL, NULL, '440802', '赤坎区', NULL, 'C', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1317, NULL, NULL, NULL, NULL, NULL, '440801', '市辖区', NULL, 'S', 10, 3, '440800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1318, NULL, NULL, NULL, NULL, NULL, '440700', '江门市', NULL, 'J', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1319, NULL, NULL, NULL, NULL, NULL, '440785', '恩平市', NULL, 'E', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1320, NULL, NULL, NULL, NULL, NULL, '440784', '鹤山市', NULL, 'H', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1321, NULL, NULL, NULL, NULL, NULL, '440783', '开平市', NULL, 'K', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1322, NULL, NULL, NULL, NULL, NULL, '440781', '台山市', NULL, 'T', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1323, NULL, NULL, NULL, NULL, NULL, '440705', '新会区', NULL, 'X', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1324, NULL, NULL, NULL, NULL, NULL, '440704', '江海区', NULL, 'J', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1325, NULL, NULL, NULL, NULL, NULL, '440703', '蓬江区', NULL, 'P', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1326, NULL, NULL, NULL, NULL, NULL, '440701', '市辖区', NULL, 'S', 10, 3, '440700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1327, NULL, NULL, NULL, NULL, NULL, '440600', '佛山市', NULL, 'F', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1328, NULL, NULL, NULL, NULL, NULL, '440608', '高明区', NULL, 'G', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1329, NULL, NULL, NULL, NULL, NULL, '440607', '三水区', NULL, 'S', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1330, NULL, NULL, NULL, NULL, NULL, '440606', '顺德区', NULL, 'S', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1331, NULL, NULL, NULL, NULL, NULL, '440605', '南海区', NULL, 'N', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1332, NULL, NULL, NULL, NULL, NULL, '440604', '禅城区', NULL, 'C', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1333, NULL, NULL, NULL, NULL, NULL, '440601', '市辖区', NULL, 'S', 10, 3, '440600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1334, NULL, NULL, NULL, NULL, NULL, '440500', '汕头市', NULL, 'S', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1335, NULL, NULL, NULL, NULL, NULL, '440523', '南澳县', NULL, 'N', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1336, NULL, NULL, NULL, NULL, NULL, '440515', '澄海区', NULL, 'C', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1337, NULL, NULL, NULL, NULL, NULL, '440514', '潮南区', NULL, 'C', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1338, NULL, NULL, NULL, NULL, NULL, '440513', '潮阳区', NULL, 'C', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1339, NULL, NULL, NULL, NULL, NULL, '440512', '濠江区', NULL, 'J', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1340, NULL, NULL, NULL, NULL, NULL, '440511', '金平区', NULL, 'J', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1341, NULL, NULL, NULL, NULL, NULL, '440507', '龙湖区', NULL, 'L', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1342, NULL, NULL, NULL, NULL, NULL, '440501', '市辖区', NULL, 'S', 10, 3, '440500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1343, NULL, NULL, NULL, NULL, NULL, '440400', '珠海市', NULL, 'Z', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1344, NULL, NULL, NULL, NULL, NULL, '440404', '金湾区', NULL, 'J', 10, 3, '440400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1345, NULL, NULL, NULL, NULL, NULL, '440403', '斗门区', NULL, 'D', 10, 3, '440400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1346, NULL, NULL, NULL, NULL, NULL, '440402', '香洲区', NULL, 'X', 10, 3, '440400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1347, NULL, NULL, NULL, NULL, NULL, '440401', '市辖区', NULL, 'S', 10, 3, '440400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1348, NULL, NULL, NULL, NULL, NULL, '440300', '深圳市', NULL, 'S', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1349, NULL, NULL, NULL, NULL, NULL, '440308', '盐田区', NULL, 'Y', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1350, NULL, NULL, NULL, NULL, NULL, '440307', '龙岗区', NULL, 'L', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1351, NULL, NULL, NULL, NULL, NULL, '440306', '宝安区', NULL, 'B', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1352, NULL, NULL, NULL, NULL, NULL, '440305', '南山区', NULL, 'N', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1353, NULL, NULL, NULL, NULL, NULL, '440304', '福田区', NULL, 'F', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1354, NULL, NULL, NULL, NULL, NULL, '440303', '罗湖区', NULL, 'L', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1355, NULL, NULL, NULL, NULL, NULL, '440301', '市辖区', NULL, 'S', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1356, NULL, NULL, NULL, NULL, NULL, '440200', '韶关市', NULL, 'S', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1357, NULL, NULL, NULL, NULL, NULL, '440282', '南雄市', NULL, 'N', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1358, NULL, NULL, NULL, NULL, NULL, '440281', '乐昌市', NULL, 'L', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1359, NULL, NULL, NULL, NULL, NULL, '440233', '新丰县', NULL, 'X', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1360, NULL, NULL, NULL, NULL, NULL, '440232', '乳源瑶族自治县', NULL, 'R', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1361, NULL, NULL, NULL, NULL, NULL, '440229', '翁源县', NULL, 'W', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1362, NULL, NULL, NULL, NULL, NULL, '440224', '仁化县', NULL, 'R', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1363, NULL, NULL, NULL, NULL, NULL, '440222', '始兴县', NULL, 'S', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1364, NULL, NULL, NULL, NULL, NULL, '440205', '曲江区', NULL, 'Q', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1365, NULL, NULL, NULL, NULL, NULL, '440204', '浈江区', NULL, 'J', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1366, NULL, NULL, NULL, NULL, NULL, '440203', '武江区', NULL, 'W', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1367, NULL, NULL, NULL, NULL, NULL, '440201', '市辖区', NULL, 'S', 10, 3, '440200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1368, NULL, NULL, NULL, NULL, NULL, '440100', '广州市', NULL, 'G', 10, 2, '440000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1369, NULL, NULL, NULL, NULL, NULL, '440184', '从化市', NULL, 'C', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1370, NULL, NULL, NULL, NULL, NULL, '440183', '增城市', NULL, 'Z', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1371, NULL, NULL, NULL, NULL, NULL, '440114', '花都区', NULL, 'H', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1372, NULL, NULL, NULL, NULL, NULL, '440113', '番禺区', NULL, 'F', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1373, NULL, NULL, NULL, NULL, NULL, '440112', '黄埔区', NULL, 'H', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1374, NULL, NULL, NULL, NULL, NULL, '440111', '白云区', NULL, 'B', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1375, NULL, NULL, NULL, NULL, NULL, '440107', '芳村区', NULL, 'F', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1376, NULL, NULL, NULL, NULL, NULL, '440106', '天河区', NULL, 'T', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1377, NULL, NULL, NULL, NULL, NULL, '440105', '海珠区', NULL, 'H', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1378, NULL, NULL, NULL, NULL, NULL, '440104', '越秀区', NULL, 'Y', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1379, NULL, NULL, NULL, NULL, NULL, '440103', '荔湾区', NULL, 'L', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1380, NULL, NULL, NULL, NULL, NULL, '440102', '东山区', NULL, 'D', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1381, NULL, NULL, NULL, NULL, NULL, '440101', '市辖区', NULL, 'S', 10, 3, '440100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1382, NULL, NULL, NULL, NULL, NULL, '430000', '湖南省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1383, NULL, NULL, NULL, NULL, NULL, '433100', '湘西土家族苗族自治州', NULL, 'X', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1384, NULL, NULL, NULL, NULL, NULL, '433130', '龙山县', NULL, 'L', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1385, NULL, NULL, NULL, NULL, NULL, '433127', '永顺县', NULL, 'Y', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1386, NULL, NULL, NULL, NULL, NULL, '433126', '古丈县', NULL, 'G', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1387, NULL, NULL, NULL, NULL, NULL, '433125', '保靖县', NULL, 'B', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1388, NULL, NULL, NULL, NULL, NULL, '433124', '花垣县', NULL, 'H', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1389, NULL, NULL, NULL, NULL, NULL, '433123', '凤凰县', NULL, 'F', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1390, NULL, NULL, NULL, NULL, NULL, '433122', '泸溪县', NULL, 'X', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1391, NULL, NULL, NULL, NULL, NULL, '433101', '吉首市', NULL, 'J', 10, 3, '433100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1392, NULL, NULL, NULL, NULL, NULL, '431300', '娄底市', NULL, 'L', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1393, NULL, NULL, NULL, NULL, NULL, '431382', '涟源市', NULL, 'L', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1394, NULL, NULL, NULL, NULL, NULL, '431381', '冷水江市', NULL, 'L', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1395, NULL, NULL, NULL, NULL, NULL, '431322', '新化县', NULL, 'X', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1396, NULL, NULL, NULL, NULL, NULL, '431321', '双峰县', NULL, 'S', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1397, NULL, NULL, NULL, NULL, NULL, '431302', '娄星区', NULL, 'L', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1398, NULL, NULL, NULL, NULL, NULL, '431301', '市辖区', NULL, 'S', 10, 3, '431300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1399, NULL, NULL, NULL, NULL, NULL, '431200', '怀化市', NULL, 'H', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1400, NULL, NULL, NULL, NULL, NULL, '431281', '洪江市', NULL, 'H', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1401, NULL, NULL, NULL, NULL, NULL, '431230', '通道侗族自治县', NULL, 'T', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1402, NULL, NULL, NULL, NULL, NULL, '431229', '靖州苗族侗族自治县', NULL, 'J', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1403, NULL, NULL, NULL, NULL, NULL, '431228', '芷江侗族自治县', NULL, 'J', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1404, NULL, NULL, NULL, NULL, NULL, '431227', '新晃侗族自治县', NULL, 'X', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1405, NULL, NULL, NULL, NULL, NULL, '431226', '麻阳苗族自治县', NULL, 'M', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1406, NULL, NULL, NULL, NULL, NULL, '431225', '会同县', NULL, 'H', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1407, NULL, NULL, NULL, NULL, NULL, '431224', '溆浦县', NULL, 'P', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1408, NULL, NULL, NULL, NULL, NULL, '431223', '辰溪县', NULL, 'C', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1409, NULL, NULL, NULL, NULL, NULL, '431222', '沅陵县', NULL, 'L', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1410, NULL, NULL, NULL, NULL, NULL, '431221', '中方县', NULL, 'Z', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1411, NULL, NULL, NULL, NULL, NULL, '431202', '鹤城区', NULL, 'H', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1412, NULL, NULL, NULL, NULL, NULL, '431201', '市辖区', NULL, 'S', 10, 3, '431200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1413, NULL, NULL, NULL, NULL, NULL, '431100', '永州市', NULL, 'Y', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1414, NULL, NULL, NULL, NULL, NULL, '431129', '江华瑶族自治县', NULL, 'J', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1415, NULL, NULL, NULL, NULL, NULL, '431128', '新田县', NULL, 'X', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1416, NULL, NULL, NULL, NULL, NULL, '431127', '蓝山县', NULL, 'L', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1417, NULL, NULL, NULL, NULL, NULL, '431126', '宁远县', NULL, 'N', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1418, NULL, NULL, NULL, NULL, NULL, '431125', '江永县', NULL, 'J', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1419, NULL, NULL, NULL, NULL, NULL, '431124', '道　县', NULL, 'D', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1420, NULL, NULL, NULL, NULL, NULL, '431123', '双牌县', NULL, 'S', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1421, NULL, NULL, NULL, NULL, NULL, '431122', '东安县', NULL, 'D', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1422, NULL, NULL, NULL, NULL, NULL, '431121', '祁阳县', NULL, 'Q', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1423, NULL, NULL, NULL, NULL, NULL, '431103', '冷水滩区', NULL, 'L', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1424, NULL, NULL, NULL, NULL, NULL, '431102', '芝山区', NULL, 'Z', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1425, NULL, NULL, NULL, NULL, NULL, '431101', '市辖区', NULL, 'S', 10, 3, '431100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1426, NULL, NULL, NULL, NULL, NULL, '431000', '郴州市', NULL, 'C', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1427, NULL, NULL, NULL, NULL, NULL, '431081', '资兴市', NULL, 'Z', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1428, NULL, NULL, NULL, NULL, NULL, '431028', '安仁县', NULL, 'A', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1429, NULL, NULL, NULL, NULL, NULL, '431027', '桂东县', NULL, 'G', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1430, NULL, NULL, NULL, NULL, NULL, '431026', '汝城县', NULL, 'R', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1431, NULL, NULL, NULL, NULL, NULL, '431025', '临武县', NULL, 'L', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1432, NULL, NULL, NULL, NULL, NULL, '431024', '嘉禾县', NULL, 'J', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1433, NULL, NULL, NULL, NULL, NULL, '431023', '永兴县', NULL, 'Y', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1434, NULL, NULL, NULL, NULL, NULL, '431022', '宜章县', NULL, 'Y', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1435, NULL, NULL, NULL, NULL, NULL, '431021', '桂阳县', NULL, 'G', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1436, NULL, NULL, NULL, NULL, NULL, '431003', '苏仙区', NULL, 'S', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1437, NULL, NULL, NULL, NULL, NULL, '431002', '北湖区', NULL, 'B', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1438, NULL, NULL, NULL, NULL, NULL, '431001', '市辖区', NULL, 'S', 10, 3, '431000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1439, NULL, NULL, NULL, NULL, NULL, '430900', '益阳市', NULL, 'Y', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1440, NULL, NULL, NULL, NULL, NULL, '430981', '沅江市', NULL, 'J', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1441, NULL, NULL, NULL, NULL, NULL, '430923', '安化县', NULL, 'A', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1442, NULL, NULL, NULL, NULL, NULL, '430922', '桃江县', NULL, 'T', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1443, NULL, NULL, NULL, NULL, NULL, '430921', '南　县', NULL, 'N', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1444, NULL, NULL, NULL, NULL, NULL, '430903', '赫山区', NULL, 'H', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1445, NULL, NULL, NULL, NULL, NULL, '430902', '资阳区', NULL, 'Z', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1446, NULL, NULL, NULL, NULL, NULL, '430901', '市辖区', NULL, 'S', 10, 3, '430900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1447, NULL, NULL, NULL, NULL, NULL, '430800', '张家界市', NULL, 'Z', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1448, NULL, NULL, NULL, NULL, NULL, '430822', '桑植县', NULL, 'S', 10, 3, '430800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1449, NULL, NULL, NULL, NULL, NULL, '430821', '慈利县', NULL, 'C', 10, 3, '430800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1450, NULL, NULL, NULL, NULL, NULL, '430811', '武陵源区', NULL, 'W', 10, 3, '430800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1451, NULL, NULL, NULL, NULL, NULL, '430802', '永定区', NULL, 'Y', 10, 3, '430800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1452, NULL, NULL, NULL, NULL, NULL, '430801', '市辖区', NULL, 'S', 10, 3, '430800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1453, NULL, NULL, NULL, NULL, NULL, '430700', '常德市', NULL, 'C', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1454, NULL, NULL, NULL, NULL, NULL, '430781', '津市市', NULL, 'J', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1455, NULL, NULL, NULL, NULL, NULL, '430726', '石门县', NULL, 'S', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1456, NULL, NULL, NULL, NULL, NULL, '430725', '桃源县', NULL, 'T', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1457, NULL, NULL, NULL, NULL, NULL, '430724', '临澧县', NULL, 'L', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1458, NULL, NULL, NULL, NULL, NULL, '430723', '澧　县', NULL, 'X', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1459, NULL, NULL, NULL, NULL, NULL, '430722', '汉寿县', NULL, 'H', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1460, NULL, NULL, NULL, NULL, NULL, '430721', '安乡县', NULL, 'A', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1461, NULL, NULL, NULL, NULL, NULL, '430703', '鼎城区', NULL, 'D', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1462, NULL, NULL, NULL, NULL, NULL, '430702', '武陵区', NULL, 'W', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1463, NULL, NULL, NULL, NULL, NULL, '430701', '市辖区', NULL, 'S', 10, 3, '430700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1464, NULL, NULL, NULL, NULL, NULL, '430600', '岳阳市', NULL, 'Y', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1465, NULL, NULL, NULL, NULL, NULL, '430682', '临湘市', NULL, 'L', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1466, NULL, NULL, NULL, NULL, NULL, '430681', '汨罗市', NULL, 'L', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1467, NULL, NULL, NULL, NULL, NULL, '430626', '平江县', NULL, 'P', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1468, NULL, NULL, NULL, NULL, NULL, '430624', '湘阴县', NULL, 'X', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1469, NULL, NULL, NULL, NULL, NULL, '430623', '华容县', NULL, 'H', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1470, NULL, NULL, NULL, NULL, NULL, '430621', '岳阳县', NULL, 'Y', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1471, NULL, NULL, NULL, NULL, NULL, '430611', '君山区', NULL, 'J', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1472, NULL, NULL, NULL, NULL, NULL, '430603', '云溪区', NULL, 'Y', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1473, NULL, NULL, NULL, NULL, NULL, '430602', '岳阳楼区', NULL, 'Y', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1474, NULL, NULL, NULL, NULL, NULL, '430601', '市辖区', NULL, 'S', 10, 3, '430600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1475, NULL, NULL, NULL, NULL, NULL, '430500', '邵阳市', NULL, 'S', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1476, NULL, NULL, NULL, NULL, NULL, '430581', '武冈市', NULL, 'W', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1477, NULL, NULL, NULL, NULL, NULL, '430529', '城步苗族自治县', NULL, 'C', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1478, NULL, NULL, NULL, NULL, NULL, '430528', '新宁县', NULL, 'X', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1479, NULL, NULL, NULL, NULL, NULL, '430527', '绥宁县', NULL, 'S', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1480, NULL, NULL, NULL, NULL, NULL, '430525', '洞口县', NULL, 'D', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1481, NULL, NULL, NULL, NULL, NULL, '430524', '隆回县', NULL, 'L', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1482, NULL, NULL, NULL, NULL, NULL, '430523', '邵阳县', NULL, 'S', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1483, NULL, NULL, NULL, NULL, NULL, '430522', '新邵县', NULL, 'X', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1484, NULL, NULL, NULL, NULL, NULL, '430521', '邵东县', NULL, 'S', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1485, NULL, NULL, NULL, NULL, NULL, '430511', '北塔区', NULL, 'B', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1486, NULL, NULL, NULL, NULL, NULL, '430503', '大祥区', NULL, 'D', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1487, NULL, NULL, NULL, NULL, NULL, '430502', '双清区', NULL, 'S', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1488, NULL, NULL, NULL, NULL, NULL, '430501', '市辖区', NULL, 'S', 10, 3, '430500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1489, NULL, NULL, NULL, NULL, NULL, '430400', '衡阳市', NULL, 'H', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1490, NULL, NULL, NULL, NULL, NULL, '430482', '常宁市', NULL, 'C', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1491, NULL, NULL, NULL, NULL, NULL, '430481', '耒阳市', NULL, 'Y', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1492, NULL, NULL, NULL, NULL, NULL, '430426', '祁东县', NULL, 'Q', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1493, NULL, NULL, NULL, NULL, NULL, '430424', '衡东县', NULL, 'H', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1494, NULL, NULL, NULL, NULL, NULL, '430423', '衡山县', NULL, 'H', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1495, NULL, NULL, NULL, NULL, NULL, '430422', '衡南县', NULL, 'H', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1496, NULL, NULL, NULL, NULL, NULL, '430421', '衡阳县', NULL, 'H', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1497, NULL, NULL, NULL, NULL, NULL, '430412', '南岳区', NULL, 'N', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1498, NULL, NULL, NULL, NULL, NULL, '430408', '蒸湘区', NULL, 'Z', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1499, NULL, NULL, NULL, NULL, NULL, '430407', '石鼓区', NULL, 'S', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1500, NULL, NULL, NULL, NULL, NULL, '430406', '雁峰区', NULL, 'Y', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1501, NULL, NULL, NULL, NULL, NULL, '430405', '珠晖区', NULL, 'Z', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1502, NULL, NULL, NULL, NULL, NULL, '430401', '市辖区', NULL, 'S', 10, 3, '430400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1503, NULL, NULL, NULL, NULL, NULL, '430300', '湘潭市', NULL, 'X', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1504, NULL, NULL, NULL, NULL, NULL, '430382', '韶山市', NULL, 'S', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1505, NULL, NULL, NULL, NULL, NULL, '430381', '湘乡市', NULL, 'X', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1506, NULL, NULL, NULL, NULL, NULL, '430321', '湘潭县', NULL, 'X', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1507, NULL, NULL, NULL, NULL, NULL, '430304', '岳塘区', NULL, 'Y', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1508, NULL, NULL, NULL, NULL, NULL, '430302', '雨湖区', NULL, 'Y', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1509, NULL, NULL, NULL, NULL, NULL, '430301', '市辖区', NULL, 'S', 10, 3, '430300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1510, NULL, NULL, NULL, NULL, NULL, '430200', '株洲市', NULL, 'Z', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1511, NULL, NULL, NULL, NULL, NULL, '430281', '醴陵市', NULL, 'L', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1512, NULL, NULL, NULL, NULL, NULL, '430225', '炎陵县', NULL, 'Y', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1513, NULL, NULL, NULL, NULL, NULL, '430224', '茶陵县', NULL, 'C', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1514, NULL, NULL, NULL, NULL, NULL, '430223', '攸　县', NULL, 'X', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1515, NULL, NULL, NULL, NULL, NULL, '430221', '株洲县', NULL, 'Z', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1516, NULL, NULL, NULL, NULL, NULL, '430211', '天元区', NULL, 'T', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1517, NULL, NULL, NULL, NULL, NULL, '430204', '石峰区', NULL, 'S', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1518, NULL, NULL, NULL, NULL, NULL, '430203', '芦淞区', NULL, 'L', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1519, NULL, NULL, NULL, NULL, NULL, '430202', '荷塘区', NULL, 'H', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1520, NULL, NULL, NULL, NULL, NULL, '430201', '市辖区', NULL, 'S', 10, 3, '430200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1521, NULL, NULL, NULL, NULL, NULL, '430100', '长沙市', NULL, 'C', 10, 2, '430000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1522, NULL, NULL, NULL, NULL, NULL, '430181', '浏阳市', NULL, 'Y', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1523, NULL, NULL, NULL, NULL, NULL, '430124', '宁乡县', NULL, 'N', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1524, NULL, NULL, NULL, NULL, NULL, '430122', '望城县', NULL, 'W', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1525, NULL, NULL, NULL, NULL, NULL, '430121', '长沙县', NULL, 'C', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1526, NULL, NULL, NULL, NULL, NULL, '430111', '雨花区', NULL, 'Y', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1527, NULL, NULL, NULL, NULL, NULL, '430105', '开福区', NULL, 'K', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1528, NULL, NULL, NULL, NULL, NULL, '430104', '岳麓区', NULL, 'Y', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1529, NULL, NULL, NULL, NULL, NULL, '430103', '天心区', NULL, 'T', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1530, NULL, NULL, NULL, NULL, NULL, '430102', '芙蓉区', NULL, 'R', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1531, NULL, NULL, NULL, NULL, NULL, '430101', '市辖区', NULL, 'S', 10, 3, '430100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1532, NULL, NULL, NULL, NULL, NULL, '420000', '湖北省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1533, NULL, NULL, NULL, NULL, NULL, '910010', '仙桃市', NULL, 'X', 10, 3, '429004', NULL);
+INSERT INTO `sys_area_dj` VALUES (1534, NULL, NULL, NULL, NULL, NULL, '429021', '神农架林区', NULL, 'S', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1535, NULL, NULL, NULL, NULL, NULL, '429006', '天门市', NULL, 'T', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1536, NULL, NULL, NULL, NULL, NULL, '429005', '潜江市', NULL, 'Q', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1537, NULL, NULL, NULL, NULL, NULL, '429004', '仙桃市', NULL, 'X', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1538, NULL, NULL, NULL, NULL, NULL, '422800', '恩施土家族苗族自治州', NULL, 'E', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1539, NULL, NULL, NULL, NULL, NULL, '422828', '鹤峰县', NULL, 'H', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1540, NULL, NULL, NULL, NULL, NULL, '422827', '来凤县', NULL, 'L', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1541, NULL, NULL, NULL, NULL, NULL, '422826', '咸丰县', NULL, 'X', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1542, NULL, NULL, NULL, NULL, NULL, '422825', '宣恩县', NULL, 'X', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1543, NULL, NULL, NULL, NULL, NULL, '422823', '巴东县', NULL, 'B', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1544, NULL, NULL, NULL, NULL, NULL, '422822', '建始县', NULL, 'J', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1545, NULL, NULL, NULL, NULL, NULL, '422802', '利川市', NULL, 'L', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1546, NULL, NULL, NULL, NULL, NULL, '422801', '恩施市', NULL, 'E', 10, 3, '422800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1547, NULL, NULL, NULL, NULL, NULL, '421300', '随州市', NULL, 'S', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1548, NULL, NULL, NULL, NULL, NULL, '421381', '广水市', NULL, 'G', 10, 3, '421300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1549, NULL, NULL, NULL, NULL, NULL, '421302', '曾都区', NULL, 'Z', 10, 3, '421300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1550, NULL, NULL, NULL, NULL, NULL, '421301', '市辖区', NULL, 'S', 10, 3, '421300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1551, NULL, NULL, NULL, NULL, NULL, '421200', '咸宁市', NULL, 'X', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1552, NULL, NULL, NULL, NULL, NULL, '421281', '赤壁市', NULL, 'C', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1553, NULL, NULL, NULL, NULL, NULL, '421224', '通山县', NULL, 'T', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1554, NULL, NULL, NULL, NULL, NULL, '421223', '崇阳县', NULL, 'C', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1555, NULL, NULL, NULL, NULL, NULL, '421222', '通城县', NULL, 'T', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1556, NULL, NULL, NULL, NULL, NULL, '421221', '嘉鱼县', NULL, 'J', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1557, NULL, NULL, NULL, NULL, NULL, '421202', '咸安区', NULL, 'X', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1558, NULL, NULL, NULL, NULL, NULL, '421201', '市辖区', NULL, 'S', 10, 3, '421200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1559, NULL, NULL, NULL, NULL, NULL, '421100', '黄冈市', NULL, 'H', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1560, NULL, NULL, NULL, NULL, NULL, '421182', '武穴市', NULL, 'W', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1561, NULL, NULL, NULL, NULL, NULL, '421181', '麻城市', NULL, 'M', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1562, NULL, NULL, NULL, NULL, NULL, '421127', '黄梅县', NULL, 'H', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1563, NULL, NULL, NULL, NULL, NULL, '421126', '蕲春县', NULL, 'C', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1564, NULL, NULL, NULL, NULL, NULL, '421125', '浠水县', NULL, 'S', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1565, NULL, NULL, NULL, NULL, NULL, '421124', '英山县', NULL, 'Y', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1566, NULL, NULL, NULL, NULL, NULL, '421123', '罗田县', NULL, 'L', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1567, NULL, NULL, NULL, NULL, NULL, '421122', '红安县', NULL, 'H', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1568, NULL, NULL, NULL, NULL, NULL, '421121', '团风县', NULL, 'T', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1569, NULL, NULL, NULL, NULL, NULL, '421102', '黄州区', NULL, 'H', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1570, NULL, NULL, NULL, NULL, NULL, '421101', '市辖区', NULL, 'S', 10, 3, '421100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1571, NULL, NULL, NULL, NULL, NULL, '421000', '荆州市', NULL, 'J', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1572, NULL, NULL, NULL, NULL, NULL, '421087', '松滋市', NULL, 'S', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1573, NULL, NULL, NULL, NULL, NULL, '421083', '洪湖市', NULL, 'H', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1574, NULL, NULL, NULL, NULL, NULL, '421081', '石首市', NULL, 'S', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1575, NULL, NULL, NULL, NULL, NULL, '421024', '江陵县', NULL, 'J', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1576, NULL, NULL, NULL, NULL, NULL, '421023', '监利县', NULL, 'J', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1577, NULL, NULL, NULL, NULL, NULL, '421022', '公安县', NULL, 'G', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1578, NULL, NULL, NULL, NULL, NULL, '421003', '荆州区', NULL, 'J', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1579, NULL, NULL, NULL, NULL, NULL, '421002', '沙市区', NULL, 'S', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1580, NULL, NULL, NULL, NULL, NULL, '421001', '市辖区', NULL, 'S', 10, 3, '421000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1581, NULL, NULL, NULL, NULL, NULL, '420900', '孝感市', NULL, 'X', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1582, NULL, NULL, NULL, NULL, NULL, '420984', '汉川市', NULL, 'H', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1583, NULL, NULL, NULL, NULL, NULL, '420982', '安陆市', NULL, 'A', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1584, NULL, NULL, NULL, NULL, NULL, '420981', '应城市', NULL, 'Y', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1585, NULL, NULL, NULL, NULL, NULL, '420923', '云梦县', NULL, 'Y', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1586, NULL, NULL, NULL, NULL, NULL, '420922', '大悟县', NULL, 'D', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1587, NULL, NULL, NULL, NULL, NULL, '420921', '孝昌县', NULL, 'X', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1588, NULL, NULL, NULL, NULL, NULL, '420902', '孝南区', NULL, 'X', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1589, NULL, NULL, NULL, NULL, NULL, '420901', '市辖区', NULL, 'S', 10, 3, '420900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1590, NULL, NULL, NULL, NULL, NULL, '420800', '荆门市', NULL, 'J', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1591, NULL, NULL, NULL, NULL, NULL, '420881', '钟祥市', NULL, 'Z', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1592, NULL, NULL, NULL, NULL, NULL, '420822', '沙洋县', NULL, 'S', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1593, NULL, NULL, NULL, NULL, NULL, '420821', '京山县', NULL, 'J', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1594, NULL, NULL, NULL, NULL, NULL, '420804', '掇刀区', NULL, 'D', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1595, NULL, NULL, NULL, NULL, NULL, '420802', '东宝区', NULL, 'D', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1596, NULL, NULL, NULL, NULL, NULL, '420801', '市辖区', NULL, 'S', 10, 3, '420800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1597, NULL, NULL, NULL, NULL, NULL, '420700', '鄂州市', NULL, 'E', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1598, NULL, NULL, NULL, NULL, NULL, '420704', '鄂城区', NULL, 'E', 10, 3, '420700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1599, NULL, NULL, NULL, NULL, NULL, '420703', '华容区', NULL, 'H', 10, 3, '420700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1600, NULL, NULL, NULL, NULL, NULL, '420702', '梁子湖区', NULL, 'L', 10, 3, '420700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1601, NULL, NULL, NULL, NULL, NULL, '420701', '市辖区', NULL, 'S', 10, 3, '420700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1602, NULL, NULL, NULL, NULL, NULL, '420600', '襄樊市', NULL, 'X', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1603, NULL, NULL, NULL, NULL, NULL, '420684', '宜城市', NULL, 'Y', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1604, NULL, NULL, NULL, NULL, NULL, '420683', '枣阳市', NULL, 'Z', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1605, NULL, NULL, NULL, NULL, NULL, '420682', '老河口市', NULL, 'L', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1606, NULL, NULL, NULL, NULL, NULL, '420626', '保康县', NULL, 'B', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1607, NULL, NULL, NULL, NULL, NULL, '420625', '谷城县', NULL, 'G', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1608, NULL, NULL, NULL, NULL, NULL, '420624', '南漳县', NULL, 'N', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1609, NULL, NULL, NULL, NULL, NULL, '420607', '襄阳区', NULL, 'X', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1610, NULL, NULL, NULL, NULL, NULL, '420606', '樊城区', NULL, 'F', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1611, NULL, NULL, NULL, NULL, NULL, '420602', '襄城区', NULL, 'X', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1612, NULL, NULL, NULL, NULL, NULL, '420601', '市辖区', NULL, 'S', 10, 3, '420600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1613, NULL, NULL, NULL, NULL, NULL, '420500', '宜昌市', NULL, 'Y', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1614, NULL, NULL, NULL, NULL, NULL, '420583', '枝江市', NULL, 'Z', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1615, NULL, NULL, NULL, NULL, NULL, '420582', '当阳市', NULL, 'D', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1616, NULL, NULL, NULL, NULL, NULL, '420581', '宜都市', NULL, 'Y', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1617, NULL, NULL, NULL, NULL, NULL, '420529', '五峰土家族自治县', NULL, 'W', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1618, NULL, NULL, NULL, NULL, NULL, '420528', '长阳土家族自治县', NULL, 'C', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1619, NULL, NULL, NULL, NULL, NULL, '420527', '秭归县', NULL, 'G', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1620, NULL, NULL, NULL, NULL, NULL, '420526', '兴山县', NULL, 'X', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1621, NULL, NULL, NULL, NULL, NULL, '420525', '远安县', NULL, 'Y', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1622, NULL, NULL, NULL, NULL, NULL, '420506', '夷陵区', NULL, 'Y', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1623, NULL, NULL, NULL, NULL, NULL, '420505', '猇亭区', NULL, '', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1624, NULL, NULL, NULL, NULL, NULL, '420504', '点军区', NULL, 'D', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1625, NULL, NULL, NULL, NULL, NULL, '420503', '伍家岗区', NULL, 'W', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1626, NULL, NULL, NULL, NULL, NULL, '420502', '西陵区', NULL, 'X', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1627, NULL, NULL, NULL, NULL, NULL, '420501', '市辖区', NULL, 'S', 10, 3, '420500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1628, NULL, NULL, NULL, NULL, NULL, '420300', '十堰市', NULL, 'S', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1629, NULL, NULL, NULL, NULL, NULL, '420381', '丹江口市', NULL, 'D', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1630, NULL, NULL, NULL, NULL, NULL, '420325', '房　县', NULL, 'F', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1631, NULL, NULL, NULL, NULL, NULL, '420324', '竹溪县', NULL, 'Z', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1632, NULL, NULL, NULL, NULL, NULL, '420323', '竹山县', NULL, 'Z', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1633, NULL, NULL, NULL, NULL, NULL, '420322', '郧西县', NULL, 'Y', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1634, NULL, NULL, NULL, NULL, NULL, '420321', '郧　县', NULL, 'Y', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1635, NULL, NULL, NULL, NULL, NULL, '420303', '张湾区', NULL, 'Z', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1636, NULL, NULL, NULL, NULL, NULL, '420302', '茅箭区', NULL, 'M', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1637, NULL, NULL, NULL, NULL, NULL, '420301', '市辖区', NULL, 'S', 10, 3, '420300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1638, NULL, NULL, NULL, NULL, NULL, '420200', '黄石市', NULL, 'H', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1639, NULL, NULL, NULL, NULL, NULL, '420281', '大冶市', NULL, 'D', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1640, NULL, NULL, NULL, NULL, NULL, '420222', '阳新县', NULL, 'Y', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1641, NULL, NULL, NULL, NULL, NULL, '420205', '铁山区', NULL, 'T', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1642, NULL, NULL, NULL, NULL, NULL, '420204', '下陆区', NULL, 'X', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1643, NULL, NULL, NULL, NULL, NULL, '420203', '西塞山区', NULL, 'X', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1644, NULL, NULL, NULL, NULL, NULL, '420202', '黄石港区', NULL, 'H', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1645, NULL, NULL, NULL, NULL, NULL, '420201', '市辖区', NULL, 'S', 10, 3, '420200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1646, NULL, NULL, NULL, NULL, NULL, '420100', '武汉市', NULL, 'W', 10, 2, '420000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1647, NULL, NULL, NULL, NULL, NULL, '420117', '新洲区', NULL, 'X', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1648, NULL, NULL, NULL, NULL, NULL, '420116', '黄陂区', NULL, 'H', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1649, NULL, NULL, NULL, NULL, NULL, '420115', '江夏区', NULL, 'J', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1650, NULL, NULL, NULL, NULL, NULL, '420114', '蔡甸区', NULL, 'C', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1651, NULL, NULL, NULL, NULL, NULL, '420113', '汉南区', NULL, 'H', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1652, NULL, NULL, NULL, NULL, NULL, '420112', '东西湖区', NULL, 'D', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1653, NULL, NULL, NULL, NULL, NULL, '420111', '洪山区', NULL, 'H', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1654, NULL, NULL, NULL, NULL, NULL, '420107', '青山区', NULL, 'Q', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1655, NULL, NULL, NULL, NULL, NULL, '420106', '武昌区', NULL, 'W', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1656, NULL, NULL, NULL, NULL, NULL, '420105', '汉阳区', NULL, 'H', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1657, NULL, NULL, NULL, NULL, NULL, '420104', '乔口区', NULL, 'Q', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1658, NULL, NULL, NULL, NULL, NULL, '420103', '江汉区', NULL, 'J', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1659, NULL, NULL, NULL, NULL, NULL, '420102', '江岸区', NULL, 'J', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1660, NULL, NULL, NULL, NULL, NULL, '420101', '市辖区', NULL, 'S', 10, 3, '420100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1661, NULL, NULL, NULL, NULL, NULL, '410000', '河南省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1662, NULL, NULL, NULL, NULL, NULL, '411700', '驻马店市', NULL, 'Z', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1663, NULL, NULL, NULL, NULL, NULL, '411729', '新蔡县', NULL, 'X', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1664, NULL, NULL, NULL, NULL, NULL, '411728', '遂平县', NULL, 'S', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1665, NULL, NULL, NULL, NULL, NULL, '411727', '汝南县', NULL, 'R', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1666, NULL, NULL, NULL, NULL, NULL, '411726', '泌阳县', NULL, 'M', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1667, NULL, NULL, NULL, NULL, NULL, '411725', '确山县', NULL, 'Q', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1668, NULL, NULL, NULL, NULL, NULL, '411724', '正阳县', NULL, 'Z', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1669, NULL, NULL, NULL, NULL, NULL, '411723', '平舆县', NULL, 'P', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1670, NULL, NULL, NULL, NULL, NULL, '411722', '上蔡县', NULL, 'S', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1671, NULL, NULL, NULL, NULL, NULL, '411721', '西平县', NULL, 'X', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1672, NULL, NULL, NULL, NULL, NULL, '411702', '驿城区', NULL, 'C', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1673, NULL, NULL, NULL, NULL, NULL, '411701', '市辖区', NULL, 'S', 10, 3, '411700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1674, NULL, NULL, NULL, NULL, NULL, '411600', '周口市', NULL, 'Z', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1675, NULL, NULL, NULL, NULL, NULL, '411681', '项城市', NULL, 'X', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1676, NULL, NULL, NULL, NULL, NULL, '411628', '鹿邑县', NULL, 'L', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1677, NULL, NULL, NULL, NULL, NULL, '411627', '太康县', NULL, 'T', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1678, NULL, NULL, NULL, NULL, NULL, '411626', '淮阳县', NULL, 'H', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1679, NULL, NULL, NULL, NULL, NULL, '411625', '郸城县', NULL, 'D', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1680, NULL, NULL, NULL, NULL, NULL, '411624', '沈丘县', NULL, 'S', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1681, NULL, NULL, NULL, NULL, NULL, '411623', '商水县', NULL, 'S', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1682, NULL, NULL, NULL, NULL, NULL, '411622', '西华县', NULL, 'X', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1683, NULL, NULL, NULL, NULL, NULL, '411621', '扶沟县', NULL, 'F', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1684, NULL, NULL, NULL, NULL, NULL, '411602', '川汇区', NULL, 'C', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1685, NULL, NULL, NULL, NULL, NULL, '411601', '市辖区', NULL, 'S', 10, 3, '411600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1686, NULL, NULL, NULL, NULL, NULL, '411500', '信阳市', NULL, 'X', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1687, NULL, NULL, NULL, NULL, NULL, '411528', '息　县', NULL, 'X', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1688, NULL, NULL, NULL, NULL, NULL, '411527', '淮滨县', NULL, 'H', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1689, NULL, NULL, NULL, NULL, NULL, '411526', '潢川县', NULL, 'C', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1690, NULL, NULL, NULL, NULL, NULL, '411525', '固始县', NULL, 'G', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1691, NULL, NULL, NULL, NULL, NULL, '411524', '商城县', NULL, 'S', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1692, NULL, NULL, NULL, NULL, NULL, '411523', '新　县', NULL, 'X', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1693, NULL, NULL, NULL, NULL, NULL, '411522', '光山县', NULL, 'G', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1694, NULL, NULL, NULL, NULL, NULL, '411521', '罗山县', NULL, 'L', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1695, NULL, NULL, NULL, NULL, NULL, '411503', '平桥区', NULL, 'P', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1696, NULL, NULL, NULL, NULL, NULL, '411502', '师河区', NULL, 'S', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1697, NULL, NULL, NULL, NULL, NULL, '411501', '市辖区', NULL, 'S', 10, 3, '411500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1698, NULL, NULL, NULL, NULL, NULL, '411400', '商丘市', NULL, 'S', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1699, NULL, NULL, NULL, NULL, NULL, '411481', '永城市', NULL, 'Y', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1700, NULL, NULL, NULL, NULL, NULL, '411426', '夏邑县', NULL, 'X', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1701, NULL, NULL, NULL, NULL, NULL, '411425', '虞城县', NULL, 'Y', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1702, NULL, NULL, NULL, NULL, NULL, '411424', '柘城县', NULL, 'C', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1703, NULL, NULL, NULL, NULL, NULL, '411423', '宁陵县', NULL, 'N', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1704, NULL, NULL, NULL, NULL, NULL, '411422', '睢　县', NULL, 'X', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1705, NULL, NULL, NULL, NULL, NULL, '411421', '民权县', NULL, 'M', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1706, NULL, NULL, NULL, NULL, NULL, '411403', '睢阳区', NULL, 'Y', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1707, NULL, NULL, NULL, NULL, NULL, '411402', '梁园区', NULL, 'L', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1708, NULL, NULL, NULL, NULL, NULL, '411401', '市辖区', NULL, 'S', 10, 3, '411400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1709, NULL, NULL, NULL, NULL, NULL, '411300', '南阳市', NULL, 'N', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1710, NULL, NULL, NULL, NULL, NULL, '411381', '邓州市', NULL, 'D', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1711, NULL, NULL, NULL, NULL, NULL, '411330', '桐柏县', NULL, 'T', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1712, NULL, NULL, NULL, NULL, NULL, '411329', '新野县', NULL, 'X', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1713, NULL, NULL, NULL, NULL, NULL, '411328', '唐河县', NULL, 'T', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1714, NULL, NULL, NULL, NULL, NULL, '411327', '社旗县', NULL, 'S', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1715, NULL, NULL, NULL, NULL, NULL, '411326', '淅川县', NULL, 'C', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1716, NULL, NULL, NULL, NULL, NULL, '411325', '内乡县', NULL, 'N', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1717, NULL, NULL, NULL, NULL, NULL, '411324', '镇平县', NULL, 'Z', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1718, NULL, NULL, NULL, NULL, NULL, '411323', '西峡县', NULL, 'X', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1719, NULL, NULL, NULL, NULL, NULL, '411322', '方城县', NULL, 'F', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1720, NULL, NULL, NULL, NULL, NULL, '411321', '南召县', NULL, 'N', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1721, NULL, NULL, NULL, NULL, NULL, '411303', '卧龙区', NULL, 'W', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1722, NULL, NULL, NULL, NULL, NULL, '411302', '宛城区', NULL, 'W', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1723, NULL, NULL, NULL, NULL, NULL, '411301', '市辖区', NULL, 'S', 10, 3, '411300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1724, NULL, NULL, NULL, NULL, NULL, '411200', '三门峡市', NULL, 'S', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1725, NULL, NULL, NULL, NULL, NULL, '411282', '灵宝市', NULL, 'L', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1726, NULL, NULL, NULL, NULL, NULL, '411281', '义马市', NULL, 'Y', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1727, NULL, NULL, NULL, NULL, NULL, '411224', '卢氏县', NULL, 'L', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1728, NULL, NULL, NULL, NULL, NULL, '411222', '陕　县', NULL, 'S', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1729, NULL, NULL, NULL, NULL, NULL, '411221', '渑池县', NULL, 'C', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1730, NULL, NULL, NULL, NULL, NULL, '411202', '湖滨区', NULL, 'H', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1731, NULL, NULL, NULL, NULL, NULL, '411201', '市辖区', NULL, 'S', 10, 3, '411200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1732, NULL, NULL, NULL, NULL, NULL, '411100', '漯河市', NULL, 'H', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1733, NULL, NULL, NULL, NULL, NULL, '411122', '临颍县', NULL, 'L', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1734, NULL, NULL, NULL, NULL, NULL, '411121', '舞阳县', NULL, 'W', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1735, NULL, NULL, NULL, NULL, NULL, '411104', '召陵区', NULL, 'Z', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1736, NULL, NULL, NULL, NULL, NULL, '411103', '郾城区', NULL, 'C', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1737, NULL, NULL, NULL, NULL, NULL, '411102', '源汇区', NULL, 'Y', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1738, NULL, NULL, NULL, NULL, NULL, '411101', '市辖区', NULL, 'S', 10, 3, '411100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1739, NULL, NULL, NULL, NULL, NULL, '411000', '许昌市', NULL, 'X', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1740, NULL, NULL, NULL, NULL, NULL, '411082', '长葛市', 1, 'C', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1741, NULL, NULL, NULL, NULL, NULL, '411081', '禹州市', NULL, 'Y', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1742, NULL, NULL, NULL, NULL, NULL, '411025', '襄城县', NULL, 'X', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1743, NULL, NULL, NULL, NULL, NULL, '411024', '鄢陵县', NULL, 'L', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1744, NULL, NULL, NULL, NULL, NULL, '411023', '许昌县', NULL, 'X', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1745, NULL, NULL, NULL, NULL, NULL, '411002', '魏都区', NULL, 'W', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1746, NULL, NULL, NULL, NULL, NULL, '411001', '市辖区', NULL, 'S', 10, 3, '411000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1747, NULL, NULL, NULL, NULL, NULL, '410900', '濮阳市', NULL, 'Y', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1748, NULL, NULL, NULL, NULL, NULL, '410928', '濮阳县', NULL, 'Y', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1749, NULL, NULL, NULL, NULL, NULL, '410927', '台前县', NULL, 'T', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1750, NULL, NULL, NULL, NULL, NULL, '410926', '范　县', NULL, 'F', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1751, NULL, NULL, NULL, NULL, NULL, '410923', '南乐县', NULL, 'N', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1752, NULL, NULL, NULL, NULL, NULL, '410922', '清丰县', NULL, 'Q', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1753, NULL, NULL, NULL, NULL, NULL, '410902', '华龙区', NULL, 'H', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1754, NULL, NULL, NULL, NULL, NULL, '410901', '市辖区', NULL, 'S', 10, 3, '410900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1755, NULL, NULL, NULL, NULL, NULL, '410800', '焦作市', NULL, 'J', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1756, NULL, NULL, NULL, NULL, NULL, '410883', '孟州市', NULL, 'M', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1757, NULL, NULL, NULL, NULL, NULL, '410882', '沁阳市', NULL, 'Q', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1758, NULL, NULL, '2024-06-04 17:37:44.225000', 1, 0, '419001', '济源市', 1, 'J', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1759, NULL, NULL, NULL, NULL, NULL, '410825', '温　县', NULL, 'W', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1760, NULL, NULL, NULL, NULL, NULL, '410823', '武陟县', NULL, 'W', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1761, NULL, NULL, NULL, NULL, NULL, '410822', '博爱县', NULL, 'B', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1762, NULL, NULL, NULL, NULL, NULL, '410821', '修武县', NULL, 'X', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1763, NULL, NULL, NULL, NULL, NULL, '410811', '山阳区', NULL, 'S', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1764, NULL, NULL, NULL, NULL, NULL, '410804', '马村区', NULL, 'M', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1765, NULL, NULL, NULL, NULL, NULL, '410803', '中站区', NULL, 'Z', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1766, NULL, NULL, NULL, NULL, NULL, '410802', '解放区', NULL, 'J', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1767, NULL, NULL, NULL, NULL, NULL, '410801', '市辖区', NULL, 'S', 10, 3, '410800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1768, NULL, NULL, NULL, NULL, NULL, '410700', '新乡市', NULL, 'X', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1769, NULL, NULL, NULL, NULL, NULL, '410782', '辉县市', NULL, 'H', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1770, NULL, NULL, NULL, NULL, NULL, '410781', '卫辉市', NULL, 'W', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1771, NULL, NULL, NULL, NULL, NULL, '410728', '长垣县', NULL, 'C', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1772, NULL, NULL, NULL, NULL, NULL, '410727', '封丘县', NULL, 'F', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1773, NULL, NULL, NULL, NULL, NULL, '410726', '延津县', NULL, 'Y', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1774, NULL, NULL, NULL, NULL, NULL, '410725', '原阳县', NULL, 'Y', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1775, NULL, NULL, NULL, NULL, NULL, '410724', '获嘉县', NULL, 'H', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1776, NULL, NULL, NULL, NULL, NULL, '410721', '新乡县', NULL, 'X', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1777, NULL, NULL, NULL, NULL, NULL, '410711', '牧野区', NULL, 'M', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1778, NULL, NULL, NULL, NULL, NULL, '410704', '凤泉区', NULL, 'F', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1779, NULL, NULL, NULL, NULL, NULL, '410703', '卫滨区', NULL, 'W', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1780, NULL, NULL, NULL, NULL, NULL, '410702', '红旗区', NULL, 'H', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1781, NULL, NULL, NULL, NULL, NULL, '410701', '市辖区', NULL, 'S', 10, 3, '410700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1782, NULL, NULL, NULL, NULL, NULL, '410600', '鹤壁市', NULL, 'H', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1783, NULL, NULL, NULL, NULL, NULL, '410622', '淇　县', NULL, 'X', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1784, NULL, NULL, NULL, NULL, NULL, '410621', '浚　县', NULL, 'J', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1785, NULL, NULL, NULL, NULL, NULL, '410611', '淇滨区', NULL, 'B', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1786, NULL, NULL, NULL, NULL, NULL, '410603', '山城区', NULL, 'S', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1787, NULL, NULL, NULL, NULL, NULL, '410602', '鹤山区', NULL, 'H', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1788, NULL, NULL, NULL, NULL, NULL, '410601', '市辖区', NULL, 'S', 10, 3, '410600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1789, NULL, NULL, NULL, NULL, NULL, '410500', '安阳市', NULL, 'A', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1790, NULL, NULL, NULL, NULL, NULL, '410581', '林州市', NULL, 'L', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1791, NULL, NULL, NULL, NULL, NULL, '410527', '内黄县', NULL, 'N', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1792, NULL, NULL, NULL, NULL, NULL, '410526', '滑　县', NULL, 'H', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1793, NULL, NULL, NULL, NULL, NULL, '410523', '汤阴县', NULL, 'T', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1794, NULL, NULL, NULL, NULL, NULL, '410522', '安阳县', NULL, 'A', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1795, NULL, NULL, NULL, NULL, NULL, '410506', '龙安区', NULL, 'L', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1796, NULL, NULL, NULL, NULL, NULL, '410505', '殷都区', NULL, 'Y', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1797, NULL, NULL, NULL, NULL, NULL, '410503', '北关区', NULL, 'B', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1798, NULL, NULL, NULL, NULL, NULL, '410502', '文峰区', NULL, 'W', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1799, NULL, NULL, NULL, NULL, NULL, '410501', '市辖区', NULL, 'S', 10, 3, '410500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1800, NULL, NULL, NULL, NULL, NULL, '410400', '平顶山市', NULL, 'P', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1801, NULL, NULL, NULL, NULL, NULL, '410482', '汝州市', NULL, 'R', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1802, NULL, NULL, NULL, NULL, NULL, '410481', '舞钢市', NULL, 'W', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1803, NULL, NULL, NULL, NULL, NULL, '410425', '郏　县', NULL, 'X', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1804, NULL, NULL, NULL, NULL, NULL, '410423', '鲁山县', NULL, 'L', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1805, NULL, NULL, NULL, NULL, NULL, '410422', '叶　县', NULL, 'Y', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1806, NULL, NULL, NULL, NULL, NULL, '410421', '宝丰县', NULL, 'B', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1807, NULL, NULL, NULL, NULL, NULL, '410411', '湛河区', NULL, 'Z', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1808, NULL, NULL, NULL, NULL, NULL, '410404', '石龙区', NULL, 'S', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1809, NULL, NULL, NULL, NULL, NULL, '410403', '卫东区', NULL, 'W', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1810, NULL, NULL, NULL, NULL, NULL, '410402', '新华区', NULL, 'X', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1811, NULL, NULL, NULL, NULL, NULL, '410401', '市辖区', NULL, 'S', 10, 3, '410400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1812, NULL, NULL, NULL, NULL, NULL, '410300', '洛阳市', NULL, 'L', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1813, NULL, NULL, NULL, NULL, NULL, '410381', '偃师市', NULL, 'S', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1814, NULL, NULL, NULL, NULL, NULL, '410329', '伊川县', NULL, 'Y', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1815, NULL, NULL, NULL, NULL, NULL, '410328', '洛宁县', NULL, 'L', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1816, NULL, NULL, NULL, NULL, NULL, '410327', '宜阳县', NULL, 'Y', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1817, NULL, NULL, NULL, NULL, NULL, '410326', '汝阳县', NULL, 'R', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1818, NULL, NULL, NULL, NULL, NULL, '410325', '嵩　县', NULL, 'X', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1819, NULL, NULL, NULL, NULL, NULL, '410324', '栾川县', NULL, 'C', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1820, NULL, NULL, NULL, NULL, NULL, '410323', '新安县', NULL, 'X', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1821, NULL, NULL, NULL, NULL, NULL, '410322', '孟津县', NULL, 'M', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1822, NULL, NULL, NULL, NULL, NULL, '410307', '洛龙区', NULL, 'L', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1823, NULL, NULL, NULL, NULL, NULL, '410306', '吉利区', NULL, 'J', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1824, NULL, NULL, NULL, NULL, NULL, '410305', '涧西区', NULL, 'J', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1825, NULL, NULL, NULL, NULL, NULL, '410304', '廛河回族区', NULL, 'H', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1826, NULL, NULL, NULL, NULL, NULL, '410303', '西工区', NULL, 'X', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1827, NULL, NULL, NULL, NULL, NULL, '410302', '老城区', NULL, 'L', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1828, NULL, NULL, NULL, NULL, NULL, '410301', '市辖区', NULL, 'S', 10, 3, '410300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1829, NULL, NULL, NULL, NULL, NULL, '410200', '开封市', NULL, 'K', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1830, NULL, NULL, NULL, NULL, NULL, '410225', '兰考县', NULL, 'L', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1831, NULL, NULL, NULL, NULL, NULL, '410224', '开封县', NULL, 'K', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1832, NULL, NULL, NULL, NULL, NULL, '410223', '尉氏县', NULL, 'W', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1833, NULL, NULL, NULL, NULL, NULL, '410222', '通许县', NULL, 'T', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1834, NULL, NULL, NULL, NULL, NULL, '410221', '杞　县', NULL, 'X', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1835, NULL, NULL, NULL, NULL, NULL, '410211', '郊　区', NULL, 'J', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1836, NULL, NULL, NULL, NULL, NULL, '410205', '南关区', NULL, 'N', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1837, NULL, NULL, NULL, NULL, NULL, '410204', '鼓楼区', NULL, 'G', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1838, NULL, NULL, NULL, NULL, NULL, '410203', '顺河回族区', NULL, 'S', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1839, NULL, NULL, NULL, NULL, NULL, '410202', '龙亭区', NULL, 'L', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1840, NULL, NULL, NULL, NULL, NULL, '410201', '市辖区', NULL, 'S', 10, 3, '410200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1841, NULL, NULL, '2024-06-04 17:38:04.213000', 1, 0, '410100', '郑州市', NULL, 'Z', 10, 2, '410000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1842, NULL, NULL, NULL, NULL, NULL, '410185', '登封市', NULL, 'D', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1843, NULL, NULL, NULL, NULL, NULL, '410184', '新郑市', NULL, 'X', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1844, NULL, NULL, NULL, NULL, NULL, '410183', '新密市', NULL, 'X', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1845, NULL, NULL, NULL, NULL, NULL, '410182', '荥阳市', NULL, 'Y', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1846, NULL, NULL, NULL, NULL, NULL, '410181', '巩义市', NULL, 'G', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1847, NULL, NULL, NULL, NULL, NULL, '410122', '中牟县', NULL, 'Z', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1848, NULL, NULL, NULL, NULL, NULL, '410108', '邙山区', NULL, 'S', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1849, NULL, NULL, NULL, NULL, NULL, '410106', '上街区', NULL, 'S', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1850, NULL, NULL, NULL, NULL, NULL, '410105', '金水区', NULL, 'J', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1851, NULL, NULL, NULL, NULL, NULL, '410104', '管城回族区', NULL, 'G', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1852, NULL, NULL, NULL, NULL, NULL, '410103', '二七区', NULL, 'E', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1853, NULL, NULL, NULL, NULL, NULL, '410102', '中原区', NULL, 'Z', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1854, NULL, NULL, NULL, NULL, NULL, '410101', '市辖区', NULL, 'S', 10, 3, '410100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1855, NULL, NULL, NULL, NULL, NULL, '370000', '山东省', NULL, 'S', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (1856, NULL, NULL, NULL, NULL, NULL, '371700', '荷泽市', NULL, 'H', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1857, NULL, NULL, NULL, NULL, NULL, '371728', '东明县', NULL, 'D', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1858, NULL, NULL, NULL, NULL, NULL, '371727', '定陶县', NULL, 'D', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1859, NULL, NULL, NULL, NULL, NULL, '371726', '鄄城县', NULL, 'C', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1860, NULL, NULL, NULL, NULL, NULL, '371725', '郓城县', NULL, 'C', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1861, NULL, NULL, NULL, NULL, NULL, '371724', '巨野县', NULL, 'J', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1862, NULL, NULL, NULL, NULL, NULL, '371723', '成武县', NULL, 'C', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1863, NULL, NULL, NULL, NULL, NULL, '371722', '单　县', NULL, 'D', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1864, NULL, NULL, NULL, NULL, NULL, '371721', '曹　县', NULL, 'C', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1865, NULL, NULL, NULL, NULL, NULL, '371702', '牡丹区', NULL, 'M', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1866, NULL, NULL, NULL, NULL, NULL, '371701', '市辖区', NULL, 'S', 10, 3, '371700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1867, NULL, NULL, NULL, NULL, NULL, '371600', '滨州市', NULL, 'B', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1868, NULL, NULL, NULL, NULL, NULL, '371626', '邹平县', NULL, 'Z', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1869, NULL, NULL, NULL, NULL, NULL, '371625', '博兴县', NULL, 'B', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1870, NULL, NULL, NULL, NULL, NULL, '371624', '沾化县', NULL, 'Z', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1871, NULL, NULL, NULL, NULL, NULL, '371623', '无棣县', NULL, 'W', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1872, NULL, NULL, NULL, NULL, NULL, '371622', '阳信县', NULL, 'Y', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1873, NULL, NULL, NULL, NULL, NULL, '371621', '惠民县', NULL, 'H', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1874, NULL, NULL, NULL, NULL, NULL, '371602', '滨城区', NULL, 'B', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1875, NULL, NULL, NULL, NULL, NULL, '371601', '市辖区', NULL, 'S', 10, 3, '371600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1876, NULL, NULL, NULL, NULL, NULL, '371500', '聊城市', NULL, 'L', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1877, NULL, NULL, NULL, NULL, NULL, '371581', '临清市', NULL, 'L', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1878, NULL, NULL, NULL, NULL, NULL, '371526', '高唐县', NULL, 'G', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1879, NULL, NULL, NULL, NULL, NULL, '371525', '冠　县', NULL, 'G', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1880, NULL, NULL, NULL, NULL, NULL, '371524', '东阿县', NULL, 'D', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1881, NULL, NULL, NULL, NULL, NULL, '371523', '茌平县', NULL, 'P', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1882, NULL, NULL, NULL, NULL, NULL, '371522', '莘　县', NULL, 'X', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1883, NULL, NULL, NULL, NULL, NULL, '371521', '阳谷县', NULL, 'Y', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1884, NULL, NULL, NULL, NULL, NULL, '371502', '东昌府区', NULL, 'D', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1885, NULL, NULL, NULL, NULL, NULL, '371501', '市辖区', NULL, 'S', 10, 3, '371500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1886, NULL, NULL, NULL, NULL, NULL, '371400', '德州市', NULL, 'D', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1887, NULL, NULL, NULL, NULL, NULL, '371482', '禹城市', NULL, 'Y', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1888, NULL, NULL, NULL, NULL, NULL, '371481', '乐陵市', NULL, 'L', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1889, NULL, NULL, NULL, NULL, NULL, '371428', '武城县', NULL, 'W', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1890, NULL, NULL, NULL, NULL, NULL, '371427', '夏津县', NULL, 'X', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1891, NULL, NULL, NULL, NULL, NULL, '371426', '平原县', NULL, 'P', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1892, NULL, NULL, NULL, NULL, NULL, '371425', '齐河县', NULL, 'Q', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1893, NULL, NULL, NULL, NULL, NULL, '371424', '临邑县', NULL, 'L', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1894, NULL, NULL, NULL, NULL, NULL, '371423', '庆云县', NULL, 'Q', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1895, NULL, NULL, NULL, NULL, NULL, '371422', '宁津县', NULL, 'N', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1896, NULL, NULL, NULL, NULL, NULL, '371421', '陵　县', NULL, 'L', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1897, NULL, NULL, NULL, NULL, NULL, '371402', '德城区', NULL, 'D', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1898, NULL, NULL, NULL, NULL, NULL, '371401', '市辖区', NULL, 'S', 10, 3, '371400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1899, NULL, NULL, NULL, NULL, NULL, '371300', '临沂市', NULL, 'L', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1900, NULL, NULL, NULL, NULL, NULL, '371329', '临沭县', NULL, 'L', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1901, NULL, NULL, NULL, NULL, NULL, '371328', '蒙阴县', NULL, 'M', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1902, NULL, NULL, NULL, NULL, NULL, '371327', '莒南县', NULL, 'N', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1903, NULL, NULL, NULL, NULL, NULL, '371326', '平邑县', NULL, 'P', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1904, NULL, NULL, NULL, NULL, NULL, '371325', '费　县', NULL, 'F', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1905, NULL, NULL, NULL, NULL, NULL, '371324', '苍山县', NULL, 'C', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1906, NULL, NULL, NULL, NULL, NULL, '371323', '沂水县', NULL, 'Y', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1907, NULL, NULL, NULL, NULL, NULL, '371322', '郯城县', NULL, 'C', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1908, NULL, NULL, NULL, NULL, NULL, '371321', '沂南县', NULL, 'Y', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1909, NULL, NULL, NULL, NULL, NULL, '371312', '河东区', NULL, 'H', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1910, NULL, NULL, NULL, NULL, NULL, '371311', '罗庄区', NULL, 'L', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1911, NULL, NULL, NULL, NULL, NULL, '371302', '兰山区', NULL, 'L', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1912, NULL, NULL, NULL, NULL, NULL, '371301', '市辖区', NULL, 'S', 10, 3, '371300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1913, NULL, NULL, NULL, NULL, NULL, '371200', '莱芜市', NULL, 'L', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1914, NULL, NULL, NULL, NULL, NULL, '371203', '钢城区', NULL, 'G', 10, 3, '371200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1915, NULL, NULL, NULL, NULL, NULL, '371202', '莱城区', NULL, 'L', 10, 3, '371200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1916, NULL, NULL, NULL, NULL, NULL, '371201', '市辖区', NULL, 'S', 10, 3, '371200', NULL);
+INSERT INTO `sys_area_dj` VALUES (1917, NULL, NULL, NULL, NULL, NULL, '371100', '日照市', NULL, 'R', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1918, NULL, NULL, NULL, NULL, NULL, '371122', '莒　县', NULL, 'X', 10, 3, '371100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1919, NULL, NULL, NULL, NULL, NULL, '371121', '五莲县', NULL, 'W', 10, 3, '371100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1920, NULL, NULL, NULL, NULL, NULL, '371103', '岚山区', NULL, 'S', 10, 3, '371100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1921, NULL, NULL, NULL, NULL, NULL, '371102', '东港区', NULL, 'D', 10, 3, '371100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1922, NULL, NULL, NULL, NULL, NULL, '371101', '市辖区', NULL, 'S', 10, 3, '371100', NULL);
+INSERT INTO `sys_area_dj` VALUES (1923, NULL, NULL, NULL, NULL, NULL, '371000', '威海市', NULL, 'W', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1924, NULL, NULL, NULL, NULL, NULL, '371083', '乳山市', NULL, 'R', 10, 3, '371000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1925, NULL, NULL, NULL, NULL, NULL, '371082', '荣成市', NULL, 'R', 10, 3, '371000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1926, NULL, NULL, NULL, NULL, NULL, '371081', '文登市', NULL, 'W', 10, 3, '371000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1927, NULL, NULL, NULL, NULL, NULL, '371002', '环翠区', NULL, 'H', 10, 3, '371000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1928, NULL, NULL, NULL, NULL, NULL, '371001', '市辖区', NULL, 'S', 10, 3, '371000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1929, NULL, NULL, NULL, NULL, NULL, '370900', '泰安市', NULL, 'T', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1930, NULL, NULL, NULL, NULL, NULL, '370983', '肥城市', NULL, 'F', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1931, NULL, NULL, NULL, NULL, NULL, '370982', '新泰市', NULL, 'X', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1932, NULL, NULL, NULL, NULL, NULL, '370923', '东平县', NULL, 'D', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1933, NULL, NULL, NULL, NULL, NULL, '370921', '宁阳县', NULL, 'N', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1934, NULL, NULL, NULL, NULL, NULL, '370903', '岱岳区', NULL, 'Y', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1935, NULL, NULL, NULL, NULL, NULL, '370902', '泰山区', NULL, 'T', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1936, NULL, NULL, NULL, NULL, NULL, '370901', '市辖区', NULL, 'S', 10, 3, '370900', NULL);
+INSERT INTO `sys_area_dj` VALUES (1937, NULL, NULL, NULL, NULL, NULL, '370800', '济宁市', NULL, 'J', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1938, NULL, NULL, NULL, NULL, NULL, '370883', '邹城市', NULL, 'Z', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1939, NULL, NULL, NULL, NULL, NULL, '370882', '兖州市', NULL, 'Z', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1940, NULL, NULL, NULL, NULL, NULL, '370881', '曲阜市', NULL, 'Q', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1941, NULL, NULL, NULL, NULL, NULL, '370832', '梁山县', NULL, 'L', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1942, NULL, NULL, NULL, NULL, NULL, '370831', '泗水县', NULL, 'S', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1943, NULL, NULL, NULL, NULL, NULL, '370830', '汶上县', NULL, 'S', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1944, NULL, NULL, NULL, NULL, NULL, '370829', '嘉祥县', NULL, 'J', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1945, NULL, NULL, NULL, NULL, NULL, '370828', '金乡县', NULL, 'J', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1946, NULL, NULL, NULL, NULL, NULL, '370827', '鱼台县', NULL, 'Y', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1947, NULL, NULL, NULL, NULL, NULL, '370826', '微山县', NULL, 'W', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1948, NULL, NULL, NULL, NULL, NULL, '370811', '任城区', NULL, 'R', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1949, NULL, NULL, NULL, NULL, NULL, '370802', '市中区', NULL, 'S', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1950, NULL, NULL, NULL, NULL, NULL, '370801', '市辖区', NULL, 'S', 10, 3, '370800', NULL);
+INSERT INTO `sys_area_dj` VALUES (1951, NULL, NULL, NULL, NULL, NULL, '370700', '潍坊市', NULL, 'W', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1952, NULL, NULL, NULL, NULL, NULL, '370786', '昌邑市', NULL, 'C', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1953, NULL, NULL, NULL, NULL, NULL, '370785', '高密市', NULL, 'G', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1954, NULL, NULL, NULL, NULL, NULL, '370784', '安丘市', NULL, 'A', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1955, NULL, NULL, NULL, NULL, NULL, '370783', '寿光市', NULL, 'S', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1956, NULL, NULL, NULL, NULL, NULL, '370782', '诸城市', NULL, 'Z', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1957, NULL, NULL, NULL, NULL, NULL, '370781', '青州市', NULL, 'Q', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1958, NULL, NULL, NULL, NULL, NULL, '370725', '昌乐县', NULL, 'C', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1959, NULL, NULL, NULL, NULL, NULL, '370724', '临朐县', NULL, 'L', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1960, NULL, NULL, NULL, NULL, NULL, '370705', '奎文区', NULL, 'K', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1961, NULL, NULL, NULL, NULL, NULL, '370704', '坊子区', NULL, 'F', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1962, NULL, NULL, NULL, NULL, NULL, '370703', '寒亭区', NULL, 'H', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1963, NULL, NULL, NULL, NULL, NULL, '370702', '潍城区', NULL, 'W', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1964, NULL, NULL, NULL, NULL, NULL, '370701', '市辖区', NULL, 'S', 10, 3, '370700', NULL);
+INSERT INTO `sys_area_dj` VALUES (1965, NULL, NULL, NULL, NULL, NULL, '370600', '烟台市', NULL, 'Y', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1966, NULL, NULL, NULL, NULL, NULL, '370687', '海阳市', NULL, 'H', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1967, NULL, NULL, NULL, NULL, NULL, '370686', '栖霞市', NULL, 'Q', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1968, NULL, NULL, NULL, NULL, NULL, '370685', '招远市', NULL, 'Z', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1969, NULL, NULL, NULL, NULL, NULL, '370684', '蓬莱市', NULL, 'P', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1970, NULL, NULL, NULL, NULL, NULL, '370683', '莱州市', NULL, 'L', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1971, NULL, NULL, NULL, NULL, NULL, '370682', '莱阳市', NULL, 'L', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1972, NULL, NULL, NULL, NULL, NULL, '370681', '龙口市', NULL, 'L', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1973, NULL, NULL, NULL, NULL, NULL, '370634', '长岛县', NULL, 'C', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1974, NULL, NULL, NULL, NULL, NULL, '370613', '莱山区', NULL, 'L', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1975, NULL, NULL, NULL, NULL, NULL, '370612', '牟平区', NULL, 'M', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1976, NULL, NULL, NULL, NULL, NULL, '370611', '福山区', NULL, 'F', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1977, NULL, NULL, NULL, NULL, NULL, '370602', '芝罘区', NULL, 'Z', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1978, NULL, NULL, NULL, NULL, NULL, '370601', '市辖区', NULL, 'S', 10, 3, '370600', NULL);
+INSERT INTO `sys_area_dj` VALUES (1979, NULL, NULL, NULL, NULL, NULL, '370500', '东营市', NULL, 'D', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1980, NULL, NULL, NULL, NULL, NULL, '370523', '广饶县', NULL, 'G', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1981, NULL, NULL, NULL, NULL, NULL, '370522', '利津县', NULL, 'L', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1982, NULL, NULL, NULL, NULL, NULL, '370521', '垦利县', NULL, 'K', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1983, NULL, NULL, NULL, NULL, NULL, '370503', '河口区', NULL, 'H', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1984, NULL, NULL, NULL, NULL, NULL, '370502', '东营区', NULL, 'D', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1985, NULL, NULL, NULL, NULL, NULL, '370501', '市辖区', NULL, 'S', 10, 3, '370500', NULL);
+INSERT INTO `sys_area_dj` VALUES (1986, NULL, NULL, NULL, NULL, NULL, '370400', '枣庄市', NULL, 'Z', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1987, NULL, NULL, NULL, NULL, NULL, '370481', '滕州市', NULL, 'Z', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1988, NULL, NULL, NULL, NULL, NULL, '370406', '山亭区', NULL, 'S', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1989, NULL, NULL, NULL, NULL, NULL, '370405', '台儿庄区', NULL, 'T', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1990, NULL, NULL, NULL, NULL, NULL, '370404', '峄城区', NULL, 'C', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1991, NULL, NULL, NULL, NULL, NULL, '370403', '薛城区', NULL, 'X', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1992, NULL, NULL, NULL, NULL, NULL, '370402', '市中区', NULL, 'S', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1993, NULL, NULL, NULL, NULL, NULL, '370401', '市辖区', NULL, 'S', 10, 3, '370400', NULL);
+INSERT INTO `sys_area_dj` VALUES (1994, NULL, NULL, NULL, NULL, NULL, '370300', '淄博市', NULL, 'Z', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (1995, NULL, NULL, NULL, NULL, NULL, '370323', '沂源县', NULL, 'Y', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1996, NULL, NULL, NULL, NULL, NULL, '370322', '高青县', NULL, 'G', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1997, NULL, NULL, NULL, NULL, NULL, '370321', '桓台县', NULL, 'H', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1998, NULL, NULL, NULL, NULL, NULL, '370306', '周村区', NULL, 'Z', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (1999, NULL, NULL, NULL, NULL, NULL, '370305', '临淄区', NULL, 'L', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2000, NULL, NULL, NULL, NULL, NULL, '370304', '博山区', NULL, 'B', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2001, NULL, NULL, NULL, NULL, NULL, '370303', '张店区', NULL, 'Z', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2002, NULL, NULL, NULL, NULL, NULL, '370302', '淄川区', NULL, 'Z', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2003, NULL, NULL, NULL, NULL, NULL, '370301', '市辖区', NULL, 'S', 10, 3, '370300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2004, NULL, NULL, NULL, NULL, NULL, '370200', '青岛市', NULL, 'Q', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2005, NULL, NULL, NULL, NULL, NULL, '370285', '莱西市', NULL, 'L', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2006, NULL, NULL, NULL, NULL, NULL, '370284', '胶南市', NULL, 'J', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2007, NULL, NULL, NULL, NULL, NULL, '370283', '平度市', NULL, 'P', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2008, NULL, NULL, NULL, NULL, NULL, '370282', '即墨市', NULL, 'J', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2009, NULL, NULL, NULL, NULL, NULL, '370281', '胶州市', NULL, 'J', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2010, NULL, NULL, NULL, NULL, NULL, '370214', '城阳区', NULL, 'C', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2011, NULL, NULL, NULL, NULL, NULL, '370213', '李沧区', NULL, 'L', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2012, NULL, NULL, NULL, NULL, NULL, '370212', '崂山区', NULL, 'S', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2013, NULL, NULL, NULL, NULL, NULL, '370211', '黄岛区', NULL, 'H', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2014, NULL, NULL, NULL, NULL, NULL, '370205', '四方区', NULL, 'S', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2015, NULL, NULL, NULL, NULL, NULL, '370203', '市北区', NULL, 'S', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2016, NULL, NULL, NULL, NULL, NULL, '370202', '市南区', NULL, 'S', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2017, NULL, NULL, NULL, NULL, NULL, '370201', '市辖区', NULL, 'S', 10, 3, '370200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2018, NULL, NULL, NULL, NULL, NULL, '370100', '济南市', NULL, 'J', 10, 2, '370000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2019, NULL, NULL, NULL, NULL, NULL, '370181', '章丘市', NULL, 'Z', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2020, NULL, NULL, NULL, NULL, NULL, '370126', '商河县', NULL, 'S', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2021, NULL, NULL, NULL, NULL, NULL, '370125', '济阳县', NULL, 'J', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2022, NULL, NULL, NULL, NULL, NULL, '370124', '平阴县', NULL, 'P', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2023, NULL, NULL, NULL, NULL, NULL, '370113', '长清区', NULL, 'C', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2024, NULL, NULL, NULL, NULL, NULL, '370112', '历城区', NULL, 'L', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2025, NULL, NULL, NULL, NULL, NULL, '370105', '天桥区', NULL, 'T', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2026, NULL, NULL, NULL, NULL, NULL, '370104', '槐荫区', NULL, 'H', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2027, NULL, NULL, NULL, NULL, NULL, '370103', '市中区', NULL, 'S', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2028, NULL, NULL, NULL, NULL, NULL, '370102', '历下区', NULL, 'L', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2029, NULL, NULL, NULL, NULL, NULL, '370101', '市辖区', NULL, 'S', 10, 3, '370100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2030, NULL, NULL, NULL, NULL, NULL, '360000', '江西省', NULL, 'J', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2031, NULL, NULL, NULL, NULL, NULL, '361100', '上饶市', NULL, 'S', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2032, NULL, NULL, NULL, NULL, NULL, '361181', '德兴市', NULL, 'D', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2033, NULL, NULL, NULL, NULL, NULL, '361130', '婺源县', NULL, 'Y', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2034, NULL, NULL, NULL, NULL, NULL, '361129', '万年县', NULL, 'W', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2035, NULL, NULL, NULL, NULL, NULL, '361128', '鄱阳县', NULL, 'Y', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2036, NULL, NULL, NULL, NULL, NULL, '361127', '余干县', NULL, 'Y', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2037, NULL, NULL, NULL, NULL, NULL, '361126', '弋阳县', NULL, 'Y', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2038, NULL, NULL, NULL, NULL, NULL, '361125', '横峰县', NULL, 'H', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2039, NULL, NULL, NULL, NULL, NULL, '361124', '铅山县', NULL, 'Q', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2040, NULL, NULL, NULL, NULL, NULL, '361123', '玉山县', NULL, 'Y', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2041, NULL, NULL, NULL, NULL, NULL, '361122', '广丰县', NULL, 'G', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2042, NULL, NULL, NULL, NULL, NULL, '361121', '上饶县', NULL, 'S', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2043, NULL, NULL, NULL, NULL, NULL, '361102', '信州区', NULL, 'X', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2044, NULL, NULL, NULL, NULL, NULL, '361101', '市辖区', NULL, 'S', 10, 3, '361100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2045, NULL, NULL, NULL, NULL, NULL, '361000', '抚州市', NULL, 'F', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2046, NULL, NULL, NULL, NULL, NULL, '361030', '广昌县', NULL, 'G', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2047, NULL, NULL, NULL, NULL, NULL, '361029', '东乡县', NULL, 'D', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2048, NULL, NULL, NULL, NULL, NULL, '361028', '资溪县', NULL, 'Z', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2049, NULL, NULL, NULL, NULL, NULL, '361027', '金溪县', NULL, 'J', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2050, NULL, NULL, NULL, NULL, NULL, '361026', '宜黄县', NULL, 'Y', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2051, NULL, NULL, NULL, NULL, NULL, '361025', '乐安县', NULL, 'L', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2052, NULL, NULL, NULL, NULL, NULL, '361024', '崇仁县', NULL, 'C', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2053, NULL, NULL, NULL, NULL, NULL, '361023', '南丰县', NULL, 'N', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2054, NULL, NULL, NULL, NULL, NULL, '361022', '黎川县', NULL, 'L', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2055, NULL, NULL, NULL, NULL, NULL, '361021', '南城县', NULL, 'N', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2056, NULL, NULL, NULL, NULL, NULL, '361002', '临川区', NULL, 'L', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2057, NULL, NULL, NULL, NULL, NULL, '361001', '市辖区', NULL, 'S', 10, 3, '361000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2058, NULL, NULL, NULL, NULL, NULL, '360900', '宜春市', NULL, 'Y', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2059, NULL, NULL, NULL, NULL, NULL, '360983', '高安市', NULL, 'G', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2060, NULL, NULL, NULL, NULL, NULL, '360982', '樟树市', NULL, 'Z', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2061, NULL, NULL, NULL, NULL, NULL, '360981', '丰城市', NULL, 'F', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2062, NULL, NULL, NULL, NULL, NULL, '360926', '铜鼓县', NULL, 'T', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2063, NULL, NULL, NULL, NULL, NULL, '360925', '靖安县', NULL, 'J', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2064, NULL, NULL, NULL, NULL, NULL, '360924', '宜丰县', NULL, 'Y', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2065, NULL, NULL, NULL, NULL, NULL, '360923', '上高县', NULL, 'S', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2066, NULL, NULL, NULL, NULL, NULL, '360922', '万载县', NULL, 'W', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2067, NULL, NULL, NULL, NULL, NULL, '360921', '奉新县', NULL, 'F', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2068, NULL, NULL, NULL, NULL, NULL, '360902', '袁州区', NULL, 'Y', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2069, NULL, NULL, NULL, NULL, NULL, '360901', '市辖区', NULL, 'S', 10, 3, '360900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2070, NULL, NULL, NULL, NULL, NULL, '360800', '吉安市', NULL, 'J', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2071, NULL, NULL, NULL, NULL, NULL, '360881', '井冈山市', NULL, 'J', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2072, NULL, NULL, NULL, NULL, NULL, '360830', '永新县', NULL, 'Y', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2073, NULL, NULL, NULL, NULL, NULL, '360829', '安福县', NULL, 'A', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2074, NULL, NULL, NULL, NULL, NULL, '360828', '万安县', NULL, 'W', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2075, NULL, NULL, NULL, NULL, NULL, '360827', '遂川县', NULL, 'S', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2076, NULL, NULL, NULL, NULL, NULL, '360826', '泰和县', NULL, 'T', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2077, NULL, NULL, NULL, NULL, NULL, '360825', '永丰县', NULL, 'Y', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2078, NULL, NULL, NULL, NULL, NULL, '360824', '新干县', NULL, 'X', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2079, NULL, NULL, NULL, NULL, NULL, '360823', '峡江县', NULL, 'X', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2080, NULL, NULL, NULL, NULL, NULL, '360822', '吉水县', NULL, 'J', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2081, NULL, NULL, NULL, NULL, NULL, '360821', '吉安县', NULL, 'J', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2082, NULL, NULL, NULL, NULL, NULL, '360803', '青原区', NULL, 'Q', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2083, NULL, NULL, NULL, NULL, NULL, '360802', '吉州区', NULL, 'J', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2084, NULL, NULL, NULL, NULL, NULL, '360801', '市辖区', NULL, 'S', 10, 3, '360800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2085, NULL, NULL, NULL, NULL, NULL, '360700', '赣州市', NULL, 'G', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2086, NULL, NULL, NULL, NULL, NULL, '360782', '南康市', NULL, 'N', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2087, NULL, NULL, NULL, NULL, NULL, '360781', '瑞金市', NULL, 'R', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2088, NULL, NULL, NULL, NULL, NULL, '360735', '石城县', NULL, 'S', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2089, NULL, NULL, NULL, NULL, NULL, '360734', '寻乌县', NULL, 'X', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2090, NULL, NULL, NULL, NULL, NULL, '360733', '会昌县', NULL, 'H', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2091, NULL, NULL, NULL, NULL, NULL, '360732', '兴国县', NULL, 'X', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2092, NULL, NULL, NULL, NULL, NULL, '360731', '于都县', NULL, 'Y', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2093, NULL, NULL, NULL, NULL, NULL, '360730', '宁都县', NULL, 'N', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2094, NULL, NULL, NULL, NULL, NULL, '360729', '全南县', NULL, 'Q', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2095, NULL, NULL, NULL, NULL, NULL, '360728', '定南县', NULL, 'D', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2096, NULL, NULL, NULL, NULL, NULL, '360727', '龙南县', NULL, 'L', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2097, NULL, NULL, NULL, NULL, NULL, '360726', '安远县', NULL, 'A', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2098, NULL, NULL, NULL, NULL, NULL, '360725', '崇义县', NULL, 'C', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2099, NULL, NULL, NULL, NULL, NULL, '360724', '上犹县', NULL, 'S', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2100, NULL, NULL, NULL, NULL, NULL, '360723', '大余县', NULL, 'D', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2101, NULL, NULL, NULL, NULL, NULL, '360722', '信丰县', NULL, 'X', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2102, NULL, NULL, NULL, NULL, NULL, '360721', '赣　县', NULL, 'G', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2103, NULL, NULL, NULL, NULL, NULL, '360702', '章贡区', NULL, 'Z', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2104, NULL, NULL, NULL, NULL, NULL, '360701', '市辖区', NULL, 'S', 10, 3, '360700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2105, NULL, NULL, NULL, NULL, NULL, '360600', '鹰潭市', NULL, 'Y', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2106, NULL, NULL, NULL, NULL, NULL, '360681', '贵溪市', NULL, 'G', 10, 3, '360600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2107, NULL, NULL, NULL, NULL, NULL, '360622', '余江县', NULL, 'Y', 10, 3, '360600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2108, NULL, NULL, NULL, NULL, NULL, '360602', '月湖区', NULL, 'Y', 10, 3, '360600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2109, NULL, NULL, NULL, NULL, NULL, '360601', '市辖区', NULL, 'S', 10, 3, '360600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2110, NULL, NULL, NULL, NULL, NULL, '360500', '新余市', NULL, 'X', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2111, NULL, NULL, NULL, NULL, NULL, '360521', '分宜县', NULL, 'F', 10, 3, '360500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2112, NULL, NULL, NULL, NULL, NULL, '360502', '渝水区', NULL, 'Y', 10, 3, '360500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2113, NULL, NULL, NULL, NULL, NULL, '360501', '市辖区', NULL, 'S', 10, 3, '360500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2114, NULL, NULL, NULL, NULL, NULL, '360400', '九江市', NULL, 'J', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2115, NULL, NULL, NULL, NULL, NULL, '360481', '瑞昌市', NULL, 'R', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2116, NULL, NULL, NULL, NULL, NULL, '360430', '彭泽县', NULL, 'P', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2117, NULL, NULL, NULL, NULL, NULL, '360429', '湖口县', NULL, 'H', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2118, NULL, NULL, NULL, NULL, NULL, '360428', '都昌县', NULL, 'D', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2119, NULL, NULL, NULL, NULL, NULL, '360427', '星子县', NULL, 'X', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2120, NULL, NULL, NULL, NULL, NULL, '360426', '德安县', NULL, 'D', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2121, NULL, NULL, NULL, NULL, NULL, '360425', '永修县', NULL, 'Y', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2122, NULL, NULL, NULL, NULL, NULL, '360424', '修水县', NULL, 'X', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2123, NULL, NULL, NULL, NULL, NULL, '360423', '武宁县', NULL, 'W', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2124, NULL, NULL, NULL, NULL, NULL, '360421', '九江县', NULL, 'J', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2125, NULL, NULL, NULL, NULL, NULL, '360403', '浔阳区', NULL, 'Y', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2126, NULL, NULL, NULL, NULL, NULL, '360402', '庐山区', NULL, 'L', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2127, NULL, NULL, NULL, NULL, NULL, '360401', '市辖区', NULL, 'S', 10, 3, '360400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2128, NULL, NULL, NULL, NULL, NULL, '360300', '萍乡市', NULL, 'P', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2129, NULL, NULL, NULL, NULL, NULL, '360323', '芦溪县', NULL, 'L', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2130, NULL, NULL, NULL, NULL, NULL, '360322', '上栗县', NULL, 'S', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2131, NULL, NULL, NULL, NULL, NULL, '360321', '莲花县', NULL, 'L', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2132, NULL, NULL, NULL, NULL, NULL, '360313', '湘东区', NULL, 'X', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2133, NULL, NULL, NULL, NULL, NULL, '360302', '安源区', NULL, 'A', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2134, NULL, NULL, NULL, NULL, NULL, '360301', '市辖区', NULL, 'S', 10, 3, '360300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2135, NULL, NULL, NULL, NULL, NULL, '360200', '景德镇市', NULL, 'J', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2136, NULL, NULL, NULL, NULL, NULL, '360281', '乐平市', NULL, 'L', 10, 3, '360200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2137, NULL, NULL, NULL, NULL, NULL, '360222', '浮梁县', NULL, 'F', 10, 3, '360200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2138, NULL, NULL, NULL, NULL, NULL, '360203', '珠山区', NULL, 'Z', 10, 3, '360200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2139, NULL, NULL, NULL, NULL, NULL, '360202', '昌江区', NULL, 'C', 10, 3, '360200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2140, NULL, NULL, NULL, NULL, NULL, '360201', '市辖区', NULL, 'S', 10, 3, '360200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2141, NULL, NULL, NULL, NULL, NULL, '360100', '南昌市', NULL, 'N', 10, 2, '360000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2142, NULL, NULL, NULL, NULL, NULL, '360124', '进贤县', NULL, 'J', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2143, NULL, NULL, NULL, NULL, NULL, '360123', '安义县', NULL, 'A', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2144, NULL, NULL, NULL, NULL, NULL, '360122', '新建县', NULL, 'X', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2145, NULL, NULL, NULL, NULL, NULL, '360121', '南昌县', NULL, 'N', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2146, NULL, NULL, NULL, NULL, NULL, '360111', '青山湖区', NULL, 'Q', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2147, NULL, NULL, NULL, NULL, NULL, '360105', '湾里区', NULL, 'W', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2148, NULL, NULL, NULL, NULL, NULL, '360104', '青云谱区', NULL, 'Q', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2149, NULL, NULL, NULL, NULL, NULL, '360103', '西湖区', NULL, 'X', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2150, NULL, NULL, NULL, NULL, NULL, '360102', '东湖区', NULL, 'D', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2151, NULL, NULL, NULL, NULL, NULL, '360101', '市辖区', NULL, 'S', 10, 3, '360100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2152, NULL, NULL, NULL, NULL, NULL, '350000', '福建省', NULL, 'F', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2153, NULL, NULL, NULL, NULL, NULL, '350900', '宁德市', NULL, 'N', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2154, NULL, NULL, NULL, NULL, NULL, '350982', '福鼎市', NULL, 'F', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2155, NULL, NULL, NULL, NULL, NULL, '350981', '福安市', NULL, 'F', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2156, NULL, NULL, NULL, NULL, NULL, '350926', '柘荣县', NULL, 'R', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2157, NULL, NULL, NULL, NULL, NULL, '350925', '周宁县', NULL, 'Z', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2158, NULL, NULL, NULL, NULL, NULL, '350924', '寿宁县', NULL, 'S', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2159, NULL, NULL, NULL, NULL, NULL, '350923', '屏南县', NULL, 'P', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2160, NULL, NULL, NULL, NULL, NULL, '350922', '古田县', NULL, 'G', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2161, NULL, NULL, NULL, NULL, NULL, '350921', '霞浦县', NULL, 'X', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2162, NULL, NULL, NULL, NULL, NULL, '350902', '蕉城区', NULL, 'J', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2163, NULL, NULL, NULL, NULL, NULL, '350901', '市辖区', NULL, 'S', 10, 3, '350900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2164, NULL, NULL, NULL, NULL, NULL, '350800', '龙岩市', NULL, 'L', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2165, NULL, NULL, NULL, NULL, NULL, '350881', '漳平市', NULL, 'Z', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2166, NULL, NULL, NULL, NULL, NULL, '350825', '连城县', NULL, 'L', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2167, NULL, NULL, NULL, NULL, NULL, '350824', '武平县', NULL, 'W', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2168, NULL, NULL, NULL, NULL, NULL, '350823', '上杭县', NULL, 'S', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2169, NULL, NULL, NULL, NULL, NULL, '350822', '永定县', NULL, 'Y', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2170, NULL, NULL, NULL, NULL, NULL, '350821', '长汀县', NULL, 'C', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2171, NULL, NULL, NULL, NULL, NULL, '350802', '新罗区', NULL, 'X', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2172, NULL, NULL, NULL, NULL, NULL, '350801', '市辖区', NULL, 'S', 10, 3, '350800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2173, NULL, NULL, NULL, NULL, NULL, '350700', '南平市', NULL, 'N', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2174, NULL, NULL, NULL, NULL, NULL, '350784', '建阳市', NULL, 'J', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2175, NULL, NULL, NULL, NULL, NULL, '350783', '建瓯市', NULL, 'J', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2176, NULL, NULL, NULL, NULL, NULL, '350782', '武夷山市', NULL, 'W', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2177, NULL, NULL, NULL, NULL, NULL, '350781', '邵武市', NULL, 'S', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2178, NULL, NULL, NULL, NULL, NULL, '350725', '政和县', NULL, 'Z', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2179, NULL, NULL, NULL, NULL, NULL, '350724', '松溪县', NULL, 'S', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2180, NULL, NULL, NULL, NULL, NULL, '350723', '光泽县', NULL, 'G', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2181, NULL, NULL, NULL, NULL, NULL, '350722', '浦城县', NULL, 'P', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2182, NULL, NULL, NULL, NULL, NULL, '350721', '顺昌县', NULL, 'S', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2183, NULL, NULL, NULL, NULL, NULL, '350702', '延平区', NULL, 'Y', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2184, NULL, NULL, NULL, NULL, NULL, '350701', '市辖区', NULL, 'S', 10, 3, '350700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2185, NULL, NULL, NULL, NULL, NULL, '350600', '漳州市', NULL, 'Z', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2186, NULL, NULL, NULL, NULL, NULL, '350681', '龙海市', NULL, 'L', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2187, NULL, NULL, NULL, NULL, NULL, '350629', '华安县', NULL, 'H', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2188, NULL, NULL, NULL, NULL, NULL, '350628', '平和县', NULL, 'P', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2189, NULL, NULL, NULL, NULL, NULL, '350627', '南靖县', NULL, 'N', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2190, NULL, NULL, NULL, NULL, NULL, '350626', '东山县', NULL, 'D', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2191, NULL, NULL, NULL, NULL, NULL, '350625', '长泰县', NULL, 'C', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2192, NULL, NULL, NULL, NULL, NULL, '350624', '诏安县', NULL, 'A', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2193, NULL, NULL, NULL, NULL, NULL, '350623', '漳浦县', NULL, 'Z', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2194, NULL, NULL, NULL, NULL, NULL, '350622', '云霄县', NULL, 'Y', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2195, NULL, NULL, NULL, NULL, NULL, '350603', '龙文区', NULL, 'L', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2196, NULL, NULL, NULL, NULL, NULL, '350602', '芗城区', NULL, 'C', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2197, NULL, NULL, NULL, NULL, NULL, '350601', '市辖区', NULL, 'S', 10, 3, '350600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2198, NULL, NULL, NULL, NULL, NULL, '350500', '泉州市', NULL, 'Q', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2199, NULL, NULL, NULL, NULL, NULL, '350583', '南安市', NULL, 'N', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2200, NULL, NULL, NULL, NULL, NULL, '350582', '晋江市', NULL, 'J', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2201, NULL, NULL, NULL, NULL, NULL, '350581', '石狮市', NULL, 'S', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2202, NULL, NULL, NULL, NULL, NULL, '350527', '金门县', NULL, 'J', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2203, NULL, NULL, NULL, NULL, NULL, '350526', '德化县', NULL, 'D', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2204, NULL, NULL, NULL, NULL, NULL, '350525', '永春县', NULL, 'Y', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2205, NULL, NULL, NULL, NULL, NULL, '350524', '安溪县', NULL, 'A', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2206, NULL, NULL, NULL, NULL, NULL, '350521', '惠安县', NULL, 'H', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2207, NULL, NULL, NULL, NULL, NULL, '350505', '泉港区', NULL, 'Q', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2208, NULL, NULL, NULL, NULL, NULL, '350504', '洛江区', NULL, 'L', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2209, NULL, NULL, NULL, NULL, NULL, '350503', '丰泽区', NULL, 'F', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2210, NULL, NULL, NULL, NULL, NULL, '350502', '鲤城区', NULL, 'L', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2211, NULL, NULL, NULL, NULL, NULL, '350501', '市辖区', NULL, 'S', 10, 3, '350500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2212, NULL, NULL, NULL, NULL, NULL, '350400', '三明市', NULL, 'S', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2213, NULL, NULL, NULL, NULL, NULL, '350481', '永安市', NULL, 'Y', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2214, NULL, NULL, NULL, NULL, NULL, '350430', '建宁县', NULL, 'J', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2215, NULL, NULL, NULL, NULL, NULL, '350429', '泰宁县', NULL, 'T', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2216, NULL, NULL, NULL, NULL, NULL, '350428', '将乐县', NULL, 'J', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2217, NULL, NULL, NULL, NULL, NULL, '350427', '沙　县', NULL, 'S', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2218, NULL, NULL, NULL, NULL, NULL, '350426', '尤溪县', NULL, 'Y', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2219, NULL, NULL, NULL, NULL, NULL, '350425', '大田县', NULL, 'D', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2220, NULL, NULL, NULL, NULL, NULL, '350424', '宁化县', NULL, 'N', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2221, NULL, NULL, NULL, NULL, NULL, '350423', '清流县', NULL, 'Q', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2222, NULL, NULL, NULL, NULL, NULL, '350421', '明溪县', NULL, 'M', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2223, NULL, NULL, NULL, NULL, NULL, '350403', '三元区', NULL, 'S', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2224, NULL, NULL, NULL, NULL, NULL, '350402', '梅列区', NULL, 'M', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2225, NULL, NULL, NULL, NULL, NULL, '350401', '市辖区', NULL, 'S', 10, 3, '350400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2226, NULL, NULL, NULL, NULL, NULL, '350300', '莆田市', NULL, 'P', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2227, NULL, NULL, NULL, NULL, NULL, '350322', '仙游县', NULL, 'X', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2228, NULL, NULL, NULL, NULL, NULL, '350305', '秀屿区', NULL, 'X', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2229, NULL, NULL, NULL, NULL, NULL, '350304', '荔城区', NULL, 'L', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2230, NULL, NULL, NULL, NULL, NULL, '350303', '涵江区', NULL, 'H', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2231, NULL, NULL, NULL, NULL, NULL, '350302', '城厢区', NULL, 'C', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2232, NULL, NULL, NULL, NULL, NULL, '350301', '市辖区', NULL, 'S', 10, 3, '350300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2233, NULL, NULL, NULL, NULL, NULL, '350200', '厦门市', NULL, 'X', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2234, NULL, NULL, NULL, NULL, NULL, '350213', '翔安区', NULL, 'X', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2235, NULL, NULL, NULL, NULL, NULL, '350212', '同安区', NULL, 'T', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2236, NULL, NULL, NULL, NULL, NULL, '350211', '集美区', NULL, 'J', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2237, NULL, NULL, NULL, NULL, NULL, '350206', '湖里区', NULL, 'H', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2238, NULL, NULL, NULL, NULL, NULL, '350205', '海沧区', NULL, 'H', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2239, NULL, NULL, NULL, NULL, NULL, '350203', '思明区', NULL, 'S', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2240, NULL, NULL, NULL, NULL, NULL, '350201', '市辖区', NULL, 'S', 10, 3, '350200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2241, NULL, NULL, NULL, NULL, NULL, '350100', '福州市', NULL, 'F', 10, 2, '350000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2242, NULL, NULL, NULL, NULL, NULL, '350182', '长乐市', NULL, 'C', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2243, NULL, NULL, NULL, NULL, NULL, '350181', '福清市', NULL, 'F', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2244, NULL, NULL, NULL, NULL, NULL, '350128', '平潭县', NULL, 'P', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2245, NULL, NULL, NULL, NULL, NULL, '350125', '永泰县', NULL, 'Y', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2246, NULL, NULL, NULL, NULL, NULL, '350124', '闽清县', NULL, 'M', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2247, NULL, NULL, NULL, NULL, NULL, '350123', '罗源县', NULL, 'L', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2248, NULL, NULL, NULL, NULL, NULL, '350122', '连江县', NULL, 'L', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2249, NULL, NULL, NULL, NULL, NULL, '350121', '闽侯县', NULL, 'M', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2250, NULL, NULL, NULL, NULL, NULL, '350111', '晋安区', NULL, 'J', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2251, NULL, NULL, NULL, NULL, NULL, '350105', '马尾区', NULL, 'M', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2252, NULL, NULL, NULL, NULL, NULL, '350104', '仓山区', NULL, 'C', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2253, NULL, NULL, NULL, NULL, NULL, '350103', '台江区', NULL, 'T', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2254, NULL, NULL, NULL, NULL, NULL, '350102', '鼓楼区', NULL, 'G', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2255, NULL, NULL, NULL, NULL, NULL, '350101', '市辖区', NULL, 'S', 10, 3, '350100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2256, NULL, NULL, NULL, NULL, NULL, '340000', '安徽省', NULL, 'A', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2257, NULL, NULL, NULL, NULL, NULL, '341800', '宣城市', NULL, 'X', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2258, NULL, NULL, NULL, NULL, NULL, '341881', '宁国市', NULL, 'N', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2259, NULL, NULL, NULL, NULL, NULL, '341825', '旌德县', NULL, 'D', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2260, NULL, NULL, NULL, NULL, NULL, '341824', '绩溪县', NULL, 'J', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2261, NULL, NULL, NULL, NULL, NULL, '341823', '泾　县', NULL, 'X', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2262, NULL, NULL, NULL, NULL, NULL, '341822', '广德县', NULL, 'G', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2263, NULL, NULL, NULL, NULL, NULL, '341821', '郎溪县', NULL, 'L', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2264, NULL, NULL, NULL, NULL, NULL, '341802', '宣州区', NULL, 'X', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2265, NULL, NULL, NULL, NULL, NULL, '341801', '市辖区', NULL, 'S', 10, 3, '341800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2266, NULL, NULL, NULL, NULL, NULL, '341700', '池州市', NULL, 'C', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2267, NULL, NULL, NULL, NULL, NULL, '341723', '青阳县', NULL, 'Q', 10, 3, '341700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2268, NULL, NULL, NULL, NULL, NULL, '341722', '石台县', NULL, 'S', 10, 3, '341700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2269, NULL, NULL, NULL, NULL, NULL, '341721', '东至县', NULL, 'D', 10, 3, '341700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2270, NULL, NULL, NULL, NULL, NULL, '341702', '贵池区', NULL, 'G', 10, 3, '341700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2271, NULL, NULL, NULL, NULL, NULL, '341701', '市辖区', NULL, 'S', 10, 3, '341700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2272, NULL, NULL, NULL, NULL, NULL, '341600', '亳州市', NULL, 'Z', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2273, NULL, NULL, NULL, NULL, NULL, '341623', '利辛县', NULL, 'L', 10, 3, '341600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2274, NULL, NULL, NULL, NULL, NULL, '341622', '蒙城县', NULL, 'M', 10, 3, '341600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2275, NULL, NULL, NULL, NULL, NULL, '341621', '涡阳县', NULL, 'W', 10, 3, '341600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2276, NULL, NULL, NULL, NULL, NULL, '341602', '谯城区', NULL, 'C', 10, 3, '341600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2277, NULL, NULL, NULL, NULL, NULL, '341601', '市辖区', NULL, 'S', 10, 3, '341600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2278, NULL, NULL, NULL, NULL, NULL, '341500', '六安市', NULL, 'L', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2279, NULL, NULL, NULL, NULL, NULL, '341525', '霍山县', NULL, 'H', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2280, NULL, NULL, NULL, NULL, NULL, '341524', '金寨县', NULL, 'J', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2281, NULL, NULL, NULL, NULL, NULL, '341523', '舒城县', NULL, 'S', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2282, NULL, NULL, NULL, NULL, NULL, '341522', '霍邱县', NULL, 'H', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2283, NULL, NULL, NULL, NULL, NULL, '341521', '寿　县', NULL, 'S', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2284, NULL, NULL, NULL, NULL, NULL, '341503', '裕安区', NULL, 'Y', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2285, NULL, NULL, NULL, NULL, NULL, '341502', '金安区', NULL, 'J', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2286, NULL, NULL, NULL, NULL, NULL, '341501', '市辖区', NULL, 'S', 10, 3, '341500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2287, NULL, NULL, NULL, NULL, NULL, '341400', '巢湖市', NULL, 'C', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2288, NULL, NULL, NULL, NULL, NULL, '341424', '和　县', NULL, 'H', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2289, NULL, NULL, NULL, NULL, NULL, '341423', '含山县', NULL, 'H', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2290, NULL, NULL, NULL, NULL, NULL, '341422', '无为县', NULL, 'W', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2291, NULL, NULL, NULL, NULL, NULL, '341421', '庐江县', NULL, 'L', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2292, NULL, NULL, NULL, NULL, NULL, '341402', '居巢区', NULL, 'J', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2293, NULL, NULL, NULL, NULL, NULL, '341401', '市辖区', NULL, 'S', 10, 3, '341400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2294, NULL, NULL, NULL, NULL, NULL, '341300', '宿州市', NULL, 'S', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2295, NULL, NULL, NULL, NULL, NULL, '341324', '泗　县', NULL, 'X', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2296, NULL, NULL, NULL, NULL, NULL, '341323', '灵璧县', NULL, 'L', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2297, NULL, NULL, NULL, NULL, NULL, '341322', '萧　县', NULL, 'X', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2298, NULL, NULL, NULL, NULL, NULL, '341321', '砀山县', NULL, 'S', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2299, NULL, NULL, NULL, NULL, NULL, '341302', '墉桥区', NULL, 'Q', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2300, NULL, NULL, NULL, NULL, NULL, '341301', '市辖区', NULL, 'S', 10, 3, '341300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2301, NULL, NULL, NULL, NULL, NULL, '341200', '阜阳市', NULL, 'F', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2302, NULL, NULL, NULL, NULL, NULL, '341282', '界首市', NULL, 'J', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2303, NULL, NULL, NULL, NULL, NULL, '341226', '颍上县', NULL, 'S', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2304, NULL, NULL, NULL, NULL, NULL, '341225', '阜南县', NULL, 'F', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2305, NULL, NULL, NULL, NULL, NULL, '341222', '太和县', NULL, 'T', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2306, NULL, NULL, NULL, NULL, NULL, '341221', '临泉县', NULL, 'L', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2307, NULL, NULL, NULL, NULL, NULL, '341204', '颍泉区', NULL, 'Q', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2308, NULL, NULL, NULL, NULL, NULL, '341203', '颍东区', NULL, 'D', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2309, NULL, NULL, NULL, NULL, NULL, '341202', '颍州区', NULL, 'Z', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2310, NULL, NULL, NULL, NULL, NULL, '341201', '市辖区', NULL, 'S', 10, 3, '341200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2311, NULL, NULL, NULL, NULL, NULL, '341100', '滁州市', NULL, 'C', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2312, NULL, NULL, NULL, NULL, NULL, '341182', '明光市', NULL, 'M', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2313, NULL, NULL, NULL, NULL, NULL, '341181', '天长市', NULL, 'T', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2314, NULL, NULL, NULL, NULL, NULL, '341126', '凤阳县', NULL, 'F', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2315, NULL, NULL, NULL, NULL, NULL, '341125', '定远县', NULL, 'D', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2316, NULL, NULL, NULL, NULL, NULL, '341124', '全椒县', NULL, 'Q', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2317, NULL, NULL, NULL, NULL, NULL, '341122', '来安县', NULL, 'L', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2318, NULL, NULL, NULL, NULL, NULL, '341103', '南谯区', NULL, 'N', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2319, NULL, NULL, NULL, NULL, NULL, '341102', '琅琊区', NULL, 'L', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2320, NULL, NULL, NULL, NULL, NULL, '341101', '市辖区', NULL, 'S', 10, 3, '341100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2321, NULL, NULL, NULL, NULL, NULL, '341000', '黄山市', NULL, 'H', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2322, NULL, NULL, NULL, NULL, NULL, '341024', '祁门县', NULL, 'Q', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2323, NULL, NULL, NULL, NULL, NULL, '341023', '黟　县', NULL, 'X', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2324, NULL, NULL, NULL, NULL, NULL, '341022', '休宁县', NULL, 'X', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2325, NULL, NULL, NULL, NULL, NULL, '341021', '歙　县', NULL, 'X', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2326, NULL, NULL, NULL, NULL, NULL, '341004', '徽州区', NULL, 'H', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2327, NULL, NULL, NULL, NULL, NULL, '341003', '黄山区', NULL, 'H', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2328, NULL, NULL, NULL, NULL, NULL, '341002', '屯溪区', NULL, 'T', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2329, NULL, NULL, NULL, NULL, NULL, '341001', '市辖区', NULL, 'S', 10, 3, '341000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2330, NULL, NULL, NULL, NULL, NULL, '340800', '安庆市', NULL, 'A', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2331, NULL, NULL, NULL, NULL, NULL, '340881', '桐城市', NULL, 'T', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2332, NULL, NULL, NULL, NULL, NULL, '340828', '岳西县', NULL, 'Y', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2333, NULL, NULL, NULL, NULL, NULL, '340827', '望江县', NULL, 'W', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2334, NULL, NULL, NULL, NULL, NULL, '340826', '宿松县', NULL, 'S', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2335, NULL, NULL, NULL, NULL, NULL, '340825', '太湖县', NULL, 'T', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2336, NULL, NULL, NULL, NULL, NULL, '340824', '潜山县', NULL, 'Q', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2337, NULL, NULL, NULL, NULL, NULL, '340823', '枞阳县', NULL, 'Y', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2338, NULL, NULL, NULL, NULL, NULL, '340822', '怀宁县', NULL, 'H', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2339, NULL, NULL, NULL, NULL, NULL, '340811', '郊　区', NULL, 'J', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2340, NULL, NULL, NULL, NULL, NULL, '340803', '大观区', NULL, 'D', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2341, NULL, NULL, NULL, NULL, NULL, '340802', '迎江区', NULL, 'Y', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2342, NULL, NULL, NULL, NULL, NULL, '340801', '市辖区', NULL, 'S', 10, 3, '340800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2343, NULL, NULL, NULL, NULL, NULL, '340700', '铜陵市', NULL, 'T', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2344, NULL, NULL, NULL, NULL, NULL, '340721', '铜陵县', NULL, 'T', 10, 3, '340700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2345, NULL, NULL, NULL, NULL, NULL, '340711', '郊　区', NULL, 'J', 10, 3, '340700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2346, NULL, NULL, NULL, NULL, NULL, '340703', '狮子山区', NULL, 'S', 10, 3, '340700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2347, NULL, NULL, NULL, NULL, NULL, '340702', '铜官山区', NULL, 'T', 10, 3, '340700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2348, NULL, NULL, NULL, NULL, NULL, '340701', '市辖区', NULL, 'S', 10, 3, '340700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2349, NULL, NULL, NULL, NULL, NULL, '340600', '淮北市', NULL, 'H', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2350, NULL, NULL, NULL, NULL, NULL, '340621', '濉溪县', NULL, 'X', 10, 3, '340600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2351, NULL, NULL, NULL, NULL, NULL, '340604', '烈山区', NULL, 'L', 10, 3, '340600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2352, NULL, NULL, NULL, NULL, NULL, '340603', '相山区', NULL, 'X', 10, 3, '340600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2353, NULL, NULL, NULL, NULL, NULL, '340602', '杜集区', NULL, 'D', 10, 3, '340600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2354, NULL, NULL, NULL, NULL, NULL, '340601', '市辖区', NULL, 'S', 10, 3, '340600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2355, NULL, NULL, NULL, NULL, NULL, '340500', '马鞍山市', NULL, 'M', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2356, NULL, NULL, NULL, NULL, NULL, '340521', '当涂县', NULL, 'D', 10, 3, '340500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2357, NULL, NULL, NULL, NULL, NULL, '340504', '雨山区', NULL, 'Y', 10, 3, '340500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2358, NULL, NULL, NULL, NULL, NULL, '340503', '花山区', NULL, 'H', 10, 3, '340500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2359, NULL, NULL, NULL, NULL, NULL, '340502', '金家庄区', NULL, 'J', 10, 3, '340500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2360, NULL, NULL, NULL, NULL, NULL, '340501', '市辖区', NULL, 'S', 10, 3, '340500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2361, NULL, NULL, NULL, NULL, NULL, '340400', '淮南市', NULL, 'H', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2362, NULL, NULL, NULL, NULL, NULL, '340421', '凤台县', NULL, 'F', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2363, NULL, NULL, NULL, NULL, NULL, '340406', '潘集区', NULL, 'P', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2364, NULL, NULL, NULL, NULL, NULL, '340405', '八公山区', NULL, 'B', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2365, NULL, NULL, NULL, NULL, NULL, '340404', '谢家集区', NULL, 'X', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2366, NULL, NULL, NULL, NULL, NULL, '340403', '田家庵区', NULL, 'T', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2367, NULL, NULL, NULL, NULL, NULL, '340402', '大通区', NULL, 'D', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2368, NULL, NULL, NULL, NULL, NULL, '340401', '市辖区', NULL, 'S', 10, 3, '340400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2369, NULL, NULL, NULL, NULL, NULL, '340300', '蚌埠市', NULL, 'B', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2370, NULL, NULL, NULL, NULL, NULL, '340323', '固镇县', NULL, 'G', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2371, NULL, NULL, NULL, NULL, NULL, '340322', '五河县', NULL, 'W', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2372, NULL, NULL, NULL, NULL, NULL, '340321', '怀远县', NULL, 'H', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2373, NULL, NULL, NULL, NULL, NULL, '340311', '淮上区', NULL, 'H', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2374, NULL, NULL, NULL, NULL, NULL, '340304', '禹会区', NULL, 'Y', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2375, NULL, NULL, NULL, NULL, NULL, '340303', '蚌山区', NULL, 'B', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2376, NULL, NULL, NULL, NULL, NULL, '340302', '龙子湖区', NULL, 'L', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2377, NULL, NULL, NULL, NULL, NULL, '340301', '市辖区', NULL, 'S', 10, 3, '340300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2378, NULL, NULL, NULL, NULL, NULL, '340200', '芜湖市', NULL, 'W', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2379, NULL, NULL, NULL, NULL, NULL, '340223', '南陵县', NULL, 'N', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2380, NULL, NULL, NULL, NULL, NULL, '340222', '繁昌县', NULL, 'F', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2381, NULL, NULL, NULL, NULL, NULL, '340221', '芜湖县', NULL, 'W', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2382, NULL, NULL, NULL, NULL, NULL, '340207', '鸠江区', NULL, 'J', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2383, NULL, NULL, NULL, NULL, NULL, '340204', '新芜区', NULL, 'X', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2384, NULL, NULL, NULL, NULL, NULL, '340203', '马塘区', NULL, 'M', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2385, NULL, NULL, NULL, NULL, NULL, '340202', '镜湖区', NULL, 'J', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2386, NULL, NULL, NULL, NULL, NULL, '340201', '市辖区', NULL, 'S', 10, 3, '340200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2387, NULL, NULL, NULL, NULL, NULL, '340100', '合肥市', NULL, 'H', 10, 2, '340000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2388, NULL, NULL, NULL, NULL, NULL, '340123', '肥西县', NULL, 'F', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2389, NULL, NULL, NULL, NULL, NULL, '340122', '肥东县', NULL, 'F', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2390, NULL, NULL, NULL, NULL, NULL, '340121', '长丰县', NULL, 'C', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2391, NULL, NULL, NULL, NULL, NULL, '340111', '包河区', NULL, 'B', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2392, NULL, NULL, NULL, NULL, NULL, '340104', '蜀山区', NULL, 'S', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2393, NULL, NULL, NULL, NULL, NULL, '340103', '庐阳区', NULL, 'L', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2394, NULL, NULL, NULL, NULL, NULL, '340102', '瑶海区', NULL, 'Y', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2395, NULL, NULL, NULL, NULL, NULL, '340101', '市辖区', NULL, 'S', 10, 3, '340100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2396, NULL, NULL, NULL, NULL, NULL, '330000', '浙江省', NULL, 'Z', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2397, NULL, NULL, NULL, NULL, NULL, '331100', '丽水市', NULL, 'L', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2398, NULL, NULL, NULL, NULL, NULL, '331181', '龙泉市', NULL, 'L', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2399, NULL, NULL, NULL, NULL, NULL, '331127', '景宁畲族自治县', NULL, 'J', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2400, NULL, NULL, NULL, NULL, NULL, '331126', '庆元县', NULL, 'Q', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2401, NULL, NULL, NULL, NULL, NULL, '331125', '云和县', NULL, 'Y', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2402, NULL, NULL, NULL, NULL, NULL, '331124', '松阳县', NULL, 'S', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2403, NULL, NULL, NULL, NULL, NULL, '331123', '遂昌县', NULL, 'S', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2404, NULL, NULL, NULL, NULL, NULL, '331122', '缙云县', NULL, 'Y', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2405, NULL, NULL, NULL, NULL, NULL, '331121', '青田县', NULL, 'Q', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2406, NULL, NULL, NULL, NULL, NULL, '331102', '莲都区', NULL, 'L', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2407, NULL, NULL, NULL, NULL, NULL, '331101', '市辖区', NULL, 'S', 10, 3, '331100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2408, NULL, NULL, NULL, NULL, NULL, '331000', '台州市', NULL, 'T', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2409, NULL, NULL, NULL, NULL, NULL, '331082', '临海市', NULL, 'L', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2410, NULL, NULL, NULL, NULL, NULL, '331081', '温岭市', NULL, 'W', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2411, NULL, NULL, NULL, NULL, NULL, '331024', '仙居县', NULL, 'X', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2412, NULL, NULL, NULL, NULL, NULL, '331023', '天台县', NULL, 'T', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2413, NULL, NULL, NULL, NULL, NULL, '331022', '三门县', NULL, 'S', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2414, NULL, NULL, NULL, NULL, NULL, '331021', '玉环县', NULL, 'Y', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2415, NULL, NULL, NULL, NULL, NULL, '331004', '路桥区', NULL, 'L', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2416, NULL, NULL, NULL, NULL, NULL, '331003', '黄岩区', NULL, 'H', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2417, NULL, NULL, NULL, NULL, NULL, '331002', '椒江区', NULL, 'J', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2418, NULL, NULL, NULL, NULL, NULL, '331001', '市辖区', NULL, 'S', 10, 3, '331000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2419, NULL, NULL, NULL, NULL, NULL, '330900', '舟山市', NULL, 'Z', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2420, NULL, NULL, NULL, NULL, NULL, '330922', '嵊泗县', NULL, 'X', 10, 3, '330900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2421, NULL, NULL, NULL, NULL, NULL, '330921', '岱山县', NULL, 'S', 10, 3, '330900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2422, NULL, NULL, NULL, NULL, NULL, '330903', '普陀区', NULL, 'P', 10, 3, '330900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2423, NULL, NULL, NULL, NULL, NULL, '330902', '定海区', NULL, 'D', 10, 3, '330900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2424, NULL, NULL, NULL, NULL, NULL, '330901', '市辖区', NULL, 'S', 10, 3, '330900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2425, NULL, NULL, NULL, NULL, NULL, '330800', '衢州市', NULL, 'Z', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2426, NULL, NULL, NULL, NULL, NULL, '330881', '江山市', NULL, 'J', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2427, NULL, NULL, NULL, NULL, NULL, '330825', '龙游县', NULL, 'L', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2428, NULL, NULL, NULL, NULL, NULL, '330824', '开化县', NULL, 'K', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2429, NULL, NULL, NULL, NULL, NULL, '330822', '常山县', NULL, 'C', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2430, NULL, NULL, NULL, NULL, NULL, '330803', '衢江区', NULL, 'J', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2431, NULL, NULL, NULL, NULL, NULL, '330802', '柯城区', NULL, 'K', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2432, NULL, NULL, NULL, NULL, NULL, '330801', '市辖区', NULL, 'S', 10, 3, '330800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2433, NULL, NULL, NULL, NULL, NULL, '330700', '金华市', NULL, 'J', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2434, NULL, NULL, NULL, NULL, NULL, '330784', '永康市', NULL, 'Y', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2435, NULL, NULL, NULL, NULL, NULL, '330783', '东阳市', NULL, 'D', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2436, NULL, NULL, NULL, NULL, NULL, '330782', '义乌市', NULL, 'Y', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2437, NULL, NULL, NULL, NULL, NULL, '330781', '兰溪市', NULL, 'L', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2438, NULL, NULL, NULL, NULL, NULL, '330727', '磐安县', NULL, 'P', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2439, NULL, NULL, NULL, NULL, NULL, '330726', '浦江县', NULL, 'P', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2440, NULL, NULL, NULL, NULL, NULL, '330723', '武义县', NULL, 'W', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2441, NULL, NULL, NULL, NULL, NULL, '330703', '金东区', NULL, 'J', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2442, NULL, NULL, NULL, NULL, NULL, '330702', '婺城区', NULL, 'C', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2443, NULL, NULL, NULL, NULL, NULL, '330701', '市辖区', NULL, 'S', 10, 3, '330700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2444, NULL, NULL, NULL, NULL, NULL, '330600', '绍兴市', NULL, 'S', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2445, NULL, NULL, NULL, NULL, NULL, '330683', '嵊州市', NULL, 'Z', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2446, NULL, NULL, NULL, NULL, NULL, '330682', '上虞市', NULL, 'S', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2447, NULL, NULL, NULL, NULL, NULL, '330681', '诸暨市', NULL, 'Z', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2448, NULL, NULL, NULL, NULL, NULL, '330624', '新昌县', NULL, 'X', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2449, NULL, NULL, NULL, NULL, NULL, '330621', '绍兴县', NULL, 'S', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2450, NULL, NULL, NULL, NULL, NULL, '330602', '越城区', NULL, 'Y', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2451, NULL, NULL, NULL, NULL, NULL, '330601', '市辖区', NULL, 'S', 10, 3, '330600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2452, NULL, NULL, NULL, NULL, NULL, '330500', '湖州市', NULL, 'H', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2453, NULL, NULL, '2024-06-05 13:06:22.813000', 1, 0, '330523', '安吉县', NULL, 'A', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2454, NULL, NULL, NULL, NULL, NULL, '330522', '长兴县', NULL, 'C', 10, 3, '330500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2455, NULL, NULL, NULL, NULL, NULL, '330521', '德清县', NULL, 'D', 10, 3, '330500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2456, NULL, NULL, NULL, NULL, NULL, '330503', '南浔区', NULL, 'N', 10, 3, '330500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2457, NULL, NULL, NULL, NULL, NULL, '330502', '吴兴区', NULL, 'W', 10, 3, '330500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2458, NULL, NULL, NULL, NULL, NULL, '330501', '市辖区', NULL, 'S', 10, 3, '330500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2459, NULL, NULL, NULL, NULL, NULL, '330400', '嘉兴市', NULL, 'J', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2460, NULL, NULL, '2024-06-05 13:02:47.263000', 1, 0, '330483', '桐乡市', NULL, 'T', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2461, NULL, NULL, NULL, NULL, NULL, '330482', '平湖市', NULL, 'P', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2462, NULL, NULL, '2024-06-05 13:09:55.577000', 1, 0, '330481', '海宁市', NULL, 'H', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2463, NULL, NULL, NULL, NULL, NULL, '330424', '海盐县', NULL, 'H', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2464, NULL, NULL, NULL, NULL, NULL, '330421', '嘉善县', NULL, 'J', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2465, NULL, NULL, NULL, NULL, NULL, '330411', '秀洲区', NULL, 'X', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2466, NULL, NULL, NULL, NULL, NULL, '330402', '秀城区', NULL, 'X', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2467, NULL, NULL, NULL, NULL, NULL, '330401', '市辖区', NULL, 'S', 10, 3, '330400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2468, NULL, NULL, NULL, NULL, NULL, '330300', '温州市', NULL, 'W', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2469, NULL, NULL, NULL, NULL, NULL, '330382', '乐清市', NULL, 'L', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2470, NULL, NULL, NULL, NULL, NULL, '330381', '瑞安市', NULL, 'R', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2471, NULL, NULL, NULL, NULL, NULL, '330329', '泰顺县', NULL, 'T', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2472, NULL, NULL, NULL, NULL, NULL, '330328', '文成县', NULL, 'W', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2473, NULL, NULL, NULL, NULL, NULL, '330327', '苍南县', NULL, 'C', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2474, NULL, NULL, NULL, NULL, NULL, '330326', '平阳县', NULL, 'P', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2475, NULL, NULL, NULL, NULL, NULL, '330324', '永嘉县', NULL, 'Y', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2476, NULL, NULL, NULL, NULL, NULL, '330322', '洞头县', NULL, 'D', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2477, NULL, NULL, NULL, NULL, NULL, '330304', '瓯海区', NULL, 'H', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2478, NULL, NULL, NULL, NULL, NULL, '330303', '龙湾区', NULL, 'L', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2479, NULL, NULL, NULL, NULL, NULL, '330302', '鹿城区', NULL, 'L', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2480, NULL, NULL, NULL, NULL, NULL, '330301', '市辖区', NULL, 'S', 10, 3, '330300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2481, NULL, NULL, NULL, NULL, NULL, '330200', '宁波市', NULL, 'N', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2482, NULL, NULL, NULL, NULL, NULL, '330283', '奉化市', NULL, 'F', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2483, NULL, NULL, NULL, NULL, NULL, '330282', '慈溪市', NULL, 'C', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2484, NULL, NULL, NULL, NULL, NULL, '330281', '余姚市', NULL, 'Y', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2485, NULL, NULL, NULL, NULL, NULL, '330226', '宁海县', NULL, 'N', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2486, NULL, NULL, NULL, NULL, NULL, '330225', '象山县', NULL, 'X', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2487, NULL, NULL, NULL, NULL, NULL, '330212', '鄞州区', NULL, 'Z', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2488, NULL, NULL, NULL, NULL, NULL, '330211', '镇海区', NULL, 'Z', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2489, NULL, NULL, NULL, NULL, NULL, '330206', '北仑区', NULL, 'B', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2490, NULL, NULL, NULL, NULL, NULL, '330205', '江北区', NULL, 'J', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2491, NULL, NULL, NULL, NULL, NULL, '330204', '江东区', NULL, 'J', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2492, NULL, NULL, NULL, NULL, NULL, '330203', '海曙区', NULL, 'H', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2493, NULL, NULL, NULL, NULL, NULL, '330201', '市辖区', NULL, 'S', 10, 3, '330200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2494, NULL, NULL, NULL, NULL, NULL, '330100', '杭州市', NULL, 'H', 10, 2, '330000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2495, NULL, NULL, NULL, NULL, NULL, '330185', '临安市', NULL, 'L', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2496, NULL, NULL, NULL, NULL, NULL, '330183', '富阳市', NULL, 'F', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2497, NULL, NULL, NULL, NULL, NULL, '330182', '建德市', NULL, 'J', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2498, NULL, NULL, NULL, NULL, NULL, '330127', '淳安县', NULL, 'C', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2499, NULL, NULL, NULL, NULL, NULL, '330122', '桐庐县', NULL, 'T', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2500, NULL, NULL, NULL, NULL, NULL, '330110', '余杭区', NULL, 'Y', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2501, NULL, NULL, NULL, NULL, NULL, '330109', '萧山区', NULL, 'X', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2502, NULL, NULL, NULL, NULL, NULL, '330108', '滨江区', NULL, 'B', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2503, NULL, NULL, NULL, NULL, NULL, '330106', '西湖区', NULL, 'X', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2504, NULL, NULL, NULL, NULL, NULL, '330105', '拱墅区', NULL, 'G', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2505, NULL, NULL, NULL, NULL, NULL, '330104', '江干区', NULL, 'J', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2506, NULL, NULL, NULL, NULL, NULL, '330103', '下城区', NULL, 'X', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2507, NULL, NULL, NULL, NULL, NULL, '330102', '上城区', NULL, 'S', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2508, NULL, NULL, NULL, NULL, NULL, '330101', '市辖区', NULL, 'S', 10, 3, '330100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2509, NULL, NULL, NULL, NULL, NULL, '320000', '江苏省', NULL, 'J', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2510, NULL, NULL, NULL, NULL, NULL, '321300', '宿迁市', NULL, 'S', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2511, NULL, NULL, NULL, NULL, NULL, '321324', '泗洪县', NULL, 'H', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2512, NULL, NULL, NULL, NULL, NULL, '321323', '泗阳县', NULL, 'Y', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2513, NULL, NULL, NULL, NULL, NULL, '321322', '沭阳县', NULL, 'Y', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2514, NULL, NULL, NULL, NULL, NULL, '321311', '宿豫区', NULL, 'S', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2515, NULL, NULL, NULL, NULL, NULL, '321302', '宿城区', NULL, 'S', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2516, NULL, NULL, NULL, NULL, NULL, '321301', '市辖区', NULL, 'S', 10, 3, '321300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2517, NULL, NULL, NULL, NULL, NULL, '321200', '泰州市', NULL, 'T', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2518, NULL, NULL, NULL, NULL, NULL, '321284', '姜堰市', NULL, 'J', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2519, NULL, NULL, NULL, NULL, NULL, '321283', '泰兴市', NULL, 'T', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2520, NULL, NULL, NULL, NULL, NULL, '321282', '靖江市', 1, 'J', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2521, NULL, NULL, NULL, NULL, NULL, '321281', '兴化市', NULL, 'X', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2522, NULL, NULL, NULL, NULL, NULL, '321203', '高港区', NULL, 'G', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2523, NULL, NULL, NULL, NULL, NULL, '321202', '海陵区', NULL, 'H', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2524, NULL, NULL, NULL, NULL, NULL, '321201', '市辖区', NULL, 'S', 10, 3, '321200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2525, NULL, NULL, NULL, NULL, NULL, '321100', '镇江市', NULL, 'Z', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2526, NULL, NULL, NULL, NULL, NULL, '321183', '句容市', NULL, 'J', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2527, NULL, NULL, NULL, NULL, NULL, '321182', '扬中市', NULL, 'Y', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2528, NULL, NULL, NULL, NULL, NULL, '321181', '丹阳市', 1, 'D', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2529, NULL, NULL, NULL, NULL, NULL, '321112', '丹徒区', NULL, 'D', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2530, NULL, NULL, NULL, NULL, NULL, '321111', '润州区', NULL, 'R', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2531, NULL, NULL, NULL, NULL, NULL, '321102', '京口区', NULL, 'J', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2532, NULL, NULL, NULL, NULL, NULL, '321101', '市辖区', NULL, 'S', 10, 3, '321100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2533, NULL, NULL, NULL, NULL, NULL, '321000', '扬州市', NULL, 'Y', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2534, NULL, NULL, NULL, NULL, NULL, '321088', '江都市', NULL, 'J', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2535, NULL, NULL, NULL, NULL, NULL, '321084', '高邮市', NULL, 'G', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2536, NULL, NULL, NULL, NULL, NULL, '321081', '仪征市', NULL, 'Y', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2537, NULL, NULL, NULL, NULL, NULL, '321023', '宝应县', NULL, 'B', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2538, NULL, NULL, NULL, NULL, NULL, '321011', '郊　区', NULL, 'J', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2539, NULL, NULL, NULL, NULL, NULL, '321003', '邗江区', NULL, 'J', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2540, NULL, NULL, NULL, NULL, NULL, '321002', '广陵区', NULL, 'G', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2541, NULL, NULL, NULL, NULL, NULL, '321001', '市辖区', NULL, 'S', 10, 3, '321000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2542, NULL, NULL, NULL, NULL, NULL, '320900', '盐城市', NULL, 'Y', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2543, NULL, NULL, NULL, NULL, NULL, '320982', '大丰市', NULL, 'D', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2544, NULL, NULL, NULL, NULL, NULL, '320981', '东台市', NULL, 'D', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2545, NULL, NULL, NULL, NULL, NULL, '320925', '建湖县', NULL, 'J', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2546, NULL, NULL, NULL, NULL, NULL, '320924', '射阳县', NULL, 'S', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2547, NULL, NULL, NULL, NULL, NULL, '320923', '阜宁县', NULL, 'F', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2548, NULL, NULL, NULL, NULL, NULL, '320922', '滨海县', NULL, 'B', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2549, NULL, NULL, NULL, NULL, NULL, '320921', '响水县', NULL, 'X', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2550, NULL, NULL, NULL, NULL, NULL, '320903', '盐都区', NULL, 'Y', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2551, NULL, NULL, NULL, NULL, NULL, '320902', '亭湖区', NULL, 'T', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2552, NULL, NULL, NULL, NULL, NULL, '320901', '市辖区', NULL, 'S', 10, 3, '320900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2553, NULL, NULL, NULL, NULL, NULL, '320800', '淮安市', NULL, 'H', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2554, NULL, NULL, NULL, NULL, NULL, '320831', '金湖县', NULL, 'J', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2555, NULL, NULL, NULL, NULL, NULL, '320830', '盱眙县', NULL, 'X', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2556, NULL, NULL, NULL, NULL, NULL, '320829', '洪泽县', NULL, 'H', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2557, NULL, NULL, NULL, NULL, NULL, '320826', '涟水县', NULL, 'L', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2558, NULL, NULL, NULL, NULL, NULL, '320811', '清浦区', NULL, 'Q', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2559, NULL, NULL, NULL, NULL, NULL, '320804', '淮阴区', NULL, 'H', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2560, NULL, NULL, NULL, NULL, NULL, '320803', '楚州区', NULL, 'C', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2561, NULL, NULL, NULL, NULL, NULL, '320802', '清河区', NULL, 'Q', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2562, NULL, NULL, NULL, NULL, NULL, '320801', '市辖区', NULL, 'S', 10, 3, '320800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2563, NULL, NULL, NULL, NULL, NULL, '320700', '连云港市', NULL, 'L', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2564, NULL, NULL, NULL, NULL, NULL, '320724', '灌南县', NULL, 'G', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2565, NULL, NULL, NULL, NULL, NULL, '320723', '灌云县', NULL, 'G', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2566, NULL, NULL, NULL, NULL, NULL, '320722', '东海县', NULL, 'D', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2567, NULL, NULL, NULL, NULL, NULL, '320721', '赣榆县', NULL, 'G', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2568, NULL, NULL, NULL, NULL, NULL, '320706', '海州区', NULL, 'H', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2569, NULL, NULL, NULL, NULL, NULL, '320705', '新浦区', NULL, 'X', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2570, NULL, NULL, NULL, NULL, NULL, '320703', '连云区', NULL, 'L', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2571, NULL, NULL, NULL, NULL, NULL, '320701', '市辖区', NULL, 'S', 10, 3, '320700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2572, NULL, NULL, NULL, NULL, NULL, '320600', '南通市', NULL, 'N', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2573, NULL, NULL, NULL, NULL, NULL, '320684', '海门市', NULL, 'H', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2574, NULL, NULL, NULL, NULL, NULL, '320683', '通州市', NULL, 'T', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2575, NULL, NULL, NULL, NULL, NULL, '320682', '如皋市', NULL, 'R', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2576, NULL, NULL, NULL, NULL, NULL, '320681', '启东市', 1, 'Q', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2577, NULL, NULL, NULL, NULL, NULL, '320623', '如东县', NULL, 'R', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2578, NULL, NULL, NULL, NULL, NULL, '320621', '海安县', NULL, 'H', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2579, NULL, NULL, NULL, NULL, NULL, '320611', '港闸区', NULL, 'G', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2580, NULL, NULL, NULL, NULL, NULL, '320602', '崇川区', NULL, 'C', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2581, NULL, NULL, NULL, NULL, NULL, '320601', '市辖区', NULL, 'S', 10, 3, '320600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2582, NULL, NULL, NULL, NULL, NULL, '320500', '苏州市', NULL, 'S', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2583, NULL, NULL, NULL, NULL, NULL, '320585', '太仓市', NULL, 'T', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2584, NULL, NULL, NULL, NULL, NULL, '320584', '吴江市', NULL, 'W', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2585, NULL, NULL, NULL, NULL, NULL, '320583', '昆山市', NULL, 'K', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2586, NULL, NULL, NULL, NULL, NULL, '320582', '张家港市', 1, 'Z', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2587, NULL, NULL, '2024-06-05 13:09:07.772000', 1, 0, '320581', '常熟市', NULL, 'C', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2588, NULL, NULL, NULL, NULL, NULL, '320507', '相城区', NULL, 'X', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2589, NULL, NULL, NULL, NULL, NULL, '320506', '吴中区', NULL, 'W', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2590, NULL, NULL, NULL, NULL, NULL, '320505', '虎丘区', NULL, 'H', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2591, NULL, NULL, NULL, NULL, NULL, '320504', '金阊区', NULL, 'J', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2592, NULL, NULL, NULL, NULL, NULL, '320503', '平江区', NULL, 'P', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2593, NULL, NULL, NULL, NULL, NULL, '320502', '沧浪区', NULL, 'C', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2594, NULL, NULL, NULL, NULL, NULL, '320501', '市辖区', NULL, 'S', 10, 3, '320500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2595, NULL, NULL, NULL, NULL, NULL, '320400', '常州市', NULL, 'C', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2596, NULL, NULL, NULL, NULL, NULL, '320482', '金坛区', NULL, 'J', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2597, NULL, NULL, NULL, NULL, NULL, '320481', '溧阳市', NULL, 'L', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2598, NULL, NULL, NULL, NULL, NULL, '320412', '武进区', NULL, 'W', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2599, NULL, NULL, NULL, NULL, NULL, '320411', '新北区', NULL, 'X', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2600, NULL, NULL, NULL, NULL, NULL, '320405', '戚墅堰区', NULL, 'Q', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2601, NULL, NULL, NULL, NULL, NULL, '320404', '钟楼区', NULL, 'Z', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2602, NULL, NULL, NULL, NULL, NULL, '320402', '天宁区', NULL, 'T', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2603, NULL, NULL, NULL, NULL, NULL, '320401', '市辖区', NULL, 'S', 10, 3, '320400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2604, NULL, NULL, NULL, NULL, NULL, '320300', '徐州市', NULL, 'X', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2605, NULL, NULL, NULL, NULL, NULL, '320382', '邳州市', NULL, 'Z', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2606, NULL, NULL, NULL, NULL, NULL, '320381', '新沂市', NULL, 'X', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2607, NULL, NULL, NULL, NULL, NULL, '320324', '睢宁县', NULL, 'N', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2608, NULL, NULL, NULL, NULL, NULL, '320323', '铜山县', NULL, 'T', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2609, NULL, NULL, NULL, NULL, NULL, '320322', '沛　县', NULL, 'P', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2610, NULL, NULL, NULL, NULL, NULL, '320321', '丰　县', NULL, 'F', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2611, NULL, NULL, NULL, NULL, NULL, '320311', '泉山区', NULL, 'Q', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2612, NULL, NULL, NULL, NULL, NULL, '320305', '贾汪区', NULL, 'J', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2613, NULL, NULL, NULL, NULL, NULL, '320304', '九里区', NULL, 'J', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2614, NULL, NULL, NULL, NULL, NULL, '320303', '云龙区', NULL, 'Y', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2615, NULL, NULL, NULL, NULL, NULL, '320302', '鼓楼区', NULL, 'G', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2616, NULL, NULL, NULL, NULL, NULL, '320301', '市辖区', NULL, 'S', 10, 3, '320300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2617, NULL, NULL, NULL, NULL, NULL, '320200', '无锡市', NULL, 'W', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2618, NULL, NULL, NULL, NULL, NULL, '320282', '宜兴市', 1, 'Y', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2619, NULL, NULL, NULL, NULL, NULL, '320281', '江阴市', 1, 'J', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2620, NULL, NULL, NULL, NULL, NULL, '320211', '滨湖区', NULL, 'B', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2621, NULL, NULL, NULL, NULL, NULL, '320206', '惠山区', NULL, 'H', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2622, NULL, NULL, NULL, NULL, NULL, '320205', '锡山区', NULL, 'X', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2623, NULL, NULL, NULL, NULL, NULL, '320204', '北塘区', NULL, 'B', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2624, NULL, NULL, NULL, NULL, NULL, '320203', '南长区', NULL, 'N', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2625, NULL, NULL, NULL, NULL, NULL, '320202', '崇安区', NULL, 'C', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2626, NULL, NULL, NULL, NULL, NULL, '320201', '市辖区', NULL, 'S', 10, 3, '320200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2627, NULL, NULL, NULL, NULL, NULL, '320100', '南京市', NULL, 'N', 10, 2, '320000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2628, NULL, NULL, NULL, NULL, NULL, '320125', '高淳县', NULL, 'G', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2629, NULL, NULL, NULL, NULL, NULL, '320124', '溧水县', NULL, 'S', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2630, NULL, NULL, NULL, NULL, NULL, '320116', '六合区', NULL, 'L', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2631, NULL, NULL, NULL, NULL, NULL, '320115', '江宁区', NULL, 'J', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2632, NULL, NULL, NULL, NULL, NULL, '320114', '雨花台区', NULL, 'Y', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2633, NULL, NULL, NULL, NULL, NULL, '320113', '栖霞区', NULL, 'Q', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2634, NULL, NULL, NULL, NULL, NULL, '320111', '浦口区', NULL, 'P', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2635, NULL, NULL, NULL, NULL, NULL, '320107', '下关区', NULL, 'X', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2636, NULL, NULL, NULL, NULL, NULL, '320106', '鼓楼区', NULL, 'G', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2637, NULL, NULL, NULL, NULL, NULL, '320105', '建邺区', NULL, 'J', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2638, NULL, NULL, NULL, NULL, NULL, '320104', '秦淮区', NULL, 'Q', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2639, NULL, NULL, NULL, NULL, NULL, '320103', '白下区', NULL, 'B', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2640, NULL, NULL, NULL, NULL, NULL, '320102', '玄武区', NULL, 'X', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2641, NULL, NULL, NULL, NULL, NULL, '320101', '市辖区', NULL, 'S', 10, 3, '320100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2642, NULL, NULL, NULL, NULL, NULL, '310000', '上海市', NULL, 'S', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2643, NULL, NULL, NULL, NULL, NULL, '310230', '崇明县', NULL, 'C', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2644, NULL, NULL, NULL, NULL, NULL, '310100', '上海市', NULL, 'S', 10, 2, '310000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2645, NULL, NULL, NULL, NULL, NULL, '310120', '奉贤区', NULL, 'F', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2646, NULL, NULL, NULL, NULL, NULL, '310119', '南汇区', NULL, 'N', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2647, NULL, NULL, NULL, NULL, NULL, '310118', '青浦区', NULL, 'Q', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2648, NULL, NULL, NULL, NULL, NULL, '310117', '松江区', NULL, 'S', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2649, NULL, NULL, NULL, NULL, NULL, '310116', '金山区', NULL, 'J', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2650, NULL, NULL, NULL, NULL, NULL, '310115', '浦东新区', NULL, 'P', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2651, NULL, NULL, NULL, NULL, NULL, '310114', '嘉定区', NULL, 'J', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2652, NULL, NULL, NULL, NULL, NULL, '310113', '宝山区', NULL, 'B', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2653, NULL, NULL, NULL, NULL, NULL, '310112', '闵行区', NULL, 'X', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2654, NULL, NULL, NULL, NULL, NULL, '310110', '杨浦区', NULL, 'Y', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2655, NULL, NULL, NULL, NULL, NULL, '310109', '虹口区', NULL, 'H', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2656, NULL, NULL, NULL, NULL, NULL, '310108', '闸北区', NULL, 'Z', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2657, NULL, NULL, NULL, NULL, NULL, '310107', '普陀区', NULL, 'P', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2658, NULL, NULL, NULL, NULL, NULL, '310106', '静安区', NULL, 'J', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2659, NULL, NULL, NULL, NULL, NULL, '310105', '长宁区', NULL, 'C', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2660, NULL, NULL, NULL, NULL, NULL, '310104', '徐汇区', NULL, 'X', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2661, NULL, NULL, NULL, NULL, NULL, '310103', '卢湾区', NULL, 'L', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2662, NULL, NULL, NULL, NULL, NULL, '310101', '黄浦区', NULL, 'H', 10, 3, '310100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2663, NULL, NULL, NULL, NULL, NULL, '230000', '黑龙江省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2664, NULL, NULL, NULL, NULL, NULL, '232700', '大兴安岭地区', NULL, 'D', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2665, NULL, NULL, NULL, NULL, NULL, '232723', '漠河县', NULL, 'M', 10, 3, '232700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2666, NULL, NULL, NULL, NULL, NULL, '232722', '塔河县', NULL, 'T', 10, 3, '232700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2667, NULL, NULL, NULL, NULL, NULL, '232721', '呼玛县', NULL, 'H', 10, 3, '232700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2668, NULL, NULL, NULL, NULL, NULL, '231200', '绥化市', NULL, 'S', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2669, NULL, NULL, NULL, NULL, NULL, '231283', '海伦市', NULL, 'H', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2670, NULL, NULL, NULL, NULL, NULL, '231282', '肇东市', NULL, 'Z', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2671, NULL, NULL, NULL, NULL, NULL, '231281', '安达市', NULL, 'A', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2672, NULL, NULL, NULL, NULL, NULL, '231226', '绥棱县', NULL, 'S', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2673, NULL, NULL, NULL, NULL, NULL, '231225', '明水县', NULL, 'M', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2674, NULL, NULL, NULL, NULL, NULL, '231224', '庆安县', NULL, 'Q', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2675, NULL, NULL, NULL, NULL, NULL, '231223', '青冈县', NULL, 'Q', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2676, NULL, NULL, NULL, NULL, NULL, '231222', '兰西县', NULL, 'L', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2677, NULL, NULL, NULL, NULL, NULL, '231221', '望奎县', NULL, 'W', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2678, NULL, NULL, NULL, NULL, NULL, '231202', '北林区', NULL, 'B', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2679, NULL, NULL, NULL, NULL, NULL, '231201', '市辖区', NULL, 'S', 10, 3, '231200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2680, NULL, NULL, NULL, NULL, NULL, '231100', '黑河市', NULL, 'H', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2681, NULL, NULL, NULL, NULL, NULL, '231182', '五大连池市', NULL, 'W', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2682, NULL, NULL, NULL, NULL, NULL, '231181', '北安市', NULL, 'B', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2683, NULL, NULL, NULL, NULL, NULL, '231124', '孙吴县', NULL, 'S', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2684, NULL, NULL, NULL, NULL, NULL, '231123', '逊克县', NULL, 'X', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2685, NULL, NULL, NULL, NULL, NULL, '231121', '嫩江县', NULL, 'N', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2686, NULL, NULL, NULL, NULL, NULL, '231102', '爱辉区', NULL, 'A', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2687, NULL, NULL, NULL, NULL, NULL, '231101', '市辖区', NULL, 'S', 10, 3, '231100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2688, NULL, NULL, NULL, NULL, NULL, '231000', '牡丹江市', NULL, 'M', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2689, NULL, NULL, NULL, NULL, NULL, '231085', '穆棱市', NULL, 'M', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2690, NULL, NULL, NULL, NULL, NULL, '231084', '宁安市', NULL, 'N', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2691, NULL, NULL, NULL, NULL, NULL, '231083', '海林市', NULL, 'H', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2692, NULL, NULL, NULL, NULL, NULL, '231081', '绥芬河市', NULL, 'S', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2693, NULL, NULL, NULL, NULL, NULL, '231025', '林口县', NULL, 'L', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2694, NULL, NULL, NULL, NULL, NULL, '231024', '东宁县', NULL, 'D', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2695, NULL, NULL, NULL, NULL, NULL, '231005', '西安区', NULL, 'X', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2696, NULL, NULL, NULL, NULL, NULL, '231004', '爱民区', NULL, 'A', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2697, NULL, NULL, NULL, NULL, NULL, '231003', '阳明区', NULL, 'Y', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2698, NULL, NULL, NULL, NULL, NULL, '231002', '东安区', NULL, 'D', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2699, NULL, NULL, NULL, NULL, NULL, '231001', '市辖区', NULL, 'S', 10, 3, '231000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2700, NULL, NULL, NULL, NULL, NULL, '230900', '七台河市', NULL, 'Q', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2701, NULL, NULL, NULL, NULL, NULL, '230921', '勃利县', NULL, 'B', 10, 3, '230900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2702, NULL, NULL, NULL, NULL, NULL, '230904', '茄子河区', NULL, 'Q', 10, 3, '230900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2703, NULL, NULL, NULL, NULL, NULL, '230903', '桃山区', NULL, 'T', 10, 3, '230900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2704, NULL, NULL, NULL, NULL, NULL, '230902', '新兴区', NULL, 'X', 10, 3, '230900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2705, NULL, NULL, NULL, NULL, NULL, '230901', '市辖区', NULL, 'S', 10, 3, '230900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2706, NULL, NULL, NULL, NULL, NULL, '230800', '佳木斯市', NULL, 'J', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2707, NULL, NULL, NULL, NULL, NULL, '230882', '富锦市', NULL, 'F', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2708, NULL, NULL, NULL, NULL, NULL, '230881', '同江市', NULL, 'T', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2709, NULL, NULL, NULL, NULL, NULL, '230833', '抚远县', NULL, 'F', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2710, NULL, NULL, NULL, NULL, NULL, '230828', '汤原县', NULL, 'T', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2711, NULL, NULL, NULL, NULL, NULL, '230826', '桦川县', NULL, 'C', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2712, NULL, NULL, NULL, NULL, NULL, '230822', '桦南县', NULL, 'N', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2713, NULL, NULL, NULL, NULL, NULL, '230811', '郊　区', NULL, 'J', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2714, NULL, NULL, NULL, NULL, NULL, '230805', '东风区', NULL, 'D', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2715, NULL, NULL, NULL, NULL, NULL, '230804', '前进区', NULL, 'Q', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2716, NULL, NULL, NULL, NULL, NULL, '230803', '向阳区', NULL, 'X', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2717, NULL, NULL, NULL, NULL, NULL, '230802', '永红区', NULL, 'Y', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2718, NULL, NULL, NULL, NULL, NULL, '230801', '市辖区', NULL, 'S', 10, 3, '230800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2719, NULL, NULL, NULL, NULL, NULL, '230700', '伊春市', NULL, 'Y', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2720, NULL, NULL, NULL, NULL, NULL, '230781', '铁力市', NULL, 'T', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2721, NULL, NULL, NULL, NULL, NULL, '230722', '嘉荫县', NULL, 'J', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2722, NULL, NULL, NULL, NULL, NULL, '230716', '上甘岭区', NULL, 'S', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2723, NULL, NULL, NULL, NULL, NULL, '230715', '红星区', NULL, 'H', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2724, NULL, NULL, NULL, NULL, NULL, '230714', '乌伊岭区', NULL, 'W', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2725, NULL, NULL, NULL, NULL, NULL, '230713', '带岭区', NULL, 'D', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2726, NULL, NULL, NULL, NULL, NULL, '230712', '汤旺河区', NULL, 'T', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2727, NULL, NULL, NULL, NULL, NULL, '230711', '乌马河区', NULL, 'W', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2728, NULL, NULL, NULL, NULL, NULL, '230710', '五营区', NULL, 'W', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2729, NULL, NULL, NULL, NULL, NULL, '230709', '金山屯区', NULL, 'J', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2730, NULL, NULL, NULL, NULL, NULL, '230708', '美溪区', NULL, 'M', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2731, NULL, NULL, NULL, NULL, NULL, '230707', '新青区', NULL, 'X', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2732, NULL, NULL, NULL, NULL, NULL, '230706', '翠峦区', NULL, 'C', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2733, NULL, NULL, NULL, NULL, NULL, '230705', '西林区', NULL, 'X', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2734, NULL, NULL, NULL, NULL, NULL, '230704', '友好区', NULL, 'Y', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2735, NULL, NULL, NULL, NULL, NULL, '230703', '南岔区', NULL, 'N', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2736, NULL, NULL, NULL, NULL, NULL, '230702', '伊春区', NULL, 'Y', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2737, NULL, NULL, NULL, NULL, NULL, '230701', '市辖区', NULL, 'S', 10, 3, '230700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2738, NULL, NULL, NULL, NULL, NULL, '230600', '大庆市', NULL, 'D', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2739, NULL, NULL, NULL, NULL, NULL, '230624', '杜尔伯特蒙古族自治县', NULL, 'D', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2740, NULL, NULL, NULL, NULL, NULL, '230623', '林甸县', NULL, 'L', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2741, NULL, NULL, NULL, NULL, NULL, '230622', '肇源县', NULL, 'Z', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2742, NULL, NULL, NULL, NULL, NULL, '230621', '肇州县', NULL, 'Z', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2743, NULL, NULL, NULL, NULL, NULL, '230606', '大同区', NULL, 'D', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2744, NULL, NULL, NULL, NULL, NULL, '230605', '红岗区', NULL, 'H', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2745, NULL, NULL, NULL, NULL, NULL, '230604', '让胡路区', NULL, 'R', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2746, NULL, NULL, NULL, NULL, NULL, '230603', '龙凤区', NULL, 'L', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2747, NULL, NULL, NULL, NULL, NULL, '230602', '萨尔图区', NULL, 'S', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2748, NULL, NULL, NULL, NULL, NULL, '230601', '市辖区', NULL, 'S', 10, 3, '230600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2749, NULL, NULL, NULL, NULL, NULL, '230500', '双鸭山市', NULL, 'S', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2750, NULL, NULL, NULL, NULL, NULL, '230524', '饶河县', NULL, 'R', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2751, NULL, NULL, NULL, NULL, NULL, '230523', '宝清县', NULL, 'B', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2752, NULL, NULL, NULL, NULL, NULL, '230522', '友谊县', NULL, 'Y', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2753, NULL, NULL, NULL, NULL, NULL, '230521', '集贤县', NULL, 'J', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2754, NULL, NULL, NULL, NULL, NULL, '230506', '宝山区', NULL, 'B', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2755, NULL, NULL, NULL, NULL, NULL, '230505', '四方台区', NULL, 'S', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2756, NULL, NULL, NULL, NULL, NULL, '230503', '岭东区', NULL, 'L', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2757, NULL, NULL, NULL, NULL, NULL, '230502', '尖山区', NULL, 'J', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2758, NULL, NULL, NULL, NULL, NULL, '230501', '市辖区', NULL, 'S', 10, 3, '230500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2759, NULL, NULL, NULL, NULL, NULL, '230400', '鹤岗市', NULL, 'H', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2760, NULL, NULL, NULL, NULL, NULL, '230422', '绥滨县', NULL, 'S', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2761, NULL, NULL, NULL, NULL, NULL, '230421', '萝北县', NULL, 'L', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2762, NULL, NULL, NULL, NULL, NULL, '230407', '兴山区', NULL, 'X', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2763, NULL, NULL, NULL, NULL, NULL, '230406', '东山区', NULL, 'D', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2764, NULL, NULL, NULL, NULL, NULL, '230405', '兴安区', NULL, 'X', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2765, NULL, NULL, NULL, NULL, NULL, '230404', '南山区', NULL, 'N', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2766, NULL, NULL, NULL, NULL, NULL, '230403', '工农区', NULL, 'G', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2767, NULL, NULL, NULL, NULL, NULL, '230402', '向阳区', NULL, 'X', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2768, NULL, NULL, NULL, NULL, NULL, '230401', '市辖区', NULL, 'S', 10, 3, '230400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2769, NULL, NULL, NULL, NULL, NULL, '230300', '鸡西市', NULL, 'J', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2770, NULL, NULL, NULL, NULL, NULL, '230382', '密山市', NULL, 'M', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2771, NULL, NULL, NULL, NULL, NULL, '230381', '虎林市', NULL, 'H', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2772, NULL, NULL, NULL, NULL, NULL, '230321', '鸡东县', NULL, 'J', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2773, NULL, NULL, NULL, NULL, NULL, '230307', '麻山区', NULL, 'M', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2774, NULL, NULL, NULL, NULL, NULL, '230306', '城子河区', NULL, 'C', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2775, NULL, NULL, NULL, NULL, NULL, '230305', '梨树区', NULL, 'L', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2776, NULL, NULL, NULL, NULL, NULL, '230304', '滴道区', NULL, 'D', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2777, NULL, NULL, NULL, NULL, NULL, '230303', '恒山区', NULL, 'H', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2778, NULL, NULL, NULL, NULL, NULL, '230302', '鸡冠区', NULL, 'J', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2779, NULL, NULL, NULL, NULL, NULL, '230301', '市辖区', NULL, 'S', 10, 3, '230300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2780, NULL, NULL, NULL, NULL, NULL, '230200', '齐齐哈尔市', NULL, 'Q', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2781, NULL, NULL, NULL, NULL, NULL, '230281', '讷河市', NULL, 'H', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2782, NULL, NULL, NULL, NULL, NULL, '230231', '拜泉县', NULL, 'B', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2783, NULL, NULL, NULL, NULL, NULL, '230230', '克东县', NULL, 'K', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2784, NULL, NULL, NULL, NULL, NULL, '230229', '克山县', NULL, 'K', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2785, NULL, NULL, NULL, NULL, NULL, '230227', '富裕县', NULL, 'F', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2786, NULL, NULL, NULL, NULL, NULL, '230225', '甘南县', NULL, 'G', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2787, NULL, NULL, NULL, NULL, NULL, '230224', '泰来县', NULL, 'T', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2788, NULL, NULL, NULL, NULL, NULL, '230223', '依安县', NULL, 'Y', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2789, NULL, NULL, NULL, NULL, NULL, '230221', '龙江县', NULL, 'L', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2790, NULL, NULL, NULL, NULL, NULL, '230208', '梅里斯达斡尔族区', NULL, 'M', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2791, NULL, NULL, NULL, NULL, NULL, '230207', '碾子山区', NULL, 'N', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2792, NULL, NULL, NULL, NULL, NULL, '230206', '富拉尔基区', NULL, 'F', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2793, NULL, NULL, NULL, NULL, NULL, '230205', '昂昂溪区', NULL, 'A', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2794, NULL, NULL, NULL, NULL, NULL, '230204', '铁锋区', NULL, 'T', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2795, NULL, NULL, NULL, NULL, NULL, '230203', '建华区', NULL, 'J', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2796, NULL, NULL, NULL, NULL, NULL, '230202', '龙沙区', NULL, 'L', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2797, NULL, NULL, NULL, NULL, NULL, '230201', '市辖区', NULL, 'S', 10, 3, '230200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2798, NULL, NULL, NULL, NULL, NULL, '230100', '哈尔滨市', NULL, 'H', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2799, NULL, NULL, NULL, NULL, NULL, '230184', '五常市', 1, 'W', 10, 2, '230000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2800, NULL, NULL, NULL, NULL, NULL, '230183', '尚志市', NULL, 'S', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2801, NULL, NULL, NULL, NULL, NULL, '230182', '双城市', NULL, 'S', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2802, NULL, NULL, NULL, NULL, NULL, '230181', '阿城市', NULL, 'A', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2803, NULL, NULL, NULL, NULL, NULL, '230129', '延寿县', NULL, 'Y', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2804, NULL, NULL, NULL, NULL, NULL, '230128', '通河县', NULL, 'T', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2805, NULL, NULL, NULL, NULL, NULL, '230127', '木兰县', NULL, 'M', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2806, NULL, NULL, NULL, NULL, NULL, '230126', '巴彦县', NULL, 'B', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2807, NULL, NULL, NULL, NULL, NULL, '230125', '宾　县', NULL, 'B', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2808, NULL, NULL, NULL, NULL, NULL, '230124', '方正县', NULL, 'F', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2809, NULL, NULL, NULL, NULL, NULL, '230123', '依兰县', NULL, 'Y', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2810, NULL, NULL, NULL, NULL, NULL, '230111', '呼兰区', NULL, 'H', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2811, NULL, NULL, NULL, NULL, NULL, '230109', '松北区', NULL, 'S', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2812, NULL, NULL, NULL, NULL, NULL, '230108', '平房区', NULL, 'P', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2813, NULL, NULL, NULL, NULL, NULL, '230107', '动力区', NULL, 'D', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2814, NULL, NULL, NULL, NULL, NULL, '230106', '香坊区', NULL, 'X', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2815, NULL, NULL, NULL, NULL, NULL, '230104', '道外区', NULL, 'D', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2816, NULL, NULL, NULL, NULL, NULL, '230103', '南岗区', NULL, 'N', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2817, NULL, NULL, NULL, NULL, NULL, '230102', '道里区', NULL, 'D', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2818, NULL, NULL, NULL, NULL, NULL, '230101', '市辖区', NULL, 'S', 10, 3, '230100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2819, NULL, NULL, NULL, NULL, NULL, '220000', '吉林省', NULL, 'J', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2820, NULL, NULL, NULL, NULL, NULL, '222400', '延边朝鲜族自治州', NULL, 'Y', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2821, NULL, NULL, NULL, NULL, NULL, '222426', '安图县', NULL, 'A', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2822, NULL, NULL, NULL, NULL, NULL, '222424', '汪清县', NULL, 'W', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2823, NULL, NULL, NULL, NULL, NULL, '222406', '和龙市', NULL, 'H', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2824, NULL, NULL, NULL, NULL, NULL, '222405', '龙井市', NULL, 'L', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2825, NULL, NULL, NULL, NULL, NULL, '222404', '珲春市', NULL, 'C', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2826, NULL, NULL, NULL, NULL, NULL, '222403', '敦化市', NULL, 'D', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2827, NULL, NULL, NULL, NULL, NULL, '222402', '图们市', NULL, 'T', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2828, NULL, NULL, NULL, NULL, NULL, '222401', '延吉市', NULL, 'Y', 10, 3, '222400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2829, NULL, NULL, NULL, NULL, NULL, '220800', '白城市', NULL, 'B', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2830, NULL, NULL, NULL, NULL, NULL, '220882', '大安市', NULL, 'D', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2831, NULL, NULL, NULL, NULL, NULL, '220881', '洮南市', NULL, 'N', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2832, NULL, NULL, NULL, NULL, NULL, '220822', '通榆县', NULL, 'T', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2833, NULL, NULL, NULL, NULL, NULL, '220821', '镇赉县', NULL, 'Z', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2834, NULL, NULL, NULL, NULL, NULL, '220802', '洮北区', NULL, 'B', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2835, NULL, NULL, NULL, NULL, NULL, '220801', '市辖区', NULL, 'S', 10, 3, '220800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2836, NULL, NULL, NULL, NULL, NULL, '220700', '松原市', NULL, 'S', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2837, NULL, NULL, NULL, NULL, NULL, '220724', '扶余县', NULL, 'F', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2838, NULL, NULL, NULL, NULL, NULL, '220723', '乾安县', NULL, 'Q', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2839, NULL, NULL, NULL, NULL, NULL, '220722', '长岭县', NULL, 'C', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2840, NULL, NULL, NULL, NULL, NULL, '220721', '前郭尔罗斯蒙古族自治县', NULL, 'Q', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2841, NULL, NULL, NULL, NULL, NULL, '220702', '宁江区', NULL, 'N', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2842, NULL, NULL, NULL, NULL, NULL, '220701', '市辖区', NULL, 'S', 10, 3, '220700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2843, NULL, NULL, NULL, NULL, NULL, '220600', '白山市', NULL, 'B', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2844, NULL, NULL, NULL, NULL, NULL, '220681', '临江市', NULL, 'L', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2845, NULL, NULL, NULL, NULL, NULL, '220625', '江源县', NULL, 'J', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2846, NULL, NULL, NULL, NULL, NULL, '220623', '长白朝鲜族自治县', NULL, 'C', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2847, NULL, NULL, NULL, NULL, NULL, '220622', '靖宇县', NULL, 'J', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2848, NULL, NULL, NULL, NULL, NULL, '220621', '抚松县', NULL, 'F', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2849, NULL, NULL, NULL, NULL, NULL, '220602', '八道江区', NULL, 'B', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2850, NULL, NULL, NULL, NULL, NULL, '220601', '市辖区', NULL, 'S', 10, 3, '220600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2851, NULL, NULL, NULL, NULL, NULL, '220500', '通化市', NULL, 'T', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2852, NULL, NULL, NULL, NULL, NULL, '220582', '集安市', NULL, 'J', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2853, NULL, NULL, NULL, NULL, NULL, '220581', '梅河口市', NULL, 'M', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2854, NULL, NULL, NULL, NULL, NULL, '220524', '柳河县', NULL, 'L', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2855, NULL, NULL, NULL, NULL, NULL, '220523', '辉南县', NULL, 'H', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2856, NULL, NULL, NULL, NULL, NULL, '220521', '通化县', NULL, 'T', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2857, NULL, NULL, NULL, NULL, NULL, '220503', '二道江区', NULL, 'E', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2858, NULL, NULL, NULL, NULL, NULL, '220502', '东昌区', NULL, 'D', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2859, NULL, NULL, NULL, NULL, NULL, '220501', '市辖区', NULL, 'S', 10, 3, '220500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2860, NULL, NULL, NULL, NULL, NULL, '220400', '辽源市', NULL, 'L', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2861, NULL, NULL, NULL, NULL, NULL, '220422', '东辽县', NULL, 'D', 10, 3, '220400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2862, NULL, NULL, NULL, NULL, NULL, '220421', '东丰县', NULL, 'D', 10, 3, '220400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2863, NULL, NULL, NULL, NULL, NULL, '220403', '西安区', NULL, 'X', 10, 3, '220400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2864, NULL, NULL, NULL, NULL, NULL, '220402', '龙山区', NULL, 'L', 10, 3, '220400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2865, NULL, NULL, NULL, NULL, NULL, '220401', '市辖区', NULL, 'S', 10, 3, '220400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2866, NULL, NULL, NULL, NULL, NULL, '220300', '四平市', NULL, 'S', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2867, NULL, NULL, NULL, NULL, NULL, '220382', '双辽市', NULL, 'S', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2868, NULL, NULL, NULL, NULL, NULL, '220381', '公主岭市', NULL, 'G', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2869, NULL, NULL, NULL, NULL, NULL, '220323', '伊通满族自治县', NULL, 'Y', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2870, NULL, NULL, NULL, NULL, NULL, '220322', '梨树县', NULL, 'L', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2871, NULL, NULL, NULL, NULL, NULL, '220303', '铁东区', NULL, 'T', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2872, NULL, NULL, NULL, NULL, NULL, '220302', '铁西区', NULL, 'T', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2873, NULL, NULL, NULL, NULL, NULL, '220301', '市辖区', NULL, 'S', 10, 3, '220300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2874, NULL, NULL, NULL, NULL, NULL, '220200', '吉林市', NULL, 'J', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2875, NULL, NULL, NULL, NULL, NULL, '220284', '磐石市', NULL, 'P', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2876, NULL, NULL, NULL, NULL, NULL, '220283', '舒兰市', NULL, 'S', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2877, NULL, NULL, NULL, NULL, NULL, '220282', '桦甸市', NULL, 'D', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2878, NULL, NULL, NULL, NULL, NULL, '220281', '蛟河市', NULL, 'H', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2879, NULL, NULL, NULL, NULL, NULL, '220221', '永吉县', NULL, 'Y', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2880, NULL, NULL, NULL, NULL, NULL, '220211', '丰满区', NULL, 'F', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2881, NULL, NULL, NULL, NULL, NULL, '220204', '船营区', NULL, 'C', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2882, NULL, NULL, NULL, NULL, NULL, '220203', '龙潭区', NULL, 'L', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2883, NULL, NULL, NULL, NULL, NULL, '220202', '昌邑区', NULL, 'C', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2884, NULL, NULL, NULL, NULL, NULL, '220201', '市辖区', NULL, 'S', 10, 3, '220200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2885, NULL, NULL, NULL, NULL, NULL, '220100', '长春市', NULL, 'C', 10, 2, '220000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2886, NULL, NULL, NULL, NULL, NULL, '220183', '德惠市', NULL, 'D', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2887, NULL, NULL, NULL, NULL, NULL, '220182', '榆树市', NULL, 'Y', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2888, NULL, NULL, NULL, NULL, NULL, '220181', '九台市', NULL, 'J', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2889, NULL, NULL, NULL, NULL, NULL, '220122', '农安县', NULL, 'N', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2890, NULL, NULL, NULL, NULL, NULL, '220112', '双阳区', NULL, 'S', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2891, NULL, NULL, NULL, NULL, NULL, '220106', '绿园区', NULL, 'L', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2892, NULL, NULL, NULL, NULL, NULL, '220105', '二道区', NULL, 'E', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2893, NULL, NULL, NULL, NULL, NULL, '220104', '朝阳区', NULL, 'C', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2894, NULL, NULL, NULL, NULL, NULL, '220103', '宽城区', NULL, 'K', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2895, NULL, NULL, NULL, NULL, NULL, '220102', '南关区', NULL, 'N', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2896, NULL, NULL, NULL, NULL, NULL, '220101', '市辖区', NULL, 'S', 10, 3, '220100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2897, NULL, NULL, NULL, NULL, NULL, '210000', '辽宁省', NULL, 'L', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (2898, NULL, NULL, NULL, NULL, NULL, '211400', '葫芦岛市', NULL, 'H', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2899, NULL, NULL, NULL, NULL, NULL, '211481', '兴城市', NULL, 'X', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2900, NULL, NULL, NULL, NULL, NULL, '211422', '建昌县', NULL, 'J', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2901, NULL, NULL, NULL, NULL, NULL, '211421', '绥中县', NULL, 'S', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2902, NULL, NULL, NULL, NULL, NULL, '211404', '南票区', NULL, 'N', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2903, NULL, NULL, NULL, NULL, NULL, '211403', '龙港区', NULL, 'L', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2904, NULL, NULL, NULL, NULL, NULL, '211402', '连山区', NULL, 'L', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2905, NULL, NULL, NULL, NULL, NULL, '211401', '市辖区', NULL, 'S', 10, 3, '211400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2906, NULL, NULL, NULL, NULL, NULL, '211300', '朝阳市', NULL, 'C', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2907, NULL, NULL, NULL, NULL, NULL, '211382', '凌源市', NULL, 'L', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2908, NULL, NULL, NULL, NULL, NULL, '211381', '北票市', NULL, 'B', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2909, NULL, NULL, NULL, NULL, NULL, '211324', '喀喇沁左翼蒙古族自治县', NULL, 'K', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2910, NULL, NULL, NULL, NULL, NULL, '211322', '建平县', NULL, 'J', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2911, NULL, NULL, NULL, NULL, NULL, '211321', '朝阳县', NULL, 'C', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2912, NULL, NULL, NULL, NULL, NULL, '211303', '龙城区', NULL, 'L', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2913, NULL, NULL, NULL, NULL, NULL, '211302', '双塔区', NULL, 'S', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2914, NULL, NULL, NULL, NULL, NULL, '211301', '市辖区', NULL, 'S', 10, 3, '211300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2915, NULL, NULL, NULL, NULL, NULL, '211200', '铁岭市', NULL, 'T', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2916, NULL, NULL, NULL, NULL, NULL, '211282', '开原市', NULL, 'K', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2917, NULL, NULL, NULL, NULL, NULL, '211281', '调兵山市', NULL, 'D', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2918, NULL, NULL, NULL, NULL, NULL, '211224', '昌图县', NULL, 'C', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2919, NULL, NULL, NULL, NULL, NULL, '211223', '西丰县', NULL, 'X', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2920, NULL, NULL, NULL, NULL, NULL, '211221', '铁岭县', NULL, 'T', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2921, NULL, NULL, NULL, NULL, NULL, '211204', '清河区', NULL, 'Q', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2922, NULL, NULL, NULL, NULL, NULL, '211202', '银州区', NULL, 'Y', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2923, NULL, NULL, NULL, NULL, NULL, '211201', '市辖区', NULL, 'S', 10, 3, '211200', NULL);
+INSERT INTO `sys_area_dj` VALUES (2924, NULL, NULL, NULL, NULL, NULL, '211100', '盘锦市', NULL, 'P', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2925, NULL, NULL, NULL, NULL, NULL, '211122', '盘山县', NULL, 'P', 10, 3, '211100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2926, NULL, NULL, NULL, NULL, NULL, '211121', '大洼县', NULL, 'D', 10, 3, '211100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2927, NULL, NULL, NULL, NULL, NULL, '211103', '兴隆台区', NULL, 'X', 10, 3, '211100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2928, NULL, NULL, NULL, NULL, NULL, '211102', '双台子区', NULL, 'S', 10, 3, '211100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2929, NULL, NULL, NULL, NULL, NULL, '211101', '市辖区', NULL, 'S', 10, 3, '211100', NULL);
+INSERT INTO `sys_area_dj` VALUES (2930, NULL, NULL, NULL, NULL, NULL, '211000', '辽阳市', NULL, 'L', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2931, NULL, NULL, NULL, NULL, NULL, '211081', '灯塔市', NULL, 'D', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2932, NULL, NULL, NULL, NULL, NULL, '211021', '辽阳县', NULL, 'L', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2933, NULL, NULL, NULL, NULL, NULL, '211011', '太子河区', NULL, 'T', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2934, NULL, NULL, NULL, NULL, NULL, '211005', '弓长岭区', NULL, 'G', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2935, NULL, NULL, NULL, NULL, NULL, '211004', '宏伟区', NULL, 'H', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2936, NULL, NULL, NULL, NULL, NULL, '211003', '文圣区', NULL, 'W', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2937, NULL, NULL, NULL, NULL, NULL, '211002', '白塔区', NULL, 'B', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2938, NULL, NULL, NULL, NULL, NULL, '211001', '市辖区', NULL, 'S', 10, 3, '211000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2939, NULL, NULL, NULL, NULL, NULL, '210900', '阜新市', NULL, 'F', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2940, NULL, NULL, NULL, NULL, NULL, '210922', '彰武县', NULL, 'Z', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2941, NULL, NULL, NULL, NULL, NULL, '210921', '阜新蒙古族自治县', NULL, 'F', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2942, NULL, NULL, NULL, NULL, NULL, '210911', '细河区', NULL, 'X', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2943, NULL, NULL, NULL, NULL, NULL, '210905', '清河门区', NULL, 'Q', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2944, NULL, NULL, NULL, NULL, NULL, '210904', '太平区', NULL, 'T', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2945, NULL, NULL, NULL, NULL, NULL, '210903', '新邱区', NULL, 'X', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2946, NULL, NULL, NULL, NULL, NULL, '210902', '海州区', NULL, 'H', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2947, NULL, NULL, NULL, NULL, NULL, '210901', '市辖区', NULL, 'S', 10, 3, '210900', NULL);
+INSERT INTO `sys_area_dj` VALUES (2948, NULL, NULL, NULL, NULL, NULL, '210800', '营口市', NULL, 'Y', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2949, NULL, NULL, NULL, NULL, NULL, '210882', '大石桥市', NULL, 'D', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2950, NULL, NULL, NULL, NULL, NULL, '210881', '盖州市', NULL, 'G', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2951, NULL, NULL, NULL, NULL, NULL, '210811', '老边区', NULL, 'L', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2952, NULL, NULL, NULL, NULL, NULL, '210804', '鲅鱼圈区', NULL, 'Y', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2953, NULL, NULL, NULL, NULL, NULL, '210803', '西市区', NULL, 'X', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2954, NULL, NULL, NULL, NULL, NULL, '210802', '站前区', NULL, 'Z', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2955, NULL, NULL, NULL, NULL, NULL, '210801', '市辖区', NULL, 'S', 10, 3, '210800', NULL);
+INSERT INTO `sys_area_dj` VALUES (2956, NULL, NULL, NULL, NULL, NULL, '210700', '锦州市', NULL, 'J', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2957, NULL, NULL, NULL, NULL, NULL, '210782', '北宁市', NULL, 'B', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2958, NULL, NULL, NULL, NULL, NULL, '210781', '凌海市', NULL, 'L', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2959, NULL, NULL, NULL, NULL, NULL, '210727', '义　县', NULL, 'Y', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2960, NULL, NULL, NULL, NULL, NULL, '210726', '黑山县', NULL, 'H', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2961, NULL, NULL, NULL, NULL, NULL, '210711', '太和区', NULL, 'T', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2962, NULL, NULL, NULL, NULL, NULL, '210703', '凌河区', NULL, 'L', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2963, NULL, NULL, NULL, NULL, NULL, '210702', '古塔区', NULL, 'G', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2964, NULL, NULL, NULL, NULL, NULL, '210701', '市辖区', NULL, 'S', 10, 3, '210700', NULL);
+INSERT INTO `sys_area_dj` VALUES (2965, NULL, NULL, NULL, NULL, NULL, '210600', '丹东市', NULL, 'D', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2966, NULL, NULL, NULL, NULL, NULL, '210682', '凤城市', NULL, 'F', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2967, NULL, NULL, NULL, NULL, NULL, '210681', '东港市', NULL, 'D', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2968, NULL, NULL, NULL, NULL, NULL, '210624', '宽甸满族自治县', NULL, 'K', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2969, NULL, NULL, NULL, NULL, NULL, '210604', '振安区', NULL, 'Z', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2970, NULL, NULL, NULL, NULL, NULL, '210603', '振兴区', NULL, 'Z', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2971, NULL, NULL, NULL, NULL, NULL, '210602', '元宝区', NULL, 'Y', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2972, NULL, NULL, NULL, NULL, NULL, '210601', '市辖区', NULL, 'S', 10, 3, '210600', NULL);
+INSERT INTO `sys_area_dj` VALUES (2973, NULL, NULL, NULL, NULL, NULL, '210500', '本溪市', NULL, 'B', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2974, NULL, NULL, NULL, NULL, NULL, '210522', '桓仁满族自治县', NULL, 'H', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2975, NULL, NULL, NULL, NULL, NULL, '210521', '本溪满族自治县', NULL, 'B', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2976, NULL, NULL, NULL, NULL, NULL, '210505', '南芬区', NULL, 'N', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2977, NULL, NULL, NULL, NULL, NULL, '210504', '明山区', NULL, 'M', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2978, NULL, NULL, NULL, NULL, NULL, '210503', '溪湖区', NULL, 'X', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2979, NULL, NULL, NULL, NULL, NULL, '210502', '平山区', NULL, 'P', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2980, NULL, NULL, NULL, NULL, NULL, '210501', '市辖区', NULL, 'S', 10, 3, '210500', NULL);
+INSERT INTO `sys_area_dj` VALUES (2981, NULL, NULL, NULL, NULL, NULL, '210400', '抚顺市', NULL, 'F', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2982, NULL, NULL, NULL, NULL, NULL, '210423', '清原满族自治县', NULL, 'Q', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2983, NULL, NULL, NULL, NULL, NULL, '210422', '新宾满族自治县', NULL, 'X', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2984, NULL, NULL, NULL, NULL, NULL, '210421', '抚顺县', NULL, 'F', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2985, NULL, NULL, NULL, NULL, NULL, '210411', '顺城区', NULL, 'S', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2986, NULL, NULL, NULL, NULL, NULL, '210404', '望花区', NULL, 'W', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2987, NULL, NULL, NULL, NULL, NULL, '210403', '东洲区', NULL, 'D', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2988, NULL, NULL, NULL, NULL, NULL, '210402', '新抚区', NULL, 'X', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2989, NULL, NULL, NULL, NULL, NULL, '210401', '市辖区', NULL, 'S', 10, 3, '210400', NULL);
+INSERT INTO `sys_area_dj` VALUES (2990, NULL, NULL, NULL, NULL, NULL, '210300', '鞍山市', NULL, 'A', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (2991, NULL, NULL, NULL, NULL, NULL, '210381', '海城市', NULL, 'H', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2992, NULL, NULL, NULL, NULL, NULL, '210323', '岫岩满族自治县', NULL, 'Y', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2993, NULL, NULL, NULL, NULL, NULL, '210321', '台安县', NULL, 'T', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2994, NULL, NULL, NULL, NULL, NULL, '210311', '千山区', NULL, 'Q', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2995, NULL, NULL, NULL, NULL, NULL, '210304', '立山区', NULL, 'L', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2996, NULL, NULL, NULL, NULL, NULL, '210303', '铁西区', NULL, 'T', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2997, NULL, NULL, NULL, NULL, NULL, '210302', '铁东区', NULL, 'T', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2998, NULL, NULL, NULL, NULL, NULL, '210301', '市辖区', NULL, 'S', 10, 3, '210300', NULL);
+INSERT INTO `sys_area_dj` VALUES (2999, NULL, NULL, NULL, NULL, NULL, '210200', '大连市', NULL, 'D', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3000, NULL, NULL, NULL, NULL, NULL, '210283', '庄河市', NULL, 'Z', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3001, NULL, NULL, NULL, NULL, NULL, '210282', '普兰店市', NULL, 'P', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3002, NULL, NULL, NULL, NULL, NULL, '210281', '瓦房店市', NULL, 'W', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3003, NULL, NULL, NULL, NULL, NULL, '210224', '长海县', NULL, 'C', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3004, NULL, NULL, NULL, NULL, NULL, '210213', '金州区', NULL, 'J', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3005, NULL, NULL, NULL, NULL, NULL, '210212', '旅顺口区', NULL, 'L', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3006, NULL, NULL, NULL, NULL, NULL, '210211', '甘井子区', NULL, 'G', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3007, NULL, NULL, NULL, NULL, NULL, '210204', '沙河口区', NULL, 'S', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3008, NULL, NULL, NULL, NULL, NULL, '210203', '西岗区', NULL, 'X', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3009, NULL, NULL, NULL, NULL, NULL, '210202', '中山区', NULL, 'Z', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3010, NULL, NULL, NULL, NULL, NULL, '210201', '市辖区', NULL, 'S', 10, 3, '210200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3011, NULL, NULL, NULL, NULL, NULL, '210100', '沈阳市', NULL, 'S', 10, 2, '210000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3012, NULL, NULL, NULL, NULL, NULL, '210181', '新民市', NULL, 'X', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3013, NULL, NULL, NULL, NULL, NULL, '210124', '法库县', NULL, 'F', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3014, NULL, NULL, NULL, NULL, NULL, '210123', '康平县', NULL, 'K', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3015, NULL, NULL, NULL, NULL, NULL, '210122', '辽中县', NULL, 'L', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3016, NULL, NULL, NULL, NULL, NULL, '210114', '于洪区', NULL, 'Y', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3017, NULL, NULL, NULL, NULL, NULL, '210113', '新城子区', NULL, 'X', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3018, NULL, NULL, NULL, NULL, NULL, '210112', '东陵区', NULL, 'D', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3019, NULL, NULL, NULL, NULL, NULL, '210111', '苏家屯区', NULL, 'S', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3020, NULL, NULL, NULL, NULL, NULL, '210106', '铁西区', NULL, 'T', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3021, NULL, NULL, NULL, NULL, NULL, '210105', '皇姑区', NULL, 'H', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3022, NULL, NULL, NULL, NULL, NULL, '210104', '大东区', NULL, 'D', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3023, NULL, NULL, NULL, NULL, NULL, '210103', '沈河区', NULL, 'S', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3024, NULL, NULL, NULL, NULL, NULL, '210102', '和平区', NULL, 'H', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3025, NULL, NULL, NULL, NULL, NULL, '210101', '市辖区', NULL, 'S', 10, 3, '210100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3026, NULL, NULL, NULL, NULL, NULL, '150000', '内蒙古自治区', NULL, 'N', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3027, NULL, NULL, NULL, NULL, NULL, '152900', '阿拉善盟', NULL, 'A', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3028, NULL, NULL, NULL, NULL, NULL, '152923', '额济纳旗', NULL, 'E', 10, 3, '152900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3029, NULL, NULL, NULL, NULL, NULL, '152922', '阿拉善右旗', NULL, 'A', 10, 3, '152900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3030, NULL, NULL, NULL, NULL, NULL, '152921', '阿拉善左旗', NULL, 'A', 10, 3, '152900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3031, NULL, NULL, NULL, NULL, NULL, '152500', '锡林郭勒盟', NULL, 'X', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3032, NULL, NULL, NULL, NULL, NULL, '152531', '多伦县', NULL, 'D', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3033, NULL, NULL, NULL, NULL, NULL, '152530', '正蓝旗', NULL, 'Z', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3034, NULL, NULL, NULL, NULL, NULL, '152529', '正镶白旗', NULL, 'Z', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3035, NULL, NULL, NULL, NULL, NULL, '152528', '镶黄旗', NULL, 'X', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3036, NULL, NULL, NULL, NULL, NULL, '152527', '太仆寺旗', NULL, 'T', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3037, NULL, NULL, NULL, NULL, NULL, '152526', '西乌珠穆沁旗', NULL, 'X', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3038, NULL, NULL, NULL, NULL, NULL, '152525', '东乌珠穆沁旗', NULL, 'D', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3039, NULL, NULL, NULL, NULL, NULL, '152524', '苏尼特右旗', NULL, 'S', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3040, NULL, NULL, NULL, NULL, NULL, '152523', '苏尼特左旗', NULL, 'S', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3041, NULL, NULL, NULL, NULL, NULL, '152522', '阿巴嘎旗', NULL, 'A', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3042, NULL, NULL, NULL, NULL, NULL, '152502', '锡林浩特市', NULL, 'X', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3043, NULL, NULL, NULL, NULL, NULL, '152501', '二连浩特市', NULL, 'E', 10, 3, '152500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3044, NULL, NULL, NULL, NULL, NULL, '152200', '兴安盟', NULL, 'X', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3045, NULL, NULL, NULL, NULL, NULL, '152224', '突泉县', NULL, 'T', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3046, NULL, NULL, NULL, NULL, NULL, '152223', '扎赉特旗', NULL, 'Z', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3047, NULL, NULL, NULL, NULL, NULL, '152222', '科尔沁右翼中旗', NULL, 'K', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3048, NULL, NULL, NULL, NULL, NULL, '152221', '科尔沁右翼前旗', NULL, 'K', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3049, NULL, NULL, NULL, NULL, NULL, '152202', '阿尔山市', NULL, 'A', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3050, NULL, NULL, NULL, NULL, NULL, '152201', '乌兰浩特市', NULL, 'W', 10, 3, '152200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3051, NULL, NULL, NULL, NULL, NULL, '150900', '乌兰察布市', NULL, 'W', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3052, NULL, NULL, NULL, NULL, NULL, '150981', '丰镇市', NULL, 'F', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3053, NULL, NULL, NULL, NULL, NULL, '150929', '四子王旗', NULL, 'S', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3054, NULL, NULL, NULL, NULL, NULL, '150928', '察哈尔右翼后旗', NULL, 'C', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3055, NULL, NULL, NULL, NULL, NULL, '150927', '察哈尔右翼中旗', NULL, 'C', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3056, NULL, NULL, NULL, NULL, NULL, '150926', '察哈尔右翼前旗', NULL, 'C', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3057, NULL, NULL, NULL, NULL, NULL, '150925', '凉城县', NULL, 'L', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3058, NULL, NULL, NULL, NULL, NULL, '150924', '兴和县', NULL, 'X', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3059, NULL, NULL, NULL, NULL, NULL, '150923', '商都县', NULL, 'S', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3060, NULL, NULL, NULL, NULL, NULL, '150922', '化德县', NULL, 'H', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3061, NULL, NULL, NULL, NULL, NULL, '150921', '卓资县', NULL, 'Z', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3062, NULL, NULL, NULL, NULL, NULL, '150902', '集宁区', NULL, 'J', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3063, NULL, NULL, NULL, NULL, NULL, '150901', '市辖区', NULL, 'S', 10, 3, '150900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3064, NULL, NULL, NULL, NULL, NULL, '150800', '巴彦淖尔市', NULL, 'B', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3065, NULL, NULL, NULL, NULL, NULL, '150826', '杭锦后旗', NULL, 'H', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3066, NULL, NULL, NULL, NULL, NULL, '150825', '乌拉特后旗', NULL, 'W', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3067, NULL, NULL, NULL, NULL, NULL, '150824', '乌拉特中旗', NULL, 'W', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3068, NULL, NULL, NULL, NULL, NULL, '150823', '乌拉特前旗', NULL, 'W', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3069, NULL, NULL, NULL, NULL, NULL, '150822', '磴口县', NULL, 'K', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3070, NULL, NULL, NULL, NULL, NULL, '150821', '五原县', NULL, 'W', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3071, NULL, NULL, NULL, NULL, NULL, '150802', '临河区', NULL, 'L', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3072, NULL, NULL, NULL, NULL, NULL, '150801', '市辖区', NULL, 'S', 10, 3, '150800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3073, NULL, NULL, NULL, NULL, NULL, '150700', '呼伦贝尔市', NULL, 'H', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3074, NULL, NULL, NULL, NULL, NULL, '150785', '根河市', NULL, 'G', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3075, NULL, NULL, NULL, NULL, NULL, '150784', '额尔古纳市', NULL, 'E', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3076, NULL, NULL, NULL, NULL, NULL, '150783', '扎兰屯市', NULL, 'Z', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3077, NULL, NULL, NULL, NULL, NULL, '150782', '牙克石市', NULL, 'Y', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3078, NULL, NULL, NULL, NULL, NULL, '150781', '满洲里市', NULL, 'M', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3079, NULL, NULL, NULL, NULL, NULL, '150727', '新巴尔虎右旗', NULL, 'X', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3080, NULL, NULL, NULL, NULL, NULL, '150726', '新巴尔虎左旗', NULL, 'X', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3081, NULL, NULL, NULL, NULL, NULL, '150725', '陈巴尔虎旗', NULL, 'C', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3082, NULL, NULL, NULL, NULL, NULL, '150724', '鄂温克族自治旗', NULL, 'E', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3083, NULL, NULL, NULL, NULL, NULL, '150723', '鄂伦春自治旗', NULL, 'E', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3084, NULL, NULL, NULL, NULL, NULL, '150722', '莫力达瓦达斡尔族自治旗', NULL, 'M', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3085, NULL, NULL, NULL, NULL, NULL, '150721', '阿荣旗', NULL, 'A', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3086, NULL, NULL, NULL, NULL, NULL, '150702', '海拉尔区', NULL, 'H', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3087, NULL, NULL, NULL, NULL, NULL, '150701', '市辖区', NULL, 'S', 10, 3, '150700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3088, NULL, NULL, NULL, NULL, NULL, '150600', '鄂尔多斯市', NULL, 'E', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3089, NULL, NULL, NULL, NULL, NULL, '150627', '伊金霍洛旗', NULL, 'Y', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3090, NULL, NULL, NULL, NULL, NULL, '150626', '乌审旗', NULL, 'W', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3091, NULL, NULL, NULL, NULL, NULL, '150625', '杭锦旗', NULL, 'H', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3092, NULL, NULL, NULL, NULL, NULL, '150624', '鄂托克旗', NULL, 'E', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3093, NULL, NULL, NULL, NULL, NULL, '150623', '鄂托克前旗', NULL, 'E', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3094, NULL, NULL, NULL, NULL, NULL, '150622', '准格尔旗', NULL, 'Z', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3095, NULL, NULL, NULL, NULL, NULL, '150621', '达拉特旗', NULL, 'D', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3096, NULL, NULL, NULL, NULL, NULL, '150602', '东胜区', NULL, 'D', 10, 3, '150600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3097, NULL, NULL, NULL, NULL, NULL, '150500', '通辽市', NULL, 'T', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3098, NULL, NULL, NULL, NULL, NULL, '150581', '霍林郭勒市', NULL, 'H', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3099, NULL, NULL, NULL, NULL, NULL, '150526', '扎鲁特旗', NULL, 'Z', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3100, NULL, NULL, NULL, NULL, NULL, '150525', '奈曼旗', NULL, 'N', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3101, NULL, NULL, NULL, NULL, NULL, '150524', '库伦旗', NULL, 'K', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3102, NULL, NULL, NULL, NULL, NULL, '150523', '开鲁县', NULL, 'K', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3103, NULL, NULL, NULL, NULL, NULL, '150522', '科尔沁左翼后旗', NULL, 'K', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3104, NULL, NULL, NULL, NULL, NULL, '150521', '科尔沁左翼中旗', NULL, 'K', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3105, NULL, NULL, NULL, NULL, NULL, '150502', '科尔沁区', NULL, 'K', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3106, NULL, NULL, NULL, NULL, NULL, '150501', '市辖区', NULL, 'S', 10, 3, '150500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3107, NULL, NULL, NULL, NULL, NULL, '150400', '赤峰市', NULL, 'C', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3108, NULL, NULL, NULL, NULL, NULL, '150430', '敖汉旗', NULL, 'A', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3109, NULL, NULL, NULL, NULL, NULL, '150429', '宁城县', NULL, 'N', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3110, NULL, NULL, NULL, NULL, NULL, '150428', '喀喇沁旗', NULL, 'K', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3111, NULL, NULL, NULL, NULL, NULL, '150426', '翁牛特旗', NULL, 'W', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3112, NULL, NULL, NULL, NULL, NULL, '150425', '克什克腾旗', NULL, 'K', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3113, NULL, NULL, NULL, NULL, NULL, '150424', '林西县', NULL, 'L', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3114, NULL, NULL, NULL, NULL, NULL, '150423', '巴林右旗', NULL, 'B', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3115, NULL, NULL, NULL, NULL, NULL, '150422', '巴林左旗', NULL, 'B', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3116, NULL, NULL, NULL, NULL, NULL, '150421', '阿鲁科尔沁旗', NULL, 'A', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3117, NULL, NULL, NULL, NULL, NULL, '150404', '松山区', NULL, 'S', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3118, NULL, NULL, NULL, NULL, NULL, '150403', '元宝山区', NULL, 'Y', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3119, NULL, NULL, NULL, NULL, NULL, '150402', '红山区', NULL, 'H', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3120, NULL, NULL, NULL, NULL, NULL, '150401', '市辖区', NULL, 'S', 10, 3, '150400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3121, NULL, NULL, NULL, NULL, NULL, '150300', '乌海市', NULL, 'W', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3122, NULL, NULL, NULL, NULL, NULL, '150304', '乌达区', NULL, 'W', 10, 3, '150300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3123, NULL, NULL, NULL, NULL, NULL, '150303', '海南区', NULL, 'H', 10, 3, '150300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3124, NULL, NULL, NULL, NULL, NULL, '150302', '海勃湾区', NULL, 'H', 10, 3, '150300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3125, NULL, NULL, NULL, NULL, NULL, '150301', '市辖区', NULL, 'S', 10, 3, '150300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3126, NULL, NULL, NULL, NULL, NULL, '150200', '包头市', NULL, 'B', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3127, NULL, NULL, NULL, NULL, NULL, '150223', '达尔罕茂明安联合旗', NULL, 'D', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3128, NULL, NULL, NULL, NULL, NULL, '150222', '固阳县', NULL, 'G', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3129, NULL, NULL, NULL, NULL, NULL, '150221', '土默特右旗', NULL, 'T', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3130, NULL, NULL, NULL, NULL, NULL, '150207', '九原区', NULL, 'J', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3131, NULL, NULL, NULL, NULL, NULL, '150206', '白云矿区', NULL, 'B', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3132, NULL, NULL, NULL, NULL, NULL, '150205', '石拐区', NULL, 'S', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3133, NULL, NULL, NULL, NULL, NULL, '150204', '青山区', NULL, 'Q', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3134, NULL, NULL, NULL, NULL, NULL, '150203', '昆都仑区', NULL, 'K', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3135, NULL, NULL, NULL, NULL, NULL, '150202', '东河区', NULL, 'D', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3136, NULL, NULL, NULL, NULL, NULL, '150201', '市辖区', NULL, 'S', 10, 3, '150200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3137, NULL, NULL, NULL, NULL, NULL, '150100', '呼和浩特市', NULL, 'H', 10, 2, '150000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3138, NULL, NULL, NULL, NULL, NULL, '150125', '武川县', NULL, 'W', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3139, NULL, NULL, NULL, NULL, NULL, '150124', '清水河县', NULL, 'Q', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3140, NULL, NULL, NULL, NULL, NULL, '150123', '和林格尔县', NULL, 'H', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3141, NULL, NULL, NULL, NULL, NULL, '150122', '托克托县', NULL, 'T', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3142, NULL, NULL, NULL, NULL, NULL, '150121', '土默特左旗', NULL, 'T', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3143, NULL, NULL, NULL, NULL, NULL, '150105', '赛罕区', NULL, 'S', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3144, NULL, NULL, NULL, NULL, NULL, '150104', '玉泉区', NULL, 'Y', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3145, NULL, NULL, NULL, NULL, NULL, '150103', '回民区', NULL, 'H', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3146, NULL, NULL, NULL, NULL, NULL, '150102', '新城区', NULL, 'X', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3147, NULL, NULL, NULL, NULL, NULL, '150101', '市辖区', NULL, 'S', 10, 3, '150100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3148, NULL, NULL, NULL, NULL, NULL, '140000', '山西省', NULL, 'S', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3149, NULL, NULL, NULL, NULL, NULL, '141100', '吕梁市', NULL, 'L', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3150, NULL, NULL, NULL, NULL, NULL, '141182', '汾阳市', NULL, 'F', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3151, NULL, NULL, NULL, NULL, NULL, '141181', '孝义市', NULL, 'X', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3152, NULL, NULL, NULL, NULL, NULL, '141130', '交口县', NULL, 'J', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3153, NULL, NULL, NULL, NULL, NULL, '141129', '中阳县', NULL, 'Z', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3154, NULL, NULL, NULL, NULL, NULL, '141128', '方山县', NULL, 'F', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3155, NULL, NULL, NULL, NULL, NULL, '141127', '岚　县', NULL, 'X', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3156, NULL, NULL, NULL, NULL, NULL, '141126', '石楼县', NULL, 'S', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3157, NULL, NULL, NULL, NULL, NULL, '141125', '柳林县', NULL, 'L', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3158, NULL, NULL, NULL, NULL, NULL, '141124', '临　县', NULL, 'L', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3159, NULL, NULL, NULL, NULL, NULL, '141123', '兴　县', NULL, 'X', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3160, NULL, NULL, NULL, NULL, NULL, '141122', '交城县', NULL, 'J', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3161, NULL, NULL, NULL, NULL, NULL, '141121', '文水县', NULL, 'W', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3162, NULL, NULL, NULL, NULL, NULL, '141102', '离石区', NULL, 'L', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3163, NULL, NULL, NULL, NULL, NULL, '141101', '市辖区', NULL, 'S', 10, 3, '141100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3164, NULL, NULL, NULL, NULL, NULL, '141000', '临汾市', NULL, 'L', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3165, NULL, NULL, NULL, NULL, NULL, '141082', '霍州市', NULL, 'H', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3166, NULL, NULL, NULL, NULL, NULL, '141081', '侯马市', NULL, 'H', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3167, NULL, NULL, NULL, NULL, NULL, '141034', '汾西县', NULL, 'F', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3168, NULL, NULL, NULL, NULL, NULL, '141033', '蒲　县', NULL, 'P', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3169, NULL, NULL, NULL, NULL, NULL, '141032', '永和县', NULL, 'Y', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3170, NULL, NULL, NULL, NULL, NULL, '141031', '隰　县', NULL, 'X', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3171, NULL, NULL, NULL, NULL, NULL, '141030', '大宁县', NULL, 'D', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3172, NULL, NULL, NULL, NULL, NULL, '141029', '乡宁县', NULL, 'X', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3173, NULL, NULL, NULL, NULL, NULL, '141028', '吉　县', NULL, 'J', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3174, NULL, NULL, NULL, NULL, NULL, '141027', '浮山县', NULL, 'F', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3175, NULL, NULL, NULL, NULL, NULL, '141026', '安泽县', NULL, 'A', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3176, NULL, NULL, NULL, NULL, NULL, '141025', '古　县', NULL, 'G', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3177, NULL, NULL, NULL, NULL, NULL, '141024', '洪洞县', NULL, 'H', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3178, NULL, NULL, NULL, NULL, NULL, '141023', '襄汾县', NULL, 'X', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3179, NULL, NULL, NULL, NULL, NULL, '141022', '翼城县', NULL, 'Y', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3180, NULL, NULL, NULL, NULL, NULL, '141021', '曲沃县', NULL, 'Q', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3181, NULL, NULL, NULL, NULL, NULL, '141002', '尧都区', NULL, 'Y', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3182, NULL, NULL, NULL, NULL, NULL, '141001', '市辖区', NULL, 'S', 10, 3, '141000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3183, NULL, NULL, NULL, NULL, NULL, '140900', '忻州市', NULL, 'X', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3184, NULL, NULL, NULL, NULL, NULL, '140981', '原平市', NULL, 'Y', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3185, NULL, NULL, NULL, NULL, NULL, '140932', '偏关县', NULL, 'P', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3186, NULL, NULL, NULL, NULL, NULL, '140931', '保德县', NULL, 'B', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3187, NULL, NULL, NULL, NULL, NULL, '140930', '河曲县', NULL, 'H', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3188, NULL, NULL, NULL, NULL, NULL, '140929', '岢岚县', NULL, 'X', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3189, NULL, NULL, NULL, NULL, NULL, '140928', '五寨县', NULL, 'W', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3190, NULL, NULL, NULL, NULL, NULL, '140927', '神池县', NULL, 'S', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3191, NULL, NULL, NULL, NULL, NULL, '140926', '静乐县', NULL, 'J', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3192, NULL, NULL, NULL, NULL, NULL, '140925', '宁武县', NULL, 'N', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3193, NULL, NULL, NULL, NULL, NULL, '140924', '繁峙县', NULL, 'F', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3194, NULL, NULL, NULL, NULL, NULL, '140923', '代　县', NULL, 'D', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3195, NULL, NULL, NULL, NULL, NULL, '140922', '五台县', NULL, 'W', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3196, NULL, NULL, NULL, NULL, NULL, '140921', '定襄县', NULL, 'D', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3197, NULL, NULL, NULL, NULL, NULL, '140902', '忻府区', NULL, 'X', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3198, NULL, NULL, NULL, NULL, NULL, '140901', '市辖区', NULL, 'S', 10, 3, '140900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3199, NULL, NULL, NULL, NULL, NULL, '140800', '运城市', NULL, 'Y', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3200, NULL, NULL, NULL, NULL, NULL, '140882', '河津市', NULL, 'H', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3201, NULL, NULL, NULL, NULL, NULL, '140881', '永济市', NULL, 'Y', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3202, NULL, NULL, NULL, NULL, NULL, '140830', '芮城县', NULL, 'C', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3203, NULL, NULL, NULL, NULL, NULL, '140829', '平陆县', NULL, 'P', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3204, NULL, NULL, NULL, NULL, NULL, '140828', '夏　县', NULL, 'X', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3205, NULL, NULL, NULL, NULL, NULL, '140827', '垣曲县', NULL, 'Y', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3206, NULL, NULL, NULL, NULL, NULL, '140826', '绛　县', NULL, 'X', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3207, NULL, NULL, NULL, NULL, NULL, '140825', '新绛县', NULL, 'X', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3208, NULL, NULL, NULL, NULL, NULL, '140824', '稷山县', NULL, 'S', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3209, NULL, NULL, NULL, NULL, NULL, '140823', '闻喜县', NULL, 'W', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3210, NULL, NULL, NULL, NULL, NULL, '140822', '万荣县', NULL, 'W', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3211, NULL, NULL, NULL, NULL, NULL, '140821', '临猗县', NULL, 'L', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3212, NULL, NULL, NULL, NULL, NULL, '140802', '盐湖区', NULL, 'Y', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3213, NULL, NULL, NULL, NULL, NULL, '140801', '市辖区', NULL, 'S', 10, 3, '140800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3214, NULL, NULL, NULL, NULL, NULL, '140700', '晋中市', NULL, 'J', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3215, NULL, NULL, NULL, NULL, NULL, '140781', '介休市', NULL, 'J', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3216, NULL, NULL, NULL, NULL, NULL, '140729', '灵石县', NULL, 'L', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3217, NULL, NULL, NULL, NULL, NULL, '140728', '平遥县', NULL, 'P', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3218, NULL, NULL, NULL, NULL, NULL, '140727', '祁　县', NULL, 'Q', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3219, NULL, NULL, NULL, NULL, NULL, '140726', '太谷县', NULL, 'T', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3220, NULL, NULL, NULL, NULL, NULL, '140725', '寿阳县', NULL, 'S', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3221, NULL, NULL, NULL, NULL, NULL, '140724', '昔阳县', NULL, 'X', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3222, NULL, NULL, NULL, NULL, NULL, '140723', '和顺县', NULL, 'H', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3223, NULL, NULL, NULL, NULL, NULL, '140722', '左权县', NULL, 'Z', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3224, NULL, NULL, NULL, NULL, NULL, '140721', '榆社县', NULL, 'Y', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3225, NULL, NULL, NULL, NULL, NULL, '140702', '榆次区', NULL, 'Y', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3226, NULL, NULL, NULL, NULL, NULL, '140701', '市辖区', NULL, 'S', 10, 3, '140700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3227, NULL, NULL, NULL, NULL, NULL, '140600', '朔州市', NULL, 'S', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3228, NULL, NULL, NULL, NULL, NULL, '140624', '怀仁县', NULL, 'H', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3229, NULL, NULL, NULL, NULL, NULL, '140623', '右玉县', NULL, 'Y', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3230, NULL, NULL, NULL, NULL, NULL, '140622', '应　县', NULL, 'Y', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3231, NULL, NULL, NULL, NULL, NULL, '140621', '山阴县', NULL, 'S', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3232, NULL, NULL, NULL, NULL, NULL, '140603', '平鲁区', NULL, 'P', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3233, NULL, NULL, NULL, NULL, NULL, '140602', '朔城区', NULL, 'S', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3234, NULL, NULL, NULL, NULL, NULL, '140601', '市辖区', NULL, 'S', 10, 3, '140600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3235, NULL, NULL, NULL, NULL, NULL, '140500', '晋城市', NULL, 'J', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3236, NULL, NULL, NULL, NULL, NULL, '140581', '高平市', NULL, 'G', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3237, NULL, NULL, NULL, NULL, NULL, '140525', '泽州县', NULL, 'Z', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3238, NULL, NULL, NULL, NULL, NULL, '140524', '陵川县', NULL, 'L', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3239, NULL, NULL, NULL, NULL, NULL, '140522', '阳城县', NULL, 'Y', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3240, NULL, NULL, NULL, NULL, NULL, '140521', '沁水县', NULL, 'Q', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3241, NULL, NULL, NULL, NULL, NULL, '140502', '城　区', NULL, 'C', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3242, NULL, NULL, NULL, NULL, NULL, '140501', '市辖区', NULL, 'S', 10, 3, '140500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3243, NULL, NULL, NULL, NULL, NULL, '140400', '长治市', NULL, 'C', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3244, NULL, NULL, NULL, NULL, NULL, '140481', '潞城市', NULL, 'L', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3245, NULL, NULL, NULL, NULL, NULL, '140431', '沁源县', NULL, 'Q', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3246, NULL, NULL, NULL, NULL, NULL, '140430', '沁　县', NULL, 'Q', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3247, NULL, NULL, NULL, NULL, NULL, '140429', '武乡县', NULL, 'W', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3248, NULL, NULL, NULL, NULL, NULL, '140428', '长子县', NULL, 'C', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3249, NULL, NULL, NULL, NULL, NULL, '140427', '壶关县', NULL, 'H', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3250, NULL, NULL, NULL, NULL, NULL, '140426', '黎城县', NULL, 'L', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3251, NULL, NULL, NULL, NULL, NULL, '140425', '平顺县', NULL, 'P', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3252, NULL, NULL, NULL, NULL, NULL, '140424', '屯留县', NULL, 'T', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3253, NULL, NULL, NULL, NULL, NULL, '140423', '襄垣县', NULL, 'X', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3254, NULL, NULL, NULL, NULL, NULL, '140421', '长治县', NULL, 'C', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3255, NULL, NULL, NULL, NULL, NULL, '140411', '郊　区', NULL, 'J', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3256, NULL, NULL, NULL, NULL, NULL, '140402', '城　区', NULL, 'C', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3257, NULL, NULL, NULL, NULL, NULL, '140401', '市辖区', NULL, 'S', 10, 3, '140400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3258, NULL, NULL, NULL, NULL, NULL, '140300', '阳泉市', NULL, 'Y', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3259, NULL, NULL, NULL, NULL, NULL, '140322', '盂　县', NULL, 'Y', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3260, NULL, NULL, NULL, NULL, NULL, '140321', '平定县', NULL, 'P', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3261, NULL, NULL, NULL, NULL, NULL, '140311', '郊　区', NULL, 'J', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3262, NULL, NULL, NULL, NULL, NULL, '140303', '矿　区', NULL, 'K', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3263, NULL, NULL, NULL, NULL, NULL, '140302', '城　区', NULL, 'C', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3264, NULL, NULL, NULL, NULL, NULL, '140301', '市辖区', NULL, 'S', 10, 3, '140300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3265, NULL, NULL, NULL, NULL, NULL, '140200', '大同市', NULL, 'D', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3266, NULL, NULL, NULL, NULL, NULL, '140227', '大同县', NULL, 'D', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3267, NULL, NULL, NULL, NULL, NULL, '140226', '左云县', NULL, 'Z', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3268, NULL, NULL, NULL, NULL, NULL, '140225', '浑源县', NULL, 'H', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3269, NULL, NULL, NULL, NULL, NULL, '140224', '灵丘县', NULL, 'L', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3270, NULL, NULL, NULL, NULL, NULL, '140223', '广灵县', NULL, 'G', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3271, NULL, NULL, NULL, NULL, NULL, '140222', '天镇县', NULL, 'T', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3272, NULL, NULL, NULL, NULL, NULL, '140221', '阳高县', NULL, 'Y', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3273, NULL, NULL, NULL, NULL, NULL, '140212', '新荣区', NULL, 'X', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3274, NULL, NULL, NULL, NULL, NULL, '140211', '南郊区', NULL, 'N', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3275, NULL, NULL, NULL, NULL, NULL, '140203', '矿　区', NULL, 'K', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3276, NULL, NULL, NULL, NULL, NULL, '140202', '城　区', NULL, 'C', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3277, NULL, NULL, NULL, NULL, NULL, '140201', '市辖区', NULL, 'S', 10, 3, '140200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3278, NULL, NULL, NULL, NULL, NULL, '140100', '太原市', NULL, 'T', 10, 2, '140000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3279, NULL, NULL, NULL, NULL, NULL, '140181', '古交市', NULL, 'G', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3280, NULL, NULL, NULL, NULL, NULL, '140123', '娄烦县', NULL, 'L', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3281, NULL, NULL, NULL, NULL, NULL, '140122', '阳曲县', NULL, 'Y', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3282, NULL, NULL, NULL, NULL, NULL, '140121', '清徐县', NULL, 'Q', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3283, NULL, NULL, NULL, NULL, NULL, '140110', '晋源区', NULL, 'J', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3284, NULL, NULL, NULL, NULL, NULL, '140109', '万柏林区', NULL, 'W', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3285, NULL, NULL, NULL, NULL, NULL, '140108', '尖草坪区', NULL, 'J', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3286, NULL, NULL, NULL, NULL, NULL, '140107', '杏花岭区', NULL, 'X', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3287, NULL, NULL, NULL, NULL, NULL, '140106', '迎泽区', NULL, 'Y', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3288, NULL, NULL, NULL, NULL, NULL, '140105', '小店区', NULL, 'X', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3289, NULL, NULL, NULL, NULL, NULL, '140101', '市辖区', NULL, 'S', 10, 3, '140100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3290, NULL, NULL, NULL, NULL, NULL, '130000', '河北省', NULL, 'H', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3291, NULL, NULL, NULL, NULL, NULL, '131100', '衡水市', NULL, 'H', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3292, NULL, NULL, NULL, NULL, NULL, '131182', '深州市', NULL, 'S', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3293, NULL, NULL, NULL, NULL, NULL, '131181', '冀州市', NULL, 'J', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3294, NULL, NULL, NULL, NULL, NULL, '131128', '阜城县', NULL, 'F', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3295, NULL, NULL, NULL, NULL, NULL, '131127', '景　县', NULL, 'J', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3296, NULL, NULL, NULL, NULL, NULL, '131126', '故城县', NULL, 'G', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3297, NULL, NULL, NULL, NULL, NULL, '131125', '安平县', NULL, 'A', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3298, NULL, NULL, NULL, NULL, NULL, '131124', '饶阳县', NULL, 'R', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3299, NULL, NULL, NULL, NULL, NULL, '131123', '武强县', NULL, 'W', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3300, NULL, NULL, NULL, NULL, NULL, '131122', '武邑县', NULL, 'W', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3301, NULL, NULL, NULL, NULL, NULL, '131121', '枣强县', NULL, 'Z', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3302, NULL, NULL, NULL, NULL, NULL, '131102', '桃城区', NULL, 'T', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3303, NULL, NULL, NULL, NULL, NULL, '131101', '市辖区', NULL, 'S', 10, 3, '131100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3304, NULL, NULL, NULL, NULL, NULL, '131000', '廊坊市', NULL, 'L', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3305, NULL, NULL, NULL, NULL, NULL, '131082', '三河市', NULL, 'S', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3306, NULL, NULL, NULL, NULL, NULL, '131081', '霸州市', NULL, 'B', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3307, NULL, NULL, NULL, NULL, NULL, '131028', '大厂回族自治县', NULL, 'D', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3308, NULL, NULL, NULL, NULL, NULL, '131026', '文安县', NULL, 'W', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3309, NULL, NULL, NULL, NULL, NULL, '131025', '大城县', NULL, 'D', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3310, NULL, NULL, NULL, NULL, NULL, '131024', '香河县', NULL, 'X', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3311, NULL, NULL, NULL, NULL, NULL, '131023', '永清县', NULL, 'Y', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3312, NULL, NULL, NULL, NULL, NULL, '131022', '固安县', NULL, 'G', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3313, NULL, NULL, NULL, NULL, NULL, '131003', '广阳区', NULL, 'G', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3314, NULL, NULL, NULL, NULL, NULL, '131002', '安次区', NULL, 'A', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3315, NULL, NULL, NULL, NULL, NULL, '131001', '市辖区', NULL, 'S', 10, 3, '131000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3316, NULL, NULL, NULL, NULL, NULL, '130900', '沧州市', NULL, 'C', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3317, NULL, NULL, NULL, NULL, NULL, '130984', '河间市', NULL, 'H', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3318, NULL, NULL, NULL, NULL, NULL, '130983', '黄骅市', NULL, 'H', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3319, NULL, NULL, NULL, NULL, NULL, '130982', '任丘市', NULL, 'R', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3320, NULL, NULL, NULL, NULL, NULL, '130981', '泊头市', NULL, 'B', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3321, NULL, NULL, NULL, NULL, NULL, '130930', '孟村回族自治县', NULL, 'M', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3322, NULL, NULL, NULL, NULL, NULL, '130929', '献　县', NULL, 'X', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3323, NULL, NULL, NULL, NULL, NULL, '130928', '吴桥县', NULL, 'W', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3324, NULL, NULL, NULL, NULL, NULL, '130927', '南皮县', NULL, 'N', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3325, NULL, NULL, NULL, NULL, NULL, '130926', '肃宁县', NULL, 'S', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3326, NULL, NULL, NULL, NULL, NULL, '130925', '盐山县', NULL, 'Y', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3327, NULL, NULL, NULL, NULL, NULL, '130924', '海兴县', NULL, 'H', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3328, NULL, NULL, NULL, NULL, NULL, '130923', '东光县', NULL, 'D', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3329, NULL, NULL, NULL, NULL, NULL, '130922', '青　县', NULL, 'Q', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3330, NULL, NULL, NULL, NULL, NULL, '130921', '沧　县', NULL, 'C', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3331, NULL, NULL, NULL, NULL, NULL, '130903', '运河区', NULL, 'Y', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3332, NULL, NULL, NULL, NULL, NULL, '130902', '新华区', NULL, 'X', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3333, NULL, NULL, NULL, NULL, NULL, '130901', '市辖区', NULL, 'S', 10, 3, '130900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3334, NULL, NULL, NULL, NULL, NULL, '130800', '承德市', NULL, 'C', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3335, NULL, NULL, NULL, NULL, NULL, '130828', '围场满族蒙古族自治县', NULL, 'W', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3336, NULL, NULL, NULL, NULL, NULL, '130827', '宽城满族自治县', NULL, 'K', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3337, NULL, NULL, NULL, NULL, NULL, '130826', '丰宁满族自治县', NULL, 'F', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3338, NULL, NULL, NULL, NULL, NULL, '130825', '隆化县', NULL, 'L', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3339, NULL, NULL, NULL, NULL, NULL, '130824', '滦平县', NULL, 'L', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3340, NULL, NULL, NULL, NULL, NULL, '130823', '平泉县', NULL, 'P', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3341, NULL, NULL, NULL, NULL, NULL, '130822', '兴隆县', NULL, 'X', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3342, NULL, NULL, NULL, NULL, NULL, '130821', '承德县', NULL, 'C', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3343, NULL, NULL, NULL, NULL, NULL, '130804', '鹰手营子矿区', NULL, 'Y', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3344, NULL, NULL, NULL, NULL, NULL, '130803', '双滦区', NULL, 'S', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3345, NULL, NULL, NULL, NULL, NULL, '130802', '双桥区', NULL, 'S', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3346, NULL, NULL, NULL, NULL, NULL, '130801', '市辖区', NULL, 'S', 10, 3, '130800', NULL);
+INSERT INTO `sys_area_dj` VALUES (3347, NULL, NULL, NULL, NULL, NULL, '130700', '张家口市', NULL, 'Z', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3348, NULL, NULL, NULL, NULL, NULL, '130733', '崇礼县', NULL, 'C', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3349, NULL, NULL, NULL, NULL, NULL, '130732', '赤城县', NULL, 'C', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3350, NULL, NULL, NULL, NULL, NULL, '130731', '涿鹿县', NULL, 'L', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3351, NULL, NULL, NULL, NULL, NULL, '130730', '怀来县', NULL, 'H', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3352, NULL, NULL, NULL, NULL, NULL, '130729', '万全县', NULL, 'W', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3353, NULL, NULL, NULL, NULL, NULL, '130728', '怀安县', NULL, 'H', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3354, NULL, NULL, NULL, NULL, NULL, '130727', '阳原县', NULL, 'Y', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3355, NULL, NULL, NULL, NULL, NULL, '130726', '蔚　县', NULL, 'W', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3356, NULL, NULL, NULL, NULL, NULL, '130725', '尚义县', NULL, 'S', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3357, NULL, NULL, NULL, NULL, NULL, '130724', '沽源县', NULL, 'G', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3358, NULL, NULL, NULL, NULL, NULL, '130723', '康保县', NULL, 'K', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3359, NULL, NULL, NULL, NULL, NULL, '130722', '张北县', NULL, 'Z', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3360, NULL, NULL, NULL, NULL, NULL, '130721', '宣化县', NULL, 'X', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3361, NULL, NULL, NULL, NULL, NULL, '130706', '下花园区', NULL, 'X', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3362, NULL, NULL, NULL, NULL, NULL, '130705', '宣化区', NULL, 'X', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3363, NULL, NULL, NULL, NULL, NULL, '130703', '桥西区', NULL, 'Q', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3364, NULL, NULL, NULL, NULL, NULL, '130702', '桥东区', NULL, 'Q', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3365, NULL, NULL, NULL, NULL, NULL, '130701', '市辖区', NULL, 'S', 10, 3, '130700', NULL);
+INSERT INTO `sys_area_dj` VALUES (3366, NULL, NULL, NULL, NULL, NULL, '130600', '保定市', NULL, 'B', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3367, NULL, NULL, NULL, NULL, NULL, '130684', '高碑店市', NULL, 'G', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3368, NULL, NULL, NULL, NULL, NULL, '130683', '安国市', NULL, 'A', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3369, NULL, NULL, NULL, NULL, NULL, '130682', '定州市', NULL, 'D', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3370, NULL, NULL, NULL, NULL, NULL, '130681', '涿州市', NULL, 'Z', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3371, NULL, NULL, NULL, NULL, NULL, '130638', '雄　县', NULL, 'X', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3372, NULL, NULL, NULL, NULL, NULL, '130637', '博野县', NULL, 'B', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3373, NULL, NULL, NULL, NULL, NULL, '130636', '顺平县', NULL, 'S', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3374, NULL, NULL, NULL, NULL, NULL, '130635', '蠡　县', NULL, 'X', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3375, NULL, NULL, NULL, NULL, NULL, '130634', '曲阳县', NULL, 'Q', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3376, NULL, NULL, NULL, NULL, NULL, '130633', '易　县', NULL, 'Y', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3377, NULL, NULL, NULL, NULL, NULL, '130632', '安新县', NULL, 'A', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3378, NULL, NULL, NULL, NULL, NULL, '130631', '望都县', NULL, 'W', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3379, NULL, NULL, NULL, NULL, NULL, '130630', '涞源县', NULL, 'Y', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3380, NULL, NULL, NULL, NULL, NULL, '130629', '容城县', NULL, 'R', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3381, NULL, NULL, NULL, NULL, NULL, '130628', '高阳县', NULL, 'G', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3382, NULL, NULL, NULL, NULL, NULL, '130627', '唐　县', NULL, 'T', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3383, NULL, NULL, NULL, NULL, NULL, '130626', '定兴县', NULL, 'D', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3384, NULL, NULL, NULL, NULL, NULL, '130625', '徐水县', NULL, 'X', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3385, NULL, NULL, NULL, NULL, NULL, '130624', '阜平县', NULL, 'F', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3386, NULL, NULL, NULL, NULL, NULL, '130623', '涞水县', NULL, 'S', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3387, NULL, NULL, NULL, NULL, NULL, '130622', '清苑县', NULL, 'Q', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3388, NULL, NULL, NULL, NULL, NULL, '130621', '满城县', NULL, 'M', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3389, NULL, NULL, NULL, NULL, NULL, '130604', '南市区', NULL, 'N', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3390, NULL, NULL, NULL, NULL, NULL, '130603', '北市区', NULL, 'B', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3391, NULL, NULL, NULL, NULL, NULL, '130602', '新市区', NULL, 'X', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3392, NULL, NULL, NULL, NULL, NULL, '130601', '市辖区', NULL, 'S', 10, 3, '130600', NULL);
+INSERT INTO `sys_area_dj` VALUES (3393, NULL, NULL, NULL, NULL, NULL, '130500', '邢台市', NULL, 'X', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3394, NULL, NULL, NULL, NULL, NULL, '130582', '沙河市', NULL, 'S', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3395, NULL, NULL, NULL, NULL, NULL, '130581', '南宫市', NULL, 'N', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3396, NULL, NULL, NULL, NULL, NULL, '130535', '临西县', NULL, 'L', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3397, NULL, NULL, NULL, NULL, NULL, '130534', '清河县', NULL, 'Q', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3398, NULL, NULL, NULL, NULL, NULL, '130533', '威　县', NULL, 'W', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3399, NULL, NULL, NULL, NULL, NULL, '130532', '平乡县', NULL, 'P', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3400, NULL, NULL, NULL, NULL, NULL, '130531', '广宗县', NULL, 'G', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3401, NULL, NULL, NULL, NULL, NULL, '130530', '新河县', NULL, 'X', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3402, NULL, NULL, NULL, NULL, NULL, '130529', '巨鹿县', NULL, 'J', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3403, NULL, NULL, NULL, NULL, NULL, '130528', '宁晋县', NULL, 'N', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3404, NULL, NULL, NULL, NULL, NULL, '130527', '南和县', NULL, 'N', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3405, NULL, NULL, NULL, NULL, NULL, '130526', '任　县', NULL, 'R', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3406, NULL, NULL, NULL, NULL, NULL, '130525', '隆尧县', NULL, 'L', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3407, NULL, NULL, NULL, NULL, NULL, '130524', '柏乡县', NULL, 'B', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3408, NULL, NULL, NULL, NULL, NULL, '130523', '内丘县', NULL, 'N', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3409, NULL, NULL, NULL, NULL, NULL, '130522', '临城县', NULL, 'L', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3410, NULL, NULL, NULL, NULL, NULL, '130521', '邢台县', NULL, 'X', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3411, NULL, NULL, NULL, NULL, NULL, '130503', '桥西区', NULL, 'Q', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3412, NULL, NULL, NULL, NULL, NULL, '130502', '桥东区', NULL, 'Q', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3413, NULL, NULL, NULL, NULL, NULL, '130501', '市辖区', NULL, 'S', 10, 3, '130500', NULL);
+INSERT INTO `sys_area_dj` VALUES (3414, NULL, NULL, NULL, NULL, NULL, '130400', '邯郸市', NULL, 'H', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3415, NULL, NULL, NULL, NULL, NULL, '130481', '武安市', NULL, 'W', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3416, NULL, NULL, NULL, NULL, NULL, '130435', '曲周县', NULL, 'Q', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3417, NULL, NULL, NULL, NULL, NULL, '130434', '魏　县', NULL, 'W', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3418, NULL, NULL, NULL, NULL, NULL, '130433', '馆陶县', NULL, 'G', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3419, NULL, NULL, NULL, NULL, NULL, '130432', '广平县', NULL, 'G', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3420, NULL, NULL, NULL, NULL, NULL, '130431', '鸡泽县', NULL, 'J', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3421, NULL, NULL, NULL, NULL, NULL, '130430', '邱　县', NULL, 'Q', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3422, NULL, NULL, NULL, NULL, NULL, '130429', '永年县', NULL, 'Y', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3423, NULL, NULL, NULL, NULL, NULL, '130428', '肥乡县', NULL, 'F', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3424, NULL, NULL, NULL, NULL, NULL, '130427', '磁　县', NULL, 'C', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3425, NULL, NULL, NULL, NULL, NULL, '130426', '涉　县', NULL, 'S', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3426, NULL, NULL, NULL, NULL, NULL, '130425', '大名县', NULL, 'D', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3427, NULL, NULL, NULL, NULL, NULL, '130424', '成安县', NULL, 'C', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3428, NULL, NULL, NULL, NULL, NULL, '130423', '临漳县', NULL, 'L', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3429, NULL, NULL, NULL, NULL, NULL, '130421', '邯郸县', NULL, 'H', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3430, NULL, NULL, NULL, NULL, NULL, '130406', '峰峰矿区', NULL, 'F', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3431, NULL, NULL, NULL, NULL, NULL, '130404', '复兴区', NULL, 'F', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3432, NULL, NULL, NULL, NULL, NULL, '130403', '丛台区', NULL, 'C', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3433, NULL, NULL, NULL, NULL, NULL, '130402', '邯山区', NULL, 'H', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3434, NULL, NULL, NULL, NULL, NULL, '130401', '市辖区', NULL, 'S', 10, 3, '130400', NULL);
+INSERT INTO `sys_area_dj` VALUES (3435, NULL, NULL, NULL, NULL, NULL, '130300', '秦皇岛市', NULL, 'Q', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3436, NULL, NULL, NULL, NULL, NULL, '130324', '卢龙县', NULL, 'L', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3437, NULL, NULL, NULL, NULL, NULL, '130323', '抚宁县', NULL, 'F', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3438, NULL, NULL, NULL, NULL, NULL, '130322', '昌黎县', NULL, 'C', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3439, NULL, NULL, NULL, NULL, NULL, '130321', '青龙满族自治县', NULL, 'Q', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3440, NULL, NULL, NULL, NULL, NULL, '130304', '北戴河区', NULL, 'B', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3441, NULL, NULL, NULL, NULL, NULL, '130303', '山海关区', NULL, 'S', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3442, NULL, NULL, NULL, NULL, NULL, '130302', '海港区', NULL, 'H', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3443, NULL, NULL, NULL, NULL, NULL, '130301', '市辖区', NULL, 'S', 10, 3, '130300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3444, NULL, NULL, NULL, NULL, NULL, '130200', '唐山市', NULL, 'T', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3445, NULL, NULL, NULL, NULL, NULL, '130283', '迁安市', NULL, 'Q', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3446, NULL, NULL, NULL, NULL, NULL, '130281', '遵化市', NULL, 'Z', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3447, NULL, NULL, NULL, NULL, NULL, '130230', '唐海县', NULL, 'T', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3448, NULL, NULL, NULL, NULL, NULL, '130229', '玉田县', NULL, 'Y', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3449, NULL, NULL, NULL, NULL, NULL, '130227', '迁西县', NULL, 'Q', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3450, NULL, NULL, NULL, NULL, NULL, '130225', '乐亭县', NULL, 'L', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3451, NULL, NULL, NULL, NULL, NULL, '130224', '滦南县', NULL, 'L', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3452, NULL, NULL, NULL, NULL, NULL, '130223', '滦　县', NULL, 'L', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3453, NULL, NULL, NULL, NULL, NULL, '130208', '丰润区', NULL, 'F', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3454, NULL, NULL, NULL, NULL, NULL, '130207', '丰南区', NULL, 'F', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3455, NULL, NULL, NULL, NULL, NULL, '130205', '开平区', NULL, 'K', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3456, NULL, NULL, NULL, NULL, NULL, '130204', '古冶区', NULL, 'G', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3457, NULL, NULL, NULL, NULL, NULL, '130203', '路北区', NULL, 'L', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3458, NULL, NULL, NULL, NULL, NULL, '130202', '路南区', NULL, 'L', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3459, NULL, NULL, NULL, NULL, NULL, '130201', '市辖区', NULL, 'S', 10, 3, '130200', NULL);
+INSERT INTO `sys_area_dj` VALUES (3460, NULL, NULL, NULL, NULL, NULL, '130100', '石家庄市', NULL, 'S', 10, 2, '130000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3461, NULL, NULL, NULL, NULL, NULL, '130185', '鹿泉市', NULL, 'L', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3462, NULL, NULL, NULL, NULL, NULL, '130184', '新乐市', NULL, 'X', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3463, NULL, NULL, NULL, NULL, NULL, '130183', '晋州市', NULL, 'J', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3464, NULL, NULL, NULL, NULL, NULL, '130182', '藁城市', NULL, 'C', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3465, NULL, NULL, NULL, NULL, NULL, '130181', '辛集市', NULL, 'X', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3466, NULL, NULL, NULL, NULL, NULL, '130133', '赵　县', NULL, 'Z', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3467, NULL, NULL, NULL, NULL, NULL, '130132', '元氏县', NULL, 'Y', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3468, NULL, NULL, NULL, NULL, NULL, '130131', '平山县', NULL, 'P', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3469, NULL, NULL, NULL, NULL, NULL, '130130', '无极县', NULL, 'W', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3470, NULL, NULL, NULL, NULL, NULL, '130129', '赞皇县', NULL, 'Z', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3471, NULL, NULL, NULL, NULL, NULL, '130128', '深泽县', NULL, 'S', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3472, NULL, NULL, '2024-02-24 15:11:07.937000', 1, 0, '130127', '高邑县', NULL, 'G', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3473, NULL, NULL, NULL, NULL, NULL, '130126', '灵寿县', NULL, 'L', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3474, NULL, NULL, NULL, NULL, NULL, '130125', '行唐县', NULL, 'X', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3475, NULL, NULL, NULL, NULL, NULL, '130124', '栾城县', NULL, 'C', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3476, NULL, NULL, NULL, NULL, NULL, '130123', '正定县', NULL, 'Z', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3477, NULL, NULL, NULL, NULL, NULL, '130121', '井陉县', NULL, 'J', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3478, NULL, NULL, NULL, NULL, NULL, '130108', '裕华区', NULL, 'Y', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3479, NULL, NULL, NULL, NULL, NULL, '130107', '井陉矿区', NULL, 'J', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3480, NULL, NULL, NULL, NULL, NULL, '130105', '新华区', NULL, 'X', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3481, NULL, NULL, NULL, NULL, NULL, '130104', '桥西区', NULL, 'Q', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3482, NULL, NULL, NULL, NULL, NULL, '130103', '桥东区', NULL, 'Q', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3483, NULL, NULL, NULL, NULL, NULL, '130102', '长安区', NULL, 'C', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3484, NULL, NULL, NULL, NULL, NULL, '130101', '市辖区', NULL, 'S', 10, 3, '130100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3485, NULL, NULL, NULL, NULL, NULL, '120000', '天津市', NULL, 'T', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3486, NULL, NULL, NULL, NULL, NULL, '120225', '蓟　县', NULL, 'J', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3487, NULL, NULL, NULL, NULL, NULL, '120223', '静海县', NULL, 'J', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3488, NULL, NULL, NULL, NULL, NULL, '120221', '宁河县', NULL, 'N', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3489, NULL, NULL, NULL, NULL, NULL, '120100', '天津市', NULL, 'T', 10, 2, '120000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3490, NULL, NULL, NULL, NULL, NULL, '120115', '宝坻区', NULL, 'B', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3491, NULL, NULL, NULL, NULL, NULL, '120114', '武清区', NULL, 'W', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3492, NULL, NULL, NULL, NULL, NULL, '120113', '北辰区', NULL, 'B', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3493, NULL, NULL, NULL, NULL, NULL, '120112', '津南区', NULL, 'J', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3494, NULL, NULL, NULL, NULL, NULL, '120111', '西青区', NULL, 'X', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3495, NULL, NULL, NULL, NULL, NULL, '120110', '东丽区', NULL, 'D', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3496, NULL, NULL, NULL, NULL, NULL, '120109', '大港区', NULL, 'D', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3497, NULL, NULL, NULL, NULL, NULL, '120108', '汉沽区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3498, NULL, NULL, NULL, NULL, NULL, '120107', '塘沽区', NULL, 'T', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3499, NULL, NULL, NULL, NULL, NULL, '120106', '红桥区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3500, NULL, NULL, NULL, NULL, NULL, '120105', '河北区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3501, NULL, NULL, NULL, NULL, NULL, '120104', '南开区', NULL, 'N', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3502, NULL, NULL, NULL, NULL, NULL, '120103', '河西区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3503, NULL, NULL, NULL, NULL, NULL, '120102', '河东区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3504, NULL, NULL, NULL, NULL, NULL, '120101', '和平区', NULL, 'H', 10, 3, '120100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3505, NULL, NULL, NULL, NULL, NULL, '110000', '北京市', NULL, 'B', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3506, NULL, NULL, NULL, NULL, NULL, '910009', '五家渠市', NULL, 'W', 10, 3, '659004', NULL);
+INSERT INTO `sys_area_dj` VALUES (3507, NULL, NULL, NULL, NULL, NULL, '110229', '延庆县', NULL, 'Y', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3508, NULL, NULL, NULL, NULL, NULL, '110228', '密云县', NULL, 'M', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3509, NULL, NULL, NULL, NULL, NULL, '110100', '北京市', NULL, 'B', 10, 2, '110000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3510, NULL, NULL, NULL, NULL, NULL, '110117', '平谷区', NULL, 'P', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3511, NULL, NULL, NULL, NULL, NULL, '110116', '怀柔区', NULL, 'H', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3512, NULL, NULL, NULL, NULL, NULL, '110115', '大兴区', NULL, 'D', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3513, NULL, NULL, NULL, NULL, NULL, '110114', '昌平区', NULL, 'C', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3514, NULL, NULL, NULL, NULL, NULL, '110113', '顺义区', NULL, 'S', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3515, NULL, NULL, NULL, NULL, NULL, '110112', '通州区', NULL, 'T', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3516, NULL, NULL, NULL, NULL, NULL, '110111', '房山区', NULL, 'F', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3517, NULL, NULL, NULL, NULL, NULL, '110109', '门头沟区', NULL, 'M', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3518, NULL, NULL, NULL, NULL, NULL, '110108', '海淀区', NULL, 'H', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3519, NULL, NULL, NULL, NULL, NULL, '110107', '石景山区', NULL, 'S', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3520, NULL, NULL, NULL, NULL, NULL, '110106', '丰台区', NULL, 'F', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3521, NULL, NULL, NULL, NULL, NULL, '110105', '朝阳区', NULL, 'C', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3522, NULL, NULL, NULL, NULL, NULL, '110104', '宣武区', NULL, 'X', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3523, NULL, NULL, NULL, NULL, NULL, '110103', '崇文区', NULL, 'C', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3524, NULL, NULL, NULL, NULL, NULL, '110102', '西城区', NULL, 'X', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3525, NULL, NULL, NULL, NULL, NULL, '110101', '东城区', NULL, 'D', 10, 3, '110100', NULL);
+INSERT INTO `sys_area_dj` VALUES (3526, NULL, NULL, NULL, NULL, NULL, '910011', '潜江市', NULL, 'Q', 10, 3, '429005', NULL);
+INSERT INTO `sys_area_dj` VALUES (3527, NULL, NULL, NULL, NULL, NULL, '910012', '天门市', NULL, 'T', 10, 3, '429006', NULL);
+INSERT INTO `sys_area_dj` VALUES (3528, NULL, NULL, NULL, NULL, NULL, '910013', '神农架林区', NULL, 'S', 10, 3, '429021', NULL);
+INSERT INTO `sys_area_dj` VALUES (3529, NULL, NULL, NULL, NULL, NULL, '910014', '三沙', NULL, 'S', 10, 2, '460000', NULL);
+INSERT INTO `sys_area_dj` VALUES (3530, NULL, NULL, NULL, NULL, NULL, '910015', '西沙群岛', NULL, 'X', 10, 3, '910014', NULL);
+INSERT INTO `sys_area_dj` VALUES (3531, NULL, NULL, NULL, NULL, NULL, '910016', '南沙群岛', NULL, 'N', 10, 3, '910014', NULL);
+INSERT INTO `sys_area_dj` VALUES (3532, NULL, NULL, NULL, NULL, NULL, '910017', '中沙群岛的岛礁及其海域', NULL, 'Z', 10, 3, '910014', NULL);
+INSERT INTO `sys_area_dj` VALUES (3533, NULL, NULL, NULL, NULL, NULL, '910018', '五指山市', NULL, 'W', 10, 3, '469001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3534, NULL, NULL, NULL, NULL, NULL, '910026', '城西区', NULL, 'C', 10, 4, '320482', NULL);
+INSERT INTO `sys_area_dj` VALUES (3535, NULL, NULL, NULL, NULL, NULL, '910023', '城东区', NULL, 'C', 10, 4, '320482', NULL);
+INSERT INTO `sys_area_dj` VALUES (3536, NULL, NULL, NULL, NULL, NULL, '910025', '玉山镇', NULL, 'Y', 10, 4, '320583', NULL);
+INSERT INTO `sys_area_dj` VALUES (3537, NULL, NULL, NULL, NULL, NULL, '910027', '石碣镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3538, NULL, NULL, NULL, NULL, NULL, '910028', '石龙镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3539, NULL, NULL, NULL, NULL, NULL, '910029', '茶山镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3540, NULL, NULL, NULL, NULL, NULL, '910030', '石排镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3541, NULL, NULL, NULL, NULL, NULL, '910031', '企石镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3542, NULL, NULL, NULL, NULL, NULL, '910032', '横沥镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3543, NULL, NULL, NULL, NULL, NULL, '910033', '桥头镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3544, NULL, NULL, NULL, NULL, NULL, '910034', '谢岗镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3545, NULL, NULL, NULL, NULL, NULL, '910035', '东坑镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3546, NULL, NULL, NULL, NULL, NULL, '910036', '常平镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3547, NULL, NULL, NULL, NULL, NULL, '910037', '寮步镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3548, NULL, NULL, NULL, NULL, NULL, '910038', '大朗镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3549, NULL, NULL, NULL, NULL, NULL, '910039', '黄江镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3550, NULL, NULL, NULL, NULL, NULL, '910040', '清溪镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3551, NULL, NULL, NULL, NULL, NULL, '910041', '塘厦镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3552, NULL, NULL, NULL, NULL, NULL, '910042', '凤岗镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3553, NULL, NULL, NULL, NULL, NULL, '910043', '长安镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3554, NULL, NULL, NULL, NULL, NULL, '910044', '虎门镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3555, NULL, NULL, NULL, NULL, NULL, '910045', '厚街镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3556, NULL, NULL, NULL, NULL, NULL, '910046', '沙田镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3557, NULL, NULL, NULL, NULL, NULL, '910047', '道滘镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3558, NULL, NULL, NULL, NULL, NULL, '910048', '洪梅镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3559, NULL, NULL, NULL, NULL, NULL, '910049', '麻涌镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3560, NULL, NULL, NULL, NULL, NULL, '910050', '中堂镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3561, NULL, NULL, NULL, NULL, NULL, '910051', '高埗镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3562, NULL, NULL, NULL, NULL, NULL, '910052', '樟木头镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3563, NULL, NULL, NULL, NULL, NULL, '910053', '大岭山镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3564, NULL, NULL, NULL, NULL, NULL, '910054', '望牛墩镇', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3565, NULL, NULL, NULL, NULL, NULL, '910055', '莞城街道', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3566, NULL, NULL, NULL, NULL, NULL, '910056', '万江街道', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3567, NULL, NULL, NULL, NULL, NULL, '910057', '南城街道', NULL, NULL, 10, 3, '441900', NULL);
+INSERT INTO `sys_area_dj` VALUES (3568, NULL, NULL, NULL, NULL, NULL, '440309', '龙华区', NULL, 'L', 10, 3, '440300', NULL);
+INSERT INTO `sys_area_dj` VALUES (3569, NULL, NULL, NULL, NULL, NULL, '4234323', '溧阳市', NULL, 'L', 10, 3, '320481', NULL);
+INSERT INTO `sys_area_dj` VALUES (3570, NULL, NULL, NULL, NULL, NULL, '4234324', '富平县', 1, 'F', 10, 3, '610528', NULL);
+INSERT INTO `sys_area_dj` VALUES (3571, NULL, NULL, NULL, NULL, NULL, '4234325', '维西傈僳族自治县', 1, 'W', 10, 3, '533423', NULL);
+INSERT INTO `sys_area_dj` VALUES (3572, NULL, NULL, NULL, NULL, NULL, '4234326', '九龙城区', 1, 'J', 10, 3, '810003', NULL);
+INSERT INTO `sys_area_dj` VALUES (3573, NULL, NULL, NULL, NULL, NULL, '4234327', '江阴市', 1, 'J', 10, 3, '320281', NULL);
+INSERT INTO `sys_area_dj` VALUES (3574, NULL, NULL, NULL, NULL, NULL, '4234328', '丹阳市', 1, 'D', 10, 3, '321181', NULL);
+INSERT INTO `sys_area_dj` VALUES (3575, NULL, NULL, NULL, NULL, NULL, '4234329', '靖江市', 1, 'J', 10, 3, '321282', NULL);
+INSERT INTO `sys_area_dj` VALUES (3576, NULL, NULL, NULL, NULL, NULL, '4234330', '启东市', 1, 'Q', 10, 3, '320681', NULL);
+INSERT INTO `sys_area_dj` VALUES (3577, NULL, NULL, NULL, NULL, NULL, '4234331', '张家港市', 1, 'Z', 10, 3, '320582', NULL);
+INSERT INTO `sys_area_dj` VALUES (3578, NULL, NULL, NULL, NULL, NULL, '4234332', '五常市', 1, 'W', 10, 3, '230184', NULL);
+INSERT INTO `sys_area_dj` VALUES (3579, NULL, NULL, NULL, NULL, NULL, '4234333', '都匀市', 1, 'D', 10, 3, '522701', NULL);
+INSERT INTO `sys_area_dj` VALUES (3580, NULL, NULL, NULL, NULL, NULL, '4234334', '伊宁县', 1, 'Y', 10, 3, '654021', NULL);
+INSERT INTO `sys_area_dj` VALUES (3581, NULL, NULL, NULL, NULL, NULL, '4234335', '伊宁市', 1, 'Y', 10, 3, '654002', NULL);
+INSERT INTO `sys_area_dj` VALUES (3582, NULL, NULL, NULL, NULL, NULL, '4234336', '宜兴市', 1, 'Y', 10, 3, '320282', NULL);
+INSERT INTO `sys_area_dj` VALUES (3583, NULL, NULL, '2024-02-24 15:14:01.330000', 1, 0, '4234337', '长葛市', 1, 'C', 10, 3, '411082', NULL);
+INSERT INTO `sys_area_dj` VALUES (3584, '2024-04-03 10:43:56.534000', 1, '2024-04-03 13:08:30.758000', 1, 0, 'LW001', '老挝', 0, 'W', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3585, '2024-04-03 13:22:10.520000', 1, '2024-04-03 13:27:47.270000', 1, 0, 'LW002', '乌多姆塞', 0, 'W', 10, 2, 'LW001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3586, '2024-04-03 18:37:32.294000', 1, '2024-04-03 18:37:48.941000', 1, 0, 'TG001', '泰国', 0, 'T', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3587, '2024-04-03 18:40:56.290000', 1, '2024-04-03 18:41:10.622000', 1, 0, 'QL002', '清莱', 0, 'Q', 10, 2, 'TG001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3588, '2024-04-03 18:42:11.821000', 1, '2024-04-03 18:42:11.821000', 1, 0, 'QM001', '清迈', 0, 'Q', 10, 2, 'TG001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3589, '2024-04-03 18:43:58.838000', 1, '2024-04-03 18:43:58.838000', 1, 0, 'LB LB001', '琅勃拉邦', 0, 'L', 10, 2, 'LW001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3590, '2024-04-03 18:50:12.759000', 1, '2024-04-03 18:53:21.580000', 1, 0, 'TKS001', '泰可素', 0, 'T', 10, 2, 'TG001', NULL);
+INSERT INTO `sys_area_dj` VALUES (3591, '2024-05-22 10:37:23.838000', 1, '2024-05-22 10:38:28.088000', 1, 0, 'XZ001', '总部', 0, 'XZ001', 10, 1, '0', NULL);
+INSERT INTO `sys_area_dj` VALUES (3592, '2024-05-22 10:38:57.492000', 1, '2024-05-22 10:39:59.591000', 1, 0, 'XZ002', '小朱自驾', 0, 'X', 10, 2, 'XZ001', NULL);
+
+-- ----------------------------
+-- Table structure for sys_article
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_article`;
+CREATE TABLE `sys_article`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+  `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '附件',
+  `img_url` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '封面图片',
+  `project_id` int(11) NULL DEFAULT NULL COMMENT '项目id',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `type` int(11) NULL DEFAULT NULL COMMENT '类型{\n    \"40\": \"通知\",\n    \"10\": \"新闻\",\n    \"20\": \"公告\",\n    \"30\": \"文章\"\n}',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  `publish_time` datetime(6) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '新闻' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_article
+-- ----------------------------
+INSERT INTO `sys_article` VALUES (1, '2024-08-04 14:35:59.588000', 0, '2024-08-04 14:56:55.699000', 0, NULL, '', '', NULL, 0, '测试数据', 30, NULL, NULL, NULL);
+INSERT INTO `sys_article` VALUES (2, '2024-08-04 14:54:38.124000', 0, '2024-08-04 15:04:59.614000', 0, NULL, '<p>dsfdsfdsfssss</p>', '', NULL, 0, '测试数据', 20, NULL, NULL, '2024-08-11 15:04:56.000000');
+
+-- ----------------------------
+-- Table structure for sys_code
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_code`;
+CREATE TABLE `sys_code`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hash_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `hash` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `number` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_code
+-- ----------------------------
+INSERT INTO `sys_code` VALUES (81, '3f133ade8a84a175e0d28823f7a05db1', NULL, NULL, NULL, NULL, NULL, NULL, 'SysAreaDj', 1);
+INSERT INTO `sys_code` VALUES (82, 'c0eb06a2fb52ab47caf27facfc870a69', NULL, NULL, NULL, NULL, NULL, NULL, 'SysConfig', 1);
+INSERT INTO `sys_code` VALUES (83, 'f26152c403fa4190cd69f5775c110277', NULL, NULL, NULL, NULL, NULL, NULL, 'SysFile', 1);
+INSERT INTO `sys_code` VALUES (84, '444121d2bb677bac2f7b1c5f35ef562e', NULL, NULL, NULL, NULL, NULL, NULL, 'SysUser', 1);
+INSERT INTO `sys_code` VALUES (85, '1a8323de1f470ccf6a4092075ce18391', NULL, NULL, NULL, NULL, NULL, NULL, 'SysLog', 1);
+INSERT INTO `sys_code` VALUES (86, 'a6505dea4b3f29fb26cc89d0c7862785', NULL, NULL, NULL, NULL, NULL, NULL, 'SysPermission', 1);
+INSERT INTO `sys_code` VALUES (87, 'ec306f055a3572eac9769e51b8810b18', NULL, NULL, NULL, NULL, NULL, NULL, 'SysMessage', 1);
+INSERT INTO `sys_code` VALUES (88, 'b76f6183151e3ef900b7510afd890f37', NULL, NULL, NULL, NULL, NULL, NULL, 'SysUserRole', 1);
+INSERT INTO `sys_code` VALUES (89, '6b9eae0e240ed80521bc6491e04cc356', NULL, NULL, NULL, NULL, NULL, NULL, 'SysAd', 1);
+INSERT INTO `sys_code` VALUES (90, 'af14e698342b605921866c5fdecaf8d7', NULL, NULL, NULL, NULL, NULL, NULL, 'SysFeedback', 1);
+INSERT INTO `sys_code` VALUES (91, '7a6054e67be84e89352e7322f078ee49', NULL, NULL, NULL, NULL, NULL, NULL, 'SysMessageTemplate', 1);
+INSERT INTO `sys_code` VALUES (92, '646d098ba4eba6305089c4e57dd06a5b', NULL, NULL, NULL, NULL, NULL, NULL, 'SysDictData', 1);
+INSERT INTO `sys_code` VALUES (93, 'c980c27e28683ca91ef08ae83b379bcd', NULL, NULL, NULL, NULL, NULL, NULL, 'SysArticle', 1);
+INSERT INTO `sys_code` VALUES (94, '8d2503b8eac76078bc74af249b21884a', NULL, NULL, NULL, NULL, NULL, NULL, 'SysRole', 1);
+INSERT INTO `sys_code` VALUES (95, 'd76ba1b10aaad941b58c47e080ba2eb3', NULL, NULL, NULL, NULL, NULL, NULL, 'SysDictType', 1);
+INSERT INTO `sys_code` VALUES (96, '76e3b55451d9047bb02464ecabe60ae9', NULL, NULL, NULL, NULL, NULL, NULL, 'SysTableColumn', 1);
+INSERT INTO `sys_code` VALUES (97, 'af14e698342b605921866c5fdecaf8d7', NULL, NULL, NULL, NULL, NULL, NULL, 'SysFeedback', 1);
+
+-- ----------------------------
+-- Table structure for sys_config
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述(如果选择框用,隔开)',
+  `group` int(11) NULL DEFAULT NULL COMMENT '配置分组',
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '配置字段名',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '配置说明',
+  `type` int(11) NULL DEFAULT NULL COMMENT '类型(配置html展现类型){\n    \"0\": \"文本框\",\n    \"1\": \"下拉选择框\",\n    \"2\": \"switch\",\n    \"3\": \"复选框\",\n    \"4\": \"上传\",\n    \"5\": \"文本域\",\n    \"6\": \"上传文件\",\n    \"7\": \"富文本\"\n}',
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '配置值',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_config
+-- ----------------------------
+INSERT INTO `sys_config` VALUES (1, '2024-08-04 19:36:14.000000', 0, '2024-08-04 19:36:17.000000', 1, 0, '系统名称可以展现在登录窗体', 10, 'system_name', '系统名称', 0, '轻巧之光1');
+INSERT INTO `sys_config` VALUES (2, '2021-06-30 23:52:39.000000', 26, '2024-03-10 10:41:55.000000', 1, NULL, '0', 1001, '版本号', '0', NULL, '0');
+INSERT INTO `sys_config` VALUES (12, NULL, NULL, '2024-03-10 11:33:34.000000', 1, NULL, '[{\"v\":10,\"n\":\"本地存储\"},{\"v\":20,\"n\":\"阿里云OSS\"}]', 40, 'storageService', '存储类型选择', 1, '20');
+INSERT INTO `sys_config` VALUES (13, NULL, NULL, '2024-03-10 11:32:27.000000', 1, NULL, '输入配置的 json格式', 40, 'ossConfig', '阿里云oss配置', 5, '{\"aliyun_accessKeyId\":\"LTAI4GAXb4A3tfxdLxHw6u5U\", \"aliyun_accessKeySecret\":\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\", \"aliyun_endpoint\":\"oss-cn-shanghai.aliyuncs.com\",\"aliyun_image_bucket\":\"djlx-image-bucket\", \"aliyun_video_bucket\": \"djlx-video-bucket\",\"aliyun_file_bucket\": \"djlx-file-bucket\",\"aliyun_origin_image_url\":\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\", \"aliyun_origin_video_url\":\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\", \"aliyun_origin_file_url\":\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\" }');
+INSERT INTO `sys_config` VALUES (14, NULL, NULL, '2024-03-10 10:41:55.000000', 1, NULL, '输入json配置', 40, 'localConfig', '本地存储配置', 5, '{}');
+INSERT INTO `sys_config` VALUES (15, NULL, NULL, '2024-08-04 21:13:16.050000', 0, NULL, '注册协议', 10, 'reg_contact', '注册协议', 7, NULL);
+INSERT INTO `sys_config` VALUES (17, NULL, NULL, NULL, NULL, NULL, '60', 60, 'receipt_long', '确认收货时长(天)', 7, '10');
+INSERT INTO `sys_config` VALUES (18, NULL, NULL, '2024-04-28 13:37:03.000000', 1, NULL, '50', 10, 'about', '关于我们', NULL, '0');
+INSERT INTO `sys_config` VALUES (19, '2024-04-11 08:49:52.000000', NULL, '2024-04-11 08:49:54.000000', NULL, NULL, '60', 60, 'cancel_long', '订单取消时长(分钟)', 0, '7');
+INSERT INTO `sys_config` VALUES (20, '2024-09-28 20:13:15.000000', NULL, '2024-09-28 20:13:18.000000', NULL, NULL, '消费获取积分', 60, 'product_point', '消费获取积分', 0, '1:1');
+INSERT INTO `sys_config` VALUES (21, '2024-09-28 20:13:15.000000', NULL, '2024-09-28 20:13:18.000000', NULL, NULL, '分销返利比', 60, 'distributor_ratio', '分销返利比', 0, '0.01');
+
+-- ----------------------------
+-- Table structure for sys_dict_data
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_data`;
+CREATE TABLE `sys_dict_data`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `css_class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '样式属性',
+  `default_flg` int(11) NULL DEFAULT NULL COMMENT '是否默认(Y=是,N=否)',
+  `dict_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典编码',
+  `dict_label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典描述',
+  `dict_sort` bigint(20) NULL DEFAULT NULL,
+  `dict_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
+  `dict_value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '字典键值',
+  `list_class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表格字典样式',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态(1=正常,0=停用){\n    \"0\": \"关闭\",\n    \"1\": \"开启\"\n}',
+  `dict_key` bigint(20) NULL DEFAULT NULL,
+  `type_id` int(11) NULL DEFAULT NULL COMMENT '类型id',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict_data
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_dict_type
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_type`;
+CREATE TABLE `sys_dict_type`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `dict_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典名称',
+  `dict_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
+  `state` int(11) NULL DEFAULT NULL COMMENT '状态(1=正常,0=停用){\n    \"0\": \"关闭\",\n    \"1\": \"开启\"\n}',
+  `dict_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典编码',
+  `group_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分组',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict_type
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_feedback`;
+CREATE TABLE `sys_feedback`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `category` int(11) NULL DEFAULT NULL COMMENT '意见反馈问题分类{\n    \"1\": \"账号问题\",\n    \"2\": \"APP问题\",\n    \"3\": \"服务问题\",\n    \"4\": \"其他服务\"\n}',
+  `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '内容',
+  `images` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片',
+  `is_read` smallint(6) NULL DEFAULT NULL,
+  `user_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户账号',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '意见反馈' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_feedback
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_file
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_file`;
+CREATE TABLE `sys_file`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `extend` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件扩展名',
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件名',
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
+  `file_size` bigint(20) NULL DEFAULT NULL COMMENT '文件大小',
+  `file_type` int(11) NULL DEFAULT NULL COMMENT '文件类型{\n    \"1\": \"音频\",\n    \"2\": \"视频\"\n}',
+  `ico` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+  `url_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '相对路径',
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件唯一标识',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件管理' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_file
+-- ----------------------------
+INSERT INTO `sys_file` VALUES (5, '2024-08-04 11:09:32.302000', 0, '2024-08-04 11:09:32.302000', 0, NULL, 'png', 'ios', 'https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/008538e4-708a-4369-9981-ac9b6fb24365.png', 95551, 1, NULL, '2024/08/04/008538e4-708a-4369-9981-ac9b6fb24365.png', NULL, NULL, NULL);
+INSERT INTO `sys_file` VALUES (6, '2024-08-04 11:10:08.675000', 0, '2024-08-04 11:40:23.478000', 0, NULL, 'doc', '7830145706747284830_2985257681418489697_包装前检，包装后检相关车间库存问题', 'https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc', 224768, 1, '[\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/10565ad4-7f5a-405b-a0d2-5a24ac241479.png\"]', '2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc', 'dsf', NULL, NULL);
+INSERT INTO `sys_file` VALUES (7, '2024-08-04 11:40:21.480000', 0, '2024-08-04 11:40:21.480000', 0, NULL, 'png', 'PixPin_2024-08-01_14-05-39', 'https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/10565ad4-7f5a-405b-a0d2-5a24ac241479.png', 323016, 1, NULL, '2024/08/04/10565ad4-7f5a-405b-a0d2-5a24ac241479.png', NULL, NULL, NULL);
+INSERT INTO `sys_file` VALUES (8, '2024-08-04 14:35:43.551000', 0, '2024-08-04 14:35:43.551000', 0, NULL, 'png', 'PixPin_2024-08-01_14-05-39', 'https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/7a467cc1-cdf8-41a8-8758-dd86844556d2.png', 323016, 1, NULL, '2024/08/04/7a467cc1-cdf8-41a8-8758-dd86844556d2.png', NULL, NULL, NULL);
+INSERT INTO `sys_file` VALUES (9, '2024-08-04 14:53:50.784000', 0, '2024-08-04 14:53:50.784000', 0, NULL, 'png', 'PixPin_2024-08-01_14-05-39', 'https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/4e054ad0-fad1-4813-a8af-ed344c8bb7c9.png', 323016, 1, NULL, '2024/08/04/4e054ad0-fad1-4813-a8af-ed344c8bb7c9.png', NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
+  `browser` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '客户端',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `exception_detail` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '异常详情',
+  `log_type` int(11) NULL DEFAULT NULL COMMENT '日志类型{\n    \"20\": \"测试\",\n    \"10\": \"登录\",\n    \"50\": \"其他\"\n}',
+  `method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '方法名',
+  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '参数',
+  `request_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求ip',
+  `time` bigint(20) NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  `state` int(11) NULL DEFAULT NULL COMMENT '状态(0,1){\n    \"0\": \"关闭\",\n    \"1\": \"开启\"\n}',
+  `url_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求路径',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '日志' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_log
+-- ----------------------------
+INSERT INTO `sys_log` VALUES (2, '2024-07-21 22:23:12.211000', 0, '2024-07-21 22:23:12.211000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"mdfu\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (3, '2024-07-21 22:24:46.320000', 0, '2024-07-21 22:24:46.320000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"Idfd\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (4, '2024-07-21 22:25:46.560000', 0, '2024-07-21 22:25:46.560000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MjMyMw==\",\"code\":\"2323\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (5, '2024-07-21 22:26:59.562000', 0, '2024-07-21 22:26:59.562000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2YWE=\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (6, '2024-07-21 22:27:13.065000', 0, '2024-07-21 22:27:13.065000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2YWE=\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (7, '2024-07-21 22:27:18.009000', 0, '2024-07-21 22:27:18.009000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2YWE=\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (8, '2024-07-21 22:31:22.693000', 0, '2024-07-21 22:31:22.693000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (9, '2024-07-21 22:32:19.619000', 0, '2024-07-21 22:32:19.619000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (10, '2024-07-21 22:36:02.872000', 0, '2024-07-21 22:36:02.872000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (11, '2024-07-21 22:36:17.184000', 0, '2024-07-21 22:36:17.184000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (12, '2024-07-21 22:37:42.688000', 0, '2024-07-21 22:37:42.688000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (13, '2024-07-21 22:41:00.809000', 1, '2024-07-21 22:41:00.809000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (14, '2024-07-21 22:51:54.718000', 1, '2024-07-21 22:51:54.718000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xvtb\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (15, '2024-07-21 23:02:50.245000', 1, '2024-07-21 23:02:50.245000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"xyar\",\"codeUid\":\"969e6eef-9842-43df-8e76-7d9df9708fb0\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (16, '2024-07-21 23:03:43.857000', 1, '2024-07-21 23:03:43.857000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"wz2u\",\"codeUid\":\"76c699c8-600c-46b3-89fb-fe9fabc651f1\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (17, '2024-07-21 23:05:14.130000', 1, '2024-07-21 23:05:14.130000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"n35ej\",\"codeUid\":\"8dec5151-6730-4ee2-832b-269fab819fdc\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (18, '2024-07-21 23:06:29.912000', 1, '2024-07-21 23:06:29.912000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"4sqAg\",\"codeUid\":\"43b8d2a0-d05a-463c-975b-59cdd0a5795e\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (19, '2024-07-21 23:33:40.422000', 1, '2024-07-21 23:33:40.422000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"FgUny\",\"codeUid\":\"44794d34-c9f1-4074-b465-e1834ef67d7a\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (20, '2024-07-21 23:34:46.754000', 1, '2024-07-21 23:34:46.754000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"FYJV4\",\"codeUid\":\"08606f0e-b059-4f64-bc2e-f1ebea703b17\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (21, '2024-07-24 10:22:13.726000', 0, '2024-07-24 10:22:13.726000', 0, NULL, NULL, 'Apifox/1.0.0 (https://apifox.com)', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"财务角色\",\"description\":\"测试添加财务角色\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (22, '2024-07-24 10:25:05.748000', 0, '2024-07-24 10:25:05.748000', 0, NULL, NULL, 'Apifox/1.0.0 (https://apifox.com)', '删除某个角色', '', 50, 'cn.light.admin.controller.RoleController.delete()', '', '0:0:0:0:0:0:0:1', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (23, '2024-07-26 22:57:16.597000', 0, '2024-07-26 22:57:16.597000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"sjlp\",\"codeUid\":\"640ab2cb-54b5-4b07-9833-730958e3b8bf\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (24, '2024-07-26 22:57:27.004000', 0, '2024-07-26 22:57:27.004000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"TYBj0\",\"codeUid\":\"47beed66-219c-4b8c-b6b0-21396043f6ad\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (25, '2024-07-26 22:57:38.917000', 0, '2024-07-26 22:57:38.917000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"JLZJI\",\"codeUid\":\"1c9ab68b-899c-4c48-96e1-586a58403789\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (26, '2024-07-26 22:58:18.388000', 0, '2024-07-26 22:58:18.388000', 0, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"GE5EJ\",\"codeUid\":\"5bd6a4cf-a680-4b46-b19f-c3a6e3d65e67\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (27, '2024-07-26 23:08:49.461000', 1, '2024-07-26 23:08:49.461000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"orxub\",\"codeUid\":\"5178cac9-e024-4e43-94fb-a5d04dde0b53\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (28, '2024-07-26 23:08:56.801000', 1, '2024-07-26 23:08:56.801000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"9xfpo\",\"codeUid\":\"55ac155f-e8f6-4e07-b2de-13ca1eed35bf\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (29, '2024-07-26 23:09:08.058000', 1, '2024-07-26 23:09:08.058000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"3PqLU\",\"codeUid\":\"093b1fa6-2ed6-4687-86f4-777fc1721b0e\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (30, '2024-07-26 23:14:31.772000', 1, '2024-07-26 23:14:31.772000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"8CJ17\",\"codeUid\":\"5c356cad-db6c-4ebf-92d4-1af5ae2cea2a\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (31, '2024-07-26 23:14:40.656000', 1, '2024-07-26 23:14:40.656000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"HPFR5\",\"codeUid\":\"86677c03-6593-43cb-a72c-73619eb19170\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (32, '2024-07-26 23:22:58.675000', 1, '2024-07-26 23:22:58.675000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"E5GLa\",\"codeUid\":\"79449043-f2b7-4427-9d9a-9abf717462d6\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (33, '2024-07-26 23:26:10.253000', 1, '2024-07-26 23:26:10.253000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"hfz95\",\"codeUid\":\"f9d2bd91-2fa0-48c1-a563-af72480f1eb6\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (34, '2024-07-26 23:26:22.644000', 1, '2024-07-26 23:26:22.644000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"hfz95\",\"codeUid\":\"f9d2bd91-2fa0-48c1-a563-af72480f1eb6\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (35, '2024-07-26 23:30:57.275000', 1, '2024-07-26 23:30:57.275000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"OCzviv\",\"codeUid\":\"dac19980-06f4-40bf-9f69-02e97c4271e2\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (36, '2024-07-26 23:31:07.672000', 1, '2024-07-26 23:31:07.672000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"JNO5Q\",\"codeUid\":\"f9456e0a-490d-473f-9de5-629dabc45185\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (37, '2024-07-26 23:32:57.763000', 1, '2024-07-26 23:32:57.763000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"JIXhl\",\"codeUid\":\"d7ff5a44-76f0-415e-9a59-6e35ee85b7f6\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (38, '2024-07-26 23:33:51.235000', 1, '2024-07-26 23:33:51.235000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"seywh\",\"codeUid\":\"a80a2fb1-cdf2-44be-bce6-def6f97ea3d0\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (39, '2024-07-26 23:35:13.215000', 1, '2024-07-31 08:17:54.032000', 100, NULL, 'xxxxxxxxxxxxxx', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"IArig\",\"codeUid\":\"a411bbef-d2a7-40f4-a8ad-bd6b068e2c34\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (40, '2024-07-26 23:35:20.617000', 1, '2024-07-27 15:13:42.322000', 1, NULL, 'xxxxxxxxxxxxxx', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"Her66\",\"codeUid\":\"8e51847c-b946-49c0-a168-777dada74365\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (41, '2024-07-26 23:37:48.243000', 1, '2024-07-27 14:49:48.589000', 0, NULL, 'xxxxxxxxxxxxxx', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (42, '2024-07-27 22:45:21.830000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU5Ng==\",\"code\":\"tmpvs\",\"codeUid\":\"8695e0ba-ee88-44e7-abe3-ef16f85ef24f\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (43, '2024-07-27 22:45:32.362000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"tmpvs\",\"codeUid\":\"8695e0ba-ee88-44e7-abe3-ef16f85ef24f\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (44, '2024-07-27 22:53:49.858000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"7w8ss\",\"codeUid\":\"17f4a950-0d48-4e2d-b78d-ee5f8957845a\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (45, '2024-07-27 23:07:43.835000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"pyxx\",\"codeUid\":\"4b3cee03-32c4-488e-82b0-c77ee7b7b12d\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (46, '2024-07-27 23:07:56.584000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"BiJ3x\",\"codeUid\":\"2b088562-4347-4fb2-aa84-b7dbb0407a02\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (47, '2024-07-27 23:08:13.266000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"o3cfv\",\"codeUid\":\"87de7807-4877-4673-a0d8-ea62a7162df9\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (48, '2024-07-27 23:51:23.409000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"TPb7f\",\"codeUid\":\"d5bb08a1-1977-402a-9e3f-78f2e956aa12\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (49, '2024-07-27 23:54:43.678000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"TN7Ge\",\"codeUid\":\"3f7a7287-584d-4ddc-ba6e-e8b244410b8b\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (50, '2024-07-28 12:02:02.673000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"Rgzsk\",\"codeUid\":\"10471aaf-7def-4e7d-8541-b6f786971460\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (51, '2024-07-28 12:10:55.239000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"bxfkj\",\"codeUid\":\"9f9c4c92-82b0-41cb-b50e-fcb4fb4ca5a0\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (52, '2024-07-28 12:46:26.126000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"oioa4\",\"codeUid\":\"00a61480-a49a-47d0-adb3-fe67d25d4ff7\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (53, '2024-07-28 12:47:53.870000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"keygp\",\"codeUid\":\"e72de13d-6ba5-447f-8937-b3de57209579\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (54, '2024-07-28 12:49:10.840000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"INBzf\",\"codeUid\":\"e6ed7e9d-a770-4802-9ed3-58304aa86fb8\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (55, '2024-07-28 12:49:22.532000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"INBZF\",\"codeUid\":\"e6ed7e9d-a770-4802-9ed3-58304aa86fb8\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (56, '2024-07-28 12:49:29.756000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"60dbB\",\"codeUid\":\"e8c64116-0b0b-4b15-9853-68172e70280c\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (57, '2024-07-28 12:50:28.157000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"hxcjp\",\"codeUid\":\"bd2d4897-6254-43cf-91c9-c41ff3a9289c\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (58, '2024-07-28 13:55:43.979000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"E1ehc\",\"codeUid\":\"fa021d65-350d-47c6-ba7e-3b0881269a9f\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (59, '2024-07-28 13:56:57.515000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"cu6dq\",\"codeUid\":\"2bbb8769-2ddb-4f6b-a474-21a248a0f418\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (60, '2024-07-28 13:57:04.462000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"Ngiyk\",\"codeUid\":\"43aab413-d5c9-4b0b-8e6a-edfaf9e64e3f\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (61, '2024-07-28 14:02:43.584000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"wqcrp\",\"codeUid\":\"79254c64-bec9-4727-bd59-2fb5f2828601\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (62, '2024-07-28 14:07:23.916000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"8YybI\",\"codeUid\":\"9a71789c-704c-4828-9e69-24faa94adf47\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (63, '2024-07-28 14:07:30.720000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"30tmj\",\"codeUid\":\"4d0f530e-ef5a-460b-a787-578c8ca9b7bc\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (64, '2024-07-28 14:08:50.122000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"BLU4u\",\"codeUid\":\"088fe4d8-5234-4a5c-84e4-a57aa95184f7\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (65, '2024-07-28 14:11:12.499000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"dcfpl\",\"codeUid\":\"1de989a0-6adf-4ec3-8759-8da613c7aebb\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (66, '2024-07-28 14:15:14.865000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"ehf86\",\"codeUid\":\"049855e6-2a0c-4ae1-bf8f-abdef6de5617\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (67, '2024-07-28 14:16:46.170000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"zqsdq\",\"codeUid\":\"1e919f51-2b39-4ddf-915a-72f79876a3b0\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (68, '2024-07-28 14:19:58.124000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"iwh55\",\"codeUid\":\"1db038dd-37ad-46a3-b2c5-2bc845bf6ae4\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (69, '2024-07-28 14:21:19.506000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"iwh55\",\"codeUid\":\"1db038dd-37ad-46a3-b2c5-2bc845bf6ae4\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (70, '2024-07-28 15:49:24.670000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (71, '2024-07-28 15:50:17.043000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"RR9c6\",\"codeUid\":\"6fa1b691-38f7-42e2-a7bb-1130a1fcdcb9\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (72, '2024-07-28 15:50:23.988000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"arki6\",\"codeUid\":\"1c76bd42-9f70-4899-aca0-6e9198ee6bdd\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (73, '2024-07-28 16:43:03.326000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"空道公司\",\"code\":\"002\",\"description\":\"公司用户信息可以全部权限\",\"id\":1,\"createTime\":1662474803000,\"updateTime\":1662519828000,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (74, '2024-07-28 16:43:27.771000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"空道公司\",\"code\":\"003\",\"description\":\"公司用户信息可以全部权限\",\"id\":1,\"createTime\":1662474803000,\"updateTime\":1722156183000,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (75, '2024-07-28 16:43:51.529000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"山东项目\",\"code\":\"001\",\"description\":\"描述\",\"id\":2,\"createTime\":1662475664000,\"updateTime\":1662475664000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (76, '2024-07-28 16:44:03.881000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"管理员\",\"code\":\"003\",\"description\":\"公司用户信息可以全部权限\",\"id\":1,\"createTime\":1662474803000,\"updateTime\":1722156207000,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (77, '2024-07-28 16:44:16.640000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"财务部\",\"code\":\"002  \",\"description\":\"描述\",\"id\":2,\"createTime\":1662475664000,\"updateTime\":1722156231000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (78, '2024-07-28 16:44:24.171000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"管理员\",\"code\":\"001\",\"description\":\"公司用户信息可以全部权限\",\"id\":1,\"createTime\":1662474803000,\"updateTime\":1722156243000,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (79, '2024-07-28 16:44:51.729000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"市场部\",\"code\":\"003\",\"description\":\"市场部门相关角色\",\"createTime\":1662475664000,\"updateTime\":1722156256000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (80, '2024-07-28 16:47:52.137000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"pwIN8\",\"codeUid\":\"46bbb8a1-2560-477f-9edc-7e18bfe53b97\"}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (81, '2024-07-28 16:48:35.609000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '修改角色', '', 50, 'cn.light.admin.controller.RoleController.save()', '{\"name\":\"管理员\",\"code\":\"admin\",\"description\":\"公司用户信息可以全部权限\",\"id\":1,\"createTime\":1662474803000,\"updateTime\":1722156264000,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (82, '2024-07-28 16:48:37.651000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 0, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (83, '2024-07-28 16:48:52.390000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"H3pGt\",\"codeUid\":\"823ee5ff-bf79-451b-9151-338a3c584c77\"}', '0:0:0:0:0:0:0:1', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (84, '2024-07-28 16:49:54.255000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"sepbi\",\"codeUid\":\"15e93064-809f-4a01-aba4-a1955b85d4f2\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (85, '2024-07-28 16:52:41.884000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"vbr48\",\"codeUid\":\"95afc1b7-0611-4012-af48-a35bd0debd89\"}', '0:0:0:0:0:0:0:1', 1, 'admin', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (86, '2024-07-28 16:52:54.701000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '删除某个角色', '', 50, 'cn.light.admin.controller.RoleController.delete()', '', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (87, '2024-08-03 09:28:14.841000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"ND7zu\",\"codeUid\":\"f5cc8ba5-1bd1-406a-af33-b50a6243b26e\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (88, '2024-08-03 09:29:26.982000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"Picnj\",\"codeUid\":\"273a9361-737f-45ef-97a2-c2451d9acbaf\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (89, '2024-08-03 09:48:13.996000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (90, '2024-08-03 09:56:54.504000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"5rktf\",\"codeUid\":\"c2d109f6-7edc-423b-8cab-9f76f8ca0164\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (91, '2024-08-03 12:08:28.544000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (92, '2024-08-03 12:08:48.049000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (93, '2024-08-03 12:09:16.898000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (94, '2024-08-03 12:13:57.953000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (95, '2024-08-03 12:18:21.810000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"width\\\":100,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (96, '2024-08-03 12:19:13.871000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":50,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"width\\\":100,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (97, '2024-08-03 12:19:23.231000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":50,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"width\\\":120,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (98, '2024-08-03 12:19:33.000000', 1, '2024-08-03 14:07:08.611000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":50,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (104, '2024-08-03 13:33:04.245000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '删除日志', '', 50, 'cn.light.admin.controller.LogController.delete()', '', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (105, '2024-08-03 13:33:12.000000', 1, '2024-08-03 14:07:31.497000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '删除日志', '', 50, 'cn.light.admin.controller.LogController.delete()', 'fdsf', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (106, '2024-08-03 14:06:05.000000', 1, '2024-08-03 14:10:17.273000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改存储列设置表\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.TableColumnController.save()\",\"params\":\"{\\\"tableName\\\":\\\"log\\\",\\\"columns\\\":\\\"[{\\\\\\\"columnKey\\\\\\\":\\\\\\\"username\\\\\\\",\\\\\\\"sort\\\\\\\":1,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"requestIp\\\\\\\",\\\\\\\"sort\\\\\\\":2,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"address\\\\\\\",\\\\\\\"sort\\\\\\\":3,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"description\\\\\\\",\\\\\\\"sort\\\\\\\":4,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"browser\\\\\\\",\\\\\\\"sort\\\\\\\":5,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"time\\\\\\\",\\\\\\\"sort\\\\\\\":6,\\\\\\\"width\\\\\\\":50,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"method\\\\\\\",\\\\\\\"sort\\\\\\\":7,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"createTime\\\\\\\",\\\\\\\"sort\\\\\\\":8,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"params\\\\\\\",\\\\\\\"sort\\\\\\\":9,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"action\\\\\\\",\\\\\\\"sort\\\\\\\":10,\\\\\\\"width\\\\\\\":90,\\\\\\\"showFlag\\\\\\\":true}]\\\"}\",\"logType\":50,\"id\":98,\"createTime\":1722658773000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (107, '2024-08-03 14:07:08.605000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改存储列设置表\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.TableColumnController.save()\",\"params\":\"{\\\"tableName\\\":\\\"log\\\",\\\"columns\\\":\\\"[{\\\\\\\"columnKey\\\\\\\":\\\\\\\"username\\\\\\\",\\\\\\\"sort\\\\\\\":1,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"requestIp\\\\\\\",\\\\\\\"sort\\\\\\\":2,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"address\\\\\\\",\\\\\\\"sort\\\\\\\":3,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"description\\\\\\\",\\\\\\\"sort\\\\\\\":4,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"browser\\\\\\\",\\\\\\\"sort\\\\\\\":5,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"time\\\\\\\",\\\\\\\"sort\\\\\\\":6,\\\\\\\"width\\\\\\\":50,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"method\\\\\\\",\\\\\\\"sort\\\\\\\":7,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"createTime\\\\\\\",\\\\\\\"sort\\\\\\\":8,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"params\\\\\\\",\\\\\\\"sort\\\\\\\":9,\\\\\\\"showFlag\\\\\\\":true},{\\\\\\\"columnKey\\\\\\\":\\\\\\\"action\\\\\\\",\\\\\\\"sort\\\\\\\":10,\\\\\\\"width\\\\\\\":90,\\\\\\\"showFlag\\\\\\\":true}]\\\"}\",\"logType\":50,\"id\":98,\"createTime\":1722658773000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (108, '2024-08-03 14:07:31.000000', 1, '2024-08-03 14:10:12.688000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"删除日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.delete()\",\"params\":\"fdsf\",\"logType\":50,\"id\":105,\"createTime\":1722663192000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (109, '2024-08-03 14:08:27.632000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"删除日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.delete()\\\",\\\"params\\\":\\\"fdsf\\\",\\\"logType\\\":50,\\\"id\\\":105,\\\"createTime\\\":1722663192000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":108,\"createTime\":1722665251000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (110, '2024-08-03 14:10:10.330000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"删除日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.delete()\\\",\\\"params\\\":\\\"fdsf\\\",\\\"logType\\\":50,\\\"id\\\":105,\\\"createTime\\\":1722663192000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":108,\"createTime\":1722665251000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (111, '2024-08-03 14:10:11.747000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"删除日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.delete()\\\",\\\"params\\\":\\\"fdsf\\\",\\\"logType\\\":50,\\\"id\\\":105,\\\"createTime\\\":1722663192000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":108,\"createTime\":1722665251000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (112, '2024-08-03 14:10:12.437000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"删除日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.delete()\\\",\\\"params\\\":\\\"fdsf\\\",\\\"logType\\\":50,\\\"id\\\":105,\\\"createTime\\\":1722663192000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":108,\"createTime\":1722665251000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (113, '2024-08-03 14:10:12.683000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"删除日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.delete()\\\",\\\"params\\\":\\\"fdsf\\\",\\\"logType\\\":50,\\\"id\\\":105,\\\"createTime\\\":1722663192000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":108,\"createTime\":1722665251000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (114, '2024-08-03 14:10:16.600000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改存储列设置表\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.TableColumnController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"tableName\\\\\\\":\\\\\\\"log\\\\\\\",\\\\\\\"columns\\\\\\\":\\\\\\\"[{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true}]\\\\\\\"}\\\",\\\"logType\\\":50,\\\"id\\\":98,\\\"createTime\\\":1722658773000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":106,\"createTime\":1722665165000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (115, '2024-08-03 14:10:17.000000', 1, '2024-08-03 14:10:53.000000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改存储列设置表\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.TableColumnController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"tableName\\\\\\\":\\\\\\\"log\\\\\\\",\\\\\\\"columns\\\\\\\":\\\\\\\"[{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\":true}]\\\\\\\"}\\\",\\\"logType\\\":50,\\\"id\\\":98,\\\"createTime\\\":1722658773000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":106,\"createTime\":1722665165000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (116, '2024-08-03 14:10:53.000000', 1, '2024-08-03 14:11:57.000000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"username\\\\\\\":\\\\\\\"18800000000\\\\\\\",\\\\\\\"requestIp\\\\\\\":\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\",\\\\\\\"description\\\\\\\":\\\\\\\"新增|修改存储列设置表\\\\\\\",\\\\\\\"browser\\\\\\\":\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\",\\\\\\\"time\\\\\\\":0,\\\\\\\"method\\\\\\\":\\\\\\\"cn.light.admin.controller.TableColumnController.save()\\\\\\\",\\\\\\\"params\\\\\\\":\\\\\\\"{\\\\\\\\\\\\\\\"tableName\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"log\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"columns\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"[{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true}]\\\\\\\\\\\\\\\"}\\\\\\\",\\\\\\\"logType\\\\\\\":50,\\\\\\\"id\\\\\\\":98,\\\\\\\"createTime\\\\\\\":1722658773000,\\\\\\\"creatorId\\\\\\\":1}\\\",\\\"logType\\\":50,\\\"id\\\":106,\\\"createTime\\\":1722665165000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":115,\"createTime\":1722665417000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (117, '2024-08-03 14:11:57.408000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"username\\\\\\\":\\\\\\\"18800000000\\\\\\\",\\\\\\\"requestIp\\\\\\\":\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\",\\\\\\\"description\\\\\\\":\\\\\\\"新增|修改日志\\\\\\\",\\\\\\\"browser\\\\\\\":\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\",\\\\\\\"time\\\\\\\":0,\\\\\\\"method\\\\\\\":\\\\\\\"cn.light.admin.controller.LogController.save()\\\\\\\",\\\\\\\"params\\\\\\\":\\\\\\\"{\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"18800000000\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"新增|修改存储列设置表\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\":0,\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"cn.light.admin.controller.TableColumnController.save()\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"tableName\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"log\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columns\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"[{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true}]\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"}\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"logType\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\":98,\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\":1722658773000,\\\\\\\\\\\\\\\"creatorId\\\\\\\\\\\\\\\":1}\\\\\\\",\\\\\\\"logType\\\\\\\":50,\\\\\\\"id\\\\\\\":106,\\\\\\\"createTime\\\\\\\":1722665165000,\\\\\\\"creatorId\\\\\\\":1}\\\",\\\"logType\\\":50,\\\"id\\\":115,\\\"createTime\\\":1722665417000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":116,\"createTime\":1722665453000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (118, '2024-08-03 14:12:54.000000', 1, '2024-08-03 14:15:58.698000', 1, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"username\\\\\\\":\\\\\\\"18800000000\\\\\\\",\\\\\\\"requestIp\\\\\\\":\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\",\\\\\\\"description\\\\\\\":\\\\\\\"新增|修改存储列设置表\\\\\\\",\\\\\\\"browser\\\\\\\":\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\",\\\\\\\"time\\\\\\\":0,\\\\\\\"method\\\\\\\":\\\\\\\"cn.light.admin.controller.TableColumnController.save()\\\\\\\",\\\\\\\"params\\\\\\\":\\\\\\\"{\\\\\\\\\\\\\\\"tableName\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"log\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"columns\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"[{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true}]\\\\\\\\\\\\\\\"}\\\\\\\",\\\\\\\"logType\\\\\\\":50,\\\\\\\"id\\\\\\\":98,\\\\\\\"createTime\\\\\\\":1722658773000,\\\\\\\"creatorId\\\\\\\":1}\\\",\\\"logType\\\":50,\\\"id\\\":106,\\\"createTime\\\":1722665165000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":115,\"createTime\":1722665417000,\"updateTime\":1722665453000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (119, '2024-08-03 14:13:44.829000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"username\\\\\\\":\\\\\\\"18800000000\\\\\\\",\\\\\\\"requestIp\\\\\\\":\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\",\\\\\\\"description\\\\\\\":\\\\\\\"新增|修改日志\\\\\\\",\\\\\\\"browser\\\\\\\":\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\",\\\\\\\"time\\\\\\\":0,\\\\\\\"method\\\\\\\":\\\\\\\"cn.light.admin.controller.LogController.save()\\\\\\\",\\\\\\\"params\\\\\\\":\\\\\\\"{\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"18800000000\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"新增|修改存储列设置表\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\":0,\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"cn.light.admin.controller.TableColumnController.save()\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"tableName\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"log\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columns\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"[{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true}]\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"}\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"logType\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\":98,\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\":1722658773000,\\\\\\\\\\\\\\\"creatorId\\\\\\\\\\\\\\\":1}\\\\\\\",\\\\\\\"logType\\\\\\\":50,\\\\\\\"id\\\\\\\":106,\\\\\\\"createTime\\\\\\\":1722665165000,\\\\\\\"creatorId\\\\\\\":1}\\\",\\\"logType\\\":50,\\\"id\\\":115,\\\"createTime\\\":1722665417000,\\\"creatorId\\\":1}\",\"logType\":50,\"id\":116,\"createTime\":1722665453000,\"updateTime\":1722665517000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (120, '2024-08-03 14:15:58.691000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.LogController.save()', '{\"username\":\"18800000000\",\"requestIp\":\"0:0:0:0:0:0:0:1\",\"description\":\"新增|修改日志\",\"browser\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\",\"time\":0,\"method\":\"cn.light.admin.controller.LogController.save()\",\"params\":\"{\\\"username\\\":\\\"18800000000\\\",\\\"requestIp\\\":\\\"0:0:0:0:0:0:0:1\\\",\\\"description\\\":\\\"新增|修改日志\\\",\\\"browser\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\",\\\"time\\\":0,\\\"method\\\":\\\"cn.light.admin.controller.LogController.save()\\\",\\\"params\\\":\\\"{\\\\\\\"username\\\\\\\":\\\\\\\"18800000000\\\\\\\",\\\\\\\"requestIp\\\\\\\":\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\",\\\\\\\"description\\\\\\\":\\\\\\\"新增|修改日志\\\\\\\",\\\\\\\"browser\\\\\\\":\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\",\\\\\\\"time\\\\\\\":0,\\\\\\\"method\\\\\\\":\\\\\\\"cn.light.admin.controller.LogController.save()\\\\\\\",\\\\\\\"params\\\\\\\":\\\\\\\"{\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"18800000000\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"0:0:0:0:0:0:0:1\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"新增|修改存储列设置表\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\":0,\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"cn.light.admin.controller.TableColumnController.save()\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"tableName\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"log\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columns\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"[{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":1,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"requestIp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":2,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"address\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":3,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"description\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":4,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"browser\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":5,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"time\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":6,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"method\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":7,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":8,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"params\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":9,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true},{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"columnKey\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"action\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"sort\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":10,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"width\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":90,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"showFlag\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":true}]\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"}\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"logType\\\\\\\\\\\\\\\":50,\\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\":98,\\\\\\\\\\\\\\\"createTime\\\\\\\\\\\\\\\":1722658773000,\\\\\\\\\\\\\\\"creatorId\\\\\\\\\\\\\\\":1}\\\\\\\",\\\\\\\"logType\\\\\\\":50,\\\\\\\"id\\\\\\\":106,\\\\\\\"createTime\\\\\\\":1722665165000,\\\\\\\"creatorId\\\\\\\":1}\\\",\\\"logType\\\":50,\\\"id\\\":115,\\\"createTime\\\":1722665417000,\\\"updateTime\\\":1722665453000,\\\"creatorId\\\":1,\\\"updaterId\\\":1}\",\"logType\":50,\"id\":118,\"createTime\":1722665574000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (121, '2024-08-03 14:19:36.489000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":false},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":51,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (122, '2024-08-03 17:22:53.094000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (123, '2024-08-03 17:23:10.254000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (124, '2024-08-03 17:24:14.528000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (125, '2024-08-03 17:24:30.238000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (126, '2024-08-03 17:25:13.374000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (127, '2024-08-03 17:25:15.298000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (128, '2024-08-03 17:25:16.002000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (129, '2024-08-03 17:26:45.561000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (130, '2024-08-03 17:27:06.979000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (131, '2024-08-03 17:30:59.226000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (132, '2024-08-03 17:36:26.787000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (133, '2024-08-03 17:36:33.139000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (134, '2024-08-03 17:38:31.390000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (135, '2024-08-03 17:38:46.140000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (136, '2024-08-03 17:40:03.259000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (137, '2024-08-03 17:40:04.055000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (138, '2024-08-03 17:40:25.223000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (139, '2024-08-03 17:40:25.470000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (140, '2024-08-03 17:40:25.594000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (141, '2024-08-03 17:40:25.764000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (142, '2024-08-03 17:41:22.635000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (143, '2024-08-03 17:41:47.190000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (144, '2024-08-03 17:43:57.036000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (145, '2024-08-03 17:44:12.653000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (146, '2024-08-03 17:52:59.466000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (147, '2024-08-03 18:05:01.178000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (148, '2024-08-03 18:08:19.047000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (149, '2024-08-03 18:08:38.413000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (150, '2024-08-03 18:09:39.699000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (151, '2024-08-03 18:11:50.978000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (152, '2024-08-03 18:12:14.649000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (153, '2024-08-03 18:14:56.220000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '导出日志', '', 50, 'cn.light.admin.controller.LogController.export()', '{\"page\":1,\"pageSize\":10,\"sort\":true,\"direction\":false,\"sortCol\":\"id\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (154, '2024-08-03 18:23:31.924000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":2,\\\"showFlag\\\":false},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":false},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":51,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (155, '2024-08-03 18:23:40.184000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"requestIp\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"address\\\",\\\"sort\\\":3,\\\"showFlag\\\":false},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"browser\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"time\\\",\\\"sort\\\":6,\\\"width\\\":51,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"method\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"createTime\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"params\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":90,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (156, '2024-08-03 19:22:53.081000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"QAIBz\",\"codeUid\":\"a609ebe0-0824-4ddf-b2a9-50aa49e9f933\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (157, '2024-08-03 19:23:54.667000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"8JNov\",\"codeUid\":\"3936ae58-b9d5-4224-8fd4-472060f4b806\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (158, '2024-08-03 19:55:13.052000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"ico\":\"\",\"fileName\":\"\",\"extend\":\"\",\"filePath\":\"\",\"fileType\":0,\"fileSize\":0,\"urlPath\":\"\",\"uuid\":\"\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (159, '2024-08-03 19:55:38.735000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"ico\":\"\",\"fileName\":\"\",\"extend\":\"\",\"filePath\":\"\",\"fileType\":0,\"fileSize\":0,\"urlPath\":\"\",\"uuid\":\"\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (160, '2024-08-03 19:56:08.397000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"ico\":\"\",\"fileName\":\"\",\"extend\":\"\",\"filePath\":\"\",\"fileType\":0,\"fileSize\":0,\"urlPath\":\"\",\"uuid\":\"\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (161, '2024-08-03 19:57:41.388000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"ico\":\"\",\"fileName\":\"\",\"extend\":\"3\",\"filePath\":\"3434\",\"fileType\":0,\"fileSize\":0,\"urlPath\":\"434\",\"uuid\":\"3434\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (162, '2024-08-04 11:39:06.009000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"fileName\":\"7830145706747284830_2985257681418489697_包装前检，包装后检相关车间库存问题\",\"extend\":\"doc\",\"filePath\":\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc\",\"fileType\":1,\"fileSize\":224768,\"urlPath\":\"2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc\",\"uuid\":\"dsf\",\"id\":6,\"createTime\":1722741008000,\"updateTime\":1722741008000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (163, '2024-08-04 11:40:23.471000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改日志', '', 50, 'cn.light.admin.controller.FileController.save()', '{\"ico\":\"[\\\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/10565ad4-7f5a-405b-a0d2-5a24ac241479.png\\\"]\",\"fileName\":\"7830145706747284830_2985257681418489697_包装前检，包装后检相关车间库存问题\",\"extend\":\"doc\",\"filePath\":\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc\",\"fileType\":1,\"fileSize\":224768,\"urlPath\":\"2024/08/04/000d5242-fd78-48c8-b79b-2cfd6f7f33c2.doc\",\"uuid\":\"dsf\",\"id\":6,\"createTime\":1722741008000,\"updateTime\":1722742746000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (164, '2024-08-04 14:35:59.575000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"imgUrl\":\"[\\\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/7a467cc1-cdf8-41a8-8758-dd86844556d2.png\\\"]\",\"type\":0,\"content\":\"\",\"fileUrl\":\"\",\"projectId\":0}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (165, '2024-08-04 14:36:52.068000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":3,\"content\":\"\",\"fileUrl\":\"\",\"projectId\":0,\"id\":1,\"createTime\":1722753359000,\"updateTime\":1722753359000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (166, '2024-08-04 14:54:38.112000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"imgUrl\":\"[\\\"https://djlx-file-bucket.oss-cn-shanghai.aliyuncs.com/2024/08/04/4e054ad0-fad1-4813-a8af-ed344c8bb7c9.png\\\"]\",\"type\":20,\"content\":\"\",\"fileUrl\":\"\",\"projectId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (167, '2024-08-04 14:56:55.650000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":30,\"content\":\"\",\"fileUrl\":\"\",\"projectId\":0,\"id\":1,\"createTime\":1722753359000,\"updateTime\":1722753412000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (168, '2024-08-04 15:01:18.681000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":20,\"content\":\"<p>dsfdsfdsf</p>\",\"fileUrl\":\"\",\"projectId\":0,\"id\":2,\"createTime\":1722754478000,\"updateTime\":1722754478000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (169, '2024-08-04 15:01:29.077000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":20,\"content\":\"<p>dsfdsfdsf</p>\",\"fileUrl\":\"\",\"projectId\":0,\"id\":2,\"createTime\":1722754478000,\"updateTime\":1722754878000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (170, '2024-08-04 15:01:32.575000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":20,\"content\":\"<p>dsfdsfdsf</p>\",\"fileUrl\":\"\",\"projectId\":0,\"id\":2,\"createTime\":1722754478000,\"updateTime\":1722754889000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (171, '2024-08-04 15:01:36.741000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":20,\"content\":\"<p>dsfdsfdsfssss</p>\",\"fileUrl\":\"\",\"projectId\":0,\"id\":2,\"createTime\":1722754478000,\"updateTime\":1722754892000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (172, '2024-08-04 15:04:59.562000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改新闻', '', 50, 'cn.light.admin.controller.ArticleController.save()', '{\"title\":\"测试数据\",\"type\":20,\"content\":\"<p>dsfdsfdsfssss</p>\",\"fileUrl\":\"\",\"projectId\":0,\"publishTime\":1723359896000,\"id\":2,\"createTime\":1722754478000,\"updateTime\":1722754896000,\"creatorId\":0,\"updaterId\":0}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (173, '2024-08-04 19:35:38.312000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"10\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (174, '2024-08-04 19:39:05.837000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"system_name\",\"name\":\"系统名称\",\"group\":10,\"value\":\"轻巧之光\",\"type\":0,\"description\":\"系统名称可以展现在登录窗体\",\"id\":1,\"createTime\":1722771374000,\"updateTime\":1722771377000,\"creatorId\":0,\"updaterId\":1},{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"20\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (175, '2024-08-04 21:05:06.317000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"system_name\",\"name\":\"系统名称\",\"group\":10,\"value\":\"轻巧之光\",\"type\":0,\"description\":\"系统名称可以展现在登录窗体\",\"id\":1,\"createTime\":1722771374000,\"updateTime\":1722771377000,\"creatorId\":0,\"updaterId\":1},{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"20\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (176, '2024-08-04 21:05:12.577000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"system_name\",\"name\":\"系统名称\",\"group\":10,\"value\":\"轻巧之光\",\"type\":0,\"description\":\"系统名称可以展现在登录窗体\",\"id\":1,\"createTime\":1722771374000,\"updateTime\":1722771377000,\"creatorId\":0,\"updaterId\":1},{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"20\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"value\":\"{}\",\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (177, '2024-08-04 21:06:53.696000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"system_name\",\"name\":\"系统名称\",\"group\":10,\"value\":\"轻巧之光1\",\"type\":0,\"description\":\"系统名称可以展现在登录窗体\",\"id\":1,\"createTime\":1722771374000,\"updateTime\":1722771377000,\"creatorId\":0,\"updaterId\":1},{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"20\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"value\":\"{}\",\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (178, '2024-08-04 21:13:16.039000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '批量新增|修改系统配置', '', 50, 'cn.light.admin.controller.ConfigController.saveList()', '[{\"key\":\"system_name\",\"name\":\"系统名称\",\"group\":10,\"value\":\"轻巧之光1\",\"type\":0,\"description\":\"系统名称可以展现在登录窗体\",\"id\":1,\"createTime\":1722771374000,\"updateTime\":1722771377000,\"creatorId\":0,\"updaterId\":1},{\"key\":\"reg_contact\",\"name\":\"注册协议\",\"group\":10,\"type\":7,\"description\":\"注册协议\",\"id\":15},{\"key\":\"storageService\",\"name\":\"存储类型选择\",\"group\":40,\"value\":\"20\",\"type\":1,\"description\":\"[{\\\"v\\\":10,\\\"n\\\":\\\"本地存储\\\"},{\\\"v\\\":20,\\\"n\\\":\\\"阿里云OSS\\\"}]\",\"id\":12,\"updateTime\":1710041614000,\"updaterId\":1},{\"key\":\"ossConfig\",\"name\":\"阿里云oss配置\",\"group\":40,\"value\":\"{\\\"aliyun_accessKeyId\\\":\\\"LTAI4GAXb4A3tfxdLxHw6u5U\\\", \\\"aliyun_accessKeySecret\\\":\\\"XADubD30SLtGX4cPmdu48GEWc4jqjJ\\\", \\\"aliyun_endpoint\\\":\\\"oss-cn-shanghai.aliyuncs.com\\\",\\\"aliyun_image_bucket\\\":\\\"djlx-image-bucket\\\", \\\"aliyun_video_bucket\\\": \\\"djlx-video-bucket\\\",\\\"aliyun_file_bucket\\\": \\\"djlx-file-bucket\\\",\\\"aliyun_origin_image_url\\\":\\\"djlx-image-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_video_url\\\":\\\"djlx-video-bucket.oss-cn-shanghai.aliyuncs.com\\\", \\\"aliyun_origin_file_url\\\":\\\"djlx-file-bucket.oss-cn-shanghai.aliyuncs.com\\\" }\",\"type\":5,\"description\":\"输入配置的 json格式\",\"id\":13,\"updateTime\":1710041547000,\"updaterId\":1},{\"key\":\"localConfig\",\"name\":\"本地存储配置\",\"group\":40,\"value\":\"{}\",\"type\":5,\"description\":\"输入json配置\",\"id\":14,\"updateTime\":1710038515000,\"updaterId\":1}]', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (179, '2024-08-04 23:47:07.815000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改站内消息、短息 记录', '', 50, 'cn.light.admin.controller.MessageController.save()', '{\"type\":5,\"templateCode\":\"001\",\"receiverId\":0,\"receiverAccount\":\"0\",\"senderId\":0,\"senderAccount\":\"0\",\"state\":2,\"params\":\"\",\"message\":\"测试消息\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (180, '2024-08-04 23:56:08.227000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (181, '2024-08-21 09:15:06.252000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"2HOYb\",\"codeUid\":\"46263ba8-8a8e-40e3-989b-a5ac221e46a8\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (182, '2024-08-21 09:15:12.914000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"admin\",\"password\":\"MTIzNDU2\",\"code\":\"2HOYb\",\"codeUid\":\"46263ba8-8a8e-40e3-989b-a5ac221e46a8\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (183, '2024-08-21 09:15:48.790000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"2HOYb\",\"codeUid\":\"46263ba8-8a8e-40e3-989b-a5ac221e46a8\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (184, '2024-08-21 09:16:34.262000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"2HOYb\",\"codeUid\":\"46263ba8-8a8e-40e3-989b-a5ac221e46a8\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (185, '2024-08-21 09:38:03.377000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改订单', '', 50, 'cn.light.admin.controller.OrderController.save()', '{\"code\":\"8bga\",\"state\":1,\"amount\":2}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (186, '2024-08-21 09:53:41.354000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0', '新增|修改订单', '', 50, 'cn.light.admin.controller.OrderController.save()', '{\"code\":\"8bga\",\"state\":10,\"amount\":2,\"id\":1,\"createTime\":1724204283000,\"creatorId\":1}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (187, '2024-09-27 22:03:37.318000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"name\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"url\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"perms\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"component\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"type\\\",\\\"sort\\\":6,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"sort\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"icon\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"show\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":120,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (188, '2024-09-27 22:39:41.857000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (189, '2024-09-27 22:39:58.483000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"kzhzl\",\"codeUid\":\"3ecd41bb-3b8f-4b4d-bb34-f569a3126fc3\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (190, '2024-09-27 23:11:06.728000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (191, '2024-09-27 23:11:18.173000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"akvTI\",\"codeUid\":\"f518abc9-d2d8-4548-a43a-6c5c9d74b2a0\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (192, '2024-09-27 23:11:49.529000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (193, '2024-09-27 23:12:07.668000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"A6YhA\",\"codeUid\":\"0669aeaf-7d08-4b9e-8c49-1381ab5fdde0\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (194, '2024-09-27 23:49:27.874000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"name\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"description\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"perms\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"component\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"type\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"icon\\\",\\\"sort\\\":6,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"sort\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":8,\\\"width\\\":120,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (195, '2024-10-05 20:16:46.279000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '退出登录', '', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (196, '2024-10-05 20:17:14.347000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"oUxuO\",\"codeUid\":\"692beaed-f97f-4f28-a576-5b8cac4ac440\"}', '0:0:0:0:0:0:0:1', 0, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (197, '2024-10-05 20:58:39.872000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"QpYhE\",\"codeUid\":\"08819f60-494f-41db-bb38-b10b9bec3340\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (198, '2024-10-05 21:17:26.497000', 1, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '新增|修改存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.save()', '{\"tableName\":\"log\",\"columns\":\"[{\\\"columnKey\\\":\\\"username\\\",\\\"sort\\\":1,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"name\\\",\\\"sort\\\":2,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"mobile\\\",\\\"sort\\\":3,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"sexEnum\\\",\\\"sort\\\":4,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"code\\\",\\\"sort\\\":5,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"stateEnum\\\",\\\"sort\\\":6,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"email\\\",\\\"sort\\\":7,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"regIp\\\",\\\"sort\\\":8,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"loginIp\\\",\\\"sort\\\":9,\\\"showFlag\\\":true},{\\\"columnKey\\\":\\\"action\\\",\\\"sort\\\":10,\\\"width\\\":120,\\\"showFlag\\\":true}]\"}', '0:0:0:0:0:0:0:1', 1, '18800000000', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_log` VALUES (199, '2024-10-06 19:00:16.633000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '删除存储列设置表', '', 50, 'cn.light.admin.controller.TableColumnController.delete()', '', '0:0:0:0:0:0:0:1', 54, '18800000000', NULL, NULL, 1, '/tableColumn/delete/log');
+INSERT INTO `sys_log` VALUES (200, '2024-10-06 19:00:56.026000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '更新用户', '', 50, 'cn.light.admin.controller.UserController.currentUpdate()', '{\"username\":\"18800000000\",\"password\":\"4f1673cf489f4f1857f1226bd5b2902099b4ddd0884e3b53f9f43f9d5ce87210\",\"sex\":10,\"name\":\"开发专用\",\"state\":1,\"regIp\":\"192.168.10.105\",\"loginIp\":\"0:0:0:0:0:0:0:1\",\"info\":\"23232\",\"id\":1,\"createTime\":1662471149000,\"updateTime\":1724038346000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 48, '18800000000', NULL, NULL, 1, '/user/currentUpdate');
+INSERT INTO `sys_log` VALUES (201, '2024-10-06 19:01:15.432000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '退出登录', 'token 无效：db65c6d6-9f6a-41c5-800a-7627777cd58c', 10, 'cn.light.admin.controller.UserController.logout()', '', '0:0:0:0:0:0:0:1', 3, '18800000000', NULL, NULL, 0, '/user/logout');
+INSERT INTO `sys_log` VALUES (202, '2024-10-06 19:01:30.165000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '验证码错误', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"9q7UY\",\"codeUid\":\"f01c0d01-8bbc-4ed1-a58a-50ee41e3e511\",\"loginIp\":\"0:0:0:0:0:0:0:1\"}', '0:0:0:0:0:0:0:1', 7, '18800000000', NULL, NULL, 0, '/user/login');
+INSERT INTO `sys_log` VALUES (203, '2024-10-06 19:01:40.647000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '验证码错误', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"MTIzNDU2\",\"code\":\"xc4F0\",\"codeUid\":\"b2758d3f-b34a-4558-978f-a36b64b5cce0\",\"loginIp\":\"0:0:0:0:0:0:0:1\"}', '0:0:0:0:0:0:0:1', 2, '18800000000', NULL, NULL, 0, '/user/login');
+INSERT INTO `sys_log` VALUES (204, '2024-10-06 19:02:26.041000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"123456\",\"code\":\"OQtLd\",\"codeUid\":\"8a5a893d-1dd4-4f60-b347-a47fe159ff4e\",\"loginIp\":\"0:0:0:0:0:0:0:1\"}', '0:0:0:0:0:0:0:1', 295, '18800000000', NULL, NULL, 1, '/user/login');
+INSERT INTO `sys_log` VALUES (205, '2024-10-06 19:03:02.036000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', '更新用户', '', 50, 'cn.light.admin.controller.UserController.currentUpdate()', '{\"username\":\"18800000000\",\"mobile\":\"18317033205\",\"password\":\"207cf410532f92a47dee245ce9b11ff71f578ebd763eb3bbea44ebd043d018fb\",\"sex\":10,\"name\":\"宋飞\",\"state\":20,\"regIp\":\"192.168.10.105\",\"loginIp\":\"0:0:0:0:0:0:0:1\",\"info\":\"23232333\",\"roleName\":\"管理员\",\"roleCode\":\"admin\",\"id\":1,\"createTime\":1662471149000,\"updateTime\":1721572665000,\"creatorId\":1,\"updaterId\":1}', '0:0:0:0:0:0:0:1', 12, '18800000000', NULL, NULL, 1, '/user/currentUpdate');
+INSERT INTO `sys_log` VALUES (206, '2024-12-01 19:47:12.925000', 0, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', '用户登录', '', 10, 'cn.light.admin.controller.UserController.login()', '{\"username\":\"18800000000\",\"password\":\"123456\",\"code\":\"3KovR\",\"codeUid\":\"e6bc0b43-a9aa-4631-bf82-fb9396809792\",\"loginIp\":\"0:0:0:0:0:0:0:1\"}', '0:0:0:0:0:0:0:1', 591, '18800000000', NULL, NULL, 1, '/user/login');
+
+-- ----------------------------
+-- Table structure for sys_message
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_message`;
+CREATE TABLE `sys_message`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `message` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '消息内容',
+  `params` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息参数',
+  `receiver_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息接收者账号',
+  `receiver_id` int(11) NULL DEFAULT NULL COMMENT '消息接收者',
+  `sender_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息发送者账号',
+  `sender_id` int(11) NULL DEFAULT NULL COMMENT '消息发送者',
+  `state` int(11) NULL DEFAULT NULL COMMENT '状态{\n    \"1\": \"新建\",\n    \"2\": \"发送\",\n    \"3\": \"已读\",\n    \"4\": \"已删除\",\n    \"5\": \"发送错误\"\n}',
+  `template_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息模板编码',
+  `type` int(11) NULL DEFAULT NULL COMMENT '消息类型{\n    \"1\": \"转发\",\n    \"2\": \"验证码短信\",\n    \"3\": \"通知短信\",\n    \"4\": \"推送消息\",\n    \"5\": \"站内消息\",\n    \"6\": \"推送模板消息\"\n}',
+  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `param` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息参数',
+  `result` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '结果',
+  `template_id` int(11) NULL DEFAULT NULL COMMENT '模板id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '站内消息、短息 记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_message
+-- ----------------------------
+INSERT INTO `sys_message` VALUES (1, '2024-08-04 23:47:07.828000', 0, NULL, NULL, NULL, '测试消息', '', '0', 0, '0', 0, 2, '001', 5, NULL, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_message_template
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_message_template`;
+CREATE TABLE `sys_message_template`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模板编码',
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '模板内容',
+  `params` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '限定参数',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模板说明',
+  `type` int(11) NULL DEFAULT NULL COMMENT '模板类型{\n    \"1\": \"转发\",\n    \"2\": \"验证码短信\",\n    \"3\": \"通知短信\",\n    \"4\": \"推送消息\",\n    \"5\": \"站内消息\",\n    \"6\": \"推送模板消息\"\n}',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消息模板' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_message_template
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_permission`;
+CREATE TABLE `sys_permission`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限名称',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限描述',
+  `perms` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
+  `parent_id` int(11) NULL DEFAULT NULL COMMENT '父级id',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '访问路径',
+  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
+  `type` int(11) NULL DEFAULT NULL COMMENT '类型(权限类型 1：目录   2：菜单   3：按钮)',
+  `create_time` datetime NULL DEFAULT NULL,
+  `update_time` datetime NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `show` int(11) NULL DEFAULT NULL COMMENT '是否展现 1 展现 0 不展现',
+  `version` int(11) NULL DEFAULT NULL,
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_permission
+-- ----------------------------
+INSERT INTO `sys_permission` VALUES (1, '系统管理', 'AuditOutlined', '系统管理', '', 0, NULL, 12, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_permission` VALUES (2, '角色管理', NULL, '项目管理', 'role-list', 1, NULL, 1, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/role/list.vue');
+INSERT INTO `sys_permission` VALUES (3, '系统配置', NULL, '系统配置', 'sys-config', 1, NULL, 3, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/config/setting.vue');
+INSERT INTO `sys_permission` VALUES (4, '用户列表', NULL, '用户列表', 'user-list', 1, NULL, 2, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/user/list.vue');
+INSERT INTO `sys_permission` VALUES (6, '系统日志', NULL, '系统日志', 'log-list', 1, NULL, 5, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/log/list.vue');
+INSERT INTO `sys_permission` VALUES (8, '内容管理', 'AreaChartOutlined', '项目管理', NULL, 0, NULL, 1, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_permission` VALUES (9, '文章列表', NULL, '文章列表', 'article-list', 8, NULL, 2, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/article/list.vue');
+INSERT INTO `sys_permission` VALUES (10, '文件管理', NULL, '文件管理', 'file-list', 8, NULL, 3, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/file/list.vue');
+INSERT INTO `sys_permission` VALUES (11, '菜单管理', NULL, NULL, 'permission-list', 1, NULL, 1, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/permission/list.vue');
+INSERT INTO `sys_permission` VALUES (12, '消息管理', NULL, '消息管理', 'message-list', 8, NULL, 2, 2, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '/system/message/list.vue');
+INSERT INTO `sys_permission` VALUES (30, '广告管理', '', '广告管理', 'ad-list', 8, '', 2, 2, '2024-09-27 23:04:25', '2024-09-27 23:04:25', 1, 1, 1, NULL, NULL, NULL, '/system/ad/list.vue');
+INSERT INTO `sys_permission` VALUES (36, '反馈建议', '', '反馈建议', 'feedback-list', 8, '', 4, 2, '2024-09-27 23:08:54', '2024-09-27 23:08:54', 1, 1, 1, NULL, NULL, NULL, '/system/feedback/list.vue');
+INSERT INTO `sys_permission` VALUES (37, '行政区域', '', '行政区域', 'areaDj-list', 8, '', 5, 2, '2024-09-27 23:10:19', '2024-09-27 23:10:19', 1, 1, 1, NULL, NULL, NULL, '/system/areaDj/list.vue');
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+  `version` int(11) NULL DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色编码',
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '所属角色' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '2022-09-06 22:33:23.000000', NULL, '2024-07-28 16:48:35.616000', 1, '公司用户信息可以全部权限', '管理员', NULL, 'admin', NULL, NULL);
+INSERT INTO `sys_role` VALUES (2, '2022-09-06 22:47:44.716000', 1, '2024-07-28 16:44:16.646000', 1, '描述', '财务部', NULL, '002  ', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_permission`;
+CREATE TABLE `sys_role_permission`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `permission_id` int(11) NULL DEFAULT NULL,
+  `role_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 90 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role_permission
+-- ----------------------------
+INSERT INTO `sys_role_permission` VALUES (9, '2024-07-28 19:09:48.275000', 1, '2024-07-28 19:09:48.275000', 1, 8, 2, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (10, '2024-07-28 19:09:48.305000', 1, '2024-07-28 19:09:48.305000', 1, 9, 2, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (11, '2024-07-28 19:09:48.307000', 1, '2024-07-28 19:09:48.307000', 1, 10, 2, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (55, '2024-09-27 23:11:03.706000', 1, '2024-09-27 23:11:03.706000', 1, 1, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (56, '2024-09-27 23:11:03.708000', 1, '2024-09-27 23:11:03.708000', 1, 2, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (57, '2024-09-27 23:11:03.709000', 1, '2024-09-27 23:11:03.709000', 1, 3, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (58, '2024-09-27 23:11:03.711000', 1, '2024-09-27 23:11:03.711000', 1, 4, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (59, '2024-09-27 23:11:03.712000', 1, '2024-09-27 23:11:03.712000', 1, 6, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (60, '2024-09-27 23:11:03.713000', 1, '2024-09-27 23:11:03.713000', 1, 8, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (61, '2024-09-27 23:11:03.714000', 1, '2024-09-27 23:11:03.714000', 1, 9, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (62, '2024-09-27 23:11:03.716000', 1, '2024-09-27 23:11:03.716000', 1, 10, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (63, '2024-09-27 23:11:03.718000', 1, '2024-09-27 23:11:03.718000', 1, 11, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (64, '2024-09-27 23:11:03.719000', 1, '2024-09-27 23:11:03.719000', 1, 12, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (65, '2024-09-27 23:11:03.721000', 1, '2024-09-27 23:11:03.721000', 1, 13, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (66, '2024-09-27 23:11:03.722000', 1, '2024-09-27 23:11:03.722000', 1, 28, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (67, '2024-09-27 23:11:03.723000', 1, '2024-09-27 23:11:03.723000', 1, 29, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (68, '2024-09-27 23:11:03.724000', 1, '2024-09-27 23:11:03.724000', 1, 35, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (69, '2024-09-27 23:11:03.725000', 1, '2024-09-27 23:11:03.725000', 1, 30, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (70, '2024-09-27 23:11:03.726000', 1, '2024-09-27 23:11:03.726000', 1, 36, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (71, '2024-09-27 23:11:03.727000', 1, '2024-09-27 23:11:03.727000', 1, 37, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (72, '2024-09-27 23:11:03.728000', 1, '2024-09-27 23:11:03.728000', 1, 14, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (73, '2024-09-27 23:11:03.730000', 1, '2024-09-27 23:11:03.730000', 1, 15, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (74, '2024-09-27 23:11:03.732000', 1, '2024-09-27 23:11:03.732000', 1, 23, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (75, '2024-09-27 23:11:03.734000', 1, '2024-09-27 23:11:03.734000', 1, 24, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (76, '2024-09-27 23:11:03.735000', 1, '2024-09-27 23:11:03.735000', 1, 25, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (77, '2024-09-27 23:11:03.736000', 1, '2024-09-27 23:11:03.736000', 1, 26, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (78, '2024-09-27 23:11:03.737000', 1, '2024-09-27 23:11:03.737000', 1, 27, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (79, '2024-09-27 23:11:03.738000', 1, '2024-09-27 23:11:03.738000', 1, 16, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (80, '2024-09-27 23:11:03.739000', 1, '2024-09-27 23:11:03.739000', 1, 17, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (81, '2024-09-27 23:11:03.740000', 1, '2024-09-27 23:11:03.740000', 1, 18, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (82, '2024-09-27 23:11:03.742000', 1, '2024-09-27 23:11:03.742000', 1, 19, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (83, '2024-09-27 23:11:03.743000', 1, '2024-09-27 23:11:03.743000', 1, 20, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (84, '2024-09-27 23:11:03.745000', 1, '2024-09-27 23:11:03.745000', 1, 21, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (85, '2024-09-27 23:11:03.746000', 1, '2024-09-27 23:11:03.746000', 1, 22, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (86, '2024-09-27 23:11:03.748000', 1, '2024-09-27 23:11:03.748000', 1, 31, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (87, '2024-09-27 23:11:03.749000', 1, '2024-09-27 23:11:03.749000', 1, 32, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (88, '2024-09-27 23:11:03.751000', 1, '2024-09-27 23:11:03.751000', 1, 33, 1, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES (89, '2024-09-27 23:11:03.752000', 1, '2024-09-27 23:11:03.752000', 1, 34, 1, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_table_column
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_table_column`;
+CREATE TABLE `sys_table_column`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `version` int(11) NULL DEFAULT NULL,
+  `columns` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表列',
+  `table_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表名',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id 0表示通用',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '存储列设置表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_table_column
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `height` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身高',
+  `login_ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录ip',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名',
+  `nick` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
+  `password` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
+  `reg_ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '注册ip',
+  `sex` int(11) NULL DEFAULT NULL COMMENT '性别{\n    \"20\": \"女\",\n    \"10\": \"男\"\n}',
+  `state` int(11) NOT NULL DEFAULT 0 COMMENT '状态(0,1){\n    \"40\": \"删除\",\n    \"10\": \"未启用\",\n    \"20\": \"正常\",\n    \"30\": \"禁用\"\n}',
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '注册方式(0,1,2){\n    \"0\": \"线下注册\",\n    \"1\": \"微信\",\n    \"2\": \"支付宝\"\n}',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号',
+  `weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '体重',
+  `front_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证正面',
+  `reverse_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证反面',
+  `version` int(11) NULL DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工号',
+  `info` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '个人简介',
+  `mobile` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES (1, '2022-09-06 21:32:29.000000', 1, '2024-07-21 22:37:45.456000', 1, NULL, '182', '0:0:0:0:0:0:0:1', '宋飞', NULL, '207cf410532f92a47dee245ce9b11ff71f578ebd763eb3bbea44ebd043d018fb', '192.168.10.105', 10, 20, '1', '18800000000', '2', NULL, NULL, NULL, NULL, '23232333', '18317033205');
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NULL DEFAULT NULL,
+  `creator_id` int(11) NULL DEFAULT NULL,
+  `update_time` datetime(6) NULL DEFAULT NULL,
+  `updater_id` int(11) NULL DEFAULT NULL,
+  `role_id` int(11) NULL DEFAULT NULL COMMENT '角色id',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `version` int(11) NULL DEFAULT NULL,
+  `creator` int(11) NULL DEFAULT NULL,
+  `updater` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES (1, '2022-09-06 22:33:47.000000', 1, '2022-09-06 22:33:52.000000', 1, 1, 1, NULL, NULL, NULL);
+INSERT INTO `sys_user_role` VALUES (2, '2022-09-29 11:44:46.977000', 1, '2022-09-29 11:44:46.977000', 1, 2, 2, NULL, NULL, NULL);
+INSERT INTO `sys_user_role` VALUES (3, '2022-09-29 11:52:35.164000', 1, '2022-09-29 11:52:35.164000', 1, 2, 3, NULL, NULL, NULL);
+
+SET FOREIGN_KEY_CHECKS = 1;

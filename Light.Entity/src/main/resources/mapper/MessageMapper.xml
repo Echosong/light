@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.MessageMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysMessage">
+        select *
+        from sys_message
+        <where>
+            <if test="type != null ">
+                and type = #{type}
+            </if>
+            <if test="templateCode != null and templateCode != '' ">
+                and template_code like CONCAT('%',#{templateCode},'%')
+            </if>
+            <if test="receiverId != null ">
+                and receiver_id = #{receiverId}
+            </if>
+            <if test="receiverAccount != null and receiverAccount != '' ">
+                and receiver_account like CONCAT('%',#{receiverAccount},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getUnreadCount" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM sys_message
+        WHERE (receiver_id = #{receiverId} OR receiver_id = 0)
+          AND state <![CDATA[ < ]]>  3 AND type = 5
+    </select>
+
+</mapper>

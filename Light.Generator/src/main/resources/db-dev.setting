@@ -1,0 +1,19 @@
+## db.setting文件 注意 idea 配置环境变量  比如  env=es
+url = jdbc:mysql://127.0.0.1:3306/db_light?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+user = root
+pass = songfeiok
+
+## 可选配置
+# 是否在日志中显示执行的SQL
+showSql = true
+# 是否格式化显示的SQL
+formatSql = false
+# 是否显示SQL参数
+showParams = true
+# 打印SQL的日志等级，默认debug，可以是info、warn、error
+sqlLevel = debug
+
+# 业务相关配置
+path-base= D:/项目资料/light框架/framework
+path-vue=  D:/项目资料/light框架/light-view/src/views
+db-prefix= hz

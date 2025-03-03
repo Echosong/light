@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.DictDataMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysDictData">
+        select *
+        from sys_dict_data where 1=1
+                 
+    </select>
+
+</mapper>

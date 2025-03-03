@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/db_light?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: songfeiok
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: _sys31UC
+      database: 6
+#文件上传操作
+file:
+  #文件上传目录
+  upload-folder: E:\外包项目整理\light轻巧之光\light\upload\
