@@ -127,6 +127,7 @@ public class BaseService {
         dict.set("import",String.join("\r\n", this.importPackage));
         dict.set("localDate", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
         dict.set("keyName",keyName);
+        dict.set("isKey",StrUtil.isNotBlank(keyName));
         return dict;
     }
 

@@ -27,8 +27,8 @@ public interface #(UpEntityName)Service extends IService<#(UpTableName)> {
     #(UpEntityName)DTO find(Integer id);
 
     void delete(Integer id);
-    //start
+    #if(isKey)
     List<Map<String, Object>> getMap();
-    //end
+    #end
 
 }
