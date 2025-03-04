@@ -66,23 +66,24 @@ public class #(UpEntityName)ServiceImpl extends ServiceImpl<#(UpEntityName)Mappe
         return DtoMapper.convert(one, #(UpEntityName)DTO.class);
     }
 
-    //start
+    #if(isKey)
     @Override
     public List<Map<String, Object>> getMap(){
          List<#(UpTableName)> all = this.baseMapper.selectList(new LambdaQueryWrapper<#(UpTableName)>()
-                        .select(#(UpTableName)::getId, #(UpTableName)::get#{keyName}#)
+                        .select(#(UpTableName)::getId, #(UpTableName)::get#(keyName) )
                         .orderByDesc(#(UpTableName)::getId)
                 );
         List<Map<String, Object>> maps = new ArrayList<>();
         for (#(UpTableName) item : all) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", item.getId());
-            map.put("name", item.get#{keyName}#());
+            map.put("name", item.get#(keyName)());
             maps.add(map);
         }
         return maps;
     }
-    //end
+    #end
+
 
 
 }
