@@ -73,10 +73,10 @@ public class ImplService  extends BaseService implements ServiceInterface  {
                 keyName = StrUtil.upperFirst(field.getName());
             }
         }
-        String templateFile = this.templatePath+"implInterface.tpl";
+        String templateFile = "implInterface.tpl";
 
         if(StrUtil.isNotBlank(implStr)){
-            templateFile = this.templatePath+"implService.tpl";
+            templateFile = "implService.tpl";
         }
 
         Dict dict = this.replaceTpl(templateFile);
@@ -86,5 +86,6 @@ public class ImplService  extends BaseService implements ServiceInterface  {
 
         FileUtil.writeString(tplContent, fileName, Charset.defaultCharset());
         Console.log("生成Service 文件 {} 成功 ", fileName);
+
     }
 }
