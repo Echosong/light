@@ -65,12 +65,12 @@ public class #(UpEntityName)Controller extends BaseController{
         #(EntityName)Service.delete(id);
     }
 
-    //start
+    #if(isKey)
     @Operation(summary = "简单查询#(tableInfo)")
     @GetMapping("/getMap")
     public List<Map<String, Object>> getMap(){
          return #(EntityName)Service.getMap();
     }
-    //end
+    #end
 
 }
