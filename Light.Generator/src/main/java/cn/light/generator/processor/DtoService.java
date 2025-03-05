@@ -215,13 +215,13 @@ public class DtoService extends BaseService implements ServiceInterface {
 
         if(field.isAnnotationPresent(DecimalMax.class)){
             var annotation = field.getAnnotation(DecimalMax.class);
-            validBuilder.append(StrUtil.format("@DecimalMax(value={} message=\"{}\")", annotation.value(), annotation.message()));
+            validBuilder.append(StrUtil.format("@DecimalMax(value=\"{}\" message=\"{}\")", annotation.value(), annotation.message()));
             validBuilder.append("\r\n");
         }
 
         if(field.isAnnotationPresent(DecimalMin.class)){
             var annotation = field.getAnnotation(DecimalMin.class);
-            validBuilder.append(StrUtil.format("@DecimalMin(value={} message=\"{}\")", annotation.value(), annotation.message()));
+            validBuilder.append(StrUtil.format("@DecimalMin(value=\"{}\" message=\"{}\")", annotation.value(), annotation.message()));
             validBuilder.append("\r\n");
         }
 
