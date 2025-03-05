@@ -122,6 +122,7 @@ public class BaseService {
         dict.set("UpEntityName", StrUtil.upperFirst(className));
         dict.set("UpTableName", StrUtil.upperFirst(tableName));
         dict.set("TableName", StrUtil.lowerFirst(tableName));
+        dict.set("table_name",StrUtil.toUnderlineCase(tableName).toLowerCase());
         dict.set("PackageName", packageName);
         dict.set("tableName",StrUtil.toUnderlineCase(tableName).toLowerCase());
         dict.set("import",String.join("\r\n", this.importPackage));
