@@ -83,7 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
         StpUtil.login(byUsername.getId());
         byUsername.setLoginIp(loginUserDTO.getLoginIp());
-        this.save( byUsername);
+        this.saveOrUpdate( byUsername);
         userCacheRepository.deleteById(byUsername.getId());
         return getLoginInfo();
     }
