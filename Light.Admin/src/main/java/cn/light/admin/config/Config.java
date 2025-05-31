@@ -1,8 +1,8 @@
 package cn.light.admin.config;
 
-import cn.light.admin.aspect.RepeatSubmitAspect;
 import cn.light.admin.component.DictionarySerializer;
 import cn.light.common.component.IDictionaryObject;
+import cn.light.common.component.RepeatSubmitAspect;
 import cn.light.common.component.SerialUtil;
 import cn.light.server.service.UserService;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
