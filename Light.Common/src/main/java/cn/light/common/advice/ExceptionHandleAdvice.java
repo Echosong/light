@@ -1,4 +1,4 @@
-package cn.light.admin.advice;
+package cn.light.common.advice;
 
 
 import cn.dev33.satoken.exception.SaTokenException;

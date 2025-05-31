@@ -45,83 +45,29 @@
 <body>
 <div class="title"><h1>项目数据字典 </h1> <h2></h2></div>
     <div class="content">
-        <h2>SysAreaDj (行政区划实体)</h2>
+        <h2>AiPlatformLlm (模型平台)</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>parentCode</td><td>String</td> <td>255</td><td>Y</td><td>父级code</td></tr>
-                <tr><td>areaName</td><td>String</td> <td>255</td><td>Y</td><td>省市区县名</td></tr>
-                <tr><td>areaCode</td><td>String</td> <td>255</td><td>Y</td><td>省市区县</td></tr>
-                <tr><td>status</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
-                <tr><td>isAdd</td><td>Integer</td> <td>255</td><td>Y</td><td>是否修改</td></tr>
-                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>省市区</td></tr>
-                <tr><td>pinyin</td><td>String</td> <td>255</td><td>Y</td><td>拼音</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysConfig (系统配置)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>key</td><td>String</td> <td>255</td><td>Y</td><td>配置字段名</td></tr>
-                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>配置说明</td></tr>
-                <tr><td>group</td><td>Integer</td> <td>255</td><td>Y</td><td>配置分组</td></tr>
-                <tr><td>value</td><td>String</td> <td>255</td><td>Y</td><td>配置值</td></tr>
-                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>类型</td></tr>
-                <tr><td>description</td><td>String</td> <td>255</td><td>Y</td><td>描述</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysFile (文件管理)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>ico</td><td>String</td> <td>255</td><td>Y</td><td>图标</td></tr>
-                <tr><td>fileName</td><td>String</td> <td>255</td><td>N</td><td>文件名</td></tr>
-                <tr><td>extend</td><td>String</td> <td>255</td><td>Y</td><td>文件扩展名</td></tr>
-                <tr><td>filePath</td><td>String</td> <td>255</td><td>Y</td><td>文件存储路径</td></tr>
-                <tr><td>fileType</td><td>Integer</td> <td>255</td><td>Y</td><td>文件类型</td></tr>
-                <tr><td>fileSize</td><td>long</td> <td>255</td><td>Y</td><td>文件大小</td></tr>
-                <tr><td>urlPath</td><td>String</td> <td>255</td><td>Y</td><td>相对路径</td></tr>
-                <tr><td>uuid</td><td>String</td> <td>255</td><td>Y</td><td>文件唯一标识</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysUser (用户)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>username</td><td>String</td> <td>255</td><td>N</td><td>账号</td></tr>
-                <tr><td>mobile</td><td>String</td> <td>255</td><td>Y</td><td>手机号</td></tr>
-                <tr><td>password</td><td>String</td> <td>300</td><td>Y</td><td>密码</td></tr>
-                <tr><td>sex</td><td>Integer</td> <td>255</td><td>Y</td><td>性别</td></tr>
-                <tr><td>code</td><td>String</td> <td>255</td><td>Y</td><td>工号</td></tr>
-                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>姓名</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>platform</td><td>Integer</td> <td>255</td><td>Y</td><td>平台</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>名称</td></tr>
+                <tr><td>model</td><td>String</td> <td>255</td><td>Y</td><td>模型</td></tr>
+                <tr><td>appType</td><td>Integer</td> <td>255</td><td>Y</td><td>应用类型</td></tr>
+                <tr><td>modelVersion</td><td>String</td> <td>255</td><td>Y</td><td>版本</td></tr>
+                <tr><td>type</td><td>String</td> <td>255</td><td>Y</td><td>类型</td></tr>
+                <tr><td>contextLen</td><td>Integer</td> <td>255</td><td>Y</td><td>上下文长度</td></tr>
+                <tr><td>inputMaxLen</td><td>Integer</td> <td>255</td><td>Y</td><td>最大输入</td></tr>
+                <tr><td>outputMaxLen</td><td>Integer</td> <td>255</td><td>Y</td><td>最大输出</td></tr>
+                <tr><td>inputCost</td><td>Integer</td> <td>255</td><td>Y</td><td>输入成本(K/T)</td></tr>
+                <tr><td>outputCost</td><td>Integer</td> <td>255</td><td>Y</td><td>输出成本(K/T)</td></tr>
+                <tr><td>isDefault</td><td>Boolean</td> <td>255</td><td>Y</td><td>是否默认</td></tr>
                 <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
-                <tr><td>email</td><td>String</td> <td>255</td><td>Y</td><td>邮箱</td></tr>
-                <tr><td>regIp</td><td>String</td> <td>255</td><td>Y</td><td>注册ip</td></tr>
-                <tr><td>loginIp</td><td>String</td> <td>255</td><td>Y</td><td>登录ip</td></tr>
-                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>个人简介</td></tr>
         </table>
     </div>
     <div class="content">
@@ -131,9 +77,10 @@
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>username</td><td>String</td> <td>255</td><td>Y</td><td>用户</td></tr>
                 <tr><td>logType</td><td>Integer</td> <td>255</td><td>Y</td><td>日志类型</td></tr>
                 <tr><td>requestIp</td><td>String</td> <td>255</td><td>Y</td><td>请求ip</td></tr>
@@ -149,15 +96,244 @@
         </table>
     </div>
     <div class="content">
+        <h2>SysTableColumn (存储列设置表)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id 0表示通用</td></tr>
+                <tr><td>tableName</td><td>String</td> <td>255</td><td>Y</td><td>表名</td></tr>
+                <tr><td>columns</td><td>String</td> <td>255</td><td>Y</td><td>表列</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiDigitWorker (数字员工)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>platformTokenId</td><td>Integer</td> <td>255</td><td>Y</td><td>认证</td></tr>
+                <tr><td>appId</td><td>String</td> <td>255</td><td>Y</td><td>应用ID</td></tr>
+                <tr><td>llmId</td><td>Integer</td> <td>255</td><td>Y</td><td>模型</td></tr>
+                <tr><td>llmName</td><td>String</td> <td>255</td><td>Y</td><td>模型名称</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>名称</td></tr>
+                <tr><td>avatar</td><td>String</td> <td>255</td><td>Y</td><td>头像</td></tr>
+                <tr><td>industry</td><td>String</td> <td>255</td><td>Y</td><td>行业</td></tr>
+                <tr><td>position</td><td>String</td> <td>255</td><td>Y</td><td>岗位</td></tr>
+                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>介绍</td></tr>
+                <tr><td>prompt</td><td>String</td> <td>255</td><td>Y</td><td>提示词</td></tr>
+                <tr><td>knowledegIds</td><td>String</td> <td>255</td><td>Y</td><td>知识库</td></tr>
+                <tr><td>onlyUseKnowledeg</td><td>boolean</td> <td>255</td><td>Y</td><td>仅用知识库匹配回答</td></tr>
+                <tr><td>segmentation</td><td>boolean</td> <td>255</td><td>Y</td><td>分段回复</td></tr>
+                <tr><td>contextRound</td><td>Integer</td> <td>255</td><td>Y</td><td>回复带上下文记忆轮次</td></tr>
+                <tr><td>maxTokens</td><td>Integer</td> <td>255</td><td>Y</td><td>回复内容最大长度</td></tr>
+                <tr><td>temperature</td><td>BigDecimal</td> <td>255</td><td>Y</td><td>内容随机性</td></tr>
+                <tr><td>topP</td><td>BigDecimal</td> <td>255</td><td>Y</td><td>词汇多样性</td></tr>
+                <tr><td>seed</td><td>Integer</td> <td>255</td><td>Y</td><td>结果相似性</td></tr>
+                <tr><td>frequencyPenalty</td><td>BigDecimal</td> <td>255</td><td>Y</td><td>重复词出现频率</td></tr>
+                <tr><td>presencePenalty</td><td>BigDecimal</td> <td>255</td><td>Y</td><td>特定词重复频率</td></tr>
+                <tr><td>forceRule</td><td>String</td> <td>255</td><td>Y</td><td>强制规则</td></tr>
+                <tr><td>stopWord</td><td>String</td> <td>255</td><td>Y</td><td>休止符</td></tr>
+                <tr><td>businessInterfaceIds</td><td>String</td> <td>255</td><td>Y</td><td>业务对接</td></tr>
+                <tr><td>outputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输出用量</td></tr>
+                <tr><td>inputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输入用量</td></tr>
+                <tr><td>totalUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>总用量</td></tr>
+                <tr><td>partCompanyOrgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>所属分公司ID</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysCode ()</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>表名</td></tr>
+                <tr><td>number</td><td>Long</td> <td>255</td><td>Y</td><td>单号</td></tr>
+                <tr><td>hashCode</td><td>String</td> <td>255</td><td>Y</td><td>哈希值</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysConfig (系统配置)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>key</td><td>String</td> <td>255</td><td>Y</td><td>配置字段名</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>配置说明</td></tr>
+                <tr><td>group</td><td>Integer</td> <td>255</td><td>Y</td><td>配置分组</td></tr>
+                <tr><td>value</td><td>String</td> <td>255</td><td>Y</td><td>配置值</td></tr>
+                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>类型</td></tr>
+                <tr><td>description</td><td>String</td> <td>255</td><td>Y</td><td>描述</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysUser (用户)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>username</td><td>String</td> <td>255</td><td>N</td><td>账号</td></tr>
+                <tr><td>mobile</td><td>String</td> <td>255</td><td>Y</td><td>手机号</td></tr>
+                <tr><td>guid</td><td>String</td> <td>255</td><td>Y</td><td>唯一识别码</td></tr>
+                <tr><td>password</td><td>String</td> <td>300</td><td>Y</td><td>密码</td></tr>
+                <tr><td>sex</td><td>Integer</td> <td>255</td><td>Y</td><td>性别</td></tr>
+                <tr><td>code</td><td>String</td> <td>255</td><td>Y</td><td>工号</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>姓名</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+                <tr><td>email</td><td>String</td> <td>255</td><td>Y</td><td>邮箱</td></tr>
+                <tr><td>regIp</td><td>String</td> <td>255</td><td>Y</td><td>注册ip</td></tr>
+                <tr><td>loginIp</td><td>String</td> <td>255</td><td>Y</td><td>登录ip</td></tr>
+                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>个人简介</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiChatRecord (聊天记录)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>senderId</td><td>Integer</td> <td>255</td><td>Y</td><td>发送人</td></tr>
+                <tr><td>getterId</td><td>Integer</td> <td>255</td><td>Y</td><td>接受人</td></tr>
+                <tr><td>senderNick</td><td>String</td> <td>255</td><td>Y</td><td>发送人昵称</td></tr>
+                <tr><td>getterNick</td><td>String</td> <td>255</td><td>Y</td><td>接受人昵称</td></tr>
+                <tr><td>chatPlatform</td><td>Integer</td> <td>255</td><td>Y</td><td>聊天平台</td></tr>
+                <tr><td>workerId</td><td>Integer</td> <td>255</td><td>Y</td><td>数字人</td></tr>
+                <tr><td>inputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输入用量</td></tr>
+                <tr><td>outputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输出用量</td></tr>
+                <tr><td>totalUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>总用量</td></tr>
+                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
+                <tr><td>filePath</td><td>String</td> <td>255</td><td>Y</td><td>路径</td></tr>
+                <tr><td>messageType</td><td>Integer</td> <td>255</td><td>Y</td><td>消息类型</td></tr>
+                <tr><td>messageRole</td><td>Integer</td> <td>255</td><td>Y</td><td>消息角色</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiThirdCustomer (三方客服)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>account</td><td>String</td> <td>255</td><td>Y</td><td>客服账户Acc</td></tr>
+                <tr><td>thirdPlatform</td><td>Integer</td> <td>255</td><td>Y</td><td>平台名称</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>客服名称</td></tr>
+                <tr><td>username</td><td>String</td> <td>255</td><td>Y</td><td>客服账户</td></tr>
+                <tr><td>password</td><td>String</td> <td>255</td><td>Y</td><td>密码</td></tr>
+                <tr><td>mchid</td><td>String</td> <td>255</td><td>Y</td><td>所属商户</td></tr>
+                <tr><td>cusId</td><td>String</td> <td>255</td><td>Y</td><td>客服编号</td></tr>
+                <tr><td>loginState</td><td>Integer</td> <td>255</td><td>Y</td><td>登录状态</td></tr>
+                <tr><td>token</td><td>String</td> <td>255</td><td>Y</td><td>token</td></tr>
+                <tr><td>refreshToken</td><td>String</td> <td>255</td><td>Y</td><td>refreshToken</td></tr>
+                <tr><td>tokenOverDate</td><td>Date</td> <td>255</td><td>Y</td><td>token过期</td></tr>
+                <tr><td>refreshOverDate</td><td>Date</td> <td>255</td><td>Y</td><td>refreshToken过期</td></tr>
+                <tr><td>nextRefreshTokenDate</td><td>Date</td> <td>255</td><td>Y</td><td></td></tr>
+                <tr><td>nextRefreshfReshtokenDate</td><td>Date</td> <td>255</td><td>Y</td><td></td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiKnowledegHis (知识库历史)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>knowledegId</td><td>Integer</td> <td>255</td><td>Y</td><td>知识库ID</td></tr>
+                <tr><td>platformTokenId</td><td>Integer</td> <td>255</td><td>Y</td><td>认证</td></tr>
+                <tr><td>datasetId</td><td>String</td> <td>255</td><td>Y</td><td>线上库ID</td></tr>
+                <tr><td>knowledegType</td><td>Integer</td> <td>255</td><td>Y</td><td>知识类型</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiBusinessInterface (业务对接)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>业务名称</td></tr>
+                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>接口描述</td></tr>
+                <tr><td>url</td><td>String</td> <td>255</td><td>Y</td><td>接口地址</td></tr>
+                <tr><td>method</td><td>Integer</td> <td>255</td><td>Y</td><td>请求方法</td></tr>
+                <tr><td>args</td><td>String</td> <td>255</td><td>Y</td><td>请求参数</td></tr>
+                <tr><td>argType</td><td>Integer</td> <td>255</td><td>Y</td><td>传入方法</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysFeedback (意见反馈)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id</td></tr>
+                <tr><td>userAccount</td><td>String</td> <td>255</td><td>Y</td><td>用户账号</td></tr>
+                <tr><td>images</td><td>String</td> <td>255</td><td>Y</td><td>图片</td></tr>
+                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
+                <tr><td>contact</td><td>String</td> <td>255</td><td>Y</td><td>联系方式</td></tr>
+                <tr><td>isRead</td><td>Short</td> <td>255</td><td>Y</td><td>是否已读</td></tr>
+                <tr><td>category</td><td>Integer</td> <td>255</td><td>Y</td><td>意见反馈问题分类</td></tr>
+        </table>
+    </div>
+    <div class="content">
         <h2>SysPermission (权限)</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>权限名称</td></tr>
                 <tr><td>description</td><td>String</td> <td>255</td><td>Y</td><td>权限描述</td></tr>
                 <tr><td>url</td><td>String</td> <td>255</td><td>Y</td><td>访问路径</td></tr>
@@ -171,17 +347,207 @@
         </table>
     </div>
     <div class="content">
-        <h2>SysRolePermission ()</h2>
+        <h2>AiKnowledegFile (知识库文件)</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>roleId</td><td>Integer</td> <td>255</td><td>Y</td><td>角色id</td></tr>
-                <tr><td>permissionId</td><td>Integer</td> <td>255</td><td>Y</td><td>权限id</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>文件名</td></tr>
+                <tr><td>knowledegId</td><td>Integer</td> <td>255</td><td>Y</td><td>知识主库</td></tr>
+                <tr><td>path</td><td>String</td> <td>255</td><td>Y</td><td>文件路径</td></tr>
+                <tr><td>documentId</td><td>Integer</td> <td>255</td><td>Y</td><td>线上知识库文件ID</td></tr>
+                <tr><td>ext</td><td>Integer</td> <td>255</td><td>Y</td><td>文件类型</td></tr>
+                <tr><td>knowledegType</td><td>Integer</td> <td>255</td><td>Y</td><td>知识类型</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysArticle (新闻)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>title</td><td>String</td> <td>255</td><td>Y</td><td>标题</td></tr>
+                <tr><td>imgUrl</td><td>String</td> <td>255</td><td>Y</td><td>封面图片</td></tr>
+                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>类型</td></tr>
+                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
+                <tr><td>fileUrl</td><td>String</td> <td>255</td><td>Y</td><td>附件</td></tr>
+                <tr><td>projectId</td><td>Integer</td> <td>255</td><td>Y</td><td>项目id</td></tr>
+                <tr><td>publishTime</td><td>Date</td> <td>255</td><td>Y</td><td>发布时间</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiChatRecordTest (测试聊天记录)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>senderId</td><td>String</td> <td>255</td><td>Y</td><td>发送人</td></tr>
+                <tr><td>getterId</td><td>String</td> <td>255</td><td>Y</td><td>接受人</td></tr>
+                <tr><td>senderNick</td><td>String</td> <td>255</td><td>Y</td><td>发送人昵称</td></tr>
+                <tr><td>getterNick</td><td>String</td> <td>255</td><td>Y</td><td>接受人昵称</td></tr>
+                <tr><td>chatPlatform</td><td>Integer</td> <td>255</td><td>Y</td><td>聊天平台</td></tr>
+                <tr><td>workerId</td><td>Integer</td> <td>255</td><td>Y</td><td>数字员工</td></tr>
+                <tr><td>inputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输入用量</td></tr>
+                <tr><td>outputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输出用量</td></tr>
+                <tr><td>totalUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>总用量</td></tr>
+                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
+                <tr><td>filePath</td><td>String</td> <td>255</td><td>Y</td><td>路径</td></tr>
+                <tr><td>messageType</td><td>Integer</td> <td>255</td><td>Y</td><td>消息类型</td></tr>
+                <tr><td>messageRole</td><td>Integer</td> <td>255</td><td>Y</td><td>消息角色</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysDictType (字典类型)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>dictName</td><td>String</td> <td>255</td><td>Y</td><td>字典名称</td></tr>
+                <tr><td>dictCode</td><td>String</td> <td>255</td><td>Y</td><td>字典编码</td></tr>
+                <tr><td>dictType</td><td>String</td> <td>255</td><td>Y</td><td>字典类型</td></tr>
+                <tr><td>groupName</td><td>String</td> <td>255</td><td>Y</td><td>分组</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiDigitWorkerReplyAppend (追加回复)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>keywords</td><td>String</td> <td>255</td><td>Y</td><td>关键词</td></tr>
+                <tr><td>workerId</td><td>Integer</td> <td>255</td><td>Y</td><td>数字员工</td></tr>
+                <tr><td>messageType</td><td>Integer</td> <td>255</td><td>Y</td><td>消息类型</td></tr>
+                <tr><td>context</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
+                <tr><td>delayMin</td><td>Integer</td> <td>255</td><td>Y</td><td>延迟最小值</td></tr>
+                <tr><td>delayMax</td><td>Integer</td> <td>255</td><td>Y</td><td>延迟最大值</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiOrgInfo (组织架构)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>orgNo</td><td>String</td> <td>255</td><td>Y</td><td>编码</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>名称</td></tr>
+                <tr><td>parentId</td><td>Integer</td> <td>255</td><td>Y</td><td>上级组织</td></tr>
+                <tr><td>partOrgId</td><td>Integer</td> <td>255</td><td>Y</td><td>分公司</td></tr>
+                <tr><td>idPath</td><td>String</td> <td>255</td><td>Y</td><td>组织路径</td></tr>
+                <tr><td>orgType</td><td>Integer</td> <td>255</td><td>Y</td><td>组织类型</td></tr>
+                <tr><td>platformTokenId</td><td>Integer</td> <td>255</td><td>Y</td><td>认证</td></tr>
+                <tr><td>testAppId</td><td>String</td> <td>255</td><td>Y</td><td>测试APP</td></tr>
+                <tr><td>overDate</td><td>Date</td> <td>255</td><td>Y</td><td>过期时间</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiThirdUser (业务对接)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>平台类型</td></tr>
+                <tr><td>thirdPlatform</td><td>Integer</td> <td>255</td><td>Y</td><td>平台</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>名称</td></tr>
+                <tr><td>thirdCustomerId</td><td>Integer</td> <td>255</td><td>Y</td><td>客服账户</td></tr>
+                <tr><td>account</td><td>String</td> <td>255</td><td>Y</td><td>账户</td></tr>
+                <tr><td>password</td><td>String</td> <td>255</td><td>Y</td><td>密码</td></tr>
+                <tr><td>accid</td><td>String</td> <td>255</td><td>Y</td><td>账户ID</td></tr>
+                <tr><td>mchid</td><td>String</td> <td>255</td><td>Y</td><td>企编</td></tr>
+                <tr><td>mchname</td><td>String</td> <td>255</td><td>Y</td><td>企名</td></tr>
+                <tr><td>appkey</td><td>String</td> <td>255</td><td>Y</td><td>appkey</td></tr>
+                <tr><td>appsec</td><td>String</td> <td>255</td><td>Y</td><td>appsec</td></tr>
+                <tr><td>appid</td><td>String</td> <td>255</td><td>Y</td><td>appid</td></tr>
+                <tr><td>cookie</td><td>String</td> <td>255</td><td>Y</td><td>Cookie</td></tr>
+                <tr><td>token</td><td>String</td> <td>255</td><td>Y</td><td>token</td></tr>
+                <tr><td>refreshToken</td><td>String</td> <td>255</td><td>Y</td><td>refreshToken</td></tr>
+                <tr><td>tokenExpired</td><td>Date</td> <td>255</td><td>Y</td><td>过期时间</td></tr>
+                <tr><td>loginState</td><td>Integer</td> <td>255</td><td>Y</td><td>登录状态</td></tr>
+                <tr><td>nextRefreshTime</td><td>Date</td> <td>255</td><td>Y</td><td>下次校验时间</td></tr>
+                <tr><td>needRefresh</td><td>Boolean</td> <td>255</td><td>Y</td><td>是否需要校验</td></tr>
+                <tr><td>loginType</td><td>Integer</td> <td>255</td><td>Y</td><td>登录方式</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysAreaDj (行政区划实体)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>parentCode</td><td>String</td> <td>255</td><td>Y</td><td>父级code</td></tr>
+                <tr><td>areaName</td><td>String</td> <td>255</td><td>Y</td><td>省市区县名</td></tr>
+                <tr><td>areaCode</td><td>String</td> <td>255</td><td>Y</td><td>省市区县</td></tr>
+                <tr><td>status</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+                <tr><td>isAdd</td><td>Integer</td> <td>255</td><td>Y</td><td>是否修改</td></tr>
+                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>省市区</td></tr>
+                <tr><td>pinyin</td><td>String</td> <td>255</td><td>Y</td><td>拼音</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiPlatformToken (平台认证信息)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>platform</td><td>Integer</td> <td>255</td><td>Y</td><td>平台</td></tr>
+                <tr><td>extralInfo</td><td>String</td> <td>255</td><td>Y</td><td>显示信息</td></tr>
+                <tr><td>remark</td><td>String</td> <td>255</td><td>Y</td><td>备注</td></tr>
+                <tr><td>account</td><td>String</td> <td>255</td><td>Y</td><td>账户</td></tr>
+                <tr><td>spaceId</td><td>String</td> <td>255</td><td>Y</td><td>空间ID</td></tr>
+                <tr><td>token</td><td>String</td> <td>255</td><td>Y</td><td>认证码</td></tr>
+                <tr><td>tokenOverDate</td><td>Date</td> <td>255</td><td>Y</td><td>认证码过期</td></tr>
+                <tr><td>canJoin</td><td>boolean</td> <td>255</td><td>Y</td><td>可否添加应用</td></tr>
+                <tr><td>belongTo</td><td>Integer</td> <td>255</td><td>Y</td><td>所属</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
         </table>
     </div>
     <div class="content">
@@ -191,9 +557,10 @@
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>消息类型</td></tr>
                 <tr><td>templateCode</td><td>String</td> <td>255</td><td>Y</td><td>消息模板编码</td></tr>
                 <tr><td>receiverId</td><td>Integer</td> <td>255</td><td>Y</td><td>消息接收者</td></tr>
@@ -201,75 +568,11 @@
                 <tr><td>senderId</td><td>Integer</td> <td>255</td><td>Y</td><td>消息发送者</td></tr>
                 <tr><td>senderAccount</td><td>String</td> <td>255</td><td>Y</td><td>消息发送者账号</td></tr>
                 <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+                <tr><td>messagePlatform</td><td>Integer</td> <td>255</td><td>Y</td><td>平台</td></tr>
+                <tr><td>nextSendTime</td><td>Date</td> <td>255</td><td>Y</td><td>下次发送</td></tr>
+                <tr><td>sendCount</td><td>Integer</td> <td>255</td><td>Y</td><td>发送次数</td></tr>
                 <tr><td>params</td><td>String</td> <td>255</td><td>Y</td><td>消息参数</td></tr>
                 <tr><td>message</td><td>String</td> <td>255</td><td>Y</td><td>消息内容</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysCode ()</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>表名</td></tr>
-                <tr><td>number</td><td>Long</td> <td>255</td><td>Y</td><td>单号</td></tr>
-                <tr><td>hashCode</td><td>String</td> <td>255</td><td>Y</td><td>哈希值</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysUserRole (用户角色)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>roleId</td><td>Integer</td> <td>255</td><td>Y</td><td>角色id</td></tr>
-                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysAd (广告管理)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>position</td><td>Integer</td> <td>255</td><td>N</td><td>位置</td></tr>
-                <tr><td>name</td><td>String</td> <td>255</td><td>N</td><td>名称</td></tr>
-                <tr><td>relationCode</td><td>String</td> <td>255</td><td>Y</td><td>关联代码</td></tr>
-                <tr><td>image</td><td>String</td> <td>255</td><td>Y</td><td>图片</td></tr>
-                <tr><td>url</td><td>String</td> <td>255</td><td>Y</td><td>跳转位置</td></tr>
-                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
-                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>关联的实体</td></tr>
-        </table>
-    </div>
-    <div class="content">
-        <h2>SysFeedback (意见反馈)</h2>
-        <table>
-            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
-                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
-                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
-                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
-                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
-                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id</td></tr>
-                <tr><td>userAccount</td><td>String</td> <td>255</td><td>Y</td><td>用户账号</td></tr>
-                <tr><td>images</td><td>String</td> <td>255</td><td>Y</td><td>图片</td></tr>
-                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
-                <tr><td>contact</td><td>String</td> <td>255</td><td>Y</td><td>联系方式</td></tr>
-                <tr><td>isRead</td><td>Short</td> <td>255</td><td>Y</td><td>是否已读</td></tr>
-                <tr><td>category</td><td>Integer</td> <td>255</td><td>Y</td><td>意见反馈问题分类</td></tr>
         </table>
     </div>
     <div class="content">
@@ -279,9 +582,10 @@
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>模板类型</td></tr>
                 <tr><td>code</td><td>String</td> <td>255</td><td>Y</td><td>模板编码</td></tr>
                 <tr><td>params</td><td>String</td> <td>255</td><td>Y</td><td>限定参数</td></tr>
@@ -296,9 +600,10 @@
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>typeId</td><td>Integer</td> <td>255</td><td>Y</td><td>类型id</td></tr>
                 <tr><td>dictKey</td><td>Long</td> <td>255</td><td>Y</td><td>字典键</td></tr>
                 <tr><td>dictValue</td><td>String</td> <td>255</td><td>Y</td><td>字典键值</td></tr>
@@ -311,22 +616,24 @@
         </table>
     </div>
     <div class="content">
-        <h2>SysArticle (新闻)</h2>
+        <h2>AiDigitWorkerHis (应用APP)</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>title</td><td>String</td> <td>255</td><td>Y</td><td>标题</td></tr>
-                <tr><td>imgUrl</td><td>String</td> <td>255</td><td>Y</td><td>封面图片</td></tr>
-                <tr><td>type</td><td>Integer</td> <td>255</td><td>Y</td><td>类型</td></tr>
-                <tr><td>content</td><td>String</td> <td>255</td><td>Y</td><td>内容</td></tr>
-                <tr><td>fileUrl</td><td>String</td> <td>255</td><td>Y</td><td>附件</td></tr>
-                <tr><td>projectId</td><td>Integer</td> <td>255</td><td>Y</td><td>项目id</td></tr>
-                <tr><td>publishTime</td><td>Date</td> <td>255</td><td>Y</td><td>发布时间</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>platformTokenId</td><td>Integer</td> <td>255</td><td>Y</td><td>认证</td></tr>
+                <tr><td>workerId</td><td>Integer</td> <td>255</td><td>Y</td><td>数字员工</td></tr>
+                <tr><td>llmId</td><td>Integer</td> <td>255</td><td>Y</td><td>模型</td></tr>
+                <tr><td>appId</td><td>String</td> <td>255</td><td>Y</td><td>应用ID</td></tr>
+                <tr><td>outputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输出用量</td></tr>
+                <tr><td>inputUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>输入用量</td></tr>
+                <tr><td>totalUsage</td><td>Integer</td> <td>255</td><td>Y</td><td>总用量</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
         </table>
     </div>
     <div class="content">
@@ -336,44 +643,189 @@
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
                 <tr><td>name</td><td>String</td> <td>255</td><td>N</td><td>角色名称</td></tr>
                 <tr><td>code</td><td>String</td> <td>255</td><td>Y</td><td>角色编码</td></tr>
                 <tr><td>description</td><td>String</td> <td>255</td><td>Y</td><td>描述</td></tr>
         </table>
     </div>
     <div class="content">
-        <h2>SysDictType (字典类型)</h2>
+        <h2>AiSocialAccount (社交账号)</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>dictName</td><td>String</td> <td>255</td><td>Y</td><td>字典名称</td></tr>
-                <tr><td>dictCode</td><td>String</td> <td>255</td><td>Y</td><td>字典编码</td></tr>
-                <tr><td>dictType</td><td>String</td> <td>255</td><td>Y</td><td>字典类型</td></tr>
-                <tr><td>groupName</td><td>String</td> <td>255</td><td>Y</td><td>分组</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>socialType</td><td>Integer</td> <td>255</td><td>Y</td><td>账号类型</td></tr>
+                <tr><td>workerId</td><td>Integer</td> <td>255</td><td>Y</td><td>数字员工</td></tr>
+                <tr><td>thirdUserId</td><td>Integer</td> <td>255</td><td>Y</td><td>所属三方</td></tr>
+                <tr><td>expireTime</td><td>Date</td> <td>255</td><td>Y</td><td>到期时间</td></tr>
+                <tr><td>isClose</td><td>Integer</td> <td>255</td><td>Y</td><td>是否封号</td></tr>
+                <tr><td>closeDesc</td><td>String</td> <td>255</td><td>Y</td><td>封号原因</td></tr>
+                <tr><td>isForbiden</td><td>Integer</td> <td>255</td><td>Y</td><td>是否限制</td></tr>
+                <tr><td>forbidenDesc</td><td>String</td> <td>255</td><td>Y</td><td>限制原因</td></tr>
+                <tr><td>isOnline</td><td>Integer</td> <td>255</td><td>Y</td><td>是否在线</td></tr>
+                <tr><td>merchatId</td><td>String</td> <td>255</td><td>Y</td><td>商家ID</td></tr>
+                <tr><td>merchatName</td><td>String</td> <td>255</td><td>Y</td><td>所属商家</td></tr>
+                <tr><td>offLineTime</td><td>Date</td> <td>255</td><td>Y</td><td>离线时间</td></tr>
+                <tr><td>onLineTime</td><td>Date</td> <td>255</td><td>Y</td><td>登录时间</td></tr>
+                <tr><td>socialAcc</td><td>String</td> <td>255</td><td>Y</td><td>微信号</td></tr>
+                <tr><td>socialId</td><td>String</td> <td>255</td><td>Y</td><td>微信ID</td></tr>
+                <tr><td>socialImgUrl</td><td>String</td> <td>255</td><td>Y</td><td>头像</td></tr>
+                <tr><td>socialNick</td><td>String</td> <td>255</td><td>Y</td><td>昵称</td></tr>
+                <tr><td>socialAlias</td><td>String</td> <td>255</td><td>Y</td><td>别名</td></tr>
+                <tr><td>currentCompany</td><td>String</td> <td>255</td><td>Y</td><td>企业名称</td></tr>
                 <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
         </table>
     </div>
     <div class="content">
-        <h2>SysTableColumn (存储列设置表)</h2>
+        <h2>SysRolePermission ()</h2>
         <table>
             <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
                 <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
                 <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
                 <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
-                <tr><td>up2024-12-01 18:42:18</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
                 <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
                 <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
-                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id 0表示通用</td></tr>
-                <tr><td>tableName</td><td>String</td> <td>255</td><td>Y</td><td>表名</td></tr>
-                <tr><td>columns</td><td>String</td> <td>255</td><td>Y</td><td>表列</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>roleId</td><td>Integer</td> <td>255</td><td>Y</td><td>角色id</td></tr>
+                <tr><td>permissionId</td><td>Integer</td> <td>255</td><td>Y</td><td>权限id</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiKnowledeg (知识库)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>Y</td><td>名称</td></tr>
+                <tr><td>platformTokenId</td><td>Integer</td> <td>255</td><td>Y</td><td>认证</td></tr>
+                <tr><td>datasetId</td><td>String</td> <td>255</td><td>Y</td><td>线上库ID</td></tr>
+                <tr><td>knowledegType</td><td>Integer</td> <td>255</td><td>Y</td><td>知识类型</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+                <tr><td>description</td><td>String</td> <td>255</td><td>Y</td><td>描述</td></tr>
+                <tr><td>avatar</td><td>String</td> <td>255</td><td>Y</td><td>头像</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysUserRole (用户角色)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>roleId</td><td>Integer</td> <td>255</td><td>Y</td><td>角色id</td></tr>
+                <tr><td>userId</td><td>Integer</td> <td>255</td><td>Y</td><td>用户id</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiConversation (会话信息)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>conversationId</td><td>String</td> <td>255</td><td>Y</td><td>会话Id</td></tr>
+                <tr><td>conversationName</td><td>String</td> <td>255</td><td>Y</td><td>会话名称</td></tr>
+                <tr><td>guid</td><td>String</td> <td>255</td><td>Y</td><td>唯一键</td></tr>
+                <tr><td>clientId</td><td>String</td> <td>255</td><td>Y</td><td>客户ID</td></tr>
+                <tr><td>clientAccout</td><td>String</td> <td>255</td><td>Y</td><td>客户账户</td></tr>
+                <tr><td>clientNickName</td><td>String</td> <td>255</td><td>Y</td><td>客户昵称</td></tr>
+                <tr><td>clientAlias</td><td>String</td> <td>255</td><td>Y</td><td>客户友好名称</td></tr>
+                <tr><td>socialId</td><td>String</td> <td>255</td><td>Y</td><td>社交账号ID</td></tr>
+                <tr><td>socialAlias</td><td>String</td> <td>255</td><td>Y</td><td>社交账号友好</td></tr>
+                <tr><td>appJwtToken</td><td>String</td> <td>255</td><td>Y</td><td>jwtToken</td></tr>
+                <tr><td>appJwtRefreshToken</td><td>String</td> <td>255</td><td>Y</td><td>refreshToken过期时间</td></tr>
+                <tr><td>appJwtTokenOverDate</td><td>Date</td> <td>255</td><td>Y</td><td>token过期时间</td></tr>
+                <tr><td>appJwtRefreshOverDate</td><td>Date</td> <td>255</td><td>Y</td><td>refreshToken过期时间</td></tr>
+                <tr><td>subject</td><td>String</td> <td>2000</td><td>Y</td><td>主题</td></tr>
+                <tr><td>partCompanyOrgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>所属分公司</td></tr>
+                <tr><td>overDate</td><td>Date</td> <td>255</td><td>Y</td><td>过期时间</td></tr>
+                <tr><td>lastMsg</td><td>String</td> <td>255</td><td>Y</td><td>最后消息</td></tr>
+                <tr><td>lastDate</td><td>Date</td> <td>255</td><td>Y</td><td>最后时间</td></tr>
+                <tr><td>subjectDetail</td><td>String</td> <td>255</td><td>Y</td><td>主题详情</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysAd (广告管理)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>position</td><td>Integer</td> <td>255</td><td>N</td><td>位置</td></tr>
+                <tr><td>name</td><td>String</td> <td>255</td><td>N</td><td>名称</td></tr>
+                <tr><td>relationCode</td><td>String</td> <td>255</td><td>Y</td><td>关联代码</td></tr>
+                <tr><td>image</td><td>String</td> <td>255</td><td>Y</td><td>图片</td></tr>
+                <tr><td>url</td><td>String</td> <td>255</td><td>Y</td><td>跳转位置</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
+                <tr><td>info</td><td>String</td> <td>255</td><td>Y</td><td>关联的实体</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>SysFile (文件管理)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>ico</td><td>String</td> <td>255</td><td>Y</td><td>图标</td></tr>
+                <tr><td>fileName</td><td>String</td> <td>255</td><td>N</td><td>文件名</td></tr>
+                <tr><td>extend</td><td>String</td> <td>255</td><td>Y</td><td>文件扩展名</td></tr>
+                <tr><td>filePath</td><td>String</td> <td>255</td><td>Y</td><td>文件存储路径</td></tr>
+                <tr><td>fileType</td><td>Integer</td> <td>255</td><td>Y</td><td>文件类型</td></tr>
+                <tr><td>fileSize</td><td>long</td> <td>255</td><td>Y</td><td>文件大小</td></tr>
+                <tr><td>urlPath</td><td>String</td> <td>255</td><td>Y</td><td>相对路径</td></tr>
+                <tr><td>uuid</td><td>String</td> <td>255</td><td>Y</td><td>文件唯一标识</td></tr>
+        </table>
+    </div>
+    <div class="content">
+        <h2>AiBusinessInterfaceArg (业务对接参数)</h2>
+        <table>
+            <tr><th>名称</th><th>数据类型</th> <th>长度</th><th>允许空值</th><th>说明</th></tr>
+                <tr><td>version</td><td>Integer</td> <td>255</td><td>Y</td><td>版本号，自动实现乐观锁</td></tr>
+                <tr><td>id</td><td>Integer</td> <td>255</td><td>N</td><td>编号</td></tr>
+                <tr><td>createTime</td><td>Date</td> <td>255</td><td>Y</td><td>创建时间</td></tr>
+                <tr><td>up2025-04-06 12:34:53</td><td>Date</td> <td>255</td><td>Y</td><td>更新时间</td></tr>
+                <tr><td>creatorId</td><td>Integer</td> <td>255</td><td>Y</td><td>创建人</td></tr>
+                <tr><td>updaterId</td><td>Integer</td> <td>255</td><td>Y</td><td>修改人</td></tr>
+                <tr><td>orgInfoId</td><td>Integer</td> <td>255</td><td>Y</td><td>组织</td></tr>
+                <tr><td>businessInterfaceId</td><td>Integer</td> <td>255</td><td>Y</td><td>接口信息</td></tr>
+                <tr><td>argName</td><td>String</td> <td>255</td><td>Y</td><td>参数名</td></tr>
+                <tr><td>argInfo</td><td>String</td> <td>255</td><td>Y</td><td>描述</td></tr>
+                <tr><td>argDefaultVal</td><td>String</td> <td>255</td><td>Y</td><td>参数默认值</td></tr>
+                <tr><td>args</td><td>String</td> <td>255</td><td>Y</td><td>请求参数</td></tr>
+                <tr><td>argType</td><td>Integer</td> <td>255</td><td>Y</td><td>传入方法</td></tr>
+                <tr><td>state</td><td>Integer</td> <td>255</td><td>Y</td><td>状态</td></tr>
         </table>
     </div>
 </body>

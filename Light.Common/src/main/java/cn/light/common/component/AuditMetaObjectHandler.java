@@ -1,4 +1,4 @@
-package cn.light.admin.component;
+package cn.light.common.component;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;

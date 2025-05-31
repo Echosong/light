@@ -1,4 +1,4 @@
-package cn.light.admin.advice;
+package cn.light.common.advice;
 
 import cn.light.common.annotation.ApiResultIgnore;
 import cn.light.common.exception.BaseErrorCode;
