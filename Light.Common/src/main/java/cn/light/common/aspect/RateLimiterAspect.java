@@ -62,11 +62,7 @@ public class RateLimiterAspect {
             }
             long number = RedisUtils.rateLimiter(combineKey, rateType, count, time, timeout);
             if (number == -1) {
-                String message = rateLimiter.message();
-                if (StrUtil.startWith(message, "{") && StrUtil.endWith(message, "}")) {
-                    message = StrUtil.sub(message, 1, message.length() - 1);
-                }
-                throw new BaseKnownException(message);
+                throw new BaseKnownException(rateLimiter.message());
             }
             log.info("限制令牌 => {}, 剩余令牌 => {}, 缓存key => '{}'", count, number, combineKey);
         } catch (Exception e) {
