@@ -1,5 +1,7 @@
 package cn.light.common.config;
 
+import cn.light.common.aspect.RateLimiterAspect;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,4 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = {"cn.light.common.advice", "cn.light.common.component"})
 public class AutoConfiguration {
+
+    @Bean
+    public RateLimiterAspect rateLimiterAspect() {
+        return new RateLimiterAspect();
+    }
 }

@@ -1,4 +1,4 @@
-package cn.light.common.component;
+package cn.light.common.aspect;
 
 import cn.light.common.annotation.NoRepeatSubmit;
 import cn.light.common.exception.BaseKnownException;
