@@ -81,6 +81,8 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
                 }else{
                     userName = "未知用户";
                 }
+                //匹配 password 进行替换掉
+                saveDTO.setParams(saveDTO.getParams().replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"******\""));
             }
             saveDTO.setUsername(userName);
         }

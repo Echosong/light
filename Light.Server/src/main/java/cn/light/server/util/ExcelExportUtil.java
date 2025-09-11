@@ -34,8 +34,6 @@ public class ExcelExportUtil {
     public <T, Q> void export(String fileName,
                               Class<T> clazz, Q queryDTO,
                               Function<Q, List<T>> dataProvider) throws IOException {
-
-
         // 设置响应格式
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
