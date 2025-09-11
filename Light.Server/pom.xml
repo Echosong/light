@@ -55,6 +55,11 @@
             <artifactId>sa-token-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
+
     </dependencies>
 
     <properties>
