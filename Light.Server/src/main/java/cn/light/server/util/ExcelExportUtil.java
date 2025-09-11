@@ -1,4 +1,3 @@
-// ExcelExportUtil.java
 package cn.light.server.util;
 
 import cn.hutool.core.date.DateUtil;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
@@ -39,7 +39,7 @@ public class ExcelExportUtil {
         // 设置响应格式
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        String encodedFileName = URLEncoder.encode(fileName + DateUtil.format(new Date(), "yyyyMMddHHmmss"), "UTF-8")
+        String encodedFileName = URLEncoder.encode(fileName + DateUtil.format(new Date(), "yyyyMMddHHmmss"), StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20");
         response.setHeader("Content-Disposition", "attachment; filename=" + encodedFileName + ".xlsx");
 
@@ -48,7 +48,7 @@ public class ExcelExportUtil {
 
         try {
             // 设置分页参数
-            setPageSize(queryDTO, 5000);
+            setPageSize(queryDTO);
             setPage(queryDTO, 1);
 
             List<T> data;
@@ -77,10 +77,10 @@ public class ExcelExportUtil {
     }
 
     // 反射设置分页大小
-    private static void setPageSize(Object queryDTO, int pageSize) {
+    private static void setPageSize(Object queryDTO) {
         try {
             java.lang.reflect.Method method = queryDTO.getClass().getMethod("setPageSize", int.class);
-            method.invoke(queryDTO, pageSize);
+            method.invoke(queryDTO, 5000);
         } catch (Exception e) {
             throw new RuntimeException("无法设置分页大小", e);
         }
