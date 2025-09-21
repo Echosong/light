@@ -24,9 +24,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,8 +42,23 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     @Resource
     private UserService userService;
 
-    //全局专门线程来处理日志
-    private static final ExecutorService LOG_EXECUTOR = Executors.newSingleThreadExecutor();
+    // 改进的线程池配置，避免内存泄漏
+    private static final ExecutorService LOG_EXECUTOR = new ThreadPoolExecutor(
+        2, // 核心线程数
+        10, // 最大线程数
+        60L, TimeUnit.SECONDS, // 线程空闲时间
+        new LinkedBlockingQueue<>(1000), // 队列大小
+        new ThreadFactory() {
+            private final AtomicInteger threadNumber = new AtomicInteger(1);
+            @Override
+            public Thread newThread(Runnable r) {
+                Thread t = new Thread(r, "log-async-" + threadNumber.getAndIncrement());
+                t.setDaemon(true); // 设置为守护线程
+                return t;
+            }
+        },
+        new ThreadPoolExecutor.CallerRunsPolicy() // 拒绝策略
+    );
 
     @Override
     public Page<LogListDTO> listPage(LogQueryDTO queryDTO) {

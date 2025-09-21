@@ -78,7 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
             throw new RuntimeException("账号或者密码错误");
         }
         Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(loginUserDTO.getPassword()), byUsername.getPassword()),
-                "账号或者密码错误"+ loginUserDTO.getPassword()+"====");
+                "账号或者密码错误");
         Assert.isTrue(byUsername.getState().equals(UserStateEnum.ON.getCode()), "账号不允许登录！");
 
         StpUtil.login(byUsername.getId());

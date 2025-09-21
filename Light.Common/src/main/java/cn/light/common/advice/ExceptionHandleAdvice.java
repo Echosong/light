@@ -28,9 +28,20 @@ public class ExceptionHandleAdvice {
 
     @ExceptionHandler(BadRequestException.class)
     public ResultVO handleBadRequest(BadRequestException ex) {
-        // 处理400请求的逻辑
-        // 返回自定义的响应实体
-        return   ResultVO.error(404, "找不到该请求接口");
+        log.warn("Bad request: {}", ex.getMessage());
+        return ResultVO.error(400, "请求格式错误");
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResultVO handleIllegalArgument(IllegalArgumentException ex) {
+        log.warn("Illegal argument: {}", ex.getMessage());
+        return ResultVO.error(400, "参数错误: " + ex.getMessage());
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResultVO handleNullPointer(NullPointerException ex) {
+        log.error("Null pointer exception", ex);
+        return ResultVO.error(500, "系统内部错误");
     }
 
     @ResponseBody
