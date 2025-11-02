@@ -1,6 +1,7 @@
 package cn.light.common.enums;
 
 import cn.light.common.enums.BaseEnum;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 /**
@@ -25,8 +26,9 @@ public enum BusinessEnum implements BaseEnum {
 
     OTHER(50, "其他");
 
-
+    @JsonValue
     private final Integer code;
+
     private final String name;
 
     /**
