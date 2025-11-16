@@ -27,7 +27,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +37,6 @@ import java.util.stream.Collectors;
 
 /**
  * 后台管理员相关账号处理
- *
  * @author : echosong
  * @version :1.0.0
  */
@@ -46,7 +44,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
     @Resource
-    private UserMapper userMapper;
+    private  UserMapper userMapper;
     @Resource
     private UserCacheRepository userCacheRepository;
     @Resource
@@ -75,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));
 
         var byUsername = this.baseMapper.findByUsername(loginUserDTO.getUsername());
-        if (Objects.isNull(byUsername)) {
+        if(Objects.isNull(byUsername)){
             throw new RuntimeException("账号或者密码错误");
         }
         Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(loginUserDTO.getPassword()), byUsername.getPassword()),
@@ -84,7 +82,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
         StpUtil.login(byUsername.getId());
         byUsername.setLoginIp(loginUserDTO.getLoginIp());
-        this.saveOrUpdate(byUsername);
+        this.saveOrUpdate( byUsername);
         userCacheRepository.deleteById(byUsername.getId());
         return getLoginInfo();
     }
@@ -92,17 +90,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     /**
      * 注册用户
-     *
      * @param user 用户数据
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void create(UserDTO user) {
+    public void create(UserDTO user){
         //处理密码国密
-        user.setPassword(SmUtil.sm3().digestHex(user.getPassword()));
+        user.setPassword( SmUtil.sm3().digestHex(user.getPassword()));
 
         SysUser sysUser = this.baseMapper.findByUsername(user.getUsername());
-        if (Objects.nonNull(sysUser)) {
+        if(Objects.nonNull(sysUser)){
             throw new BaseKnownException(600, "账号已经存在，不能注册");
         }
         Assert.notNull(user.getRoleId(), "新增账号必须选择角色");
@@ -116,25 +113,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     /**
      * 获取全部信息
-     *
      * @return 用户列表
      */
     @Override
     public List<UserCacheDTO> getAllCache() {
         List<UserCache> all = userCacheRepository.findAll();
-        if (CollUtil.isEmpty(all)) {
+        if(CollUtil.isEmpty(all)) {
             List<SysUser> list = this.lambdaQuery()
                     .ne(SysUser::getState, UserStateEnum.DELETE.getCode()).list();
 
             all = DtoMapper.convertList(list, UserCache.class);
-            userCacheRepository.saveAll(all);
+             userCacheRepository.saveAll(all);
         }
         return DtoMapper.convertList(all, UserCacheDTO.class);
     }
 
     /**
      * 更新用户信息
-     *
      * @param userDTO 用户
      */
     @Override
@@ -154,7 +149,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
             SysUserRole userRole = new SysUserRole();
             userRole.setRoleId(userDTO.getRoleId());
             userRole.setUserId(user.getId());
-            if (CollUtil.isNotEmpty(allByUserId)) {
+            if(CollUtil.isNotEmpty(allByUserId)) {
                 userRoleMapper.deleteBatchIds(allByUserId.stream().map(SysUserRole::getId).collect(Collectors.toList()));
             }
             userRoleMapper.insert(userRole);
@@ -168,8 +163,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         UserCache user = null;
         try {
             user = userCacheRepository.findById(userId).orElse(null);
-        } catch (Exception ignored) {
-        }
+        }catch (Exception ignored){}
         if (Objects.isNull(user)) {
             user = userMapper.getUserCache(userId);
             userCacheRepository.save(user);
@@ -180,7 +174,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     /**
      * 处理分页信息
-     *
      * @param userQueryDTO 用户信息
      * @return 用户信息
      */
@@ -193,33 +186,36 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         List<UserDTO> content = userPage.getContent();
         Set<Integer> userIds = content.stream().map(UserDTO::getId).collect(Collectors.toSet());
         List<SysUserRole> allByUserIdIn = userRoleMapper.findAllByUserIdIn(userIds);
-        if (!allByUserIdIn.isEmpty()) {
+        if(!allByUserIdIn.isEmpty()){
             List<Integer> roleIds = allByUserIdIn.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
             List<SysRole> allByIdIn = roleMapper.selectBatchIds(roleIds);
 
-            for (UserDTO t : content) {
-                allByIdIn.stream()
-                        .filter(k -> Objects.equals(k.getId(), t.getRoleId()))
-                        .findFirst()
-                        .ifPresent(h -> {
-                            t.setRoleName(h.getName());
-                            t.setRoleId(h.getId());
-                        });
-
+            for (UserDTO userDTO : content) {
+                SysUserRole sysUserRole = allByUserIdIn.stream().filter(k -> k.getUserId().equals(userDTO.getId()))
+                        .findFirst().orElse(null);
+                if (Objects.nonNull(sysUserRole)) {
+                    userDTO.setRoleId(sysUserRole.getRoleId());
+                }
+                SysRole sysRole = allByIdIn.stream().filter(k -> k.getId().equals(userDTO.getRoleId()))
+                        .findFirst().orElse(null);
+                if (Objects.nonNull(sysRole)) {
+                    userDTO.setRoleName(sysRole.getName());
+                    userDTO.setRoleCode(sysRole.getCode());
+                    userDTO.setRoleId(sysRole.getId());
+                }
             }
         }
-        return userPage;
+        return  userPage;
     }
 
     /**
      * 重置密码
-     *
-     * @param password    密码
+     * @param password 密码
      * @param newPassword 密码
      */
     @Override
     public void setPassword(String password, String newPassword) {
-        Integer userId = Convert.toInt(StpUtil.getLoginId(), 0);
+        Integer userId = Convert.toInt( StpUtil.getLoginId(), 0);
         SysUser kdUser = this.getOptById(userId).orElseThrow(() -> new BaseKnownException(600, "当前未登录"));
         Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(password), kdUser.getPassword()),
                 "账号或者密码错误");
@@ -275,7 +271,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         UserCache userCache = this.getUserCache();
         LoginResultDTO resultDTO = DtoMapper.convert(userCache, LoginResultDTO.class);
         resultDTO.setToken(StpUtil.getTokenInfo().getTokenValue());
-        resultDTO.setMenuList(permissionService.listByUser(userCache.getId()));
+        resultDTO.setMenuList( permissionService.listByUser(userCache.getId()));
         return resultDTO;
     }
 
@@ -283,11 +279,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     public void currentUpdate(UserDTO userDTO) {
         UserCache userCache = this.getUserCache();
         this.lambdaUpdate()
-                .set(SysUser::getInfo, userDTO.getInfo())
+                .set(SysUser::getInfo,userDTO.getInfo())
                 .set(SysUser::getName, userDTO.getName())
-                .set(SysUser::getEmail, userDTO.getEmail())
-                .set(SysUser::getSex, userDTO.getSex())
-                .eq(SysUser::getId, userCache.getId())
+                .set(SysUser::getEmail,userDTO.getEmail())
+                .set(SysUser::getSex,userDTO.getSex())
+                .eq(SysUser::getId,userCache.getId())
                 .update();
         userCacheRepository.deleteById(userCache.getId());
     }
