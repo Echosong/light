@@ -44,8 +44,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
     @Resource
-    private  UserMapper userMapper;
-    @Resource
     private UserCacheRepository userCacheRepository;
     @Resource
     private PermissionService permissionService;
@@ -165,7 +163,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
             user = userCacheRepository.findById(userId).orElse(null);
         }catch (Exception ignored){}
         if (Objects.isNull(user)) {
-            user = userMapper.getUserCache(userId);
+            user = this.baseMapper.getUserCache(userId);
             userCacheRepository.save(user);
         }
         return user;
@@ -179,7 +177,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
      */
     @Override
     public Page<UserDTO> list(UserQueryDTO userQueryDTO) {
-        Page<SysUser> allByUsernameContaining = PageUtil.getPage(userMapper::listPage, userQueryDTO);
+        Page<SysUser> allByUsernameContaining = PageUtil.getPage(this.baseMapper::listPage, userQueryDTO);
         Page<UserDTO> userPage = DtoMapper.convertPage(allByUsernameContaining, UserDTO.class);
 
         //拿角色名称
