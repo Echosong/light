@@ -3,7 +3,7 @@
 <mapper namespace="#(PackageName).mapper.#(UpEntityName)Mapper">
     <select id="listPage" resultType="#(SYS_PATH).entity.entity.#(UpTableName)">
         select *
-        from #(table_name)
+         from #(tableName)
         <where>
           #(sql_where)
         </where>
