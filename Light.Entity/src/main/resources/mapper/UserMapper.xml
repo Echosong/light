@@ -13,7 +13,7 @@
                 and name like CONCAT('%',#{name},'%')
             </if>
 
-            <if test="keywords != null and keywords != null">
+            <if test="keywords != null and keywords != ''">
                 and (
                     username like CONCAT('%',#{keywords},'%')
                     or name like CONCAT('%',#{keywords},'%')

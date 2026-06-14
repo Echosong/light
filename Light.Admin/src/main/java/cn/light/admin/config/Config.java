@@ -78,7 +78,7 @@ public class Config {
      */
     @Bean
     RepeatSubmitAspect repeatSubmitAspect(){
-        return new RepeatSubmitAspect( stringRedisTemplate, request);
+        return new RepeatSubmitAspect( stringRedisTemplate);
     }
 
 

@@ -1,16 +1,16 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/db_light?rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: songfeiok
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/db_light?rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
   data:
     redis:
-      host: 127.0.0.1
-      port: 6379
-      password: _sys31UC
-      database: 8
+      host: ${SPRING_DATA_REDIS_HOST:127.0.0.1}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD:}
+      database: ${SPRING_DATA_REDIS_DATABASE:8}
 #文件上传操作
 file:
   #文件上传目录
-  upload-folder: D:\项目资料\light框架\upload\
+  upload-folder: ${FILE_UPLOAD_FOLDER:/data/light/upload/}

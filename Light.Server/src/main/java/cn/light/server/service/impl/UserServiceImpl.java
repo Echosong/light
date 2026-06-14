@@ -55,34 +55,66 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     private RoleMapper roleMapper;
 
     /**
-     * 登录服务
+     * 登录服务（带速率限制 + 失败次数锁定）
      *
      * @param loginUserDTO 登录信息
      */
     @Override
     public LoginResultDTO login(LoginUserDTO loginUserDTO) {
-        SmsCache smsCache = smsCacheRepository.findById(loginUserDTO.getCodeUid())
-                .orElseThrow(() -> new RuntimeException("验证码错误"));
-
-        Assert.isTrue(smsCache.getContent().equalsIgnoreCase(loginUserDTO.getCode()), "验证码错误");
-        //删除
-        smsCacheRepository.deleteById(loginUserDTO.getCodeUid());
-        //前端密码简单用了base64处理了下
-        loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));
-
-        var byUsername = this.baseMapper.findByUsername(loginUserDTO.getUsername());
-        if(Objects.isNull(byUsername)){
-            throw new RuntimeException("账号或者密码错误");
+        // 1) IP 维度速率限制：1 分钟最多 10 次
+        String rateKey = "login:rate:" + (loginUserDTO.getLoginIp() == null ? "unknown" : loginUserDTO.getLoginIp());
+        long rate = cn.light.common.util.RedisUtils.rateLimiter(
+                rateKey, org.redisson.api.RateType.OVERALL, 10, 60);
+        if (rate < 0) {
+            throw new cn.light.common.exception.BaseKnownException(429, "请求过于频繁，请稍后再试");
         }
-        Assert.isTrue(Objects.equals(SmUtil.sm3().digestHex(loginUserDTO.getPassword()), byUsername.getPassword()),
-                "账号或者密码错误");
+
+        // 2) 账号维度失败次数锁定：5 次失败锁定 30 分钟
+        String lockKey = "login:lock:" + loginUserDTO.getUsername();
+        String failKey = "login:fail:" + loginUserDTO.getUsername();
+        Integer lockVal = cn.light.common.util.RedisUtils.getCacheObject(lockKey);
+        if (lockVal != null && lockVal >= 5) {
+            throw new cn.light.common.exception.BaseKnownException(403, "账号已被临时锁定，请 30 分钟后再试");
+        }
+
+        // 3) 验证码校验（一次性）
+        SmsCache smsCache = smsCacheRepository.findById(loginUserDTO.getCodeUid())
+                .orElseThrow(() -> new cn.light.common.exception.BaseKnownException(400, "验证码错误"));
+        Assert.isTrue(smsCache.getContent().equalsIgnoreCase(loginUserDTO.getCode()), "验证码错误");
+        smsCacheRepository.deleteById(loginUserDTO.getCodeUid());
+
+        // 4) 密码解析 & 校验
+        loginUserDTO.setPassword(Base64.decodeStr(loginUserDTO.getPassword()));
+        var byUsername = this.baseMapper.findByUsername(loginUserDTO.getUsername());
+        if (Objects.isNull(byUsername)) {
+            incrementFailAndMaybeLock(failKey, lockKey);
+            throw new cn.light.common.exception.BaseKnownException(401, "账号或者密码错误");
+        }
+        if (!Objects.equals(SmUtil.sm3().digestHex(loginUserDTO.getPassword()), byUsername.getPassword())) {
+            incrementFailAndMaybeLock(failKey, lockKey);
+            throw new cn.light.common.exception.BaseKnownException(401, "账号或者密码错误");
+        }
         Assert.isTrue(byUsername.getState().equals(UserStateEnum.ON.getCode()), "账号不允许登录！");
+
+        // 5) 登录成功：清除失败计数
+        cn.light.common.util.RedisUtils.deleteObject(failKey);
+        cn.light.common.util.RedisUtils.deleteObject(lockKey);
 
         StpUtil.login(byUsername.getId());
         byUsername.setLoginIp(loginUserDTO.getLoginIp());
-        this.saveOrUpdate( byUsername);
+        this.saveOrUpdate(byUsername);
         userCacheRepository.deleteById(byUsername.getId());
         return getLoginInfo();
+    }
+
+    /** 累计失败次数，达到阈值则锁定 30 分钟 */
+    private void incrementFailAndMaybeLock(String failKey, String lockKey) {
+        Integer fail = cn.light.common.util.RedisUtils.getCacheObject(failKey);
+        int count = fail == null ? 1 : fail + 1;
+        cn.light.common.util.RedisUtils.setCacheObject(failKey, count, java.time.Duration.ofMinutes(30));
+        if (count >= 5) {
+            cn.light.common.util.RedisUtils.setCacheObject(lockKey, count, java.time.Duration.ofMinutes(30));
+        }
     }
 
 
@@ -288,6 +320,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 
     @Override
     public void delete(Integer userId) {
+        if (userId == null) {
+            return;
+        }
+        // 禁止删除当前登录用户
+        try {
+            Integer loginId = cn.dev33.satoken.stp.StpUtil.getLoginIdAsInt();
+            if (userId.equals(loginId)) {
+                throw new cn.light.common.exception.BaseKnownException(400, "不能删除当前登录的账号");
+            }
+        } catch (cn.light.common.exception.BaseKnownException e) {
+            throw e;
+        } catch (Exception ignored) {
+            // 未登录时走统一异常处理
+        }
         this.removeById(userId);
         userRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>()
                 .eq(SysUserRole::getUserId, userId)
