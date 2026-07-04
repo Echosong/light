@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.light.entity.mapper.OrderMapper">
+    <select id="listPage" resultType="cn.light.entity.entity.SysOrder">
+        select *
+        from sys_order
+        <where>
+            <if test="memberName != null and memberName != ''"> and member_name like CONCAT('%',#{memberName},'%')</if>
+            <if test="orderNo != null and orderNo != ''"> and order_no like CONCAT('%',#{orderNo},'%')</if>
+            <if test="outOrderNo != null and outOrderNo != ''"> and out_order_no like CONCAT('%',#{outOrderNo},'%')</if>
+            <if test="payAmount != null"> and pay_amount = #{payAmount}</if>
+        </where>
+    </select>
+
+</mapper>
