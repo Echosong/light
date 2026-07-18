@@ -147,26 +147,36 @@ public @interface NotinListDTO {}
 
 **包路径**：`cn.light.common.anno.AutoEntityFieldDefault`
 
-字段默认值设置（预留功能）。
+设置字段在 Vue 表单（add.vue）中的初始默认值。
 
 ```java
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AutoEntityFieldDefault {
-    String value() default "";
-    boolean notNull() default true;
+    String value() default "";        // 默认值（字符串形式，如 "0"）
+    boolean notNull() default true;   // 是否必填
 }
 ```
+
+**解析规则**：
+- 在 add.vue 生成时，`initialData` 中该字段使用 `value()` 作为初始值
+- 示例：`@AutoEntityFieldDefault(value = "0")` → `point: 0`（初始数据中）
+- 无此注解的字段按 Java 类型推断初始值：String→`''`，Integer/BigDecimal→`0`，Date→`''`
 
 ### @AutoSorted
 
 **包路径**：`cn.light.common.anno.AutoSorted`
 
-字段排序标记（预留功能）。
+标记字段在 list.vue 表格中可排序。
 
 ```java
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AutoSorted {}
 ```
+
+**解析规则**：
+- 标记式注解（无属性）
+- 在 list.vue 表格列 JSON 中，带此注解的字段添加 `sorter: true` 属性
+- 示例：`{ title: '创建时间', dataIndex: 'createTime', sorter: true }`
 
 ---
 

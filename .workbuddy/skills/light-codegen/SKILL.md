@@ -283,7 +283,7 @@ Vue 视图生成需要从 Entity 字段注解中提取额外信息：
 
 | 枚举值 | 组件 | 说明 |
 |--------|------|------|
-| `INPUT` | `<a-input>` 或 `<a-date-picker>` 或 `<input-enum>` | 文本框（默认） |
+| `INPUT` | 按字段类型细分（见下方） | 文本框（默认） |
 | `SELECT` | `<select-data>` | 下拉选择（关联数据源） |
 | `RADIO` | `<e-switch>` | Switch 开关 |
 | `CHECKBOX` | - | 复选框（预留） |
@@ -292,9 +292,15 @@ Vue 视图生成需要从 Entity 字段注解中提取额外信息：
 | `FILE` | `<File>` | 文件上传 |
 | `TEXTEDIT` | `<Wangeditor>` | 富文本编辑器 |
 
+> **INPUT 类型按 Java 字段类型细分**：
+> - `String` → `<a-input>`
+> - `Date` → `<a-date-picker show-time>`
+> - `Integer` / `BigDecimal` → `<a-input-number>`
+> - 有 `enums` → `<input-enum>`
+
 #### list.vue 生成要点
 
-1. **查询表单**：遍历 `@InQueryDTO` 字段，根据类型生成查询表单项
+1. **查询表单**：遍历 `@InQueryDTO` 字段，根据 Java 类型生成查询表单项（String→`<a-input>`，Date→`<a-date-picker>`，BigDecimal/Integer→`<a-input-number>`，枚举→`<input-enum>`，SELECT→`<select-data>`）
 2. **表格列**：遍历非 `@NotinListDTO` 字段生成列定义 JSON，末尾追加操作列
 3. **查询参数**：分页参数 + 查询字段初始值
 4. **import**：根据字段类型收集组件 import
@@ -305,7 +311,7 @@ Vue 视图生成需要从 Entity 字段注解中提取额外信息：
 
 1. **表单项**：遍历所有 `@AutoEntityField` 字段，根据 htmlType 生成对应组件
 2. **验证规则**：从 Jakarta Validation 注解生成 rules 对象
-3. **初始数据**：String/Date → `''`，其他 → `0`
+3. **初始数据**：String/Date → `''`，Integer/BigDecimal → `0`；有 `@AutoEntityFieldDefault` 的字段使用注解指定的 `value()`
 4. **WangEditor**：TEXTEDIT 字段需要 ref 声明和内容提取
 
 详细规则见 `references/templates/addVue.md`
