@@ -5,6 +5,7 @@ import cn.light.common.enums.CodeTypeEnum;
 import cn.light.common.enums.HtmlTypeEnum;
 import cn.light.common.enums.BusinessEnum;
 import cn.light.packet.enums.system.YesOrNoEnum;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,6 +50,7 @@ public class SysLog extends SysBase {
     private String description;
 
     @AutoEntityField(value = "客户端", htmlType = HtmlTypeEnum.TEXTAREA)
+    @Column(columnDefinition = "mediumtext comment '客户端'")
     private String browser;
 
     @AutoEntityField(value = "请求耗时")
@@ -58,6 +60,7 @@ public class SysLog extends SysBase {
     private String method;
 
     @AutoEntityField(value = "参数", htmlType = HtmlTypeEnum.TEXTAREA)
+    @Column(columnDefinition = "mediumtext comment '参数'")
     private String params;
 
     @AutoEntityField(value = "请求路径")
@@ -68,5 +71,6 @@ public class SysLog extends SysBase {
 
     @AutoEntityField(value = "异常详情", htmlType = HtmlTypeEnum.TEXTAREA)
     @NotinListDTO
+    @Column(columnDefinition = "mediumtext comment '异常详情'")
     private String exceptionDetail;
 }
