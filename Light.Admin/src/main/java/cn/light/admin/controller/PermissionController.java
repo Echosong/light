@@ -16,8 +16,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +40,6 @@ public class PermissionController extends BaseController {
 
     @PostMapping("/save")
     @Operation(summary = "新建|更新权限信息")
-    @CacheEvict(value = "Permission_all", allEntries = true)
     @Permission(roles = "admin", logical = LogicalEnum.AND)
     public void save(@RequestBody @Valid PermissionDTO permissionDTO) {
         permissionService.save(permissionDTO);

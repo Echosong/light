@@ -129,6 +129,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
                     .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
         }
         this.saveOrUpdate(kdPermission);
+        // 新增/修改权限节点后，权限菜单会发生变化，清理所有用户的权限菜单缓存，下次获取时重新加载
+        userPermissionCacheRepository.deleteAll();
     }
 
     @Override
