@@ -128,7 +128,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
             this.getOptById(kdPermission.getParentId())
                     .orElseThrow(() -> new BaseKnownException(600, "上级权限不存在"));
         }
-        this.save(kdPermission);
+        this.saveOrUpdate(kdPermission);
     }
 
     @Override
